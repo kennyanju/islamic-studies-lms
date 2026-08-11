@@ -1,0 +1,23 @@
+{
+  "name": "islamic-studies-lms",
+  "version": "1.0.0",
+  "description": "Lightweight LMS for Islamic Studies Course (Foundations, Purification, Seerah, Fiqh, Character)",
+  "main": "server.js",
+  "scripts": {
+    "build": "node compile.js",
+    "start": "node server.js",
+    "dev": "node compile.js && node server.js"
+  },
+  "keywords": [
+    "lms",
+    "islamic-studies",
+    "education",
+    "interactive-quiz"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2",
+    "marked": "^12.0.2"
+  }
+}

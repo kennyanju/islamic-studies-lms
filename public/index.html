@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Islamic Studies LMS - Family Curriculum</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- Marked Markdown Parser -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body class="theme-dark">
+  <div class="app-layout">
+    
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <div class="logo">
+          <i class="fa-solid fa-kaaba logo-icon"></i>
+          <div class="logo-text">
+            <span class="logo-title">Islamic Studies</span>
+            <span class="logo-subtitle">Family Curriculum LMS</span>
+          </div>
+        </div>
+        <button class="mobile-toggle" id="mobileSidebarClose" aria-label="Close sidebar">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <!-- Track Switcher -->
+      <div class="track-selector-container">
+        <label class="track-label">Learning Track</label>
+        <div class="track-selector">
+          <button class="track-btn active" data-track="level1" id="trackL1">
+            <i class="fa-solid fa-child"></i>
+            <span>Level 1 (10y)</span>
+          </button>
+          <button class="track-btn" data-track="level2" id="trackL2">
+            <i class="fa-solid fa-user-graduate"></i>
+            <span>Level 2 (13y+)</span>
+          </button>
+          <button class="track-btn" data-track="teacher" id="trackTeacher">
+            <i class="fa-solid fa-chalkboard-user"></i>
+            <span>Teacher</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Curriculum Progress Card -->
+      <div class="progress-card">
+        <div class="progress-info">
+          <span>Overall Progress</span>
+          <strong id="progressPercent">0%</strong>
+        </div>
+        <div class="progress-bar-bg">
+          <div class="progress-bar-fill" id="progressBarFill" style="width: 0%;"></div>
+        </div>
+      </div>
+
+      <!-- Modules Navigation List -->
+      <nav class="modules-nav">
+        <div class="nav-section-title">Modules Curriculum</div>
+        <ul class="modules-list" id="modulesList">
+          <!-- Dynamically populated -->
+        </ul>
+      </nav>
+
+      <div class="sidebar-footer">
+        <button class="btn-theme-toggle" id="themeToggleBtn">
+          <i class="fa-solid fa-moon"></i>
+          <span id="themeToggleText">Light Mode</span>
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+      
+      <!-- Top Navigation Header -->
+      <header class="top-header">
+        <button class="mobile-toggle" id="mobileSidebarOpen" aria-label="Open sidebar">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+
+        <div class="search-box">
+          <i class="fa-solid fa-magnifying-glass search-icon"></i>
+          <input type="text" id="searchInput" placeholder="Search lessons, topics, fiqh rules, or seerah..." autocomplete="off">
+          <button class="clear-search" id="clearSearchBtn" style="display: none;">
+            <i class="fa-solid fa-circle-xmark"></i>
+          </button>
+        </div>
+
+        <div class="header-actions">
+          <button class="header-btn" id="printBtn" title="Print / Save PDF">
+            <i class="fa-solid fa-print"></i>
+            <span class="btn-text">Print PDF</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- Dashboard View (Shown when no specific module is open, or on home) -->
+      <div class="view-container" id="dashboardView">
+        <div class="hero-banner">
+          <div class="hero-content">
+            <span class="hero-badge"><i class="fa-solid fa-star"></i> Comprehensive 9-Module Curriculum</span>
+            <h1>Islamic Studies Family LMS</h1>
+            <p>Interactive Aqidah (Ash'ari), Fiqh (Maliki), Seerah, Quranic Studies, and Character Education tailored for youth and family learning.</p>
+            <div class="hero-stats">
+              <div class="stat-item">
+                <strong id="statTotalModules">9</strong>
+                <span>Modules</span>
+              </div>
+              <div class="stat-item">
+                <strong>18</strong>
+                <span>Worksheets</span>
+              </div>
+              <div class="stat-item">
+                <strong>360+</strong>
+                <span>Interactive Questions</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="dashboard-section">
+          <h2><i class="fa-solid fa-book-open-reader"></i> Course Curriculum</h2>
+          <div class="modules-grid" id="modulesGrid">
+            <!-- Dynamically populated card grid -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Module View Container (Active module content) -->
+      <div class="view-container" id="moduleView" style="display: none;">
+        
+        <!-- Module Header Banner -->
+        <div class="module-header-card">
+          <div class="module-meta-top">
+            <span class="category-badge" id="moduleCategory">Aqidah</span>
+            <span class="track-badge" id="moduleTrackBadge">Level 1 (10 Years Old)</span>
+          </div>
+          <h1 id="moduleTitle">Module Title</h1>
+          <p id="moduleDescription">Module description goes here...</p>
+
+          <!-- Tab Navigation -->
+          <div class="tab-nav" id="moduleTabNav">
+            <button class="tab-btn active" data-tab="handout">
+              <i class="fa-solid fa-file-lines"></i>
+              <span>Student Handout</span>
+            </button>
+            <button class="tab-btn" data-tab="quiz">
+              <i class="fa-solid fa-circle-question"></i>
+              <span>Interactive Quiz</span>
+            </button>
+            <button class="tab-btn" data-tab="slides" id="slidesTabBtn">
+              <i class="fa-solid fa-presentation-screen"></i>
+              <span>Teacher Presentation</span>
+            </button>
+            <button class="tab-btn" data-tab="voicescript" id="scriptTabBtn">
+              <i class="fa-solid fa-microphone"></i>
+              <span>Voice Script</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Search Results Panel (Overlay when searching) -->
+        <div id="searchResultsContainer" style="display: none;" class="search-results-panel">
+          <h3><i class="fa-solid fa-list-check"></i> Search Results</h3>
+          <div id="searchResultsList" class="search-results-list"></div>
+        </div>
+
+        <!-- Tab Content Views -->
+
+        <!-- 1. Handout Tab -->
+        <div class="tab-content active" id="handoutTab">
+          <div class="content-card">
+            <div class="content-toolbar">
+              <button class="btn-mark-complete" id="markHandoutCompleteBtn">
+                <i class="fa-regular fa-circle-check"></i>
+                <span>Mark as Completed</span>
+              </button>
+            </div>
+            <div class="markdown-body" id="handoutContent">
+              <!-- Rendered Markdown Handout -->
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. Interactive Quiz Tab -->
+        <div class="tab-content" id="quizTab">
+          <div class="quiz-container">
+            
+            <!-- Quiz Score Banner -->
+            <div class="quiz-score-banner" id="quizScoreBanner" style="display: none;">
+              <div class="score-icon"><i class="fa-solid fa-trophy"></i></div>
+              <div class="score-details">
+                <h3>Worksheet Quiz Completed!</h3>
+                <p>Your Score: <strong id="scoreDisplay">0 / 0</strong> (<span id="scorePercent">0%</span>)</p>
+              </div>
+              <button class="btn-retry" id="retryQuizBtn">
+                <i class="fa-solid fa-rotate-right"></i> Retry Quiz
+              </button>
+            </div>
+
+            <!-- Quiz Questions Render Area -->
+            <div id="quizQuestionsArea">
+              <!-- Dynamically rendered multiple choice, fill in blanks, matching & reflection -->
+            </div>
+
+            <div class="quiz-submit-bar">
+              <button class="btn-submit-quiz" id="submitQuizBtn">
+                <i class="fa-solid fa-paper-plane"></i> Submit & Grade Quiz
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. Teacher Presentation Slides Tab -->
+        <div class="tab-content" id="slidesTab">
+          <div class="slideshow-container">
+            <div class="slideshow-controls">
+              <button class="slide-nav-btn" id="prevSlideBtn">
+                <i class="fa-solid fa-chevron-left"></i> Previous
+              </button>
+              <span class="slide-counter" id="slideCounter">Slide 1 of 1</span>
+              <button class="slide-nav-btn" id="nextSlideBtn">
+                Next <i class="fa-solid fa-chevron-right"></i>
+              </button>
+              <button class="btn-fullscreen" id="fullscreenSlidesBtn" title="Toggle Fullscreen">
+                <i class="fa-solid fa-expand"></i>
+              </button>
+            </div>
+
+            <div class="slide-frame" id="slideFrame">
+              <div class="markdown-body slide-content" id="slideContent">
+                <!-- Slide markdown rendered here -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. Teacher Voice Script Tab -->
+        <div class="tab-content" id="voicescriptTab">
+          <div class="content-card">
+            <div class="markdown-body" id="voiceScriptContent">
+              <!-- Voice script content rendered here -->
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </main>
+
+  </div>
+
+  <!-- Custom App JS -->
+  <script src="/app.js"></script>
+</body>
+</html>
