@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   let userProgress = JSON.parse(localStorage.getItem('lms_progress') || '{}');
   let quizScores = JSON.parse(localStorage.getItem('lms_quiz_scores') || '{}');
+  let userReflections = JSON.parse(localStorage.getItem('lms_reflections') || '{}');
 
   // DOM Elements
   const themeToggleBtn = document.getElementById('themeToggleBtn');
@@ -211,7 +212,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (activeTrack === 'teacher') trackName = 'Teacher Portal Decks';
     moduleTrackBadge.textContent = trackName;
 
-    // Show/Hide slide and voice script tab buttons based on track
     const slidesTabBtn = document.getElementById('slidesTabBtn');
     const scriptTabBtn = document.getElementById('scriptTabBtn');
     if (activeTrack === 'teacher') {
@@ -269,7 +269,6 @@ document.addEventListener('DOMContentLoaded', () => {
       handoutContent.innerHTML = `<pre>${md || 'No handout content available for this track.'}</pre>`;
     }
 
-    // Handout completion status
     const isComp = userProgress[`mod_${mod.id}`];
     markHandoutCompleteBtn.classList.toggle('completed', !!isComp);
     markHandoutCompleteBtn.querySelector('span').textContent = isComp ? 'Completed ✓' : 'Mark as Completed';
@@ -299,11 +298,14 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     const pq = trackData.parsedQuestions;
+
+    // Fallback if no questions parsed (strips Answer Key so answers are NEVER shown to students)
     if (!pq || (!pq.multipleChoice.length && !pq.fillBlanks.length && !pq.reflection.length)) {
-      if (window.marked && trackData.questionsMd) {
-        quizQuestionsArea.innerHTML = `<div class="content-card"><div class="markdown-body">${marked.parse(trackData.questionsMd)}</div></div>`;
+      const cleanMd = pq && pq.studentQuestionsMd ? pq.studentQuestionsMd : (trackData.questionsMd || '').replace(/##?\s*.*Answer\s+Key[\s\S]*/i, '');
+      if (window.marked && cleanMd) {
+        quizQuestionsArea.innerHTML = `<div class="content-card"><div class="markdown-body">${marked.parse(cleanMd)}</div></div>`;
       } else {
-        quizQuestionsArea.innerHTML = '<p>No interactive quiz questions available for this module track.</p>';
+        quizQuestionsArea.innerHTML = '<p>No questions available for this module track.</p>';
       }
       submitQuizBtn.style.display = 'none';
       return;
@@ -311,11 +313,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     submitQuizBtn.style.display = 'flex';
 
-    // 1. Multiple Choice Questions
+    // 1. Multiple Choice Questions (Interactive Clickable Buttons)
     if (pq.multipleChoice.length > 0) {
       const mcqSection = document.createElement('div');
       mcqSection.className = 'quiz-card';
-      mcqSection.innerHTML = `<h3><i class="fa-solid fa-list-check"></i> Part A: Multiple Choice Questions</h3>`;
+      mcqSection.innerHTML = `<h3><i class="fa-solid fa-list-check"></i> Multiple Choice Questions</h3>`;
 
       pq.multipleChoice.forEach((q, idx) => {
         const qBox = document.createElement('div');
@@ -326,7 +328,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let optsHtml = '';
         q.options.forEach(opt => {
           optsHtml += `
-            <button class="opt-btn" data-qid="${q.id}" data-opt="${opt.key}">
+            <button type="button" class="opt-btn" data-qid="${q.id}" data-opt="${opt.key}">
               <span class="opt-key">${opt.key})</span>
               <span>${opt.text}</span>
             </button>
@@ -341,10 +343,11 @@ document.addEventListener('DOMContentLoaded', () => {
           <div class="mcq-options">${optsHtml}</div>
         `;
 
-        // Handle Option Selection
+        // Interactive Click Selection Handler
         const btns = qBox.querySelectorAll('.opt-btn');
         btns.forEach(b => {
-          b.addEventListener('click', () => {
+          b.addEventListener('click', (e) => {
+            e.preventDefault();
             btns.forEach(x => x.classList.remove('selected'));
             b.classList.add('selected');
           });
@@ -377,7 +380,7 @@ document.addEventListener('DOMContentLoaded', () => {
       });
 
       fibSection.innerHTML = `
-        <h3><i class="fa-solid fa-pen-line"></i> Part B: Fill in the Blanks</h3>
+        <h3><i class="fa-solid fa-pen-line"></i> Fill in the Blanks</h3>
         ${wordBankHtml}
         <div>${fibLinesHtml}</div>
       `;
@@ -385,7 +388,7 @@ document.addEventListener('DOMContentLoaded', () => {
       quizQuestionsArea.appendChild(fibSection);
     }
 
-    // 3. Reflection / Short Answer
+    // 3. Reflection & Short Answer (Fully Editable Textareas with LocalStorage Auto-Save)
     if (pq.reflection.length > 0) {
       const refSection = document.createElement('div');
       refSection.className = 'quiz-card';
@@ -395,17 +398,28 @@ document.addEventListener('DOMContentLoaded', () => {
       pq.reflection.forEach(ref => {
         const item = document.createElement('div');
         item.style.marginTop = '16px';
+
+        const saveKey = `ref_${activeModuleId}_${activeTrack}_${ref.id}`;
+        const savedText = userReflections[saveKey] || '';
+
         item.innerHTML = `
           <p><strong>${ref.id}. ${ref.question}</strong></p>
-          <textarea class="reflection-input" placeholder="Type your response or reflection here..."></textarea>
+          <textarea class="reflection-input" data-refkey="${saveKey}" placeholder="Write your thoughts or response here...">${savedText}</textarea>
         `;
+
+        const ta = item.querySelector('textarea');
+        ta.addEventListener('input', (e) => {
+          userReflections[saveKey] = e.target.value;
+          localStorage.setItem('lms_reflections', JSON.stringify(userReflections));
+        });
+
         refSection.appendChild(item);
       });
 
       quizQuestionsArea.appendChild(refSection);
     }
 
-    // Load existing score if submitted previously
+    // Restore previous quiz score if submitted
     const scoreKey = `quiz_${activeModuleId}_${activeTrack}`;
     if (quizScores[scoreKey]) {
       showQuizScoreBanner(quizScores[scoreKey].score, quizScores[scoreKey].total);
@@ -432,14 +446,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
       optBtns.forEach(btn => {
         const key = btn.dataset.opt;
-        if (key === q.correctAnswer) {
+        if (q.correctAnswer && key === q.correctAnswer) {
           btn.classList.add('correct');
-        } else if (selectedOpt && btn === selectedOpt && key !== q.correctAnswer) {
+        } else if (selectedOpt && btn === selectedOpt && q.correctAnswer && key !== q.correctAnswer) {
           btn.classList.add('incorrect');
         }
       });
 
-      if (selectedOpt && selectedOpt.dataset.opt === q.correctAnswer) {
+      if (selectedOpt && q.correctAnswer && selectedOpt.dataset.opt === q.correctAnswer) {
         correctCount++;
       }
     });
@@ -598,15 +612,16 @@ document.addEventListener('DOMContentLoaded', () => {
     mobileSidebarOpen.addEventListener('click', () => sidebar.classList.add('open'));
     mobileSidebarClose.addEventListener('click', () => sidebar.classList.remove('open'));
 
-    // Tab buttons event delegation
     moduleTabNav.querySelectorAll('.tab-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         switchTab(btn.dataset.tab);
       });
     });
 
-    // Keyboard navigation for slides
     document.addEventListener('keydown', (e) => {
+      // Do not trigger slide change if user is typing in a reflection textarea or input
+      if (['TEXTAREA', 'INPUT'].includes(document.activeElement.tagName)) return;
+
       if (activeTab === 'slides' && activeModuleId !== null) {
         if (e.key === 'ArrowRight') nextSlideBtn.click();
         if (e.key === 'ArrowLeft') prevSlideBtn.click();

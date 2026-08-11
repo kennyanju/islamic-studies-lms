@@ -108,8 +108,8 @@ function findMdFile(dir, pattern) {
   return null;
 }
 
-function parseQuestionsFast(markdownText) {
-  if (!markdownText) return { multipleChoice: [], fillBlanks: [], matching: [], reflection: [], answerKeyRaw: '' };
+function parseQuestionsComprehensive(markdownText) {
+  if (!markdownText) return { multipleChoice: [], fillBlanks: [], matching: [], reflection: [], answerKeyRaw: '', studentQuestionsMd: '' };
 
   const lines = markdownText.split(/\r?\n/);
   const mcq = [];
@@ -117,10 +117,11 @@ function parseQuestionsFast(markdownText) {
   const matching = [];
   const reflection = [];
   const answerKeyLines = [];
+  const studentLines = [];
 
+  let inAnswerKey = false;
   let currentSection = '';
   let currentMcq = null;
-  let inAnswerKey = false;
   let wordBank = [];
   let currentMatchGroup = '';
 
@@ -128,7 +129,8 @@ function parseQuestionsFast(markdownText) {
     const line = lines[i];
     const trimmed = line.trim();
 
-    if (/^##\s+(Teacher\s+)?Answer\s+Key/i.test(trimmed)) {
+    // Detect Answer Key section at bottom of file
+    if (/^(##|###)\s*.*(Answer\s+Key|Marking\s+Guide|Teacher\s+Answers)/i.test(trimmed)) {
       inAnswerKey = true;
       continue;
     }
@@ -138,57 +140,90 @@ function parseQuestionsFast(markdownText) {
       continue;
     }
 
-    if (/^##\s+Part\s+(A|1)/i.test(trimmed)) {
+    studentLines.push(line);
+
+    // Detect Section Headers
+    if (/^(##|###|####)\s*(Part\s*(A|1)|Questions)/i.test(trimmed) || /Multiple\s+Choice/i.test(trimmed)) {
+      if (currentMcq) { mcq.push(currentMcq); currentMcq = null; }
       currentSection = 'MCQ';
       continue;
-    } else if (/^##\s+Part\s+(B|2)/i.test(trimmed)) {
+    } else if (/^(##|###|####)\s*Part\s*(B|2)/i.test(trimmed) && /True\s+or\s+False/i.test(trimmed)) {
+      if (currentMcq) { mcq.push(currentMcq); currentMcq = null; }
+      currentSection = 'TF';
+      continue;
+    } else if (/^(##|###|####)\s*Part\s*(B|2)/i.test(trimmed) && /Fill\s+in/i.test(trimmed)) {
+      if (currentMcq) { mcq.push(currentMcq); currentMcq = null; }
       currentSection = 'FIB';
       continue;
-    } else if (/^##\s+Part\s+C/i.test(trimmed)) {
+    } else if (/^(##|###|####)\s*Part\s*C/i.test(trimmed) || /Matching/i.test(trimmed)) {
+      if (currentMcq) { mcq.push(currentMcq); currentMcq = null; }
       currentSection = 'MATCH';
       continue;
-    } else if (/^##\s+Part\s+(D|3|4)/i.test(trimmed)) {
+    } else if (/^(##|###|####)\s*Part\s*(D|3|4)/i.test(trimmed) || /Short\s+Answer|Reflection|Scenario/i.test(trimmed)) {
+      if (currentMcq) { mcq.push(currentMcq); currentMcq = null; }
       currentSection = 'REFLECT';
       continue;
     }
 
+    // MCQ Parsing
     if (currentSection === 'MCQ') {
-      const qHeader = trimmed.match(/^###\s*(\d+)\.\s*(.*)/);
-      if (qHeader) {
+      const qMatch = trimmed.match(/^(?:####|###|##)?\s*(?:\*\*)?\s*(\d+)\s*[\.\)]\s*(.*?)(?:\*\*)?$/);
+      const optMatch = trimmed.match(/^(?:\*\s*)?\(?\s*([a-dA-D])[\.\)]\s*(.*)/);
+
+      if (qMatch && !optMatch) {
         if (currentMcq) mcq.push(currentMcq);
         currentMcq = {
-          id: parseInt(qHeader[1], 10),
-          question: qHeader[2].trim(),
+          id: parseInt(qMatch[1], 10),
+          question: qMatch[2].replace(/^\*\*|\*\*$/g, '').trim(),
           options: []
         };
-      } else if (currentMcq && /^\*\s*([A-D])\)\s*(.*)/.test(trimmed)) {
-        const optMatch = trimmed.match(/^\*\s*([A-D])\)\s*(.*)/);
+      } else if (currentMcq && optMatch) {
         currentMcq.options.push({
-          key: optMatch[1],
-          text: optMatch[2].trim()
+          key: optMatch[1].toUpperCase(),
+          text: optMatch[2].replace(/^\*\*|\*\*$/g, '').trim()
         });
       }
-    } else if (currentSection === 'FIB') {
+    }
+    // True/False Parsing
+    else if (currentSection === 'TF') {
+      const tfMatch = trimmed.match(/^(?:####|###|##)?\s*(?:\*\*)?\s*(\d+)\s*[\.\)]\s*(.*?)(?:\*\*)?$/);
+      if (tfMatch && !trimmed.toLowerCase().includes('true or false?')) {
+        if (currentMcq) mcq.push(currentMcq);
+        currentMcq = {
+          id: parseInt(tfMatch[1], 10),
+          question: tfMatch[2].replace(/^\*\*|\*\*$/g, '').trim(),
+          options: [
+            { key: 'A', text: 'True' },
+            { key: 'B', text: 'False' }
+          ]
+        };
+      }
+    }
+    // Fill in the Blanks Parsing
+    else if (currentSection === 'FIB') {
       if (trimmed.includes('Vocabulary Bank:') || trimmed.includes('Word Bank:')) {
         const wbMatch = trimmed.match(/(Vocabulary|Word) Bank:\s*\*?([^*]+)\*?/i);
         if (wbMatch) {
           wordBank = wbMatch[2].replace(/\*/g, '').split(/,|\n/).map(w => w.trim()).filter(Boolean);
         }
       } else {
-        const fibMatch = trimmed.match(/^(?:###\s*)?(\d+)\.\s*(.*)/);
+        const fibMatch = trimmed.match(/^(?:####|###|##)?\s*(?:\*\*)?\s*(\d+)\s*[\.\)]\s*(.*?)(?:\*\*)?$/);
         if (fibMatch) {
           fillBlanks.push({
             id: parseInt(fibMatch[1], 10),
-            text: fibMatch[2].trim(),
+            text: fibMatch[2].replace(/^\*\*|\*\*$/g, '').trim(),
             wordBank
           });
         }
       }
-    } else if (currentSection === 'MATCH') {
-      if (trimmed.startsWith('###')) {
-        currentMatchGroup = trimmed.replace(/^###\s*/, '').trim();
-      } else if (trimmed.includes('───')) {
-        const parts = trimmed.replace(/^\*\s*/, '').split('───');
+    }
+    // Matching Parsing
+    else if (currentSection === 'MATCH') {
+      if (trimmed.startsWith('#')) {
+        currentMatchGroup = trimmed.replace(/^#+\s*/, '').trim();
+      } else if (trimmed.includes('───') || trimmed.includes('->')) {
+        const delim = trimmed.includes('───') ? '───' : '->';
+        const parts = trimmed.replace(/^\*\s*/, '').split(delim);
         if (parts.length === 2) {
           matching.push({
             group: currentMatchGroup,
@@ -197,12 +232,14 @@ function parseQuestionsFast(markdownText) {
           });
         }
       }
-    } else if (currentSection === 'REFLECT') {
-      const refMatch = trimmed.match(/^(?:###\s*)?(\d+)\.\s*(.*)/);
+    }
+    // Reflection / Short Answer Parsing
+    else if (currentSection === 'REFLECT') {
+      const refMatch = trimmed.match(/^(?:####|###|##)?\s*(?:\*\*)?\s*(\d+)\s*[\.\)]\s*(.*?)(?:\*\*)?$/);
       if (refMatch) {
         reflection.push({
           id: parseInt(refMatch[1], 10),
-          question: refMatch[2].trim()
+          question: refMatch[2].replace(/^\*\*|\*\*$/g, '').trim()
         });
       }
     }
@@ -213,13 +250,20 @@ function parseQuestionsFast(markdownText) {
   }
 
   const answerKeyRaw = answerKeyLines.join('\n').trim();
+  const studentQuestionsMd = studentLines.join('\n').trim();
 
-  // Populate answers from answerKeyRaw
+  // Extract correct answers from answerKeyRaw
   mcq.forEach(q => {
-    const keyRegex = new RegExp(`(?:^|\\n)\\s*${q.id}\\.\\s*\\*\\*([A-D])\\*\\*`, 'i');
-    const m = answerKeyRaw.match(keyRegex);
-    if (m) {
-      q.correctAnswer = m[1].toUpperCase();
+    const keyRegex1 = new RegExp(`(?:^|\\n)\\s*${q.id}\\.\\s*(?:\\*\\*)?\\s*\\(?([a-dA-D])\\)?`, 'i');
+    const m1 = answerKeyRaw.match(keyRegex1);
+    if (m1) {
+      q.correctAnswer = m1[1].toUpperCase();
+    } else {
+      const tfRegex = new RegExp(`(?:^|\\n)\\s*${q.id}\\.\\s*(?:\\*\\*)?\\s*(True|False)`, 'i');
+      const mTF = answerKeyRaw.match(tfRegex);
+      if (mTF) {
+        q.correctAnswer = mTF[1].toLowerCase() === 'true' ? 'A' : 'B';
+      }
     }
   });
 
@@ -228,7 +272,8 @@ function parseQuestionsFast(markdownText) {
     fillBlanks,
     matching,
     reflection,
-    answerKeyRaw
+    answerKeyRaw,
+    studentQuestionsMd
   };
 }
 
@@ -302,8 +347,8 @@ modulesConfig.forEach(cfg => {
   const slidesRaw = slidesPath ? fs.readFileSync(slidesPath, 'utf8') : '';
   const voiceScriptRaw = voiceScriptPath ? fs.readFileSync(voiceScriptPath, 'utf8') : '';
 
-  const parsedQ10 = parseQuestionsFast(questions10Raw);
-  const parsedQ13 = parseQuestionsFast(questions13Raw);
+  const parsedQ10 = parseQuestionsComprehensive(questions10Raw);
+  const parsedQ13 = parseQuestionsComprehensive(questions13Raw);
   const parsedSlides = parseSlidesFast(slidesRaw);
 
   courseData.modules.push({

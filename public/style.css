@@ -840,7 +840,7 @@ h1, h2, h3, h4, .logo-title {
   display: flex;
   align-items: center;
   gap: 14px;
-  padding: 12px 18px;
+  padding: 14px 20px;
   border-radius: var(--radius-sm);
   border: 1px solid var(--card-border);
   background-color: var(--input-bg);
@@ -849,16 +849,20 @@ h1, h2, h3, h4, .logo-title {
   cursor: pointer;
   text-align: left;
   transition: var(--transition);
+  user-select: none;
+  pointer-events: auto !important;
 }
 
 .opt-btn:hover {
   border-color: var(--emerald-primary);
+  background-color: rgba(5, 150, 105, 0.1);
 }
 
 .opt-btn.selected {
   border-color: var(--emerald-primary);
-  background-color: rgba(5, 150, 105, 0.15);
+  background-color: rgba(5, 150, 105, 0.25);
   font-weight: 600;
+  box-shadow: inset 0 0 0 1px var(--emerald-primary);
 }
 
 .opt-btn.correct {
@@ -903,16 +907,24 @@ h1, h2, h3, h4, .logo-title {
   background-color: var(--input-bg);
   border: 1px solid var(--card-border);
   color: var(--text-main);
-  padding: 6px 12px;
+  padding: 8px 14px;
   border-radius: 6px;
   font-size: 0.95rem;
   margin: 0 4px;
-  width: 140px;
+  min-width: 150px;
+  outline: none;
+  pointer-events: auto !important;
+  user-select: text !important;
+}
+
+.fib-input:focus {
+  border-color: var(--emerald-primary);
+  box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.2);
 }
 
 .reflection-input {
   width: 100%;
-  min-height: 100px;
+  min-height: 110px;
   background-color: var(--input-bg);
   border: 1px solid var(--card-border);
   color: var(--text-main);
@@ -922,6 +934,15 @@ h1, h2, h3, h4, .logo-title {
   font-size: 0.95rem;
   margin-top: 10px;
   outline: none;
+  resize: vertical;
+  cursor: text;
+  pointer-events: auto !important;
+  user-select: text !important;
+}
+
+.reflection-input:focus {
+  border-color: var(--emerald-primary);
+  box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.2);
 }
 
 .btn-submit-quiz {
