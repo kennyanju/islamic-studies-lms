@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Islamic Studies LMS - Single Page Application Engine with Read Aloud
+   Islamic Studies LMS - Single Page Application Engine with Teacher Portal
    ========================================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -8,8 +8,10 @@ document.addEventListener('DOMContentLoaded', () => {
   let courseData = null;
   let activeModuleId = null;
   let activeTrack = localStorage.getItem('lms_track') || 'level1'; // level1 | level2 | teacher
-  let activeTab = 'handout'; // handout | readaloud | quiz | slides | voicescript
+  let activeTab = 'handout'; // handout | readaloud | teleprompter | answerkeys | quiz | slides | voicescript
   let currentSlideIndex = 0;
+  let currentTpSlideIndex = 0;
+  let tpFontSize = 'normal'; // normal | large | xlarge
 
   let userProgress = JSON.parse(localStorage.getItem('lms_progress') || '{}');
   let quizScores = JSON.parse(localStorage.getItem('lms_quiz_scores') || '{}');
@@ -58,6 +60,15 @@ document.addEventListener('DOMContentLoaded', () => {
   const moduleDescription = document.getElementById('moduleDescription');
   const moduleTabNav = document.getElementById('moduleTabNav');
 
+  // Tab Buttons
+  const handoutTabBtn = document.getElementById('handoutTabBtn');
+  const readaloudTabBtn = document.getElementById('readaloudTabBtn');
+  const quizTabBtn = document.getElementById('quizTabBtn');
+  const teleprompterTabBtn = document.getElementById('teleprompterTabBtn');
+  const answerkeysTabBtn = document.getElementById('answerkeysTabBtn');
+  const slidesTabBtn = document.getElementById('slidesTabBtn');
+  const scriptTabBtn = document.getElementById('scriptTabBtn');
+
   // Tab Contents
   const handoutContent = document.getElementById('handoutContent');
   const markHandoutCompleteBtn = document.getElementById('markHandoutCompleteBtn');
@@ -71,6 +82,29 @@ document.addEventListener('DOMContentLoaded', () => {
   const raProgressLabel = document.getElementById('raProgressLabel');
   const raProgressFill = document.getElementById('raProgressFill');
   const readAloudBody = document.getElementById('readAloudBody');
+
+  // Teleprompter Elements
+  const tpPrevBtn = document.getElementById('tpPrevBtn');
+  const tpNextBtn = document.getElementById('tpNextBtn');
+  const tpCounter = document.getElementById('tpCounter');
+  const tpFontDecBtn = document.getElementById('tpFontDecBtn');
+  const tpFontIncBtn = document.getElementById('tpFontIncBtn');
+  const tpSpeakBtn = document.getElementById('tpSpeakBtn');
+  const tpSlideContent = document.getElementById('tpSlideContent');
+  const tpCuePill = document.getElementById('tpCuePill');
+  const tpCueText = document.getElementById('tpCueText');
+  const tpScriptText = document.getElementById('tpScriptText');
+  const tpAnalogyCard = document.getElementById('tpAnalogyCard');
+  const tpAnalogyText = document.getElementById('tpAnalogyText');
+  const tpCheckCard = document.getElementById('tpCheckCard');
+  const tpCheckText = document.getElementById('tpCheckText');
+  const tpShowAnswerBtn = document.getElementById('tpShowAnswerBtn');
+
+  // Answer Keys Elements
+  const akToggleL1 = document.getElementById('akToggleL1');
+  const akToggleL2 = document.getElementById('akToggleL2');
+  const answerKeyContent = document.getElementById('answerKeyContent');
+  let activeAkLevel = 'level1';
 
   // Sticky Bottom Audio Bar
   const stickyAudioBar = document.getElementById('stickyAudioBar');
@@ -103,7 +137,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // 1. Fetch Course Data
+  // Fetch Course Data
   fetch('/api/course-data')
     .then(res => res.json())
     .then(data => {
@@ -131,7 +165,6 @@ document.addEventListener('DOMContentLoaded', () => {
     setupEventListeners();
   }
 
-  // Populate Speech Synthesis Voices
   function setupVoices() {
     if (!speechSynth) return;
     function loadVoices() {
@@ -153,7 +186,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // Theme Management
   function setupTheme() {
     const savedTheme = localStorage.getItem('lms_theme') || 'dark';
     document.body.className = savedTheme === 'light' ? 'theme-light' : 'theme-dark';
@@ -173,7 +205,6 @@ document.addEventListener('DOMContentLoaded', () => {
     themeToggleText.textContent = isLight ? 'Dark Mode' : 'Light Mode';
   }
 
-  // Learning Track Switcher
   function setupTrackButtons() {
     updateTrackActiveBtn();
 
@@ -182,6 +213,11 @@ document.addEventListener('DOMContentLoaded', () => {
         activeTrack = btn.dataset.track;
         localStorage.setItem('lms_track', activeTrack);
         updateTrackActiveBtn();
+        if (activeTrack === 'teacher') {
+          activeTab = 'teleprompter';
+        } else if (activeTab === 'teleprompter' || activeTab === 'answerkeys') {
+          activeTab = 'handout';
+        }
         if (activeModuleId !== null) {
           openModule(activeModuleId);
         }
@@ -195,7 +231,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Render Sidebar Module Navigation
   function renderSidebarModules() {
     modulesList.innerHTML = '';
     courseData.modules.forEach(mod => {
@@ -215,7 +250,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Render Home Dashboard
   function renderDashboard() {
     modulesGrid.innerHTML = '';
     courseData.modules.forEach(mod => {
@@ -243,7 +277,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Open Module View
   function openModule(moduleId) {
     activeModuleId = moduleId;
     const mod = courseData.modules.find(m => m.id === moduleId);
@@ -259,15 +292,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let trackName = 'Level 1 (10 Years Old)';
     if (activeTrack === 'level2') trackName = 'Level 2 (13+ Years Old)';
-    if (activeTrack === 'teacher') trackName = 'Teacher Portal Decks';
+    if (activeTrack === 'teacher') trackName = 'Teacher Portal & Teleprompter';
     moduleTrackBadge.textContent = trackName;
 
-    const slidesTabBtn = document.getElementById('slidesTabBtn');
-    const scriptTabBtn = document.getElementById('scriptTabBtn');
+    // Show/Hide Teacher Dedicated Tabs
     if (activeTrack === 'teacher') {
+      teleprompterTabBtn.style.display = 'inline-flex';
+      answerkeysTabBtn.style.display = 'inline-flex';
       slidesTabBtn.style.display = 'inline-flex';
       scriptTabBtn.style.display = 'inline-flex';
     } else {
+      teleprompterTabBtn.style.display = 'none';
+      answerkeysTabBtn.style.display = 'none';
       slidesTabBtn.style.display = 'inline-flex';
       scriptTabBtn.style.display = 'none';
     }
@@ -276,7 +312,6 @@ document.addEventListener('DOMContentLoaded', () => {
     switchTab(activeTab);
   }
 
-  // Switch Active Tab
   function switchTab(tabName) {
     activeTab = tabName;
     const tabBtns = moduleTabNav.querySelectorAll('.tab-btn');
@@ -297,6 +332,10 @@ document.addEventListener('DOMContentLoaded', () => {
       renderHandout(mod);
     } else if (tabName === 'readaloud') {
       renderReadAloudTab(mod);
+    } else if (tabName === 'teleprompter') {
+      renderTeleprompter(mod);
+    } else if (tabName === 'answerkeys') {
+      renderAnswerKeys(mod);
     } else if (tabName === 'quiz') {
       renderQuiz(mod);
     } else if (tabName === 'slides') {
@@ -306,19 +345,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // Render Student Handout
   function renderHandout(mod) {
-    let md = '';
-    if (activeTrack === 'level2') {
-      md = mod.tracks.level2.handoutMd;
-    } else {
-      md = mod.tracks.level1.handoutMd;
-    }
-
+    let md = activeTrack === 'level2' ? mod.tracks.level2.handoutMd : mod.tracks.level1.handoutMd;
     if (window.marked && md) {
       handoutContent.innerHTML = marked.parse(md);
     } else {
-      handoutContent.innerHTML = `<pre>${md || 'No handout content available for this track.'}</pre>`;
+      handoutContent.innerHTML = `<pre>${md || 'No handout content available.'}</pre>`;
     }
 
     const isComp = userProgress[`mod_${mod.id}`];
@@ -326,13 +358,11 @@ document.addEventListener('DOMContentLoaded', () => {
     markHandoutCompleteBtn.querySelector('span').textContent = isComp ? 'Completed ✓' : 'Mark as Completed';
   }
 
-  // Listen Handout Read-Aloud Button
   listenHandoutBtn.addEventListener('click', () => {
     switchTab('readaloud');
     startReadAloud(0);
   });
 
-  // Mark Handout Complete
   markHandoutCompleteBtn.addEventListener('click', () => {
     if (activeModuleId === null) return;
     const key = `mod_${activeModuleId}`;
@@ -346,6 +376,137 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // --------------------------------------------------------------------------
+  // TEACHER TELEPROMPTER & LIVE PRESENTATION CONTROLLER
+  // --------------------------------------------------------------------------
+
+  function renderTeleprompter(mod) {
+    const slides = mod.teacher.parsedSlides || [];
+    const scriptSlides = mod.teacher.parsedVoiceScript || [];
+    const total = Math.max(slides.length, scriptSlides.length);
+
+    if (total === 0) {
+      tpSlideContent.innerHTML = '<p>No slides available for teleprompter.</p>';
+      return;
+    }
+
+    currentTpSlideIndex = 0;
+    updateTeleprompterDisplay(mod, slides, scriptSlides);
+
+    tpPrevBtn.onclick = () => {
+      if (currentTpSlideIndex > 0) {
+        currentTpSlideIndex--;
+        updateTeleprompterDisplay(mod, slides, scriptSlides);
+      }
+    };
+
+    tpNextBtn.onclick = () => {
+      const maxLen = Math.max(slides.length, scriptSlides.length);
+      if (currentTpSlideIndex < maxLen - 1) {
+        currentTpSlideIndex++;
+        updateTeleprompterDisplay(mod, slides, scriptSlides);
+      }
+    };
+  }
+
+  function updateTeleprompterDisplay(mod, slides, scriptSlides) {
+    const total = Math.max(slides.length, scriptSlides.length);
+    if (currentTpSlideIndex >= total) currentTpSlideIndex = 0;
+
+    tpCounter.textContent = `Slide ${currentTpSlideIndex + 1} of ${total}`;
+
+    // 1. Update Left Visual Slide
+    const slide = slides[currentTpSlideIndex];
+    if (slide && window.marked && slide.content) {
+      tpSlideContent.innerHTML = marked.parse(slide.content);
+    } else {
+      tpSlideContent.innerHTML = `<h3>${slide ? slide.title : 'Slide ' + (currentTpSlideIndex + 1)}</h3>`;
+    }
+
+    // 2. Update Right Teleprompter Script Card
+    const sc = scriptSlides[currentTpSlideIndex];
+    if (sc) {
+      tpCuePill.style.display = sc.direction ? 'block' : 'none';
+      tpCueText.textContent = sc.direction || '';
+
+      tpScriptText.textContent = sc.script || sc.summary || 'Follow presentation slides for discussion.';
+
+      tpAnalogyCard.style.display = sc.analogy ? 'block' : 'none';
+      tpAnalogyText.textContent = sc.analogy || '';
+
+      tpCheckCard.style.display = sc.checkQuestion ? 'block' : 'none';
+      tpCheckText.innerHTML = sc.checkQuestion || '';
+    } else {
+      tpCuePill.style.display = 'none';
+      tpScriptText.textContent = 'No voice script available for this slide.';
+      tpAnalogyCard.style.display = 'none';
+      tpCheckCard.style.display = 'none';
+    }
+
+    // Teleprompter Read-Aloud Action Button
+    tpSpeakBtn.onclick = () => {
+      const textToSpeak = sc ? `${sc.title}. ${sc.script || sc.summary}` : 'Slide presentation.';
+      if (speechSynth) {
+        speechSynth.cancel();
+        const u = new SpeechSynthesisUtterance(textToSpeak);
+        if (raVoiceSelect.value !== '' && availableVoices[raVoiceSelect.value]) {
+          u.voice = availableVoices[raVoiceSelect.value];
+        }
+        speechSynth.speak(u);
+      }
+    };
+  }
+
+  // Teleprompter Font Size Controls
+  tpFontDecBtn.addEventListener('click', () => {
+    tpScriptText.classList.remove('font-xlarge');
+    if (tpScriptText.classList.contains('font-large')) {
+      tpScriptText.classList.remove('font-large');
+    }
+  });
+
+  tpFontIncBtn.addEventListener('click', () => {
+    if (!tpScriptText.classList.contains('font-large')) {
+      tpScriptText.classList.add('font-large');
+    } else {
+      tpScriptText.classList.add('font-xlarge');
+    }
+  });
+
+  // --------------------------------------------------------------------------
+  // TEACHER MASTER ANSWER KEYS CONTROLLER
+  // --------------------------------------------------------------------------
+
+  function renderAnswerKeys(mod) {
+    updateAkToggleButtons();
+
+    akToggleL1.onclick = () => {
+      activeAkLevel = 'level1';
+      updateAkToggleButtons();
+      renderAnswerKeys(mod);
+    };
+
+    akToggleL2.onclick = () => {
+      activeAkLevel = 'level2';
+      updateAkToggleButtons();
+      renderAnswerKeys(mod);
+    };
+
+    const trackData = activeAkLevel === 'level2' ? mod.tracks.level2 : mod.tracks.level1;
+    const akRaw = trackData.parsedQuestions.answerKeyRaw;
+
+    if (window.marked && akRaw) {
+      answerKeyContent.innerHTML = marked.parse(akRaw);
+    } else {
+      answerKeyContent.innerHTML = `<p class="text-muted">Master answer key compiled within module script. Refer to voice scripts or slides for full explanation.</p>`;
+    }
+  }
+
+  function updateAkToggleButtons() {
+    akToggleL1.classList.toggle('active', activeAkLevel === 'level1');
+    akToggleL2.classList.toggle('active', activeAkLevel === 'level2');
+  }
+
+  // --------------------------------------------------------------------------
   // READ ALOUD SPEECH SYNTHESIS ENGINE
   // --------------------------------------------------------------------------
 
@@ -355,10 +516,7 @@ document.addEventListener('DOMContentLoaded', () => {
       rawMd = mod.teacher.voiceScriptMd;
     }
 
-    // Clean Markdown tags for clean text reading
     const cleanText = rawMd.replace(/#+\s*/g, '').replace(/\*+/g, '').replace(/_+/g, '').replace(/\[(.*?)\]\(.*?\)/g, '$1');
-    
-    // Segment into sentences
     currentSentences = cleanText.split(/(?<=[.!?])\s+|\n+/).map(s => s.trim()).filter(s => s.length > 3);
     currentSentenceIdx = 0;
 
@@ -383,7 +541,7 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
-    speechSynth.cancel(); // Stop any active speech
+    speechSynth.cancel();
     currentSentenceIdx = startIdx;
 
     if (currentSentences.length === 0) return;
@@ -405,15 +563,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const text = currentSentences[currentSentenceIdx];
     currentUtterance = new SpeechSynthesisUtterance(text);
 
-    // Set voice if selected
     if (raVoiceSelect.value !== '' && availableVoices[raVoiceSelect.value]) {
       currentUtterance.voice = availableVoices[raVoiceSelect.value];
     }
 
-    // Set speed rate
     currentUtterance.rate = parseFloat(raSpeedSelect.value || 1);
 
-    // Highlight current sentence block
     const blocks = readAloudBody.querySelectorAll('.sentence-block');
     blocks.forEach(b => b.classList.remove('speaking'));
     
@@ -829,9 +984,15 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('keydown', (e) => {
       if (['TEXTAREA', 'INPUT', 'SELECT'].includes(document.activeElement.tagName)) return;
 
-      if (activeTab === 'slides' && activeModuleId !== null) {
-        if (e.key === 'ArrowRight') nextSlideBtn.click();
-        if (e.key === 'ArrowLeft') prevSlideBtn.click();
+      if ((activeTab === 'slides' || activeTab === 'teleprompter') && activeModuleId !== null) {
+        if (e.key === 'ArrowRight') {
+          if (activeTab === 'teleprompter') tpNextBtn.click();
+          else nextSlideBtn.click();
+        }
+        if (e.key === 'ArrowLeft') {
+          if (activeTab === 'teleprompter') tpPrevBtn.click();
+          else prevSlideBtn.click();
+        }
       }
     });
   }

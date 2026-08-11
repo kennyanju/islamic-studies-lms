@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Islamic Studies LMS - Family Curriculum</title>
+  <title>Islamic Studies LMS - Family Curriculum & Teacher Command Portal</title>
   
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -39,7 +39,7 @@
 
       <!-- Track Selector -->
       <div class="track-selector-container">
-        <label class="track-label">Learning Track</label>
+        <label class="track-label">Learning Mode</label>
         <div class="track-selector">
           <button class="track-btn active" data-track="level1" id="trackL1">
             <i class="fa-solid fa-child"></i>
@@ -51,7 +51,7 @@
           </button>
           <button class="track-btn" data-track="teacher" id="trackTeacher">
             <i class="fa-solid fa-chalkboard-user"></i>
-            <span>Teacher</span>
+            <span>Teacher Portal</span>
           </button>
         </div>
       </div>
@@ -94,7 +94,7 @@
 
         <div class="search-box">
           <i class="fa-solid fa-magnifying-glass search-icon"></i>
-          <input type="text" id="searchInput" placeholder="Search lessons, topics, fiqh rules, or seerah..." autocomplete="off">
+          <input type="text" id="searchInput" placeholder="Search lessons, seerah, fiqh rules, or teacher scripts..." autocomplete="off">
           <button class="clear-search" id="clearSearchBtn" style="display: none;">
             <i class="fa-solid fa-circle-xmark"></i>
           </button>
@@ -103,18 +103,18 @@
         <div class="header-actions">
           <button class="header-btn" id="printBtn" title="Print / Save PDF">
             <i class="fa-solid fa-print"></i>
-            <span class="btn-text">Print PDF</span>
+            <span class="btn-text">Print Packet</span>
           </button>
         </div>
       </header>
 
-      <!-- Dashboard View (Shown when no specific module is open, or on home) -->
+      <!-- Dashboard View -->
       <div class="view-container" id="dashboardView">
         <div class="hero-banner">
           <div class="hero-content">
-            <span class="hero-badge"><i class="fa-solid fa-star"></i> Comprehensive 9-Module Curriculum</span>
+            <span class="hero-badge"><i class="fa-solid fa-star"></i> Comprehensive 9-Module Curriculum & Teacher Portal</span>
             <h1>Islamic Studies Family LMS</h1>
-            <p>Interactive Aqidah (Ash'ari), Fiqh (Maliki), Seerah, Quranic Studies, and Character Education tailored for youth and family learning.</p>
+            <p>Interactive Aqidah (Ash'ari), Fiqh (Maliki), Seerah, Quranic Studies, and Character Education tailored for youth learning and teacher presentation.</p>
             <div class="hero-stats">
               <div class="stat-item">
                 <strong id="statTotalModules">9</strong>
@@ -125,8 +125,8 @@
                 <span>Worksheets</span>
               </div>
               <div class="stat-item">
-                <strong>360+</strong>
-                <span>Interactive Questions</span>
+                <strong>200+</strong>
+                <span>Teleprompter Slides</span>
               </div>
             </div>
           </div>
@@ -140,7 +140,7 @@
         </div>
       </div>
 
-      <!-- Module View Container (Active module content) -->
+      <!-- Module View Container -->
       <div class="view-container" id="moduleView" style="display: none;">
         
         <!-- Module Header Banner -->
@@ -154,7 +154,7 @@
 
           <!-- Tab Navigation -->
           <div class="tab-nav" id="moduleTabNav">
-            <button class="tab-btn active" data-tab="handout">
+            <button class="tab-btn active" data-tab="handout" id="handoutTabBtn">
               <i class="fa-solid fa-file-lines"></i>
               <span>Student Handout</span>
             </button>
@@ -162,22 +162,32 @@
               <i class="fa-solid fa-volume-high"></i>
               <span>Read Aloud</span>
             </button>
-            <button class="tab-btn" data-tab="quiz">
+            <button class="tab-btn" data-tab="quiz" id="quizTabBtn">
               <i class="fa-solid fa-circle-question"></i>
               <span>Interactive Quiz</span>
             </button>
+            
+            <!-- Teacher Dedicated Tabs -->
+            <button class="tab-btn" data-tab="teleprompter" id="teleprompterTabBtn" style="display: none;">
+              <i class="fa-solid fa-chalkboard-user"></i>
+              <span>Presentation Teleprompter</span>
+            </button>
+            <button class="tab-btn" data-tab="answerkeys" id="answerkeysTabBtn" style="display: none;">
+              <i class="fa-solid fa-key"></i>
+              <span>Master Answer Keys</span>
+            </button>
             <button class="tab-btn" data-tab="slides" id="slidesTabBtn">
               <i class="fa-solid fa-presentation-screen"></i>
-              <span>Teacher Presentation</span>
+              <span>Slide Deck</span>
             </button>
             <button class="tab-btn" data-tab="voicescript" id="scriptTabBtn">
-              <i class="fa-solid fa-microphone"></i>
-              <span>Voice Script</span>
+              <i class="fa-solid fa-scroll"></i>
+              <span>Full Voice Script</span>
             </button>
           </div>
         </div>
 
-        <!-- Search Results Panel (Overlay when searching) -->
+        <!-- Search Results Panel -->
         <div id="searchResultsContainer" style="display: none;" class="search-results-panel">
           <h3><i class="fa-solid fa-list-check"></i> Search Results</h3>
           <div id="searchResultsList" class="search-results-list"></div>
@@ -198,13 +208,11 @@
                 <span>Mark as Completed</span>
               </button>
             </div>
-            <div class="markdown-body" id="handoutContent">
-              <!-- Rendered Markdown Handout -->
-            </div>
+            <div class="markdown-body" id="handoutContent"></div>
           </div>
         </div>
 
-        <!-- 2. Read-Aloud Page Tab -->
+        <!-- 2. Read-Aloud Tab -->
         <div class="tab-content" id="readaloudTab">
           <div class="content-card read-aloud-page">
             <div class="read-aloud-header">
@@ -242,14 +250,84 @@
               </div>
             </div>
 
-            <!-- Sentence-by-Sentence Interactive Karaoke-style Reader -->
-            <div class="read-aloud-body" id="readAloudBody">
-              <p class="text-muted">Click the Play button above or any sentence below to start listening.</p>
+            <div class="read-aloud-body" id="readAloudBody"></div>
+          </div>
+        </div>
+
+        <!-- 3. Teacher Teleprompter & Live Presentation Mode Tab -->
+        <div class="tab-content" id="teleprompterTab">
+          <div class="teleprompter-wrapper">
+            <div class="teleprompter-toolbar">
+              <div class="tp-controls-left">
+                <button class="slide-nav-btn" id="tpPrevBtn"><i class="fa-solid fa-chevron-left"></i> Prev</button>
+                <span class="slide-counter" id="tpCounter">Slide 1 of 1</span>
+                <button class="slide-nav-btn" id="tpNextBtn">Next <i class="fa-solid fa-chevron-right"></i></button>
+              </div>
+              <div class="tp-controls-right">
+                <button class="btn-tp-font" id="tpFontDecBtn" title="Decrease Font Size">A-</button>
+                <button class="btn-tp-font" id="tpFontIncBtn" title="Increase Font Size">A+</button>
+                <button class="btn-read-aloud" id="tpSpeakBtn"><i class="fa-solid fa-volume-high"></i> Read Script</button>
+              </div>
+            </div>
+
+            <!-- Dual Split-Screen View: Left Slide Deck + Right Live Teleprompter Script -->
+            <div class="teleprompter-grid">
+              
+              <!-- Left Visual Slide Frame -->
+              <div class="tp-slide-box">
+                <div class="tp-box-header"><i class="fa-solid fa-desktop"></i> Classroom Visual Slide</div>
+                <div class="slide-frame" id="tpSlideFrame">
+                  <div class="markdown-body" id="tpSlideContent"></div>
+                </div>
+              </div>
+
+              <!-- Right Speaker Script & Teleprompter Card -->
+              <div class="tp-script-box">
+                <div class="tp-box-header"><i class="fa-solid fa-scroll"></i> Teacher Speaker Teleprompter & Cues</div>
+                <div class="tp-script-body" id="tpScriptBody">
+                  
+                  <div class="cue-pill" id="tpCuePill">
+                    <i class="fa-solid fa-face-smile"></i> <span id="tpCueText">Delivery cue...</span>
+                  </div>
+
+                  <div class="teleprompter-text" id="tpScriptText">
+                    Teacher narrative script...
+                  </div>
+
+                  <div class="analogy-card" id="tpAnalogyCard">
+                    <div class="analogy-title"><i class="fa-solid fa-lightbulb"></i> Concept Analogy for Class</div>
+                    <div id="tpAnalogyText">Analogy text...</div>
+                  </div>
+
+                  <div class="check-q-card" id="tpCheckCard">
+                    <div class="check-title"><i class="fa-solid fa-circle-question"></i> Check for Understanding Question</div>
+                    <div id="tpCheckText">Question text...</div>
+                    <button class="btn-show-answer" id="tpShowAnswerBtn">Reveal Answer</button>
+                  </div>
+
+                </div>
+              </div>
+
             </div>
           </div>
         </div>
 
-        <!-- 3. Interactive Quiz Tab -->
+        <!-- 4. Teacher Master Answer Keys Tab -->
+        <div class="tab-content" id="answerkeysTab">
+          <div class="content-card">
+            <h2><i class="fa-solid fa-key"></i> Teacher Master Answer Keys & Marking Guides</h2>
+            <p class="text-muted" style="margin-bottom: 20px;">Comprehensive answer key, Maliki fiqh evidence notes, Ash'ari creed references, and sample reflection answers for all levels.</p>
+
+            <div class="track-answer-toggle">
+              <button class="track-btn active" id="akToggleL1">Level 1 (10y) Answer Key</button>
+              <button class="track-btn" id="akToggleL2">Level 2 (13y+) Answer Key</button>
+            </div>
+
+            <div class="markdown-body" id="answerKeyContent" style="margin-top: 24px;"></div>
+          </div>
+        </div>
+
+        <!-- 5. Interactive Quiz Tab -->
         <div class="tab-content" id="quizTab">
           <div class="quiz-container">
             <div class="quiz-score-banner" id="quizScoreBanner" style="display: none;">
@@ -273,36 +351,26 @@
           </div>
         </div>
 
-        <!-- 4. Teacher Presentation Slides Tab -->
+        <!-- 6. Teacher Presentation Slides Tab -->
         <div class="tab-content" id="slidesTab">
           <div class="slideshow-container">
             <div class="slideshow-controls">
-              <button class="slide-nav-btn" id="prevSlideBtn">
-                <i class="fa-solid fa-chevron-left"></i> Previous
-              </button>
+              <button class="slide-nav-btn" id="prevSlideBtn"><i class="fa-solid fa-chevron-left"></i> Previous</button>
               <span class="slide-counter" id="slideCounter">Slide 1 of 1</span>
-              <button class="slide-nav-btn" id="nextSlideBtn">
-                Next <i class="fa-solid fa-chevron-right"></i>
-              </button>
-              <button class="btn-fullscreen" id="fullscreenSlidesBtn" title="Toggle Fullscreen">
-                <i class="fa-solid fa-expand"></i>
-              </button>
+              <button class="slide-nav-btn" id="nextSlideBtn">Next <i class="fa-solid fa-chevron-right"></i></button>
+              <button class="btn-fullscreen" id="fullscreenSlidesBtn" title="Toggle Fullscreen"><i class="fa-solid fa-expand"></i></button>
             </div>
 
             <div class="slide-frame" id="slideFrame">
-              <div class="markdown-body slide-content" id="slideContent">
-                <!-- Slide markdown rendered here -->
-              </div>
+              <div class="markdown-body slide-content" id="slideContent"></div>
             </div>
           </div>
         </div>
 
-        <!-- 5. Teacher Voice Script Tab -->
+        <!-- 7. Teacher Voice Script Tab -->
         <div class="tab-content" id="voicescriptTab">
           <div class="content-card">
-            <div class="markdown-body" id="voiceScriptContent">
-              <!-- Voice script content rendered here -->
-            </div>
+            <div class="markdown-body" id="voiceScriptContent"></div>
           </div>
         </div>
 
@@ -312,7 +380,7 @@
 
   </div>
 
-  <!-- Floating Sticky Bottom Audio Bar (Visible when audio is playing across tabs) -->
+  <!-- Floating Sticky Bottom Audio Bar -->
   <div class="sticky-audio-bar" id="stickyAudioBar" style="display: none;">
     <div class="audio-bar-info">
       <i class="fa-solid fa-volume-high audio-pulse-icon"></i>

@@ -709,6 +709,163 @@ h1, h2, h3, h4, .logo-title {
   border-color: var(--emerald-primary);
 }
 
+/* Teacher Teleprompter & Presentation Portal */
+.teleprompter-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.teleprompter-toolbar {
+  background-color: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-md);
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.tp-controls-left, .tp-controls-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.btn-tp-font {
+  background-color: var(--input-bg);
+  border: 1px solid var(--card-border);
+  color: var(--text-main);
+  padding: 6px 14px;
+  border-radius: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.btn-tp-font:hover {
+  border-color: var(--emerald-primary);
+  color: var(--emerald-primary);
+}
+
+.teleprompter-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.tp-slide-box, .tp-script-box {
+  background-color: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-md);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.tp-box-header {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--emerald-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-bottom: 1px solid var(--card-border);
+  padding-bottom: 12px;
+}
+
+.cue-pill {
+  background-color: rgba(139, 92, 246, 0.15);
+  border: 1px solid #8b5cf6;
+  color: #c4b5fd;
+  padding: 10px 16px;
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.teleprompter-text {
+  font-size: 1.15rem;
+  line-height: 1.8;
+  color: var(--text-main);
+  background-color: var(--input-bg);
+  padding: 20px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--card-border);
+  white-space: pre-line;
+  max-height: 380px;
+  overflow-y: auto;
+}
+
+.teleprompter-text.font-large { font-size: 1.35rem; }
+.teleprompter-text.font-xlarge { font-size: 1.55rem; }
+
+.analogy-card {
+  background-color: rgba(217, 119, 6, 0.15);
+  border: 1px solid var(--gold-accent);
+  color: var(--gold-light);
+  padding: 16px;
+  border-radius: var(--radius-sm);
+  font-size: 0.95rem;
+}
+
+.analogy-title {
+  font-weight: 700;
+  color: var(--gold-accent);
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.check-q-card {
+  background-color: var(--input-bg);
+  border: 1px solid var(--emerald-primary);
+  padding: 16px;
+  border-radius: var(--radius-sm);
+  font-size: 0.95rem;
+}
+
+.check-title {
+  font-weight: 700;
+  color: var(--emerald-primary);
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-show-answer {
+  background-color: var(--card-bg);
+  border: 1px solid var(--emerald-primary);
+  color: var(--emerald-primary);
+  padding: 6px 14px;
+  border-radius: 14px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: var(--transition);
+}
+
+.btn-show-answer:hover {
+  background-color: var(--emerald-primary);
+  color: #ffffff;
+}
+
+.track-answer-toggle {
+  display: flex;
+  gap: 12px;
+  background-color: var(--input-bg);
+  padding: 6px;
+  border-radius: var(--radius-sm);
+}
+
 /* Read Aloud Page & Player Styles */
 .read-aloud-page {
   display: flex;
@@ -1330,6 +1487,10 @@ h1, h2, h3, h4, .logo-title {
     font-size: 1.6rem;
   }
 
+  .teleprompter-grid {
+    grid-template-columns: 1fr;
+  }
+
   .sticky-audio-bar {
     right: 12px;
     left: 12px;
@@ -1352,7 +1513,7 @@ h1, h2, h3, h4, .logo-title {
     color: #000000 !important;
   }
 
-  .content-card, .quiz-card {
+  .content-card, .quiz-card, .tp-slide-box, .tp-script-box {
     border: none !important;
     padding: 0 !important;
     box-shadow: none !important;

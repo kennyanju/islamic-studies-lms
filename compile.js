@@ -129,7 +129,6 @@ function parseQuestionsComprehensive(markdownText) {
     const line = lines[i];
     const trimmed = line.trim();
 
-    // Detect Answer Key section at bottom of file
     if (/^(##|###)\s*.*(Answer\s+Key|Marking\s+Guide|Teacher\s+Answers)/i.test(trimmed)) {
       inAnswerKey = true;
       continue;
@@ -142,7 +141,6 @@ function parseQuestionsComprehensive(markdownText) {
 
     studentLines.push(line);
 
-    // Detect Section Headers
     if (/^(##|###|####)\s*(Part\s*(A|1)|Questions)/i.test(trimmed) || /Multiple\s+Choice/i.test(trimmed)) {
       if (currentMcq) { mcq.push(currentMcq); currentMcq = null; }
       currentSection = 'MCQ';
@@ -165,7 +163,6 @@ function parseQuestionsComprehensive(markdownText) {
       continue;
     }
 
-    // MCQ Parsing
     if (currentSection === 'MCQ') {
       const qMatch = trimmed.match(/^(?:####|###|##)?\s*(?:\*\*)?\s*(\d+)\s*[\.\)]\s*(.*?)(?:\*\*)?$/);
       const optMatch = trimmed.match(/^(?:\*\s*)?\(?\s*([a-dA-D])[\.\)]\s*(.*)/);
@@ -183,9 +180,7 @@ function parseQuestionsComprehensive(markdownText) {
           text: optMatch[2].replace(/^\*\*|\*\*$/g, '').trim()
         });
       }
-    }
-    // True/False Parsing
-    else if (currentSection === 'TF') {
+    } else if (currentSection === 'TF') {
       const tfMatch = trimmed.match(/^(?:####|###|##)?\s*(?:\*\*)?\s*(\d+)\s*[\.\)]\s*(.*?)(?:\*\*)?$/);
       if (tfMatch && !trimmed.toLowerCase().includes('true or false?')) {
         if (currentMcq) mcq.push(currentMcq);
@@ -198,9 +193,7 @@ function parseQuestionsComprehensive(markdownText) {
           ]
         };
       }
-    }
-    // Fill in the Blanks Parsing
-    else if (currentSection === 'FIB') {
+    } else if (currentSection === 'FIB') {
       if (trimmed.includes('Vocabulary Bank:') || trimmed.includes('Word Bank:')) {
         const wbMatch = trimmed.match(/(Vocabulary|Word) Bank:\s*\*?([^*]+)\*?/i);
         if (wbMatch) {
@@ -216,9 +209,7 @@ function parseQuestionsComprehensive(markdownText) {
           });
         }
       }
-    }
-    // Matching Parsing
-    else if (currentSection === 'MATCH') {
+    } else if (currentSection === 'MATCH') {
       if (trimmed.startsWith('#')) {
         currentMatchGroup = trimmed.replace(/^#+\s*/, '').trim();
       } else if (trimmed.includes('───') || trimmed.includes('->')) {
@@ -232,9 +223,7 @@ function parseQuestionsComprehensive(markdownText) {
           });
         }
       }
-    }
-    // Reflection / Short Answer Parsing
-    else if (currentSection === 'REFLECT') {
+    } else if (currentSection === 'REFLECT') {
       const refMatch = trimmed.match(/^(?:####|###|##)?\s*(?:\*\*)?\s*(\d+)\s*[\.\)]\s*(.*?)(?:\*\*)?$/);
       if (refMatch) {
         reflection.push({
@@ -252,7 +241,6 @@ function parseQuestionsComprehensive(markdownText) {
   const answerKeyRaw = answerKeyLines.join('\n').trim();
   const studentQuestionsMd = studentLines.join('\n').trim();
 
-  // Extract correct answers from answerKeyRaw
   mcq.forEach(q => {
     const keyRegex1 = new RegExp(`(?:^|\\n)\\s*${q.id}\\.\\s*(?:\\*\\*)?\\s*\\(?([a-dA-D])\\)?`, 'i');
     const m1 = answerKeyRaw.match(keyRegex1);
@@ -317,6 +305,35 @@ function parseSlidesFast(slidesMd) {
   return slides;
 }
 
+function parseVoiceScript(voiceScriptMd) {
+  if (!voiceScriptMd) return [];
+  const slides = [];
+  const sections = voiceScriptMd.split(/\n(?=##\s+Slide\s+\d+)/i);
+  sections.forEach((sec, idx) => {
+    const trimmed = sec.trim();
+    if (!trimmed || !trimmed.toLowerCase().includes("slide")) return;
+
+    const titleMatch = trimmed.match(/##\s+Slide\s+\d+:?\s*(.*)/i);
+    const summaryMatch = trimmed.match(/\*\s*\*\*Slide Summary:\*\*\s*(.*)/i);
+    const directionMatch = trimmed.match(/\*\s*\*\*Delivery Direction:\*\*\s*(.*)/i);
+    const scriptMatch = trimmed.match(/\*\s*\*\*Narrative Script:\*\*\s*([\s\S]*?)(?=\n\*\s*\*\*|\n---|$)/i);
+    const analogyMatch = trimmed.match(/\*\s*\*\*Concept Analogy:\*\*\s*(.*)/i);
+    const checkMatch = trimmed.match(/\*\s*\*\*Check-for-Understanding Question:\*\*\s*(.*)/i);
+
+    slides.push({
+      slideNum: slides.length + 1,
+      title: titleMatch ? titleMatch[1].trim() : `Slide ${idx + 1}`,
+      summary: summaryMatch ? summaryMatch[1].trim() : "",
+      direction: directionMatch ? directionMatch[1].trim() : "",
+      script: scriptMatch ? scriptMatch[1].trim().replace(/^"|"$/g, "") : "",
+      analogy: analogyMatch ? analogyMatch[1].trim() : "",
+      checkQuestion: checkMatch ? checkMatch[1].trim() : "",
+      rawSection: trimmed
+    });
+  });
+  return slides;
+}
+
 console.log('Compiling course modules...');
 
 const courseData = {
@@ -350,6 +367,7 @@ modulesConfig.forEach(cfg => {
   const parsedQ10 = parseQuestionsComprehensive(questions10Raw);
   const parsedQ13 = parseQuestionsComprehensive(questions13Raw);
   const parsedSlides = parseSlidesFast(slidesRaw);
+  const parsedVoiceScript = parseVoiceScript(voiceScriptRaw);
 
   courseData.modules.push({
     id: cfg.id,
@@ -374,7 +392,8 @@ modulesConfig.forEach(cfg => {
     teacher: {
       slidesMd: slidesRaw,
       parsedSlides: parsedSlides,
-      voiceScriptMd: voiceScriptRaw
+      voiceScriptMd: voiceScriptRaw,
+      parsedVoiceScript: parsedVoiceScript
     }
   });
 
