@@ -37,7 +37,7 @@
         </button>
       </div>
 
-      <!-- Track Switcher -->
+      <!-- Track Selector -->
       <div class="track-selector-container">
         <label class="track-label">Learning Track</label>
         <div class="track-selector">
@@ -158,6 +158,10 @@
               <i class="fa-solid fa-file-lines"></i>
               <span>Student Handout</span>
             </button>
+            <button class="tab-btn" data-tab="readaloud" id="readaloudTabBtn">
+              <i class="fa-solid fa-volume-high"></i>
+              <span>Read Aloud</span>
+            </button>
             <button class="tab-btn" data-tab="quiz">
               <i class="fa-solid fa-circle-question"></i>
               <span>Interactive Quiz</span>
@@ -185,6 +189,10 @@
         <div class="tab-content active" id="handoutTab">
           <div class="content-card">
             <div class="content-toolbar">
+              <button class="btn-read-aloud" id="listenHandoutBtn">
+                <i class="fa-solid fa-headphones"></i>
+                <span>Listen Read-Aloud</span>
+              </button>
               <button class="btn-mark-complete" id="markHandoutCompleteBtn">
                 <i class="fa-regular fa-circle-check"></i>
                 <span>Mark as Completed</span>
@@ -196,11 +204,54 @@
           </div>
         </div>
 
-        <!-- 2. Interactive Quiz Tab -->
+        <!-- 2. Read-Aloud Page Tab -->
+        <div class="tab-content" id="readaloudTab">
+          <div class="content-card read-aloud-page">
+            <div class="read-aloud-header">
+              <div class="player-controls">
+                <button class="btn-audio-action play" id="raPlayBtn" title="Play / Pause">
+                  <i class="fa-solid fa-play"></i>
+                </button>
+                <button class="btn-audio-action stop" id="raStopBtn" title="Stop Audio">
+                  <i class="fa-solid fa-square"></i>
+                </button>
+                
+                <div class="audio-setting">
+                  <label><i class="fa-solid fa-gauge-high"></i> Speed</label>
+                  <select id="raSpeedSelect" class="audio-select">
+                    <option value="0.75">0.75x (Slow)</option>
+                    <option value="1" selected>1.0x (Normal)</option>
+                    <option value="1.25">1.25x (Fast)</option>
+                    <option value="1.5">1.5x (Super Fast)</option>
+                  </select>
+                </div>
+
+                <div class="audio-setting">
+                  <label><i class="fa-solid fa-user-gear"></i> Voice</label>
+                  <select id="raVoiceSelect" class="audio-select">
+                    <option value="">Default System Voice</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="audio-progress-container">
+                <span id="raProgressLabel">Sentence 0 of 0</span>
+                <div class="audio-progress-bar">
+                  <div class="audio-progress-fill" id="raProgressFill" style="width: 0%;"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Sentence-by-Sentence Interactive Karaoke-style Reader -->
+            <div class="read-aloud-body" id="readAloudBody">
+              <p class="text-muted">Click the Play button above or any sentence below to start listening.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. Interactive Quiz Tab -->
         <div class="tab-content" id="quizTab">
           <div class="quiz-container">
-            
-            <!-- Quiz Score Banner -->
             <div class="quiz-score-banner" id="quizScoreBanner" style="display: none;">
               <div class="score-icon"><i class="fa-solid fa-trophy"></i></div>
               <div class="score-details">
@@ -212,10 +263,7 @@
               </button>
             </div>
 
-            <!-- Quiz Questions Render Area -->
-            <div id="quizQuestionsArea">
-              <!-- Dynamically rendered multiple choice, fill in blanks, matching & reflection -->
-            </div>
+            <div id="quizQuestionsArea"></div>
 
             <div class="quiz-submit-bar">
               <button class="btn-submit-quiz" id="submitQuizBtn">
@@ -225,7 +273,7 @@
           </div>
         </div>
 
-        <!-- 3. Teacher Presentation Slides Tab -->
+        <!-- 4. Teacher Presentation Slides Tab -->
         <div class="tab-content" id="slidesTab">
           <div class="slideshow-container">
             <div class="slideshow-controls">
@@ -249,7 +297,7 @@
           </div>
         </div>
 
-        <!-- 4. Teacher Voice Script Tab -->
+        <!-- 5. Teacher Voice Script Tab -->
         <div class="tab-content" id="voicescriptTab">
           <div class="content-card">
             <div class="markdown-body" id="voiceScriptContent">
@@ -262,6 +310,21 @@
 
     </main>
 
+  </div>
+
+  <!-- Floating Sticky Bottom Audio Bar (Visible when audio is playing across tabs) -->
+  <div class="sticky-audio-bar" id="stickyAudioBar" style="display: none;">
+    <div class="audio-bar-info">
+      <i class="fa-solid fa-volume-high audio-pulse-icon"></i>
+      <div>
+        <span class="audio-bar-title" id="stickyAudioTitle">Reading Lesson Aloud...</span>
+        <span class="audio-bar-text" id="stickyAudioText">Playing sentence...</span>
+      </div>
+    </div>
+    <div class="audio-bar-controls">
+      <button class="bar-btn" id="stickyPlayPauseBtn"><i class="fa-solid fa-pause"></i></button>
+      <button class="bar-btn" id="stickyStopBtn"><i class="fa-solid fa-xmark"></i></button>
+    </div>
   </div>
 
   <!-- Custom App JS -->

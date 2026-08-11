@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Islamic Studies LMS - Single Page Application Engine
+   Islamic Studies LMS - Single Page Application Engine with Read Aloud
    ========================================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -8,12 +8,21 @@ document.addEventListener('DOMContentLoaded', () => {
   let courseData = null;
   let activeModuleId = null;
   let activeTrack = localStorage.getItem('lms_track') || 'level1'; // level1 | level2 | teacher
-  let activeTab = 'handout'; // handout | quiz | slides | voicescript
+  let activeTab = 'handout'; // handout | readaloud | quiz | slides | voicescript
   let currentSlideIndex = 0;
 
   let userProgress = JSON.parse(localStorage.getItem('lms_progress') || '{}');
   let quizScores = JSON.parse(localStorage.getItem('lms_quiz_scores') || '{}');
   let userReflections = JSON.parse(localStorage.getItem('lms_reflections') || '{}');
+
+  // Read Aloud State
+  let speechSynth = window.speechSynthesis;
+  let currentUtterance = null;
+  let currentSentences = [];
+  let currentSentenceIdx = 0;
+  let isSpeaking = false;
+  let isPaused = false;
+  let availableVoices = [];
 
   // DOM Elements
   const themeToggleBtn = document.getElementById('themeToggleBtn');
@@ -52,7 +61,25 @@ document.addEventListener('DOMContentLoaded', () => {
   // Tab Contents
   const handoutContent = document.getElementById('handoutContent');
   const markHandoutCompleteBtn = document.getElementById('markHandoutCompleteBtn');
+  const listenHandoutBtn = document.getElementById('listenHandoutBtn');
   
+  // Read Aloud Tab Elements
+  const raPlayBtn = document.getElementById('raPlayBtn');
+  const raStopBtn = document.getElementById('raStopBtn');
+  const raSpeedSelect = document.getElementById('raSpeedSelect');
+  const raVoiceSelect = document.getElementById('raVoiceSelect');
+  const raProgressLabel = document.getElementById('raProgressLabel');
+  const raProgressFill = document.getElementById('raProgressFill');
+  const readAloudBody = document.getElementById('readAloudBody');
+
+  // Sticky Bottom Audio Bar
+  const stickyAudioBar = document.getElementById('stickyAudioBar');
+  const stickyAudioTitle = document.getElementById('stickyAudioTitle');
+  const stickyAudioText = document.getElementById('stickyAudioText');
+  const stickyPlayPauseBtn = document.getElementById('stickyPlayPauseBtn');
+  const stickyStopBtn = document.getElementById('stickyStopBtn');
+
+  // Quiz Elements
   const quizQuestionsArea = document.getElementById('quizQuestionsArea');
   const quizScoreBanner = document.getElementById('quizScoreBanner');
   const scoreDisplay = document.getElementById('scoreDisplay');
@@ -60,6 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const submitQuizBtn = document.getElementById('submitQuizBtn');
   const retryQuizBtn = document.getElementById('retryQuizBtn');
 
+  // Slideshow Elements
   const slideContent = document.getElementById('slideContent');
   const prevSlideBtn = document.getElementById('prevSlideBtn');
   const nextSlideBtn = document.getElementById('nextSlideBtn');
@@ -68,7 +96,6 @@ document.addEventListener('DOMContentLoaded', () => {
   
   const voiceScriptContent = document.getElementById('voiceScriptContent');
 
-  // Initialize marked markdown parser options
   if (window.marked) {
     marked.setOptions({
       gfm: true,
@@ -97,10 +124,33 @@ document.addEventListener('DOMContentLoaded', () => {
   function initApp() {
     setupTheme();
     setupTrackButtons();
+    setupVoices();
     renderSidebarModules();
     renderDashboard();
     updateProgressUI();
     setupEventListeners();
+  }
+
+  // Populate Speech Synthesis Voices
+  function setupVoices() {
+    if (!speechSynth) return;
+    function loadVoices() {
+      availableVoices = speechSynth.getVoices();
+      raVoiceSelect.innerHTML = '<option value="">Default System Voice</option>';
+      availableVoices.forEach((voice, index) => {
+        const option = document.createElement('option');
+        option.value = index;
+        option.textContent = `${voice.name} (${voice.lang})`;
+        if (voice.lang.includes('en') || voice.lang.includes('ar')) {
+          raVoiceSelect.appendChild(option);
+        }
+      });
+    }
+
+    loadVoices();
+    if (speechSynth.onvoiceschanged !== undefined) {
+      speechSynth.onvoiceschanged = loadVoices;
+    }
   }
 
   // Theme Management
@@ -245,6 +295,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (tabName === 'handout') {
       renderHandout(mod);
+    } else if (tabName === 'readaloud') {
+      renderReadAloudTab(mod);
     } else if (tabName === 'quiz') {
       renderQuiz(mod);
     } else if (tabName === 'slides') {
@@ -274,6 +326,12 @@ document.addEventListener('DOMContentLoaded', () => {
     markHandoutCompleteBtn.querySelector('span').textContent = isComp ? 'Completed ✓' : 'Mark as Completed';
   }
 
+  // Listen Handout Read-Aloud Button
+  listenHandoutBtn.addEventListener('click', () => {
+    switchTab('readaloud');
+    startReadAloud(0);
+  });
+
   // Mark Handout Complete
   markHandoutCompleteBtn.addEventListener('click', () => {
     if (activeModuleId === null) return;
@@ -285,6 +343,162 @@ document.addEventListener('DOMContentLoaded', () => {
     renderDashboard();
     updateProgressUI();
     renderHandout(courseData.modules.find(m => m.id === activeModuleId));
+  });
+
+  // --------------------------------------------------------------------------
+  // READ ALOUD SPEECH SYNTHESIS ENGINE
+  // --------------------------------------------------------------------------
+
+  function renderReadAloudTab(mod) {
+    let rawMd = activeTrack === 'level2' ? mod.tracks.level2.handoutMd : mod.tracks.level1.handoutMd;
+    if (activeTrack === 'teacher' && mod.teacher.voiceScriptMd) {
+      rawMd = mod.teacher.voiceScriptMd;
+    }
+
+    // Clean Markdown tags for clean text reading
+    const cleanText = rawMd.replace(/#+\s*/g, '').replace(/\*+/g, '').replace(/_+/g, '').replace(/\[(.*?)\]\(.*?\)/g, '$1');
+    
+    // Segment into sentences
+    currentSentences = cleanText.split(/(?<=[.!?])\s+|\n+/).map(s => s.trim()).filter(s => s.length > 3);
+    currentSentenceIdx = 0;
+
+    readAloudBody.innerHTML = '';
+    currentSentences.forEach((sentence, idx) => {
+      const block = document.createElement('div');
+      block.className = 'sentence-block';
+      block.dataset.idx = idx;
+      block.innerHTML = `<i class="fa-solid fa-volume-low" style="opacity:0.3;margin-right:8px;font-size:0.85rem;"></i> ${sentence}`;
+      block.addEventListener('click', () => {
+        startReadAloud(idx);
+      });
+      readAloudBody.appendChild(block);
+    });
+
+    updateReadAloudProgress();
+  }
+
+  function startReadAloud(startIdx = 0) {
+    if (!speechSynth) {
+      alert('Speech synthesis is not supported in this browser.');
+      return;
+    }
+
+    speechSynth.cancel(); // Stop any active speech
+    currentSentenceIdx = startIdx;
+
+    if (currentSentences.length === 0) return;
+
+    isSpeaking = true;
+    isPaused = false;
+    updateAudioControlsUI();
+    stickyAudioBar.style.display = 'flex';
+
+    speakNextSentence();
+  }
+
+  function speakNextSentence() {
+    if (currentSentenceIdx >= currentSentences.length || !isSpeaking) {
+      stopReadAloud();
+      return;
+    }
+
+    const text = currentSentences[currentSentenceIdx];
+    currentUtterance = new SpeechSynthesisUtterance(text);
+
+    // Set voice if selected
+    if (raVoiceSelect.value !== '' && availableVoices[raVoiceSelect.value]) {
+      currentUtterance.voice = availableVoices[raVoiceSelect.value];
+    }
+
+    // Set speed rate
+    currentUtterance.rate = parseFloat(raSpeedSelect.value || 1);
+
+    // Highlight current sentence block
+    const blocks = readAloudBody.querySelectorAll('.sentence-block');
+    blocks.forEach(b => b.classList.remove('speaking'));
+    
+    const activeBlock = readAloudBody.querySelector(`[data-idx="${currentSentenceIdx}"]`);
+    if (activeBlock) {
+      activeBlock.classList.add('speaking');
+      activeBlock.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    const mod = courseData.modules.find(m => m.id === activeModuleId);
+    stickyAudioTitle.textContent = mod ? `Module ${mod.id}: ${mod.title}` : 'Reading Lesson Aloud...';
+    stickyAudioText.textContent = text;
+
+    updateReadAloudProgress();
+
+    currentUtterance.onend = () => {
+      if (isSpeaking && !isPaused) {
+        currentSentenceIdx++;
+        speakNextSentence();
+      }
+    };
+
+    currentUtterance.onerror = (e) => {
+      console.warn('Speech error:', e);
+      currentSentenceIdx++;
+      speakNextSentence();
+    };
+
+    speechSynth.speak(currentUtterance);
+  }
+
+  function togglePlayPause() {
+    if (!isSpeaking) {
+      startReadAloud(currentSentenceIdx);
+    } else if (isPaused) {
+      speechSynth.resume();
+      isPaused = false;
+      updateAudioControlsUI();
+    } else {
+      speechSynth.pause();
+      isPaused = true;
+      updateAudioControlsUI();
+    }
+  }
+
+  function stopReadAloud() {
+    if (speechSynth) speechSynth.cancel();
+    isSpeaking = false;
+    isPaused = false;
+    stickyAudioBar.style.display = 'none';
+    updateAudioControlsUI();
+
+    const blocks = readAloudBody.querySelectorAll('.sentence-block');
+    blocks.forEach(b => b.classList.remove('speaking'));
+  }
+
+  function updateAudioControlsUI() {
+    const playIconClass = isSpeaking && !isPaused ? 'fa-solid fa-pause' : 'fa-solid fa-play';
+    raPlayBtn.querySelector('i').className = playIconClass;
+    stickyPlayPauseBtn.querySelector('i').className = playIconClass;
+  }
+
+  function updateReadAloudProgress() {
+    const total = currentSentences.length;
+    const current = total > 0 ? currentSentenceIdx + 1 : 0;
+    raProgressLabel.textContent = `Sentence ${current} of ${total}`;
+    const pct = total > 0 ? Math.round((current / total) * 100) : 0;
+    raProgressFill.style.width = `${pct}%`;
+  }
+
+  raPlayBtn.addEventListener('click', togglePlayPause);
+  raStopBtn.addEventListener('click', stopReadAloud);
+  stickyPlayPauseBtn.addEventListener('click', togglePlayPause);
+  stickyStopBtn.addEventListener('click', stopReadAloud);
+
+  raSpeedSelect.addEventListener('change', () => {
+    if (isSpeaking) {
+      startReadAloud(currentSentenceIdx);
+    }
+  });
+
+  raVoiceSelect.addEventListener('change', () => {
+    if (isSpeaking) {
+      startReadAloud(currentSentenceIdx);
+    }
   });
 
   // Render Interactive Quiz Engine
@@ -299,7 +513,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const pq = trackData.parsedQuestions;
 
-    // Fallback if no questions parsed (strips Answer Key so answers are NEVER shown to students)
     if (!pq || (!pq.multipleChoice.length && !pq.fillBlanks.length && !pq.reflection.length)) {
       const cleanMd = pq && pq.studentQuestionsMd ? pq.studentQuestionsMd : (trackData.questionsMd || '').replace(/##?\s*.*Answer\s+Key[\s\S]*/i, '');
       if (window.marked && cleanMd) {
@@ -313,7 +526,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     submitQuizBtn.style.display = 'flex';
 
-    // 1. Multiple Choice Questions (Interactive Clickable Buttons)
     if (pq.multipleChoice.length > 0) {
       const mcqSection = document.createElement('div');
       mcqSection.className = 'quiz-card';
@@ -343,7 +555,6 @@ document.addEventListener('DOMContentLoaded', () => {
           <div class="mcq-options">${optsHtml}</div>
         `;
 
-        // Interactive Click Selection Handler
         const btns = qBox.querySelectorAll('.opt-btn');
         btns.forEach(b => {
           b.addEventListener('click', (e) => {
@@ -359,7 +570,6 @@ document.addEventListener('DOMContentLoaded', () => {
       quizQuestionsArea.appendChild(mcqSection);
     }
 
-    // 2. Fill in the Blanks
     if (pq.fillBlanks.length > 0) {
       const fibSection = document.createElement('div');
       fibSection.className = 'quiz-card';
@@ -388,7 +598,6 @@ document.addEventListener('DOMContentLoaded', () => {
       quizQuestionsArea.appendChild(fibSection);
     }
 
-    // 3. Reflection & Short Answer (Fully Editable Textareas with LocalStorage Auto-Save)
     if (pq.reflection.length > 0) {
       const refSection = document.createElement('div');
       refSection.className = 'quiz-card';
@@ -419,7 +628,6 @@ document.addEventListener('DOMContentLoaded', () => {
       quizQuestionsArea.appendChild(refSection);
     }
 
-    // Restore previous quiz score if submitted
     const scoreKey = `quiz_${activeModuleId}_${activeTrack}`;
     if (quizScores[scoreKey]) {
       showQuizScoreBanner(quizScores[scoreKey].score, quizScores[scoreKey].total);
@@ -619,8 +827,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     document.addEventListener('keydown', (e) => {
-      // Do not trigger slide change if user is typing in a reflection textarea or input
-      if (['TEXTAREA', 'INPUT'].includes(document.activeElement.tagName)) return;
+      if (['TEXTAREA', 'INPUT', 'SELECT'].includes(document.activeElement.tagName)) return;
 
       if (activeTab === 'slides' && activeModuleId !== null) {
         if (e.key === 'ArrowRight') nextSlideBtn.click();
