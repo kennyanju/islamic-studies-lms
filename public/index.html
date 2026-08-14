@@ -598,54 +598,76 @@
         </div>
       </div>
 
-      <!-- Dashboard View -->
+      <!-- Dashboard View (Learner Personal Study Dashboard) -->
       <div class="view-container" id="dashboardView" style="display: none;">
-        <div class="hero-banner">
+        <!-- Learner Hero Banner -->
+        <div class="hero-banner" id="learnerHeroBanner">
           <div class="hero-content">
             <div class="hero-badge-row">
-              <span class="hero-badge"><i class="fa-solid fa-award"></i> IDEO Redesigned Learning Portal</span>
-              <span class="hero-badge gold"><i class="fa-solid fa-book-bookmark"></i> Maliki Fiqh & Ash'ari Aqidah</span>
+              <span class="hero-badge" id="learnerAvatarBadge"><i class="fa-solid fa-graduation-cap"></i> Islamic Studies Learner</span>
+              <span class="hero-badge gold" id="learnerTrackBadge"><i class="fa-solid fa-layer-group"></i> Level 1 Track (~10y)</span>
+              <span class="hero-badge" id="learnerTrackSwitchPill" style="cursor: pointer;" title="Click to toggle between Level 1 and Level 2 tracks"><i class="fa-solid fa-arrows-rotate"></i> Switch Track</span>
             </div>
-            <h1>Islamic Studies Family LMS</h1>
-            <p>Comprehensive 9-Module Islamic Studies curriculum covering Aqidah, Maliki Fiqh, Seerah, Quranic Sciences, and Ethics. Designed for youth learning, family study, and interactive classroom teaching.</p>
+            <h1 id="learnerWelcomeHeadline">Welcome to Your Islamic Studies Journey</h1>
+            <p id="learnerWelcomeSubhead">Comprehensive 9-Module Islamic Studies curriculum covering Aqidah, Maliki Fiqh, Seerah, Quranic Sciences, and Ethics.</p>
             
             <div class="hero-stats">
               <div class="stat-card">
                 <div class="stat-icon"><i class="fa-solid fa-book"></i></div>
                 <div>
-                  <strong id="statTotalModules">9</strong>
-                  <span>Modules</span>
+                  <strong id="learnerStatCompleted">0 / 9</strong>
+                  <span>Completed Modules</span>
                 </div>
               </div>
               <div class="stat-card">
-                <div class="stat-icon"><i class="fa-solid fa-file-pen"></i></div>
+                <div class="stat-icon"><i class="fa-solid fa-chart-pie"></i></div>
                 <div>
-                  <strong>18</strong>
-                  <span>Interactive Quizzes</span>
+                  <strong id="learnerStatAvgQuiz">0%</strong>
+                  <span>Quiz Mastery</span>
                 </div>
               </div>
               <div class="stat-card">
-                <div class="stat-icon"><i class="fa-solid fa-desktop"></i></div>
+                <div class="stat-icon"><i class="fa-solid fa-fire font-gold"></i></div>
                 <div>
-                  <strong>200+</strong>
-                  <span>Teacher Slides</span>
+                  <strong id="learnerStatStreak">1 Day</strong>
+                  <span>Learning Streak</span>
                 </div>
               </div>
               <div class="stat-card">
-                <div class="stat-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+                <div class="stat-icon"><i class="fa-solid fa-award"></i></div>
                 <div>
-                  <strong>Verified</strong>
-                  <span>Certificates</span>
+                  <strong id="learnerStatCert">In Progress</strong>
+                  <span>Certificate Status</span>
                 </div>
               </div>
             </div>
           </div>
         </div>
 
+        <!-- Next Recommended Lesson Spotlight Card -->
+        <div class="learner-next-action-card" id="learnerNextActionCard">
+          <div class="next-action-left">
+            <div class="next-action-icon" id="nextActionIcon"><i class="fa-solid fa-kaaba"></i></div>
+            <div class="next-action-info">
+              <span class="badge" id="nextActionBadge"><i class="fa-solid fa-play"></i> Recommended Next Lesson</span>
+              <h3 id="nextActionTitle">Module 1: Foundations of Belief</h3>
+              <p id="nextActionDesc">Start with the core articles of faith, Tawhid, and the purpose of creation.</p>
+            </div>
+          </div>
+          <div class="next-action-btns">
+            <button class="btn-primary-action" id="nextActionStartBtn">
+              <i class="fa-solid fa-book-open"></i> Start Module Lesson
+            </button>
+            <button class="btn-secondary-action" id="nextActionQuizBtn">
+              <i class="fa-solid fa-file-pen"></i> Take Module Quiz
+            </button>
+          </div>
+        </div>
+
         <!-- Dashboard Filter Pills & Grid -->
         <div class="dashboard-section">
           <div class="dashboard-filter-bar">
-            <h2><i class="fa-solid fa-compass"></i> Course Modules</h2>
+            <h2><i class="fa-solid fa-compass"></i> Course Curriculum Modules</h2>
             <div class="category-filters" id="categoryFilters">
               <button class="filter-pill active" data-cat="all">All Modules</button>
               <button class="filter-pill" data-cat="aqidah">Aqidah (Creed)</button>
@@ -658,6 +680,7 @@
           <div class="modules-grid" id="modulesGrid">
             <!-- Dynamically populated card grid -->
           </div>
+        </div>
       </div>
 
       <!-- Parent Dashboard View Container -->

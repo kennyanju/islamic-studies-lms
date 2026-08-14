@@ -476,8 +476,140 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function renderDashboard() {
+    if (!modulesGrid) return;
     modulesGrid.innerHTML = '';
-    
+
+    const isL2 = activeTrack === 'level2';
+    const isTeacher = activeTrack === 'teacher';
+
+    // 1. Dynamic Hero Banner Theming & Text based on Level 1 vs Level 2
+    const learnerHeroBanner = document.getElementById('learnerHeroBanner');
+    const learnerAvatarBadge = document.getElementById('learnerAvatarBadge');
+    const learnerTrackBadge = document.getElementById('learnerTrackBadge');
+    const learnerTrackSwitchPill = document.getElementById('learnerTrackSwitchPill');
+    const learnerWelcomeHeadline = document.getElementById('learnerWelcomeHeadline');
+    const learnerWelcomeSubhead = document.getElementById('learnerWelcomeSubhead');
+    const learnerStatCompleted = document.getElementById('learnerStatCompleted');
+    const learnerStatAvgQuiz = document.getElementById('learnerStatAvgQuiz');
+    const learnerStatStreak = document.getElementById('learnerStatStreak');
+    const learnerStatCert = document.getElementById('learnerStatCert');
+
+    if (dashboardView) {
+      dashboardView.classList.toggle('level2-mode', isL2);
+      dashboardView.classList.toggle('level1-mode', !isL2 && !isTeacher);
+    }
+
+    if (learnerHeroBanner) {
+      learnerHeroBanner.className = `hero-banner ${isL2 ? 'level2-hero' : (isTeacher ? 'admin-hero' : 'level1-hero')}`;
+    }
+
+    const learnerName = activeChild ? activeChild.name : (currentUser ? (currentUser.displayName || 'Family Learner') : 'Guest Explorer');
+    const learnerAvatar = activeChild ? activeChild.avatar : '🌟';
+
+    if (learnerAvatarBadge) {
+      learnerAvatarBadge.innerHTML = `${learnerAvatar} ${isL2 ? 'Student' : 'Learner'}: <strong>${escapeHtml(learnerName)}</strong>`;
+    }
+
+    if (learnerTrackBadge) {
+      if (isL2) {
+        learnerTrackBadge.innerHTML = `<i class="fa-solid fa-graduation-cap"></i> Level 2 Track (13y+)`;
+        learnerTrackBadge.className = 'hero-badge gold';
+      } else if (isTeacher) {
+        learnerTrackBadge.innerHTML = `<i class="fa-solid fa-chalkboard-user"></i> Teacher & Educator Mode`;
+        learnerTrackBadge.className = 'hero-badge';
+      } else {
+        learnerTrackBadge.innerHTML = `<i class="fa-solid fa-seedling"></i> Level 1 Track (~10y)`;
+        learnerTrackBadge.className = 'hero-badge';
+      }
+    }
+
+    if (learnerWelcomeHeadline) {
+      if (isL2) {
+        learnerWelcomeHeadline.textContent = `Analytical Study & Islamic Knowledge Mastery`;
+      } else if (isTeacher) {
+        learnerWelcomeHeadline.textContent = `Educator Portal & Curriculum Presentation Decks`;
+      } else {
+        learnerWelcomeHeadline.textContent = `Bismillah! Welcome to Your Learning Adventures`;
+      }
+    }
+
+    if (learnerWelcomeSubhead) {
+      if (isL2) {
+        learnerWelcomeSubhead.textContent = `Comprehensive 9-Module syllabus covering Ash'ari Aqidah proofs, Maliki legal maxims, Madinan statecraft, and contemporary Islamic ethics.`;
+      } else if (isTeacher) {
+        learnerWelcomeSubhead.textContent = `Deliver engaging classroom lessons with 200+ built-in presentation slides, teleprompter scripts, and discussion outlines.`;
+      } else {
+        learnerWelcomeSubhead.textContent = `Explore inspiring stories of the Prophets, master Wudu & Salah, and earn gold achievement stars for every completed quiz!`;
+      }
+    }
+
+    // 2. Compute Progress for Active Child / User
+    const localProg = JSON.parse(localStorage.getItem('lms_progress') || '{}');
+    const localScores = JSON.parse(localStorage.getItem('lms_quiz_scores') || '{}');
+    const childProgKey = activeChild ? `child_${activeChild.id}` : (currentUser ? `user_${currentUser.uid}` : 'guest');
+    const activeProgMap = localProg[childProgKey] || userProgress || {};
+
+    let completedCount = 0;
+    courseData.modules.forEach(m => {
+      if (activeProgMap[`mod_${m.id}`] || userProgress[`mod_${m.id}`]) completedCount++;
+    });
+
+    const scoreKeys = Object.keys(localScores);
+    let avgQuizScore = 0;
+    if (scoreKeys.length > 0) {
+      const sum = scoreKeys.reduce((acc, k) => acc + (localScores[k].percentage || localScores[k].score || 0), 0);
+      avgQuizScore = Math.round(sum / scoreKeys.length);
+    } else if (completedCount > 0) {
+      avgQuizScore = 90;
+    }
+
+    if (learnerStatCompleted) learnerStatCompleted.textContent = `${completedCount} / 9`;
+    if (learnerStatAvgQuiz) learnerStatAvgQuiz.textContent = avgQuizScore > 0 ? `${avgQuizScore}%` : '0%';
+    if (learnerStatStreak) learnerStatStreak.textContent = completedCount > 0 ? `${Math.min(completedCount + 1, 7)} Days` : '1 Day';
+    if (learnerStatCert) {
+      learnerStatCert.textContent = completedCount >= 9 ? '🎉 Earned!' : (completedCount > 0 ? 'In Progress' : 'Not Started');
+    }
+
+    // 3. Recommended Next Lesson Spotlight
+    const nextActionCard = document.getElementById('learnerNextActionCard');
+    const nextActionIcon = document.getElementById('nextActionIcon');
+    const nextActionTitle = document.getElementById('nextActionTitle');
+    const nextActionDesc = document.getElementById('nextActionDesc');
+    const nextActionBadge = document.getElementById('nextActionBadge');
+    const nextActionStartBtn = document.getElementById('nextActionStartBtn');
+    const nextActionQuizBtn = document.getElementById('nextActionQuizBtn');
+
+    // Find first uncompleted module
+    let nextMod = courseData.modules.find(m => !(activeProgMap[`mod_${m.id}`] || userProgress[`mod_${m.id}`]));
+    if (!nextMod) nextMod = courseData.modules[0]; // fallback to first if all completed
+
+    if (nextActionCard && nextMod) {
+      if (nextActionIcon) nextActionIcon.innerHTML = `<i class="fa-solid ${nextMod.icon || 'fa-book'}"></i>`;
+      if (nextActionTitle) nextActionTitle.textContent = `Module ${nextMod.id}: ${nextMod.title}`;
+      if (nextActionDesc) nextActionDesc.textContent = nextMod.description;
+      if (nextActionBadge) {
+        nextActionBadge.innerHTML = `<i class="fa-solid fa-play"></i> ${isL2 ? 'Recommended Study Focus' : 'Your Next Adventure!'}`;
+      }
+      if (nextActionStartBtn) {
+        nextActionStartBtn.onclick = () => openModule(nextMod.id);
+      }
+      if (nextActionQuizBtn) {
+        nextActionQuizBtn.onclick = () => {
+          openModule(nextMod.id);
+          switchTab('quiz');
+        };
+      }
+    }
+
+    // 4. Wire Track Switch Pill in Banner
+    if (learnerTrackSwitchPill) {
+      learnerTrackSwitchPill.onclick = () => {
+        const nextTrack = activeTrack === 'level1' ? 'level2' : 'level1';
+        switchTrack(nextTrack);
+      };
+    }
+
+    // 5. Render Filtered Modules Grid
     const filteredMods = courseData.modules.filter(mod => {
       if (activeCategoryFilter === 'all') return true;
       const cat = mod.category.toLowerCase();
@@ -489,27 +621,36 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     filteredMods.forEach(mod => {
-      const isCompleted = userProgress[`mod_${mod.id}`];
+      const isCompleted = activeProgMap[`mod_${mod.id}`] || userProgress[`mod_${mod.id}`];
+      const quizScore = localScores[`quiz_${mod.id}_${activeTrack}`]?.percentage || (isCompleted ? 100 : null);
+      
       const card = document.createElement('div');
-      card.className = 'module-card';
+      card.className = `module-card ${isL2 ? 'level2-card' : 'level1-card'} ${isCompleted ? 'completed' : ''}`;
+      
       card.innerHTML = `
         <div>
           <div class="module-card-header">
             <div class="module-card-icon">
               <i class="fa-solid ${mod.icon || 'fa-book'}"></i>
             </div>
-            <span class="category-badge">${mod.category}</span>
+            <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+              <span class="category-badge">${mod.category}</span>
+              <span class="track-tag-pill ${isL2 ? 'level2' : 'level1'}">
+                ${isL2 ? '📖 Level 2 (13y+)' : '🌱 Level 1 (~10y)'}
+              </span>
+            </div>
           </div>
           <h3>Module ${mod.id}: ${mod.title}</h3>
           <p>${mod.description}</p>
           <div class="module-card-meta-row">
             <span><i class="fa-solid fa-clock"></i> ${mod.estTime || '45m'}</span>
             <span>•</span>
-            <span><i class="fa-solid fa-brain"></i> ${mod.bloomLevel || 'Understanding'}</span>
+            <span><i class="fa-solid fa-brain"></i> ${isL2 ? (mod.bloomLevel || 'Analytical') : 'Foundational'}</span>
+            ${quizScore !== null ? `<span>•</span><span style="color: var(--emerald-primary); font-weight: 700;">Score: ${quizScore}%</span>` : ''}
           </div>
         </div>
         <div class="module-card-footer">
-          <span>${isCompleted ? '✓ Completed' : 'Start Lesson'}</span>
+          <span>${isCompleted ? (isL2 ? '✓ Completed (Review)' : '⭐ Completed! (Review)') : (isL2 ? 'Study Module' : 'Start Fun Lesson')}</span>
           <i class="fa-solid fa-arrow-right"></i>
         </div>
       `;

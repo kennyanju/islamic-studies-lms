@@ -2126,6 +2126,140 @@ h1, h2, h3, h4, .logo-title, .cert-title {
   background: linear-gradient(135deg, rgba(180, 83, 9, 0.9), rgba(9, 13, 22, 0.95)), url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1200&q=80') center/cover;
 }
 
+.hero-banner.level1-hero {
+  background: linear-gradient(135deg, rgba(6, 95, 70, 0.92), rgba(30, 58, 138, 0.9)), url('https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=1200&q=80') center/cover;
+}
+
+.hero-banner.level2-hero {
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(30, 27, 75, 0.92)), url('https://images.unsplash.com/photo-1509198397868-475647b2a1e5?auto=format&fit=crop&w=1200&q=80') center/cover;
+}
+
+/* Learner Next Action Card */
+.learner-next-action-card {
+  background: var(--card-bg);
+  border: 1px solid var(--emerald-primary);
+  border-radius: var(--radius-lg);
+  padding: 20px 24px;
+  margin-top: 1.5rem;
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+  box-shadow: 0 4px 20px rgba(5, 150, 105, 0.15);
+}
+
+.level2-mode .learner-next-action-card {
+  border-color: #3b82f6;
+  box-shadow: 0 4px 20px rgba(59, 130, 246, 0.15);
+}
+
+.next-action-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.next-action-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: var(--radius-md);
+  background: var(--emerald-light);
+  color: var(--emerald-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  flex-shrink: 0;
+}
+
+.level2-mode .next-action-icon {
+  background: rgba(59, 130, 246, 0.15);
+  color: #3b82f6;
+}
+
+.next-action-info .badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--emerald-primary);
+  letter-spacing: 0.5px;
+  margin-bottom: 2px;
+}
+
+.level2-mode .next-action-info .badge {
+  color: #3b82f6;
+}
+
+.next-action-info h3 {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--text-main);
+  margin: 0 0 2px 0;
+}
+
+.next-action-info p {
+  font-size: 0.86rem;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+.next-action-btns {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Track-Specific Module Card Styles */
+.module-card.level1-card {
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--card-border);
+  transition: var(--transition);
+}
+
+.module-card.level1-card:hover {
+  border-color: var(--emerald-primary);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(5, 150, 105, 0.2);
+}
+
+.module-card.level2-card {
+  border-radius: var(--radius-md);
+  border: 1px solid var(--card-border);
+  background: linear-gradient(180deg, var(--card-bg) 0%, rgba(15, 23, 42, 0.8) 100%);
+  transition: var(--transition);
+}
+
+.module-card.level2-card:hover {
+  border-color: #3b82f6;
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(59, 130, 246, 0.2);
+}
+
+.track-tag-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 8px;
+  border-radius: var(--radius-sm);
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.track-tag-pill.level1 {
+  background: var(--emerald-light);
+  color: var(--emerald-primary);
+}
+
+.track-tag-pill.level2 {
+  background: rgba(59, 130, 246, 0.15);
+  color: #3b82f6;
+}
+
 /* Action Buttons */
 .btn-primary-action {
   background: var(--emerald-primary);
