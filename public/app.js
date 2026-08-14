@@ -1513,9 +1513,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const homeAuthTabSignIn = document.getElementById('homeAuthTabSignIn');
   const homeAuthTabSignUp = document.getElementById('homeAuthTabSignUp');
   const homeAuthAlertMsg = document.getElementById('homeAuthAlertMsg');
-  const homeGoogleSignInBtn = document.getElementById('homeGoogleSignInBtn');
-  const homeAppleSignInBtn = document.getElementById('homeAppleSignInBtn');
-  const homeMicrosoftSignInBtn = document.getElementById('homeMicrosoftSignInBtn');
   const homeEmailAuthForm = document.getElementById('homeEmailAuthForm');
   const homeAuthEmailInput = document.getElementById('homeAuthEmailInput');
   const homeAuthPasswordInput = document.getElementById('homeAuthPasswordInput');
@@ -1524,8 +1521,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const homeSignUpEmailInput = document.getElementById('homeSignUpEmailInput');
   const homeSignUpPasswordInput = document.getElementById('homeSignUpPasswordInput');
   const homeSignUpRoleSelect = document.getElementById('homeSignUpRoleSelect');
-  const homeDemoParentBtn = document.getElementById('homeDemoParentBtn');
-  const homeDemoAdminBtn = document.getElementById('homeDemoAdminBtn');
   const guestBrowseBtn = document.getElementById('guestBrowseBtn');
 
   // Parent Dashboard Elements
@@ -1555,9 +1550,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const authTabSignIn = document.getElementById('authTabSignIn');
   const authTabSignUp = document.getElementById('authTabSignUp');
   const authAlertMsg = document.getElementById('authAlertMsg');
-  const googleSignInBtn = document.getElementById('googleSignInBtn');
-  const appleSignInBtn = document.getElementById('appleSignInBtn');
-  const microsoftSignInBtn = document.getElementById('microsoftSignInBtn');
   const emailAuthForm = document.getElementById('emailAuthForm');
   const authEmailInput = document.getElementById('authEmailInput');
   const authPasswordInput = document.getElementById('authPasswordInput');
@@ -2376,19 +2368,6 @@ document.addEventListener('DOMContentLoaded', () => {
   if (profileSignOutBtn) {
     profileSignOutBtn.addEventListener('click', handleSignOut);
   }
-
-  // Federated Auth Sign In Notice (Google, Apple, Microsoft)
-  function handleOAuthNotice(providerName) {
-    showToast(`${providerName} Sign-In`, `${providerName} Single Sign-On is being enabled for the upcoming mobile update. Please register or sign in with your Email and Password below.`, 'info', 6000);
-  }
-
-  if (googleSignInBtn) googleSignInBtn.addEventListener('click', () => handleOAuthNotice('Google'));
-  if (appleSignInBtn) appleSignInBtn.addEventListener('click', () => handleOAuthNotice('Apple'));
-  if (microsoftSignInBtn) microsoftSignInBtn.addEventListener('click', () => handleOAuthNotice('Microsoft'));
-
-  if (homeGoogleSignInBtn) homeGoogleSignInBtn.addEventListener('click', () => handleOAuthNotice('Google'));
-  if (homeAppleSignInBtn) homeAppleSignInBtn.addEventListener('click', () => handleOAuthNotice('Apple'));
-  if (homeMicrosoftSignInBtn) homeMicrosoftSignInBtn.addEventListener('click', () => handleOAuthNotice('Microsoft'));
 
   // Email Sign In Form Submit (Modal)
   if (emailAuthForm) {
