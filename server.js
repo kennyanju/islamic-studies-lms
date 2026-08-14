@@ -771,16 +771,62 @@ app.post('/api/quiz/grade', validateModuleId, async (req, res, next) => {
 app.get('/api/admin/overview', requireAdmin, async (req, res, next) => {
   try {
     const users = await db.getAllUsers();
+    const totalKids = (db.memoryData.children || []).length;
+    const quizList = db.memoryData.quizResults || [];
+    const totalQuizSubmissions = quizList.length;
+
+    // Count all completed module instances across all children and users
+    let totalCompletedModules = 0;
+    const progressMap = db.memoryData.progress || {};
+    for (const key in progressMap) {
+      const mods = progressMap[key] || {};
+      for (const m in mods) {
+        if (mods[m]) totalCompletedModules++;
+      }
+    }
+
+    const passedQuizzes = quizList.filter(q => q.passed || (q.percentage >= 80)).length;
+    const passRate = totalQuizSubmissions > 0
+      ? Math.round((passedQuizzes / totalQuizSubmissions) * 100)
+      : 0;
+
+    const avgQuizScore = totalQuizSubmissions > 0
+      ? Math.round(quizList.reduce((acc, q) => acc + (q.percentage || Math.round(((q.score || 0) / (q.total || 1)) * 100) || 0), 0) / totalQuizSubmissions)
+      : 0;
+
+    // Module-by-module breakdown (Modules 1-9)
+    const moduleStats = [];
+    for (let mId = 1; mId <= 9; mId++) {
+      const mQuizzes = quizList.filter(q => q.moduleId === mId);
+      const mCompletions = Object.values(progressMap).filter(p => p && (p[`mod_${mId}`] || p[mId])).length;
+      const mAvg = mQuizzes.length > 0
+        ? Math.round(mQuizzes.reduce((sum, q) => sum + (q.percentage || 0), 0) / mQuizzes.length)
+        : 0;
+      moduleStats.push({
+        moduleId: mId,
+        completions: mCompletions,
+        quizAttempts: mQuizzes.length,
+        avgScore: mAvg
+      });
+    }
+
     res.json({
       success: true,
       stats: {
         totalParents: users.length,
-        totalKids: db.memoryData.children.length,
-        totalQuizSubmissions: db.memoryData.quizResults.length,
-        totalCompletedModules: Object.keys(db.memoryData.progress).length,
-        avgQuizScore: db.memoryData.quizResults.length > 0
-          ? Math.round(db.memoryData.quizResults.reduce((acc, q) => acc + (q.percentage || 0), 0) / db.memoryData.quizResults.length)
-          : 0
+        totalKids,
+        totalQuizSubmissions,
+        totalCompletedModules,
+        avgQuizScore,
+        passRate,
+        moduleStats,
+        system: {
+          uptime: Math.floor(process.uptime()),
+          nodeEnv: process.env.NODE_ENV || 'development',
+          storage: db.type.toUpperCase(),
+          clientErrorsCount: telemetryMetrics.clientErrors || 0,
+          cspViolationsCount: telemetryMetrics.cspViolations || 0
+        }
       }
     });
   } catch (err) {
@@ -792,7 +838,7 @@ app.get('/api/admin/users', requireAdmin, async (req, res, next) => {
   try {
     const users = await db.getAllUsers();
     const usersWithMeta = users.map(u => {
-      const children = db.memoryData.children.filter(c => c.parentUid === u.uid);
+      const children = (db.memoryData.children || []).filter(c => c.parentUid === u.uid);
       return {
         ...u,
         childrenCount: children.length,
@@ -820,6 +866,22 @@ app.put('/api/admin/users/:uid/role', requireAdmin, async (req, res, next) => {
     }
 
     res.json({ success: true, user: safeUser(updated) });
+  } catch (err) {
+    next(err);
+  }
+});
+
+app.delete('/api/admin/users/:uid', requireAdmin, async (req, res, next) => {
+  try {
+    const { uid } = req.params;
+    if (req.session && req.session.user && req.session.user.uid === uid) {
+      return res.status(400).json({ success: false, error: 'Cannot delete your own active admin account.' });
+    }
+    const success = await db.deleteUser(uid);
+    if (!success) {
+      return res.status(404).json({ success: false, error: 'User not found.' });
+    }
+    res.json({ success: true, message: 'User deleted successfully.' });
   } catch (err) {
     next(err);
   }

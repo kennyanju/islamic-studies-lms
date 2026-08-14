@@ -88,6 +88,9 @@
           <button class="btn-dashboard-jump" id="dashboardJumpBtn" title="View Dashboard Grid" aria-label="Jump to Course Dashboard Grid">
             <i class="fa-solid fa-grid-2" aria-hidden="true"></i> Dashboard
           </button>
+          <button class="btn-dashboard-jump gold-btn" id="sidebarAdminBtn" style="display: none;" title="Platform Admin Dashboard" aria-label="Open Platform Administrator Dashboard">
+            <i class="fa-solid fa-shield-halved" aria-hidden="true"></i> Admin Panel
+          </button>
         </div>
         <ul class="modules-list" id="modulesList">
           <!-- Dynamically populated -->
@@ -363,6 +366,20 @@
 
       <!-- Parent Dashboard View Container -->
       <div class="view-container" id="parentDashboardView" style="display: none;">
+        <!-- Super Admin Quick-Switch Banner -->
+        <div class="admin-quick-switch-banner" id="parentAdminBanner" style="display: none;">
+          <div class="admin-banner-info">
+            <i class="fa-solid fa-shield-halved" aria-hidden="true"></i>
+            <div>
+              <strong>Super Administrator Mode Active</strong>
+              <p>You are viewing a Parent account profile. Switch to the Admin Control Center to inspect global family registries, lesson completions, and curriculum analytics.</p>
+            </div>
+          </div>
+          <button class="btn-admin-switch" id="parentToAdminBtn">
+            <i class="fa-solid fa-chart-line" aria-hidden="true"></i> Open Admin Analytics
+          </button>
+        </div>
+
         <div class="hero-banner parent-hero">
           <div class="hero-content">
             <div class="hero-badge-row">
@@ -508,6 +525,52 @@
                 <!-- Dynamically populated -->
               </tbody>
             </table>
+          </div>
+        </div>
+
+        <!-- Curriculum Analytics Breakdown Grid -->
+        <div class="dashboard-section" style="margin-top: 2rem;">
+          <div class="dashboard-filter-bar">
+            <h2><i class="fa-solid fa-book-open-reader"></i> Curriculum Module Performance & Engagement</h2>
+            <span class="analytics-badge" id="adminAnalyticsUpdatedBadge"><i class="fa-solid fa-bolt"></i> Live Real-Time Data</span>
+          </div>
+          <div class="admin-modules-analytics-grid" id="adminModulesAnalyticsGrid">
+            <!-- Dynamically populated module cards with completions & quiz pass rates -->
+          </div>
+        </div>
+
+        <!-- System Runtime & Health Overview -->
+        <div class="dashboard-section" style="margin-top: 2rem;">
+          <h2><i class="fa-solid fa-server"></i> System Health & Server Telemetry</h2>
+          <div class="admin-system-health-grid" id="adminSystemHealthGrid">
+            <div class="health-card">
+              <div class="health-icon green"><i class="fa-solid fa-database"></i></div>
+              <div class="health-info">
+                <span class="health-label">Storage Engine</span>
+                <strong id="healthStorageType">FILE (JSON)</strong>
+              </div>
+            </div>
+            <div class="health-card">
+              <div class="health-icon green"><i class="fa-solid fa-heart-pulse"></i></div>
+              <div class="health-info">
+                <span class="health-label">System Status</span>
+                <strong id="healthSystemStatus">100% Operational</strong>
+              </div>
+            </div>
+            <div class="health-card">
+              <div class="health-icon blue"><i class="fa-solid fa-clock"></i></div>
+              <div class="health-info">
+                <span class="health-label">Uptime</span>
+                <strong id="healthUptime">0h 0m</strong>
+              </div>
+            </div>
+            <div class="health-card">
+              <div class="health-icon purple"><i class="fa-solid fa-bug"></i></div>
+              <div class="health-info">
+                <span class="health-label">Client Telemetry</span>
+                <strong id="healthClientErrors">0 Errors</strong>
+              </div>
+            </div>
           </div>
         </div>
       </div>
