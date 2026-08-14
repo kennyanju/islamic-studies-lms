@@ -10,6 +10,7 @@ const morgan = require('morgan');
 const db = require('./lib/db');
 
 const app = express();
+app.set('trust proxy', 1);
 const PORT = process.env.PORT || 3000;
 const publicDir = path.join(__dirname, 'public');
 const isProd = process.env.NODE_ENV === 'production';
@@ -65,11 +66,11 @@ app.use(helmet({
   contentSecurityPolicy: {
     directives: {
       defaultSrc: ["'self'"],
-      scriptSrc: ["'self'", "'unsafe-inline'", "cdn.jsdelivr.net", "accounts.google.com", "cdnjs.cloudflare.com"],
+      scriptSrc: ["'self'", "'unsafe-inline'", "cdn.jsdelivr.net", "cdnjs.cloudflare.com"],
       styleSrc: ["'self'", "'unsafe-inline'", "fonts.googleapis.com", "cdnjs.cloudflare.com"],
       fontSrc: ["'self'", "fonts.gstatic.com", "cdnjs.cloudflare.com"],
       imgSrc: ["'self'", "data:", "api.dicebear.com", "https:"],
-      connectSrc: ["'self'", "accounts.google.com"],
+      connectSrc: ["'self'", "https:", "http:"],
     }
   }
 }));

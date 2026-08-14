@@ -134,6 +134,20 @@ export async function onRequest(context) {
   const method = request.method;
   const jwtSecret = env.SESSION_SECRET || 'cf-islamic-studies-edge-secret-key-2026';
 
+  // Handle CORS preflight OPTIONS request
+  if (method === 'OPTIONS') {
+    return new Response(null, {
+      status: 204,
+      headers: {
+        'Access-Control-Allow-Origin': request.headers.get('Origin') || '*',
+        'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+        'Access-Control-Allow-Headers': 'Content-Type, Authorization, Cookie',
+        'Access-Control-Allow-Credentials': 'true',
+        'Access-Control-Max-Age': '86400'
+      }
+    });
+  }
+
   // Extract authenticated user from signed JWT cookie
   const cookies = parseCookies(request.headers.get('Cookie') || '');
   const token = cookies['cf_session'] || (request.headers.get('Authorization') || '').replace(/^Bearer\s+/i, '');
