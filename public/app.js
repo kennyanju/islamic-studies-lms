@@ -2447,6 +2447,15 @@ document.addEventListener('DOMContentLoaded', () => {
       const password = signUpPasswordInput.value;
       const role = signUpRoleSelect.value;
 
+      if (!displayName || !email || !password) {
+        showAuthAlert('Please fill in your name, email address, and password.', 'error');
+        return;
+      }
+      if (password.length < 6) {
+        showAuthAlert('Password must be at least 6 characters long.', 'error');
+        return;
+      }
+
       try {
         const res = await fetch('/api/auth/register', {
           method: 'POST',
@@ -2465,7 +2474,8 @@ document.addEventListener('DOMContentLoaded', () => {
             switchView('parent');
           }, 600);
         } else {
-          const errMsg = (data && data.error) ? data.error : 'Registration failed. Please verify your inputs.';
+          let errMsg = (data && data.error) ? data.error : 'Registration failed. Please verify your inputs.';
+          if (!data && res.status === 400) errMsg = 'Please verify your inputs and ensure password is at least 6 characters.';
           showAuthAlert(errMsg, 'error');
         }
       } catch (err) {
@@ -2485,6 +2495,15 @@ document.addEventListener('DOMContentLoaded', () => {
       const password = homeSignUpPasswordInput.value;
       const role = homeSignUpRoleSelect.value;
 
+      if (!displayName || !email || !password) {
+        showAuthAlert('Please enter your full name, email address, and a password.', 'error', homeAuthAlertMsg);
+        return;
+      }
+      if (password.length < 6) {
+        showAuthAlert('Password must be at least 6 characters long.', 'error', homeAuthAlertMsg);
+        return;
+      }
+
       try {
         const res = await fetch('/api/auth/register', {
           method: 'POST',
@@ -2503,7 +2522,8 @@ document.addEventListener('DOMContentLoaded', () => {
             switchView('parent');
           }, 600);
         } else {
-          const errMsg = (data && data.error) ? data.error : 'Registration failed. Please verify your inputs.';
+          let errMsg = (data && data.error) ? data.error : 'Registration failed. Please verify your inputs.';
+          if (!data && res.status === 400) errMsg = 'Please verify your inputs and ensure password is at least 6 characters.';
           showAuthAlert(errMsg, 'error', homeAuthAlertMsg);
           showToast('Registration Error', errMsg, 'error');
         }

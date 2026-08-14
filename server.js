@@ -294,12 +294,13 @@ app.post('/api/auth/register', async (req, res, next) => {
       return res.status(400).json({ success: false, error: 'An account with this email already exists. Please sign in instead.' });
     }
 
+    const assignedRole = (req.body.role === 'teacher' || req.body.role === 'educator') ? 'teacher' : 'parent';
     const passwordHash = bcrypt.hashSync(password, BCRYPT_ROUNDS);
     const newUser = await db.createUser({
       email,
       passwordHash,
       displayName,
-      role: 'parent', // Non-admin registrations are strictly assigned 'parent'
+      role: assignedRole,
       provider: 'password',
       isVerified: false
     });
