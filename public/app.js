@@ -364,6 +364,12 @@ document.addEventListener('DOMContentLoaded', () => {
     renderDashboard();
     updateProgressUI();
     setupEventListeners();
+
+    if (!currentUser) {
+      switchView('authLanding');
+    } else {
+      switchView('parent');
+    }
   }
 
   function setupVoices() {
@@ -516,7 +522,6 @@ document.addEventListener('DOMContentLoaded', () => {
     renderDashboard();
   }
 
-  if (appLogoBtn) appLogoBtn.addEventListener('click', showDashboard);
   if (dashboardJumpBtn) dashboardJumpBtn.addEventListener('click', showDashboard);
 
   function openModule(moduleId) {
