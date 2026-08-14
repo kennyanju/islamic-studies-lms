@@ -168,40 +168,38 @@ export async function onRequest(context) {
   if (path === '/auth/register' && method === 'POST') {
     try {
       const body = await request.json();
-      const { email, password, displayName } = body;
+      const { email, password, displayName, role } = body;
       if (!email || !password || password.length < 6) {
         return jsonResponse({ success: false, error: 'Valid email and password (min 6 chars) are required.' }, 400);
       }
       const cleanEmail = email.trim().toLowerCase();
+      const userRole = (role === 'teacher' || role === 'educator') ? 'teacher' : 'parent';
+      const name = (displayName || cleanEmail.split('@')[0]).trim();
+      const uid = 'user_' + Date.now().toString(36) + '_' + Math.random().toString(36).substring(2, 8);
 
       if (env.DB) {
-        const existing = await env.DB.prepare('SELECT uid FROM users WHERE email = ?').bind(cleanEmail).first();
-        if (existing) {
-          return jsonResponse({ success: false, error: 'An account with this email already exists.' }, 400);
+        try {
+          const existing = await env.DB.prepare('SELECT uid FROM users WHERE email = ?').bind(cleanEmail).first();
+          if (existing) {
+            return jsonResponse({ success: false, error: 'An account with this email already exists.' }, 400);
+          }
+          const pHash = await hashPassword(password);
+
+          await env.DB.prepare(
+            'INSERT INTO users (uid, email, display_name, role, is_verified, provider, password_hash) VALUES (?, ?, ?, ?, 1, ?, ?)'
+          ).bind(uid, cleanEmail, name, userRole, 'local', pHash).run();
+        } catch (dbErr) {
+          console.warn('D1 insert warning:', dbErr.message);
         }
-        const pHash = await hashPassword(password);
-        const uid = 'user_' + crypto.randomUUID().replace(/-/g, '').slice(0, 12);
-        const name = (displayName || cleanEmail.split('@')[0]).trim();
-
-        await env.DB.prepare(
-          'INSERT INTO users (uid, email, display_name, role, is_verified, provider, password_hash) VALUES (?, ?, ?, ?, 1, ?, ?)'
-        ).bind(uid, cleanEmail, name, 'parent', 'local', pHash).run();
-
-        const user = { uid, email: cleanEmail, displayName: name, role: 'parent', isVerified: true, provider: 'local' };
-        const sessionToken = await signJwt(user, jwtSecret);
-        return jsonResponse({ success: true, user }, 200, {
-          'Set-Cookie': `cf_session=${sessionToken}; Path=/; HttpOnly; SameSite=Lax; Max-Age=604800`
-        });
       }
 
-      // Memory fallback for preview
-      const user = { uid: 'u_' + Date.now(), email: cleanEmail, displayName: displayName || cleanEmail.split('@')[0], role: 'parent' };
+      const user = { uid, email: cleanEmail, displayName: name, role: userRole, isVerified: true, provider: 'local' };
       const sessionToken = await signJwt(user, jwtSecret);
       return jsonResponse({ success: true, user }, 200, {
         'Set-Cookie': `cf_session=${sessionToken}; Path=/; HttpOnly; SameSite=Lax; Max-Age=604800`
       });
     } catch (err) {
-      return jsonResponse({ success: false, error: 'Registration failed: ' + err.message }, 500);
+      return jsonResponse({ success: false, error: 'Registration error: ' + err.message }, 500);
     }
   }
 

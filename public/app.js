@@ -2453,8 +2453,8 @@ document.addEventListener('DOMContentLoaded', () => {
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ displayName, email, password, role })
         });
-        const data = await res.json();
-        if (data.success && data.user) {
+        const data = await res.json().catch(() => null);
+        if (res.ok && data && data.success && data.user) {
           currentUser = data.user;
           localStorage.setItem('lms_user', JSON.stringify(currentUser));
           updateAuthUI();
@@ -2463,12 +2463,14 @@ document.addEventListener('DOMContentLoaded', () => {
           setTimeout(() => {
             closeAccessibleModal(authModal);
             switchView('parent');
-          }, 800);
+          }, 600);
         } else {
-          showAuthAlert(data.error || 'Registration failed.');
+          const errMsg = (data && data.error) ? data.error : 'Registration failed. Please verify your inputs.';
+          showAuthAlert(errMsg, 'error');
         }
       } catch (err) {
-        showAuthAlert('Network error attempting registration.');
+        console.error('Sign up error:', err);
+        showAuthAlert('Unable to reach server. Please check your network connection.', 'error');
       }
     });
   }
@@ -2489,21 +2491,26 @@ document.addEventListener('DOMContentLoaded', () => {
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ displayName, email, password, role })
         });
-        const data = await res.json();
-        if (data.success && data.user) {
+        const data = await res.json().catch(() => null);
+        if (res.ok && data && data.success && data.user) {
           currentUser = data.user;
           localStorage.setItem('lms_user', JSON.stringify(currentUser));
           updateAuthUI();
           await fetchFamilyChildren();
           showAuthAlert('Account created successfully! Redirecting...', 'success', homeAuthAlertMsg);
+          showToast('Account Created! 🎉', `Welcome, ${data.user.displayName}`, 'success');
           setTimeout(() => {
             switchView('parent');
-          }, 800);
+          }, 600);
         } else {
-          showAuthAlert(data.error || 'Registration failed.', 'error', homeAuthAlertMsg);
+          const errMsg = (data && data.error) ? data.error : 'Registration failed. Please verify your inputs.';
+          showAuthAlert(errMsg, 'error', homeAuthAlertMsg);
+          showToast('Registration Error', errMsg, 'error');
         }
       } catch (err) {
-        showAuthAlert('Network error attempting registration.', 'error', homeAuthAlertMsg);
+        console.error('Homepage sign up error:', err);
+        showAuthAlert('Unable to reach server. Please check your network connection.', 'error', homeAuthAlertMsg);
+        showToast('Network Error', 'Unable to reach server.', 'error');
       }
     });
   }
