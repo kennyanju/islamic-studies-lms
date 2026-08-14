@@ -1530,6 +1530,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const homeSignUpPasswordInput = document.getElementById('homeSignUpPasswordInput');
   const homeSignUpRoleSelect = document.getElementById('homeSignUpRoleSelect');
   const guestBrowseBtn = document.getElementById('guestBrowseBtn');
+  const landingNavGuestBtn = document.getElementById('landingNavGuestBtn');
+  const landingNavAuthBtn = document.getElementById('landingNavAuthBtn');
+  const heroSignInScrollBtn = document.getElementById('heroSignInScrollBtn');
+  const ctaRegisterBtn = document.getElementById('ctaRegisterBtn');
+  const ctaGuestBtn = document.getElementById('ctaGuestBtn');
 
   // Parent Dashboard Elements
   const parentWelcomeTitle = document.getElementById('parentWelcomeTitle');
@@ -2382,6 +2387,45 @@ document.addEventListener('DOMContentLoaded', () => {
   if (guestBrowseBtn) {
     guestBrowseBtn.addEventListener('click', () => switchView('dashboard'));
   }
+  if (landingNavGuestBtn) {
+    landingNavGuestBtn.addEventListener('click', () => switchView('dashboard'));
+  }
+  if (ctaGuestBtn) {
+    ctaGuestBtn.addEventListener('click', () => switchView('dashboard'));
+  }
+  if (landingNavAuthBtn) {
+    landingNavAuthBtn.addEventListener('click', () => {
+      const card = document.getElementById('landingAuthCard');
+      if (card) card.scrollIntoView({ behavior: 'smooth' });
+      if (homeAuthEmailInput) homeAuthEmailInput.focus();
+    });
+  }
+  if (heroSignInScrollBtn) {
+    heroSignInScrollBtn.addEventListener('click', () => {
+      const card = document.getElementById('landingAuthCard');
+      if (card) card.scrollIntoView({ behavior: 'smooth' });
+      if (homeAuthEmailInput) homeAuthEmailInput.focus();
+    });
+  }
+  if (ctaRegisterBtn) {
+    ctaRegisterBtn.addEventListener('click', () => {
+      switchHomeAuthTab('signup');
+      const card = document.getElementById('landingAuthCard');
+      if (card) card.scrollIntoView({ behavior: 'smooth' });
+      if (homeSignUpNameInput) homeSignUpNameInput.focus();
+    });
+  }
+
+  // Interactive Guest Module Preview Buttons on Homepage
+  document.querySelectorAll('.btn-preview-module').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const mId = parseInt(btn.dataset.moduleId, 10);
+      if (mId) {
+        loadModule(mId);
+        switchView('module');
+      }
+    });
+  });
 
   if (authHeaderBtn) {
     authHeaderBtn.addEventListener('click', () => {

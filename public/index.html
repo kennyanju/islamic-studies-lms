@@ -175,6 +175,26 @@
 
       <!-- Homepage Parent Sign In & Sign Up Landing View -->
       <div class="view-container" id="authLandingView">
+        <!-- Landing Top Navigation Bar -->
+        <div class="landing-top-bar">
+          <div class="landing-brand">
+            <div class="landing-brand-icon"><i class="fa-solid fa-kaaba" aria-hidden="true"></i></div>
+            <div class="landing-brand-text">
+              <strong>Islamic Studies LMS</strong>
+              <span>Family & Classroom Learning</span>
+            </div>
+          </div>
+          <div class="landing-nav-actions">
+            <button class="btn-landing-nav-guest" id="landingNavGuestBtn" aria-label="Explore Course Curriculum as Guest">
+              <i class="fa-solid fa-compass" aria-hidden="true"></i> Explore Modules
+            </button>
+            <button class="btn-landing-nav-auth" id="landingNavAuthBtn" aria-label="Parent Sign In or Register">
+              <i class="fa-solid fa-right-to-bracket" aria-hidden="true"></i> Parent Sign In
+            </button>
+          </div>
+        </div>
+
+        <!-- Hero Banner Grid -->
         <div class="hero-banner auth-landing-hero">
           <div class="hero-content landing-grid">
             <div class="landing-text-col">
@@ -183,41 +203,61 @@
                 <span class="hero-badge gold"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i> Federated Parent Auth</span>
               </div>
               <h1>Empower Your Family's Islamic Education</h1>
-              <p>A comprehensive 9-Module Islamic Studies curriculum covering Ash'ari Aqidah, Maliki Fiqh, authentic Seerah, and Akhlaq. Create child profiles, track quiz progress, and learn together.</p>
+              <p>A comprehensive 9-Module Islamic Studies curriculum covering Ash'ari Aqidah, Maliki Fiqh, authentic Seerah, and Akhlaq. Create child profiles, assign tailored tracks, track quiz progress, and learn together.</p>
               
+              <!-- Trust Indicators Strip -->
+              <div class="landing-trust-strip">
+                <span class="trust-badge-pill"><i class="fa-solid fa-book-open"></i> 9 Core Modules</span>
+                <span class="trust-badge-pill gold"><i class="fa-solid fa-layer-group"></i> Dual Tracks (Level 1 & Level 2)</span>
+                <span class="trust-badge-pill"><i class="fa-solid fa-award"></i> Ash'ari Aqidah & Maliki Fiqh</span>
+                <span class="trust-badge-pill gold"><i class="fa-solid fa-certificate"></i> Verified Certificates</span>
+              </div>
+
+              <!-- Feature Highlights Grid -->
               <div class="landing-features-list">
                 <div class="feature-item">
                   <i class="fa-solid fa-circle-check font-emerald" aria-hidden="true"></i>
                   <div>
                     <strong>Multi-Tenant Child Profiles</strong>
-                    <span>Separate accounts for Level 1 (youth ~10y) and Level 2 (teens 13y+)</span>
+                    <span>Separate accounts for Level 1 (youth ~10y) and Level 2 (teens 13y+) with optional PIN privacy</span>
                   </div>
                 </div>
                 <div class="feature-item">
                   <i class="fa-solid fa-circle-check font-gold" aria-hidden="true"></i>
                   <div>
                     <strong>Federated Identity Sync</strong>
-                    <span>Sign in securely with Google, Apple, Microsoft or Email</span>
+                    <span>Sign in securely with Google, Apple, Microsoft or verified email authentication</span>
                   </div>
                 </div>
                 <div class="feature-item">
                   <i class="fa-solid fa-circle-check font-emerald" aria-hidden="true"></i>
                   <div>
                     <strong>Real-Time Family Analytics</strong>
-                    <span>Monitor quiz scores, completion certificates, and child reflections</span>
+                    <span>Monitor quiz scores, module completion certificates, and individual child reflections</span>
+                  </div>
+                </div>
+                <div class="feature-item">
+                  <i class="fa-solid fa-circle-check font-gold" aria-hidden="true"></i>
+                  <div>
+                    <strong>Teacher & Homeschool Resources</strong>
+                    <span>Access 200+ built-in presentation slides, discussion outlines, and answer keys</span>
                   </div>
                 </div>
               </div>
 
-              <div class="landing-guest-row">
-                <button class="btn-guest-browse" id="guestBrowseBtn" aria-label="Explore Course Curriculum as Guest">
-                  <i class="fa-solid fa-compass" aria-hidden="true"></i> Explore Course Curriculum
+              <!-- CTA Row -->
+              <div class="landing-guest-row" style="display: flex; gap: 14px; flex-wrap: wrap;">
+                <button class="btn-guest-browse primary-glow" id="guestBrowseBtn" aria-label="Explore Course Curriculum as Guest">
+                  <i class="fa-solid fa-compass" aria-hidden="true"></i> Explore Course Curriculum as Guest
+                </button>
+                <button class="btn-secondary-action" id="heroSignInScrollBtn" aria-label="Sign in or create parent account">
+                  <i class="fa-solid fa-user-plus" aria-hidden="true"></i> Parent Sign In / Register
                 </button>
               </div>
             </div>
 
             <!-- Embedded Parent Sign In / Sign Up Form Card -->
-            <div class="landing-auth-card">
+            <div class="landing-auth-card" id="landingAuthCard">
               <div class="card-header-auth">
                 <div class="auth-card-icon" aria-hidden="true"><i class="fa-solid fa-user-shield" aria-hidden="true"></i></div>
                 <h2>Parent Account Access</h2>
@@ -296,7 +336,263 @@
                     <i class="fa-solid fa-user-plus" aria-hidden="true"></i> Register Parent Account
                   </button>
                 </form>
+
+                <p style="font-size: 0.76rem; color: var(--text-subtle); text-align: center; margin-top: 14px; margin-bottom: 0;">
+                  <i class="fa-solid fa-lock"></i> 100% Private, Secure & Ad-Free. Built for families.
+                </p>
               </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Lower Section 1: Curriculum Overview (9 Modules Showcase) -->
+        <div class="landing-section">
+          <div class="landing-section-header">
+            <h2><i class="fa-solid fa-book-open-reader"></i> Comprehensive 9-Module Curriculum</h2>
+            <p>Designed for progressive, age-appropriate learning from foundational articles of faith to applied contemporary ethics.</p>
+          </div>
+
+          <div class="landing-curriculum-grid">
+            <!-- Module 1 -->
+            <div class="landing-module-card">
+              <div>
+                <div class="landing-module-top">
+                  <div class="landing-module-icon"><i class="fa-solid fa-kaaba"></i></div>
+                  <div class="landing-module-info">
+                    <h3>Module 1: Foundations of Belief</h3>
+                    <div class="landing-module-meta">
+                      <span class="landing-meta-tag green">Level 1: ~10y</span>
+                      <span class="landing-meta-tag gold">Level 2: 13y+</span>
+                    </div>
+                  </div>
+                </div>
+                <p class="landing-module-desc">Core tenets of Ash'ari Aqidah, the Six Articles of Faith, Tawhid, Prophethood, the Unseen, and Divine Decree.</p>
+              </div>
+              <button class="btn-preview-module" data-module-id="1">
+                <i class="fa-solid fa-eye"></i> Preview Module as Guest
+              </button>
+            </div>
+
+            <!-- Module 2 -->
+            <div class="landing-module-card">
+              <div>
+                <div class="landing-module-top">
+                  <div class="landing-module-icon"><i class="fa-solid fa-hands-wash"></i></div>
+                  <div class="landing-module-info">
+                    <h3>Module 2: Purification & Prayer</h3>
+                    <div class="landing-module-meta">
+                      <span class="landing-meta-tag green">Level 1: ~10y</span>
+                      <span class="landing-meta-tag gold">Level 2: 13y+</span>
+                    </div>
+                  </div>
+                </div>
+                <p class="landing-module-desc">Maliki Fiqh of Taharah, Wudu, Ghusl, conditions and integrals of Salah, Congregational Prayer, and Khushu'.</p>
+              </div>
+              <button class="btn-preview-module" data-module-id="2">
+                <i class="fa-solid fa-eye"></i> Preview Module as Guest
+              </button>
+            </div>
+
+            <!-- Module 3 -->
+            <div class="landing-module-card">
+              <div>
+                <div class="landing-module-top">
+                  <div class="landing-module-icon"><i class="fa-solid fa-book-quran"></i></div>
+                  <div class="landing-module-info">
+                    <h3>Module 3: Seerah: Early Life of Prophet ﷺ</h3>
+                    <div class="landing-module-meta">
+                      <span class="landing-meta-tag green">Level 1: ~10y</span>
+                      <span class="landing-meta-tag gold">Level 2: 13y+</span>
+                    </div>
+                  </div>
+                </div>
+                <p class="landing-module-desc">Makkan period, noble character of the Prophet ﷺ, First Revelation at Cave Hira, persecution, and the Night Journey (Isra & Mi'raj).</p>
+              </div>
+              <button class="btn-preview-module" data-module-id="3">
+                <i class="fa-solid fa-eye"></i> Preview Module as Guest
+              </button>
+            </div>
+
+            <!-- Module 4 -->
+            <div class="landing-module-card">
+              <div>
+                <div class="landing-module-top">
+                  <div class="landing-module-icon"><i class="fa-solid fa-quran"></i></div>
+                  <div class="landing-module-info">
+                    <h3>Module 4: Deepening Belief & the Quran</h3>
+                    <div class="landing-module-meta">
+                      <span class="landing-meta-tag green">Level 1: ~10y</span>
+                      <span class="landing-meta-tag gold">Level 2: 13y+</span>
+                    </div>
+                  </div>
+                </div>
+                <p class="landing-module-desc">Quranic revelation, preservation, miracles, angels, divine scriptures, and analytical proofs of Prophethood.</p>
+              </div>
+              <button class="btn-preview-module" data-module-id="4">
+                <i class="fa-solid fa-eye"></i> Preview Module as Guest
+              </button>
+            </div>
+
+            <!-- Module 5 -->
+            <div class="landing-module-card">
+              <div>
+                <div class="landing-module-top">
+                  <div class="landing-module-icon"><i class="fa-solid fa-moon"></i></div>
+                  <div class="landing-module-info">
+                    <h3>Module 5: Fiqh of Fasting & Zakah</h3>
+                    <div class="landing-module-meta">
+                      <span class="landing-meta-tag green">Level 1: ~10y</span>
+                      <span class="landing-meta-tag gold">Level 2: 13y+</span>
+                    </div>
+                  </div>
+                </div>
+                <p class="landing-module-desc">Spiritual and legal dimensions of Ramadan, Sawm, Zakat al-Fitr, wealth purification (Zakah), and voluntary charity (Sadaqah).</p>
+              </div>
+              <button class="btn-preview-module" data-module-id="5">
+                <i class="fa-solid fa-eye"></i> Preview Module as Guest
+              </button>
+            </div>
+
+            <!-- Module 6 -->
+            <div class="landing-module-card">
+              <div>
+                <div class="landing-module-top">
+                  <div class="landing-module-icon"><i class="fa-solid fa-mosque"></i></div>
+                  <div class="landing-module-info">
+                    <h3>Module 6: Seerah: Madinah Community</h3>
+                    <div class="landing-module-meta">
+                      <span class="landing-meta-tag green">Level 1: ~10y</span>
+                      <span class="landing-meta-tag gold">Level 2: 13y+</span>
+                    </div>
+                  </div>
+                </div>
+                <p class="landing-module-desc">The Hijrah, building the Prophetic Mosque, the Constitution of Madinah, Mu'akhah (Brotherhood), and the Conquest of Makkah.</p>
+              </div>
+              <button class="btn-preview-module" data-module-id="6">
+                <i class="fa-solid fa-eye"></i> Preview Module as Guest
+              </button>
+            </div>
+
+            <!-- Module 7 -->
+            <div class="landing-module-card">
+              <div>
+                <div class="landing-module-top">
+                  <div class="landing-module-icon"><i class="fa-solid fa-scale-balanced"></i></div>
+                  <div class="landing-module-info">
+                    <h3>Module 7: Applied Fiqh & Everyday Life</h3>
+                    <div class="landing-module-meta">
+                      <span class="landing-meta-tag green">Level 1: ~10y</span>
+                      <span class="landing-meta-tag gold">Level 2: 13y+</span>
+                    </div>
+                  </div>
+                </div>
+                <p class="landing-module-desc">Halal and Haram in diet, financial ethics, honest trade, digital etiquette, and Islamic legal maxims for modern living.</p>
+              </div>
+              <button class="btn-preview-module" data-module-id="7">
+                <i class="fa-solid fa-eye"></i> Preview Module as Guest
+              </button>
+            </div>
+
+            <!-- Module 8 -->
+            <div class="landing-module-card">
+              <div>
+                <div class="landing-module-top">
+                  <div class="landing-module-icon"><i class="fa-solid fa-heart"></i></div>
+                  <div class="landing-module-info">
+                    <h3>Module 8: Character, Society & Family</h3>
+                    <div class="landing-module-meta">
+                      <span class="landing-meta-tag green">Level 1: ~10y</span>
+                      <span class="landing-meta-tag gold">Level 2: 13y+</span>
+                    </div>
+                  </div>
+                </div>
+                <p class="landing-module-desc">Islamic Akhlaq, honoring parents (Birr al-Walidayn), kinship ties (Silat ar-Rahim), neighbor rights, and social justice.</p>
+              </div>
+              <button class="btn-preview-module" data-module-id="8">
+                <i class="fa-solid fa-eye"></i> Preview Module as Guest
+              </button>
+            </div>
+
+            <!-- Module 9 -->
+            <div class="landing-module-card">
+              <div>
+                <div class="landing-module-top">
+                  <div class="landing-module-icon"><i class="fa-solid fa-compass"></i></div>
+                  <div class="landing-module-info">
+                    <h3>Module 9: Living Faith Today</h3>
+                    <div class="landing-module-meta">
+                      <span class="landing-meta-tag green">Level 1: ~10y</span>
+                      <span class="landing-meta-tag gold">Level 2: 13y+</span>
+                    </div>
+                  </div>
+                </div>
+                <p class="landing-module-desc">Preserving Islamic identity, navigating modern cultural pressures, science & revelation, civic duty, and the Farewell Sermon.</p>
+              </div>
+              <button class="btn-preview-module" data-module-id="9">
+                <i class="fa-solid fa-eye"></i> Preview Module as Guest
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Lower Section 2: Why This Portal Matters -->
+        <div class="landing-section">
+          <div class="landing-section-header">
+            <h2><i class="fa-solid fa-sparkles"></i> Why This Portal Matters</h2>
+            <p>A unified, authentic Islamic learning environment crafted specifically for families, youth, and educators.</p>
+          </div>
+
+          <div class="landing-pillars-grid">
+            <div class="landing-pillar-card">
+              <div class="pillar-icon-box emerald"><i class="fa-solid fa-house-chimney-user"></i></div>
+              <h3>For Parents & Families</h3>
+              <p>Take control of your family's Islamic curriculum with authentic scholarship, child-level tracking, and total privacy.</p>
+              <ul class="pillar-checklist">
+                <li><i class="fa-solid fa-check"></i> Multi-child profiles with PIN privacy</li>
+                <li><i class="fa-solid fa-check"></i> Age-appropriate tracks (Level 1 & Level 2)</li>
+                <li><i class="fa-solid fa-check"></i> Real-time family quiz & score monitoring</li>
+                <li><i class="fa-solid fa-check"></i> Safe, ad-free, family-first environment</li>
+              </ul>
+            </div>
+
+            <div class="landing-pillar-card">
+              <div class="pillar-icon-box gold"><i class="fa-solid fa-child-reaching"></i></div>
+              <h3>For Youth & Students</h3>
+              <p>Learn with interactive, bite-sized lessons, self-paced quizzes, instant feedback, and achievement certificates.</p>
+              <ul class="pillar-checklist">
+                <li><i class="fa-solid fa-check"></i> Gamified quiz assessments & badges</li>
+                <li><i class="fa-solid fa-check"></i> Beautiful, responsive reader mode</li>
+                <li><i class="fa-solid fa-check"></i> Authentic Arabic audio & Quranic verses</li>
+                <li><i class="fa-solid fa-check"></i> Printable personalized certificates</li>
+              </ul>
+            </div>
+
+            <div class="landing-pillar-card">
+              <div class="pillar-icon-box blue"><i class="fa-solid fa-chalkboard-user"></i></div>
+              <h3>For Teachers & Educators</h3>
+              <p>Deliver engaging lessons with ready-to-teach slide decks, printable handouts, answer keys, and pedagogical tools.</p>
+              <ul class="pillar-checklist">
+                <li><i class="fa-solid fa-check"></i> 200+ built-in presentation slides</li>
+                <li><i class="fa-solid fa-check"></i> Comprehensive teacher discussion guides</li>
+                <li><i class="fa-solid fa-check"></i> Printable PDF handouts for classrooms</li>
+                <li><i class="fa-solid fa-check"></i> Authentic Maliki & Ash'ari source citations</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Lower Section 3: Final Conversion CTA Banner -->
+        <div class="landing-cta-banner">
+          <div class="landing-cta-content">
+            <h2>Start Your Family's Islamic Learning Journey Today</h2>
+            <p>Join parents and educators worldwide nurturing confident, knowledgeable Muslim youth with structured, authentic curriculum.</p>
+            <div class="landing-cta-buttons">
+              <button class="btn-cta-primary" id="ctaRegisterBtn">
+                <i class="fa-solid fa-user-plus"></i> Create Free Parent Account
+              </button>
+              <button class="btn-cta-secondary" id="ctaGuestBtn">
+                <i class="fa-solid fa-compass"></i> Explore Course Curriculum
+              </button>
             </div>
           </div>
         </div>
