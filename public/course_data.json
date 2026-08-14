@@ -1,13 +1,22 @@
 {
-  "compiledAt": "2026-08-11T10:08:10.617Z",
+  "compiledAt": "2026-08-14T10:28:25.973Z",
   "totalModules": 9,
+  "curriculumStandard": "Maliki Fiqh & Ash'ari Creed Standard",
   "modules": [
     {
       "id": 1,
       "title": "Foundations of Belief",
       "category": "Aqidah (Creed)",
-      "description": "Explore Tawhid, the Ash'ari creed, Pillars of Iman vs. Islam, Angels, Divine Books, and the Maliki perspective.",
+      "description": "Explore Tawhid, Ash'ari creed, Pillars of Iman vs. Islam, Angels, Divine Books, and Maliki theological principles.",
       "icon": "fa-kaaba",
+      "estTime": "45 mins",
+      "bloomLevel": "Understanding & Applying",
+      "objectives": [
+        "Articulate the difference between Iman (faith) and Islam (practice) according to the Hadith of Jibril.",
+        "Explain the 20 necessary attributes of Allah (Sifat Wajibah) in Ash'ari theological tradition.",
+        "Identify foundational classical texts of Maliki Aqidah such as Al-Risala of Ibn Abi Zayd al-Qayrawani and Matn Ibn 'Ashir."
+      ],
+      "malikiNotes": "Rooted in Al-'Aqidah al-Sanusiyyah and Al-Risala of Ibn Abi Zayd al-Qayrawani. Emphasizes Tanzih (divine transcendence without anthropomorphism).",
       "tracks": {
         "level1": {
           "targetAge": "10 Years Old (Level 1)",
@@ -974,8 +983,16 @@
       "id": 2,
       "title": "Purification & Prayer",
       "category": "Fiqh (Jurisprudence)",
-      "description": "Master Taharah, Wudu, Ghusl, Tayammum, Fard and Sunnah elements of Salah according to Maliki fiqh.",
+      "description": "Master Taharah, Wudu, Ghusl, Tayammum, and Fard/Sunnah elements of Salah according to Maliki fiqh.",
       "icon": "fa-hands-wash",
+      "estTime": "60 mins",
+      "bloomLevel": "Applying & Executing",
+      "objectives": [
+        "List the 7 Obligatory Acts (Farad'i) of Wudu in Maliki fiqh, including Dalk (rubbing) and Muwalat (continuity).",
+        "Distinguish between Fard (obligatory), Sunnah, and Mustahabb elements of ritual Salah.",
+        "Demonstrate the prevalent Maliki position of Sadl (letting arms rest naturally) and Sujud as-Sahw (pre vs post salam)."
+      ],
+      "malikiNotes": "Based on Al-Muwatta of Imam Malik and Matn Ibn 'Ashir. Notes 7 Fard of Wudu (Niyyah, Face, Arms, Head, Feet, Dalk, Muwalat) and Sadl during Qiyam.",
       "tracks": {
         "level1": {
           "targetAge": "10 Years Old (Level 1)",
@@ -1822,6 +1839,14 @@
       "category": "Seerah (History)",
       "description": "Trace the noble lineage, birth, youth, marriage to Khadijah (RA), and early revelation of Prophet Muhammad ﷺ.",
       "icon": "fa-book-quran",
+      "estTime": "50 mins",
+      "bloomLevel": "Analyzing & Synthesizing",
+      "objectives": [
+        "Trace key biographical events from the Year of the Elephant to the first revelation in Cave Hira.",
+        "Analyze the noble character (Al-Amin) of Prophet Muhammad ﷺ prior to prophethood.",
+        "Extract practical leadership and moral lessons for contemporary Muslim youth."
+      ],
+      "malikiNotes": "Historical narrative drawn from Ibn Hisham and Al-Qadi 'Iyad's Al-Shifa, highlighting love for the Prophet ﷺ as an essential foundation of faith.",
       "tracks": {
         "level1": {
           "targetAge": "10 Years Old (Level 1)",
@@ -1850,7 +1875,8 @@
                     "text": "Banu Zuhrah"
                   }
                 ],
-                "correctAnswer": "B"
+                "correctAnswer": "B",
+                "explanation": "Banu Hashim** (The noble clan of the Quraysh)."
               },
               {
                 "id": 2,
@@ -1873,7 +1899,8 @@
                     "text": "The Patient"
                   }
                 ],
-                "correctAnswer": "C"
+                "correctAnswer": "C",
+                "explanation": "The Truthful** (*Al-Amin* means the Trustworthy)."
               },
               {
                 "id": 3,
@@ -1896,7 +1923,8 @@
                     "text": "To learn how to trade caravans"
                   }
                 ],
-                "correctAnswer": "C"
+                "correctAnswer": "C",
+                "explanation": "To build strong bodies, learn pure Arabic, and escape city diseases**."
               },
               {
                 "id": 4,
@@ -1919,7 +1947,8 @@
                     "text": "*Fitrah*"
                   }
                 ],
-                "correctAnswer": "B"
+                "correctAnswer": "B",
+                "explanation": "*'Ismah*** (Infallibility/Protection from sins. *Wahy* means revelation, *Barakah* means blessings, *Fitrah* means natural state)."
               },
               {
                 "id": 5,
@@ -1942,7 +1971,8 @@
                     "text": "Jabal al-Rahmah and Cave of Arafat"
                   }
                 ],
-                "correctAnswer": "B"
+                "correctAnswer": "B",
+                "explanation": "Jabal al-Nur and Cave of Hira** (Jabal al-Nur is the mountain; Hira is the cave)."
               },
               {
                 "id": 6,
@@ -1965,7 +1995,8 @@
                     "text": "*Qul*"
                   }
                 ],
-                "correctAnswer": "C"
+                "correctAnswer": "C",
+                "explanation": "*Iqra*** (Meaning: Read or Recite)."
               },
               {
                 "id": 7,
@@ -1988,7 +2019,8 @@
                     "text": "Zayd ibn 'Amr"
                   }
                 ],
-                "correctAnswer": "B"
+                "correctAnswer": "B",
+                "explanation": "Waraqah ibn Nawfal** (He recognized the Angel Jibril as the same Angel sent to Prophet Musa)."
               },
               {
                 "id": 8,
@@ -2011,7 +2043,8 @@
                     "text": "Ta'if"
                   }
                 ],
-                "correctAnswer": "B"
+                "correctAnswer": "B",
+                "explanation": "Dar al-Arqam** (The House of Al-Arqam)."
               },
               {
                 "id": 9,
@@ -2034,7 +2067,8 @@
                     "text": "He ignored the Angel."
                   }
                 ],
-                "correctAnswer": "C"
+                "correctAnswer": "C",
+                "explanation": "He made a prayer for their descendants to worship Allah alone** (Demonstrating his attribute of Mercy)."
               },
               {
                 "id": 10,
@@ -2057,7 +2091,8 @@
                     "text": "Al-Shifa"
                   }
                 ],
-                "correctAnswer": "B"
+                "correctAnswer": "B",
+                "explanation": "Al-Muwatta'** (The book compiled by Imam Malik over 40 years)."
               },
               {
                 "id": 11,
@@ -2190,7 +2225,8 @@
                     "text": "They believed that the idols were superior to Allah in power."
                   }
                 ],
-                "correctAnswer": "B"
+                "correctAnswer": "B",
+                "explanation": "They believed the idols acted as intermediaries (*shufa'a'*) to bring them closer to Allah."
               },
               {
                 "id": 2,
@@ -2213,7 +2249,8 @@
                     "text": "*Ansar*"
                   }
                 ],
-                "correctAnswer": "B"
+                "correctAnswer": "B",
+                "explanation": "*Hanifs*** (hunafa')."
               },
               {
                 "id": 3,
@@ -2236,7 +2273,8 @@
                     "text": "*Taqlid*"
                   }
                 ],
-                "correctAnswer": "B"
+                "correctAnswer": "B",
+                "explanation": "*'Ismah*** (Infallibility)."
               },
               {
                 "id": 4,
@@ -2259,7 +2297,8 @@
                     "text": "There is no difference; both are created attributes of Allah."
                   }
                 ],
-                "correctAnswer": "B"
+                "correctAnswer": "B",
+                "explanation": "*Kalam Nafsi* is the eternal, soundless Speech of Allah's Essence, while *Kalam Lafzi* refers to the created Arabic letters and sounds that express it."
               },
               {
                 "id": 5,
@@ -2282,7 +2321,8 @@
                     "text": "All of the above."
                   }
                 ],
-                "correctAnswer": "D"
+                "correctAnswer": "D",
+                "explanation": "All of the above."
               },
               {
                 "id": 6,
@@ -2305,7 +2345,8 @@
                     "text": "*Al-Ghanimah* (Wealth accumulation)"
                   }
                 ],
-                "correctAnswer": "D"
+                "correctAnswer": "D",
+                "explanation": "*Al-Ghanimah*** (The fourth necessary attribute is *Al-Tabligh* / Conveyance)."
               },
               {
                 "id": 7,
@@ -2328,7 +2369,8 @@
                     "text": "Grief at the loss of his trade goods."
                   }
                 ],
-                "correctAnswer": "A"
+                "correctAnswer": "A",
+                "explanation": "*Iftiqar* (absolute neediness) and *Ubudiyyah* (servantship)."
               },
               {
                 "id": 8,
@@ -2351,7 +2393,8 @@
                     "text": "The compilation of modern laws in Madinah."
                   }
                 ],
-                "correctAnswer": "B"
+                "correctAnswer": "B",
+                "explanation": "The collective, inherited public practice of the scholars and community of Madinah."
               }
             ],
             "fillBlanks": [
@@ -2811,6 +2854,14 @@
       "category": "Aqidah & Quran",
       "description": "Understand the miracles of the Quran, Divine Attributes, Al-Qadar (Destiny), and strengthening inner conviction.",
       "icon": "fa-scroll",
+      "estTime": "55 mins",
+      "bloomLevel": "Evaluating & Reasoning",
+      "objectives": [
+        "Explain the linguistic and spiritual inimitability (I'jaz) of the Noble Quran.",
+        "Describe the correct understanding of Al-Qadar (Divine Decree) balancing divine will and human responsibility.",
+        "Identify key Quranic preservation milestones during the era of Abu Bakr and 'Uthman (RA)."
+      ],
+      "malikiNotes": "In accordance with classical Sunni creed (Ash'ari/Maturidi), affirming divine decree without fatalism or coercion.",
       "tracks": {
         "level1": {
           "targetAge": "10 Years Old (Level 1)",
@@ -2839,7 +2890,8 @@
                     "text": "*Kasb*"
                   }
                 ],
-                "correctAnswer": "B"
+                "correctAnswer": "B",
+                "explanation": "*Niyyah***. (Intention)."
               },
               {
                 "id": 2,
@@ -2862,7 +2914,8 @@
                     "text": "*Isnād* (Chain)"
                   }
                 ],
-                "correctAnswer": "A"
+                "correctAnswer": "A",
+                "explanation": "*Riyā’***. (Ostentation / Showing off). This is the \"minor shirk\" that destroys the rewards of our deeds."
               },
               {
                 "id": 3,
@@ -2885,7 +2938,8 @@
                     "text": "No one creates actions; they just happen."
                   }
                 ],
-                "correctAnswer": "C"
+                "correctAnswer": "C",
+                "explanation": "Allah creates all actions, and we choose them**. *[Ash‘arī Creed Flag]* This is the concept of *Kasb* (Acquisition)—Allah is the Creator (*Khāliq*) of all actions, but humans are the choosers/acquirers (*Muktasib*)."
               },
               {
                 "id": 4,
@@ -2908,7 +2962,8 @@
                     "text": "50 years"
                   }
                 ],
-                "correctAnswer": "B"
+                "correctAnswer": "B",
+                "explanation": "23 years**. (13 years in Makkah and 10 years in Madinah)."
               },
               {
                 "id": 5,
@@ -2931,7 +2986,8 @@
                     "text": "The translation of the Quran into English."
                   }
                 ],
-                "correctAnswer": "C"
+                "correctAnswer": "C",
+                "explanation": "The eternal, uncreated Attribute of Speech belonging to Allah**. *[Ash‘arī Creed Flag]* *Al-Kalām al-Nafsī* refers to Allah's uncreated attribute of Speech, distinct from the physical paper, ink, and voice which are created (*al-Kalām al-Lafẓī*)."
               },
               {
                 "id": 6,
@@ -2954,7 +3010,8 @@
                     "text": "Ali"
                   }
                 ],
-                "correctAnswer": "A"
+                "correctAnswer": "A",
+                "explanation": "Abu Bakr**. He ordered the compilation after the Battle of Yamamah, on the advice of Umar."
               },
               {
                 "id": 7,
@@ -2977,7 +3034,8 @@
                     "text": "*Tafseer*"
                   }
                 ],
-                "correctAnswer": "A"
+                "correctAnswer": "A",
+                "explanation": "*Rasm al-‘Uthmānī***. This is the sacred orthography of the Mushaf."
               },
               {
                 "id": 8,
@@ -3000,7 +3058,8 @@
                     "text": "The afternoon time."
                   }
                 ],
-                "correctAnswer": "B"
+                "correctAnswer": "B",
+                "explanation": "The Self-Sufficient Besought of all**. *Aṣ-Ṣamad* means He is free of all needs, has no cavities, and does not eat or drink, while all creation depends on Him."
               },
               {
                 "id": 9,
@@ -3023,7 +3082,8 @@
                     "text": "The name of the chapter."
                   }
                 ],
-                "correctAnswer": "C"
+                "correctAnswer": "C",
+                "explanation": "The chain of narrators showing who passed the report down**. The *Isnād* is the chain, while the *Matn* is the text."
               },
               {
                 "id": 10,
@@ -3046,7 +3106,8 @@
                     "text": "*Tafwīḍ*"
                   }
                 ],
-                "correctAnswer": "C"
+                "correctAnswer": "C",
+                "explanation": "*‘Amal Ahl al-Madīnah***. This is the living practice of the people of Madinah."
               }
             ],
             "fillBlanks": [
@@ -3156,7 +3217,8 @@
                     "text": "It is required only when performing dry purification (*Tayammum*)."
                   }
                 ],
-                "correctAnswer": "B"
+                "correctAnswer": "B",
+                "explanation": "It is a structural pillar (*Rukn*) without which the act is invalid.** *[Mālikī Fiqh Flag]* In the Mālikī school, the *niyyah* is a strict pillar (*rukn*), not a sunnah or optional act."
               },
               {
                 "id": 2,
@@ -3179,7 +3241,8 @@
                     "text": "Doing an action purely to enjoy the physical health benefits."
                   }
                 ],
-                "correctAnswer": "B"
+                "correctAnswer": "B",
+                "explanation": "Performing an act of worship with the intention of gaining human approval or admiration.** This is classified as the \"minor shirk\" (*ash-shirk al-asghar*)."
               },
               {
                 "id": 3,
@@ -3202,7 +3265,8 @@
                     "text": "The legalists and the mystics."
                   }
                 ],
-                "correctAnswer": "C"
+                "correctAnswer": "C",
+                "explanation": "The Qadariyyah and the Jabariyyah.** *[Ash‘arī Creed Flag]* *Kasb* is the middle path: it rejects the *Qadariyyah* (who claimed humans create their own actions) and the *Jabariyyah* (who claimed humans have no choices/will)."
               },
               {
                 "id": 4,
@@ -3225,7 +3289,8 @@
                     "text": "There is no distinction; they are two names for the physical book."
                   }
                 ],
-                "correctAnswer": "C"
+                "correctAnswer": "C",
+                "explanation": "*Al-Kalām al-Nafsī* is the eternal, uncreated attribute of Speech in Allah's Self, while *al-Kalām al-Lafẓī* is the created Arabic text we recite, which represents that eternal Speech.** *[Ash‘arī Creed Flag]* This distinction preserves the uncreated nature of Allah's attributes while recognizing the physical text is created in time."
               },
               {
                 "id": 5,
@@ -3248,7 +3313,8 @@
                     "text": "He translated all manuscripts into the Qurayshi dialect immediately."
                   }
                 ],
-                "correctAnswer": "B"
+                "correctAnswer": "B",
+                "explanation": "He only accepted verses in written form verified by two witnesses who saw it written in the direct presence of the Prophet ﷺ.** This ensured absolute historical verification."
               },
               {
                 "id": 6,
@@ -3271,7 +3337,8 @@
                     "text": "To write down the Quran for the first time in Islamic history."
                   }
                 ],
-                "correctAnswer": "C"
+                "correctAnswer": "C",
+                "explanation": "To resolve dangerous disputes over regional pronunciation and dialectal variants by standardizing the script.** The expansion of the empire led to regional dialect variations that threatened community unity."
               },
               {
                 "id": 7,
@@ -3294,7 +3361,8 @@
                     "text": "It was revealed in the third year of the prophetic mission."
                   }
                 ],
-                "correctAnswer": "B"
+                "correctAnswer": "B",
+                "explanation": "The Quran consists of three major divisions—Creed (*‘Aqīdah*), Law (*Fiqh*), and Narrative—and this Surah fully details the foundations of Creed."
               },
               {
                 "id": 8,
@@ -3317,7 +3385,8 @@
                     "text": "They claim that these features are created and temporary attributes of Allah."
                   }
                 ],
-                "correctAnswer": "C"
+                "correctAnswer": "C",
+                "explanation": "They apply either *Tafwīḍ* or *Ta’wīl*.** *[Ash‘arī Creed Flag]* Literal anthropomorphism (*Tashbīh*) is rejected. The school resolves these texts through *Tafwīḍ* (consigning the meaning to Allah) or *Ta’wīl* (metaphorical linguistic interpretation)."
               },
               {
                 "id": 9,
@@ -3340,7 +3409,8 @@
                     "text": "That the narrator has personally met the Prophet ﷺ."
                   }
                 ],
-                "correctAnswer": "B"
+                "correctAnswer": "B",
+                "explanation": "That the narrator is a practicing Muslim who avoids major sins and acts that violate public honor.** *‘Adālah* refers to moral character; *Ḍabṭ* refers to memory accuracy."
               },
               {
                 "id": 10,
@@ -3363,7 +3433,8 @@
                     "text": "Because the Quran explicitly states that the people of Madinah can never make mistakes."
                   }
                 ],
-                "correctAnswer": "B"
+                "correctAnswer": "B",
+                "explanation": "Because a single-narrator report is subject to human error, whereas the continuous, daily public practice of Madinah represents a mass-transmitted physical transmission.** *[Mālikī Fiqh Flag]* The lived practice of thousands in the Prophet’s ﷺ city has the strength of mass-transmission (*Tawātur*)."
               }
             ],
             "fillBlanks": [],
@@ -3730,6 +3801,14 @@
       "category": "Fiqh (Jurisprudence)",
       "description": "Comprehensive guide to Sawm (Fasting), Zakat calculation, Eid celebrations, and community worship.",
       "icon": "fa-moon",
+      "estTime": "60 mins",
+      "bloomLevel": "Applying & Analyzing",
+      "objectives": [
+        "Detail the rules of Sawm (Fasting) in Ramadan including the validity of a single monthly Niyyah in Maliki fiqh.",
+        "Calculate Zakah across gold, currency, and trade goods using Nisab benchmarks.",
+        "Explain the community responsibilities associated with Zakat al-Fitr and Eid congregational prayers."
+      ],
+      "malikiNotes": "Reflects Mukhtasar Khalil and Al-Risala rulings on Sawm (single Niyyah on night 1 of Ramadan suffices) and Zakah thresholds.",
       "tracks": {
         "level1": {
           "targetAge": "10 Years Old (Level 1)",
@@ -4558,6 +4637,14 @@
       "category": "Seerah (History)",
       "description": "The Hijrah to Madinah, building the Prophet's Mosque, the Constitution of Madinah, and key historical battles.",
       "icon": "fa-mosque",
+      "estTime": "55 mins",
+      "bloomLevel": "Analyzing & Reflecting",
+      "objectives": [
+        "Examine the strategic significance of the Hijrah and the brotherhood (Mu'akhah) established in Madinah.",
+        "Analyze the Constitution of Madinah as a foundational charter of pluralism and civic duty.",
+        "Understand the defensive context of key historical encounters (Badr, Uhud, Al-Khandaq)."
+      ],
+      "malikiNotes": "Highlights the practice of the people of Madinah ('Amal Ahl al-Madinah') as a fundamental source of law in Maliki methodology.",
       "tracks": {
         "level1": {
           "targetAge": "10 Years Old (Level 1)",
@@ -5464,6 +5551,14 @@
       "category": "Fiqh (Jurisprudence)",
       "description": "Practical halal and haram in food, finance, clothing, digital ethics, and everyday decision-making.",
       "icon": "fa-scale-balanced",
+      "estTime": "50 mins",
+      "bloomLevel": "Applying & Decision Making",
+      "objectives": [
+        "Apply Islamic ethical guidelines to modern financial transactions and consumer choices.",
+        "Identify halal vs. haram principles in dietary laws, slaughter conditions, and digital ethics.",
+        "Formulate principled decision-making frameworks for navigating complex contemporary social situations."
+      ],
+      "malikiNotes": "Applies Maliki legal maxims (Al-Qawa'id al-Fiqhiyyah) such as \"Al-Aslu fi al-Ashya'i al-Ibahah\" (permissibility is the baseline).",
       "tracks": {
         "level1": {
           "targetAge": "10 Years Old (Level 1)",
@@ -5492,7 +5587,8 @@
                     "text": "Only for adults"
                   }
                 ],
-                "correctAnswer": "B"
+                "correctAnswer": "B",
+                "explanation": "Permissible and lawful.** *Explanation*: *Ḥalāl* means allowed by Allah's law."
               },
               {
                 "id": 2,
@@ -5515,7 +5611,8 @@
                     "text": "Healthy"
                   }
                 ],
-                "correctAnswer": "C"
+                "correctAnswer": "C",
+                "explanation": "Forbidden and sinful.** *Explanation*: *Ḥarām* is what Allah has prohibited, and doing it is a sin."
               },
               {
                 "id": 3,
@@ -5538,7 +5635,8 @@
                     "text": "Neutral actions can never be acts of worship"
                   }
                 ],
-                "correctAnswer": "B"
+                "correctAnswer": "B",
+                "explanation": "By making a good intention (*Niyyah*) in your heart.** *Explanation*: In Ash'ari creed, all actions are created by Allah. When we form a good intention, Allah turns a simple daily action into an act of worship."
               },
               {
                 "id": 4,
@@ -5561,7 +5659,8 @@
                     "text": "Only if you say *Bismillāh* 10 times before eating it"
                   }
                 ],
-                "correctAnswer": "B"
+                "correctAnswer": "B",
+                "explanation": "Yes, because Allah excuses forgetfulness.** *Explanation*: **Maliki position**: If a Muslim forgets the *Tasmiyah*, the meat is still halal. But if they intentionally skip it, the meat is haram."
               },
               {
                 "id": 5,
@@ -5584,7 +5683,8 @@
                     "text": "No sea creatures are allowed"
                   }
                 ],
-                "correctAnswer": "C"
+                "correctAnswer": "C",
+                "explanation": "All water-dwelling creatures without exception.** *Explanation*: **Maliki position**: Imam Malik ruled that everything living in the sea is halal, dead or alive, regardless of its shape or name."
               },
               {
                 "id": 6,
@@ -5607,7 +5707,8 @@
                     "text": "*Gharar*"
                   }
                 ],
-                "correctAnswer": "B"
+                "correctAnswer": "B",
+                "explanation": "*Ḥayā’*.** *Explanation*: *Ḥayā’* is spiritual modesty and shyness that comes from knowing Allah is always watching us."
               },
               {
                 "id": 7,
@@ -5630,7 +5731,8 @@
                     "text": "The money we spend in charity"
                   }
                 ],
-                "correctAnswer": "A"
+                "correctAnswer": "A",
+                "explanation": "The parts of the body that must be covered in front of others and in prayer.** *Explanation*: Covering the *‘Awrah* is a basic requirement of modesty and prayer validity."
               },
               {
                 "id": 8,
@@ -5653,7 +5755,8 @@
                     "text": "It must only be covered in the mosque"
                   }
                 ],
-                "correctAnswer": "C"
+                "correctAnswer": "C",
+                "explanation": "It is *‘Awrah Khafīfah* (light awrah) and should still be covered in public.** *Explanation*: **Maliki position**: The thigh is light awrah for men. While exposing it doesn't break Salah, it is disliked and bad manners in public."
               },
               {
                 "id": 9,
@@ -5676,7 +5779,8 @@
                     "text": "Just her hair"
                   }
                 ],
-                "correctAnswer": "A"
+                "correctAnswer": "A",
+                "explanation": "Her entire body except her face and hands.** *Explanation*: This is the general boundary of modesty for women in front of non-mahrams and during prayer."
               },
               {
                 "id": 10,
@@ -5699,7 +5803,8 @@
                     "text": "She must make Sujud as-Sahw (prostration of forgetfulness)"
                   }
                 ],
-                "correctAnswer": "B"
+                "correctAnswer": "B",
+                "explanation": "Her prayer is valid, but it is disliked; it is recommended to repeat it before the prayer time ends.** *Explanation*: **Maliki position**: The feet are light awrah. If uncovered, Salah remains valid, but it is disliked and recommended to repeat if time remains."
               },
               {
                 "id": 11,
@@ -5722,7 +5827,8 @@
                     "text": "Both hands at the same time"
                   }
                 ],
-                "correctAnswer": "B"
+                "correctAnswer": "B",
+                "explanation": "Right hand.** *Explanation*: The Prophet ﷺ taught us to use the right hand for eating and drinking, and the left hand for cleaning."
               },
               {
                 "id": 12,
@@ -5745,7 +5851,8 @@
                     "text": "Because it makes the food taste sweeter"
                   }
                 ],
-                "correctAnswer": "C"
+                "correctAnswer": "C",
+                "explanation": "To prevent Shaytan from sharing our food.** *Explanation*: Saying *Bismillāh* brings blessing to the meal and keeps Shaytan away."
               },
               {
                 "id": 13,
@@ -5768,7 +5875,8 @@
                     "text": "They should wait for someone else to walk by"
                   }
                 ],
-                "correctAnswer": "B"
+                "correctAnswer": "B",
+                "explanation": "The person walking.** *Explanation*: The Sunnah order is that the walker greets the sitter, the young greet the old, and the smaller group greets the larger group."
               },
               {
                 "id": 14,
@@ -5791,7 +5899,8 @@
                     "text": "It is disliked (*Makrūh*)"
                   }
                 ],
-                "correctAnswer": "C"
+                "correctAnswer": "C",
+                "explanation": "It is obligatory (*Farḍ*).** *Explanation*: Initiating the greeting is a Sunnah, but responding to someone who greets you is a mandatory duty."
               },
               {
                 "id": 15,
@@ -5814,7 +5923,8 @@
                     "text": "Exactly 5 times"
                   }
                 ],
-                "correctAnswer": "C"
+                "correctAnswer": "C",
+                "explanation": "Up to 3 times.** *Explanation*: The Sunnah limit is three knocks. If there is no answer, you must leave."
               },
               {
                 "id": 16,
@@ -5837,7 +5947,8 @@
                     "text": "Sitting on the doorstep"
                   }
                 ],
-                "correctAnswer": "B"
+                "correctAnswer": "B",
+                "explanation": "To the left or right side of the door to protect the family’s privacy.** *Explanation*: Standing to the side prevents you from looking inside the home when the door opens."
               },
               {
                 "id": 17,
@@ -5860,7 +5971,8 @@
                     "text": "Tell them it was broken by someone else"
                   }
                 ],
-                "correctAnswer": "B"
+                "correctAnswer": "B",
+                "explanation": "Tell the buyer about the broken wheel before taking their money.** *Explanation*: Hiding defects is a sin and removes the blessing (*Barakah*) from the money you earn."
               },
               {
                 "id": 18,
@@ -5883,7 +5995,8 @@
                     "text": "Contracts are never binding"
                   }
                 ],
-                "correctAnswer": "B"
+                "correctAnswer": "B",
+                "explanation": "The moment the verbal agreement (offer and acceptance) is completed.** *Explanation*: **Maliki position**: The school rejects the \"option of the session.\" Once the buyer and seller agree, the deal is final immediately, based on the practice of Madinah."
               },
               {
                 "id": 19,
@@ -5906,7 +6019,8 @@
                     "text": "Hajj is never obligatory"
                   }
                 ],
-                "correctAnswer": "A"
+                "correctAnswer": "A",
+                "explanation": "Immediately, during the next Hajj season (*‘Alā al-Fawr*).** *Explanation*: **Maliki position**: Once you are able to perform Hajj, you must go immediately and cannot delay it without sin."
               },
               {
                 "id": 20,
@@ -5929,7 +6043,8 @@
                     "text": "They must pay a fine but do not need Wudu"
                   }
                 ],
-                "correctAnswer": "B"
+                "correctAnswer": "B",
+                "explanation": "They must stop, make Wudu, and restart *Ṭawāf* from the very first round.** *Explanation*: **Maliki position**: Purity is a condition for Tawaf. If Wudu breaks, the Tawaf is void and must be restarted from the beginning with strict continuity."
               }
             ],
             "fillBlanks": [],
@@ -5966,7 +6081,8 @@
                     "text": "Through historical evolution and cultural adaptation"
                   }
                 ],
-                "correctAnswer": "B"
+                "correctAnswer": "B",
+                "explanation": "By Divine Revelation (*Shar‘*) and the decree of Allah as *Al-Ḥākim* (The Lawgiver).** *Explanation*: In Ash'ari theology, the moral value (goodness or badness) of actions is determined by Allah's command through revelation, not by the independent judgment of human intellect."
               },
               {
                 "id": 2,
@@ -5989,7 +6105,8 @@
                     "text": "Both carry the exact same rewards and punishments; they are synonyms."
                   }
                 ],
-                "correctAnswer": "C"
+                "correctAnswer": "C",
+                "explanation": "Obligatory actions are rewarded if performed and punished if omitted, while Recommended actions are rewarded if performed but carry no sin or punishment if omitted.** *Explanation*: This defines the standard legal classification of *Farḍ* vs. *Mandūb* in Usul al-Fiqh."
               },
               {
                 "id": 3,
@@ -6012,7 +6129,8 @@
                     "text": "Only scholars can make this transformation; normal laypeople cannot"
                   }
                 ],
-                "correctAnswer": "B"
+                "correctAnswer": "B",
+                "explanation": "Intending (*Niyyah*) in the heart to do the action for a good purpose, such as gaining strength to worship Allah.** *Explanation*: Intention (*Niyyah*) redirects the purpose of a neutral (*Mubāḥ*) act toward the worship of Allah, turning it into a rewarded act."
               },
               {
                 "id": 4,
@@ -6035,7 +6153,8 @@
                     "text": "The spinal cord and the esophagus"
                   }
                 ],
-                "correctAnswer": "B"
+                "correctAnswer": "B",
+                "explanation": "The windpipe (*Ḥulqūm*), the gullet (*Marī’*), and the two jugular veins (*Wadajayn*).** *Explanation*: In the Maliki school, all four passages must be severed completely for the slaughter (*Dhakāh*) to be legally valid."
               },
               {
                 "id": 5,
@@ -6058,7 +6177,8 @@
                     "text": "The meat is only lawful for Christians and Jews, not Muslims."
                   }
                 ],
-                "correctAnswer": "B"
+                "correctAnswer": "B",
+                "explanation": "The meat is *Ḥalāl* if the omission was due to forgetfulness (*Nisyān*), but *Ḥarām* if omitted intentionally.** *Explanation*: **Maliki Position**: Saying *Bismillāh* is a condition of validity if remembered. Forgetfulness is excused, but intentional omission invalidates the slaughter."
               },
               {
                 "id": 6,
@@ -6081,7 +6201,8 @@
                     "text": "Shellfish are *Ḥarām*, but all other sea creatures are *Ḥalāl*."
                   }
                 ],
-                "correctAnswer": "B"
+                "correctAnswer": "B",
+                "explanation": "All sea creatures are *Ḥalāl*, dead or alive, with no exceptions for shape, mammalian status, or names.** *Explanation*: **Maliki Position**: The school adopts the most inclusive interpretation of Surah al-Ma'idah (5:96), allowing all water-dwelling animals without exception."
               },
               {
                 "id": 7,
@@ -6104,7 +6225,8 @@
                     "text": "They are only allowed for travelers"
                   }
                 ],
-                "correctAnswer": "C"
+                "correctAnswer": "C",
+                "explanation": "They are *Makrūh* (disliked).** *Explanation*: **Maliki Position**: The standard view of the school is that predatory beasts with canines and birds with talons are disliked (*Makrūh*) to eat, rather than strictly forbidden (*Ḥarām*), based on the text of Surah al-An'am (6:145)."
               },
               {
                 "id": 8,
@@ -6127,7 +6249,8 @@
                     "text": "It is only required to avoid legal fines in Islamic states."
                   }
                 ],
-                "correctAnswer": "B"
+                "correctAnswer": "B",
+                "explanation": "It stems directly from knowing that Allah is *Al-Raqīb* (The Watchful) and *Al-Baṣīr* (The All-Seeing), motivating us to act respectably.** *Explanation*: True modesty is a spiritual state of the heart that arises from a deep belief (*‘Aqīdah*) in Allah’s attributes of constant awareness and sight."
               },
               {
                 "id": 9,
@@ -6150,7 +6273,8 @@
                     "text": "It must be covered only from the knee down."
                   }
                 ],
-                "correctAnswer": "C"
+                "correctAnswer": "C",
+                "explanation": "It is *‘Awrah Khafīfah* (light awrah); exposing it in public is disliked/prohibited, but exposing it does not invalidate prayer.** *Explanation*: **Maliki Position**: The thigh is light awrah. While exposing it in public is a violation of modesty, it does not invalidate prayer like exposing the heavy awrah (*‘Awrah Mughallaẓah*)."
               },
               {
                 "id": 10,
@@ -6173,7 +6297,8 @@
                     "text": "She should do prostrations of forgetfulness (*Sujūd al-Sahw*)."
                   }
                 ],
-                "correctAnswer": "B"
+                "correctAnswer": "B",
+                "explanation": "Her prayer is valid; however, since feet are *‘Awrah Khafīfah* (light awrah), it is disliked, and she is recommended (*Mustaḥabb*) to repeat it before the time of Dhuhr expires.** *Explanation*: **Maliki Position**: Exposing the light awrah in prayer does not invalidate it, but it is disliked. She should repeat it within the time block (*Al-Waqt al-Mukhtār*) if possible."
               },
               {
                 "id": 11,
@@ -6196,7 +6321,8 @@
                     "text": "Both are obligatory for every single Muslim in every meeting."
                   }
                 ],
-                "correctAnswer": "B"
+                "correctAnswer": "B",
+                "explanation": "Initiating is recommended (*Sunnah*); responding is an individual or collective obligation (*Farḍ*).** *Explanation*: Initiating *Salām* is a Sunnah Mu'akkadah, but returning it is an absolute obligation (*Farḍ ‘Ayn* if alone, *Farḍ Kifāyah* if in a group)."
               },
               {
                 "id": 12,
@@ -6219,7 +6345,8 @@
                     "text": "They must greet at the exact same time"
                   }
                 ],
-                "correctAnswer": "B"
+                "correctAnswer": "B",
+                "explanation": "The walking group.** *Explanation*: The Sunnah protocol dictates that the walking party greets the sitting party, the younger greets the older, and the smaller group greets the larger group."
               },
               {
                 "id": 13,
@@ -6242,7 +6369,8 @@
                     "text": "Identifying yourself by name rather than saying \"Me\""
                   }
                 ],
-                "correctAnswer": "B"
+                "correctAnswer": "B",
+                "explanation": "Standing directly in front of the door to face the host when it opens.** *Explanation*: Standing directly in front of the door violates privacy by allowing your eyes to wander inside. You should stand to the side."
               },
               {
                 "id": 14,
@@ -6265,7 +6393,8 @@
                     "text": "A trade where the seller donates a portion to charity"
                   }
                 ],
-                "correctAnswer": "B"
+                "correctAnswer": "B",
+                "explanation": "Excessive uncertainty, ambiguity, or deception in a contract regarding the price, item, or delivery.** *Explanation*: *Gharar* means contract ambiguity. Islam requires commercial clarity to prevent disputes and injustice."
               },
               {
                 "id": 15,
@@ -6288,7 +6417,8 @@
                     "text": "It slows down the speed of bank transfers."
                   }
                 ],
-                "correctAnswer": "B"
+                "correctAnswer": "B",
+                "explanation": "It is an exploitative practice that generates money from money without real value or risk, harming the poor.** *Explanation*: *Ribā* is forbidden because it exploits human need and undermines productive trade."
               },
               {
                 "id": 16,
@@ -6311,7 +6441,8 @@
                     "text": "They leave it up to the government to decide."
                   }
                 ],
-                "correctAnswer": "B"
+                "correctAnswer": "B",
+                "explanation": "They reject it; the contract becomes binding (*Lāzim*) immediately upon verbal agreement (offer and acceptance), based on *‘Amal Ahl al-Madīnah*.** *Explanation*: **Maliki Position**: The school does not recognize the \"option of the session\" (*Khiyār al-Majlis*). Once agreement is spoken or acted, the deal is final immediately, based on the inherited practice of Madinah."
               },
               {
                 "id": 17,
@@ -6334,7 +6465,8 @@
                     "text": "It is immediately obligatory for men, but delayed for women."
                   }
                 ],
-                "correctAnswer": "B"
+                "correctAnswer": "B",
+                "explanation": "It is an immediate obligation (*‘Alā al-Fawr*); you must perform it in the next available season or you commit a sin.** *Explanation*: **Maliki Position**: Hajj is obligatory immediately upon reaching capability (*Istiṭā‘ah*). You cannot delay it without a valid excuse."
               },
               {
                 "id": 18,
@@ -6357,7 +6489,8 @@
                     "text": "If Wudu breaks, you can complete *Ṭawāf* and make Wudu before the Salah."
                   }
                 ],
-                "correctAnswer": "B"
+                "correctAnswer": "B",
+                "explanation": "It is a condition of validity (*Sharṭ Ṣiḥḥah*); if Wudu breaks, the *Ṭawāf* is void and must be restarted from the beginning with continuity.** *Explanation*: **Maliki Position**: Wudu is a condition for Tawaf. If lost, the Tawaf is voided and must be restarted from the beginning."
               },
               {
                 "id": 19,
@@ -6380,7 +6513,8 @@
                     "text": "It is only obligatory for local residents of Makkah."
                   }
                 ],
-                "correctAnswer": "C"
+                "correctAnswer": "C",
+                "explanation": "It is an essential Pillar (*Rukn*); without it, Hajj and Umrah are invalid and cannot be fixed with sacrifice.** *Explanation*: **Maliki Position**: *Sa‘y* is a primary pillar (*Rukn*) of pilgrimage, not a secondary duty (*Wājib*)."
               },
               {
                 "id": 20,
@@ -6403,7 +6537,8 @@
                     "text": "You can throw all seven pebbles in one single throw."
                   }
                 ],
-                "correctAnswer": "B"
+                "correctAnswer": "B",
+                "explanation": "The pebble must land within the designated basin surrounding the pillar to count; if it misses, another must be thrown.** *Explanation*: **Maliki Position**: The pebble must land in the target basin to count toward the stoning ritual. Missed stones do not count and must be re-thrown."
               }
             ],
             "fillBlanks": [],
@@ -6764,6 +6899,14 @@
       "category": "Akhlaq & Adab (Ethics)",
       "description": "Islamic etiquette (Adab), honoring parents, family rights, honesty, humility, and avoiding social vices.",
       "icon": "fa-heart",
+      "estTime": "45 mins",
+      "bloomLevel": "Evaluating & Internalizing",
+      "objectives": [
+        "Demonstrate high standards of Islamic interpersonal etiquette (Adab) with parents, elders, and neighbors.",
+        "Evaluate spiritual diseases of the heart (pride, envy, ostentation) and their remedies.",
+        "Implement strategies for conflict resolution and speech preservation in family life."
+      ],
+      "malikiNotes": "Draws from Imam Malik's emphasis on Adab before knowledge, citing Al-Adab al-Mufrad and classical ethical treatises.",
       "tracks": {
         "level1": {
           "targetAge": "10 Years Old (Level 1)",
@@ -7530,6 +7673,14 @@
       "category": "Seerah & Modern Life",
       "description": "The Conquest of Makkah, Farewell Pilgrimage, legacy of the Sahabah, and applying Islam in contemporary society.",
       "icon": "fa-compass",
+      "estTime": "50 mins",
+      "bloomLevel": "Creating & Living Faith",
+      "objectives": [
+        "Summarize the lessons of magnanimity and mercy demonstrated during Fath Makkah.",
+        "Analyze the key human rights and equality proclamations in the Farewell Sermon (Khutbat al-Wada').",
+        "Formulate a personal action plan for living an authentic, active Muslim life in contemporary global society."
+      ],
+      "malikiNotes": "Synthesizes Seerah with living faith, reflecting Imam Malik's principle: \"Nothing will rectify the end of this nation except what rectified its beginning.\"",
       "tracks": {
         "level1": {
           "targetAge": "10 Years Old (Level 1)",
@@ -7558,7 +7709,8 @@
                     "text": "10th Year"
                   }
                 ],
-                "correctAnswer": "C"
+                "correctAnswer": "C",
+                "explanation": "8th Year.** (Fatḥ Makkah took place in Ramadan, 8 AH)."
               },
               {
                 "id": 2,
@@ -7581,7 +7733,8 @@
                     "text": "Demanding that his enemies be punished immediately"
                   }
                 ],
-                "correctAnswer": "B"
+                "correctAnswer": "B",
+                "explanation": "Bowing his head in deep humility (*Tawāḍu‘*) on his camel.** (He showed gratitude to Allah instead of pride)."
               },
               {
                 "id": 3,
@@ -7604,7 +7757,8 @@
                     "text": "*\"I will take my revenge today.\"*"
                   }
                 ],
-                "correctAnswer": "B"
+                "correctAnswer": "B",
+                "explanation": "\"Go, for you are free.\"** (The Prophet ﷺ granted a general amnesty, showing mercy instead of revenge)."
               },
               {
                 "id": 4,
@@ -7627,7 +7781,8 @@
                     "text": "Mount Hira"
                   }
                 ],
-                "correctAnswer": "C"
+                "correctAnswer": "C",
+                "explanation": "Mount ‘Arafāt.** (This is where the Farewell Sermon was delivered)."
               },
               {
                 "id": 5,
@@ -7650,7 +7805,8 @@
                     "text": "Sayyiduna ‘Uthmān ibn ‘Affān"
                   }
                 ],
-                "correctAnswer": "C"
+                "correctAnswer": "C",
+                "explanation": "Sayyiduna Abu Bakr al-Ṣiddīq.** (He kept the community stable and firm in their faith)."
               },
               {
                 "id": 6,
@@ -7673,7 +7829,8 @@
                     "text": "Army General"
                   }
                 ],
-                "correctAnswer": "B"
+                "correctAnswer": "B",
+                "explanation": "Successor or Steward.** (A Caliph manages the political and social affairs of the community, succeeding the Prophet’s ﷺ leadership)."
               },
               {
                 "id": 7,
@@ -7696,7 +7853,8 @@
                     "text": "Imam Malik"
                   }
                 ],
-                "correctAnswer": "A"
+                "correctAnswer": "A",
+                "explanation": "Sayyiduna Abu Bakr al-Ṣiddīq.** (He ordered the first collection of the Quran onto sheets of parchment after many memorizers died in battle)."
               },
               {
                 "id": 8,
@@ -7719,7 +7877,8 @@
                     "text": "Sayyiduna ‘Alī"
                   }
                 ],
-                "correctAnswer": "B"
+                "correctAnswer": "B",
+                "explanation": "Sayyiduna ‘Umar.** (He chose the Migration (*Hijrah*) as the starting point of the calendar)."
               },
               {
                 "id": 9,
@@ -7742,7 +7901,8 @@
                     "text": "The Riyāḍ al-Ṣāliḥīn"
                   }
                 ],
-                "correctAnswer": "C"
+                "correctAnswer": "C",
+                "explanation": "The Muwaṭṭa’.** (This is Imam Malik’s compilation of Hadith, sayings of the Companions, and practices of Madinah)."
               },
               {
                 "id": 10,
@@ -7765,7 +7925,8 @@
                     "text": "Raising them above their head"
                   }
                 ],
-                "correctAnswer": "C"
+                "correctAnswer": "C",
+                "explanation": "Letting their arms rest naturally at their sides (*Sadl*).** (This is the dominant opinion in the Maliki school, representing the continuous practice of the people of Madinah)."
               }
             ],
             "fillBlanks": [
@@ -7849,7 +8010,8 @@
                     "text": "Tactical delay"
                   }
                 ],
-                "correctAnswer": "B"
+                "correctAnswer": "B",
+                "explanation": "Divine mercy (*Raḥmah*) and humility (*Tawāḍu‘*).** (His action broke the historical pattern of revenge and established a precedent of mercy in victory)."
               },
               {
                 "id": 2,
@@ -7872,7 +8034,8 @@
                     "text": "To force all merchants to become farmers"
                   }
                 ],
-                "correctAnswer": "B"
+                "correctAnswer": "B",
+                "explanation": "To protect the poor from financial exploitation.** (Usury creates a system where wealth accumulates only among the rich, which violates Islamic social justice)."
               },
               {
                 "id": 3,
@@ -7895,7 +8058,8 @@
                     "text": "He has been raised to divine status, sharing in Allah's attribute of creating."
                   }
                 ],
-                "correctAnswer": "B"
+                "correctAnswer": "B",
+                "explanation": "He enjoys a special, noble spiritual life in the intermediate realm (*Barzakh*)...** (Ash'ari creed balances high respect for the Prophet's continuing spiritual existence with the finality of his earthly legal mission)."
               },
               {
                 "id": 4,
@@ -7918,7 +8082,8 @@
                     "text": "To translate the Quran into Persian"
                   }
                 ],
-                "correctAnswer": "C"
+                "correctAnswer": "C",
+                "explanation": "To prevent the Quran from being lost after many memorizers died.** (The loss of memorizers in the Yamamah campaign created an urgent administrative need to write down the text)."
               },
               {
                 "id": 5,
@@ -7941,7 +8106,8 @@
                     "text": "The confiscation of all books in the city"
                   }
                 ],
-                "correctAnswer": "B"
+                "correctAnswer": "B",
+                "explanation": "The safety of Christian citizens, their property, and their churches.** (This covenant is a foundational text for religious tolerance in Islamic law)."
               },
               {
                 "id": 6,
@@ -7964,7 +8130,8 @@
                     "text": "To change the vocabulary of the text"
                   }
                 ],
-                "correctAnswer": "B"
+                "correctAnswer": "B",
+                "explanation": "To resolve rising disputes over differing regional dialects.** (As Islam expanded to non-Arab regions, standardization prevented divisions over how the Quran should be recited)."
               },
               {
                 "id": 7,
@@ -7987,7 +8154,8 @@
                     "text": "We should reject the reports of these conflicts entirely as myth."
                   }
                 ],
-                "correctAnswer": "B"
+                "correctAnswer": "B",
+                "explanation": "All sides acted out of a sincere effort to find the truth through legal reasoning (*Ijtihād*)...** (Sunni creed emphasizes holding a good opinion of all Sahabah, recognizing their status while acknowledging they were not infallible in political judgments)."
               },
               {
                 "id": 8,
@@ -8010,7 +8178,8 @@
                     "text": "The trade contracts signed in the marketplace of Madinah"
                   }
                 ],
-                "correctAnswer": "C"
+                "correctAnswer": "C",
+                "explanation": "The continuous, living practice of the scholars and community of Madinah.** (It represents a mass-transmitted, visual sunnah that Imam Malik prioritized)."
               },
               {
                 "id": 9,
@@ -8033,7 +8202,8 @@
                     "text": "To make the prayer faster and easier"
                   }
                 ],
-                "correctAnswer": "C"
+                "correctAnswer": "C",
+                "explanation": "Because it was the continuous living practice (*‘Amal*) of the scholars and people of Madinah.** (Imam Malik observed that the major successors did not cross their hands in obligatory prayers, indicating this was the original practice of the Prophet ﷺ)."
               },
               {
                 "id": 10,
@@ -8056,7 +8226,8 @@
                     "text": "Through decree of the Roman Empire"
                   }
                 ],
-                "correctAnswer": "B"
+                "correctAnswer": "B",
+                "explanation": "Through trade routes, where local populations observed the honesty of Maliki merchants.** (The ethical practice of Islamic trade laws by Muslim merchants was the primary vehicle for the peaceful spread of Islam in West Africa)."
               }
             ],
             "fillBlanks": [

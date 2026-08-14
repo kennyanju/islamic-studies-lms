@@ -15,8 +15,16 @@ const modulesConfig = [
     mdDir: 'MD Foundations of Belief',
     title: 'Foundations of Belief',
     category: 'Aqidah (Creed)',
-    description: 'Explore Tawhid, the Ash\'ari creed, Pillars of Iman vs. Islam, Angels, Divine Books, and the Maliki perspective.',
-    icon: 'fa-kaaba'
+    description: 'Explore Tawhid, Ash\'ari creed, Pillars of Iman vs. Islam, Angels, Divine Books, and Maliki theological principles.',
+    icon: 'fa-kaaba',
+    estTime: '45 mins',
+    bloomLevel: 'Understanding & Applying',
+    objectives: [
+      'Articulate the difference between Iman (faith) and Islam (practice) according to the Hadith of Jibril.',
+      'Explain the 20 necessary attributes of Allah (Sifat Wajibah) in Ash\'ari theological tradition.',
+      'Identify foundational classical texts of Maliki Aqidah such as Al-Risala of Ibn Abi Zayd al-Qayrawani and Matn Ibn \'Ashir.'
+    ],
+    malikiNotes: 'Rooted in Al-\'Aqidah al-Sanusiyyah and Al-Risala of Ibn Abi Zayd al-Qayrawani. Emphasizes Tanzih (divine transcendence without anthropomorphism).'
   },
   {
     id: 2,
@@ -24,8 +32,16 @@ const modulesConfig = [
     mdDir: 'MD Purification & Prayer',
     title: 'Purification & Prayer',
     category: 'Fiqh (Jurisprudence)',
-    description: 'Master Taharah, Wudu, Ghusl, Tayammum, Fard and Sunnah elements of Salah according to Maliki fiqh.',
-    icon: 'fa-hands-wash'
+    description: 'Master Taharah, Wudu, Ghusl, Tayammum, and Fard/Sunnah elements of Salah according to Maliki fiqh.',
+    icon: 'fa-hands-wash',
+    estTime: '60 mins',
+    bloomLevel: 'Applying & Executing',
+    objectives: [
+      'List the 7 Obligatory Acts (Farad\'i) of Wudu in Maliki fiqh, including Dalk (rubbing) and Muwalat (continuity).',
+      'Distinguish between Fard (obligatory), Sunnah, and Mustahabb elements of ritual Salah.',
+      'Demonstrate the prevalent Maliki position of Sadl (letting arms rest naturally) and Sujud as-Sahw (pre vs post salam).'
+    ],
+    malikiNotes: 'Based on Al-Muwatta of Imam Malik and Matn Ibn \'Ashir. Notes 7 Fard of Wudu (Niyyah, Face, Arms, Head, Feet, Dalk, Muwalat) and Sadl during Qiyam.'
   },
   {
     id: 3,
@@ -34,7 +50,15 @@ const modulesConfig = [
     title: 'Seerah: Early Life of the Prophet ﷺ',
     category: 'Seerah (History)',
     description: 'Trace the noble lineage, birth, youth, marriage to Khadijah (RA), and early revelation of Prophet Muhammad ﷺ.',
-    icon: 'fa-book-quran'
+    icon: 'fa-book-quran',
+    estTime: '50 mins',
+    bloomLevel: 'Analyzing & Synthesizing',
+    objectives: [
+      'Trace key biographical events from the Year of the Elephant to the first revelation in Cave Hira.',
+      'Analyze the noble character (Al-Amin) of Prophet Muhammad ﷺ prior to prophethood.',
+      'Extract practical leadership and moral lessons for contemporary Muslim youth.'
+    ],
+    malikiNotes: 'Historical narrative drawn from Ibn Hisham and Al-Qadi \'Iyad\'s Al-Shifa, highlighting love for the Prophet ﷺ as an essential foundation of faith.'
   },
   {
     id: 4,
@@ -43,7 +67,15 @@ const modulesConfig = [
     title: 'Deepening Belief & the Quran',
     category: 'Aqidah & Quran',
     description: 'Understand the miracles of the Quran, Divine Attributes, Al-Qadar (Destiny), and strengthening inner conviction.',
-    icon: 'fa-scroll'
+    icon: 'fa-scroll',
+    estTime: '55 mins',
+    bloomLevel: 'Evaluating & Reasoning',
+    objectives: [
+      'Explain the linguistic and spiritual inimitability (I\'jaz) of the Noble Quran.',
+      'Describe the correct understanding of Al-Qadar (Divine Decree) balancing divine will and human responsibility.',
+      'Identify key Quranic preservation milestones during the era of Abu Bakr and \'Uthman (RA).'
+    ],
+    malikiNotes: 'In accordance with classical Sunni creed (Ash\'ari/Maturidi), affirming divine decree without fatalism or coercion.'
   },
   {
     id: 5,
@@ -52,7 +84,15 @@ const modulesConfig = [
     title: 'Fiqh of Fasting, Zakah & Community',
     category: 'Fiqh (Jurisprudence)',
     description: 'Comprehensive guide to Sawm (Fasting), Zakat calculation, Eid celebrations, and community worship.',
-    icon: 'fa-moon'
+    icon: 'fa-moon',
+    estTime: '60 mins',
+    bloomLevel: 'Applying & Analyzing',
+    objectives: [
+      'Detail the rules of Sawm (Fasting) in Ramadan including the validity of a single monthly Niyyah in Maliki fiqh.',
+      'Calculate Zakah across gold, currency, and trade goods using Nisab benchmarks.',
+      'Explain the community responsibilities associated with Zakat al-Fitr and Eid congregational prayers.'
+    ],
+    malikiNotes: 'Reflects Mukhtasar Khalil and Al-Risala rulings on Sawm (single Niyyah on night 1 of Ramadan suffices) and Zakah thresholds.'
   },
   {
     id: 6,
@@ -61,7 +101,15 @@ const modulesConfig = [
     title: 'Seerah: Madinah & Building a Community',
     category: 'Seerah (History)',
     description: 'The Hijrah to Madinah, building the Prophet\'s Mosque, the Constitution of Madinah, and key historical battles.',
-    icon: 'fa-mosque'
+    icon: 'fa-mosque',
+    estTime: '55 mins',
+    bloomLevel: 'Analyzing & Reflecting',
+    objectives: [
+      'Examine the strategic significance of the Hijrah and the brotherhood (Mu\'akhah) established in Madinah.',
+      'Analyze the Constitution of Madinah as a foundational charter of pluralism and civic duty.',
+      'Understand the defensive context of key historical encounters (Badr, Uhud, Al-Khandaq).'
+    ],
+    malikiNotes: 'Highlights the practice of the people of Madinah (\'Amal Ahl al-Madinah\') as a fundamental source of law in Maliki methodology.'
   },
   {
     id: 7,
@@ -70,7 +118,15 @@ const modulesConfig = [
     title: 'Applied Fiqh & Everyday Life',
     category: 'Fiqh (Jurisprudence)',
     description: 'Practical halal and haram in food, finance, clothing, digital ethics, and everyday decision-making.',
-    icon: 'fa-scale-balanced'
+    icon: 'fa-scale-balanced',
+    estTime: '50 mins',
+    bloomLevel: 'Applying & Decision Making',
+    objectives: [
+      'Apply Islamic ethical guidelines to modern financial transactions and consumer choices.',
+      'Identify halal vs. haram principles in dietary laws, slaughter conditions, and digital ethics.',
+      'Formulate principled decision-making frameworks for navigating complex contemporary social situations.'
+    ],
+    malikiNotes: 'Applies Maliki legal maxims (Al-Qawa\'id al-Fiqhiyyah) such as "Al-Aslu fi al-Ashya\'i al-Ibahah" (permissibility is the baseline).'
   },
   {
     id: 8,
@@ -79,7 +135,15 @@ const modulesConfig = [
     title: 'Character, Society & Family',
     category: 'Akhlaq & Adab (Ethics)',
     description: 'Islamic etiquette (Adab), honoring parents, family rights, honesty, humility, and avoiding social vices.',
-    icon: 'fa-heart'
+    icon: 'fa-heart',
+    estTime: '45 mins',
+    bloomLevel: 'Evaluating & Internalizing',
+    objectives: [
+      'Demonstrate high standards of Islamic interpersonal etiquette (Adab) with parents, elders, and neighbors.',
+      'Evaluate spiritual diseases of the heart (pride, envy, ostentation) and their remedies.',
+      'Implement strategies for conflict resolution and speech preservation in family life.'
+    ],
+    malikiNotes: 'Draws from Imam Malik\'s emphasis on Adab before knowledge, citing Al-Adab al-Mufrad and classical ethical treatises.'
   },
   {
     id: 9,
@@ -88,7 +152,15 @@ const modulesConfig = [
     title: 'Seerah, History & Living Faith Today',
     category: 'Seerah & Modern Life',
     description: 'The Conquest of Makkah, Farewell Pilgrimage, legacy of the Sahabah, and applying Islam in contemporary society.',
-    icon: 'fa-compass'
+    icon: 'fa-compass',
+    estTime: '50 mins',
+    bloomLevel: 'Creating & Living Faith',
+    objectives: [
+      'Summarize the lessons of magnanimity and mercy demonstrated during Fath Makkah.',
+      'Analyze the key human rights and equality proclamations in the Farewell Sermon (Khutbat al-Wada\').',
+      'Formulate a personal action plan for living an authentic, active Muslim life in contemporary global society.'
+    ],
+    malikiNotes: 'Synthesizes Seerah with living faith, reflecting Imam Malik\'s principle: "Nothing will rectify the end of this nation except what rectified its beginning."'
   }
 ];
 
@@ -241,16 +313,23 @@ function parseQuestionsComprehensive(markdownText) {
   const answerKeyRaw = answerKeyLines.join('\n').trim();
   const studentQuestionsMd = studentLines.join('\n').trim();
 
+  // Parse correct answers and extract explanations from answerKeyRaw
   mcq.forEach(q => {
-    const keyRegex1 = new RegExp(`(?:^|\\n)\\s*${q.id}\\.\\s*(?:\\*\\*)?\\s*\\(?([a-dA-D])\\)?`, 'i');
+    const keyRegex1 = new RegExp(`(?:^|\\n)\\s*${q.id}\\.\\s*(?:\\*\\*)?\\s*\\(?([a-dA-D])\\)?(?:[\\:\\-\\s]+(.*))?`, 'i');
     const m1 = answerKeyRaw.match(keyRegex1);
     if (m1) {
       q.correctAnswer = m1[1].toUpperCase();
+      if (m1[2]) {
+        q.explanation = m1[2].replace(/^\*\*|\*\*$/g, '').trim();
+      }
     } else {
-      const tfRegex = new RegExp(`(?:^|\\n)\\s*${q.id}\\.\\s*(?:\\*\\*)?\\s*(True|False)`, 'i');
+      const tfRegex = new RegExp(`(?:^|\\n)\\s*${q.id}\\.\\s*(?:\\*\\*)?\\s*(True|False)(?:[\\:\\-\\s]+(.*))?`, 'i');
       const mTF = answerKeyRaw.match(tfRegex);
       if (mTF) {
         q.correctAnswer = mTF[1].toLowerCase() === 'true' ? 'A' : 'B';
+        if (mTF[2]) {
+          q.explanation = mTF[2].replace(/^\*\*|\*\*$/g, '').trim();
+        }
       }
     }
   });
@@ -334,11 +413,12 @@ function parseVoiceScript(voiceScriptMd) {
   return slides;
 }
 
-console.log('Compiling course modules...');
+console.log('Compiling Islamic Studies course modules...');
 
 const courseData = {
   compiledAt: new Date().toISOString(),
   totalModules: modulesConfig.length,
+  curriculumStandard: "Maliki Fiqh & Ash'ari Creed Standard",
   modules: []
 };
 
@@ -375,6 +455,10 @@ modulesConfig.forEach(cfg => {
     category: cfg.category,
     description: cfg.description,
     icon: cfg.icon,
+    estTime: cfg.estTime,
+    bloomLevel: cfg.bloomLevel,
+    objectives: cfg.objectives,
+    malikiNotes: cfg.malikiNotes,
     tracks: {
       level1: {
         targetAge: '10 Years Old (Level 1)',

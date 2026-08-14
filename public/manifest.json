@@ -1,0 +1,18 @@
+{
+  "name": "Islamic Studies Family LMS",
+  "short_name": "Islamic Studies",
+  "description": "IDEO-designed Islamic Studies LMS with Maliki Fiqh, Ash'ari Creed, and Teacher Teleprompter",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#090d16",
+  "theme_color": "#059669",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%23059669' width='100' height='100' rx='20'/><text y='.9em' font-size='70' x='15'>🕋</text></svg>",
+      "sizes": "192x192 512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

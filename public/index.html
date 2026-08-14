@@ -3,88 +3,112 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Islamic Studies LMS - Family Curriculum & Teacher Command Portal</title>
+  <meta name="description" content="Islamic Studies Family LMS - IDEO-designed interactive learning portal with Maliki Fiqh, Ash'ari Creed, authentic Seerah, and Teacher Teleprompter.">
+  <title>Islamic Studies Family LMS - Maliki Fiqh & Ash'ari Creed Portal</title>
   
-  <!-- Google Fonts -->
+  <!-- Preconnect & Streamlined Google Fonts (Optimized weights & font-display: swap for LCP) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
   
-  <!-- FontAwesome Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <!-- Asynchronously Loaded FontAwesome Icons (Non-Render-Blocking for fast FCP/LCP) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"></noscript>
   
   <!-- Marked Markdown Parser -->
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 
+  <!-- DOMPurify HTML Sanitizer -->
+  <script src="https://cdn.jsdelivr.net/npm/dompurify@3.1.6/dist/purify.min.js"></script>
+
+  <!-- Google Identity Services SDK for Federated Auth -->
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+
+  <!-- Web App Manifest for Offline PWA Support -->
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#059669">
+  
   <!-- Custom CSS -->
   <link rel="stylesheet" href="/style.css">
 </head>
 <body class="theme-dark">
+  <!-- Accessible Skip to Main Content Navigation Link -->
+  <a href="#mainContent" class="skip-link">Skip to main content</a>
+
   <div class="app-layout">
     
     <!-- Sidebar Navigation -->
-    <aside class="sidebar" id="sidebar">
+    <aside class="sidebar" id="sidebar" aria-label="Main Course Navigation">
       <div class="sidebar-header">
-        <div class="logo">
-          <i class="fa-solid fa-kaaba logo-icon"></i>
+        <div class="logo" id="appLogoBtn" style="cursor: pointer;" title="Back to Dashboard" role="button" tabindex="0" aria-label="Back to Islamic Studies Dashboard">
+          <div class="logo-icon-bg">
+            <i class="fa-solid fa-kaaba logo-icon" aria-hidden="true"></i>
+          </div>
           <div class="logo-text">
             <span class="logo-title">Islamic Studies</span>
-            <span class="logo-subtitle">Family Curriculum LMS</span>
+            <span class="logo-subtitle"><i class="fa-solid fa-certificate" aria-hidden="true"></i> Family LMS Portal</span>
           </div>
         </div>
         <button class="mobile-toggle" id="mobileSidebarClose" aria-label="Close sidebar">
-          <i class="fa-solid fa-xmark"></i>
+          <i class="fa-solid fa-xmark" aria-hidden="true"></i>
         </button>
       </div>
 
-      <!-- Track Selector -->
+      <!-- Learning Mode Track Selector -->
       <div class="track-selector-container">
-        <label class="track-label">Learning Mode</label>
-        <div class="track-selector">
-          <button class="track-btn active" data-track="level1" id="trackL1">
-            <i class="fa-solid fa-child"></i>
+        <span class="track-label" id="learningModeLabel"><i class="fa-solid fa-sliders" aria-hidden="true"></i> Learning Mode</span>
+        <div class="track-selector" role="group" aria-labelledby="learningModeLabel">
+          <button class="track-btn active" data-track="level1" id="trackL1" aria-pressed="true">
+            <i class="fa-solid fa-child" aria-hidden="true"></i>
             <span>Level 1 (10y)</span>
           </button>
-          <button class="track-btn" data-track="level2" id="trackL2">
-            <i class="fa-solid fa-user-graduate"></i>
+          <button class="track-btn" data-track="level2" id="trackL2" aria-pressed="false">
+            <i class="fa-solid fa-user-graduate" aria-hidden="true"></i>
             <span>Level 2 (13y+)</span>
           </button>
-          <button class="track-btn" data-track="teacher" id="trackTeacher">
-            <i class="fa-solid fa-chalkboard-user"></i>
+          <button class="track-btn" data-track="teacher" id="trackTeacher" aria-pressed="false">
+            <i class="fa-solid fa-chalkboard-user" aria-hidden="true"></i>
             <span>Teacher Portal</span>
           </button>
         </div>
       </div>
 
-      <!-- Curriculum Progress Card -->
+      <!-- Curriculum Progress Analytics Card -->
       <div class="progress-card">
         <div class="progress-info">
-          <span>Overall Progress</span>
-          <strong id="progressPercent">0%</strong>
+          <span><i class="fa-solid fa-chart-line" aria-hidden="true"></i> Overall Progress</span>
+          <strong id="progressPercent" aria-live="polite">0%</strong>
         </div>
-        <div class="progress-bar-bg">
+        <div class="progress-bar-bg" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="Course completion progress">
           <div class="progress-bar-fill" id="progressBarFill" style="width: 0%;"></div>
         </div>
+        <div class="progress-subtext" id="progressSubtext" aria-live="polite">0 of 9 Modules Completed</div>
       </div>
 
       <!-- Modules Navigation List -->
-      <nav class="modules-nav">
-        <div class="nav-section-title">Modules Curriculum</div>
+      <nav class="modules-nav" aria-label="Course Modules">
+        <div class="nav-section-header">
+          <span class="nav-section-title">Course Modules</span>
+          <button class="btn-dashboard-jump" id="dashboardJumpBtn" title="View Dashboard Grid" aria-label="Jump to Course Dashboard Grid">
+            <i class="fa-solid fa-grid-2" aria-hidden="true"></i> Dashboard
+          </button>
+        </div>
         <ul class="modules-list" id="modulesList">
           <!-- Dynamically populated -->
         </ul>
       </nav>
 
+      <!-- Sidebar Footer Theme Toggle -->
       <div class="sidebar-footer">
-        <button class="btn-theme-toggle" id="themeToggleBtn">
-          <i class="fa-solid fa-moon"></i>
+        <button class="btn-theme-toggle" id="themeToggleBtn" aria-label="Toggle visual theme between dark and light mode">
+          <i class="fa-solid fa-moon" aria-hidden="true"></i>
           <span id="themeToggleText">Light Mode</span>
         </button>
       </div>
     </aside>
 
     <!-- Main Content Area -->
-    <main class="main-content">
+    <main class="main-content" id="mainContent" tabindex="-1">
       
       <!-- Top Navigation Header -->
       <header class="top-header">
@@ -93,49 +117,442 @@
         </button>
 
         <div class="search-box">
-          <i class="fa-solid fa-magnifying-glass search-icon"></i>
-          <input type="text" id="searchInput" placeholder="Search lessons, seerah, fiqh rules, or teacher scripts..." autocomplete="off">
-          <button class="clear-search" id="clearSearchBtn" style="display: none;">
-            <i class="fa-solid fa-circle-xmark"></i>
+          <label for="searchInput" class="sr-only">Search course lessons, rules, or scripts</label>
+          <i class="fa-solid fa-magnifying-glass search-icon" aria-hidden="true"></i>
+          <input type="text" id="searchInput" placeholder="Search lessons, Maliki fiqh rules, Seerah, or teleprompter scripts..." autocomplete="off" aria-label="Search curriculum, fiqh rules, or teleprompter scripts">
+          <button class="clear-search" id="clearSearchBtn" style="display: none;" aria-label="Clear search input">
+            <i class="fa-solid fa-circle-xmark" aria-hidden="true"></i>
           </button>
         </div>
 
         <div class="header-actions">
-          <button class="header-btn" id="printBtn" title="Print / Save PDF">
-            <i class="fa-solid fa-print"></i>
-            <span class="btn-text">Print Packet</span>
+          <div class="badge-madhhab" title="Orthodox Maliki Fiqh & Ash'ari Aqidah Standard">
+            <i class="fa-solid fa-scale-balanced" aria-hidden="true"></i> Maliki / Ash'ari
+          </div>
+          
+          <!-- Learner Profile Switcher Pill -->
+          <button class="learner-switcher-pill" id="learnerSwitcherBtn" title="Switch Learner / Profile" aria-label="Switch active learner profile. Current learner: Zayd" aria-haspopup="dialog">
+            <span class="learner-avatar" id="headerLearnerAvatar" aria-hidden="true">🌟</span>
+            <span class="learner-info">
+              <span class="learner-label">Active Learner</span>
+              <strong class="learner-name" id="headerLearnerName">Zayd</strong>
+            </span>
+            <i class="fa-solid fa-chevron-down pill-arrow" aria-hidden="true"></i>
+          </button>
+
+          <!-- Parent Dashboard Link -->
+          <button class="header-btn" id="parentNavBtn" title="Parent Dashboard" aria-label="Open Parent Management Portal">
+            <i class="fa-solid fa-user-gear" aria-hidden="true"></i>
+            <span class="btn-text">Parent Portal</span>
+          </button>
+
+          <!-- Admin Dashboard Link (Super Admin Only) -->
+          <button class="header-btn gold" id="adminNavBtn" style="display: none;" title="Platform Admin Dashboard" aria-label="Open Platform Administrator Dashboard">
+            <i class="fa-solid fa-shield-halved" aria-hidden="true"></i>
+            <span class="btn-text">Admin</span>
+          </button>
+
+          <!-- Auth Account Button -->
+          <button class="header-btn primary" id="authHeaderBtn" title="Parent Sign In / User Profile" aria-label="Sign In or Open User Account Profile">
+            <i class="fa-solid fa-arrow-right-to-bracket" id="authHeaderIcon" aria-hidden="true"></i>
+            <span class="btn-text" id="authHeaderText">Sign In</span>
+          </button>
+
+          <button class="header-btn" id="printBtn" title="Print Lesson / Save PDF" aria-label="Print Current Lesson or Save PDF">
+            <i class="fa-solid fa-print" aria-hidden="true"></i>
+            <span class="btn-text">Print</span>
           </button>
         </div>
       </header>
 
+      <!-- Search Results Panel -->
+      <div id="searchResultsContainer" style="display: none;" class="search-results-panel" role="region" aria-label="Search Results">
+        <div class="search-panel-header">
+          <h3><i class="fa-solid fa-magnifying-glass-chart" aria-hidden="true"></i> Search Results</h3>
+          <span id="searchResultsCount" class="results-count-badge" aria-live="polite">0 results</span>
+        </div>
+        <div id="searchResultsList" class="search-results-list"></div>
+      </div>
+
+      <!-- Homepage Parent Sign In & Sign Up Landing View -->
+      <div class="view-container" id="authLandingView">
+        <div class="hero-banner auth-landing-hero">
+          <div class="hero-content landing-grid">
+            <div class="landing-text-col">
+              <div class="hero-badge-row">
+                <span class="hero-badge"><i class="fa-solid fa-kaaba" aria-hidden="true"></i> Islamic Studies Family LMS</span>
+                <span class="hero-badge gold"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i> Federated Parent Auth</span>
+              </div>
+              <h1>Empower Your Family's Islamic Education</h1>
+              <p>A comprehensive 9-Module Islamic Studies curriculum covering Ash'ari Aqidah, Maliki Fiqh, authentic Seerah, and Akhlaq. Create child profiles, track quiz progress, and learn together.</p>
+              
+              <div class="landing-features-list">
+                <div class="feature-item">
+                  <i class="fa-solid fa-circle-check font-emerald" aria-hidden="true"></i>
+                  <div>
+                    <strong>Multi-Tenant Child Profiles</strong>
+                    <span>Separate accounts for Level 1 (youth ~10y) and Level 2 (teens 13y+)</span>
+                  </div>
+                </div>
+                <div class="feature-item">
+                  <i class="fa-solid fa-circle-check font-gold" aria-hidden="true"></i>
+                  <div>
+                    <strong>Federated Identity Sync</strong>
+                    <span>Sign in securely with Google, Apple, Microsoft or Email</span>
+                  </div>
+                </div>
+                <div class="feature-item">
+                  <i class="fa-solid fa-circle-check font-emerald" aria-hidden="true"></i>
+                  <div>
+                    <strong>Real-Time Family Analytics</strong>
+                    <span>Monitor quiz scores, completion certificates, and child reflections</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="landing-guest-row">
+                <button class="btn-guest-browse" id="guestBrowseBtn" aria-label="Explore Course Curriculum as Guest">
+                  <i class="fa-solid fa-compass" aria-hidden="true"></i> Explore Course Curriculum
+                </button>
+              </div>
+            </div>
+
+            <!-- Embedded Parent Sign In / Sign Up Form Card -->
+            <div class="landing-auth-card">
+              <div class="card-header-auth">
+                <div class="auth-card-icon" aria-hidden="true"><i class="fa-solid fa-user-shield" aria-hidden="true"></i></div>
+                <h2>Parent Account Access</h2>
+                <p>Sign in or create a new account to get started:</p>
+              </div>
+
+              <!-- Auth Navigation Tabs -->
+              <div class="auth-tabs landing-tabs" role="tablist" aria-label="Authentication Options">
+                <button class="auth-tab-btn active" id="homeAuthTabSignIn" data-hometab="signin" role="tab" aria-selected="true" aria-controls="homeEmailAuthForm">
+                  <i class="fa-solid fa-right-to-bracket" aria-hidden="true"></i> Sign In
+                </button>
+                <button class="auth-tab-btn" id="homeAuthTabSignUp" data-hometab="signup" role="tab" aria-selected="false" aria-controls="homeSignUpForm">
+                  <i class="fa-solid fa-user-plus" aria-hidden="true"></i> Create Account
+                </button>
+              </div>
+
+              <div class="card-body-auth">
+                <div class="auth-alert-msg" id="homeAuthAlertMsg" style="display: none;" role="alert" aria-live="assertive"></div>
+
+                <!-- Federated Social Grid -->
+                <div class="federated-auth-section">
+                  <span class="federated-title"><i class="fa-solid fa-globe" aria-hidden="true"></i> Federated Identity Providers</span>
+                  <div class="federated-btn-grid">
+                    <button class="btn-federated google" id="homeGoogleSignInBtn" aria-label="Sign in with Google">
+                      <svg class="google-icon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+                        <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                        <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                        <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
+                        <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
+                      </svg>
+                      <span>Google</span>
+                    </button>
+                    <button class="btn-federated apple" id="homeAppleSignInBtn" aria-label="Sign in with Apple">
+                      <i class="fa-brands fa-apple" aria-hidden="true"></i>
+                      <span>Apple</span>
+                    </button>
+                    <button class="btn-federated microsoft" id="homeMicrosoftSignInBtn" aria-label="Sign in with Microsoft">
+                      <i class="fa-brands fa-microsoft" aria-hidden="true"></i>
+                      <span>Microsoft</span>
+                    </button>
+                  </div>
+                </div>
+
+                <div class="auth-divider">
+                  <span id="homeAuthDividerText">OR SIGN IN WITH EMAIL</span>
+                </div>
+
+                <!-- Sign In Form -->
+                <form id="homeEmailAuthForm" class="auth-form" role="tabpanel" aria-labelledby="homeAuthTabSignIn">
+                  <div class="form-group">
+                    <label for="homeAuthEmailInput"><i class="fa-solid fa-envelope" aria-hidden="true"></i> Email Address</label>
+                    <input type="email" id="homeAuthEmailInput" placeholder="parent@example.com" required class="form-input" autocomplete="email">
+                  </div>
+                  <div class="form-group">
+                    <label for="homeAuthPasswordInput"><i class="fa-solid fa-lock" aria-hidden="true"></i> Password</label>
+                    <div class="password-input-wrap">
+                      <input type="password" id="homeAuthPasswordInput" placeholder="••••••••" required class="form-input" autocomplete="current-password">
+                      <button type="button" class="btn-password-toggle" data-target="homeAuthPasswordInput" aria-label="Show password" aria-pressed="false">
+                        <i class="fa-solid fa-eye" aria-hidden="true"></i>
+                      </button>
+                    </div>
+                  </div>
+                  <button type="submit" class="btn-submit-auth">
+                    <i class="fa-solid fa-right-to-bracket" aria-hidden="true"></i> Sign In to Family Portal
+                  </button>
+                </form>
+
+                <!-- Sign Up Form -->
+                <form id="homeSignUpForm" class="auth-form" style="display: none;" role="tabpanel" aria-labelledby="homeAuthTabSignUp">
+                  <div class="form-group">
+                    <label for="homeSignUpNameInput"><i class="fa-solid fa-user-tag" aria-hidden="true"></i> Full Name / Title</label>
+                    <input type="text" id="homeSignUpNameInput" placeholder="e.g. Sister Fatimah, Brother Tariq" required class="form-input" autocomplete="name">
+                  </div>
+                  <div class="form-group">
+                    <label for="homeSignUpEmailInput"><i class="fa-solid fa-envelope" aria-hidden="true"></i> Email Address</label>
+                    <input type="email" id="homeSignUpEmailInput" placeholder="parent@example.com" required class="form-input" autocomplete="email">
+                  </div>
+                  <div class="form-group">
+                    <label for="homeSignUpPasswordInput"><i class="fa-solid fa-lock" aria-hidden="true"></i> Password</label>
+                    <div class="password-input-wrap">
+                      <input type="password" id="homeSignUpPasswordInput" placeholder="Create strong password" required class="form-input" minlength="6" autocomplete="new-password">
+                      <button type="button" class="btn-password-toggle" data-target="homeSignUpPasswordInput" aria-label="Show password" aria-pressed="false">
+                        <i class="fa-solid fa-eye" aria-hidden="true"></i>
+                      </button>
+                    </div>
+                    <div class="password-strength-container" id="homePasswordStrengthContainer" style="display: none;">
+                      <div class="strength-bar-track">
+                        <div class="strength-bar-fill" id="homeStrengthFill"></div>
+                      </div>
+                      <div class="strength-hint-row">
+                        <span class="strength-label" id="homeStrengthLabel">Password Strength: <strong>Weak</strong></span>
+                        <span class="strength-criteria" id="homeStrengthCriteria">Use 8+ chars with mix of letters & numbers</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="homeSignUpRoleSelect"><i class="fa-solid fa-users" aria-hidden="true"></i> Account Role</label>
+                    <select id="homeSignUpRoleSelect" class="form-input">
+                      <option value="parent">Parent / Family Head</option>
+                      <option value="teacher">Educator / Teacher</option>
+                    </select>
+                  </div>
+                  <button type="submit" class="btn-submit-auth gold">
+                    <i class="fa-solid fa-user-plus" aria-hidden="true"></i> Register Parent Account
+                  </button>
+                </form>
+
+                <!-- Quick Demo Buttons -->
+                <div class="demo-auth-box">
+                  <span class="demo-label">Quick Testing Accounts:</span>
+                  <div class="demo-btn-row">
+                    <button class="btn-demo-acc" id="homeDemoParentBtn" aria-label="Sign in with Parent Demo Account">
+                      <i class="fa-solid fa-user" aria-hidden="true"></i> Parent Account
+                    </button>
+                    <button class="btn-demo-acc gold" id="homeDemoAdminBtn" aria-label="Sign in with Super Admin Demo Account">
+                      <i class="fa-solid fa-shield-halved" aria-hidden="true"></i> Super Admin
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <!-- Dashboard View -->
-      <div class="view-container" id="dashboardView">
+      <div class="view-container" id="dashboardView" style="display: none;">
         <div class="hero-banner">
           <div class="hero-content">
-            <span class="hero-badge"><i class="fa-solid fa-star"></i> Comprehensive 9-Module Curriculum & Teacher Portal</span>
+            <div class="hero-badge-row">
+              <span class="hero-badge"><i class="fa-solid fa-award"></i> IDEO Redesigned Learning Portal</span>
+              <span class="hero-badge gold"><i class="fa-solid fa-book-bookmark"></i> Maliki Fiqh & Ash'ari Aqidah</span>
+            </div>
             <h1>Islamic Studies Family LMS</h1>
-            <p>Interactive Aqidah (Ash'ari), Fiqh (Maliki), Seerah, Quranic Studies, and Character Education tailored for youth learning and teacher presentation.</p>
+            <p>Comprehensive 9-Module Islamic Studies curriculum covering Aqidah, Maliki Fiqh, Seerah, Quranic Sciences, and Ethics. Designed for youth learning, family study, and interactive classroom teaching.</p>
+            
             <div class="hero-stats">
-              <div class="stat-item">
-                <strong id="statTotalModules">9</strong>
-                <span>Modules</span>
+              <div class="stat-card">
+                <div class="stat-icon"><i class="fa-solid fa-book"></i></div>
+                <div>
+                  <strong id="statTotalModules">9</strong>
+                  <span>Modules</span>
+                </div>
               </div>
-              <div class="stat-item">
-                <strong>18</strong>
-                <span>Worksheets</span>
+              <div class="stat-card">
+                <div class="stat-icon"><i class="fa-solid fa-file-pen"></i></div>
+                <div>
+                  <strong>18</strong>
+                  <span>Interactive Quizzes</span>
+                </div>
               </div>
-              <div class="stat-item">
-                <strong>200+</strong>
-                <span>Teleprompter Slides</span>
+              <div class="stat-card">
+                <div class="stat-icon"><i class="fa-solid fa-desktop"></i></div>
+                <div>
+                  <strong>200+</strong>
+                  <span>Teacher Slides</span>
+                </div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+                <div>
+                  <strong>Verified</strong>
+                  <span>Certificates</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dashboard Filter Pills & Grid -->
+        <div class="dashboard-section">
+          <div class="dashboard-filter-bar">
+            <h2><i class="fa-solid fa-compass"></i> Course Modules</h2>
+            <div class="category-filters" id="categoryFilters">
+              <button class="filter-pill active" data-cat="all">All Modules</button>
+              <button class="filter-pill" data-cat="aqidah">Aqidah (Creed)</button>
+              <button class="filter-pill" data-cat="fiqh">Fiqh (Jurisprudence)</button>
+              <button class="filter-pill" data-cat="seerah">Seerah (History)</button>
+              <button class="filter-pill" data-cat="akhlaq">Akhlaq (Ethics)</button>
+            </div>
+          </div>
+
+          <div class="modules-grid" id="modulesGrid">
+            <!-- Dynamically populated card grid -->
+          </div>
+      </div>
+
+      <!-- Parent Dashboard View Container -->
+      <div class="view-container" id="parentDashboardView" style="display: none;">
+        <div class="hero-banner parent-hero">
+          <div class="hero-content">
+            <div class="hero-badge-row">
+              <span class="hero-badge"><i class="fa-solid fa-users-gear"></i> Parent Management Center</span>
+              <span class="hero-badge gold" id="parentAuthBadge"><i class="fa-brands fa-google"></i> Google Federated Account</span>
+            </div>
+            <h1 id="parentWelcomeTitle">Welcome, Parent!</h1>
+            <p>Manage your children's learning profiles, assign tracks (Level 1 vs Level 2), monitor real-time quiz performance, and switch learner views.</p>
+            
+            <div class="hero-stats">
+              <div class="stat-card">
+                <div class="stat-icon"><i class="fa-solid fa-children"></i></div>
+                <div>
+                  <strong id="statParentKidsCount">0</strong>
+                  <span>Registered Children</span>
+                </div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+                <div>
+                  <strong id="statParentTotalCompleted">0</strong>
+                  <span>Modules Completed</span>
+                </div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-icon"><i class="fa-solid fa-star"></i></div>
+                <div>
+                  <strong id="statParentAvgQuiz">0%</strong>
+                  <span>Family Quiz Average</span>
+                </div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-icon"><i class="fa-solid fa-user-check"></i></div>
+                <div>
+                  <strong id="statActiveLearnerName">None</strong>
+                  <span>Current Learner</span>
+                </div>
               </div>
             </div>
           </div>
         </div>
 
         <div class="dashboard-section">
-          <h2><i class="fa-solid fa-book-open-reader"></i> Course Curriculum</h2>
-          <div class="modules-grid" id="modulesGrid">
-            <!-- Dynamically populated card grid -->
+          <div class="dashboard-filter-bar">
+            <h2><i class="fa-solid fa-id-card-clip"></i> Children & Learner Profiles</h2>
+            <button class="btn-primary-action" id="addChildBtn">
+              <i class="fa-solid fa-user-plus"></i> Add Child Profile
+            </button>
+          </div>
+
+          <div class="parent-children-grid" id="parentChildrenGrid">
+            <!-- Dynamically populated child cards -->
+          </div>
+        </div>
+
+        <div class="dashboard-section" style="margin-top: 2rem;">
+          <h2><i class="fa-solid fa-clock-rotate-left"></i> Family Activity & Progress Log</h2>
+          <div class="family-activity-card" id="familyActivityList">
+            <p class="empty-state-text">No activity recorded yet. Switch to a child's profile to start learning!</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Admin Dashboard View Container (Super Admin Only) -->
+      <div class="view-container" id="adminDashboardView" style="display: none;">
+        <div class="hero-banner admin-hero">
+          <div class="hero-content">
+            <div class="hero-badge-row">
+              <span class="hero-badge gold"><i class="fa-solid fa-shield-halved"></i> Platform Super Admin Control Center</span>
+              <span class="hero-badge"><i class="fa-solid fa-globe"></i> Web-Wide Multi-Tenant Analytics</span>
+            </div>
+            <h1>Global LMS Administrator Dashboard</h1>
+            <p>System-wide view of all registered parent accounts, children profiles, global course completion metrics, and user permission management.</p>
+            
+            <div class="hero-stats">
+              <div class="stat-card">
+                <div class="stat-icon"><i class="fa-solid fa-users"></i></div>
+                <div>
+                  <strong id="statAdminTotalParents">0</strong>
+                  <span>Registered Parents</span>
+                </div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-icon"><i class="fa-solid fa-child-reaching"></i></div>
+                <div>
+                  <strong id="statAdminTotalKids">0</strong>
+                  <span>Total Children</span>
+                </div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-icon"><i class="fa-solid fa-circle-check"></i></div>
+                <div>
+                  <strong id="statAdminTotalCompletions">0</strong>
+                  <span>Modules Completed</span>
+                </div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-icon"><i class="fa-solid fa-chart-pie"></i></div>
+                <div>
+                  <strong id="statAdminAvgQuiz">0%</strong>
+                  <span>Global Quiz Pass Rate</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="dashboard-section">
+          <div class="dashboard-filter-bar admin-filter-controls">
+            <h2><i class="fa-solid fa-user-shield" aria-hidden="true"></i> User & Family Management</h2>
+            <div class="admin-search-group">
+              <div class="admin-input-wrapper">
+                <label for="adminUserSearchInput" class="sr-only">Search users by name, email, or child</label>
+                <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+                <input type="text" id="adminUserSearchInput" placeholder="Search by name, email, or child..." class="admin-search-input" aria-label="Search registered users by name, email, or child">
+              </div>
+              <label for="adminRoleFilterSelect" class="sr-only">Filter users by role</label>
+              <select id="adminRoleFilterSelect" class="admin-role-select" aria-label="Filter users by account role">
+                <option value="all">All Roles</option>
+                <option value="parent">Parent</option>
+                <option value="super_admin">Super Admin</option>
+              </select>
+              <button class="btn-secondary-action" id="adminRefreshBtn" aria-label="Refresh user management table data">
+                <i class="fa-solid fa-arrows-rotate" aria-hidden="true"></i> Refresh Data
+              </button>
+            </div>
+          </div>
+
+          <div class="table-responsive" role="region" aria-label="Users and Families Table" tabindex="0">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th scope="col">Parent / User</th>
+                  <th scope="col">Auth Provider</th>
+                  <th scope="col">Role</th>
+                  <th scope="col">Children Count</th>
+                  <th scope="col">Children Names</th>
+                  <th scope="col">Joined Date</th>
+                  <th scope="col">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="adminUsersTableBody">
+                <!-- Dynamically populated -->
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
@@ -143,90 +560,102 @@
       <!-- Module View Container -->
       <div class="view-container" id="moduleView" style="display: none;">
         
-        <!-- Module Header Banner -->
+        <!-- Module Header Card -->
         <div class="module-header-card">
           <div class="module-meta-top">
             <span class="category-badge" id="moduleCategory">Aqidah</span>
             <span class="track-badge" id="moduleTrackBadge">Level 1 (10 Years Old)</span>
+            <span class="time-badge" id="moduleEstTime"><i class="fa-solid fa-clock" aria-hidden="true"></i> 45 mins</span>
+            <span class="bloom-badge" id="moduleBloomLevel"><i class="fa-solid fa-brain" aria-hidden="true"></i> Understanding</span>
           </div>
+          
           <h1 id="moduleTitle">Module Title</h1>
           <p id="moduleDescription">Module description goes here...</p>
 
+          <!-- Learning Objectives (SWBAT) Accordion / Bar -->
+          <div class="objectives-card" id="objectivesCard" role="region" aria-label="Module Learning Objectives">
+            <div class="objectives-header">
+              <i class="fa-solid fa-bullseye" aria-hidden="true"></i> <strong>Learning Objectives (SWBAT)</strong>
+            </div>
+            <ul class="objectives-list" id="objectivesList">
+              <!-- Dynamically populated -->
+            </ul>
+          </div>
+
           <!-- Tab Navigation -->
-          <div class="tab-nav" id="moduleTabNav">
-            <button class="tab-btn active" data-tab="handout" id="handoutTabBtn">
-              <i class="fa-solid fa-file-lines"></i>
+          <div class="tab-nav" id="moduleTabNav" role="tablist" aria-label="Lesson Views">
+            <button class="tab-btn active" data-tab="handout" id="handoutTabBtn" role="tab" aria-selected="true" aria-controls="handoutTab">
+              <i class="fa-solid fa-file-lines" aria-hidden="true"></i>
               <span>Student Handout</span>
             </button>
-            <button class="tab-btn" data-tab="readaloud" id="readaloudTabBtn">
-              <i class="fa-solid fa-volume-high"></i>
+            <button class="tab-btn" data-tab="readaloud" id="readaloudTabBtn" role="tab" aria-selected="false" aria-controls="readaloudTab">
+              <i class="fa-solid fa-volume-high" aria-hidden="true"></i>
               <span>Read Aloud</span>
             </button>
-            <button class="tab-btn" data-tab="quiz" id="quizTabBtn">
-              <i class="fa-solid fa-circle-question"></i>
+            <button class="tab-btn" data-tab="quiz" id="quizTabBtn" role="tab" aria-selected="false" aria-controls="quizTab">
+              <i class="fa-solid fa-circle-question" aria-hidden="true"></i>
               <span>Interactive Quiz</span>
             </button>
             
             <!-- Teacher Dedicated Tabs -->
-            <button class="tab-btn" data-tab="teleprompter" id="teleprompterTabBtn" style="display: none;">
-              <i class="fa-solid fa-chalkboard-user"></i>
+            <button class="tab-btn" data-tab="teleprompter" id="teleprompterTabBtn" style="display: none;" role="tab" aria-selected="false" aria-controls="teleprompterTab">
+              <i class="fa-solid fa-chalkboard-user" aria-hidden="true"></i>
               <span>Presentation Teleprompter</span>
             </button>
-            <button class="tab-btn" data-tab="answerkeys" id="answerkeysTabBtn" style="display: none;">
-              <i class="fa-solid fa-key"></i>
+            <button class="tab-btn" data-tab="answerkeys" id="answerkeysTabBtn" style="display: none;" role="tab" aria-selected="false" aria-controls="answerkeysTab">
+              <i class="fa-solid fa-key" aria-hidden="true"></i>
               <span>Master Answer Keys</span>
             </button>
-            <button class="tab-btn" data-tab="slides" id="slidesTabBtn">
-              <i class="fa-solid fa-presentation-screen"></i>
+            <button class="tab-btn" data-tab="slides" id="slidesTabBtn" role="tab" aria-selected="false" aria-controls="slidesTab">
+              <i class="fa-solid fa-presentation-screen" aria-hidden="true"></i>
               <span>Slide Deck</span>
             </button>
-            <button class="tab-btn" data-tab="voicescript" id="scriptTabBtn">
-              <i class="fa-solid fa-scroll"></i>
+            <button class="tab-btn" data-tab="voicescript" id="scriptTabBtn" role="tab" aria-selected="false" aria-controls="voicescriptTab">
+              <i class="fa-solid fa-scroll" aria-hidden="true"></i>
               <span>Full Voice Script</span>
             </button>
           </div>
         </div>
 
-        <!-- Search Results Panel -->
-        <div id="searchResultsContainer" style="display: none;" class="search-results-panel">
-          <h3><i class="fa-solid fa-list-check"></i> Search Results</h3>
-          <div id="searchResultsList" class="search-results-list"></div>
-        </div>
-
         <!-- Tab Content Views -->
 
         <!-- 1. Handout Tab -->
-        <div class="tab-content active" id="handoutTab">
+        <div class="tab-content active" id="handoutTab" role="tabpanel" aria-labelledby="handoutTabBtn">
           <div class="content-card">
             <div class="content-toolbar">
-              <button class="btn-read-aloud" id="listenHandoutBtn">
-                <i class="fa-solid fa-headphones"></i>
-                <span>Listen Read-Aloud</span>
-              </button>
-              <button class="btn-mark-complete" id="markHandoutCompleteBtn">
-                <i class="fa-regular fa-circle-check"></i>
-                <span>Mark as Completed</span>
-              </button>
+              <div class="toolbar-left">
+                <span class="maliki-citation-tag" id="malikiCitationTag"><i class="fa-solid fa-book-open" aria-hidden="true"></i> Maliki Fiqh Reference</span>
+              </div>
+              <div class="toolbar-right">
+                <button class="btn-read-aloud" id="listenHandoutBtn" aria-label="Switch to Read Aloud tab and listen to lesson audio">
+                  <i class="fa-solid fa-headphones" aria-hidden="true"></i>
+                  <span>Listen Read-Aloud</span>
+                </button>
+                <button class="btn-mark-complete" id="markHandoutCompleteBtn" aria-label="Toggle completion status of student handout">
+                  <i class="fa-regular fa-circle-check" aria-hidden="true"></i>
+                  <span>Mark as Completed</span>
+                </button>
+              </div>
             </div>
             <div class="markdown-body" id="handoutContent"></div>
           </div>
         </div>
 
         <!-- 2. Read-Aloud Tab -->
-        <div class="tab-content" id="readaloudTab">
+        <div class="tab-content" id="readaloudTab" role="tabpanel" aria-labelledby="readaloudTabBtn">
           <div class="content-card read-aloud-page">
             <div class="read-aloud-header">
               <div class="player-controls">
-                <button class="btn-audio-action play" id="raPlayBtn" title="Play / Pause">
-                  <i class="fa-solid fa-play"></i>
+                <button class="btn-audio-action play" id="raPlayBtn" title="Play / Pause Audio" aria-label="Play or pause read-aloud audio narration">
+                  <i class="fa-solid fa-play" aria-hidden="true"></i>
                 </button>
-                <button class="btn-audio-action stop" id="raStopBtn" title="Stop Audio">
-                  <i class="fa-solid fa-square"></i>
+                <button class="btn-audio-action stop" id="raStopBtn" title="Stop Audio" aria-label="Stop audio narration">
+                  <i class="fa-solid fa-square" aria-hidden="true"></i>
                 </button>
                 
                 <div class="audio-setting">
-                  <label><i class="fa-solid fa-gauge-high"></i> Speed</label>
-                  <select id="raSpeedSelect" class="audio-select">
+                  <label for="raSpeedSelect"><i class="fa-solid fa-gauge-high" aria-hidden="true"></i> Speed</label>
+                  <select id="raSpeedSelect" class="audio-select" aria-label="Narration playback speed">
                     <option value="0.75">0.75x (Slow)</option>
                     <option value="1" selected>1.0x (Normal)</option>
                     <option value="1.25">1.25x (Fast)</option>
@@ -235,16 +664,16 @@
                 </div>
 
                 <div class="audio-setting">
-                  <label><i class="fa-solid fa-user-gear"></i> Voice</label>
-                  <select id="raVoiceSelect" class="audio-select">
+                  <label for="raVoiceSelect"><i class="fa-solid fa-user-gear" aria-hidden="true"></i> Voice</label>
+                  <select id="raVoiceSelect" class="audio-select" aria-label="Select speech synthesis voice">
                     <option value="">Default System Voice</option>
                   </select>
                 </div>
               </div>
 
               <div class="audio-progress-container">
-                <span id="raProgressLabel">Sentence 0 of 0</span>
-                <div class="audio-progress-bar">
+                <span id="raProgressLabel" aria-live="polite">Sentence 0 of 0</span>
+                <div class="audio-progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="Read-aloud audio narration progress">
                   <div class="audio-progress-fill" id="raProgressFill" style="width: 0%;"></div>
                 </div>
               </div>
@@ -254,40 +683,58 @@
           </div>
         </div>
 
-        <!-- 3. Teacher Teleprompter & Live Presentation Mode Tab -->
-        <div class="tab-content" id="teleprompterTab">
+        <!-- 3. Teacher Teleprompter & Presentation Mode Tab -->
+        <div class="tab-content" id="teleprompterTab" role="tabpanel" aria-labelledby="teleprompterTabBtn">
           <div class="teleprompter-wrapper">
+            
             <div class="teleprompter-toolbar">
               <div class="tp-controls-left">
-                <button class="slide-nav-btn" id="tpPrevBtn"><i class="fa-solid fa-chevron-left"></i> Prev</button>
-                <span class="slide-counter" id="tpCounter">Slide 1 of 1</span>
-                <button class="slide-nav-btn" id="tpNextBtn">Next <i class="fa-solid fa-chevron-right"></i></button>
+                <button class="slide-nav-btn" id="tpPrevBtn" aria-label="Go to previous teleprompter slide"><i class="fa-solid fa-chevron-left" aria-hidden="true"></i> Prev</button>
+                <span class="slide-counter" id="tpCounter" aria-live="polite">Slide 1 of 1</span>
+                <button class="slide-nav-btn" id="tpNextBtn" aria-label="Go to next teleprompter slide">Next <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></button>
               </div>
+
+              <div class="tp-controls-center">
+                <button class="btn-auto-scroll" id="tpAutoScrollBtn" aria-label="Toggle teleprompter auto-scroll">
+                  <i class="fa-solid fa-angles-down" aria-hidden="true"></i> Auto-Scroll: OFF
+                </button>
+                <div class="scroll-speed-box">
+                  <label for="tpScrollSpeed">Speed</label>
+                  <input type="range" id="tpScrollSpeed" min="1" max="5" value="2" aria-label="Auto-scroll speed level (1 to 5)">
+                </div>
+              </div>
+
               <div class="tp-controls-right">
-                <button class="btn-tp-font" id="tpFontDecBtn" title="Decrease Font Size">A-</button>
-                <button class="btn-tp-font" id="tpFontIncBtn" title="Increase Font Size">A+</button>
-                <button class="btn-read-aloud" id="tpSpeakBtn"><i class="fa-solid fa-volume-high"></i> Read Script</button>
+                <button class="btn-tp-font" id="tpFontDecBtn" title="Decrease Font Size" aria-label="Decrease teleprompter font size">A-</button>
+                <button class="btn-tp-font" id="tpFontIncBtn" title="Increase Font Size" aria-label="Increase teleprompter font size">A+</button>
+                <button class="btn-read-aloud" id="tpSpeakBtn" aria-label="Read current teleprompter script aloud"><i class="fa-solid fa-volume-high" aria-hidden="true"></i> Read Script</button>
               </div>
             </div>
 
-            <!-- Dual Split-Screen View: Left Slide Deck + Right Live Teleprompter Script -->
+            <!-- Dual Split-Screen View: Left Visual Slide Frame + Right Speaker Teleprompter Script -->
             <div class="teleprompter-grid">
               
               <!-- Left Visual Slide Frame -->
               <div class="tp-slide-box">
-                <div class="tp-box-header"><i class="fa-solid fa-desktop"></i> Classroom Visual Slide</div>
+                <div class="tp-box-header"><i class="fa-solid fa-desktop" aria-hidden="true"></i> Classroom Visual Slide</div>
                 <div class="slide-frame" id="tpSlideFrame">
                   <div class="markdown-body" id="tpSlideContent"></div>
                 </div>
               </div>
 
-              <!-- Right Speaker Script & Teleprompter Card -->
+              <!-- Right Speaker Script Teleprompter Card -->
               <div class="tp-script-box">
-                <div class="tp-box-header"><i class="fa-solid fa-scroll"></i> Teacher Speaker Teleprompter & Cues</div>
+                <div class="tp-box-header">
+                  <span><i class="fa-solid fa-scroll" aria-hidden="true"></i> Teacher Teleprompter & Cues</span>
+                  <span class="tp-speed-badge" id="tpCurrentSpeedBadge">2x Speed</span>
+                </div>
+                <div class="tp-scroll-progress-track" aria-hidden="true">
+                  <div class="tp-scroll-progress-fill" id="tpScrollProgressFill"></div>
+                </div>
                 <div class="tp-script-body" id="tpScriptBody">
                   
                   <div class="cue-pill" id="tpCuePill">
-                    <i class="fa-solid fa-face-smile"></i> <span id="tpCueText">Delivery cue...</span>
+                    <i class="fa-solid fa-face-smile" aria-hidden="true"></i> <span id="tpCueText">Delivery cue...</span>
                   </div>
 
                   <div class="teleprompter-text" id="tpScriptText">
@@ -295,14 +742,14 @@
                   </div>
 
                   <div class="analogy-card" id="tpAnalogyCard">
-                    <div class="analogy-title"><i class="fa-solid fa-lightbulb"></i> Concept Analogy for Class</div>
+                    <div class="analogy-title"><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> Concept Analogy for Class</div>
                     <div id="tpAnalogyText">Analogy text...</div>
                   </div>
 
                   <div class="check-q-card" id="tpCheckCard">
-                    <div class="check-title"><i class="fa-solid fa-circle-question"></i> Check for Understanding Question</div>
+                    <div class="check-title"><i class="fa-solid fa-circle-question" aria-hidden="true"></i> Check for Understanding Question</div>
                     <div id="tpCheckText">Question text...</div>
-                    <button class="btn-show-answer" id="tpShowAnswerBtn">Reveal Answer</button>
+                    <button class="btn-show-answer" id="tpShowAnswerBtn" aria-label="Reveal answer to check-for-understanding question">Reveal Answer</button>
                   </div>
 
                 </div>
@@ -313,14 +760,14 @@
         </div>
 
         <!-- 4. Teacher Master Answer Keys Tab -->
-        <div class="tab-content" id="answerkeysTab">
+        <div class="tab-content" id="answerkeysTab" role="tabpanel" aria-labelledby="answerkeysTabBtn">
           <div class="content-card">
-            <h2><i class="fa-solid fa-key"></i> Teacher Master Answer Keys & Marking Guides</h2>
-            <p class="text-muted" style="margin-bottom: 20px;">Comprehensive answer key, Maliki fiqh evidence notes, Ash'ari creed references, and sample reflection answers for all levels.</p>
+            <h2><i class="fa-solid fa-key" aria-hidden="true"></i> Teacher Master Answer Keys & Marking Guides</h2>
+            <p class="text-muted" style="margin-bottom: 20px;">Comprehensive answer key, Maliki fiqh evidence notes (*Al-Muwatta*, *Al-Risala*), Ash'ari creed references, and sample reflection answers for all levels.</p>
 
-            <div class="track-answer-toggle">
-              <button class="track-btn active" id="akToggleL1">Level 1 (10y) Answer Key</button>
-              <button class="track-btn" id="akToggleL2">Level 2 (13y+) Answer Key</button>
+            <div class="track-answer-toggle" role="group" aria-label="Answer Key Level Selector">
+              <button class="track-btn active" id="akToggleL1" aria-pressed="true">Level 1 (10y) Answer Key</button>
+              <button class="track-btn" id="akToggleL2" aria-pressed="false">Level 2 (13y+) Answer Key</button>
             </div>
 
             <div class="markdown-body" id="answerKeyContent" style="margin-top: 24px;"></div>
@@ -328,37 +775,43 @@
         </div>
 
         <!-- 5. Interactive Quiz Tab -->
-        <div class="tab-content" id="quizTab">
+        <div class="tab-content" id="quizTab" role="tabpanel" aria-labelledby="quizTabBtn">
           <div class="quiz-container">
-            <div class="quiz-score-banner" id="quizScoreBanner" style="display: none;">
-              <div class="score-icon"><i class="fa-solid fa-trophy"></i></div>
+            
+            <div class="quiz-score-banner" id="quizScoreBanner" style="display: none;" role="status" aria-live="polite">
+              <div class="score-icon"><i class="fa-solid fa-trophy" aria-hidden="true"></i></div>
               <div class="score-details">
                 <h3>Worksheet Quiz Completed!</h3>
                 <p>Your Score: <strong id="scoreDisplay">0 / 0</strong> (<span id="scorePercent">0%</span>)</p>
               </div>
-              <button class="btn-retry" id="retryQuizBtn">
-                <i class="fa-solid fa-rotate-right"></i> Retry Quiz
-              </button>
+              <div class="score-actions">
+                <button class="btn-retry" id="retryQuizBtn" aria-label="Retry quiz questions">
+                  <i class="fa-solid fa-rotate-right" aria-hidden="true"></i> Retry Quiz
+                </button>
+                <button class="btn-certificate" id="openCertBtn" style="display: none;" aria-label="Open printable Certificate of Completion">
+                  <i class="fa-solid fa-certificate" aria-hidden="true"></i> View Certificate
+                </button>
+              </div>
             </div>
 
             <div id="quizQuestionsArea"></div>
 
             <div class="quiz-submit-bar">
-              <button class="btn-submit-quiz" id="submitQuizBtn">
-                <i class="fa-solid fa-paper-plane"></i> Submit & Grade Quiz
+              <button class="btn-submit-quiz" id="submitQuizBtn" aria-label="Submit worksheet quiz answers for automated grading">
+                <i class="fa-solid fa-paper-plane" aria-hidden="true"></i> Submit & Grade Quiz
               </button>
             </div>
           </div>
         </div>
 
         <!-- 6. Teacher Presentation Slides Tab -->
-        <div class="tab-content" id="slidesTab">
+        <div class="tab-content" id="slidesTab" role="tabpanel" aria-labelledby="slidesTabBtn">
           <div class="slideshow-container">
             <div class="slideshow-controls">
-              <button class="slide-nav-btn" id="prevSlideBtn"><i class="fa-solid fa-chevron-left"></i> Previous</button>
-              <span class="slide-counter" id="slideCounter">Slide 1 of 1</span>
-              <button class="slide-nav-btn" id="nextSlideBtn">Next <i class="fa-solid fa-chevron-right"></i></button>
-              <button class="btn-fullscreen" id="fullscreenSlidesBtn" title="Toggle Fullscreen"><i class="fa-solid fa-expand"></i></button>
+              <button class="slide-nav-btn" id="prevSlideBtn" aria-label="Previous presentation slide"><i class="fa-solid fa-chevron-left" aria-hidden="true"></i> Previous</button>
+              <span class="slide-counter" id="slideCounter" aria-live="polite">Slide 1 of 1</span>
+              <button class="slide-nav-btn" id="nextSlideBtn" aria-label="Next presentation slide">Next <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></button>
+              <button class="btn-fullscreen" id="fullscreenSlidesBtn" title="Toggle Fullscreen" aria-label="Toggle fullscreen slide presentation"><i class="fa-solid fa-expand" aria-hidden="true"></i></button>
             </div>
 
             <div class="slide-frame" id="slideFrame">
@@ -368,7 +821,7 @@
         </div>
 
         <!-- 7. Teacher Voice Script Tab -->
-        <div class="tab-content" id="voicescriptTab">
+        <div class="tab-content" id="voicescriptTab" role="tabpanel" aria-labelledby="scriptTabBtn">
           <div class="content-card">
             <div class="markdown-body" id="voiceScriptContent"></div>
           </div>
@@ -380,7 +833,7 @@
 
   </div>
 
-  <!-- Floating Sticky Bottom Audio Bar -->
+  <!-- Floating Sticky Audio Control Bar -->
   <div class="sticky-audio-bar" id="stickyAudioBar" style="display: none;">
     <div class="audio-bar-info">
       <i class="fa-solid fa-volume-high audio-pulse-icon"></i>
@@ -390,10 +843,337 @@
       </div>
     </div>
     <div class="audio-bar-controls">
-      <button class="bar-btn" id="stickyPlayPauseBtn"><i class="fa-solid fa-pause"></i></button>
-      <button class="bar-btn" id="stickyStopBtn"><i class="fa-solid fa-xmark"></i></button>
+      <button class="bar-btn" id="stickyPlayPauseBtn" aria-label="Play or Pause audio"><i class="fa-solid fa-pause"></i></button>
+      <button class="bar-btn" id="stickyStopBtn" aria-label="Stop audio"><i class="fa-solid fa-xmark"></i></button>
     </div>
   </div>
+
+  <!-- Printable Certificate of Completion Modal -->
+  <div class="cert-modal-backdrop" id="certModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="certTitleText" aria-describedby="certSubtitleText">
+    <div class="cert-modal-card">
+      <button class="cert-close-btn" id="certCloseBtn" aria-label="Close Certificate of Completion modal">&times;</button>
+      
+      <div class="cert-frame" id="certPrintFrame">
+        <div class="cert-border-pattern" aria-hidden="true"></div>
+        <div class="cert-content">
+          <div class="cert-header-icon" aria-hidden="true"><i class="fa-solid fa-kaaba" aria-hidden="true"></i></div>
+          <h2 class="cert-title" id="certTitleText">Certificate of Completion</h2>
+          <div class="cert-subtitle" id="certSubtitleText">Islamic Studies Family Curriculum</div>
+          
+          <div class="cert-body">
+            This is to certify that
+            <label for="certStudentName" class="sr-only">Student name for certificate</label>
+            <input type="text" id="certStudentName" class="cert-name-input" value="Student Name" placeholder="Enter Student Name" aria-label="Student full name for certificate">
+            has successfully completed the coursework and examination for
+            <div class="cert-course-name" id="certModuleName">Module Title</div>
+            <div class="cert-score-badge" id="certScoreBadge">Score: 100%</div>
+          </div>
+
+          <div class="cert-footer">
+            <div class="cert-sign-col">
+              <div class="cert-sign-line" aria-hidden="true"></div>
+              <span>Course Facilitator</span>
+            </div>
+            <div class="cert-seal">
+              <i class="fa-solid fa-award" aria-hidden="true"></i>
+              <span>VERIFIED</span>
+            </div>
+            <div class="cert-sign-col">
+              <div class="cert-date" id="certDateText">Date: Aug 11, 2026</div>
+              <span>Issue Date</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cert-modal-actions">
+        <button class="btn-certificate-print" id="printCertBtn" aria-label="Print Certificate of Completion or save as PDF">
+          <i class="fa-solid fa-print" aria-hidden="true"></i> Print Certificate
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Federated Identity & Auth Modal -->
+  <div class="modal-backdrop" id="authModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="authModalHeading" aria-describedby="authModalDesc">
+    <div class="modal-card auth-modal-card">
+      <button class="modal-close-btn" id="authModalCloseBtn" aria-label="Close authentication modal">&times;</button>
+      <div class="modal-header">
+        <div class="modal-icon" aria-hidden="true"><i class="fa-solid fa-user-shield" aria-hidden="true"></i></div>
+        <h2 id="authModalHeading">Parent & Educator Account Access</h2>
+        <p id="authModalDesc">Sign in or register to sync your family's Islamic Studies progress, manage child profiles, and view performance.</p>
+      </div>
+
+      <!-- Auth Navigation Tabs -->
+      <div class="auth-tabs" role="tablist" aria-label="Authentication Options">
+        <button class="auth-tab-btn active" id="authTabSignIn" data-authtab="signin" role="tab" aria-selected="true" aria-controls="emailAuthForm">
+          <i class="fa-solid fa-right-to-bracket" aria-hidden="true"></i> Sign In
+        </button>
+        <button class="auth-tab-btn" id="authTabSignUp" data-authtab="signup" role="tab" aria-selected="false" aria-controls="signUpForm">
+          <i class="fa-solid fa-user-plus" aria-hidden="true"></i> Create Account
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <!-- Auth Feedback Alert Banner -->
+        <div class="auth-alert-msg" id="authAlertMsg" style="display: none;" role="alert" aria-live="assertive"></div>
+
+        <!-- Federated Identity Row -->
+        <div class="federated-auth-section">
+          <span class="federated-title"><i class="fa-solid fa-globe" aria-hidden="true"></i> Federated Identity Providers</span>
+          <div class="federated-btn-grid">
+            <button class="btn-federated google" id="googleSignInBtn" aria-label="Sign in with Google">
+              <svg class="google-icon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+                <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
+                <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
+              </svg>
+              <span>Google</span>
+            </button>
+            <button class="btn-federated apple" id="appleSignInBtn" aria-label="Sign in with Apple">
+              <i class="fa-brands fa-apple" aria-hidden="true"></i>
+              <span>Apple</span>
+            </button>
+            <button class="btn-federated microsoft" id="microsoftSignInBtn" aria-label="Sign in with Microsoft">
+              <i class="fa-brands fa-microsoft" aria-hidden="true"></i>
+              <span>Microsoft</span>
+            </button>
+          </div>
+          <!-- GIS Container for standard Google One-Tap / Sign-In Button rendering -->
+          <div id="googleGisContainer" style="margin-top: 8px;"></div>
+        </div>
+
+        <div class="auth-divider">
+          <span id="authDividerText">OR SIGN IN WITH EMAIL</span>
+        </div>
+
+        <!-- 1. Sign In Form -->
+        <form id="emailAuthForm" class="auth-form" role="tabpanel" aria-labelledby="authTabSignIn">
+          <div class="form-group">
+            <label for="authEmailInput"><i class="fa-solid fa-envelope" aria-hidden="true"></i> Email Address</label>
+            <input type="email" id="authEmailInput" placeholder="parent@example.com" required class="form-input" autocomplete="email">
+          </div>
+          <div class="form-group">
+            <label for="authPasswordInput"><i class="fa-solid fa-lock" aria-hidden="true"></i> Password</label>
+            <div class="password-input-wrap">
+              <input type="password" id="authPasswordInput" placeholder="••••••••" required class="form-input" autocomplete="current-password">
+              <button type="button" class="btn-password-toggle" data-target="authPasswordInput" aria-label="Show password" aria-pressed="false">
+                <i class="fa-solid fa-eye" aria-hidden="true"></i>
+              </button>
+            </div>
+          </div>
+          <button type="submit" class="btn-submit-auth">
+            <i class="fa-solid fa-right-to-bracket" aria-hidden="true"></i> Sign In to Portal
+          </button>
+        </form>
+
+        <!-- 2. Sign Up Form (Hidden by default) -->
+        <form id="signUpForm" class="auth-form" style="display: none;" role="tabpanel" aria-labelledby="authTabSignUp">
+          <div class="form-group">
+            <label for="signUpNameInput"><i class="fa-solid fa-user-tag" aria-hidden="true"></i> Full Name / Title</label>
+            <input type="text" id="signUpNameInput" placeholder="e.g. Sister Fatimah, Brother Tariq" required class="form-input" autocomplete="name">
+          </div>
+          <div class="form-group">
+            <label for="signUpEmailInput"><i class="fa-solid fa-envelope" aria-hidden="true"></i> Email Address</label>
+            <input type="email" id="signUpEmailInput" placeholder="parent@example.com" required class="form-input" autocomplete="email">
+          </div>
+          <div class="form-group">
+            <label for="signUpPasswordInput"><i class="fa-solid fa-lock" aria-hidden="true"></i> Password</label>
+            <div class="password-input-wrap">
+              <input type="password" id="signUpPasswordInput" placeholder="Create strong password" required class="form-input" minlength="6" autocomplete="new-password">
+              <button type="button" class="btn-password-toggle" data-target="signUpPasswordInput" aria-label="Show password" aria-pressed="false">
+                <i class="fa-solid fa-eye" aria-hidden="true"></i>
+              </button>
+            </div>
+            <div class="password-strength-container" id="modalPasswordStrengthContainer" style="display: none;">
+              <div class="strength-bar-track">
+                <div class="strength-bar-fill" id="modalStrengthFill"></div>
+              </div>
+              <div class="strength-hint-row">
+                <span class="strength-label" id="modalStrengthLabel">Password Strength: <strong>Weak</strong></span>
+                <span class="strength-criteria" id="modalStrengthCriteria">Use 8+ chars with letters & numbers</span>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="signUpRoleSelect"><i class="fa-solid fa-users" aria-hidden="true"></i> Initial Role</label>
+            <select id="signUpRoleSelect" class="form-input">
+              <option value="parent">Parent / Family Head</option>
+              <option value="teacher">Educator / Teacher</option>
+            </select>
+          </div>
+          <button type="submit" class="btn-submit-auth gold">
+            <i class="fa-solid fa-user-plus" aria-hidden="true"></i> Complete Sign Up
+          </button>
+        </form>
+
+        <!-- Demo Accounts Box -->
+        <div class="demo-auth-box">
+          <span class="demo-label">Quick Testing Accounts:</span>
+          <div class="demo-btn-row">
+            <button class="btn-demo-acc" id="demoParentBtn" aria-label="Sign in with Parent Demo Account">
+              <i class="fa-solid fa-user" aria-hidden="true"></i> Parent Demo
+            </button>
+            <button class="btn-demo-acc gold" id="demoAdminBtn" aria-label="Sign in with Super Admin Demo Account">
+              <i class="fa-solid fa-shield-halved" aria-hidden="true"></i> Super Admin
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- User Account Profile Modal -->
+  <div class="modal-backdrop" id="userProfileModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="userProfileModalHeading" aria-describedby="profileUserEmail">
+    <div class="modal-card user-profile-card">
+      <button class="modal-close-btn" id="userProfileModalCloseBtn" aria-label="Close user profile modal">&times;</button>
+      <div class="modal-header">
+        <div class="user-avatar-badge">
+          <img id="profileUserPhoto" src="https://api.dicebear.com/7.x/avataaars/svg?seed=user" alt="User Profile Avatar">
+        </div>
+        <h2 id="userProfileModalHeading"><span id="profileUserName">User Name</span></h2>
+        <p id="profileUserEmail">user@example.com</p>
+        <div class="profile-badges-row">
+          <span class="badge-role" id="profileUserRole">Parent Account</span>
+          <span class="badge-provider" id="profileUserProvider"><i class="fa-brands fa-google" aria-hidden="true"></i> Google Federated</span>
+        </div>
+      </div>
+
+      <div class="modal-body">
+        <form id="profileEditForm" class="auth-form">
+          <div class="form-group">
+            <label for="profileNameInput"><i class="fa-solid fa-pen" aria-hidden="true"></i> Display Name</label>
+            <input type="text" id="profileNameInput" class="form-input" required autocomplete="name">
+          </div>
+          <button type="submit" class="btn-save-modal" id="profileSaveBtn" aria-label="Save changes to display name">
+            <i class="fa-solid fa-floppy-disk" aria-hidden="true"></i> Update Profile
+          </button>
+        </form>
+
+        <div class="profile-actions-footer">
+          <button type="button" class="btn-sign-out" id="profileSignOutBtn" aria-label="Sign out of your account">
+            <i class="fa-solid fa-arrow-right-from-bracket" aria-hidden="true"></i> Sign Out
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add/Edit Child Profile Modal -->
+  <div class="modal-backdrop" id="childModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="childModalTitle" aria-describedby="childModalDesc">
+    <div class="modal-card child-modal-card">
+      <button class="modal-close-btn" id="childModalCloseBtn" aria-label="Close child profile modal">&times;</button>
+      <div class="modal-header">
+        <div class="modal-icon" aria-hidden="true"><i class="fa-solid fa-child" aria-hidden="true"></i></div>
+        <h2 id="childModalTitle">Create Child Profile</h2>
+        <p id="childModalDesc">Set up a learner profile for your child to track their course progress and quiz results.</p>
+      </div>
+
+      <div class="modal-body">
+        <form id="childForm">
+          <input type="hidden" id="editingChildId" value="">
+          
+          <div class="form-group">
+            <label for="childNameInput"><i class="fa-solid fa-user-tag" aria-hidden="true"></i> Child Name / Nickname</label>
+            <input type="text" id="childNameInput" placeholder="e.g. Zayd, Maryam, Ibrahim" required class="form-input" autocomplete="name">
+          </div>
+
+          <div class="form-group">
+            <span class="form-label-title"><i class="fa-solid fa-face-smile" aria-hidden="true"></i> Choose Learner Avatar</span>
+            <div class="avatar-selector-grid" id="avatarSelectorGrid" role="radiogroup" aria-label="Learner Avatar Selection">
+              <button type="button" class="avatar-opt active" data-avatar="🌟" aria-label="Avatar: Star" role="radio" aria-checked="true">🌟</button>
+              <button type="button" class="avatar-opt" data-avatar="🦁" aria-label="Avatar: Lion" role="radio" aria-checked="false">🦁</button>
+              <button type="button" class="avatar-opt" data-avatar="📚" aria-label="Avatar: Books" role="radio" aria-checked="false">📚</button>
+              <button type="button" class="avatar-opt" data-avatar="🌙" aria-label="Avatar: Crescent Moon" role="radio" aria-checked="false">🌙</button>
+              <button type="button" class="avatar-opt" data-avatar="🦅" aria-label="Avatar: Eagle" role="radio" aria-checked="false">🦅</button>
+              <button type="button" class="avatar-opt" data-avatar="🎓" aria-label="Avatar: Graduation Cap" role="radio" aria-checked="false">🎓</button>
+              <button type="button" class="avatar-opt" data-avatar="🕌" aria-label="Avatar: Mosque" role="radio" aria-checked="false">🕌</button>
+              <button type="button" class="avatar-opt" data-avatar="🎨" aria-label="Avatar: Art Palette" role="radio" aria-checked="false">🎨</button>
+              <button type="button" class="avatar-opt" data-avatar="🚀" aria-label="Avatar: Rocket" role="radio" aria-checked="false">🚀</button>
+              <button type="button" class="avatar-opt" data-avatar="💡" aria-label="Avatar: Lightbulb" role="radio" aria-checked="false">💡</button>
+              <button type="button" class="avatar-opt" data-avatar="🌺" aria-label="Avatar: Flower" role="radio" aria-checked="false">🌺</button>
+              <button type="button" class="avatar-opt" data-avatar="🛡️" aria-label="Avatar: Shield" role="radio" aria-checked="false">🛡️</button>
+            </div>
+            <input type="hidden" id="selectedChildAvatar" value="🌟">
+          </div>
+
+          <div class="form-group">
+            <label for="childTrackSelect"><i class="fa-solid fa-graduation-cap" aria-hidden="true"></i> Assigned Learning Track</label>
+            <select id="childTrackSelect" class="form-input">
+              <option value="level1">Level 1 (Youth ~10y - Simplified Handouts & Quizzes)</option>
+              <option value="level2">Level 2 (Teens 13y+ - Deep Fiqh & Detailed Analysis)</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="childPinInput"><i class="fa-solid fa-key" aria-hidden="true"></i> Optional 4-Digit Profile PIN</label>
+            <input type="password" id="childPinInput" placeholder="e.g. 1234 (Leave blank for no PIN)" maxlength="4" class="form-input" autocomplete="new-password">
+            <small class="form-hint">Prevents siblings from switching into each other's accounts on a shared tablet.</small>
+          </div>
+
+          <div class="modal-form-actions">
+            <button type="button" class="btn-cancel-modal" id="cancelChildBtn" aria-label="Cancel and close dialog">Cancel</button>
+            <button type="submit" class="btn-save-modal" id="saveChildBtn" aria-label="Save child profile">Save Child Profile</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Switch Active Learner Profile Modal -->
+  <div class="modal-backdrop" id="learnerModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="learnerModalTitle" aria-describedby="learnerModalDesc">
+    <div class="modal-card learner-modal-card">
+      <button class="modal-close-btn" id="learnerModalCloseBtn" aria-label="Close learner selection modal">&times;</button>
+      <div class="modal-header">
+        <div class="modal-icon" aria-hidden="true"><i class="fa-solid fa-users" aria-hidden="true"></i></div>
+        <h2 id="learnerModalTitle">Select Active Learner Profile</h2>
+        <p id="learnerModalDesc">Switch who is currently studying on this device:</p>
+      </div>
+
+      <div class="modal-body">
+        <div class="learner-modal-list" id="learnerModalList" role="list">
+          <!-- Dynamically populated list of kids -->
+        </div>
+
+        <div class="learner-modal-footer">
+          <button class="btn-parent-portal-link" id="learnerModalParentBtn" aria-label="Navigate to Parent Management Portal">
+            <i class="fa-solid fa-user-gear" aria-hidden="true"></i> Open Parent Portal
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Child Profile PIN Verification Challenge Modal -->
+  <div class="modal-backdrop" id="pinChallengeModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="pinChallengeTitle" aria-describedby="pinChallengeDesc">
+    <div class="modal-card pin-modal-card">
+      <button class="modal-close-btn" id="pinChallengeCloseBtn" aria-label="Close PIN challenge modal">&times;</button>
+      <div class="modal-header">
+        <div class="modal-icon" aria-hidden="true"><i class="fa-solid fa-shield-cat" aria-hidden="true"></i></div>
+        <h2 id="pinChallengeTitle">Profile PIN Required</h2>
+        <p id="pinChallengeDesc">Enter 4-digit PIN code to unlock this profile:</p>
+      </div>
+
+      <div class="modal-body">
+        <form id="pinChallengeForm">
+          <input type="hidden" id="targetChildId" value="">
+          <div class="form-group center-pin">
+            <label for="pinChallengeInput" class="sr-only">4-digit PIN Code</label>
+            <input type="password" id="pinChallengeInput" maxlength="4" placeholder="••••" required class="form-input pin-input" autocomplete="off" aria-label="4 digit PIN security code">
+            <div class="pin-error-msg" id="pinErrorMsg" style="display: none;" role="alert" aria-live="assertive">Incorrect PIN. Please try again.</div>
+          </div>
+          <div class="modal-form-actions">
+            <button type="button" class="btn-cancel-modal" id="pinChallengeCancelBtn" aria-label="Cancel PIN unlock and close modal">Cancel</button>
+            <button type="submit" class="btn-save-modal" id="pinChallengeSubmitBtn" aria-label="Verify PIN and unlock learner profile">Unlock Profile</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Floating Toast Notifications Container -->
+  <div id="toastContainer" class="toast-container" aria-live="polite" aria-atomic="true"></div>
 
   <!-- Custom App JS -->
   <script src="/app.js"></script>

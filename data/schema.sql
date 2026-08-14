@@ -1,0 +1,58 @@
+-- PostgreSQL Schema for Islamic Studies Family LMS
+-- Run this script to provision tables when deploying to AWS RDS, Supabase, Neon, or Railway PostgreSQL.
+
+CREATE TABLE IF NOT EXISTS users (
+  uid VARCHAR(64) PRIMARY KEY,
+  email VARCHAR(255) UNIQUE NOT NULL,
+  password_hash VARCHAR(255) NOT NULL,
+  display_name VARCHAR(120) NOT NULL,
+  role VARCHAR(32) DEFAULT 'parent' NOT NULL,
+  provider VARCHAR(32) DEFAULT 'password' NOT NULL,
+  photo_url TEXT,
+  is_verified BOOLEAN DEFAULT FALSE NOT NULL,
+  verification_token VARCHAR(128),
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE INDEX IF NOT EXISTS idx_users_email ON users(email);
+
+CREATE TABLE IF NOT EXISTS children (
+  id VARCHAR(64) PRIMARY KEY,
+  parent_uid VARCHAR(64) REFERENCES users(uid) ON DELETE CASCADE,
+  name VARCHAR(100) NOT NULL,
+  avatar VARCHAR(32) DEFAULT '🌟',
+  assigned_track VARCHAR(32) DEFAULT 'level1' NOT NULL,
+  pin_hash VARCHAR(255),
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE INDEX IF NOT EXISTS idx_children_parent ON children(parent_uid);
+
+CREATE TABLE IF NOT EXISTS quiz_results (
+  id VARCHAR(64) PRIMARY KEY,
+  user_uid VARCHAR(64) REFERENCES users(uid) ON DELETE SET NULL,
+  child_id VARCHAR(64) REFERENCES children(id) ON DELETE SET NULL,
+  module_id INT NOT NULL,
+  track VARCHAR(32) NOT NULL,
+  score INT NOT NULL,
+  total INT NOT NULL,
+  percentage INT NOT NULL,
+  passed BOOLEAN NOT NULL,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE INDEX IF NOT EXISTS idx_quiz_results_user ON quiz_results(user_uid);
+CREATE INDEX IF NOT EXISTS idx_quiz_results_child ON quiz_results(child_id);
+
+CREATE TABLE IF NOT EXISTS module_progress (
+  id SERIAL PRIMARY KEY,
+  target_key VARCHAR(64) NOT NULL, -- 'user_<uid>' or 'child_<childId>'
+  module_id INT NOT NULL,
+  completed BOOLEAN DEFAULT FALSE NOT NULL,
+  updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+  UNIQUE (target_key, module_id)
+);
+
+CREATE INDEX IF NOT EXISTS idx_progress_target ON module_progress(target_key);
