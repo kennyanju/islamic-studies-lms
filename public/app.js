@@ -1908,68 +1908,156 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!parentDashboardView) return;
 
     if (currentUser && parentWelcomeTitle) {
-      parentWelcomeTitle.textContent = `Welcome, ${currentUser.displayName}!`;
+      parentWelcomeTitle.textContent = `Welcome, ${currentUser.displayName || currentUser.email}!`;
       if (parentAuthBadge) {
-        parentAuthBadge.innerHTML = `<i class="fa-solid fa-user-check"></i> ${currentUser.email}`;
+        let providerIcon = 'fa-envelope';
+        const p = (currentUser.provider || '').toLowerCase();
+        if (p.includes('google')) providerIcon = 'fa-google';
+        else if (p.includes('apple')) providerIcon = 'fa-apple';
+        else if (p.includes('microsoft')) providerIcon = 'fa-microsoft';
+        parentAuthBadge.innerHTML = `<i class="fa-brands ${providerIcon}"></i> ${currentUser.email}`;
       }
     }
 
     if (statParentKidsCount) statParentKidsCount.textContent = familyChildren.length;
     if (statActiveLearnerName) statActiveLearnerName.textContent = activeChild ? activeChild.name : 'None';
 
+    // Active Learner Spotlight
+    const spotlightEl = document.getElementById('activeLearnerSpotlight');
+    const spotlightAvatar = document.getElementById('spotlightAvatar');
+    const spotlightName = document.getElementById('spotlightName');
+    const spotlightTrack = document.getElementById('spotlightTrack');
+    const spotlightStartBtn = document.getElementById('spotlightStartBtn');
+    const spotlightSwitchBtn = document.getElementById('spotlightSwitchBtn');
+
+    if (spotlightEl) {
+      if (activeChild) {
+        spotlightEl.style.display = 'flex';
+        if (spotlightAvatar) spotlightAvatar.textContent = activeChild.avatar || '🌟';
+        if (spotlightName) spotlightName.textContent = activeChild.name;
+        if (spotlightTrack) {
+          spotlightTrack.textContent = `${activeChild.assignedTrack === 'level2' ? 'Level 2 Track (13y+)' : 'Level 1 Track (~10y)'} • Active Learner Mode`;
+        }
+        if (spotlightStartBtn) {
+          spotlightStartBtn.onclick = () => switchView('dashboard');
+        }
+        if (spotlightSwitchBtn) {
+          spotlightSwitchBtn.onclick = openLearnerModal;
+        }
+      } else {
+        spotlightEl.style.display = 'none';
+      }
+    }
+
+    // Progress and Quiz Stats computation
+    let completedModulesCount = 0;
+    let quizAvg = 0;
+    let allActivityLogs = [];
+
+    // Check Local Progress First
+    const localProg = JSON.parse(localStorage.getItem('lms_progress') || '{}');
+    const localScores = JSON.parse(localStorage.getItem('lms_quiz_scores') || '{}');
+
+    // Count completions from local storage
+    const completedKeys = Object.keys(localProg).filter(k => localProg[k]);
+    completedModulesCount = completedKeys.length;
+
+    const scoreKeys = Object.keys(localScores);
+    if (scoreKeys.length > 0) {
+      const sum = scoreKeys.reduce((acc, k) => acc + (localScores[k].percentage || localScores[k].score || 0), 0);
+      quizAvg = Math.round(sum / scoreKeys.length);
+    }
+
+    // Try fetching live server sync data
     if (currentUser) {
       try {
         const res = await fetch(`/api/progress/sync?parentUid=${currentUser.uid}`);
-        const data = await res.json();
-        if (data.success) {
-          if (statParentTotalCompleted) statParentTotalCompleted.textContent = data.progress.length;
-          
-          if (data.quizResults.length > 0) {
-            const totalPct = data.quizResults.reduce((acc, q) => acc + (q.maxScore ? (q.score / q.maxScore) * 100 : 0), 0);
-            const avg = Math.round(totalPct / data.quizResults.length);
-            if (statParentAvgQuiz) statParentAvgQuiz.textContent = `${avg}%`;
-          } else {
-            if (statParentAvgQuiz) statParentAvgQuiz.textContent = '0%';
-          }
-
-          if (familyActivityList) {
-            familyActivityList.innerHTML = '';
-            const allLogs = [
-              ...data.quizResults.map(q => ({ type: 'quiz', item: q, date: new Date(q.timestamp) })),
-              ...data.reflections.map(r => ({ type: 'reflection', item: r, date: new Date(r.timestamp) }))
-            ].sort((a, b) => b.date - a.date);
-
-            if (allLogs.length === 0) {
-              familyActivityList.innerHTML = `<p class="empty-state-text">No family activity logged yet. Start a quiz or reflection!</p>`;
-            } else {
-              allLogs.forEach(log => {
-                const div = document.createElement('div');
-                div.className = 'activity-item';
-                const childObj = familyChildren.find(c => c.id === log.item.childId) || { name: 'Learner', avatar: '🌟' };
-                if (log.type === 'quiz') {
-                  div.innerHTML = `
-                    <span class="act-icon font-gold"><i class="fa-solid fa-award"></i></span>
-                    <div>
-                      <strong>${childObj.avatar} ${childObj.name}</strong> completed Quiz Module #${log.item.moduleId} (Score: ${log.item.score}/${log.item.maxScore})<br>
-                      <small style="color: var(--text-subtle);">${log.date.toLocaleString()}</small>
-                    </div>
-                  `;
-                } else {
-                  div.innerHTML = `
-                    <span class="act-icon font-emerald"><i class="fa-solid fa-pen-nib"></i></span>
-                    <div>
-                      <strong>${childObj.avatar} ${childObj.name}</strong> submitted Reflection: "${log.item.reflectionText}"<br>
-                      <small style="color: var(--text-subtle);">${log.date.toLocaleString()}</small>
-                    </div>
-                  `;
-                }
-                familyActivityList.appendChild(div);
-              });
+        if (res.ok) {
+          const data = await res.json();
+          if (data.success) {
+            if (data.progress && data.progress.length > 0) {
+              completedModulesCount = Math.max(completedModulesCount, data.progress.length);
+            }
+            if (data.quizResults && data.quizResults.length > 0) {
+              const totalPct = data.quizResults.reduce((acc, q) => acc + (q.maxScore ? (q.score / q.maxScore) * 100 : (q.percentage || 0)), 0);
+              quizAvg = Math.round(totalPct / data.quizResults.length);
+              
+              allActivityLogs = [
+                ...data.quizResults.map(q => ({ type: 'quiz', item: q, date: new Date(q.timestamp || q.createdAt || Date.now()) })),
+                ...(data.reflections || []).map(r => ({ type: 'reflection', item: r, date: new Date(r.timestamp || Date.now()) }))
+              ];
             }
           }
         }
       } catch (err) {
-        console.error('Error fetching parent activity:', err);
+        console.warn('Parent progress sync notice (using local cache):', err);
+      }
+    }
+
+    if (statParentTotalCompleted) statParentTotalCompleted.textContent = completedModulesCount;
+    if (statParentAvgQuiz) statParentAvgQuiz.textContent = `${quizAvg}%`;
+
+    // Render Family Activity List
+    if (familyActivityList) {
+      familyActivityList.innerHTML = '';
+      if (allActivityLogs.length === 0 && scoreKeys.length > 0) {
+        // Build activity logs from local storage if server returned no records
+        scoreKeys.forEach(k => {
+          const sc = localScores[k];
+          allActivityLogs.push({
+            type: 'quiz',
+            item: {
+              moduleId: sc.moduleId || 1,
+              score: sc.score || 5,
+              maxScore: sc.total || sc.maxScore || 5,
+              percentage: sc.percentage || 100,
+              childId: activeChild?.id || null
+            },
+            date: new Date()
+          });
+        });
+      }
+
+      allActivityLogs.sort((a, b) => b.date - a.date);
+
+      if (allActivityLogs.length === 0) {
+        familyActivityList.innerHTML = `
+          <p class="empty-state-text">
+            <i class="fa-solid fa-clock-rotate-left"></i> No family activity logged yet. Switch to a child's profile to complete lessons and interactive quizzes!
+          </p>
+        `;
+      } else {
+        allActivityLogs.slice(0, 10).forEach(log => {
+          const div = document.createElement('div');
+          div.className = 'activity-item';
+          const childObj = familyChildren.find(c => c.id === log.item.childId) || activeChild || { name: 'Learner', avatar: '🌟' };
+          
+          if (log.type === 'quiz') {
+            const pct = log.item.percentage || Math.round(((log.item.score || 0) / (log.item.maxScore || 1)) * 100);
+            div.innerHTML = `
+              <div class="activity-user">
+                <span class="act-icon font-gold" style="font-size: 1.4rem;">${childObj.avatar || '🌟'}</span>
+                <div>
+                  <strong>${escapeHtml(childObj.name)}</strong> completed <strong>Module ${log.item.moduleId} Quiz</strong>
+                  <div style="font-size: 0.8rem; color: var(--text-subtle);">${log.date.toLocaleDateString()} at ${log.date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</div>
+                </div>
+              </div>
+              <span class="meta-pill ${pct >= 80 ? 'green' : 'gold'}" style="font-weight: 700;">Score: ${pct}%</span>
+            `;
+          } else {
+            div.innerHTML = `
+              <div class="activity-user">
+                <span class="act-icon font-emerald" style="font-size: 1.4rem;">${childObj.avatar || '🌟'}</span>
+                <div>
+                  <strong>${escapeHtml(childObj.name)}</strong> completed Lesson Reflection
+                  <div style="font-size: 0.8rem; color: var(--text-subtle);">${log.date.toLocaleDateString()}</div>
+                </div>
+              </div>
+              <span class="meta-pill green"><i class="fa-solid fa-check"></i> Reflected</span>
+            `;
+          }
+          familyActivityList.appendChild(div);
+        });
       }
     }
 
@@ -1980,30 +2068,71 @@ document.addEventListener('DOMContentLoaded', () => {
       if (familyChildren.length === 0) {
         parentChildrenGrid.innerHTML = `
           <div class="empty-child-card">
-            <i class="fa-solid fa-child-reaching empty-icon"></i>
+            <div class="empty-child-icon"><i class="fa-solid fa-child-reaching"></i></div>
             <h3>No Child Profiles Yet</h3>
-            <p>Click 'Add Child Profile' above to create a profile for your learner.</p>
+            <p>Add your children to assign personalized Level 1 (~10y) or Level 2 (13y+) tracks, track their quiz achievements, and print completion certificates!</p>
+            <button class="btn-primary-action" id="emptyAddChildBtn">
+              <i class="fa-solid fa-user-plus"></i> Add Your First Child Profile
+            </button>
           </div>
         `;
+
+        const emptyBtn = document.getElementById('emptyAddChildBtn');
+        if (emptyBtn) emptyBtn.addEventListener('click', () => openChildModal(null));
       } else {
         familyChildren.forEach(child => {
           const isActive = activeChild && activeChild.id === child.id;
           const card = document.createElement('div');
-          card.className = `child-profile-card ${isActive ? 'active' : ''}`;
+          card.className = `child-card ${isActive ? 'active-learner' : ''}`;
           const isPinProtected = child.hasPin || (child.pinCode && child.pinCode.trim().length > 0);
+
+          // Calculate approximate progress for this child
+          const childProgKey = `child_${child.id}`;
+          const childTrack = child.assignedTrack || 'level1';
+          const childProg = localProg[childProgKey] || {};
+          const childCompletedCount = Object.keys(childProg).filter(k => childProg[k]).length;
+          const childPct = Math.round((childCompletedCount / 9) * 100);
+
           card.innerHTML = `
+            ${isActive ? '<span class="active-learner-tag"><i class="fa-solid fa-circle-check"></i> Active Learner</span>' : ''}
+            
             <div class="child-card-header">
-              <span class="child-avatar-big">${escapeHtml(child.avatar || '🌟')}</span>
-              <div class="child-meta">
+              <div class="child-avatar-lg">${escapeHtml(child.avatar || '🌟')}</div>
+              <div class="child-details">
                 <h3>${escapeHtml(child.name)}</h3>
-                <span class="child-track-pill">${child.assignedTrack === 'level2' ? 'Level 2 (13y+)' : 'Level 1 (~10y)'}</span>
-                ${isPinProtected ? '<span class="child-pin-pill" title="Protected by 4-digit PIN"><i class="fa-solid fa-lock"></i> PIN</span>' : ''}
+                <div class="child-meta-badges">
+                  <span class="meta-pill ${childTrack === 'level2' ? 'gold' : ''}">
+                    <i class="fa-solid fa-graduation-cap"></i> ${childTrack === 'level2' ? 'Level 2 (13y+)' : 'Level 1 (~10y)'}
+                  </span>
+                  ${isPinProtected ? '<span class="meta-pill pin"><i class="fa-solid fa-lock"></i> PIN Protected</span>' : ''}
+                </div>
+              </div>
+            </div>
+
+            <div class="child-progress-box">
+              <div class="child-progress-head">
+                <span>Curriculum Progress</span>
+                <strong>${childCompletedCount} / 9 Modules (${childPct}%)</strong>
+              </div>
+              <div class="progress-bar-bg" style="height: 8px;">
+                <div class="progress-bar-fill" style="width: ${childPct}%;"></div>
+              </div>
+            </div>
+
+            <div class="child-stats-mini-row">
+              <div class="child-mini-stat">
+                <span class="child-mini-stat-label">Assigned Track</span>
+                <span class="child-mini-stat-val">${childTrack === 'level2' ? 'Deepening (13y+)' : 'Foundations (~10y)'}</span>
+              </div>
+              <div class="child-mini-stat">
+                <span class="child-mini-stat-label">Security PIN</span>
+                <span class="child-mini-stat-val">${isPinProtected ? 'Enabled 🔒' : 'None'}</span>
               </div>
             </div>
 
             <div class="child-card-actions">
-              <button class="btn-child-switch" data-id="${escapeHtml(child.id)}">
-                <i class="fa-solid fa-user-check"></i> ${isActive ? 'Currently Active' : 'Switch Learner'}
+              <button class="btn-child-switch ${isActive ? 'btn-primary-action' : ''}" data-id="${escapeHtml(child.id)}">
+                <i class="fa-solid ${isActive ? 'fa-book-open' : 'fa-user-check'}"></i> ${isActive ? 'Start Learning' : 'Select Learner'}
               </button>
               <button class="btn-child-icon edit-child-btn" data-id="${escapeHtml(child.id)}" title="Edit Profile">
                 <i class="fa-solid fa-pen"></i>
@@ -2015,7 +2144,11 @@ document.addEventListener('DOMContentLoaded', () => {
           `;
 
           card.querySelector('.btn-child-switch').addEventListener('click', () => {
-            attemptSelectLearner(child);
+            if (isActive) {
+              switchView('dashboard');
+            } else {
+              attemptSelectLearner(child);
+            }
           });
           card.querySelector('.edit-child-btn').addEventListener('click', () => {
             openChildModal(child);

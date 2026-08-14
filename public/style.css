@@ -2323,6 +2323,137 @@ h1, h2, h3, h4, .logo-title, .cert-title {
   border-color: var(--danger-border);
 }
 
+/* Active Learner Spotlight */
+.active-learner-spotlight {
+  background: linear-gradient(135deg, rgba(6, 78, 59, 0.2), rgba(15, 23, 42, 0.6));
+  border: 1px solid var(--emerald-primary);
+  border-radius: var(--radius-lg);
+  padding: 20px 24px;
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+  box-shadow: 0 4px 16px rgba(5, 150, 105, 0.12);
+}
+
+.spotlight-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.spotlight-avatar {
+  font-size: 2.2rem;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--emerald-light);
+  border: 2px solid var(--emerald-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.spotlight-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--emerald-primary);
+  letter-spacing: 0.5px;
+  margin-bottom: 2px;
+}
+
+.spotlight-info h3 {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--text-main);
+  margin: 0 0 2px 0;
+}
+
+.spotlight-info p {
+  font-size: 0.86rem;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+.spotlight-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Empty State Child Card */
+.empty-child-card {
+  grid-column: 1 / -1;
+  background: var(--card-bg);
+  border: 2px dashed var(--card-border);
+  border-radius: var(--radius-lg);
+  padding: 48px 24px;
+  text-align: center;
+  max-width: 560px;
+  margin: 0 auto;
+}
+
+.empty-child-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: var(--emerald-light);
+  color: var(--emerald-primary);
+  font-size: 1.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px auto;
+}
+
+.empty-child-card h3 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 8px;
+}
+
+.empty-child-card p {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+
+/* Child Card Stats Row */
+.child-stats-mini-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin: 12px 0;
+}
+
+.child-mini-stat {
+  background: var(--input-bg);
+  padding: 8px 10px;
+  border-radius: var(--radius-sm);
+}
+
+.child-mini-stat-label {
+  display: block;
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+.child-mini-stat-val {
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--text-main);
+}
+
 /* Family Activity Log */
 .family-activity-card {
   background: var(--card-bg);
