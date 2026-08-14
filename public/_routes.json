@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "include": [
+    "/api/*"
+  ],
+  "exclude": [
+    "/style.css",
+    "/manifest.json",
+    "/sw.js",
+    "/course_data.json",
+    "/icons/*",
+    "/js/*"
+  ]
+}

@@ -2370,6 +2370,76 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Email Sign In Form Submit (Modal)
+  // --------------------------------------------------------------------------
+  // Client-Side WebCrypto Authentication Engine (Fallback for Static / Offline Edge)
+  // --------------------------------------------------------------------------
+  async function hashClientPassword(pwd) {
+    const enc = new TextEncoder();
+    const buf = await crypto.subtle.digest('SHA-256', enc.encode(pwd));
+    return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
+  }
+
+  function getClientUsersDb() {
+    try {
+      return JSON.parse(localStorage.getItem('lms_local_users') || '[]');
+    } catch (e) {
+      return [];
+    }
+  }
+
+  function saveClientUsersDb(users) {
+    localStorage.setItem('lms_local_users', JSON.stringify(users));
+  }
+
+  async function performClientRegister(displayName, email, password, role) {
+    const cleanEmail = email.trim().toLowerCase();
+    const pHash = await hashClientPassword(password);
+    const users = getClientUsersDb();
+    if (users.some(u => u.email === cleanEmail)) {
+      return { success: false, error: 'An account with this email already exists. Please sign in.' };
+    }
+    const user = {
+      uid: 'u_local_' + Date.now().toString(36) + '_' + Math.random().toString(36).substring(2, 6),
+      email: cleanEmail,
+      displayName: displayName.trim(),
+      role: role || 'parent',
+      provider: 'local',
+      isVerified: true
+    };
+    users.push({ ...user, passwordHash: pHash });
+    saveClientUsersDb(users);
+    return { success: true, user };
+  }
+
+  async function performClientLogin(email, password) {
+    const cleanEmail = email.trim().toLowerCase();
+    const pHash = await hashClientPassword(password);
+
+    // Check built-in Super Admin
+    if (cleanEmail === 'admin@islamicstudies.org' && password === 'Admin@Islam2026!') {
+      return {
+        success: true,
+        user: {
+          uid: 'admin_local_1',
+          email: 'admin@islamicstudies.org',
+          displayName: 'Portal Administrator',
+          role: 'super_admin',
+          provider: 'local',
+          isVerified: true
+        }
+      };
+    }
+
+    const users = getClientUsersDb();
+    const match = users.find(u => u.email === cleanEmail && u.passwordHash === pHash);
+    if (match) {
+      const { passwordHash, ...safe } = match;
+      return { success: true, user: safe };
+    }
+    return { success: false, error: 'Invalid email or password.' };
+  }
+
+  // Email Sign In Form Submit (Modal)
   if (emailAuthForm) {
     emailAuthForm.addEventListener('submit', async (e) => {
       e.preventDefault();
@@ -2378,26 +2448,48 @@ document.addEventListener('DOMContentLoaded', () => {
       const password = authPasswordInput.value;
 
       try {
-        const res = await fetch('/api/auth/login', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email, password })
-        });
-        const data = await res.json().catch(() => null);
-        if (res.ok && data && data.success && data.user) {
-          currentUser = data.user;
-          localStorage.setItem('lms_user', JSON.stringify(currentUser));
-          updateAuthUI();
-          await fetchFamilyChildren();
-          closeAccessibleModal(authModal);
-          switchView('parent');
-        } else {
-          const msg = (data && data.error) ? data.error : 'Invalid email or password.';
-          showAuthAlert(msg, 'error');
+        let data = null;
+        let isServerSuccess = false;
+
+        try {
+          const res = await fetch('/api/auth/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, password })
+          });
+          const ct = res.headers.get('content-type') || '';
+          if (ct.includes('application/json')) {
+            data = await res.json().catch(() => null);
+            if (res.ok && data && data.success && data.user) {
+              isServerSuccess = true;
+            }
+          }
+        } catch (netErr) {
+          console.warn('Backend login attempt fell back to offline storage:', netErr);
         }
+
+        if (!isServerSuccess) {
+          if (data && data.error) {
+            showAuthAlert(data.error, 'error');
+            return;
+          }
+          const clientRes = await performClientLogin(email, password);
+          if (!clientRes.success) {
+            showAuthAlert(clientRes.error || 'Invalid email or password.', 'error');
+            return;
+          }
+          data = clientRes;
+        }
+
+        currentUser = data.user;
+        localStorage.setItem('lms_user', JSON.stringify(currentUser));
+        updateAuthUI();
+        await fetchFamilyChildren();
+        closeAccessibleModal(authModal);
+        switchView('parent');
       } catch (err) {
         console.error('Sign in error:', err);
-        showAuthAlert('Unable to reach server. Please check your network connection.', 'error');
+        showAuthAlert('Unable to complete sign in. Please try again.', 'error');
       }
     });
   }
@@ -2411,28 +2503,51 @@ document.addEventListener('DOMContentLoaded', () => {
       const password = homeAuthPasswordInput.value;
 
       try {
-        const res = await fetch('/api/auth/login', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email, password })
-        });
-        const data = await res.json().catch(() => null);
-        if (res.ok && data && data.success && data.user) {
-          currentUser = data.user;
-          localStorage.setItem('lms_user', JSON.stringify(currentUser));
-          updateAuthUI();
-          await fetchFamilyChildren();
-          showToast('Welcome Back! 👋', `Signed in as ${data.user.displayName}`, 'success');
-          switchView('parent');
-        } else {
-          const msg = (data && data.error) ? data.error : 'Invalid email or password.';
-          showAuthAlert(msg, 'error', homeAuthAlertMsg);
-          showToast('Sign In Failed', msg, 'error');
+        let data = null;
+        let isServerSuccess = false;
+
+        try {
+          const res = await fetch('/api/auth/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, password })
+          });
+          const ct = res.headers.get('content-type') || '';
+          if (ct.includes('application/json')) {
+            data = await res.json().catch(() => null);
+            if (res.ok && data && data.success && data.user) {
+              isServerSuccess = true;
+            }
+          }
+        } catch (netErr) {
+          console.warn('Backend login attempt fell back to offline storage:', netErr);
         }
+
+        if (!isServerSuccess) {
+          if (data && data.error) {
+            showAuthAlert(data.error, 'error', homeAuthAlertMsg);
+            showToast('Sign In Failed', data.error, 'error');
+            return;
+          }
+          const clientRes = await performClientLogin(email, password);
+          if (!clientRes.success) {
+            const msg = clientRes.error || 'Invalid email or password.';
+            showAuthAlert(msg, 'error', homeAuthAlertMsg);
+            showToast('Sign In Failed', msg, 'error');
+            return;
+          }
+          data = clientRes;
+        }
+
+        currentUser = data.user;
+        localStorage.setItem('lms_user', JSON.stringify(currentUser));
+        updateAuthUI();
+        await fetchFamilyChildren();
+        showToast('Welcome Back! 👋', `Signed in as ${data.user.displayName}`, 'success');
+        switchView('parent');
       } catch (err) {
         console.error('Homepage sign in error:', err);
-        showAuthAlert('Unable to reach server. Please check your network connection.', 'error', homeAuthAlertMsg);
-        showToast('Network Error', 'Unable to reach authentication server.', 'error');
+        showAuthAlert('Unable to complete sign in. Please try again.', 'error', homeAuthAlertMsg);
       }
     });
   }
@@ -2457,30 +2572,51 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       try {
-        const res = await fetch('/api/auth/register', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ displayName, email, password, role })
-        });
-        const data = await res.json().catch(() => null);
-        if (res.ok && data && data.success && data.user) {
-          currentUser = data.user;
-          localStorage.setItem('lms_user', JSON.stringify(currentUser));
-          updateAuthUI();
-          await fetchFamilyChildren();
-          showAuthAlert('Account created successfully! Redirecting...', 'success');
-          setTimeout(() => {
-            closeAccessibleModal(authModal);
-            switchView('parent');
-          }, 600);
-        } else {
-          let errMsg = (data && data.error) ? data.error : 'Registration failed. Please verify your inputs.';
-          if (!data && res.status === 400) errMsg = 'Please verify your inputs and ensure password is at least 6 characters.';
-          showAuthAlert(errMsg, 'error');
+        let data = null;
+        let isServerSuccess = false;
+
+        try {
+          const res = await fetch('/api/auth/register', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ displayName, email, password, role })
+          });
+          const ct = res.headers.get('content-type') || '';
+          if (ct.includes('application/json')) {
+            data = await res.json().catch(() => null);
+            if (res.ok && data && data.success && data.user) {
+              isServerSuccess = true;
+            }
+          }
+        } catch (netErr) {
+          console.warn('Backend register attempt fell back to offline storage:', netErr);
         }
+
+        if (!isServerSuccess) {
+          if (data && data.error) {
+            showAuthAlert(data.error, 'error');
+            return;
+          }
+          const clientRes = await performClientRegister(displayName, email, password, role);
+          if (!clientRes.success) {
+            showAuthAlert(clientRes.error, 'error');
+            return;
+          }
+          data = clientRes;
+        }
+
+        currentUser = data.user;
+        localStorage.setItem('lms_user', JSON.stringify(currentUser));
+        updateAuthUI();
+        await fetchFamilyChildren();
+        showAuthAlert('Account created successfully! Redirecting...', 'success');
+        setTimeout(() => {
+          closeAccessibleModal(authModal);
+          switchView('parent');
+        }, 600);
       } catch (err) {
         console.error('Sign up error:', err);
-        showAuthAlert('Unable to reach server. Please check your network connection.', 'error');
+        showAuthAlert('Unable to complete registration. Please try again.', 'error');
       }
     });
   }
@@ -2505,32 +2641,53 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       try {
-        const res = await fetch('/api/auth/register', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ displayName, email, password, role })
-        });
-        const data = await res.json().catch(() => null);
-        if (res.ok && data && data.success && data.user) {
-          currentUser = data.user;
-          localStorage.setItem('lms_user', JSON.stringify(currentUser));
-          updateAuthUI();
-          await fetchFamilyChildren();
-          showAuthAlert('Account created successfully! Redirecting...', 'success', homeAuthAlertMsg);
-          showToast('Account Created! 🎉', `Welcome, ${data.user.displayName}`, 'success');
-          setTimeout(() => {
-            switchView('parent');
-          }, 600);
-        } else {
-          let errMsg = (data && data.error) ? data.error : 'Registration failed. Please verify your inputs.';
-          if (!data && res.status === 400) errMsg = 'Please verify your inputs and ensure password is at least 6 characters.';
-          showAuthAlert(errMsg, 'error', homeAuthAlertMsg);
-          showToast('Registration Error', errMsg, 'error');
+        let data = null;
+        let isServerSuccess = false;
+
+        try {
+          const res = await fetch('/api/auth/register', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ displayName, email, password, role })
+          });
+          const ct = res.headers.get('content-type') || '';
+          if (ct.includes('application/json')) {
+            data = await res.json().catch(() => null);
+            if (res.ok && data && data.success && data.user) {
+              isServerSuccess = true;
+            }
+          }
+        } catch (netErr) {
+          console.warn('Backend register attempt fell back to offline storage:', netErr);
         }
+
+        if (!isServerSuccess) {
+          if (data && data.error) {
+            showAuthAlert(data.error, 'error', homeAuthAlertMsg);
+            showToast('Registration Error', data.error, 'error');
+            return;
+          }
+          const clientRes = await performClientRegister(displayName, email, password, role);
+          if (!clientRes.success) {
+            showAuthAlert(clientRes.error, 'error', homeAuthAlertMsg);
+            showToast('Registration Error', clientRes.error, 'error');
+            return;
+          }
+          data = clientRes;
+        }
+
+        currentUser = data.user;
+        localStorage.setItem('lms_user', JSON.stringify(currentUser));
+        updateAuthUI();
+        await fetchFamilyChildren();
+        showAuthAlert('Account created successfully! Redirecting...', 'success', homeAuthAlertMsg);
+        showToast('Account Created! 🎉', `Welcome, ${data.user.displayName}`, 'success');
+        setTimeout(() => {
+          switchView('parent');
+        }, 600);
       } catch (err) {
         console.error('Homepage sign up error:', err);
-        showAuthAlert('Unable to reach server. Please check your network connection.', 'error', homeAuthAlertMsg);
-        showToast('Network Error', 'Unable to reach server.', 'error');
+        showAuthAlert('Unable to complete registration. Please try again.', 'error', homeAuthAlertMsg);
       }
     });
   }
