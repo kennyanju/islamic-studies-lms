@@ -1561,8 +1561,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const signUpEmailInput = document.getElementById('signUpEmailInput');
   const signUpPasswordInput = document.getElementById('signUpPasswordInput');
   const signUpRoleSelect = document.getElementById('signUpRoleSelect');
-  const demoParentBtn = document.getElementById('demoParentBtn');
-  const demoAdminBtn = document.getElementById('demoAdminBtn');
 
   // User Profile Modal Elements
   const userProfileModal = document.getElementById('userProfileModal');
@@ -1789,10 +1787,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Family & Children Management
   async function fetchFamilyChildren() {
     if (!currentUser) {
-      familyChildren = [
-        { id: 'child_demo_1', name: 'Zayd', avatar: '🌟', assignedTrack: 'level1', hasPin: true },
-        { id: 'child_demo_2', name: 'Maryam', avatar: '📚', assignedTrack: 'level2', hasPin: false }
-      ];
+      familyChildren = [];
     } else {
       try {
         const res = await fetch(`/api/parent/children?parentUid=${encodeURIComponent(currentUser.uid)}`);
@@ -2570,61 +2565,6 @@ document.addEventListener('DOMContentLoaded', () => {
       } catch (err) {
         showAuthAlert('Network error attempting registration.', 'error', homeAuthAlertMsg);
       }
-    });
-  }
-
-  // Instant Demo Accounts
-  if (demoParentBtn) {
-    demoParentBtn.addEventListener('click', async () => {
-      await syncAuthWithBackend({
-        uid: 'parent_demo_user',
-        email: 'family@islamicstudies.org',
-        displayName: 'Sister Fatimah & Family',
-        role: 'parent',
-        provider: 'demo'
-      });
-      closeAccessibleModal(authModal);
-      switchView('parent');
-    });
-  }
-
-  if (demoAdminBtn) {
-    demoAdminBtn.addEventListener('click', async () => {
-      await syncAuthWithBackend({
-        uid: 'admin_demo',
-        email: 'admin@islamicstudies.org',
-        displayName: 'Headmaster Admin',
-        role: 'super_admin',
-        provider: 'demo'
-      });
-      closeAccessibleModal(authModal);
-      switchView('admin');
-    });
-  }
-
-  if (homeDemoParentBtn) {
-    homeDemoParentBtn.addEventListener('click', async () => {
-      await syncAuthWithBackend({
-        uid: 'parent_demo_user',
-        email: 'family@islamicstudies.org',
-        displayName: 'Sister Fatimah & Family',
-        role: 'parent',
-        provider: 'demo'
-      });
-      switchView('parent');
-    });
-  }
-
-  if (homeDemoAdminBtn) {
-    homeDemoAdminBtn.addEventListener('click', async () => {
-      await syncAuthWithBackend({
-        uid: 'admin_demo',
-        email: 'admin@islamicstudies.org',
-        displayName: 'Headmaster Admin',
-        role: 'super_admin',
-        provider: 'demo'
-      });
-      switchView('admin');
     });
   }
 

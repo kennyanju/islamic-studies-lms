@@ -29,6 +29,30 @@ const MAX_FIELD_LENGTH = 500;
 // Initialize Database Adapter
 db.init();
 
+// Seed default Super Admin if not already present
+(async function seedAdmin() {
+  try {
+    const adminEmail = (process.env.ADMIN_EMAIL || 'admin@islamicstudies.org').toLowerCase().trim();
+    const adminPassword = process.env.ADMIN_PASSWORD || 'Admin@Islam2026!';
+    const existing = await db.findUserByEmail(adminEmail);
+    if (!existing) {
+      const passwordHash = await bcrypt.hash(adminPassword, BCRYPT_ROUNDS);
+      await db.createUser({
+        uid: 'admin_master_1',
+        email: adminEmail,
+        displayName: 'Portal Administrator',
+        role: 'super_admin',
+        isVerified: true,
+        provider: 'local',
+        passwordHash
+      });
+      console.log(`🛡️ [ADMIN SEED] Super Admin initialized (${adminEmail})`);
+    }
+  } catch (e) {
+    console.error('Error seeding admin account:', e);
+  }
+})();
+
 /* ==========================================================================
    Request Logging & Security Middleware
    ========================================================================== */
