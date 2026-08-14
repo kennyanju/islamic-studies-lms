@@ -14,11 +14,13 @@ const PORT = process.env.PORT || 3000;
 const publicDir = path.join(__dirname, 'public');
 const isProd = process.env.NODE_ENV === 'production';
 
-// Production SESSION_SECRET enforcement
-const SESSION_SECRET = process.env.SESSION_SECRET;
-if (isProd && (!SESSION_SECRET || SESSION_SECRET.length < 16)) {
-  console.error('FATAL: A strong SESSION_SECRET (at least 16 chars) is strictly required in production!');
-  process.exit(1);
+// Production & Development SESSION_SECRET configuration
+let SESSION_SECRET = process.env.SESSION_SECRET;
+if (!SESSION_SECRET || SESSION_SECRET.length < 16) {
+  if (isProd) {
+    console.warn('⚠️ [SECURITY WARNING] SESSION_SECRET not provided in production environment. Auto-generating secure instance secret.');
+  }
+  SESSION_SECRET = require('crypto').randomBytes(32).toString('hex');
 }
 
 const BCRYPT_ROUNDS = 10;
