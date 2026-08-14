@@ -412,22 +412,27 @@ document.addEventListener('DOMContentLoaded', () => {
     themeToggleText.textContent = isLight ? 'Dark Mode' : 'Light Mode';
   }
 
+  function switchTrack(track) {
+    if (!track) return;
+    activeTrack = track;
+    localStorage.setItem('lms_track', activeTrack);
+    updateTrackActiveBtn();
+    if (activeTrack === 'teacher') {
+      activeTab = 'teleprompter';
+    } else if (activeTab === 'teleprompter' || activeTab === 'answerkeys') {
+      activeTab = 'handout';
+    }
+    if (activeModuleId !== null) {
+      openModule(activeModuleId);
+    }
+  }
+
   function setupTrackButtons() {
     updateTrackActiveBtn();
 
     [trackL1, trackL2, trackTeacher].forEach(btn => {
       btn.addEventListener('click', () => {
-        activeTrack = btn.dataset.track;
-        localStorage.setItem('lms_track', activeTrack);
-        updateTrackActiveBtn();
-        if (activeTrack === 'teacher') {
-          activeTab = 'teleprompter';
-        } else if (activeTab === 'teleprompter' || activeTab === 'answerkeys') {
-          activeTab = 'handout';
-        }
-        if (activeModuleId !== null) {
-          openModule(activeModuleId);
-        }
+        switchTrack(btn.dataset.track);
       });
     });
   }
@@ -1781,6 +1786,27 @@ document.addEventListener('DOMContentLoaded', () => {
     switchView('authLanding');
   }
 
+  function renderChildrenGrid() {
+    if (parentDashboardView && parentDashboardView.style.display !== 'none') {
+      renderParentDashboard();
+    }
+  }
+
+  function renderLearnerSelector() {
+    if (activeChild) {
+      if (headerLearnerAvatar) headerLearnerAvatar.textContent = activeChild.avatar || '🌟';
+      if (headerLearnerName) headerLearnerName.textContent = activeChild.name;
+      if (statActiveLearnerName) statActiveLearnerName.textContent = activeChild.name;
+    } else {
+      if (headerLearnerAvatar) headerLearnerAvatar.textContent = '🌟';
+      if (headerLearnerName) headerLearnerName.textContent = 'Select Learner';
+      if (statActiveLearnerName) statActiveLearnerName.textContent = 'None';
+    }
+    if (learnerModal && learnerModal.classList.contains('active')) {
+      openLearnerModal();
+    }
+  }
+
   // Family & Children Management
   async function fetchFamilyChildren() {
     if (!currentUser) {
@@ -2374,9 +2400,22 @@ document.addEventListener('DOMContentLoaded', () => {
   // Client-Side WebCrypto Authentication Engine (Fallback for Static / Offline Edge)
   // --------------------------------------------------------------------------
   async function hashClientPassword(pwd) {
-    const enc = new TextEncoder();
-    const buf = await crypto.subtle.digest('SHA-256', enc.encode(pwd));
-    return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
+    if (typeof window !== 'undefined' && window.crypto && window.crypto.subtle && typeof window.crypto.subtle.digest === 'function') {
+      try {
+        const enc = new TextEncoder();
+        const buf = await window.crypto.subtle.digest('SHA-256', enc.encode(pwd));
+        return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
+      } catch (e) {
+        console.warn('Subtle crypto digest failed, falling back to simple hash:', e);
+      }
+    }
+    let hash = 0;
+    for (let i = 0; i < pwd.length; i++) {
+      const char = pwd.charCodeAt(i);
+      hash = ((hash << 5) - hash) + char;
+      hash = hash & hash;
+    }
+    return 'fallback_' + Math.abs(hash).toString(16);
   }
 
   function getClientUsersDb() {
@@ -2608,7 +2647,11 @@ document.addEventListener('DOMContentLoaded', () => {
         currentUser = data.user;
         localStorage.setItem('lms_user', JSON.stringify(currentUser));
         updateAuthUI();
-        await fetchFamilyChildren();
+        try {
+          await fetchFamilyChildren();
+        } catch (syncErr) {
+          console.warn('Post-registration children sync non-fatal warning:', syncErr);
+        }
         showAuthAlert('Account created successfully! Redirecting...', 'success');
         setTimeout(() => {
           closeAccessibleModal(authModal);
@@ -2679,7 +2722,11 @@ document.addEventListener('DOMContentLoaded', () => {
         currentUser = data.user;
         localStorage.setItem('lms_user', JSON.stringify(currentUser));
         updateAuthUI();
-        await fetchFamilyChildren();
+        try {
+          await fetchFamilyChildren();
+        } catch (syncErr) {
+          console.warn('Post-registration children sync non-fatal warning:', syncErr);
+        }
         showAuthAlert('Account created successfully! Redirecting...', 'success', homeAuthAlertMsg);
         showToast('Account Created! 🎉', `Welcome, ${data.user.displayName}`, 'success');
         setTimeout(() => {

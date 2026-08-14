@@ -7,7 +7,9 @@
     "build": "node compile.js",
     "start": "node server.js",
     "dev": "node compile.js && node server.js",
-    "test": "jest --runInBand --detectOpenHandles --forceExit"
+    "test": "jest --runInBand --detectOpenHandles --forceExit",
+    "test:smoke": "node compile.js && jest tests/smoke.test.js --forceExit",
+    "smoke": "npm run test:smoke"
   },
   "keywords": [
     "lms",

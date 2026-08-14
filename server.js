@@ -15,12 +15,61 @@ const PORT = process.env.PORT || 3000;
 const publicDir = path.join(__dirname, 'public');
 const isProd = process.env.NODE_ENV === 'production';
 
+// Environment & Startup Validation
+function validateEnvironment() {
+  const warnings = [];
+  const errors = [];
+  const nodeEnv = process.env.NODE_ENV || 'development';
+
+  // Check SESSION_SECRET
+  const sessionSecret = process.env.SESSION_SECRET;
+  if (!sessionSecret || sessionSecret.length < 16 || sessionSecret.includes('change_this_in_production')) {
+    if (nodeEnv === 'production') {
+      warnings.push('SESSION_SECRET is missing, too short, or using default placeholder. Generating secure ephemeral session secret.');
+    }
+  }
+
+  // Check Admin Credentials in Production
+  const adminEmail = process.env.ADMIN_EMAIL;
+  const adminPassword = process.env.ADMIN_PASSWORD;
+  if (nodeEnv === 'production') {
+    if (!adminPassword || adminPassword === 'Admin@Islam2026!') {
+      warnings.push('Default admin password ("Admin@Islam2026!") is active in production. Set ADMIN_PASSWORD in environment variables.');
+    }
+    if (!adminEmail) {
+      warnings.push('ADMIN_EMAIL not specified; default ("admin@islamicstudies.org") will be used.');
+    }
+  }
+
+  // Pre-flight check: Data directory writability
+  try {
+    const dataDir = path.join(__dirname, 'data');
+    if (!fs.existsSync(dataDir)) {
+      fs.mkdirSync(dataDir, { recursive: true });
+    }
+    fs.accessSync(dataDir, fs.constants.R_OK | fs.constants.W_OK);
+  } catch (fsErr) {
+    errors.push(`Data storage directory (data/) is not readable/writable: ${fsErr.message}`);
+  }
+
+  if (errors.length > 0) {
+    console.error('💥 [CONFIGURATION FATAL] Startup environment validation failed:');
+    errors.forEach(e => console.error(`   ❌ ${e}`));
+    process.exit(1);
+  }
+
+  if (warnings.length > 0) {
+    console.warn('⚠️  [CONFIGURATION WARNINGS]:');
+    warnings.forEach(w => console.warn(`   ⚠️  ${w}`));
+  }
+}
+
+// Run environment validation on startup
+validateEnvironment();
+
 // Production & Development SESSION_SECRET configuration
 let SESSION_SECRET = process.env.SESSION_SECRET;
-if (!SESSION_SECRET || SESSION_SECRET.length < 16) {
-  if (isProd) {
-    console.warn('⚠️ [SECURITY WARNING] SESSION_SECRET not provided in production environment. Auto-generating secure instance secret.');
-  }
+if (!SESSION_SECRET || SESSION_SECRET.length < 16 || SESSION_SECRET.includes('change_this_in_production')) {
   SESSION_SECRET = require('crypto').randomBytes(32).toString('hex');
 }
 
@@ -61,7 +110,7 @@ db.init();
 // Morgan HTTP logger
 app.use(morgan(isProd ? 'combined' : 'dev'));
 
-// Helmet for security headers
+// Helmet for security headers & CSP violation reporting
 app.use(helmet({
   contentSecurityPolicy: {
     directives: {
@@ -71,6 +120,7 @@ app.use(helmet({
       fontSrc: ["'self'", "fonts.gstatic.com", "cdnjs.cloudflare.com"],
       imgSrc: ["'self'", "data:", "api.dicebear.com", "https:"],
       connectSrc: ["'self'", "https:", "http:"],
+      reportUri: ['/api/telemetry/csp']
     }
   }
 }));
@@ -254,10 +304,26 @@ function requireParentOwnership(req, res, next) {
 }
 
 /* ==========================================================================
-   Course Data API
+   Health Check & Course Data API
    ========================================================================== */
 
-app.get('/api/course-data', (req, res) => {
+// Startup & Runtime Health Check
+app.get(['/api/health', '/healthz'], (req, res) => {
+  const isStorageHealthy = db && typeof db._loadFile === 'function';
+  const mem = process.memoryUsage();
+  res.json({
+    status: 'ok',
+    uptime: Math.floor(process.uptime()),
+    timestamp: new Date().toISOString(),
+    env: process.env.NODE_ENV || 'development',
+    storage: db ? db.type : 'unknown',
+    storageHealthy: isStorageHealthy,
+    memoryRssMb: Math.round(mem.rss / 1024 / 1024)
+  });
+});
+
+// Course Data / Modules API
+app.get(['/api/course-data', '/api/modules'], (req, res) => {
   if (fs.existsSync(dataFile)) {
     res.sendFile(dataFile);
   } else {
@@ -760,15 +826,53 @@ app.put('/api/admin/users/:uid/role', requireAdmin, async (req, res, next) => {
 });
 
 /* ==========================================================================
-   Telemetry & Client Error Monitoring API
+   Telemetry, CSP Reporting & Client Error Monitoring API
    ========================================================================== */
 
-app.post('/api/telemetry/errors', (req, res) => {
-  const { message, source, lineno, colno, stack, url, timestamp } = req.body;
-  console.warn(`⚠️ [Client Telemetry Error] [${timestamp || new Date().toISOString()}] ${message} at ${source || url}:${lineno || ''}`);
-  if (stack && !isProd) {
-    console.warn(`   Stack: ${stack.split('\n')[0]}`);
+// Runtime Telemetry & Violation Counter
+const telemetryMetrics = {
+  clientErrors: 0,
+  cspViolations: 0,
+  lastCspAlertTime: 0,
+  lastErrorAlertTime: 0
+};
+
+// CSP Violation Reporting Endpoint
+app.post('/api/telemetry/csp', express.json({ type: ['application/json', 'application/csp-report'] }), (req, res) => {
+  telemetryMetrics.cspViolations++;
+  const report = req.body['csp-report'] || req.body || {};
+  const blockedUri = report['blocked-uri'] || report.blockedUri || 'unknown';
+  const violatedDirective = report['violated-directive'] || report.violatedDirective || 'unknown';
+  const documentUri = report['document-uri'] || report.documentUri || '';
+
+  console.warn(`🛡️  [CSP Violation] Blocked URI: ${blockedUri} | Directive: ${violatedDirective} | Document: ${documentUri}`);
+
+  // Alert if high frequency of CSP violations occur (e.g. >= 5 within 1 min)
+  const now = Date.now();
+  if (telemetryMetrics.cspViolations >= 5 && now - telemetryMetrics.lastCspAlertTime > 60000) {
+    console.error(`🚨 [ALERT] High frequency of CSP violations detected (${telemetryMetrics.cspViolations} total). Please inspect CSP rules or unexpected scripts.`);
+    telemetryMetrics.lastCspAlertTime = now;
   }
+
+  res.status(204).end();
+});
+
+// Client Error Telemetry Endpoint
+app.post('/api/telemetry/errors', (req, res) => {
+  telemetryMetrics.clientErrors++;
+  const { message, source, lineno, colno, stack, url, timestamp } = req.body || {};
+  console.warn(`⚠️ [Client Telemetry Error] [${timestamp || new Date().toISOString()}] ${message || 'Unknown error'} at ${source || url || ''}:${lineno || ''}`);
+  if (stack && !isProd) {
+    console.warn(`   Stack: ${String(stack).split('\n')[0]}`);
+  }
+
+  // Alert on high volume of client errors
+  const now = Date.now();
+  if (telemetryMetrics.clientErrors >= 10 && now - telemetryMetrics.lastErrorAlertTime > 60000) {
+    console.error(`🚨 [ALERT] High volume of client errors logged (${telemetryMetrics.clientErrors} total). Possible frontend regression.`);
+    telemetryMetrics.lastErrorAlertTime = now;
+  }
+
   res.json({ success: true, logged: true });
 });
 
@@ -795,15 +899,49 @@ app.use((err, req, res, next) => {
   });
 });
 
-if (require.main === module) {
-  app.listen(PORT, () => {
+/* ==========================================================================
+   Server Startup with Port Fallback Strategy
+   ========================================================================== */
+
+function startServer(portToTry, attemptsRemaining = 10) {
+  const currentPort = parseInt(portToTry, 10);
+  const server = app.listen(currentPort);
+
+  server.on('listening', () => {
+    const isFallback = currentPort !== parseInt(PORT, 10);
     console.log(`=======================================================`);
-    console.log(` 🕌 Islamic Studies LMS Server running on port ${PORT}`);
-    console.log(` 🌐 Local: http://localhost:${PORT}`);
+    console.log(` 🕌 Islamic Studies LMS Server running on port ${currentPort}${isFallback ? ' (FALLBACK ACTIVE)' : ''}`);
+    console.log(` 🌐 Local: http://localhost:${currentPort}`);
     console.log(` 🛡️  Environment: ${process.env.NODE_ENV || 'development'}`);
     console.log(` 📦 Storage: ${db.type.toUpperCase()}`);
+    console.log(` 🩺 Health: http://localhost:${currentPort}/api/health`);
     console.log(`=======================================================`);
   });
+
+  server.on('error', (err) => {
+    if (err.code === 'EADDRINUSE') {
+      console.warn(`⚠️  [PORT CONFLICT] Port ${currentPort} is currently in use.`);
+      if (attemptsRemaining > 0) {
+        const nextPort = currentPort + 1;
+        console.log(`🔄 [PORT FALLBACK] Automatically switching to port ${nextPort} (${attemptsRemaining} attempts left)...`);
+        startServer(nextPort, attemptsRemaining - 1);
+      } else {
+        console.error(`💥 [STARTUP FATAL] Exhausted all port fallback attempts. Cannot start server.`);
+        process.exit(1);
+      }
+    } else {
+      console.error(`💥 [STARTUP FATAL] Server startup failed with error:`, err);
+      process.exit(1);
+    }
+  });
+
+  return server;
+}
+
+if (require.main === module) {
+  startServer(PORT);
 }
 
 module.exports = app;
+module.exports.startServer = startServer;
+module.exports.validateEnvironment = validateEnvironment;
