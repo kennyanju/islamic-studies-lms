@@ -11,7 +11,7 @@ describe('Super Admin Access & Management Tests', () => {
     // Admin login
     await adminAgent.post('/api/auth/login').send({
       email: 'admin@islamicstudies.org',
-      password: 'admin123'
+      password: 'Admin@Islam2026!'
     });
 
     // Parent login

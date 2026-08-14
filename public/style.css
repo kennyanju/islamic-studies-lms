@@ -2646,48 +2646,6 @@ h1, h2, h3, h4, .logo-title, .cert-title {
   background: var(--emerald-hover);
 }
 
-.demo-auth-box {
-  margin-top: 20px;
-  padding-top: 16px;
-  border-top: 1px dashed var(--card-border);
-  text-align: center;
-}
-
-.demo-label {
-  font-size: 0.8rem;
-  color: var(--text-subtle);
-  display: block;
-  margin-bottom: 8px;
-}
-
-.demo-btn-row {
-  display: flex;
-  gap: 10px;
-}
-
-.btn-demo-acc {
-  flex: 1;
-  background: var(--input-bg);
-  color: var(--text-main);
-  border: 1px solid var(--card-border);
-  border-radius: var(--radius-md);
-  padding: 8px;
-  font-size: 0.8rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: var(--transition);
-}
-
-.btn-demo-acc:hover {
-  border-color: var(--emerald-primary);
-  color: var(--emerald-primary);
-}
-
-.btn-demo-acc.gold:hover {
-  border-color: var(--gold-border);
-  color: var(--gold-accent);
-}
-
 /* Avatar Picker Grid */
 .avatar-selector-grid {
   display: grid;
@@ -3309,11 +3267,6 @@ body.unauthenticated-view .main-content {
 
   .federated-btn-grid {
     grid-template-columns: 1fr;
-    gap: 8px;
-  }
-
-  .demo-btn-row {
-    flex-direction: column;
     gap: 8px;
   }
 

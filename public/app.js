@@ -2237,9 +2237,13 @@ document.addEventListener('DOMContentLoaded', () => {
   if (childForm) {
     childForm.addEventListener('submit', async (e) => {
       e.preventDefault();
+      if (!currentUser) {
+        showToast('Sign In Required', 'Please sign in to add or edit learner profiles.', 'error');
+        return;
+      }
       const pinVal = childPinInput.value.trim();
       const childData = {
-        parentUid: currentUser ? currentUser.uid : 'admin_demo',
+        parentUid: currentUser.uid,
         name: childNameInput.value.trim(),
         avatar: selectedChildAvatar.value,
         assignedTrack: childTrackSelect.value
@@ -2344,94 +2348,18 @@ document.addEventListener('DOMContentLoaded', () => {
     profileSignOutBtn.addEventListener('click', handleSignOut);
   }
 
-  // Federated Auth Sign In Handlers (Google, Apple, Microsoft) - Modal
-  if (googleSignInBtn) {
-    googleSignInBtn.addEventListener('click', async () => {
-      const mockGoogleUser = {
-        uid: `google_${Date.now()}`,
-        email: `parent_${Math.floor(Math.random()*1000)}@gmail.com`,
-        displayName: 'Google Muslim Parent',
-        photoURL: 'https://api.dicebear.com/7.x/avataaars/svg?seed=google',
-        provider: 'google.com'
-      };
-      await syncAuthWithBackend(mockGoogleUser);
-      closeAccessibleModal(authModal);
-      switchView('parent');
-    });
+  // Federated Auth Sign In Notice (Google, Apple, Microsoft)
+  function handleOAuthNotice(providerName) {
+    showToast(`${providerName} Sign-In`, `${providerName} Single Sign-On is being enabled for the upcoming mobile update. Please register or sign in with your Email and Password below.`, 'info', 6000);
   }
 
-  if (appleSignInBtn) {
-    appleSignInBtn.addEventListener('click', async () => {
-      const mockAppleUser = {
-        uid: `apple_${Date.now()}`,
-        email: `parent_${Math.floor(Math.random()*1000)}@privaterelay.appleid.com`,
-        displayName: 'Apple Parent Account',
-        photoURL: 'https://api.dicebear.com/7.x/avataaars/svg?seed=apple',
-        provider: 'apple.com'
-      };
-      await syncAuthWithBackend(mockAppleUser);
-      closeAccessibleModal(authModal);
-      switchView('parent');
-    });
-  }
+  if (googleSignInBtn) googleSignInBtn.addEventListener('click', () => handleOAuthNotice('Google'));
+  if (appleSignInBtn) appleSignInBtn.addEventListener('click', () => handleOAuthNotice('Apple'));
+  if (microsoftSignInBtn) microsoftSignInBtn.addEventListener('click', () => handleOAuthNotice('Microsoft'));
 
-  if (microsoftSignInBtn) {
-    microsoftSignInBtn.addEventListener('click', async () => {
-      const mockMsUser = {
-        uid: `ms_${Date.now()}`,
-        email: `parent_${Math.floor(Math.random()*1000)}@outlook.com`,
-        displayName: 'Microsoft Educator Parent',
-        photoURL: 'https://api.dicebear.com/7.x/avataaars/svg?seed=microsoft',
-        provider: 'microsoft.com'
-      };
-      await syncAuthWithBackend(mockMsUser);
-      closeAccessibleModal(authModal);
-      switchView('parent');
-    });
-  }
-
-  // Homepage Auth Federated Buttons
-  if (homeGoogleSignInBtn) {
-    homeGoogleSignInBtn.addEventListener('click', async () => {
-      const mockGoogleUser = {
-        uid: `google_${Date.now()}`,
-        email: `parent_${Math.floor(Math.random()*1000)}@gmail.com`,
-        displayName: 'Google Muslim Parent',
-        photoURL: 'https://api.dicebear.com/7.x/avataaars/svg?seed=google',
-        provider: 'google.com'
-      };
-      await syncAuthWithBackend(mockGoogleUser);
-      switchView('parent');
-    });
-  }
-
-  if (homeAppleSignInBtn) {
-    homeAppleSignInBtn.addEventListener('click', async () => {
-      const mockAppleUser = {
-        uid: `apple_${Date.now()}`,
-        email: `parent_${Math.floor(Math.random()*1000)}@privaterelay.appleid.com`,
-        displayName: 'Apple Parent Account',
-        photoURL: 'https://api.dicebear.com/7.x/avataaars/svg?seed=apple',
-        provider: 'apple.com'
-      };
-      await syncAuthWithBackend(mockAppleUser);
-      switchView('parent');
-    });
-  }
-
-  if (homeMicrosoftSignInBtn) {
-    homeMicrosoftSignInBtn.addEventListener('click', async () => {
-      const mockMsUser = {
-        uid: `ms_${Date.now()}`,
-        email: `parent_${Math.floor(Math.random()*1000)}@outlook.com`,
-        displayName: 'Microsoft Educator Parent',
-        photoURL: 'https://api.dicebear.com/7.x/avataaars/svg?seed=microsoft',
-        provider: 'microsoft.com'
-      };
-      await syncAuthWithBackend(mockMsUser);
-      switchView('parent');
-    });
-  }
+  if (homeGoogleSignInBtn) homeGoogleSignInBtn.addEventListener('click', () => handleOAuthNotice('Google'));
+  if (homeAppleSignInBtn) homeAppleSignInBtn.addEventListener('click', () => handleOAuthNotice('Apple'));
+  if (homeMicrosoftSignInBtn) homeMicrosoftSignInBtn.addEventListener('click', () => handleOAuthNotice('Microsoft'));
 
   // Email Sign In Form Submit (Modal)
   if (emailAuthForm) {
