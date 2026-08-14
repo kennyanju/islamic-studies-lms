@@ -1788,21 +1788,44 @@ document.addEventListener('DOMContentLoaded', () => {
   async function fetchFamilyChildren() {
     if (!currentUser) {
       familyChildren = [];
-    } else {
-      try {
-        const res = await fetch(`/api/parent/children?parentUid=${encodeURIComponent(currentUser.uid)}`);
+      renderChildrenGrid();
+      renderLearnerSelector();
+      return;
+    }
+
+    try {
+      const res = await fetch(`/api/parent/children?parentUid=${encodeURIComponent(currentUser.uid)}`);
+      if (res.status === 401 || res.status === 403) {
+        currentUser = null;
+        familyChildren = [];
+        localStorage.removeItem('lms_user');
+        localStorage.removeItem('lms_children');
+        updateAuthUI();
+        switchView('authLanding');
+        return;
+      }
+      if (res.ok) {
         const data = await res.json();
-        if (data.success && data.children) {
+        if (data.success && Array.isArray(data.children)) {
           familyChildren = data.children;
           localStorage.setItem('lms_children', JSON.stringify(familyChildren));
-        } else if (data.error) {
-          showToast('Sync Warning', data.error, 'info');
         }
-      } catch (err) {
-        console.error('Error fetching children profiles:', err);
-        showToast('Network Error', 'Could not sync children profiles from server.', 'error');
+      } else {
+        const cached = localStorage.getItem('lms_children');
+        if (cached) {
+          try { familyChildren = JSON.parse(cached); } catch (e) {}
+        }
+      }
+    } catch (err) {
+      console.warn('Children sync notice:', err);
+      const cached = localStorage.getItem('lms_children');
+      if (cached) {
+        try { familyChildren = JSON.parse(cached); } catch (e) {}
       }
     }
+
+    renderChildrenGrid();
+    renderLearnerSelector();
 
     // Set default active child if none selected
     if (!activeChild && familyChildren.length > 0) {
@@ -1811,6 +1834,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const refreshed = familyChildren.find(c => c.id === activeChild.id);
       if (refreshed) setActiveChild(refreshed);
       else if (familyChildren.length > 0) setActiveChild(familyChildren[0]);
+      else activeChild = null;
     }
   }
 
@@ -2500,20 +2524,23 @@ document.addEventListener('DOMContentLoaded', () => {
   (async function initMultiTenant() {
     try {
       const res = await fetch('/api/auth/me');
-      const data = await res.json();
-      if (data.success && data.user) {
-        currentUser = data.user;
-        localStorage.setItem('lms_user', JSON.stringify(currentUser));
+      if (res.ok) {
+        const data = await res.json();
+        if (data.success && data.user) {
+          currentUser = data.user;
+          localStorage.setItem('lms_user', JSON.stringify(currentUser));
+        } else {
+          currentUser = null;
+          localStorage.removeItem('lms_user');
+        }
       } else {
         currentUser = null;
         localStorage.removeItem('lms_user');
       }
     } catch (e) {
-      console.warn('Session verification fallback:', e);
-      const savedUser = localStorage.getItem('lms_user');
-      if (savedUser) {
-        try { currentUser = JSON.parse(savedUser); } catch (err) {}
-      }
+      console.warn('Session verification notice:', e);
+      currentUser = null;
+      localStorage.removeItem('lms_user');
     }
     
     updateAuthUI();

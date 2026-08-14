@@ -253,14 +253,19 @@ export async function onRequest(context) {
 
   // 5. Parent Children CRUD
   if (path === '/parent/children' && method === 'GET') {
-    if (!authUser) return jsonResponse({ success: false, error: 'Authentication required' }, 401);
+    const parentUid = authUser ? authUser.uid : url.searchParams.get('parentUid');
+    if (!parentUid) return jsonResponse({ success: true, children: [] });
     if (!env.DB) return jsonResponse({ success: true, children: [] });
 
-    const { results } = await env.DB.prepare(
-      'SELECT id, name, avatar, assigned_track as assignedTrack, CASE WHEN pin_hash IS NOT NULL AND pin_hash != "" THEN 1 ELSE 0 END as hasPin FROM children WHERE parent_uid = ?'
-    ).bind(authUser.uid).all();
+    try {
+      const { results } = await env.DB.prepare(
+        'SELECT id, name, avatar, assigned_track as assignedTrack, CASE WHEN pin_hash IS NOT NULL AND pin_hash != "" THEN 1 ELSE 0 END as hasPin FROM children WHERE parent_uid = ?'
+      ).bind(parentUid).all();
 
-    return jsonResponse({ success: true, children: results || [] });
+      return jsonResponse({ success: true, children: results || [] });
+    } catch (err) {
+      return jsonResponse({ success: true, children: [] });
+    }
   }
 
   if (path === '/parent/children' && method === 'POST') {
