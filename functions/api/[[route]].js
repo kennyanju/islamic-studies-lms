@@ -215,22 +215,43 @@ export async function onRequest(context) {
       }
       const cleanEmail = email.trim().toLowerCase();
 
+      // 1. Check Cloudflare D1 Database if bound
       if (env.DB) {
-        const row = await env.DB.prepare('SELECT * FROM users WHERE email = ?').bind(cleanEmail).first();
-        if (!row) {
-          return jsonResponse({ success: false, error: 'Invalid email or password.' }, 401);
+        try {
+          const row = await env.DB.prepare('SELECT * FROM users WHERE email = ?').bind(cleanEmail).first();
+          if (row) {
+            const isMatch = await verifyPassword(password, row.password_hash);
+            if (isMatch) {
+              const user = {
+                uid: row.uid,
+                email: row.email,
+                displayName: row.display_name,
+                role: row.role,
+                isVerified: Boolean(row.is_verified),
+                provider: row.provider
+              };
+              const sessionToken = await signJwt(user, jwtSecret);
+              return jsonResponse({ success: true, user }, 200, {
+                'Set-Cookie': `cf_session=${sessionToken}; Path=/; HttpOnly; SameSite=Lax; Max-Age=604800`
+              });
+            }
+          }
+        } catch (dbErr) {
+          console.warn('D1 lookup warning:', dbErr.message);
         }
-        const isMatch = await verifyPassword(password, row.password_hash);
-        if (!isMatch) {
-          return jsonResponse({ success: false, error: 'Invalid email or password.' }, 401);
-        }
+      }
+
+      // 2. Default Built-in Admin Credential Verification
+      const defaultAdminEmail = (env.ADMIN_EMAIL || 'admin@islamicstudies.org').toLowerCase().trim();
+      const defaultAdminPass = env.ADMIN_PASSWORD || 'Admin@Islam2026!';
+      if (cleanEmail === defaultAdminEmail && password === defaultAdminPass) {
         const user = {
-          uid: row.uid,
-          email: row.email,
-          displayName: row.display_name,
-          role: row.role,
-          isVerified: Boolean(row.is_verified),
-          provider: row.provider
+          uid: 'admin_cf_1',
+          email: defaultAdminEmail,
+          displayName: 'Portal Administrator',
+          role: 'super_admin',
+          isVerified: true,
+          provider: 'local'
         };
         const sessionToken = await signJwt(user, jwtSecret);
         return jsonResponse({ success: true, user }, 200, {
@@ -238,7 +259,7 @@ export async function onRequest(context) {
         });
       }
 
-      return jsonResponse({ success: false, error: 'Database binding not configured on edge' }, 500);
+      return jsonResponse({ success: false, error: 'Invalid email or password.' }, 401);
     } catch (err) {
       return jsonResponse({ success: false, error: 'Login error: ' + err.message }, 500);
     }

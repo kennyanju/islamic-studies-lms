@@ -2404,8 +2404,8 @@ document.addEventListener('DOMContentLoaded', () => {
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ email, password })
         });
-        const data = await res.json();
-        if (data.success && data.user) {
+        const data = await res.json().catch(() => null);
+        if (res.ok && data && data.success && data.user) {
           currentUser = data.user;
           localStorage.setItem('lms_user', JSON.stringify(currentUser));
           updateAuthUI();
@@ -2413,10 +2413,12 @@ document.addEventListener('DOMContentLoaded', () => {
           closeAccessibleModal(authModal);
           switchView('parent');
         } else {
-          showAuthAlert(data.error || 'Sign in failed.');
+          const msg = (data && data.error) ? data.error : 'Invalid email or password.';
+          showAuthAlert(msg, 'error');
         }
       } catch (err) {
-        showAuthAlert('Network error attempting sign in.');
+        console.error('Sign in error:', err);
+        showAuthAlert('Unable to reach server. Please check your network connection.', 'error');
       }
     });
   }
@@ -2435,8 +2437,8 @@ document.addEventListener('DOMContentLoaded', () => {
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ email, password })
         });
-        const data = await res.json();
-        if (data.success && data.user) {
+        const data = await res.json().catch(() => null);
+        if (res.ok && data && data.success && data.user) {
           currentUser = data.user;
           localStorage.setItem('lms_user', JSON.stringify(currentUser));
           updateAuthUI();
@@ -2444,12 +2446,14 @@ document.addEventListener('DOMContentLoaded', () => {
           showToast('Welcome Back! 👋', `Signed in as ${data.user.displayName}`, 'success');
           switchView('parent');
         } else {
-          showAuthAlert(data.error || 'Sign in failed.', 'error', homeAuthAlertMsg);
-          showToast('Sign In Failed', data.error || 'Invalid credentials.', 'error');
+          const msg = (data && data.error) ? data.error : 'Invalid email or password.';
+          showAuthAlert(msg, 'error', homeAuthAlertMsg);
+          showToast('Sign In Failed', msg, 'error');
         }
       } catch (err) {
-        showAuthAlert('Network error attempting sign in.', 'error', homeAuthAlertMsg);
-        showToast('Network Error', 'Failed to connect to authentication server.', 'error');
+        console.error('Homepage sign in error:', err);
+        showAuthAlert('Unable to reach server. Please check your network connection.', 'error', homeAuthAlertMsg);
+        showToast('Network Error', 'Unable to reach authentication server.', 'error');
       }
     });
   }
