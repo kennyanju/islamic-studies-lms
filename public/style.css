@@ -600,6 +600,63 @@ h1, h2, h3, h4, .logo-title, .cert-title {
   color: var(--emerald-primary);
 }
 
+.header-btn.signout-btn {
+  background-color: transparent;
+  border-color: rgba(239, 68, 68, 0.35);
+  color: #ef4444;
+}
+
+.header-btn.signout-btn:hover {
+  background-color: rgba(239, 68, 68, 0.1);
+  border-color: #ef4444;
+  color: #dc2626;
+}
+
+.btn-sidebar-signout {
+  width: 100%;
+  padding: 10px 14px;
+  background-color: transparent;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  border-radius: var(--radius-sm);
+  color: #ef4444;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 8px;
+  transition: var(--transition);
+}
+
+.btn-sidebar-signout:hover {
+  background-color: rgba(239, 68, 68, 0.12);
+  border-color: #ef4444;
+}
+
+.hero-action-btn-sm {
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #ffffff;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: var(--transition);
+  backdrop-filter: blur(8px);
+}
+
+.hero-action-btn-sm:hover {
+  background: rgba(239, 68, 68, 0.3);
+  border-color: #ef4444;
+  color: #ffffff;
+}
+
 /* Search Panel */
 .search-results-panel {
   background-color: var(--card-bg);

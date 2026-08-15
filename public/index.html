@@ -97,11 +97,15 @@
         </ul>
       </nav>
 
-      <!-- Sidebar Footer Theme Toggle -->
+      <!-- Sidebar Footer Theme Toggle & Sign Out -->
       <div class="sidebar-footer">
         <button class="btn-theme-toggle" id="themeToggleBtn" aria-label="Toggle visual theme between dark and light mode">
           <i class="fa-solid fa-moon" aria-hidden="true"></i>
           <span id="themeToggleText">Light Mode</span>
+        </button>
+        <button class="btn-sidebar-signout" id="sidebarSignOutBtn" style="display: none;" aria-label="Sign out of account">
+          <i class="fa-solid fa-right-from-bracket" aria-hidden="true"></i>
+          <span>Sign Out</span>
         </button>
       </div>
     </aside>
@@ -155,6 +159,12 @@
           <button class="header-btn primary" id="authHeaderBtn" title="Parent Sign In / User Profile" aria-label="Sign In or Open User Account Profile">
             <i class="fa-solid fa-arrow-right-to-bracket" id="authHeaderIcon" aria-hidden="true"></i>
             <span class="btn-text" id="authHeaderText">Sign In</span>
+          </button>
+
+          <!-- Direct Sign Out Header Button -->
+          <button class="header-btn signout-btn" id="signOutHeaderBtn" style="display: none;" title="Sign Out of Account" aria-label="Sign Out of Account">
+            <i class="fa-solid fa-right-from-bracket" aria-hidden="true"></i>
+            <span class="btn-text">Sign Out</span>
           </button>
         </div>
       </header>
@@ -704,6 +714,9 @@
             <div class="hero-badge-row">
               <span class="hero-badge"><i class="fa-solid fa-users-gear"></i> Parent Management Center</span>
               <span class="hero-badge gold" id="parentAuthBadge"><i class="fa-solid fa-user-check"></i> Verified Account</span>
+              <button class="hero-action-btn-sm" id="parentSignOutBtn" title="Sign Out of Account" aria-label="Sign out of account">
+                <i class="fa-solid fa-right-from-bracket" aria-hidden="true"></i> Sign Out
+              </button>
             </div>
             <h1 id="parentWelcomeTitle">Welcome, Parent!</h1>
             <p>Manage your children's learning profiles, assign tracks (Level 1 vs Level 2), monitor real-time quiz performance, and switch learner views.</p>
@@ -789,6 +802,9 @@
             <div class="hero-badge-row">
               <span class="hero-badge gold"><i class="fa-solid fa-shield-halved"></i> Platform Super Admin Control Center</span>
               <span class="hero-badge"><i class="fa-solid fa-globe"></i> Web-Wide Multi-Tenant Analytics</span>
+              <button class="hero-action-btn-sm" id="adminSignOutBtn" title="Sign Out of Admin Control Center" aria-label="Sign out of account">
+                <i class="fa-solid fa-right-from-bracket" aria-hidden="true"></i> Sign Out
+              </button>
             </div>
             <h1>Global LMS Administrator Dashboard</h1>
             <p>System-wide view of all registered parent accounts, children profiles, global course completion metrics, and user permission management.</p>

@@ -1474,6 +1474,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const authHeaderBtn = document.getElementById('authHeaderBtn');
   const authHeaderIcon = document.getElementById('authHeaderIcon');
   const authHeaderText = document.getElementById('authHeaderText');
+  const signOutHeaderBtn = document.getElementById('signOutHeaderBtn');
+  const sidebarSignOutBtn = document.getElementById('sidebarSignOutBtn');
 
   // DOM Elements - Views
   const authLandingView = document.getElementById('authLandingView');
@@ -1509,6 +1511,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const parentChildrenGrid = document.getElementById('parentChildrenGrid');
   const addChildBtn = document.getElementById('addChildBtn');
   const familyActivityList = document.getElementById('familyActivityList');
+  const parentSignOutBtn = document.getElementById('parentSignOutBtn');
 
   // Admin Dashboard Elements
   const statAdminTotalParents = document.getElementById('statAdminTotalParents');
@@ -1519,6 +1522,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const adminRefreshBtn = document.getElementById('adminRefreshBtn');
   const adminUserSearchInput = document.getElementById('adminUserSearchInput');
   const adminRoleFilterSelect = document.getElementById('adminRoleFilterSelect');
+  const adminSignOutBtn = document.getElementById('adminSignOutBtn');
 
   // Modal Elements - Auth & Signup/Signin
   const authModal = document.getElementById('authModal');
@@ -1705,6 +1709,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (currentUser) {
       if (authHeaderText) authHeaderText.textContent = currentUser.displayName || currentUser.email.split('@')[0];
       if (authHeaderIcon) authHeaderIcon.className = 'fa-solid fa-user-circle';
+      if (signOutHeaderBtn) signOutHeaderBtn.style.display = 'inline-flex';
+      if (sidebarSignOutBtn) sidebarSignOutBtn.style.display = 'flex';
       const isSuper = currentUser.role === 'super_admin';
       if (adminNavBtn) adminNavBtn.style.display = isSuper ? 'inline-flex' : 'none';
       if (sidebarAdminBtn) sidebarAdminBtn.style.display = isSuper ? 'inline-flex' : 'none';
@@ -1712,6 +1718,8 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
       if (authHeaderText) authHeaderText.textContent = 'Sign In';
       if (authHeaderIcon) authHeaderIcon.className = 'fa-solid fa-arrow-right-to-bracket';
+      if (signOutHeaderBtn) signOutHeaderBtn.style.display = 'none';
+      if (sidebarSignOutBtn) sidebarSignOutBtn.style.display = 'none';
       if (adminNavBtn) adminNavBtn.style.display = 'none';
       if (sidebarAdminBtn) sidebarAdminBtn.style.display = 'none';
       if (parentAdminBanner) parentAdminBanner.style.display = 'none';
@@ -1760,6 +1768,7 @@ document.addEventListener('DOMContentLoaded', () => {
     localStorage.removeItem('lms_children');
     updateAuthUI();
     if (userProfileModal) closeAccessibleModal(userProfileModal);
+    showToast('Signed Out Successfully', 'You have been safely signed out of your account.', 'info');
     switchView('authLanding');
   }
 
@@ -2790,6 +2799,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (profileSignOutBtn) {
     profileSignOutBtn.addEventListener('click', handleSignOut);
+  }
+  if (signOutHeaderBtn) {
+    signOutHeaderBtn.addEventListener('click', handleSignOut);
+  }
+  if (sidebarSignOutBtn) {
+    sidebarSignOutBtn.addEventListener('click', handleSignOut);
+  }
+  if (parentSignOutBtn) {
+    parentSignOutBtn.addEventListener('click', handleSignOut);
+  }
+  if (adminSignOutBtn) {
+    adminSignOutBtn.addEventListener('click', handleSignOut);
   }
 
   // Email Sign In Form Submit (Modal)
