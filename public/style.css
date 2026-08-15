@@ -1072,25 +1072,7 @@ h1, h2, h3, h4, .logo-title, .cert-title {
   border: 1px solid var(--gold-border);
 }
 
-.btn-read-aloud {
-  background-color: var(--emerald-primary);
-  color: #ffffff;
-  border: none;
-  padding: 8px 20px;
-  border-radius: var(--radius-full);
-  font-size: 0.85rem;
-  font-weight: 700;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  transition: var(--transition);
-}
 
-.btn-read-aloud:hover {
-  background-color: var(--emerald-hover);
-  transform: translateY(-2px);
-}
 
 .btn-mark-complete {
   background-color: var(--input-bg);
@@ -1146,121 +1128,7 @@ h1, h2, h3, h4, .logo-title, .cert-title {
   font-style: italic;
 }
 
-/* Read Aloud Page */
-.read-aloud-page {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-}
 
-.read-aloud-header {
-  background-color: var(--input-bg);
-  border: 1px solid var(--card-border);
-  border-radius: var(--radius-md);
-  padding: 20px;
-}
-
-.player-controls {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  flex-wrap: wrap;
-  margin-bottom: 16px;
-}
-
-.btn-audio-action {
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  border: none;
-  background-color: var(--emerald-primary);
-  color: #ffffff;
-  font-size: 1.2rem;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: var(--transition);
-}
-
-.btn-audio-action:hover {
-  transform: scale(1.08);
-}
-
-.btn-audio-action.stop {
-  background-color: var(--card-border);
-  color: var(--text-main);
-}
-
-.audio-setting {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 0.85rem;
-}
-
-.audio-select {
-  background-color: var(--card-bg);
-  border: 1px solid var(--card-border);
-  color: var(--text-main);
-  padding: 6px 12px;
-  border-radius: var(--radius-sm);
-  font-size: 0.85rem;
-  outline: none;
-}
-
-.audio-progress-container {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-#raProgressLabel {
-  font-size: 0.8rem;
-  color: var(--text-muted);
-}
-
-.audio-progress-bar {
-  height: 6px;
-  background-color: var(--card-border);
-  border-radius: 3px;
-  overflow: hidden;
-}
-
-.audio-progress-fill {
-  height: 100%;
-  background-color: var(--emerald-primary);
-  transition: width 0.3s ease;
-}
-
-.read-aloud-body {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.sentence-block {
-  padding: 14px 18px;
-  border-radius: var(--radius-sm);
-  background-color: var(--input-bg);
-  border: 1px solid var(--card-border);
-  cursor: pointer;
-  transition: var(--transition);
-  font-size: 1.05rem;
-  line-height: 1.6;
-}
-
-.sentence-block:hover {
-  border-color: var(--emerald-primary);
-  background-color: var(--card-hover);
-}
-
-.sentence-block.speaking {
-  border-color: var(--emerald-primary);
-  background-color: var(--emerald-light);
-  box-shadow: 0 0 0 2px var(--emerald-primary);
-  font-weight: 600;
-}
 
 /* Teleprompter Portal */
 .teleprompter-wrapper {
@@ -1732,74 +1600,7 @@ h1, h2, h3, h4, .logo-title, .cert-title {
   cursor: pointer;
 }
 
-/* Sticky Audio Control Bar */
-.sticky-audio-bar {
-  position: fixed;
-  bottom: 24px;
-  right: 32px;
-  z-index: 150;
-  background-color: var(--glass-bg);
-  backdrop-filter: blur(16px);
-  border: 1px solid var(--emerald-primary);
-  padding: 14px 24px;
-  border-radius: var(--radius-full);
-  box-shadow: var(--shadow-lg), var(--shadow-glow);
-  display: flex;
-  align-items: center;
-  gap: 24px;
-}
 
-.audio-bar-info {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.audio-pulse-icon {
-  font-size: 1.2rem;
-  color: var(--emerald-primary);
-  animation: pulse 1.5s infinite;
-}
-
-@keyframes pulse {
-  0% { transform: scale(1); opacity: 1; }
-  50% { transform: scale(1.2); opacity: 0.7; }
-  100% { transform: scale(1); opacity: 1; }
-}
-
-.audio-bar-title {
-  display: block;
-  font-weight: 700;
-  font-size: 0.875rem;
-}
-
-.audio-bar-text {
-  display: block;
-  font-size: 0.75rem;
-  color: var(--text-muted);
-  max-width: 260px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.audio-bar-controls {
-  display: flex;
-  gap: 10px;
-}
-
-.bar-btn {
-  background-color: var(--emerald-primary);
-  color: #ffffff;
-  border: none;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
 
 /* Certificate Modal */
 .cert-modal-backdrop {
@@ -1974,23 +1775,11 @@ h1, h2, h3, h4, .logo-title, .cert-title {
   margin-top: 24px;
 }
 
-.btn-certificate-print {
-  background: linear-gradient(135deg, var(--gold-accent), var(--gold-hover));
-  color: #ffffff;
-  border: none;
-  padding: 12px 32px;
-  border-radius: var(--radius-full);
-  font-size: 1rem;
-  font-weight: 700;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
+
 
 /* Print Rules */
 @media print {
-  .sidebar, .top-header, .sticky-audio-bar, .cert-modal-actions, .cert-close-btn, .content-toolbar, .tab-nav {
+  .sidebar, .top-header, .cert-modal-actions, .cert-close-btn, .content-toolbar, .tab-nav {
     display: none !important;
   }
   .main-content {

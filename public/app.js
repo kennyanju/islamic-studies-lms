@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let activeModuleId = null;
   let activeCategoryFilter = 'all';
   let activeTrack = localStorage.getItem('lms_track') || 'level1'; // level1 | level2 | teacher
-  let activeTab = 'handout'; // handout | readaloud | teleprompter | answerkeys | quiz | slides | voicescript
+  let activeTab = 'handout'; // handout | teleprompter | answerkeys | quiz | slides | voicescript
   let currentSlideIndex = 0;
   let currentTpSlideIndex = 0;
   let isAutoScrolling = false;
@@ -18,15 +18,6 @@ document.addEventListener('DOMContentLoaded', () => {
   let userProgress = JSON.parse(localStorage.getItem('lms_progress') || '{}');
   let quizScores = JSON.parse(localStorage.getItem('lms_quiz_scores') || '{}');
   let userReflections = JSON.parse(localStorage.getItem('lms_reflections') || '{}');
-
-  // Read Aloud State
-  let speechSynth = window.speechSynthesis;
-  let currentUtterance = null;
-  let currentSentences = [];
-  let currentSentenceIdx = 0;
-  let isSpeaking = false;
-  let isPaused = false;
-  let availableVoices = [];
 
   // DOM Elements
   const themeToggleBtn = document.getElementById('themeToggleBtn');
@@ -59,8 +50,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const searchResultsList = document.getElementById('searchResultsList');
   const searchResultsCount = document.getElementById('searchResultsCount');
 
-  const printBtn = document.getElementById('printBtn');
-
   // Module Header elements
   const moduleCategory = document.getElementById('moduleCategory');
   const moduleTrackBadge = document.getElementById('moduleTrackBadge');
@@ -73,7 +62,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Tab Buttons
   const handoutTabBtn = document.getElementById('handoutTabBtn');
-  const readaloudTabBtn = document.getElementById('readaloudTabBtn');
   const quizTabBtn = document.getElementById('quizTabBtn');
   const teleprompterTabBtn = document.getElementById('teleprompterTabBtn');
   const answerkeysTabBtn = document.getElementById('answerkeysTabBtn');
@@ -84,16 +72,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const handoutContent = document.getElementById('handoutContent');
   const malikiCitationTag = document.getElementById('malikiCitationTag');
   const markHandoutCompleteBtn = document.getElementById('markHandoutCompleteBtn');
-  const listenHandoutBtn = document.getElementById('listenHandoutBtn');
-  
-  // Read Aloud Tab Elements
-  const raPlayBtn = document.getElementById('raPlayBtn');
-  const raStopBtn = document.getElementById('raStopBtn');
-  const raSpeedSelect = document.getElementById('raSpeedSelect');
-  const raVoiceSelect = document.getElementById('raVoiceSelect');
-  const raProgressLabel = document.getElementById('raProgressLabel');
-  const raProgressFill = document.getElementById('raProgressFill');
-  const readAloudBody = document.getElementById('readAloudBody');
 
   // Teleprompter Elements
   const tpPrevBtn = document.getElementById('tpPrevBtn');
@@ -103,7 +81,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const tpScrollSpeed = document.getElementById('tpScrollSpeed');
   const tpFontDecBtn = document.getElementById('tpFontDecBtn');
   const tpFontIncBtn = document.getElementById('tpFontIncBtn');
-  const tpSpeakBtn = document.getElementById('tpSpeakBtn');
   const tpSlideContent = document.getElementById('tpSlideContent');
   const tpCuePill = document.getElementById('tpCuePill');
   const tpCueText = document.getElementById('tpCueText');
@@ -119,13 +96,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const akToggleL2 = document.getElementById('akToggleL2');
   const answerKeyContent = document.getElementById('answerKeyContent');
   let activeAkLevel = 'level1';
-
-  // Sticky Bottom Audio Bar
-  const stickyAudioBar = document.getElementById('stickyAudioBar');
-  const stickyAudioTitle = document.getElementById('stickyAudioTitle');
-  const stickyAudioText = document.getElementById('stickyAudioText');
-  const stickyPlayPauseBtn = document.getElementById('stickyPlayPauseBtn');
-  const stickyStopBtn = document.getElementById('stickyStopBtn');
 
   // Quiz Elements
   const quizQuestionsArea = document.getElementById('quizQuestionsArea');
@@ -143,7 +113,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const certScoreBadge = document.getElementById('certScoreBadge');
   const certStudentName = document.getElementById('certStudentName');
   const certDateText = document.getElementById('certDateText');
-  const printCertBtn = document.getElementById('printCertBtn');
+  const certDoneBtn = document.getElementById('certDoneBtn');
 
   // Slideshow Elements
   const slideContent = document.getElementById('slideContent');
@@ -359,38 +329,10 @@ document.addEventListener('DOMContentLoaded', () => {
     setupTheme();
     setupTrackButtons();
     setupCategoryFilters();
-    setupVoices();
     renderSidebarModules();
     renderDashboard();
     updateProgressUI();
     setupEventListeners();
-
-    if (!currentUser) {
-      switchView('authLanding');
-    } else {
-      switchView('parent');
-    }
-  }
-
-  function setupVoices() {
-    if (!speechSynth) return;
-    function loadVoices() {
-      availableVoices = speechSynth.getVoices();
-      raVoiceSelect.innerHTML = '<option value="">Default System Voice</option>';
-      availableVoices.forEach((voice, index) => {
-        const option = document.createElement('option');
-        option.value = index;
-        option.textContent = `${voice.name} (${voice.lang})`;
-        if (voice.lang.includes('en') || voice.lang.includes('ar')) {
-          raVoiceSelect.appendChild(option);
-        }
-      });
-    }
-
-    loadVoices();
-    if (speechSynth.onvoiceschanged !== undefined) {
-      speechSynth.onvoiceschanged = loadVoices;
-    }
   }
 
   function setupTheme() {
@@ -739,8 +681,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (tabName === 'handout') {
       renderHandout(mod);
-    } else if (tabName === 'readaloud') {
-      renderReadAloudTab(mod);
     } else if (tabName === 'teleprompter') {
       renderTeleprompter(mod);
     } else if (tabName === 'answerkeys') {
@@ -771,10 +711,7 @@ document.addEventListener('DOMContentLoaded', () => {
     markHandoutCompleteBtn.querySelector('span').textContent = isComp ? 'Completed ✓' : 'Mark as Completed';
   }
 
-  listenHandoutBtn.addEventListener('click', () => {
-    switchTab('readaloud');
-    startReadAloud(0);
-  });
+
 
   markHandoutCompleteBtn.addEventListener('click', () => {
     if (activeModuleId === null) return;
@@ -867,19 +804,6 @@ document.addEventListener('DOMContentLoaded', () => {
       tpAnalogyCard.style.display = 'none';
       tpCheckCard.style.display = 'none';
     }
-
-    // Teleprompter Read-Aloud Action Button
-    tpSpeakBtn.onclick = () => {
-      const textToSpeak = sc ? `${sc.title}. ${sc.script || sc.summary}` : 'Slide presentation.';
-      if (speechSynth) {
-        speechSynth.cancel();
-        const u = new SpeechSynthesisUtterance(textToSpeak);
-        if (raVoiceSelect.value !== '' && availableVoices[raVoiceSelect.value]) {
-          u.voice = availableVoices[raVoiceSelect.value];
-        }
-        speechSynth.speak(u);
-      }
-    };
   }
 
   // --------------------------------------------------------------------------
@@ -1065,155 +989,7 @@ document.addEventListener('DOMContentLoaded', () => {
     akToggleL2.classList.toggle('active', activeAkLevel === 'level2');
   }
 
-  // --------------------------------------------------------------------------
-  // READ ALOUD SPEECH SYNTHESIS ENGINE
-  // --------------------------------------------------------------------------
 
-  function renderReadAloudTab(mod) {
-    let rawMd = activeTrack === 'level2' ? mod.tracks.level2.handoutMd : mod.tracks.level1.handoutMd;
-    if (activeTrack === 'teacher' && mod.teacher.voiceScriptMd) {
-      rawMd = mod.teacher.voiceScriptMd;
-    }
-
-    const cleanText = rawMd.replace(/#+\s*/g, '').replace(/\*+/g, '').replace(/_+/g, '').replace(/\[(.*?)\]\(.*?\)/g, '$1');
-    currentSentences = cleanText.split(/(?<=[.!?])\s+|\n+/).map(s => s.trim()).filter(s => s.length > 3);
-    currentSentenceIdx = 0;
-
-    readAloudBody.innerHTML = '';
-    currentSentences.forEach((sentence, idx) => {
-      const block = document.createElement('div');
-      block.className = 'sentence-block';
-      block.dataset.idx = idx;
-      block.innerHTML = `<i class="fa-solid fa-volume-low" style="opacity:0.4;margin-right:8px;font-size:0.85rem;"></i> ${sentence}`;
-      block.addEventListener('click', () => {
-        startReadAloud(idx);
-      });
-      readAloudBody.appendChild(block);
-    });
-
-    updateReadAloudProgress();
-  }
-
-  function startReadAloud(startIdx = 0) {
-    if (!speechSynth) {
-      alert('Speech synthesis is not supported in this browser.');
-      return;
-    }
-
-    speechSynth.cancel();
-    currentSentenceIdx = startIdx;
-
-    if (currentSentences.length === 0) return;
-
-    isSpeaking = true;
-    isPaused = false;
-    updateAudioControlsUI();
-    stickyAudioBar.style.display = 'flex';
-
-    speakNextSentence();
-  }
-
-  function speakNextSentence() {
-    if (currentSentenceIdx >= currentSentences.length || !isSpeaking) {
-      stopReadAloud();
-      return;
-    }
-
-    const text = currentSentences[currentSentenceIdx];
-    currentUtterance = new SpeechSynthesisUtterance(text);
-
-    if (raVoiceSelect.value !== '' && availableVoices[raVoiceSelect.value]) {
-      currentUtterance.voice = availableVoices[raVoiceSelect.value];
-    }
-
-    currentUtterance.rate = parseFloat(raSpeedSelect.value || 1);
-
-    const blocks = readAloudBody.querySelectorAll('.sentence-block');
-    blocks.forEach(b => b.classList.remove('speaking'));
-    
-    const activeBlock = readAloudBody.querySelector(`[data-idx="${currentSentenceIdx}"]`);
-    if (activeBlock) {
-      activeBlock.classList.add('speaking');
-      activeBlock.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }
-
-    const mod = courseData.modules.find(m => m.id === activeModuleId);
-    stickyAudioTitle.textContent = mod ? `Module ${mod.id}: ${mod.title}` : 'Reading Lesson Aloud...';
-    stickyAudioText.textContent = text;
-
-    updateReadAloudProgress();
-
-    currentUtterance.onend = () => {
-      if (isSpeaking && !isPaused) {
-        currentSentenceIdx++;
-        speakNextSentence();
-      }
-    };
-
-    currentUtterance.onerror = (e) => {
-      console.warn('Speech error:', e);
-      currentSentenceIdx++;
-      speakNextSentence();
-    };
-
-    speechSynth.speak(currentUtterance);
-  }
-
-  function togglePlayPause() {
-    if (!isSpeaking) {
-      startReadAloud(currentSentenceIdx);
-    } else if (isPaused) {
-      speechSynth.resume();
-      isPaused = false;
-      updateAudioControlsUI();
-    } else {
-      speechSynth.pause();
-      isPaused = true;
-      updateAudioControlsUI();
-    }
-  }
-
-  function stopReadAloud() {
-    if (speechSynth) speechSynth.cancel();
-    isSpeaking = false;
-    isPaused = false;
-    stickyAudioBar.style.display = 'none';
-    updateAudioControlsUI();
-
-    const blocks = readAloudBody.querySelectorAll('.sentence-block');
-    blocks.forEach(b => b.classList.remove('speaking'));
-  }
-
-  function updateAudioControlsUI() {
-    const playIconClass = isSpeaking && !isPaused ? 'fa-solid fa-pause' : 'fa-solid fa-play';
-    raPlayBtn.querySelector('i').className = playIconClass;
-    stickyPlayPauseBtn.querySelector('i').className = playIconClass;
-  }
-
-  function updateReadAloudProgress() {
-    const total = currentSentences.length;
-    const current = total > 0 ? currentSentenceIdx + 1 : 0;
-    raProgressLabel.textContent = `Sentence ${current} of ${total}`;
-    const pct = total > 0 ? Math.round((current / total) * 100) : 0;
-    raProgressFill.style.width = `${pct}%`;
-  }
-
-  raPlayBtn.addEventListener('click', togglePlayPause);
-  raStopBtn.addEventListener('click', stopReadAloud);
-  stickyPlayPauseBtn.addEventListener('click', togglePlayPause);
-  stickyStopBtn.addEventListener('click', stopReadAloud);
-
-  raSpeedSelect.addEventListener('change', () => {
-    if (isSpeaking) {
-      startReadAloud(currentSentenceIdx);
-    }
-  });
-
-  raVoiceSelect.addEventListener('change', () => {
-    if (isSpeaking) {
-      startReadAloud(currentSentenceIdx);
-    }
-  });
 
   // --------------------------------------------------------------------------
   // INTERACTIVE QUIZ ENGINE & CERTIFICATE GENERATOR
@@ -1516,11 +1292,11 @@ document.addEventListener('DOMContentLoaded', () => {
     certModuleName.textContent = mod ? `Module ${mod.id}: ${mod.title}` : 'Islamic Studies Module';
     certScoreBadge.textContent = `Score Achieved: ${pct}%`;
     certDateText.textContent = `Issue Date: ${new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}`;
-    openAccessibleModal(certModal, '#printCertBtn');
+    openAccessibleModal(certModal, '#certCloseBtn');
   }
 
   if (certCloseBtn) certCloseBtn.addEventListener('click', () => closeAccessibleModal(certModal));
-  if (printCertBtn) printCertBtn.addEventListener('click', () => window.print());
+  if (certDoneBtn) certDoneBtn.addEventListener('click', () => closeAccessibleModal(certModal));
 
   // --------------------------------------------------------------------------
   // SLIDESHOW & VOICE SCRIPT RENDERERS
@@ -1676,8 +1452,6 @@ document.addEventListener('DOMContentLoaded', () => {
     searchResultsContainer.style.display = 'none';
     searchInput.focus();
   });
-
-  printBtn.addEventListener('click', () => window.print());
 
   /* ==========================================================================
      Multi-Tenant Auth, Family Learner Switcher, Parent & Admin Controller

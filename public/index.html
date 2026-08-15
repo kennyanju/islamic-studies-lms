@@ -156,11 +156,6 @@
             <i class="fa-solid fa-arrow-right-to-bracket" id="authHeaderIcon" aria-hidden="true"></i>
             <span class="btn-text" id="authHeaderText">Sign In</span>
           </button>
-
-          <button class="header-btn" id="printBtn" title="Print Lesson / Save PDF" aria-label="Print Current Lesson or Save PDF">
-            <i class="fa-solid fa-print" aria-hidden="true"></i>
-            <span class="btn-text">Print</span>
-          </button>
         </div>
       </header>
 
@@ -950,10 +945,6 @@
               <i class="fa-solid fa-file-lines" aria-hidden="true"></i>
               <span>Student Handout</span>
             </button>
-            <button class="tab-btn" data-tab="readaloud" id="readaloudTabBtn" role="tab" aria-selected="false" aria-controls="readaloudTab">
-              <i class="fa-solid fa-volume-high" aria-hidden="true"></i>
-              <span>Read Aloud</span>
-            </button>
             <button class="tab-btn" data-tab="quiz" id="quizTabBtn" role="tab" aria-selected="false" aria-controls="quizTab">
               <i class="fa-solid fa-circle-question" aria-hidden="true"></i>
               <span>Interactive Quiz</span>
@@ -989,10 +980,6 @@
                 <span class="maliki-citation-tag" id="malikiCitationTag"><i class="fa-solid fa-book-open" aria-hidden="true"></i> Maliki Fiqh Reference</span>
               </div>
               <div class="toolbar-right">
-                <button class="btn-read-aloud" id="listenHandoutBtn" aria-label="Switch to Read Aloud tab and listen to lesson audio">
-                  <i class="fa-solid fa-headphones" aria-hidden="true"></i>
-                  <span>Listen Read-Aloud</span>
-                </button>
                 <button class="btn-mark-complete" id="markHandoutCompleteBtn" aria-label="Toggle completion status of student handout">
                   <i class="fa-regular fa-circle-check" aria-hidden="true"></i>
                   <span>Mark as Completed</span>
@@ -1003,47 +990,7 @@
           </div>
         </div>
 
-        <!-- 2. Read-Aloud Tab -->
-        <div class="tab-content" id="readaloudTab" role="tabpanel" aria-labelledby="readaloudTabBtn">
-          <div class="content-card read-aloud-page">
-            <div class="read-aloud-header">
-              <div class="player-controls">
-                <button class="btn-audio-action play" id="raPlayBtn" title="Play / Pause Audio" aria-label="Play or pause read-aloud audio narration">
-                  <i class="fa-solid fa-play" aria-hidden="true"></i>
-                </button>
-                <button class="btn-audio-action stop" id="raStopBtn" title="Stop Audio" aria-label="Stop audio narration">
-                  <i class="fa-solid fa-square" aria-hidden="true"></i>
-                </button>
-                
-                <div class="audio-setting">
-                  <label for="raSpeedSelect"><i class="fa-solid fa-gauge-high" aria-hidden="true"></i> Speed</label>
-                  <select id="raSpeedSelect" class="audio-select" aria-label="Narration playback speed">
-                    <option value="0.75">0.75x (Slow)</option>
-                    <option value="1" selected>1.0x (Normal)</option>
-                    <option value="1.25">1.25x (Fast)</option>
-                    <option value="1.5">1.5x (Super Fast)</option>
-                  </select>
-                </div>
 
-                <div class="audio-setting">
-                  <label for="raVoiceSelect"><i class="fa-solid fa-user-gear" aria-hidden="true"></i> Voice</label>
-                  <select id="raVoiceSelect" class="audio-select" aria-label="Select speech synthesis voice">
-                    <option value="">Default System Voice</option>
-                  </select>
-                </div>
-              </div>
-
-              <div class="audio-progress-container">
-                <span id="raProgressLabel" aria-live="polite">Sentence 0 of 0</span>
-                <div class="audio-progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="Read-aloud audio narration progress">
-                  <div class="audio-progress-fill" id="raProgressFill" style="width: 0%;"></div>
-                </div>
-              </div>
-            </div>
-
-            <div class="read-aloud-body" id="readAloudBody"></div>
-          </div>
-        </div>
 
         <!-- 3. Teacher Teleprompter & Presentation Mode Tab -->
         <div class="tab-content" id="teleprompterTab" role="tabpanel" aria-labelledby="teleprompterTabBtn">
@@ -1069,7 +1016,6 @@
               <div class="tp-controls-right">
                 <button class="btn-tp-font" id="tpFontDecBtn" title="Decrease Font Size" aria-label="Decrease teleprompter font size">A-</button>
                 <button class="btn-tp-font" id="tpFontIncBtn" title="Increase Font Size" aria-label="Increase teleprompter font size">A+</button>
-                <button class="btn-read-aloud" id="tpSpeakBtn" aria-label="Read current teleprompter script aloud"><i class="fa-solid fa-volume-high" aria-hidden="true"></i> Read Script</button>
               </div>
             </div>
 
@@ -1195,20 +1141,7 @@
 
   </div>
 
-  <!-- Floating Sticky Audio Control Bar -->
-  <div class="sticky-audio-bar" id="stickyAudioBar" style="display: none;">
-    <div class="audio-bar-info">
-      <i class="fa-solid fa-volume-high audio-pulse-icon"></i>
-      <div>
-        <span class="audio-bar-title" id="stickyAudioTitle">Reading Lesson Aloud...</span>
-        <span class="audio-bar-text" id="stickyAudioText">Playing sentence...</span>
-      </div>
-    </div>
-    <div class="audio-bar-controls">
-      <button class="bar-btn" id="stickyPlayPauseBtn" aria-label="Play or Pause audio"><i class="fa-solid fa-pause"></i></button>
-      <button class="bar-btn" id="stickyStopBtn" aria-label="Stop audio"><i class="fa-solid fa-xmark"></i></button>
-    </div>
-  </div>
+
 
   <!-- Printable Certificate of Completion Modal -->
   <div class="cert-modal-backdrop" id="certModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="certTitleText" aria-describedby="certSubtitleText">
@@ -1249,8 +1182,8 @@
       </div>
 
       <div class="cert-modal-actions">
-        <button class="btn-certificate-print" id="printCertBtn" aria-label="Print Certificate of Completion or save as PDF">
-          <i class="fa-solid fa-print" aria-hidden="true"></i> Print Certificate
+        <button class="btn-secondary" id="certDoneBtn" aria-label="Close Certificate of Completion modal">
+          <i class="fa-solid fa-check" aria-hidden="true"></i> Done
         </button>
       </div>
     </div>
