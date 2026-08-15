@@ -372,6 +372,36 @@ export async function onRequest(context) {
     });
   }
 
+  // 9. Admin Users List
+  if (path === '/admin/users' && method === 'GET') {
+    if (!authUser || authUser.role !== 'super_admin') {
+      return jsonResponse({ success: false, error: 'Forbidden: Super Admin only' }, 403);
+    }
+    let usersList = [];
+    if (env.DB) {
+      try {
+        const { results } = await env.DB.prepare(
+          'SELECT uid, email, display_name as displayName, role, provider, is_verified as isVerified, created_at as createdAt FROM users'
+        ).all();
+        const childrenRows = await env.DB.prepare(
+          'SELECT id, parent_uid as parentUid, name, avatar, assigned_track as assignedTrack FROM children'
+        ).all();
+        const allKids = childrenRows?.results || [];
+        usersList = (results || []).map(u => {
+          const userKids = allKids.filter(k => k.parentUid === u.uid);
+          return {
+            ...u,
+            childrenCount: userKids.length,
+            children: userKids
+          };
+        });
+      } catch (err) {
+        console.warn('D1 admin users error:', err.message);
+      }
+    }
+    return jsonResponse({ success: true, users: usersList });
+  }
+
   // Fallback for unmatched API routes
   return jsonResponse({ success: false, error: `Cloudflare Edge API route not found: ${method} ${path}` }, 404);
 }

@@ -2413,13 +2413,26 @@ document.addEventListener('DOMContentLoaded', () => {
       console.warn('Backend admin fetch fell back to local store:', err);
     }
 
+    const localUsers = getClientUsersDb();
+    const localKids = JSON.parse(localStorage.getItem('lms_children') || '[]');
+    const localProg = JSON.parse(localStorage.getItem('lms_progress') || '{}');
+    const localScores = JSON.parse(localStorage.getItem('lms_quiz_scores') || '{}');
+
+    // If server users were retrieved, also merge any local client registrations not yet synced
+    if (users && Array.isArray(users)) {
+      localUsers.forEach(lu => {
+        if (!users.some(u => u.email.toLowerCase() === lu.email.toLowerCase())) {
+          users.push({
+            ...lu,
+            childrenCount: lu.uid === currentUser?.uid ? localKids.length : 0,
+            children: lu.uid === currentUser?.uid ? localKids : []
+          });
+        }
+      });
+    }
+
     // Client-side Fallback Computation if offline or unauthenticated session
     if (!stats || !users) {
-      const localUsers = getClientUsersDb();
-      const localKids = JSON.parse(localStorage.getItem('lms_children') || '[]');
-      const localProg = JSON.parse(localStorage.getItem('lms_progress') || '{}');
-      const localScores = JSON.parse(localStorage.getItem('lms_quiz_scores') || '{}');
-
       // Add default admin if not present
       const allUsers = [...localUsers];
       if (!allUsers.some(u => u.email === 'admin@islamicstudies.org')) {
@@ -2466,6 +2479,10 @@ document.addEventListener('DOMContentLoaded', () => {
         childrenCount: u.uid === currentUser?.uid ? localKids.length : 0,
         children: u.uid === currentUser?.uid ? localKids : []
       }));
+    }
+
+    if (stats && users) {
+      stats.totalParents = users.length;
     }
 
     // Render KPI Metrics
@@ -2572,21 +2589,37 @@ document.addEventListener('DOMContentLoaded', () => {
       const row = document.createElement('tr');
       const kidsListStr = u.children && u.children.length > 0 ? u.children.map(c => `${c.avatar} ${c.name}`).join(', ') : 'None';
       const isSuperAdmin = u.role === 'super_admin';
-      let providerIcon = 'fa-google';
-      if ((u.provider || '').includes('apple')) providerIcon = 'fa-apple';
-      else if ((u.provider || '').includes('microsoft')) providerIcon = 'fa-microsoft';
-      else if ((u.provider || '').includes('password')) providerIcon = 'fa-envelope';
+      const isTeacher = u.role === 'teacher' || u.role === 'educator';
+      let iconClass = 'fa-solid fa-envelope';
+      let providerLabel = 'Email / Password';
+      if ((u.provider || '').includes('google')) {
+        iconClass = 'fa-brands fa-google';
+        providerLabel = 'Google';
+      } else if ((u.provider || '').includes('apple')) {
+        iconClass = 'fa-brands fa-apple';
+        providerLabel = 'Apple';
+      } else if ((u.provider || '').includes('microsoft')) {
+        iconClass = 'fa-brands fa-microsoft';
+        providerLabel = 'Microsoft';
+      }
+
+      let roleBadge = '<span class="role-badge parent">👨‍👩‍👧 Parent</span>';
+      if (isSuperAdmin) {
+        roleBadge = '<span class="role-badge super_admin">⚡ Super Admin</span>';
+      } else if (isTeacher) {
+        roleBadge = '<span class="role-badge teacher">🎓 Educator</span>';
+      }
 
       row.innerHTML = `
         <td>
-          <strong>${u.displayName || u.email}</strong><br>
-          <small style="color: var(--text-subtle);">${u.email}</small>
+          <strong>${escapeHtml(u.displayName || u.email)}</strong><br>
+          <small style="color: var(--text-subtle);">${escapeHtml(u.email)}</small>
         </td>
-        <td><i class="fa-brands ${providerIcon}"></i> ${u.provider || 'google.com'}</td>
-        <td><span class="role-badge ${u.role}">${isSuperAdmin ? '⚡ Super Admin' : '👨‍👩‍👧 Parent'}</span></td>
-        <td><strong>${u.childrenCount}</strong> kids</td>
-        <td>${kidsListStr}</td>
-        <td>${new Date(u.createdAt).toLocaleDateString()}</td>
+        <td><i class="${iconClass}"></i> ${providerLabel}</td>
+        <td>${roleBadge}</td>
+        <td><strong>${u.childrenCount || 0}</strong> kids</td>
+        <td>${escapeHtml(kidsListStr)}</td>
+        <td>${u.createdAt ? new Date(u.createdAt).toLocaleDateString() : 'Active'}</td>
         <td>
           <button class="btn-action-role" data-uid="${u.uid}" data-current="${u.role}">
             <i class="fa-solid fa-arrows-rotate"></i> ${isSuperAdmin ? 'Make Parent' : 'Make Admin'}
@@ -3244,6 +3277,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
         currentUser = data.user;
         localStorage.setItem('lms_user', JSON.stringify(currentUser));
+
+        // Mirror to local users list so admin dashboard reflects registered parents immediately
+        const localUsers = getClientUsersDb();
+        const existingIdx = localUsers.findIndex(u => u.email.toLowerCase() === data.user.email.toLowerCase());
+        if (existingIdx === -1) {
+          localUsers.push(data.user);
+        } else {
+          localUsers[existingIdx] = { ...localUsers[existingIdx], ...data.user };
+        }
+        saveClientUsersDb(localUsers);
+
         updateAuthUI();
         try {
           await fetchFamilyChildren();
@@ -3319,6 +3363,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
         currentUser = data.user;
         localStorage.setItem('lms_user', JSON.stringify(currentUser));
+
+        // Mirror to local users list so admin dashboard reflects registered parents immediately
+        const localUsers = getClientUsersDb();
+        const existingIdx = localUsers.findIndex(u => u.email.toLowerCase() === data.user.email.toLowerCase());
+        if (existingIdx === -1) {
+          localUsers.push(data.user);
+        } else {
+          localUsers[existingIdx] = { ...localUsers[existingIdx], ...data.user };
+        }
+        saveClientUsersDb(localUsers);
+
         updateAuthUI();
         try {
           await fetchFamilyChildren();
