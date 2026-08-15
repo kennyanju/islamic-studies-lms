@@ -136,6 +136,9 @@ const apiLimiter = rateLimit({
 });
 app.use('/api/', apiLimiter);
 
+// Trust proxy for secure cookies behind reverse proxies (Render, Heroku, Cloudflare, etc.)
+app.set('trust proxy', 1);
+
 // Stricter rate limit on auth endpoints
 const authLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
@@ -148,15 +151,18 @@ app.use('/api/auth/', authLimiter);
 app.use(express.json({ limit: '1mb' }));
 app.use(express.urlencoded({ extended: true, limit: '1mb' }));
 
-// Session management
+// Session management with robust persistence
 app.use(session({
+  name: 'lms_session',
   secret: SESSION_SECRET || 'islamic-studies-lms-dev-secret-key-12345',
   resave: false,
   saveUninitialized: false,
+  rolling: true,
   cookie: {
     httpOnly: true,
-    secure: isProd,
-    maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
+    secure: 'auto',
+    sameSite: 'lax',
+    maxAge: 30 * 24 * 60 * 60 * 1000 // 30 days
   }
 }));
 
@@ -675,6 +681,49 @@ app.post('/api/parent/children/:id/verify-pin', requireAuth, async (req, res, ne
     const valid = bcrypt.compareSync(pin, child.pinHash);
     if (valid) {
       res.json({ success: true, verified: true });
+    } else {
+      res.status(401).json({ success: false, verified: false, error: 'Incorrect PIN. Please try again.' });
+    }
+  } catch (err) {
+    next(err);
+  }
+});
+
+// Public Direct Child Access API (Allows children to log in directly via URL + PIN)
+app.get('/api/public/child/:id', async (req, res, next) => {
+  try {
+    const childId = req.params.id;
+    const child = await db.getChildById(childId);
+    if (!child) {
+      return res.status(404).json({ success: false, error: 'Learner profile not found.' });
+    }
+    res.json({ success: true, child: safeChild(child) });
+  } catch (err) {
+    next(err);
+  }
+});
+
+app.post('/api/public/child/:id/verify-pin', async (req, res, next) => {
+  try {
+    const childId = req.params.id;
+    const pin = sanitizeStr(req.body.pin, 4);
+
+    const child = await db.getChildById(childId);
+    if (!child) {
+      return res.status(404).json({ success: false, error: 'Learner profile not found.' });
+    }
+
+    if (!child.pinHash) {
+      return res.json({ success: true, verified: true, child: safeChild(child) });
+    }
+
+    if (!pin) {
+      return res.status(400).json({ success: false, error: 'PIN is required.' });
+    }
+
+    const valid = bcrypt.compareSync(pin, child.pinHash);
+    if (valid) {
+      res.json({ success: true, verified: true, child: safeChild(child) });
     } else {
       res.status(401).json({ success: false, verified: false, error: 'Incorrect PIN. Please try again.' });
     }

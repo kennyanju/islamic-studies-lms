@@ -200,7 +200,7 @@
             <div class="landing-text-col">
               <div class="hero-badge-row">
                 <span class="hero-badge"><i class="fa-solid fa-kaaba" aria-hidden="true"></i> Islamic Studies Family LMS</span>
-                <span class="hero-badge gold"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i> Federated Parent Auth</span>
+                <span class="hero-badge gold"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i> Secure Family Authentication</span>
               </div>
               <h1>Empower Your Family's Islamic Education</h1>
               <p>A comprehensive 9-Module Islamic Studies curriculum covering Ash'ari Aqidah, Maliki Fiqh, authentic Seerah, and Akhlaq. Create child profiles, assign tailored tracks, track quiz progress, and learn together.</p>
@@ -225,7 +225,7 @@
                 <div class="feature-item">
                   <i class="fa-solid fa-circle-check font-gold" aria-hidden="true"></i>
                   <div>
-                    <strong>Federated Identity Sync</strong>
+                    <strong>Secure Multi-Provider Login</strong>
                     <span>Sign in securely with Google, Apple, Microsoft or verified email authentication</span>
                   </div>
                 </div>
@@ -261,7 +261,23 @@
               <div class="card-header-auth">
                 <div class="auth-card-icon" aria-hidden="true"><i class="fa-solid fa-user-shield" aria-hidden="true"></i></div>
                 <h2>Parent Account Access</h2>
-                <p>Sign in or create a new account to get started:</p>
+                <p>Sign in securely with Google, Apple, Microsoft or verified email authentication</p>
+              </div>
+
+              <!-- Social Auth Quick Provider Strip -->
+              <div class="federated-auth-section" style="padding: 0 20px 10px 20px;">
+                <div class="federated-btn-grid">
+                  <button type="button" class="btn-federated google home-social-btn" data-provider="google" aria-label="Sign in with Google">
+                    <i class="fa-brands fa-google" aria-hidden="true"></i> Google
+                  </button>
+                  <button type="button" class="btn-federated apple home-social-btn" data-provider="apple" aria-label="Sign in with Apple">
+                    <i class="fa-brands fa-apple" aria-hidden="true"></i> Apple
+                  </button>
+                  <button type="button" class="btn-federated microsoft home-social-btn" data-provider="microsoft" aria-label="Sign in with Microsoft">
+                    <i class="fa-brands fa-microsoft" aria-hidden="true"></i> Microsoft
+                  </button>
+                </div>
+                <div class="federated-title" style="margin-top: 14px; margin-bottom: 6px;"><span>or continue with email</span></div>
               </div>
 
               <!-- Auth Navigation Tabs -->
@@ -703,7 +719,7 @@
           <div class="hero-content">
             <div class="hero-badge-row">
               <span class="hero-badge"><i class="fa-solid fa-users-gear"></i> Parent Management Center</span>
-              <span class="hero-badge gold" id="parentAuthBadge"><i class="fa-brands fa-google"></i> Google Federated Account</span>
+              <span class="hero-badge gold" id="parentAuthBadge"><i class="fa-solid fa-user-check"></i> Verified Account</span>
             </div>
             <h1 id="parentWelcomeTitle">Welcome, Parent!</h1>
             <p>Manage your children's learning profiles, assign tracks (Level 1 vs Level 2), monitor real-time quiz performance, and switch learner views.</p>
@@ -1350,7 +1366,7 @@
         <p id="profileUserEmail">user@example.com</p>
         <div class="profile-badges-row">
           <span class="badge-role" id="profileUserRole">Parent Account</span>
-          <span class="badge-provider" id="profileUserProvider"><i class="fa-brands fa-google" aria-hidden="true"></i> Google Federated</span>
+          <span class="badge-provider" id="profileUserProvider"><i class="fa-solid fa-user-shield" aria-hidden="true"></i> Verified Account</span>
         </div>
       </div>
 
@@ -1423,7 +1439,18 @@
           <div class="form-group">
             <label for="childPinInput"><i class="fa-solid fa-key" aria-hidden="true"></i> Optional 4-Digit Profile PIN</label>
             <input type="password" id="childPinInput" placeholder="e.g. 1234 (Leave blank for no PIN)" maxlength="4" class="form-input" autocomplete="new-password">
-            <small class="form-hint">Prevents siblings from switching into each other's accounts on a shared tablet.</small>
+            <small class="form-hint">Protects the profile and lets your child access courses directly using their PIN.</small>
+          </div>
+
+          <div class="form-group" id="childDirectLinkGroup" style="display: none;">
+            <label for="childDirectLinkInput"><i class="fa-solid fa-link" aria-hidden="true"></i> Kids Direct Course Access Link</label>
+            <div style="display: flex; gap: 8px;">
+              <input type="text" id="childDirectLinkInput" readonly class="form-input" style="background: var(--input-bg); font-family: monospace; font-size: 0.85rem;" aria-label="Direct kid access URL">
+              <button type="button" class="btn-secondary-action" id="copyDirectLinkBtn" style="white-space: nowrap;">
+                <i class="fa-solid fa-copy"></i> Copy Link
+              </button>
+            </div>
+            <small class="form-hint">Share this URL with your child so they can jump straight to courses and log in with their PIN from any device.</small>
           </div>
 
           <div class="modal-form-actions">

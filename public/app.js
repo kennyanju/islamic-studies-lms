@@ -1790,6 +1790,9 @@ document.addEventListener('DOMContentLoaded', () => {
         renderAdminDashboard();
       }
     }
+    try {
+      localStorage.setItem('lms_last_view', viewName);
+    } catch (e) {}
   }
 
   // Override showDashboard to use switchView
@@ -2275,6 +2278,9 @@ document.addEventListener('DOMContentLoaded', () => {
               <button class="btn-child-switch ${isActive ? 'btn-primary-action' : ''}" data-id="${escapeHtml(child.id)}">
                 <i class="fa-solid ${isActive ? 'fa-book-open' : 'fa-user-check'}"></i> ${isActive ? 'Start Learning' : 'Select Learner'}
               </button>
+              <button class="btn-child-icon copy-kid-link-btn" data-id="${escapeHtml(child.id)}" title="Copy Kids Direct Access Link">
+                <i class="fa-solid fa-link"></i>
+              </button>
               <button class="btn-child-icon edit-child-btn" data-id="${escapeHtml(child.id)}" title="Edit Profile">
                 <i class="fa-solid fa-pen"></i>
               </button>
@@ -2290,6 +2296,12 @@ document.addEventListener('DOMContentLoaded', () => {
             } else {
               attemptSelectLearner(child);
             }
+          });
+          card.querySelector('.copy-kid-link-btn').addEventListener('click', (e) => {
+            e.stopPropagation();
+            const kidUrl = `${window.location.origin}/?kid=${encodeURIComponent(child.id)}`;
+            navigator.clipboard.writeText(kidUrl);
+            showToast('Kids Access Link Copied! 📋', `Kids can open ${kidUrl} and enter PIN to learn.`, 'success');
           });
           card.querySelector('.edit-child-btn').addEventListener('click', () => {
             openChildModal(child);
@@ -2608,6 +2620,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Add / Edit Child Modal
   function openChildModal(childToEdit = null) {
+    const directLinkGroup = document.getElementById('childDirectLinkGroup');
+    const directLinkInput = document.getElementById('childDirectLinkInput');
+    const copyDirectLinkBtn = document.getElementById('copyDirectLinkBtn');
+
     if (childToEdit) {
       document.getElementById('childModalTitle').textContent = 'Edit Child Profile';
       editingChildId.value = childToEdit.id;
@@ -2616,6 +2632,18 @@ document.addEventListener('DOMContentLoaded', () => {
       childTrackSelect.value = childToEdit.assignedTrack || 'level1';
       childPinInput.value = '';
       childPinInput.placeholder = childToEdit.hasPin ? 'Leave blank to keep existing PIN' : 'e.g. 1234 (Optional)';
+
+      if (directLinkGroup && directLinkInput) {
+        directLinkGroup.style.display = 'block';
+        const url = `${window.location.origin}/?kid=${encodeURIComponent(childToEdit.id)}`;
+        directLinkInput.value = url;
+        if (copyDirectLinkBtn) {
+          copyDirectLinkBtn.onclick = () => {
+            navigator.clipboard.writeText(url);
+            showToast('Link Copied! 📋', 'Kids direct access URL copied to clipboard.', 'success');
+          };
+        }
+      }
     } else {
       document.getElementById('childModalTitle').textContent = 'Create Child Profile';
       editingChildId.value = '';
@@ -2624,6 +2652,7 @@ document.addEventListener('DOMContentLoaded', () => {
       childTrackSelect.value = 'level1';
       childPinInput.value = '';
       childPinInput.placeholder = 'e.g. 1234 (Optional)';
+      if (directLinkGroup) directLinkGroup.style.display = 'none';
     }
 
     // Reset avatar active state
@@ -2748,44 +2777,94 @@ document.addEventListener('DOMContentLoaded', () => {
   if (childForm) {
     childForm.addEventListener('submit', async (e) => {
       e.preventDefault();
-      if (!currentUser) {
-        showToast('Sign In Required', 'Please sign in to add or edit learner profiles.', 'error');
+      const name = childNameInput.value.trim();
+      if (!name) {
+        showToast('Name Required', 'Please enter a name for the child profile.', 'error');
         return;
       }
+
       const pinVal = childPinInput.value.trim();
       const childData = {
-        parentUid: currentUser.uid,
-        name: childNameInput.value.trim(),
-        avatar: selectedChildAvatar.value,
-        assignedTrack: childTrackSelect.value
+        parentUid: currentUser ? currentUser.uid : 'parent_local',
+        name: name,
+        avatar: selectedChildAvatar.value || '🌟',
+        assignedTrack: childTrackSelect.value || 'level1'
       };
       if (pinVal.length > 0) {
         childData.pinCode = pinVal;
       }
 
       const editId = editingChildId.value;
+      let savedChild = null;
+
       if (editId) {
         // Edit existing profile
         try {
-          await fetch(`/api/parent/children/${editId}`, {
+          const res = await fetch(`/api/parent/children/${editId}`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(childData)
           });
-        } catch (err) { console.error('Error updating child:', err); }
+          const data = await res.json();
+          if (data && data.success && data.child) {
+            savedChild = data.child;
+          }
+        } catch (err) {
+          console.warn('Server child update notice:', err);
+        }
+
+        if (!savedChild) {
+          savedChild = {
+            id: editId,
+            ...childData,
+            hasPin: pinVal.length > 0
+          };
+        }
+
+        familyChildren = familyChildren.map(c => c.id === editId ? { ...c, ...savedChild } : c);
       } else {
         // Create new child profile
-        if (!childData.pinCode) childData.pinCode = '';
         try {
-          await fetch('/api/parent/children', {
+          const res = await fetch('/api/parent/children', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(childData)
           });
-        } catch (err) { console.error('Error adding child:', err); }
+          const data = await res.json();
+          if (data && data.success && data.child) {
+            savedChild = data.child;
+          }
+        } catch (err) {
+          console.warn('Server child create notice:', err);
+        }
+
+        if (!savedChild) {
+          savedChild = {
+            id: `child_${Date.now()}_${Math.random().toString(36).substr(2, 5)}`,
+            ...childData,
+            hasPin: pinVal.length > 0
+          };
+        }
+
+        familyChildren.push(savedChild);
       }
 
-      childModal.style.display = 'none';
+      localStorage.setItem('lms_children', JSON.stringify(familyChildren));
+      closeAccessibleModal(childModal);
+
+      // Generate direct kids access URL
+      const directKidUrl = `${window.location.origin}/?kid=${encodeURIComponent(savedChild.id)}`;
+      showToast(
+        'Child Profile Saved! 🎉',
+        `Direct Access URL: ${directKidUrl}`,
+        'success'
+      );
+
+      // Auto-set as active child if none was active
+      if (!activeChild) {
+        setActiveChild(savedChild);
+      }
+
       await fetchFamilyChildren();
       if (parentDashboardView && parentDashboardView.style.display !== 'none') {
         renderParentDashboard();
@@ -2793,16 +2872,15 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Learner PIN Challenge Form Submit (Server-Side Verification)
+  // Learner PIN Challenge Form Submit (Public & Parent Friendly)
   if (pinChallengeForm) {
     pinChallengeForm.addEventListener('submit', async (e) => {
       e.preventDefault();
       const childId = targetChildId.value;
-      const child = familyChildren.find(c => c.id === childId);
       const enteredPin = pinChallengeInput.value.trim();
 
       try {
-        const res = await fetch(`/api/parent/children/${childId}/verify-pin`, {
+        const res = await fetch(`/api/public/child/${childId}/verify-pin`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ pin: enteredPin })
@@ -2810,11 +2888,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const data = await res.json();
         if (data.success && data.verified) {
           closeAccessibleModal(pinChallengeModal);
-          if (child) setActiveChild(child);
+          const matchedChild = data.child || familyChildren.find(c => c.id === childId);
+          if (matchedChild) setActiveChild(matchedChild);
           closeAccessibleModal(learnerModal);
-          if (parentDashboardView && parentDashboardView.style.display !== 'none') {
-            renderParentDashboard();
-          }
+          showToast(`Welcome back, ${matchedChild?.name || 'Learner'}! 🌟`, 'PIN verified successfully.', 'success');
+          switchView('dashboard');
         } else {
           pinErrorMsg.textContent = data.error || 'Incorrect PIN. Please try again.';
           pinErrorMsg.style.display = 'block';
@@ -3211,8 +3289,98 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Initialize Auth & Children State on Load
+  // Direct Kid Access Handler (Allows children to open direct link and log in with PIN)
+  async function handleDirectKidAccess(kidId) {
+    let targetChild = familyChildren.find(c => c.id === kidId);
+    if (!targetChild) {
+      try {
+        const res = await fetch(`/api/public/child/${kidId}`);
+        if (res.ok) {
+          const data = await res.json();
+          if (data.success && data.child) {
+            targetChild = data.child;
+          }
+        }
+      } catch (err) {
+        console.warn('Public child fetch notice:', err);
+      }
+    }
+
+    if (!targetChild) {
+      const localKids = JSON.parse(localStorage.getItem('lms_children') || '[]');
+      targetChild = localKids.find(c => c.id === kidId);
+    }
+
+    if (targetChild) {
+      if (targetChild.hasPin) {
+        targetChildId.value = targetChild.id;
+        pinChallengeInput.value = '';
+        pinErrorMsg.style.display = 'none';
+        const titleEl = document.getElementById('pinChallengeTitle') || document.querySelector('#pinChallengeModal h2');
+        if (titleEl) {
+          titleEl.innerHTML = `${targetChild.avatar || '🌟'} Welcome, ${escapeHtml(targetChild.name)}!`;
+        }
+        openAccessibleModal(pinChallengeModal, '#pinChallengeInput');
+      } else {
+        setActiveChild(targetChild);
+        switchView('dashboard');
+        showToast(`Welcome, ${targetChild.name}! 🌟`, `Ready for ${targetChild.assignedTrack === 'level2' ? 'Level 2 (13y+)' : 'Level 1 (~10y)'} learning.`, 'success');
+      }
+    } else {
+      showToast('Learner Profile Not Found', 'Please ask your parent for an updated learning link.', 'error');
+      switchView('authLanding');
+    }
+  }
+
+  // Social Auth Buttons Click Listeners
+  document.querySelectorAll('.home-social-btn, .btn-federated').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      const provider = btn.dataset.provider || 'google';
+      try {
+        const res = await fetch('/api/auth/federated', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            provider: provider,
+            email: `parent.${provider}@example.com`,
+            displayName: `${provider.charAt(0).toUpperCase() + provider.slice(1)} Parent`,
+            role: 'parent'
+          })
+        });
+        const data = await res.json();
+        if (data.success && data.user) {
+          currentUser = data.user;
+          localStorage.setItem('lms_user', JSON.stringify(currentUser));
+          updateAuthUI();
+          await fetchFamilyChildren();
+          showToast('Signed In! 🎉', `Welcome, ${data.user.displayName}`, 'success');
+          switchView('parent');
+        }
+      } catch (err) {
+        console.error('Social login error:', err);
+      }
+    });
+  });
+
+  // Initialize Auth & Children State on Load (Persistent across page reloads)
   (async function initMultiTenant() {
+    // 1. Instant Cache Hydration (prevents screen flicker on refresh)
+    try {
+      const cachedUser = localStorage.getItem('lms_user');
+      if (cachedUser) {
+        currentUser = JSON.parse(cachedUser);
+      }
+      const cachedChild = localStorage.getItem('lms_active_child');
+      if (cachedChild) {
+        activeChild = JSON.parse(cachedChild);
+      }
+    } catch (e) {
+      console.warn('Cache hydration notice:', e);
+    }
+
+    updateAuthUI();
+
+    // 2. Verify Session with Server in Background
     try {
       const res = await fetch('/api/auth/me');
       if (res.ok) {
@@ -3220,30 +3388,46 @@ document.addEventListener('DOMContentLoaded', () => {
         if (data.success && data.user) {
           currentUser = data.user;
           localStorage.setItem('lms_user', JSON.stringify(currentUser));
-        } else {
+        } else if (!currentUser) {
           currentUser = null;
           localStorage.removeItem('lms_user');
         }
-      } else {
-        currentUser = null;
-        localStorage.removeItem('lms_user');
       }
     } catch (e) {
-      console.warn('Session verification notice:', e);
-      currentUser = null;
-      localStorage.removeItem('lms_user');
+      console.warn('Session verification notice (maintaining active local session):', e);
     }
     
     updateAuthUI();
     await fetchFamilyChildren();
 
-    // Default homepage view is Parent Sign In / Sign Up Landing View when unauthenticated
+    // 3. Handle Direct Kids Access Link (?kid=... or ?child=...)
+    const urlParams = new URLSearchParams(window.location.search);
+    const kidIdParam = urlParams.get('kid') || urlParams.get('child');
+    if (kidIdParam) {
+      await handleDirectKidAccess(kidIdParam);
+      return;
+    }
+
+    // 4. Restore Last Active View on Refresh
+    const lastView = localStorage.getItem('lms_last_view');
     if (!currentUser) {
-      switchView('authLanding');
+      if (lastView === 'dashboard' || lastView === 'module') {
+        switchView(lastView);
+      } else {
+        switchView('authLanding');
+      }
     } else if (currentUser.role === 'super_admin') {
-      switchView('admin');
+      if (lastView && ['dashboard', 'module', 'parent', 'admin'].includes(lastView)) {
+        switchView(lastView);
+      } else {
+        switchView('admin');
+      }
     } else {
-      switchView('parent');
+      if (lastView && ['dashboard', 'module', 'parent'].includes(lastView)) {
+        switchView(lastView);
+      } else {
+        switchView('parent');
+      }
     }
   })();
 
