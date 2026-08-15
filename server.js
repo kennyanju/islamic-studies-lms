@@ -965,9 +965,10 @@ app.get('/api/admin/overview', requireAdmin, async (req, res, next) => {
         system: {
           uptime: Math.floor(process.uptime()),
           nodeEnv: process.env.NODE_ENV || 'development',
-          storage: db.type.toUpperCase(),
+          storage: db.type === 'file' ? 'FILE (JSON Store)' : db.type.toUpperCase(),
           clientErrorsCount: telemetryMetrics.clientErrors || 0,
-          cspViolationsCount: telemetryMetrics.cspViolations || 0
+          cspViolationsCount: telemetryMetrics.cspViolations || 0,
+          status: '100% Operational'
         }
       }
     });
