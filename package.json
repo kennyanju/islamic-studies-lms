@@ -9,7 +9,11 @@
     "dev": "node compile.js && node server.js",
     "test": "jest --runInBand --detectOpenHandles --forceExit",
     "test:smoke": "node compile.js && jest tests/smoke.test.js --forceExit",
-    "smoke": "npm run test:smoke"
+    "smoke": "npm run test:smoke",
+    "deploy": "node compile.js && wrangler pages deploy public",
+    "pages:deploy": "node compile.js && wrangler pages deploy public",
+    "d1:migrate:local": "wrangler d1 migrations apply islamic-studies-db --local",
+    "d1:migrate:remote": "wrangler d1 migrations apply islamic-studies-db --remote"
   },
   "keywords": [
     "lms",

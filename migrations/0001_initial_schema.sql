@@ -1,5 +1,5 @@
 -- Cloudflare D1 Initial Database Migration for Islamic Studies LMS
--- Run with: npx wrangler d1 migrations apply islamic-studies-db --remote
+-- Schema covering Users, Children Profiles, Module Progress, Quiz Results, Telemetry, and Password Resets
 
 CREATE TABLE IF NOT EXISTS users (
   uid TEXT PRIMARY KEY,
@@ -47,6 +47,15 @@ CREATE TABLE IF NOT EXISTS quiz_results (
   created_at TEXT DEFAULT CURRENT_TIMESTAMP
 );
 
+CREATE TABLE IF NOT EXISTS reset_tokens (
+  token TEXT PRIMARY KEY,
+  uid TEXT NOT NULL,
+  email TEXT NOT NULL,
+  expires_at INTEGER NOT NULL,
+  used INTEGER DEFAULT 0,
+  created_at TEXT DEFAULT CURRENT_TIMESTAMP
+);
+
 CREATE TABLE IF NOT EXISTS telemetry_logs (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   message TEXT,
@@ -56,8 +65,10 @@ CREATE TABLE IF NOT EXISTS telemetry_logs (
   created_at TEXT DEFAULT CURRENT_TIMESTAMP
 );
 
--- Initial Indexes for high-speed edge lookups
+-- Performance Indexes
 CREATE INDEX IF NOT EXISTS idx_users_email ON users(email);
 CREATE INDEX IF NOT EXISTS idx_children_parent ON children(parent_uid);
+CREATE INDEX IF NOT EXISTS idx_children_name ON children(name);
 CREATE INDEX IF NOT EXISTS idx_progress_student ON module_progress(student_id);
 CREATE INDEX IF NOT EXISTS idx_quiz_student ON quiz_results(student_id);
+CREATE INDEX IF NOT EXISTS idx_reset_token ON reset_tokens(token);

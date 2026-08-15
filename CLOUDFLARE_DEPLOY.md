@@ -1,64 +1,74 @@
-# Free Full-Stack Deployment on Cloudflare Pages & D1
+# Cloudflare Workers & Pages Deployment Guide with Cloudflare D1 SQL
 
-This guide explains how to deploy the Islamic Studies Family LMS to **Cloudflare Pages** for **100% free hosting** with global edge CDN, unlimited bandwidth, serverless APIs, and Cloudflare D1 SQL database.
+This guide provides instructions to deploy the Islamic Studies Family LMS to **Cloudflare Pages / Workers** with **Cloudflare D1 SQL database**.
 
 ---
 
-## Step 1: Push Repository to GitHub
-Ensure the latest code is pushed to your GitHub repository:
-```bash
-git push origin main
+## Architecture
+
+```
+                       ┌────────────────────────────────────────────────────────┐
+                       │               Cloudflare Global Edge Network           │
+                       │                                                        │
+  User Requests  ───►  │  1. Static Assets: HTML, CSS, JS, course_data.json     │
+                       │  2. Serverless Edge API: functions/api/[[route]].js    │
+                       │  3. Database: Cloudflare D1 Serverless SQL Database    │
+                       └────────────────────────────────────────────────────────┘
 ```
 
 ---
 
-## Step 2: Create Cloudflare Pages Project
+## Quick CLI Deployment (Wrangler)
 
-1. Log in to your [Cloudflare Dashboard](https://dash.cloudflare.com/).
-2. In the left sidebar, click **Compute (Workers & Pages)** > **Pages**.
-3. Click **Connect to Git** (or **Create application** > **Pages** > **Connect to Git**).
-4. Select your repository: `kennyanju/islamic-studies-lms`.
-5. Configure the build settings:
+### Step 1: Log in to Cloudflare CLI
+```bash
+npx wrangler login
+```
+*(Or set `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` in your environment)*
+
+### Step 2: Create D1 Database (if not already created)
+```bash
+npx wrangler d1 create islamic-studies-db
+```
+Copy the generated `database_id` and ensure it is in [`wrangler.toml`](./wrangler.toml).
+
+### Step 3: Apply D1 SQL Migrations
+```bash
+npx wrangler d1 migrations apply islamic-studies-db --remote
+```
+
+### Step 4: Build Curriculum & Deploy
+```bash
+npm run deploy
+```
+*(Runs `node compile.js && wrangler pages deploy public --project-name=islamic-studies-lms`)*
+
+---
+
+## Web Dashboard Deployment (Git Integration)
+
+1. **Connect to GitHub**:
+   - Go to [Cloudflare Dashboard](https://dash.cloudflare.com/) > **Workers & Pages** > **Create application** > **Pages** > **Connect to Git**.
+   - Select `kennyanju/islamic-studies-lms`.
+2. **Build Settings**:
    - **Framework preset**: `None`
    - **Build command**: `npm run build`
    - **Build output directory**: `public`
-6. Click **Save and Deploy**.
+3. **Bind D1 Database**:
+   - Go to **Project Settings** > **Functions** > **D1 Database Bindings**:
+     - Variable name: `DB`
+     - Database: `islamic-studies-db`
+4. **Environment Variables (Optional)**:
+   - `SESSION_SECRET`: Random 32+ character string
+   - `ADMIN_EMAIL`: `admin@islamicstudies.org`
+   - `ADMIN_PASSWORD`: `Admin@Islam2026!`
 
 ---
 
-## Step 3: Create & Bind Cloudflare D1 Database (Free SQL Storage)
+## Local Development & Emulation
 
-1. In Cloudflare Dashboard, go to **Storage & Databases** > **D1 SQL Database**.
-2. Click **Create Database** and name it `islamic-studies-db`.
-3. Go back to your Pages Project (`islamic-studies-lms`):
-   - Navigate to **Settings** > **Functions**.
-   - Under **D1 Database Bindings**, click **Add binding**:
-     - **Variable name**: `DB`
-     - **D1 Database**: Select `islamic-studies-db`.
-4. Apply the database tables:
-   - In Cloudflare D1 dashboard for `islamic-studies-db`, go to the **Console** tab and execute the SQL inside [`migrations/0001_initial_schema.sql`](./migrations/0001_initial_schema.sql).
-
----
-
-## Step 4: Environment Variables (Optional)
-
-In your Pages Project **Settings** > **Environment variables**:
-- `SESSION_SECRET`: Set a secure 32+ character random string.
-- `ADMIN_EMAIL`: `admin@islamicstudies.org` (or your chosen email).
-- `ADMIN_PASSWORD`: `Admin@Islam2026!` (or your chosen password).
-
----
-
-## Step 5: Custom Domain & Free SSL
-
-1. In your Pages project, go to **Custom domains**.
-2. Click **Set up a custom domain** (e.g. `lms.yourdomain.com`).
-3. Cloudflare will automatically provision a free SSL/TLS certificate and route traffic globally!
-
----
-
-### Local Testing with Wrangler (Optional)
-To test Cloudflare Pages Functions locally:
+To emulate Cloudflare Pages Functions and local D1 database locally:
 ```bash
+npm run d1:migrate:local
 npx wrangler pages dev public
 ```

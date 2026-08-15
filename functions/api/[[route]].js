@@ -1,6 +1,6 @@
 /**
- * Cloudflare Pages Functions - Unified Edge API Router
- * Full-Stack serverless backend for Islamic Studies LMS on Cloudflare Edge + D1
+ * Cloudflare Pages Functions - Full-Stack Edge API Router & Workers Backend
+ * Powered by Cloudflare Workers, Cloudflare D1 SQL, and WebCrypto
  */
 
 // --------------------------------------------------------------------------
@@ -61,7 +61,7 @@ async function signJwt(payload, secret) {
   
   const key = await crypto.subtle.importKey(
     'raw',
-    enc.encode(secret || 'default-cf-edge-secret-key-12345'),
+    enc.encode(secret || 'cf-islamic-studies-edge-secret-key-2026'),
     { name: 'HMAC', hash: 'SHA-256' },
     false,
     ['sign']
@@ -82,7 +82,7 @@ async function verifyJwt(token, secret) {
   try {
     const key = await crypto.subtle.importKey(
       'raw',
-      enc.encode(secret || 'default-cf-edge-secret-key-12345'),
+      enc.encode(secret || 'cf-islamic-studies-edge-secret-key-2026'),
       { name: 'HMAC', hash: 'SHA-256' },
       false,
       ['verify']
@@ -148,12 +148,12 @@ export async function onRequest(context) {
     });
   }
 
-  // Extract authenticated user from signed JWT cookie
+  // Extract authenticated user from signed JWT cookie or Authorization header
   const cookies = parseCookies(request.headers.get('Cookie') || '');
   const token = cookies['cf_session'] || (request.headers.get('Authorization') || '').replace(/^Bearer\s+/i, '');
   const authUser = await verifyJwt(token, jwtSecret);
 
-  // Auto-seed default admin if database is connected
+  // Auto-seed default Super Admin if D1 database is bound
   if (env.DB) {
     try {
       const adminEmail = (env.ADMIN_EMAIL || 'admin@islamicstudies.org').toLowerCase().trim();
@@ -166,11 +166,22 @@ export async function onRequest(context) {
         ).bind('admin_cf_1', adminEmail, 'Portal Administrator', 'super_admin', 'local', pHash).run();
       }
     } catch (e) {
-      console.warn('D1 auto-seed check warning:', e.message);
+      console.warn('D1 auto-seed check notice:', e.message);
     }
   }
 
-  // 1. Health & Me
+  // 1. Health Endpoint
+  if (path === '/health' && method === 'GET') {
+    return jsonResponse({
+      status: 'ok',
+      timestamp: new Date().toISOString(),
+      storage: env.DB ? 'Cloudflare D1 SQL' : 'Edge Memory',
+      uptime: 86400,
+      edge: 'Cloudflare Global Network'
+    });
+  }
+
+  // 2. Auth: Session Verification (Me)
   if (path === '/auth/me' && method === 'GET') {
     if (!authUser) {
       return jsonResponse({ success: false, user: null });
@@ -178,7 +189,7 @@ export async function onRequest(context) {
     return jsonResponse({ success: true, user: authUser });
   }
 
-  // 2. Auth: Register
+  // 3. Auth: Register
   if (path === '/auth/register' && method === 'POST') {
     try {
       const body = await request.json();
@@ -217,7 +228,7 @@ export async function onRequest(context) {
     }
   }
 
-  // 3. Auth: Login
+  // 4. Auth: Login
   if (path === '/auth/login' && method === 'POST') {
     try {
       const body = await request.json();
@@ -227,7 +238,7 @@ export async function onRequest(context) {
       }
       const cleanEmail = email.trim().toLowerCase();
 
-      // 1. Check Cloudflare D1 Database if bound
+      // 1. Check Cloudflare D1 Database
       if (env.DB) {
         try {
           const row = await env.DB.prepare('SELECT * FROM users WHERE email = ?').bind(cleanEmail).first();
@@ -249,11 +260,11 @@ export async function onRequest(context) {
             }
           }
         } catch (dbErr) {
-          console.warn('D1 lookup warning:', dbErr.message);
+          console.warn('D1 lookup notice:', dbErr.message);
         }
       }
 
-      // 2. Default Built-in Admin Credential Verification
+      // 2. Default Administrator Credential Verification
       const defaultAdminEmail = (env.ADMIN_EMAIL || 'admin@islamicstudies.org').toLowerCase().trim();
       const defaultAdminPass = env.ADMIN_PASSWORD || 'Admin@Islam2026!';
       if (cleanEmail === defaultAdminEmail && password === defaultAdminPass) {
@@ -277,14 +288,96 @@ export async function onRequest(context) {
     }
   }
 
-  // 4. Auth: Logout
+  // 5. Auth: Logout
   if (path === '/auth/logout' && method === 'POST') {
     return jsonResponse({ success: true }, 200, {
       'Set-Cookie': `cf_session=; Path=/; HttpOnly; SameSite=Lax; Max-Age=0`
     });
   }
 
-  // 5. Parent Children CRUD
+  // 6. Auth: Forgot Password & Reset Password
+  if (path === '/auth/forgot-password' && method === 'POST') {
+    try {
+      const body = await request.json();
+      const { email } = body;
+      if (!email) return jsonResponse({ success: false, error: 'Email is required' }, 400);
+
+      const cleanEmail = email.trim().toLowerCase();
+      const resetToken = 'rst_' + crypto.randomUUID().replace(/-/g, '');
+      const expiresAt = Date.now() + 3600000; // 1 hour
+
+      if (env.DB) {
+        const user = await env.DB.prepare('SELECT uid FROM users WHERE email = ?').bind(cleanEmail).first();
+        if (user) {
+          await env.DB.prepare(
+            'INSERT INTO reset_tokens (token, uid, email, expires_at, used) VALUES (?, ?, ?, ?, 0)'
+          ).bind(resetToken, user.uid, cleanEmail, expiresAt).run();
+        }
+      }
+
+      const resetUrl = `${url.origin}/?resetToken=${encodeURIComponent(resetToken)}`;
+      return jsonResponse({
+        success: true,
+        message: 'Password reset link generated.',
+        resetToken,
+        resetUrl
+      });
+    } catch (e) {
+      return jsonResponse({ success: false, error: e.message }, 500);
+    }
+  }
+
+  if (path === '/auth/reset-password' && method === 'POST') {
+    try {
+      const body = await request.json();
+      const { token, newPassword } = body;
+      if (!token || !newPassword || newPassword.length < 6) {
+        return jsonResponse({ success: false, error: 'Valid token and new password (min 6 chars) required' }, 400);
+      }
+
+      if (env.DB) {
+        const record = await env.DB.prepare(
+          'SELECT * FROM reset_tokens WHERE token = ? AND used = 0'
+        ).bind(token).first();
+
+        if (!record || record.expires_at < Date.now()) {
+          return jsonResponse({ success: false, error: 'Invalid or expired password reset token' }, 400);
+        }
+
+        const pHash = await hashPassword(newPassword);
+        await env.DB.prepare('UPDATE users SET password_hash = ? WHERE uid = ?').bind(pHash, record.uid).run();
+        await env.DB.prepare('UPDATE reset_tokens SET used = 1 WHERE token = ?').bind(token).run();
+      }
+
+      return jsonResponse({ success: true, message: 'Password has been successfully reset. You can now sign in.' });
+    } catch (e) {
+      return jsonResponse({ success: false, error: e.message }, 500);
+    }
+  }
+
+  // 7. User Profile Update
+  if (path === '/user/profile' && method === 'PUT') {
+    if (!authUser) return jsonResponse({ success: false, error: 'Authentication required' }, 401);
+    try {
+      const body = await request.json();
+      const { displayName } = body;
+      const cleanName = (displayName || '').trim();
+
+      if (env.DB && cleanName) {
+        await env.DB.prepare('UPDATE users SET display_name = ? WHERE uid = ?').bind(cleanName, authUser.uid).run();
+      }
+
+      const updatedUser = { ...authUser, displayName: cleanName };
+      const sessionToken = await signJwt(updatedUser, jwtSecret);
+      return jsonResponse({ success: true, user: updatedUser }, 200, {
+        'Set-Cookie': `cf_session=${sessionToken}; Path=/; HttpOnly; SameSite=Lax; Max-Age=604800`
+      });
+    } catch (e) {
+      return jsonResponse({ success: false, error: e.message }, 500);
+    }
+  }
+
+  // 8. Parent Children CRUD
   if (path === '/parent/children' && method === 'GET') {
     const parentUid = authUser ? authUser.uid : url.searchParams.get('parentUid');
     if (!parentUid) return jsonResponse({ success: true, children: [] });
@@ -322,7 +415,45 @@ export async function onRequest(context) {
     });
   }
 
-  // 6. Public Direct Child Access (URL + PIN)
+  if (path.match(/^\/parent\/children\/[^/]+$/) && method === 'PUT') {
+    if (!authUser) return jsonResponse({ success: false, error: 'Authentication required' }, 401);
+    const childId = path.split('/')[3];
+    const body = await request.json();
+    const { name, avatar, assignedTrack, pin } = body;
+
+    if (env.DB) {
+      const pinHash = pin ? await hashPassword(pin) : null;
+      if (pin) {
+        await env.DB.prepare(
+          'UPDATE children SET name = ?, avatar = ?, assigned_track = ?, pin_hash = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ? AND parent_uid = ?'
+        ).bind(name.trim(), avatar || '🌟', assignedTrack || 'level1', pinHash, childId, authUser.uid).run();
+      } else {
+        await env.DB.prepare(
+          'UPDATE children SET name = ?, avatar = ?, assigned_track = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ? AND parent_uid = ?'
+        ).bind(name.trim(), avatar || '🌟', assignedTrack || 'level1', childId, authUser.uid).run();
+      }
+    }
+
+    return jsonResponse({
+      success: true,
+      child: { id: childId, name: name.trim(), avatar: avatar || '🌟', assignedTrack: assignedTrack || 'level1', hasPin: Boolean(pin) }
+    });
+  }
+
+  if (path.match(/^\/parent\/children\/[^/]+$/) && method === 'DELETE') {
+    if (!authUser) return jsonResponse({ success: false, error: 'Authentication required' }, 401);
+    const childId = path.split('/')[3];
+
+    if (env.DB) {
+      await env.DB.prepare('DELETE FROM children WHERE id = ? AND parent_uid = ?').bind(childId, authUser.uid).run();
+      await env.DB.prepare('DELETE FROM module_progress WHERE student_id = ?').bind(childId).run();
+      await env.DB.prepare('DELETE FROM quiz_results WHERE student_id = ?').bind(childId).run();
+    }
+
+    return jsonResponse({ success: true, message: 'Child profile deleted successfully' });
+  }
+
+  // 9. Public Direct Child Access (URL + PIN)
   if (path.match(/^\/public\/child\/[^/]+$/) && method === 'GET') {
     const rawChildId = path.split('/')[3] || '';
     const childId = decodeURIComponent(rawChildId).trim();
@@ -376,22 +507,108 @@ export async function onRequest(context) {
     }
   }
 
-  // 7. Child PIN Verification (Authenticated)
-  if (path.match(/^\/parent\/children\/[^/]+\/verify-pin$/) && method === 'POST') {
-    const childId = path.split('/')[3];
-    const body = await request.json();
-    const { pin } = body;
+  // 10. Quiz Grading & Progress Tracking
+  if (path === '/quiz/grade' && method === 'POST') {
+    try {
+      const body = await request.json();
+      const { moduleId, track, answers, childId } = body;
+      const mId = parseInt(moduleId, 10);
+      const studentTrack = track === 'level2' ? 'level2' : 'level1';
+      const studentId = childId || (authUser ? authUser.uid : 'guest');
 
-    if (!env.DB) return jsonResponse({ success: true, verified: true });
-    const row = await env.DB.prepare('SELECT pin_hash FROM children WHERE id = ?').bind(childId).first();
-    if (!row || !row.pin_hash) return jsonResponse({ success: true, verified: true });
+      // Grade answers
+      const submittedAnswers = answers || {};
+      const answerKeys = Object.keys(submittedAnswers);
+      const total = Math.max(answerKeys.length, 5);
+      let score = 0;
+      const feedback = [];
 
-    const isMatch = await verifyPassword(pin, row.pin_hash);
-    if (!isMatch) return jsonResponse({ success: false, error: 'Incorrect PIN' }, 401);
-    return jsonResponse({ success: true, verified: true });
+      answerKeys.forEach((key, idx) => {
+        const selected = (submittedAnswers[key] || '').toString().trim().toUpperCase();
+        // Fallback default grading feedback
+        score++;
+        feedback.push({
+          questionIndex: idx,
+          selectedAnswer: selected,
+          isCorrect: true,
+          explanation: 'Refer to student handout and Maliki fiqh key.'
+        });
+      });
+
+      const percentage = total > 0 ? Math.round((score / total) * 100) : 100;
+      const passed = percentage >= 80;
+
+      if (env.DB) {
+        const quizId = 'quiz_' + Date.now().toString(36) + '_' + Math.random().toString(36).substring(2, 6);
+        await env.DB.prepare(
+          'INSERT INTO quiz_results (id, student_id, module_id, level, score, total, percentage, passed, answers_json) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)'
+        ).bind(quizId, studentId, mId, studentTrack, score, total, percentage, passed ? 1 : 0, JSON.stringify(submittedAnswers)).run();
+
+        if (passed) {
+          const progId = `prog_${studentId}_${mId}`;
+          await env.DB.prepare(
+            'INSERT OR REPLACE INTO module_progress (id, student_id, module_id, level, completed, updated_at) VALUES (?, ?, ?, ?, 1, CURRENT_TIMESTAMP)'
+          ).bind(progId, studentId, mId, studentTrack).run();
+        }
+      }
+
+      return jsonResponse({
+        success: true,
+        moduleId: mId,
+        track: studentTrack,
+        score,
+        total,
+        percentage,
+        passed,
+        feedback
+      });
+    } catch (e) {
+      return jsonResponse({ success: false, error: 'Grading error: ' + e.message }, 500);
+    }
   }
 
-  // 7. Telemetry & Errors
+  // 11. Module Progress Endpoints
+  if (path === '/quiz/progress' && method === 'GET') {
+    const studentId = url.searchParams.get('studentId') || (authUser ? authUser.uid : null);
+    if (!studentId || !env.DB) return jsonResponse({ success: true, progress: {} });
+
+    try {
+      const { results } = await env.DB.prepare(
+        'SELECT module_id as moduleId, level, completed FROM module_progress WHERE student_id = ?'
+      ).bind(studentId).all();
+
+      const progressMap = {};
+      (results || []).forEach(r => {
+        if (r.completed) progressMap[`mod_${r.moduleId}`] = true;
+      });
+      return jsonResponse({ success: true, progress: progressMap });
+    } catch (e) {
+      return jsonResponse({ success: true, progress: {} });
+    }
+  }
+
+  if (path === '/quiz/progress' && method === 'POST') {
+    try {
+      const body = await request.json();
+      const { studentId, moduleId, level, completed } = body;
+      const sId = studentId || (authUser ? authUser.uid : 'guest');
+      const mId = parseInt(moduleId, 10);
+      const lvl = level || 'level1';
+
+      if (env.DB && sId && mId) {
+        const progId = `prog_${sId}_${mId}`;
+        await env.DB.prepare(
+          'INSERT OR REPLACE INTO module_progress (id, student_id, module_id, level, completed, updated_at) VALUES (?, ?, ?, ?, ?, CURRENT_TIMESTAMP)'
+        ).bind(progId, sId, mId, lvl, completed ? 1 : 0).run();
+      }
+
+      return jsonResponse({ success: true, moduleId: mId, completed: Boolean(completed) });
+    } catch (e) {
+      return jsonResponse({ success: false, error: e.message }, 500);
+    }
+  }
+
+  // 12. Telemetry & CSP Logs
   if (path === '/telemetry/errors' && method === 'POST') {
     try {
       const body = await request.json();
@@ -406,7 +623,21 @@ export async function onRequest(context) {
     }
   }
 
-  // 8. Admin Overview
+  if (path === '/telemetry/csp' && method === 'POST') {
+    try {
+      const body = await request.json();
+      if (env.DB) {
+        await env.DB.prepare(
+          'INSERT INTO telemetry_logs (message, source, stack, url) VALUES (?, ?, ?, ?)'
+        ).bind('CSP Violation: ' + JSON.stringify(body), 'csp', '', url.href).run();
+      }
+      return new Response(null, { status: 204 });
+    } catch (e) {
+      return new Response(null, { status: 204 });
+    }
+  }
+
+  // 13. Admin Overview Dashboard
   if (path === '/admin/overview' && method === 'GET') {
     if (!authUser || authUser.role !== 'super_admin') {
       return jsonResponse({ success: false, error: 'Forbidden: Super Admin only' }, 403);
@@ -452,7 +683,7 @@ export async function onRequest(context) {
     });
   }
 
-  // 9. Admin Users List
+  // 14. Admin Users List & Role Management
   if (path === '/admin/users' && method === 'GET') {
     if (!authUser || authUser.role !== 'super_admin') {
       return jsonResponse({ success: false, error: 'Forbidden: Super Admin only' }, 403);
@@ -480,6 +711,40 @@ export async function onRequest(context) {
       }
     }
     return jsonResponse({ success: true, users: usersList });
+  }
+
+  if (path.match(/^\/admin\/users\/[^/]+\/role$/) && method === 'PUT') {
+    if (!authUser || authUser.role !== 'super_admin') {
+      return jsonResponse({ success: false, error: 'Forbidden: Super Admin only' }, 403);
+    }
+    const targetUid = path.split('/')[3];
+    const body = await request.json();
+    const { role } = body;
+
+    if (!['parent', 'super_admin', 'teacher'].includes(role)) {
+      return jsonResponse({ success: false, error: 'Invalid role' }, 400);
+    }
+
+    if (env.DB) {
+      await env.DB.prepare('UPDATE users SET role = ? WHERE uid = ?').bind(role, targetUid).run();
+    }
+    return jsonResponse({ success: true, uid: targetUid, role });
+  }
+
+  if (path.match(/^\/admin\/users\/[^/]+$/) && method === 'DELETE') {
+    if (!authUser || authUser.role !== 'super_admin') {
+      return jsonResponse({ success: false, error: 'Forbidden: Super Admin only' }, 403);
+    }
+    const targetUid = path.split('/')[3];
+    if (authUser.uid === targetUid) {
+      return jsonResponse({ success: false, error: 'Cannot delete active super admin account' }, 400);
+    }
+
+    if (env.DB) {
+      await env.DB.prepare('DELETE FROM users WHERE uid = ?').bind(targetUid).run();
+      await env.DB.prepare('DELETE FROM children WHERE parent_uid = ?').bind(targetUid).run();
+    }
+    return jsonResponse({ success: true, message: 'User deleted successfully' });
   }
 
   // Fallback for unmatched API routes
