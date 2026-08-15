@@ -117,4 +117,62 @@ describe('Authentication & Session API Tests', () => {
     expect(correctPinRes.body.verified).toBe(true);
     expect(correctPinRes.body.child.name).toBe('Ibrahim Test');
   });
+
+  test('POST /api/auth/forgot-password & POST /api/auth/reset-password - Complete password reset lifecycle', async () => {
+    // 1. Request forgot password for existing user
+    const forgotRes = await request(app)
+      .post('/api/auth/forgot-password')
+      .send({ email: testEmail });
+
+    expect(forgotRes.statusCode).toBe(200);
+    expect(forgotRes.body.success).toBe(true);
+    const resetToken = forgotRes.body.debugToken;
+    expect(resetToken).toBeDefined();
+
+    // 2. Reject invalid reset token
+    const badTokenRes = await request(app)
+      .post('/api/auth/reset-password')
+      .send({
+        token: 'invalid_token_12345',
+        password: 'NewPassword2026!'
+      });
+
+    expect(badTokenRes.statusCode).toBe(400);
+    expect(badTokenRes.body.success).toBe(false);
+
+    // 3. Reject short password
+    const shortPassRes = await request(app)
+      .post('/api/auth/reset-password')
+      .send({
+        token: resetToken,
+        password: '123'
+      });
+
+    expect(shortPassRes.statusCode).toBe(400);
+
+    // 4. Successfully reset password with valid token
+    const newPassword = 'NewPassword2026!';
+    const resetRes = await request(app)
+      .post('/api/auth/reset-password')
+      .send({
+        token: resetToken,
+        password: newPassword
+      });
+
+    expect(resetRes.statusCode).toBe(200);
+    expect(resetRes.body.success).toBe(true);
+    expect(resetRes.body.user.email).toBe(testEmail);
+
+    // 5. Verify user can now log in with the new password
+    const loginRes = await request(app)
+      .post('/api/auth/login')
+      .send({
+        email: testEmail,
+        password: newPassword
+      });
+
+    expect(loginRes.statusCode).toBe(200);
+    expect(loginRes.body.success).toBe(true);
+    expect(loginRes.body.user.email).toBe(testEmail);
+  });
 });

@@ -3426,7 +3426,17 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
-    // 4. Restore Last Active View on Refresh
+    // 4. Handle Password Reset Link (?resetToken=... or ?token=...)
+    const resetTokenParam = urlParams.get('resetToken') || urlParams.get('token');
+    if (resetTokenParam) {
+      const resetModal = document.getElementById('resetPasswordModal');
+      const tokenInput = document.getElementById('resetPasswordTokenInput');
+      if (tokenInput) tokenInput.value = resetTokenParam;
+      openAccessibleModal(resetModal, '#newPasswordInput');
+      return;
+    }
+
+    // 5. Restore Last Active View on Refresh
     const lastView = localStorage.getItem('lms_last_view');
     if (!currentUser) {
       if (lastView === 'dashboard' || lastView === 'module') {
@@ -3508,6 +3518,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     setupStrengthListener('homeSignUpPasswordInput', 'homePasswordStrengthContainer', 'homeStrengthFill', 'homeStrengthLabel', 'homeStrengthCriteria');
     setupStrengthListener('signUpPasswordInput', 'modalPasswordStrengthContainer', 'modalStrengthFill', 'modalStrengthLabel', 'modalStrengthCriteria');
+    setupStrengthListener('newPasswordInput', 'resetPasswordStrengthContainer', 'resetStrengthFill', 'resetStrengthLabel', 'resetStrengthCriteria');
 
     // 3. Pre-submit Live Validation Indicators
     function attachLiveValidator(inputId, validatorFn) {
@@ -3537,8 +3548,187 @@ document.addEventListener('DOMContentLoaded', () => {
     attachLiveValidator('homeSignUpPasswordInput', v => v.length >= 6);
   }
 
+  // --------------------------------------------------------------------------
+  // FORGOT PASSWORD & RESET PASSWORD ENGINE
+  // --------------------------------------------------------------------------
+  function initForgotPasswordUX() {
+    const forgotModal = document.getElementById('forgotPasswordModal');
+    const resetModal = document.getElementById('resetPasswordModal');
+    const forgotForm = document.getElementById('forgotPasswordForm');
+    const resetForm = document.getElementById('resetPasswordForm');
+    const forgotAlert = document.getElementById('forgotPasswordAlertMsg');
+    const resetAlert = document.getElementById('resetPasswordAlertMsg');
+    const forgotCloseBtn = document.getElementById('forgotPasswordCloseBtn');
+    const resetCloseBtn = document.getElementById('resetPasswordCloseBtn');
+    const tokenInput = document.getElementById('resetPasswordTokenInput');
+    const newPassInput = document.getElementById('newPasswordInput');
+    const confirmPassInput = document.getElementById('confirmNewPasswordInput');
+
+    // Open Forgot Password modal from any button
+    document.querySelectorAll('.open-forgot-password-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        closeAccessibleModal(authModal);
+        if (forgotAlert) forgotAlert.style.display = 'none';
+        const forgotEmail = document.getElementById('forgotEmailInput');
+        if (forgotEmail) {
+          const prefill = (document.getElementById('homeAuthEmailInput') || document.getElementById('authEmailInput'))?.value || '';
+          forgotEmail.value = prefill;
+        }
+        openAccessibleModal(forgotModal, '#forgotEmailInput');
+      });
+    });
+
+    if (forgotCloseBtn) {
+      forgotCloseBtn.addEventListener('click', () => closeAccessibleModal(forgotModal));
+    }
+    if (resetCloseBtn) {
+      resetCloseBtn.addEventListener('click', () => closeAccessibleModal(resetModal));
+    }
+
+    // Submit Forgot Password Form
+    if (forgotForm) {
+      forgotForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const email = document.getElementById('forgotEmailInput')?.value.trim();
+        if (!email) return;
+
+        const submitBtn = document.getElementById('forgotSubmitBtn');
+        if (submitBtn) {
+          submitBtn.disabled = true;
+          submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Sending Link...';
+        }
+
+        try {
+          const res = await fetch('/api/auth/forgot-password', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email })
+          });
+          const data = await res.json();
+          if (data && data.success) {
+            if (forgotAlert) {
+              forgotAlert.className = 'auth-alert-msg success';
+              forgotAlert.style.display = 'block';
+              forgotAlert.innerHTML = `<i class="fa-solid fa-circle-check"></i> ${escapeHtml(data.message || 'Password reset link sent! Check your inbox.')}`;
+            }
+            showToast('Reset Link Dispatched! ✉️', 'Please check your email for password reset instructions.', 'success');
+            setTimeout(() => {
+              closeAccessibleModal(forgotModal);
+            }, 3000);
+          } else {
+            if (forgotAlert) {
+              forgotAlert.className = 'auth-alert-msg error';
+              forgotAlert.style.display = 'block';
+              forgotAlert.textContent = data.error || 'Unable to process request.';
+            }
+          }
+        } catch (err) {
+          console.error('Forgot password error:', err);
+          if (forgotAlert) {
+            forgotAlert.className = 'auth-alert-msg error';
+            forgotAlert.style.display = 'block';
+            forgotAlert.textContent = 'Connection error. Please try again.';
+          }
+        } finally {
+          if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Send Password Reset Link';
+          }
+        }
+      });
+    }
+
+    // Submit Reset Password Form
+    if (resetForm) {
+      resetForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const token = tokenInput?.value;
+        const pass = newPassInput?.value;
+        const confirmPass = confirmPassInput?.value;
+
+        if (!token) {
+          if (resetAlert) {
+            resetAlert.className = 'auth-alert-msg error';
+            resetAlert.style.display = 'block';
+            resetAlert.textContent = 'Reset token is missing. Please request a new link.';
+          }
+          return;
+        }
+
+        if (!pass || pass.length < 6) {
+          if (resetAlert) {
+            resetAlert.className = 'auth-alert-msg error';
+            resetAlert.style.display = 'block';
+            resetAlert.textContent = 'Password must be at least 6 characters.';
+          }
+          return;
+        }
+
+        if (pass !== confirmPass) {
+          if (resetAlert) {
+            resetAlert.className = 'auth-alert-msg error';
+            resetAlert.style.display = 'block';
+            resetAlert.textContent = 'Passwords do not match. Please verify and retype.';
+          }
+          return;
+        }
+
+        const submitBtn = document.getElementById('resetSubmitBtn');
+        if (submitBtn) {
+          submitBtn.disabled = true;
+          submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Updating Password...';
+        }
+
+        try {
+          const res = await fetch('/api/auth/reset-password', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ token, password: pass })
+          });
+          const data = await res.json();
+          if (data && data.success && data.user) {
+            if (resetAlert) {
+              resetAlert.className = 'auth-alert-msg success';
+              resetAlert.style.display = 'block';
+              resetAlert.textContent = data.message || 'Password updated successfully!';
+            }
+            currentUser = data.user;
+            localStorage.setItem('lms_user', JSON.stringify(currentUser));
+            updateAuthUI();
+            await fetchFamilyChildren();
+            showToast('Password Updated! 🎉', 'You are now signed in with your new password.', 'success');
+            setTimeout(() => {
+              closeAccessibleModal(resetModal);
+              switchView(currentUser.role === 'super_admin' ? 'admin' : 'parent');
+            }, 1000);
+          } else {
+            if (resetAlert) {
+              resetAlert.className = 'auth-alert-msg error';
+              resetAlert.style.display = 'block';
+              resetAlert.textContent = data.error || 'Password reset failed.';
+            }
+          }
+        } catch (err) {
+          console.error('Reset password error:', err);
+          if (resetAlert) {
+            resetAlert.className = 'auth-alert-msg error';
+            resetAlert.style.display = 'block';
+            resetAlert.textContent = 'Connection error. Please try again.';
+          }
+        } finally {
+          if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = '<i class="fa-solid fa-check-circle"></i> Update & Save Password';
+          }
+        }
+      });
+    }
+  }
+
   function setupEventListeners() {
     initPasswordUX();
+    initForgotPasswordUX();
 
     mobileSidebarOpen.addEventListener('click', () => {
       sidebar.classList.add('open');

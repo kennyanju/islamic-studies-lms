@@ -291,6 +291,11 @@
                         <i class="fa-solid fa-eye" aria-hidden="true"></i>
                       </button>
                     </div>
+                    <div class="auth-helper-row" style="display: flex; justify-content: flex-end; margin-top: 6px;">
+                      <button type="button" class="btn-text-link open-forgot-password-btn" style="background: none; border: none; color: #fbbf24; font-size: 13px; cursor: pointer; text-decoration: underline; padding: 0;">
+                        Forgot Password?
+                      </button>
+                    </div>
                   </div>
                   <button type="submit" class="btn-submit-auth">
                     <i class="fa-solid fa-right-to-bracket" aria-hidden="true"></i> Sign In to Family Portal
@@ -1289,6 +1294,11 @@
                 <i class="fa-solid fa-eye" aria-hidden="true"></i>
               </button>
             </div>
+            <div class="auth-helper-row" style="display: flex; justify-content: flex-end; margin-top: 6px;">
+              <button type="button" class="btn-text-link open-forgot-password-btn" style="background: none; border: none; color: #fbbf24; font-size: 13px; cursor: pointer; text-decoration: underline; padding: 0;">
+                Forgot Password?
+              </button>
+            </div>
           </div>
           <button type="submit" class="btn-submit-auth">
             <i class="fa-solid fa-right-to-bracket" aria-hidden="true"></i> Sign In to Portal
@@ -1492,6 +1502,78 @@
             <button type="button" class="btn-cancel-modal" id="pinChallengeCancelBtn" aria-label="Cancel PIN unlock and close modal">Cancel</button>
             <button type="submit" class="btn-save-modal" id="pinChallengeSubmitBtn" aria-label="Verify PIN and unlock learner profile">Unlock Profile</button>
           </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Forgot Password Modal -->
+  <div class="modal-backdrop" id="forgotPasswordModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="forgotPasswordHeading">
+    <div class="modal-card auth-modal-card">
+      <button class="modal-close-btn" id="forgotPasswordCloseBtn" aria-label="Close modal">&times;</button>
+      <div class="modal-header">
+        <div class="modal-icon" aria-hidden="true"><i class="fa-solid fa-key" aria-hidden="true"></i></div>
+        <h2 id="forgotPasswordHeading">Reset Your Password</h2>
+        <p>Enter your registered email address and we will dispatch a secure password reset link.</p>
+      </div>
+      <div class="modal-body">
+        <div class="auth-alert-msg" id="forgotPasswordAlertMsg" style="display: none;" role="alert" aria-live="assertive"></div>
+        <form id="forgotPasswordForm" class="auth-form">
+          <div class="form-group">
+            <label for="forgotEmailInput"><i class="fa-solid fa-envelope" aria-hidden="true"></i> Email Address</label>
+            <input type="email" id="forgotEmailInput" placeholder="parent@example.com" required class="form-input" autocomplete="email">
+          </div>
+          <button type="submit" class="btn-submit-auth" id="forgotSubmitBtn">
+            <i class="fa-solid fa-paper-plane" aria-hidden="true"></i> Send Password Reset Link
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Reset Password Modal (Triggered via Token) -->
+  <div class="modal-backdrop" id="resetPasswordModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="resetPasswordHeading">
+    <div class="modal-card auth-modal-card">
+      <button class="modal-close-btn" id="resetPasswordCloseBtn" aria-label="Close modal">&times;</button>
+      <div class="modal-header">
+        <div class="modal-icon" aria-hidden="true"><i class="fa-solid fa-lock-open" aria-hidden="true"></i></div>
+        <h2 id="resetPasswordHeading">Set New Password</h2>
+        <p>Enter a new secure password for your Islamic Studies LMS account.</p>
+      </div>
+      <div class="modal-body">
+        <div class="auth-alert-msg" id="resetPasswordAlertMsg" style="display: none;" role="alert" aria-live="assertive"></div>
+        <form id="resetPasswordForm" class="auth-form">
+          <input type="hidden" id="resetPasswordTokenInput">
+          <div class="form-group">
+            <label for="newPasswordInput"><i class="fa-solid fa-lock" aria-hidden="true"></i> New Password</label>
+            <div class="password-input-wrap">
+              <input type="password" id="newPasswordInput" placeholder="Create strong new password" required class="form-input" minlength="6" autocomplete="new-password">
+              <button type="button" class="btn-password-toggle" data-target="newPasswordInput" aria-label="Show password" aria-pressed="false">
+                <i class="fa-solid fa-eye" aria-hidden="true"></i>
+              </button>
+            </div>
+            <div class="password-strength-container" id="resetPasswordStrengthContainer" style="display: none;">
+              <div class="strength-bar-track">
+                <div class="strength-bar-fill" id="resetStrengthFill"></div>
+              </div>
+              <div class="strength-hint-row">
+                <span class="strength-label" id="resetStrengthLabel">Password Strength: <strong>Weak</strong></span>
+                <span class="strength-criteria" id="resetStrengthCriteria">Use 8+ chars with mix of letters & numbers</span>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="confirmNewPasswordInput"><i class="fa-solid fa-lock" aria-hidden="true"></i> Confirm New Password</label>
+            <div class="password-input-wrap">
+              <input type="password" id="confirmNewPasswordInput" placeholder="Confirm your new password" required class="form-input" minlength="6" autocomplete="new-password">
+              <button type="button" class="btn-password-toggle" data-target="confirmNewPasswordInput" aria-label="Show password" aria-pressed="false">
+                <i class="fa-solid fa-eye" aria-hidden="true"></i>
+              </button>
+            </div>
+          </div>
+          <button type="submit" class="btn-submit-auth" id="resetSubmitBtn">
+            <i class="fa-solid fa-check-circle" aria-hidden="true"></i> Update & Save Password
+          </button>
         </form>
       </div>
     </div>

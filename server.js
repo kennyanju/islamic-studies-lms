@@ -8,6 +8,7 @@ const compression = require('compression');
 const rateLimit = require('express-rate-limit');
 const morgan = require('morgan');
 const db = require('./lib/db');
+const emailService = require('./lib/email');
 
 const app = express();
 app.set('trust proxy', 1);
@@ -377,8 +378,98 @@ app.post('/api/auth/register', async (req, res, next) => {
       isVerified: false
     });
 
+    // Send Welcome / Registration Notification Email asynchronously
+    const origin = req.protocol + '://' + req.get('host');
+    emailService.sendWelcomeEmail({
+      email: newUser.email,
+      displayName: newUser.displayName,
+      role: newUser.role,
+      origin
+    }).catch(err => console.warn('Registration email notification warning:', err.message));
+
     req.session.user = safeUser(newUser);
     res.json({ success: true, user: safeUser(newUser) });
+  } catch (err) {
+    next(err);
+  }
+});
+
+// Forgot Password - Generate Reset Token & Send Email
+app.post('/api/auth/forgot-password', async (req, res, next) => {
+  try {
+    const email = sanitizeStr(req.body.email, 254).toLowerCase();
+    if (!email || !isValidEmail(email)) {
+      return res.status(400).json({ success: false, error: 'Please provide a valid email address.' });
+    }
+
+    const user = await db.findUserByEmail(email);
+    let resetToken = null;
+
+    if (user) {
+      const crypto = require('crypto');
+      resetToken = crypto.randomBytes(32).toString('hex');
+      const expiresDate = new Date(Date.now() + 3600 * 1000); // 1 hour expiration
+
+      await db.setPasswordResetToken(user.email, resetToken, expiresDate);
+
+      const origin = req.protocol + '://' + req.get('host');
+      await emailService.sendPasswordResetEmail({
+        email: user.email,
+        displayName: user.displayName,
+        resetToken,
+        origin
+      });
+    }
+
+    // Always return a generic success message to prevent user enumeration
+    res.json({
+      success: true,
+      message: 'If an account exists with this email, a password reset link has been dispatched.',
+      // In dev / test mode, include token for convenience
+      debugToken: !isProd ? resetToken : undefined
+    });
+  } catch (err) {
+    next(err);
+  }
+});
+
+// Reset Password - Verify Token and Update Password
+app.post('/api/auth/reset-password', async (req, res, next) => {
+  try {
+    const { token, password } = req.body;
+    if (!token) {
+      return res.status(400).json({ success: false, error: 'Password reset token is required.' });
+    }
+    if (!password || password.length < 6) {
+      return res.status(400).json({ success: false, error: 'Password must be at least 6 characters.' });
+    }
+    if (password.length > 128) {
+      return res.status(400).json({ success: false, error: 'Password is too long.' });
+    }
+
+    const user = await db.findUserByResetToken(token);
+    if (!user) {
+      return res.status(400).json({
+        success: false,
+        error: 'Password reset link is invalid or has expired. Please request a new one.'
+      });
+    }
+
+    const newPasswordHash = bcrypt.hashSync(password, BCRYPT_ROUNDS);
+    const updatedUser = await db.resetPasswordWithToken(token, newPasswordHash);
+
+    if (!updatedUser) {
+      return res.status(400).json({ success: false, error: 'Failed to reset password. Please try again.' });
+    }
+
+    // Automatically establish session for convenience
+    req.session.user = safeUser(updatedUser);
+
+    res.json({
+      success: true,
+      message: 'Password has been reset successfully! You are now signed in.',
+      user: safeUser(updatedUser)
+    });
   } catch (err) {
     next(err);
   }
