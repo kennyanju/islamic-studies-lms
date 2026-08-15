@@ -322,7 +322,59 @@ export async function onRequest(context) {
     });
   }
 
-  // 6. Child PIN Verification
+  // 6. Public Direct Child Access (URL + PIN)
+  if (path.match(/^\/public\/child\/[^/]+$/) && method === 'GET') {
+    const childId = path.split('/')[3];
+    if (!env.DB) return jsonResponse({ success: false, error: 'Database not initialized' }, 404);
+
+    try {
+      const row = await env.DB.prepare(
+        'SELECT id, name, avatar, assigned_track as assignedTrack, CASE WHEN pin_hash IS NOT NULL AND pin_hash != "" THEN 1 ELSE 0 END as hasPin FROM children WHERE id = ? OR LOWER(id) = LOWER(?) OR LOWER(name) = LOWER(?)'
+      ).bind(childId, childId, childId).first();
+
+      if (!row) {
+        return jsonResponse({ success: false, error: 'Learner profile not found.' }, 404);
+      }
+
+      return jsonResponse({ success: true, child: row });
+    } catch (err) {
+      return jsonResponse({ success: false, error: 'Error fetching learner: ' + err.message }, 500);
+    }
+  }
+
+  if (path.match(/^\/public\/child\/[^/]+\/verify-pin$/) && method === 'POST') {
+    const childId = path.split('/')[3];
+    const body = await request.json();
+    const { pin } = body;
+
+    if (!env.DB) return jsonResponse({ success: true, verified: true });
+    try {
+      const row = await env.DB.prepare(
+        'SELECT id, name, avatar, assigned_track as assignedTrack, pin_hash, CASE WHEN pin_hash IS NOT NULL AND pin_hash != "" THEN 1 ELSE 0 END as hasPin FROM children WHERE id = ? OR LOWER(id) = LOWER(?) OR LOWER(name) = LOWER(?)'
+      ).bind(childId, childId, childId).first();
+
+      if (!row) {
+        return jsonResponse({ success: false, error: 'Learner profile not found.' }, 404);
+      }
+
+      if (!row.pin_hash) {
+        const { pin_hash, ...safe } = row;
+        return jsonResponse({ success: true, verified: true, child: safe });
+      }
+
+      const isMatch = await verifyPassword(pin, row.pin_hash);
+      if (!isMatch) {
+        return jsonResponse({ success: false, verified: false, error: 'Incorrect PIN. Please try again.' }, 401);
+      }
+
+      const { pin_hash, ...safe } = row;
+      return jsonResponse({ success: true, verified: true, child: safe });
+    } catch (err) {
+      return jsonResponse({ success: false, error: 'Error verifying PIN: ' + err.message }, 500);
+    }
+  }
+
+  // 7. Child PIN Verification (Authenticated)
   if (path.match(/^\/parent\/children\/[^/]+\/verify-pin$/) && method === 'POST') {
     const childId = path.split('/')[3];
     const body = await request.json();

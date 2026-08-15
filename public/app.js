@@ -3394,10 +3394,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Direct Kid Access Handler (Allows children to open direct link and log in with PIN)
   async function handleDirectKidAccess(kidId) {
-    let targetChild = familyChildren.find(c => c.id === kidId);
+    if (!kidId) return;
+    const cleanKidId = decodeURIComponent(kidId).trim();
+    const cleanLower = cleanKidId.toLowerCase();
+
+    // 1. Search in current memory state (by ID or Name)
+    let targetChild = familyChildren.find(c => 
+      c.id === cleanKidId || 
+      (c.id && c.id.toLowerCase() === cleanLower) || 
+      (c.name && c.name.trim().toLowerCase() === cleanLower)
+    );
+
+    // 2. Query public endpoint from server
     if (!targetChild) {
       try {
-        const res = await fetch(`/api/public/child/${kidId}`);
+        const res = await fetch(`/api/public/child/${encodeURIComponent(cleanKidId)}`);
         if (res.ok) {
           const data = await res.json();
           if (data.success && data.child) {
@@ -3409,12 +3420,31 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
 
+    // 3. Check local storage lists (lms_children)
     if (!targetChild) {
       const localKids = JSON.parse(localStorage.getItem('lms_children') || '[]');
-      targetChild = localKids.find(c => c.id === kidId);
+      targetChild = localKids.find(c => 
+        c.id === cleanKidId || 
+        (c.id && c.id.toLowerCase() === cleanLower) || 
+        (c.name && c.name.trim().toLowerCase() === cleanLower)
+      );
+    }
+
+    // 4. Fallback to active child if cached
+    if (!targetChild && activeChild) {
+      if (activeChild.id === cleanKidId || 
+          (activeChild.id && activeChild.id.toLowerCase() === cleanLower) || 
+          (activeChild.name && activeChild.name.trim().toLowerCase() === cleanLower)) {
+        targetChild = activeChild;
+      }
     }
 
     if (targetChild) {
+      // Ensure target child is recorded in memory state
+      if (!familyChildren.some(c => c.id === targetChild.id)) {
+        familyChildren.push(targetChild);
+      }
+
       if (targetChild.hasPin) {
         targetChildId.value = targetChild.id;
         pinChallengeInput.value = '';
@@ -3430,7 +3460,7 @@ document.addEventListener('DOMContentLoaded', () => {
         showToast(`Welcome, ${targetChild.name}! 🌟`, `Ready for ${targetChild.assignedTrack === 'level2' ? 'Level 2 (13y+)' : 'Level 1 (~10y)'} learning.`, 'success');
       }
     } else {
-      showToast('Learner Profile Not Found', 'Please ask your parent for an updated learning link.', 'error');
+      showToast('Learner Profile Not Found', `Unable to find learner profile matching "${cleanKidId}". Please check the link with your parent.`, 'error', 6000);
       switchView('authLanding');
     }
   }
@@ -3473,9 +3503,9 @@ document.addEventListener('DOMContentLoaded', () => {
     updateAuthUI();
     await fetchFamilyChildren();
 
-    // 3. Handle Direct Kids Access Link (?kid=... or ?child=...)
+    // 3. Handle Direct Kids Access Link (?kid=... or ?child=... or ?learner=...)
     const urlParams = new URLSearchParams(window.location.search);
-    const kidIdParam = urlParams.get('kid') || urlParams.get('child');
+    const kidIdParam = urlParams.get('kid') || urlParams.get('child') || urlParams.get('learner') || urlParams.get('student');
     if (kidIdParam) {
       await handleDirectKidAccess(kidIdParam);
       return;

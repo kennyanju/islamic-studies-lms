@@ -783,7 +783,8 @@ app.post('/api/parent/children/:id/verify-pin', requireAuth, async (req, res, ne
 // Public Direct Child Access API (Allows children to log in directly via URL + PIN)
 app.get('/api/public/child/:id', async (req, res, next) => {
   try {
-    const childId = req.params.id;
+    const rawId = req.params.id || '';
+    const childId = decodeURIComponent(rawId).trim();
     const child = await db.getChildById(childId);
     if (!child) {
       return res.status(404).json({ success: false, error: 'Learner profile not found.' });
@@ -796,7 +797,8 @@ app.get('/api/public/child/:id', async (req, res, next) => {
 
 app.post('/api/public/child/:id/verify-pin', async (req, res, next) => {
   try {
-    const childId = req.params.id;
+    const rawId = req.params.id || '';
+    const childId = decodeURIComponent(rawId).trim();
     const pin = sanitizeStr(req.body.pin, 4);
 
     const child = await db.getChildById(childId);
