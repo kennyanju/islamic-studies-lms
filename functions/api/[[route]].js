@@ -324,13 +324,14 @@ export async function onRequest(context) {
 
   // 6. Public Direct Child Access (URL + PIN)
   if (path.match(/^\/public\/child\/[^/]+$/) && method === 'GET') {
-    const childId = path.split('/')[3];
+    const rawChildId = path.split('/')[3] || '';
+    const childId = decodeURIComponent(rawChildId).trim();
     if (!env.DB) return jsonResponse({ success: false, error: 'Database not initialized' }, 404);
 
     try {
       const row = await env.DB.prepare(
-        'SELECT id, name, avatar, assigned_track as assignedTrack, CASE WHEN pin_hash IS NOT NULL AND pin_hash != "" THEN 1 ELSE 0 END as hasPin FROM children WHERE id = ? OR LOWER(id) = LOWER(?) OR LOWER(name) = LOWER(?)'
-      ).bind(childId, childId, childId).first();
+        'SELECT id, name, avatar, assigned_track as assignedTrack, CASE WHEN pin_hash IS NOT NULL AND pin_hash != "" THEN 1 ELSE 0 END as hasPin FROM children WHERE id = ? OR LOWER(id) = LOWER(?) OR LOWER(name) = LOWER(?) OR id LIKE ? OR name LIKE ?'
+      ).bind(childId, childId, childId, `%${childId}%`, `%${childId}%`).first();
 
       if (!row) {
         return jsonResponse({ success: false, error: 'Learner profile not found.' }, 404);
@@ -343,15 +344,16 @@ export async function onRequest(context) {
   }
 
   if (path.match(/^\/public\/child\/[^/]+\/verify-pin$/) && method === 'POST') {
-    const childId = path.split('/')[3];
+    const rawChildId = path.split('/')[3] || '';
+    const childId = decodeURIComponent(rawChildId).trim();
     const body = await request.json();
     const { pin } = body;
 
     if (!env.DB) return jsonResponse({ success: true, verified: true });
     try {
       const row = await env.DB.prepare(
-        'SELECT id, name, avatar, assigned_track as assignedTrack, pin_hash, CASE WHEN pin_hash IS NOT NULL AND pin_hash != "" THEN 1 ELSE 0 END as hasPin FROM children WHERE id = ? OR LOWER(id) = LOWER(?) OR LOWER(name) = LOWER(?)'
-      ).bind(childId, childId, childId).first();
+        'SELECT id, name, avatar, assigned_track as assignedTrack, pin_hash, CASE WHEN pin_hash IS NOT NULL AND pin_hash != "" THEN 1 ELSE 0 END as hasPin FROM children WHERE id = ? OR LOWER(id) = LOWER(?) OR LOWER(name) = LOWER(?) OR id LIKE ? OR name LIKE ?'
+      ).bind(childId, childId, childId, `%${childId}%`, `%${childId}%`).first();
 
       if (!row) {
         return jsonResponse({ success: false, error: 'Learner profile not found.' }, 404);

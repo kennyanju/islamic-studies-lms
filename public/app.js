@@ -3189,15 +3189,58 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Direct Kid Access Handler (Allows children to open direct link and log in with PIN)
   async function handleDirectKidAccess(kidId) {
-    if (!kidId) return;
+    if (!kidId) {
+      if (activeChild) {
+        switchView('dashboard');
+      } else if (familyChildren.length > 0) {
+        switchView('dashboard');
+        openLearnerModal();
+      } else {
+        switchView('dashboard');
+      }
+      return;
+    }
+
     const cleanKidId = decodeURIComponent(kidId).trim();
     const cleanLower = cleanKidId.toLowerCase();
 
-    // 1. Search in current memory state (by ID or Name)
+    // Check if parameter is a generic mode flag (e.g. ?child or ?kid or ?learner)
+    const genericTokens = ['child', 'kid', 'learner', 'student', 'true', '1', 'yes', 'null', 'undefined', ''];
+    if (genericTokens.includes(cleanLower)) {
+      if (activeChild) {
+        setActiveChild(activeChild);
+        switchView('dashboard');
+        showToast(`Welcome Back, ${activeChild.name}! 🌟`, `Ready for ${activeChild.assignedTrack === 'level2' ? 'Level 2 (13y+)' : 'Level 1 (~10y)'} learning.`, 'info');
+      } else if (familyChildren.length === 1) {
+        attemptSelectLearner(familyChildren[0]);
+        switchView('dashboard');
+      } else if (familyChildren.length > 1) {
+        switchView('dashboard');
+        openLearnerModal();
+      } else {
+        const localKids = JSON.parse(localStorage.getItem('lms_children') || '[]');
+        if (localKids.length === 1) {
+          attemptSelectLearner(localKids[0]);
+          switchView('dashboard');
+        } else if (localKids.length > 1) {
+          familyChildren = localKids;
+          switchView('dashboard');
+          openLearnerModal();
+        } else {
+          switchView('dashboard');
+          showToast('Welcome to Islamic Studies! 📖', 'Explore all 9 modules across Aqidah, Maliki Fiqh, and Seerah.', 'info');
+        }
+      }
+      return;
+    }
+
+    // 1. Search in current memory state (by ID, Name, or partial match)
     let targetChild = familyChildren.find(c => 
       c.id === cleanKidId || 
       (c.id && c.id.toLowerCase() === cleanLower) || 
-      (c.name && c.name.trim().toLowerCase() === cleanLower)
+      (c.name && c.name.trim().toLowerCase() === cleanLower) ||
+      (c.id && (c.id.toLowerCase().includes(cleanLower) || cleanLower.includes(c.id.toLowerCase()))) ||
+      (c.name && (c.name.trim().toLowerCase().includes(cleanLower) || cleanLower.includes(c.name.trim().toLowerCase())))
     );
 
     // 2. Query public endpoint from server
@@ -3215,13 +3258,15 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
 
-    // 3. Check local storage lists (lms_children)
+    // 3. Check local storage lists (lms_children and lms_local_children)
     if (!targetChild) {
-      const localKids = JSON.parse(localStorage.getItem('lms_children') || '[]');
+      const localKids = JSON.parse(localStorage.getItem('lms_children') || localStorage.getItem('lms_local_children') || '[]');
       targetChild = localKids.find(c => 
         c.id === cleanKidId || 
         (c.id && c.id.toLowerCase() === cleanLower) || 
-        (c.name && c.name.trim().toLowerCase() === cleanLower)
+        (c.name && c.name.trim().toLowerCase() === cleanLower) ||
+        (c.id && (c.id.toLowerCase().includes(cleanLower) || cleanLower.includes(c.id.toLowerCase()))) ||
+        (c.name && (c.name.trim().toLowerCase().includes(cleanLower) || cleanLower.includes(c.name.trim().toLowerCase())))
       );
     }
 
@@ -3229,7 +3274,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!targetChild && activeChild) {
       if (activeChild.id === cleanKidId || 
           (activeChild.id && activeChild.id.toLowerCase() === cleanLower) || 
-          (activeChild.name && activeChild.name.trim().toLowerCase() === cleanLower)) {
+          (activeChild.name && activeChild.name.trim().toLowerCase() === cleanLower) ||
+          (activeChild.name && activeChild.name.trim().toLowerCase().includes(cleanLower))) {
         targetChild = activeChild;
       }
     }
@@ -3255,8 +3301,17 @@ document.addEventListener('DOMContentLoaded', () => {
         showToast(`Welcome, ${targetChild.name}! 🌟`, `Ready for ${targetChild.assignedTrack === 'level2' ? 'Level 2 (13y+)' : 'Level 1 (~10y)'} learning.`, 'success');
       }
     } else {
-      showToast('Learner Profile Not Found', `Unable to find learner profile matching "${cleanKidId}". Please check the link with your parent.`, 'error', 6000);
-      switchView('authLanding');
+      // Graceful fallback: If any children exist, offer learner picker instead of blocking
+      const availableKids = familyChildren.length > 0 ? familyChildren : JSON.parse(localStorage.getItem('lms_children') || '[]');
+      if (availableKids.length > 0) {
+        familyChildren = availableKids;
+        switchView('dashboard');
+        openLearnerModal();
+        showToast('Learner Profile Notice', `Could not find a profile matching "${cleanKidId}". Please choose your profile below.`, 'info', 5000);
+      } else {
+        switchView('dashboard');
+        showToast('Course Curriculum', 'Welcome! Explore all 9 Islamic Studies modules.', 'info');
+      }
     }
   }
 
