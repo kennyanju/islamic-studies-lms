@@ -3332,36 +3332,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // Social Auth Buttons Click Listeners
-  document.querySelectorAll('.home-social-btn, .btn-federated').forEach(btn => {
-    btn.addEventListener('click', async () => {
-      const provider = btn.dataset.provider || 'google';
-      try {
-        const res = await fetch('/api/auth/federated', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            provider: provider,
-            email: `parent.${provider}@example.com`,
-            displayName: `${provider.charAt(0).toUpperCase() + provider.slice(1)} Parent`,
-            role: 'parent'
-          })
-        });
-        const data = await res.json();
-        if (data.success && data.user) {
-          currentUser = data.user;
-          localStorage.setItem('lms_user', JSON.stringify(currentUser));
-          updateAuthUI();
-          await fetchFamilyChildren();
-          showToast('Signed In! 🎉', `Welcome, ${data.user.displayName}`, 'success');
-          switchView('parent');
-        }
-      } catch (err) {
-        console.error('Social login error:', err);
-      }
-    });
-  });
-
   // Initialize Auth & Children State on Load (Persistent across page reloads)
   (async function initMultiTenant() {
     // 1. Instant Cache Hydration (prevents screen flicker on refresh)
