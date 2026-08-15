@@ -1387,11 +1387,14 @@
 
           <div class="form-group" id="childDirectLinkGroup" style="display: none;">
             <label for="childDirectLinkInput"><i class="fa-solid fa-link" aria-hidden="true"></i> Kids Direct Course Access Link</label>
-            <div style="display: flex; gap: 8px;">
-              <input type="text" id="childDirectLinkInput" readonly class="form-input" style="background: var(--input-bg); font-family: monospace; font-size: 0.85rem;" aria-label="Direct kid access URL">
+            <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+              <input type="text" id="childDirectLinkInput" readonly class="form-input" style="flex: 1 1 200px; background: var(--input-bg); font-family: monospace; font-size: 0.85rem;" aria-label="Direct kid access URL">
               <button type="button" class="btn-secondary-action" id="copyDirectLinkBtn" style="white-space: nowrap;">
                 <i class="fa-solid fa-copy"></i> Copy Link
               </button>
+              <a href="#" target="_blank" class="btn-secondary-action" id="openDirectLinkBtn" style="white-space: nowrap; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
+                <i class="fa-solid fa-arrow-up-right-from-square"></i> Open Link
+              </a>
             </div>
             <small class="form-hint">Share this URL with your child so they can jump straight to courses and log in with their PIN from any device.</small>
           </div>

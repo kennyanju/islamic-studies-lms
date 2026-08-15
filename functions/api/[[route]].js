@@ -468,7 +468,16 @@ export async function onRequest(context) {
         return jsonResponse({ success: false, error: 'Learner profile not found.' }, 404);
       }
 
-      return jsonResponse({ success: true, child: row });
+      return jsonResponse({
+        success: true,
+        child: {
+          id: row.id,
+          name: row.name,
+          avatar: row.avatar || '🌟',
+          assignedTrack: row.assignedTrack || 'level1',
+          hasPin: Boolean(row.hasPin)
+        }
+      });
     } catch (err) {
       return jsonResponse({ success: false, error: 'Error fetching learner: ' + err.message }, 500);
     }
@@ -491,8 +500,17 @@ export async function onRequest(context) {
       }
 
       if (!row.pin_hash) {
-        const { pin_hash, ...safe } = row;
-        return jsonResponse({ success: true, verified: true, child: safe });
+        return jsonResponse({
+          success: true,
+          verified: true,
+          child: {
+            id: row.id,
+            name: row.name,
+            avatar: row.avatar || '🌟',
+            assignedTrack: row.assignedTrack || 'level1',
+            hasPin: false
+          }
+        });
       }
 
       const isMatch = await verifyPassword(pin, row.pin_hash);
@@ -500,8 +518,17 @@ export async function onRequest(context) {
         return jsonResponse({ success: false, verified: false, error: 'Incorrect PIN. Please try again.' }, 401);
       }
 
-      const { pin_hash, ...safe } = row;
-      return jsonResponse({ success: true, verified: true, child: safe });
+      return jsonResponse({
+        success: true,
+        verified: true,
+        child: {
+          id: row.id,
+          name: row.name,
+          avatar: row.avatar || '🌟',
+          assignedTrack: row.assignedTrack || 'level1',
+          hasPin: true
+        }
+      });
     } catch (err) {
       return jsonResponse({ success: false, error: 'Error verifying PIN: ' + err.message }, 500);
     }

@@ -2081,12 +2081,10 @@ document.addEventListener('DOMContentLoaded', () => {
           const childTrack = child.assignedTrack || 'level1';
           const childProg = localProg[childProgKey] || {};
           const childCompletedCount = Object.keys(childProg).filter(k => childProg[k]).length;
-          const childPct = Math.round((childCompletedCount / 9) * 100);
-
-          card.innerHTML = `
+                   card.innerHTML = `
             ${isActive ? '<span class="active-learner-tag"><i class="fa-solid fa-circle-check"></i> Active Learner</span>' : ''}
             
-            <div class="child-card-header">
+            <div class="child-card-header child-clickable-header" style="cursor: pointer;" title="Click to select ${escapeHtml(child.name)}">
               <div class="child-avatar-lg">${escapeHtml(child.avatar || '🌟')}</div>
               <div class="child-details">
                 <h3>${escapeHtml(child.name)}</h3>
@@ -2124,6 +2122,9 @@ document.addEventListener('DOMContentLoaded', () => {
               <button class="btn-child-switch ${isActive ? 'btn-primary-action' : ''}" data-id="${escapeHtml(child.id)}">
                 <i class="fa-solid ${isActive ? 'fa-book-open' : 'fa-user-check'}"></i> ${isActive ? 'Start Learning' : 'Select Learner'}
               </button>
+              <a href="${window.location.origin}/?kid=${encodeURIComponent(child.id)}" target="_blank" class="btn-child-icon open-kid-link-btn" data-id="${escapeHtml(child.id)}" title="Open Profile in New Tab">
+                <i class="fa-solid fa-arrow-up-right-from-square"></i>
+              </a>
               <button class="btn-child-icon copy-kid-link-btn" data-id="${escapeHtml(child.id)}" title="Copy Kids Direct Access Link">
                 <i class="fa-solid fa-link"></i>
               </button>
@@ -2136,6 +2137,15 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
           `;
 
+          // Clicking card header or avatar switches learner
+          const headerClickEl = card.querySelector('.child-clickable-header');
+          if (headerClickEl) {
+            headerClickEl.addEventListener('click', () => {
+              if (isActive) switchView('dashboard');
+              else attemptSelectLearner(child);
+            });
+          }
+
           card.querySelector('.btn-child-switch').addEventListener('click', () => {
             if (isActive) {
               switchView('dashboard');
@@ -2147,7 +2157,7 @@ document.addEventListener('DOMContentLoaded', () => {
             e.stopPropagation();
             const kidUrl = `${window.location.origin}/?kid=${encodeURIComponent(child.id)}`;
             navigator.clipboard.writeText(kidUrl);
-            showToast('Kids Access Link Copied! 📋', `Kids can open ${kidUrl} and enter PIN to learn.`, 'success');
+            showToast('Kids Access Link Copied! 📋', `Direct access URL copied: ${kidUrl}`, 'success');
           });
           card.querySelector('.edit-child-btn').addEventListener('click', () => {
             openChildModal(child);
@@ -2554,6 +2564,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const directLinkGroup = document.getElementById('childDirectLinkGroup');
     const directLinkInput = document.getElementById('childDirectLinkInput');
     const copyDirectLinkBtn = document.getElementById('copyDirectLinkBtn');
+    const openDirectLinkBtn = document.getElementById('openDirectLinkBtn');
 
     if (childToEdit) {
       document.getElementById('childModalTitle').textContent = 'Edit Child Profile';
@@ -2568,10 +2579,13 @@ document.addEventListener('DOMContentLoaded', () => {
         directLinkGroup.style.display = 'block';
         const url = `${window.location.origin}/?kid=${encodeURIComponent(childToEdit.id)}`;
         directLinkInput.value = url;
+        if (openDirectLinkBtn) {
+          openDirectLinkBtn.href = url;
+        }
         if (copyDirectLinkBtn) {
           copyDirectLinkBtn.onclick = () => {
             navigator.clipboard.writeText(url);
-            showToast('Link Copied! 📋', 'Kids direct access URL copied to clipboard.', 'success');
+            showToast('Link Copied! 📋', `Kids direct access URL copied: ${url}`, 'success');
           };
         }
       }
@@ -3266,14 +3280,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Direct Kid Access Handler (Allows children to open direct link and log in with PIN)
   async function handleDirectKidAccess(kidId) {
+    // Switch to main dashboard layout immediately so children see course contents
+    switchView('dashboard');
+
     if (!kidId) {
       if (activeChild) {
-        switchView('dashboard');
+        setActiveChild(activeChild);
       } else if (familyChildren.length > 0) {
-        switchView('dashboard');
         openLearnerModal();
-      } else {
-        switchView('dashboard');
       }
       return;
     }
@@ -3286,25 +3300,19 @@ document.addEventListener('DOMContentLoaded', () => {
     if (genericTokens.includes(cleanLower)) {
       if (activeChild) {
         setActiveChild(activeChild);
-        switchView('dashboard');
         showToast(`Welcome Back, ${activeChild.name}! 🌟`, `Ready for ${activeChild.assignedTrack === 'level2' ? 'Level 2 (13y+)' : 'Level 1 (~10y)'} learning.`, 'info');
       } else if (familyChildren.length === 1) {
         attemptSelectLearner(familyChildren[0]);
-        switchView('dashboard');
       } else if (familyChildren.length > 1) {
-        switchView('dashboard');
         openLearnerModal();
       } else {
         const localKids = JSON.parse(localStorage.getItem('lms_children') || '[]');
         if (localKids.length === 1) {
           attemptSelectLearner(localKids[0]);
-          switchView('dashboard');
         } else if (localKids.length > 1) {
           familyChildren = localKids;
-          switchView('dashboard');
           openLearnerModal();
         } else {
-          switchView('dashboard');
           showToast('Welcome to Islamic Studies! 📖', 'Explore all 9 modules across Aqidah, Maliki Fiqh, and Seerah.', 'info');
         }
       }
@@ -3320,7 +3328,7 @@ document.addEventListener('DOMContentLoaded', () => {
       (c.name && (c.name.trim().toLowerCase().includes(cleanLower) || cleanLower.includes(c.name.trim().toLowerCase())))
     );
 
-    // 2. Query public endpoint from server
+    // 2. Query public endpoint from server / edge D1
     if (!targetChild) {
       try {
         const res = await fetch(`/api/public/child/${encodeURIComponent(cleanKidId)}`);
@@ -3374,7 +3382,6 @@ document.addEventListener('DOMContentLoaded', () => {
         openAccessibleModal(pinChallengeModal, '#pinChallengeInput');
       } else {
         setActiveChild(targetChild);
-        switchView('dashboard');
         showToast(`Welcome, ${targetChild.name}! 🌟`, `Ready for ${targetChild.assignedTrack === 'level2' ? 'Level 2 (13y+)' : 'Level 1 (~10y)'} learning.`, 'success');
       }
     } else {
@@ -3382,11 +3389,9 @@ document.addEventListener('DOMContentLoaded', () => {
       const availableKids = familyChildren.length > 0 ? familyChildren : JSON.parse(localStorage.getItem('lms_children') || '[]');
       if (availableKids.length > 0) {
         familyChildren = availableKids;
-        switchView('dashboard');
         openLearnerModal();
-        showToast('Learner Profile Notice', `Could not find a profile matching "${cleanKidId}". Please choose your profile below.`, 'info', 5000);
+        showToast('Learner Profile Notice', `Could not find profile matching "${cleanKidId}". Please select a profile below.`, 'info', 5000);
       } else {
-        switchView('dashboard');
         showToast('Course Curriculum', 'Welcome! Explore all 9 Islamic Studies modules.', 'info');
       }
     }
@@ -3430,9 +3435,26 @@ document.addEventListener('DOMContentLoaded', () => {
     updateAuthUI();
     await fetchFamilyChildren();
 
-    // 3. Handle Direct Kids Access Link (?kid=... or ?child=... or ?learner=...)
+    // 3. Handle Direct Kids Access Link (?kid=... or ?child=... or #kid=... or pathname /child/...)
     const urlParams = new URLSearchParams(window.location.search);
-    const kidIdParam = urlParams.get('kid') || urlParams.get('child') || urlParams.get('learner') || urlParams.get('student');
+    let kidIdParam = urlParams.get('kid') || urlParams.get('child') || urlParams.get('learner') || urlParams.get('student');
+    
+    if (!kidIdParam && window.location.hash) {
+      const hashClean = window.location.hash.replace(/^#\/?/, '');
+      const hashParams = new URLSearchParams(hashClean);
+      kidIdParam = hashParams.get('kid') || hashParams.get('child') || hashParams.get('learner') || hashParams.get('student');
+      if (!kidIdParam && (hashClean.startsWith('child_') || hashClean.startsWith('kid_'))) {
+        kidIdParam = hashClean;
+      }
+    }
+
+    if (!kidIdParam && window.location.pathname) {
+      const match = window.location.pathname.match(/^\/(?:child|kid|learner|student)\/([^/]+)/i);
+      if (match) {
+        kidIdParam = decodeURIComponent(match[1]);
+      }
+    }
+
     if (kidIdParam) {
       await handleDirectKidAccess(kidIdParam);
       return;
