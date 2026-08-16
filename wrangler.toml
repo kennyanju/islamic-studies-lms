@@ -4,6 +4,7 @@ compatibility_flags = ["nodejs_compat"]
 pages_build_output_dir = "public"
 
 # Cloudflare D1 Serverless SQL Database Binding
+# Local preview defaults to preview database ID; replace with production database_id from Cloudflare dashboard
 [[d1_databases]]
 binding = "DB"
 database_name = "islamic-studies-db"

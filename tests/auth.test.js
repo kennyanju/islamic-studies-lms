@@ -174,5 +174,19 @@ describe('Authentication & Session API Tests', () => {
     expect(loginRes.statusCode).toBe(200);
     expect(loginRes.body.success).toBe(true);
     expect(loginRes.body.user.email).toBe(testEmail);
+
+    // 6. Test second reset with newPassword payload alias
+    const forgot2 = await request(app).post('/api/auth/forgot-password').send({ email: testEmail });
+    expect(forgot2.body.debugToken).toBeDefined();
+
+    const reset2 = await request(app)
+      .post('/api/auth/reset-password')
+      .send({
+        token: forgot2.body.debugToken,
+        newPassword: 'AnotherPassword2026!'
+      });
+
+    expect(reset2.statusCode).toBe(200);
+    expect(reset2.body.success).toBe(true);
   });
 });

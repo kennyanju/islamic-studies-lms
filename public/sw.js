@@ -1,88 +1,101 @@
 /**
- * Islamic Studies LMS - Service Worker (PWA & Offline Capability)
- * Caches core app shell, curriculum data, and styles for offline study and read-aloud
+ * Islamic Studies LMS - Progressive Web App (PWA) Service Worker
+ * Provides offline caching, network-first curriculum loading, and background resilience.
  */
 
-const CACHE_NAME = 'islamic-studies-lms-v1';
-const ASSETS_TO_CACHE = [
+const CACHE_NAME = 'islamic-studies-v1';
+const STATIC_ASSETS = [
   '/',
   '/index.html',
   '/style.css',
   '/app.js',
-  '/js/utils.js',
-  '/js/auth.js',
-  '/course_data.json',
   '/manifest.json',
+  '/course_data.json',
   'https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800&display=swap',
   'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css',
   'https://cdn.jsdelivr.net/npm/marked/marked.min.js',
   'https://cdn.jsdelivr.net/npm/dompurify@3.1.6/dist/purify.min.js'
 ];
 
+// Install Event: Pre-cache core application shell
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
-      console.log('[SW] Pre-caching offline app shell assets');
-      return cache.addAll(ASSETS_TO_CACHE).catch(err => {
-        console.warn('[SW] Some remote assets could not be pre-cached immediately:', err);
+      return cache.addAll(STATIC_ASSETS).catch((err) => {
+        console.warn('[SW] Pre-caching partial notice:', err);
       });
     }).then(() => self.skipWaiting())
   );
 });
 
+// Activate Event: Clean up legacy caches
 self.addEventListener('activate', (event) => {
   event.waitUntil(
-    caches.keys().then((keys) => {
+    caches.keys().then((cacheNames) => {
       return Promise.all(
-        keys.map((key) => {
-          if (key !== CACHE_NAME) {
-            console.log('[SW] Removing deprecated cache:', key);
-            return caches.delete(key);
-          }
-        })
+        cacheNames
+          .filter((name) => name !== CACHE_NAME)
+          .map((name) => caches.delete(name))
       );
     }).then(() => self.clients.claim())
   );
 });
 
+// Fetch Event: Stale-while-revalidate for course data, Cache-first for static, Network-first for API
 self.addEventListener('fetch', (event) => {
-  // Never cache mutating API calls
-  if (event.request.url.includes('/api/auth/') ||
-      event.request.url.includes('/api/parent/') ||
-      event.request.url.includes('/api/quiz/grade') ||
-      event.request.url.includes('/api/admin/') ||
-      event.request.method !== 'GET') {
+  const { request } = event;
+  const url = new URL(request.url);
+
+  // Bypass non-GET requests and external analytics
+  if (request.method !== 'GET') {
     return;
   }
 
-  // Network-first for dynamic course-data with cache fallback
-  if (event.request.url.includes('/api/course-data') || event.request.url.includes('/course_data.json')) {
+  // Bypass API requests to ensure real-time backend updates, with graceful network failure handling
+  if (url.pathname.startsWith('/api/')) {
+    return;
+  }
+
+  // Handle course data: Stale-While-Revalidate
+  if (url.pathname.endsWith('course_data.json')) {
     event.respondWith(
-      fetch(event.request)
-        .then((response) => {
-          if (response && response.status === 200) {
-            const responseClone = response.clone();
-            caches.open(CACHE_NAME).then((cache) => cache.put(event.request, responseClone));
-          }
-          return response;
-        })
-        .catch(() => caches.match(event.request))
+      caches.open(CACHE_NAME).then((cache) => {
+        return cache.match(request).then((cachedResponse) => {
+          const fetchPromise = fetch(request).then((networkResponse) => {
+            if (networkResponse && networkResponse.status === 200) {
+              cache.put(request, networkResponse.clone());
+            }
+            return networkResponse;
+          }).catch(() => cachedResponse);
+
+          return cachedResponse || fetchPromise;
+        });
+      })
     );
     return;
   }
 
-  // Stale-while-revalidate for static shell assets
+  // Static Assets: Cache First with Network Fallback
   event.respondWith(
-    caches.match(event.request).then((cachedResponse) => {
-      const fetchPromise = fetch(event.request).then((networkResponse) => {
-        if (networkResponse && networkResponse.status === 200) {
-          const responseClone = networkResponse.clone();
-          caches.open(CACHE_NAME).then((cache) => cache.put(event.request, responseClone));
+    caches.match(request).then((cached) => {
+      if (cached) {
+        return cached;
+      }
+      return fetch(request).then((response) => {
+        // Cache valid responses for static assets
+        if (response && response.status === 200 && response.type === 'basic') {
+          const responseToCache = response.clone();
+          caches.open(CACHE_NAME).then((cache) => {
+            cache.put(request, responseToCache);
+          });
         }
-        return networkResponse;
-      }).catch(() => cachedResponse);
-
-      return cachedResponse || fetchPromise;
+        return response;
+      }).catch(() => {
+        // Fallback for document navigation if offline
+        if (request.mode === 'navigate') {
+          return caches.match('/index.html');
+        }
+      });
     })
   );
 });

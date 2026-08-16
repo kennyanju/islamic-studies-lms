@@ -1,18 +1,20 @@
 const request = require('supertest');
 const app = require('../server');
+const db = require('../lib/db');
 
 describe('Child Profiles & Access Control API Tests', () => {
   const agent1 = request.agent(app);
   const agent2 = request.agent(app);
 
   let user1Uid = '';
+  let parent1Email = `parent1_${Date.now()}@test.com`;
   let createdChildId = '';
 
   beforeAll(async () => {
     // Register Parent 1
     const reg1 = await agent1.post('/api/auth/register').send({
       displayName: 'Parent One',
-      email: `parent1_${Date.now()}@test.com`,
+      email: parent1Email,
       password: 'Password123!'
     });
     user1Uid = reg1.body.user.uid;
@@ -80,7 +82,38 @@ describe('Child Profiles & Access Control API Tests', () => {
     expect(res.statusCode).toBe(403);
   });
 
+  test('GET /api/public/child/:id - Public learner access works without parent session', async () => {
+    // 1. Create a child
+    const res = await agent1.post('/api/parent/children').send({
+      name: 'Maryam',
+      avatar: '🌸',
+      assignedTrack: 'level2',
+      pinCode: '5555'
+    });
+    expect(res.statusCode).toBe(200);
+    const maryamId = res.body.child.id;
+
+    // 2. Parent signs out
+    await agent1.post('/api/auth/logout');
+
+    // 3. Child profile remains accessible via public URL endpoint
+    const pubRes = await request(app).get(`/api/public/child/${maryamId}`);
+    expect(pubRes.statusCode).toBe(200);
+    expect(pubRes.body.success).toBe(true);
+    expect(pubRes.body.child.name).toBe('Maryam');
+    expect(pubRes.body.child.assignedTrack).toBe('level2');
+    expect(pubRes.body.child.hasPin).toBe(true);
+
+    // 4. Clean up
+    await db.deleteChild(maryamId);
+  });
+
   test('DELETE /api/parent/children/:id - Parent 1 can delete their child', async () => {
+    // Log back in
+    await agent1.post('/api/auth/login').send({
+      email: parent1Email,
+      password: 'Password123!'
+    });
     const res = await agent1.delete(`/api/parent/children/${createdChildId}`);
     expect(res.statusCode).toBe(200);
     expect(res.body.success).toBe(true);

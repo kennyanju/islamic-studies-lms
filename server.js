@@ -436,14 +436,15 @@ app.post('/api/auth/forgot-password', async (req, res, next) => {
 // Reset Password - Verify Token and Update Password
 app.post('/api/auth/reset-password', async (req, res, next) => {
   try {
-    const { token, password } = req.body;
+    const { token, password, newPassword } = req.body;
+    const targetPassword = password || newPassword;
     if (!token) {
       return res.status(400).json({ success: false, error: 'Password reset token is required.' });
     }
-    if (!password || password.length < 6) {
+    if (!targetPassword || targetPassword.length < 6) {
       return res.status(400).json({ success: false, error: 'Password must be at least 6 characters.' });
     }
-    if (password.length > 128) {
+    if (targetPassword.length > 128) {
       return res.status(400).json({ success: false, error: 'Password is too long.' });
     }
 
@@ -455,7 +456,7 @@ app.post('/api/auth/reset-password', async (req, res, next) => {
       });
     }
 
-    const newPasswordHash = bcrypt.hashSync(password, BCRYPT_ROUNDS);
+    const newPasswordHash = bcrypt.hashSync(targetPassword, BCRYPT_ROUNDS);
     const updatedUser = await db.resetPasswordWithToken(token, newPasswordHash);
 
     if (!updatedUser) {

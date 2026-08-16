@@ -466,7 +466,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if (learnerWelcomeHeadline) {
-      if (isL2) {
+      if (activeChild) {
+        learnerWelcomeHeadline.textContent = `Welcome back, ${activeChild.name}! 🌟`;
+      } else if (isL2) {
         learnerWelcomeHeadline.textContent = `Analytical Study & Islamic Knowledge Mastery`;
       } else if (isTeacher) {
         learnerWelcomeHeadline.textContent = `Educator Portal & Curriculum Presentation Decks`;
@@ -713,6 +715,42 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
+  async function persistModuleProgress(moduleId, completed = true, level = activeTrack) {
+    try {
+      const sId = activeChild ? activeChild.id : (currentUser ? currentUser.uid : 'guest');
+      fetch('/api/quiz/progress', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          studentId: sId,
+          moduleId,
+          level,
+          completed
+        })
+      }).catch(() => {});
+    } catch (e) {}
+  }
+
+  async function syncCloudProgress(studentId = null) {
+    try {
+      const sId = studentId || (activeChild ? activeChild.id : (currentUser ? currentUser.uid : null));
+      if (!sId) return;
+      const res = await fetch(`/api/quiz/progress?studentId=${encodeURIComponent(sId)}`);
+      if (res.ok) {
+        const data = await res.json();
+        if (data.success && data.progress) {
+          userProgress = { ...userProgress, ...data.progress };
+          localStorage.setItem('lms_progress', JSON.stringify(userProgress));
+          renderSidebarModules();
+          renderDashboard();
+          updateProgressUI();
+        }
+      }
+    } catch (err) {
+      console.warn('[Sync] Progress sync notice:', err);
+    }
+  }
+
   markHandoutCompleteBtn.addEventListener('click', () => {
     if (activeModuleId === null) return;
     const mod = courseData.modules.find(m => m.id === activeModuleId);
@@ -720,6 +758,9 @@ document.addEventListener('DOMContentLoaded', () => {
     userProgress[key] = !userProgress[key];
     localStorage.setItem('lms_progress', JSON.stringify(userProgress));
     
+    // Asynchronously sync with Cloudflare D1 Backend
+    persistModuleProgress(activeModuleId, userProgress[key], activeTrack);
+
     renderSidebarModules();
     renderDashboard();
     updateProgressUI();
@@ -1253,6 +1294,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (data.passed) {
         userProgress[`mod_${activeModuleId}`] = true;
         localStorage.setItem('lms_progress', JSON.stringify(userProgress));
+        persistModuleProgress(activeModuleId, true, activeTrack);
         renderSidebarModules();
         updateProgressUI();
         showToast('MashaAllah! Exam Passed 🏆', `You scored ${data.percentage}% on Module ${activeModuleId}! Certificate unlocked.`, 'celebration');
@@ -1771,16 +1813,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
   async function handleSignOut() {
     try {
+      // Fetch latest children from server BEFORE logging out to persist them
+      if (currentUser) {
+        const res = await fetch(`/api/parent/children?parentUid=${encodeURIComponent(currentUser.uid)}`);
+        if (res.ok) {
+          const data = await res.json();
+          if (data.success && data.children && Array.isArray(data.children)) {
+            localStorage.setItem('lms_children', JSON.stringify(data.children));
+          }
+        }
+      }
       await fetch('/api/auth/logout', { method: 'POST' });
     } catch (e) {
       console.warn('Logout API error:', e);
     }
     currentUser = null;
     activeChild = null;
-    familyChildren = [];
     localStorage.removeItem('lms_user');
     localStorage.removeItem('lms_active_child');
-    localStorage.removeItem('lms_children');
+    // Note: Retain lms_children in storage so direct kid URLs and local family profiles remain accessible
     updateAuthUI();
     if (userProfileModal) closeAccessibleModal(userProfileModal);
     showToast('Signed Out Successfully', 'You have been safely signed out of your account.', 'info');
@@ -1811,7 +1862,15 @@ document.addEventListener('DOMContentLoaded', () => {
   // Family & Children Management
   async function fetchFamilyChildren() {
     if (!currentUser) {
-      familyChildren = [];
+      const cached = localStorage.getItem('lms_children') || localStorage.getItem('lms_local_children');
+      if (cached) {
+        try {
+          const parsed = JSON.parse(cached);
+          if (Array.isArray(parsed) && parsed.length > 0) {
+            familyChildren = parsed;
+          }
+        } catch (e) {}
+      }
       renderChildrenGrid();
       renderLearnerSelector();
       return;
@@ -2081,7 +2140,9 @@ document.addEventListener('DOMContentLoaded', () => {
           const childTrack = child.assignedTrack || 'level1';
           const childProg = localProg[childProgKey] || {};
           const childCompletedCount = Object.keys(childProg).filter(k => childProg[k]).length;
-                   card.innerHTML = `
+          const childPct = Math.round((childCompletedCount / 9) * 100);
+
+          card.innerHTML = `
             ${isActive ? '<span class="active-learner-tag"><i class="fa-solid fa-circle-check"></i> Active Learner</span>' : ''}
             
             <div class="child-card-header child-clickable-header" style="cursor: pointer;" title="Click to select ${escapeHtml(child.name)}">
@@ -3639,7 +3700,10 @@ document.addEventListener('DOMContentLoaded', () => {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email })
           });
-          const data = await res.json();
+          let data = null;
+          try {
+            data = await res.json();
+          } catch (jsonErr) {}
           if (data && data.success) {
             if (forgotAlert) {
               forgotAlert.className = 'auth-alert-msg success';
@@ -3654,7 +3718,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (forgotAlert) {
               forgotAlert.className = 'auth-alert-msg error';
               forgotAlert.style.display = 'block';
-              forgotAlert.textContent = data.error || 'Unable to process request.';
+              forgotAlert.textContent = (data && data.error) ? data.error : 'Unable to process request.';
             }
           }
         } catch (err) {
@@ -3662,7 +3726,7 @@ document.addEventListener('DOMContentLoaded', () => {
           if (forgotAlert) {
             forgotAlert.className = 'auth-alert-msg error';
             forgotAlert.style.display = 'block';
-            forgotAlert.textContent = 'Connection error. Please try again.';
+            forgotAlert.textContent = 'Network error submitting request. Please verify connection and try again.';
           }
         } finally {
           if (submitBtn) {
@@ -3718,29 +3782,36 @@ document.addEventListener('DOMContentLoaded', () => {
           const res = await fetch('/api/auth/reset-password', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ token, password: pass })
+            body: JSON.stringify({ token, password: pass, newPassword: pass })
           });
-          const data = await res.json();
-          if (data && data.success && data.user) {
+          let data = null;
+          try {
+            data = await res.json();
+          } catch (jsonErr) {}
+          if (data && data.success) {
             if (resetAlert) {
               resetAlert.className = 'auth-alert-msg success';
               resetAlert.style.display = 'block';
               resetAlert.textContent = data.message || 'Password updated successfully!';
             }
-            currentUser = data.user;
-            localStorage.setItem('lms_user', JSON.stringify(currentUser));
-            updateAuthUI();
-            await fetchFamilyChildren();
+            if (data.user) {
+              currentUser = data.user;
+              localStorage.setItem('lms_user', JSON.stringify(currentUser));
+              updateAuthUI();
+              await fetchFamilyChildren();
+            }
             showToast('Password Updated! 🎉', 'You are now signed in with your new password.', 'success');
             setTimeout(() => {
               closeAccessibleModal(resetModal);
-              switchView(currentUser.role === 'super_admin' ? 'admin' : 'parent');
-            }, 1000);
+              if (currentUser) {
+                switchView(currentUser.role === 'super_admin' ? 'admin' : 'parent');
+              }
+            }, 1200);
           } else {
             if (resetAlert) {
               resetAlert.className = 'auth-alert-msg error';
               resetAlert.style.display = 'block';
-              resetAlert.textContent = data.error || 'Password reset failed.';
+              resetAlert.textContent = (data && data.error) ? data.error : 'Password reset failed. The link may have expired.';
             }
           }
         } catch (err) {
@@ -3748,7 +3819,7 @@ document.addEventListener('DOMContentLoaded', () => {
           if (resetAlert) {
             resetAlert.className = 'auth-alert-msg error';
             resetAlert.style.display = 'block';
-            resetAlert.textContent = 'Connection error. Please try again.';
+            resetAlert.textContent = 'Network error updating password. Please try again.';
           }
         } finally {
           if (submitBtn) {
@@ -3862,6 +3933,17 @@ document.addEventListener('DOMContentLoaded', () => {
           timestamp: new Date().toISOString()
         })
       }).catch(() => {});
+    });
+  }
+
+  // Register Progressive Web App (PWA) Service Worker for Offline Resilience
+  if ('serviceWorker' in navigator && window.location.protocol.startsWith('http')) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/sw.js').then((reg) => {
+        console.log('✅ [PWA] Service Worker registered:', reg.scope);
+      }).catch((err) => {
+        console.warn('⚠️ [PWA] Service Worker registration notice:', err);
+      });
     });
   }
 
