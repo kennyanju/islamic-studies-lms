@@ -69,16 +69,15 @@ function hexToBuf(hex) {
 }
 
 // --------------------------------------------------------------------------
-// Ephemeral / Runtime Secret Key Generator (No hardcoded fallback strings)
+// Ephemeral / Runtime Secret Key Generator (Lazy, No hardcoded fallback strings)
 // --------------------------------------------------------------------------
-if (!globalThis._EPHEMERAL_JWT_SECRET) {
-  const randBytes = crypto.getRandomValues(new Uint8Array(32));
-  globalThis._EPHEMERAL_JWT_SECRET = bufToHex(randBytes);
-}
-
 function getJwtSecret(env) {
   if (env && env.SESSION_SECRET && env.SESSION_SECRET.length >= 16) {
     return env.SESSION_SECRET;
+  }
+  if (!globalThis._EPHEMERAL_JWT_SECRET) {
+    const randBytes = crypto.getRandomValues(new Uint8Array(32));
+    globalThis._EPHEMERAL_JWT_SECRET = bufToHex(randBytes);
   }
   return globalThis._EPHEMERAL_JWT_SECRET;
 }

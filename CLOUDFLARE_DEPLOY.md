@@ -41,12 +41,23 @@ npx wrangler d1 migrations apply islamic-studies-db --remote
 ```bash
 npm run deploy
 ```
-*(Runs `node compile.js && wrangler pages deploy public --project-name=islamic-studies-lms`)*
+*(Runs `node compile.js && wrangler deploy` for Cloudflare Workers with Static Assets, or run `npm run pages:deploy` for Cloudflare Pages)*
 
 ---
 
 ## Web Dashboard Deployment (Git Integration)
 
+### Option A: Cloudflare Workers (Recommended for modern unified builds)
+1. **Connect to GitHub**:
+   - Go to [Cloudflare Dashboard](https://dash.cloudflare.com/) > **Workers & Pages** > **Create application** > **Worker** > **Connect to Git**.
+   - Select repository `kennyanju/islamic-studies-lms`.
+2. **Build Settings**:
+   - **Build command**: `npm run build`
+   - **Deploy command**: `npx wrangler deploy` (default)
+3. **Bind D1 Database**:
+   - In project settings, bind D1 database `islamic-studies-db` to binding `DB`.
+
+### Option B: Cloudflare Pages
 1. **Connect to GitHub**:
    - Go to [Cloudflare Dashboard](https://dash.cloudflare.com/) > **Workers & Pages** > **Create application** > **Pages** > **Connect to Git**.
    - Select `kennyanju/islamic-studies-lms`.
@@ -58,17 +69,14 @@ npm run deploy
    - Go to **Project Settings** > **Functions** > **D1 Database Bindings**:
      - Variable name: `DB`
      - Database: `islamic-studies-db`
-4. **Environment Variables (Optional)**:
-   - `SESSION_SECRET`: Random 32+ character string
-   - `ADMIN_EMAIL`: `admin@islamicstudies.org`
-   - `ADMIN_PASSWORD`: `Admin@Islam2026!`
 
 ---
 
 ## Local Development & Emulation
 
-To emulate Cloudflare Pages Functions and local D1 database locally:
+To emulate Cloudflare Worker/Pages Functions and local D1 database locally:
 ```bash
 npm run d1:migrate:local
-npx wrangler pages dev public
+npx wrangler dev
 ```
+

@@ -1,7 +1,12 @@
 name = "islamic-studies-lms"
-compatibility_date = "2024-01-01"
+main = "worker.js"
+compatibility_date = "2024-09-23"
 compatibility_flags = ["nodejs_compat"]
-pages_build_output_dir = "public"
+
+# Cloudflare Workers Static Assets
+[assets]
+directory = "./public"
+
 
 # Cloudflare D1 Serverless SQL Database Binding
 # Local preview defaults to preview database ID; replace with production database_id from Cloudflare dashboard
@@ -10,3 +15,5 @@ binding = "DB"
 database_name = "islamic-studies-db"
 database_id = "local-preview-id"
 migrations_dir = "migrations"
+
+
