@@ -161,6 +161,145 @@ function jsonResponse(data, status = 200, headers = {}, request = null) {
   });
 }
 
+// --------------------------------------------------------------------------
+// Cloudflare Edge Email Dispatch Engine (Resend REST API / Web Standards)
+// --------------------------------------------------------------------------
+async function sendEdgeEmail({ to, subject, html, text, env }) {
+  const from = (env && env.EMAIL_FROM) || 'Islamic Studies LMS <onboarding@resend.dev>';
+  const apiKey = env && env.RESEND_API_KEY;
+
+  if (apiKey) {
+    try {
+      const res = await fetch('https://api.resend.com/emails', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${apiKey}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          from,
+          to: Array.isArray(to) ? to : [to],
+          subject,
+          html,
+          text: text || ''
+        })
+      });
+      const data = await res.json().catch(() => ({}));
+      return { success: res.ok, data };
+    } catch (e) {
+      console.warn('Resend Edge email dispatch exception:', e.message);
+      return { success: false, error: e.message };
+    }
+  }
+
+  console.log(`✉️ [Edge Simulated Email] To: ${to} | Subject: "${subject}" (Set RESEND_API_KEY in Cloudflare Worker secrets for live email delivery)`);
+  return { success: true, simulated: true };
+}
+
+function buildPasswordResetHtml({ resetUrl, email, displayName }) {
+  return `<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background-color: #090d16; color: #f8fafc; margin: 0; padding: 24px; }
+    .card { max-width: 560px; margin: 0 auto; background: #111827; border: 1px solid #1f2937; border-radius: 16px; overflow: hidden; }
+    .hdr { background: linear-gradient(135deg, #064e3b, #090d16); padding: 32px; text-align: center; }
+    .hdr h1 { color: #fbbf24; margin: 0 0 6px 0; font-size: 22px; }
+    .content { padding: 28px; line-height: 1.6; }
+    .btn { display: inline-block; background: #059669; color: #ffffff !important; padding: 12px 28px; text-decoration: none; border-radius: 8px; font-weight: 700; margin: 20px 0; }
+    .token-box { background: #090d16; border: 1px dashed #fbbf24; border-radius: 8px; padding: 12px; font-family: monospace; font-size: 12px; color: #fbbf24; word-break: break-all; margin: 16px 0; }
+    .ftr { padding: 16px 28px; text-align: center; font-size: 12px; color: #64748b; border-top: 1px solid #1f2937; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="hdr">
+      <h1>🕌 Islamic Studies Family LMS</h1>
+      <p style="color: #94a3b8; margin: 0; font-size: 14px;">Password Reset Request</p>
+    </div>
+    <div class="content">
+      <h2 style="font-size: 18px; margin-top: 0;">Assalamu Alaikum ${displayName || 'Parent'},</h2>
+      <p>We received a request to reset the password for your Islamic Studies LMS account (<strong>${email}</strong>).</p>
+      <p>Click the button below to choose a secure new password. This reset link expires in <strong>1 hour</strong>.</p>
+      <center><a href="${resetUrl}" class="btn">Reset Password</a></center>
+      <p style="font-size: 13px; color: #94a3b8;">Or copy and paste this link in your browser:</p>
+      <div class="token-box">${resetUrl}</div>
+      <p style="font-size: 13px; color: #94a3b8;">If you did not request a password reset, you can safely ignore this email.</p>
+    </div>
+    <div class="ftr">
+      <p>&copy; ${new Date().getFullYear()} Islamic Studies Family LMS. 100% Private, Secure & Ad-Free.</p>
+    </div>
+  </div>
+</body>
+</html>`;
+}
+
+function buildWelcomeHtml({ appUrl, email, displayName, role }) {
+  return `<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background-color: #090d16; color: #f8fafc; margin: 0; padding: 24px; }
+    .card { max-width: 560px; margin: 0 auto; background: #111827; border: 1px solid #1f2937; border-radius: 16px; overflow: hidden; }
+    .hdr { background: linear-gradient(135deg, #064e3b, #090d16); padding: 32px; text-align: center; }
+    .hdr h1 { color: #fbbf24; margin: 0 0 6px 0; font-size: 22px; }
+    .content { padding: 28px; line-height: 1.6; }
+    .btn { display: inline-block; background: #059669; color: #ffffff !important; padding: 12px 28px; text-decoration: none; border-radius: 8px; font-weight: 700; margin: 20px 0; }
+    .box { background: #090d16; border: 1px solid #1f2937; border-radius: 8px; padding: 16px; margin: 16px 0; }
+    .ftr { padding: 16px 28px; text-align: center; font-size: 12px; color: #64748b; border-top: 1px solid #1f2937; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="hdr">
+      <h1>🕌 Welcome to Islamic Studies LMS</h1>
+      <p style="color: #94a3b8; margin: 0; font-size: 14px;">Authentic Maliki Fiqh & Ash'ari Creed Curriculum</p>
+    </div>
+    <div class="content">
+      <h2 style="font-size: 18px; margin-top: 0;">Assalamu Alaikum, ${displayName || 'Family Head'}!</h2>
+      <p>Welcome to our family Islamic education portal. Your account (<strong>${email}</strong>) has been registered successfully with the <strong>${role === 'teacher' ? 'Educator' : 'Parent / Family Head'}</strong> role.</p>
+      <div class="box">
+        <strong style="color: #fbbf24;">Getting Started:</strong>
+        <ul style="margin: 8px 0 0 0; padding-left: 20px; color: #cbd5e1; font-size: 14px;">
+          <li>Add child profiles with personalized avatars and optional 4-digit PINs.</li>
+          <li>Choose between Level 1 (~10y) and Level 2 (13y+ teens) curriculum tracks.</li>
+          <li>Monitor quiz mastery and generate printable completion certificates.</li>
+        </ul>
+      </div>
+      <center><a href="${appUrl}" class="btn">Open Family Portal</a></center>
+    </div>
+    <div class="ftr">
+      <p>&copy; ${new Date().getFullYear()} Islamic Studies Family LMS. 100% Private, Secure & Ad-Free.</p>
+    </div>
+  </div>
+</body>
+</html>`;
+}
+
+// --------------------------------------------------------------------------
+// Super Admin First-Run Bootstrap Helper
+// --------------------------------------------------------------------------
+async function ensureSuperAdminBootstrap(env) {
+  if (!env || !env.DB) return;
+  try {
+    const countRow = await env.DB.prepare('SELECT COUNT(*) as c FROM users').first();
+    if (countRow && countRow.c === 0) {
+      const adminEmail = (env.ADMIN_EMAIL || 'admin@islamicstudies.org').trim().toLowerCase();
+      const adminPass = env.ADMIN_PASSWORD || 'Admin@Islam2026!';
+      const pHash = await hashPassword(adminPass);
+      const uid = 'admin_root_' + Date.now().toString(36);
+      await env.DB.prepare(
+        'INSERT INTO users (uid, email, display_name, role, is_verified, provider, password_hash) VALUES (?, ?, ?, ?, 1, ?, ?)'
+      ).bind(uid, adminEmail, 'Super Administrator', 'super_admin', 'local', pHash).run();
+      console.log(`👑 [Bootstrap] Initial Super Admin account created for ${adminEmail}`);
+    }
+  } catch (err) {
+    // Ignore if table not yet initialized
+  }
+}
+
 // Simple IP-based Rate Limiter (Workers In-Memory Window)
 const RATE_LIMIT_MAP = new Map();
 function checkRateLimit(ip, path, max = 60, windowSec = 60) {
@@ -190,6 +329,9 @@ export async function onRequest(context) {
   const method = request.method;
   const jwtSecret = getJwtSecret(env);
   const clientIp = request.headers.get('CF-Connecting-IP') || request.headers.get('x-forwarded-for') || '127.0.0.1';
+
+  // Ensure first-run Super Admin is initialized if users table is empty
+  await ensureSuperAdminBootstrap(env);
 
   // Handle CORS preflight OPTIONS request
   if (method === 'OPTIONS') {
@@ -269,6 +411,14 @@ export async function onRequest(context) {
           await env.DB.prepare(
             'INSERT INTO users (uid, email, display_name, role, is_verified, provider, password_hash) VALUES (?, ?, ?, ?, 1, ?, ?)'
           ).bind(uid, cleanEmail, name, userRole, 'local', pHash).run();
+
+          // Dispatch Welcome Email in the background
+          sendEdgeEmail({
+            to: cleanEmail,
+            subject: 'Welcome to Islamic Studies Family LMS 🕌',
+            html: buildWelcomeHtml({ appUrl: url.origin, email: cleanEmail, displayName: name, role: userRole }),
+            env
+          }).catch(e => console.warn('Welcome email notice:', e.message));
         } catch (dbErr) {
           console.warn('D1 insert warning:', dbErr.message);
         }
@@ -277,7 +427,7 @@ export async function onRequest(context) {
       const user = { uid, email: cleanEmail, displayName: name, role: userRole, isVerified: true, provider: 'local' };
       const sessionToken = await signJwt(user, jwtSecret);
       return jsonResponse({ success: true, user }, 200, {
-        'Set-Cookie': `cf_session=${sessionToken}; Path=/; HttpOnly; SameSite=Lax; Max-Age=604800`
+        'Set-Cookie': `cf_session=${sessionToken}; Path=/; HttpOnly; SameSite=Lax; Secure; Max-Age=604800`
       }, request);
     } catch (err) {
       return jsonResponse({ success: false, error: 'Registration error: ' + err.message }, 500, {}, request);
@@ -311,7 +461,7 @@ export async function onRequest(context) {
               };
               const sessionToken = await signJwt(user, jwtSecret);
               return jsonResponse({ success: true, user }, 200, {
-                'Set-Cookie': `cf_session=${sessionToken}; Path=/; HttpOnly; SameSite=Lax; Max-Age=604800`
+                'Set-Cookie': `cf_session=${sessionToken}; Path=/; HttpOnly; SameSite=Lax; Secure; Max-Age=604800`
               }, request);
             }
           }
@@ -329,7 +479,7 @@ export async function onRequest(context) {
   // 5. Auth: Logout
   if (path === '/auth/logout' && method === 'POST') {
     return jsonResponse({ success: true }, 200, {
-      'Set-Cookie': `cf_session=; Path=/; HttpOnly; SameSite=Lax; Max-Age=0`
+      'Set-Cookie': `cf_session=; Path=/; HttpOnly; SameSite=Lax; Secure; Max-Age=0`
     }, request);
   }
 
@@ -345,11 +495,19 @@ export async function onRequest(context) {
       const expiresAt = Date.now() + 3600000; // 1 hour
 
       if (env.DB) {
-        const user = await env.DB.prepare('SELECT uid FROM users WHERE email = ?').bind(cleanEmail).first();
+        const user = await env.DB.prepare('SELECT uid, display_name FROM users WHERE email = ?').bind(cleanEmail).first();
         if (user) {
           await env.DB.prepare(
             'INSERT INTO reset_tokens (token, uid, email, expires_at, used) VALUES (?, ?, ?, ?, 0)'
           ).bind(resetToken, user.uid, cleanEmail, expiresAt).run();
+
+          const resetUrl = `${url.origin}/?resetToken=${encodeURIComponent(resetToken)}&email=${encodeURIComponent(cleanEmail)}`;
+          sendEdgeEmail({
+            to: cleanEmail,
+            subject: 'Password Reset Request - Islamic Studies LMS 🔐',
+            html: buildPasswordResetHtml({ resetUrl, email: cleanEmail, displayName: user.display_name }),
+            env
+          }).catch(e => console.warn('Password reset email dispatch notice:', e.message));
         }
       }
 
@@ -368,8 +526,8 @@ export async function onRequest(context) {
       const body = await request.json().catch(() => ({}));
       const token = body.token;
       const targetPass = body.newPassword || body.password;
-      if (!token || !targetPass || typeof targetPass !== 'string' || targetPass.length < 6) {
-        return jsonResponse({ success: false, error: 'Valid token and new password (min 6 characters) are required.' }, 400, {}, request);
+      if (!token || !targetPass || typeof targetPass !== 'string' || targetPass.length < 8) {
+        return jsonResponse({ success: false, error: 'Valid token and secure new password (min 8 characters) are required.' }, 400, {}, request);
       }
 
       let updatedUser = null;
@@ -407,7 +565,7 @@ export async function onRequest(context) {
       let cookieHeader = {};
       if (updatedUser) {
         const sessionToken = await signJwt(updatedUser, jwtSecret);
-        cookieHeader['Set-Cookie'] = `cf_session=${sessionToken}; Path=/; HttpOnly; SameSite=Lax; Max-Age=604800`;
+        cookieHeader['Set-Cookie'] = `cf_session=${sessionToken}; Path=/; HttpOnly; SameSite=Lax; Secure; Max-Age=604800`;
       }
 
       return jsonResponse({
@@ -435,7 +593,7 @@ export async function onRequest(context) {
       const updatedUser = { ...authUser, displayName: cleanName };
       const sessionToken = await signJwt(updatedUser, jwtSecret);
       return jsonResponse({ success: true, user: updatedUser }, 200, {
-        'Set-Cookie': `cf_session=${sessionToken}; Path=/; HttpOnly; SameSite=Lax; Max-Age=604800`
+        'Set-Cookie': `cf_session=${sessionToken}; Path=/; HttpOnly; SameSite=Lax; Secure; Max-Age=604800`
       }, request);
     } catch (e) {
       return jsonResponse({ success: false, error: e.message }, 500, {}, request);
@@ -614,57 +772,58 @@ export async function onRequest(context) {
       const studentId = childId || (authUser ? authUser.uid : 'guest');
 
       const submittedAnswers = answers || {};
-      const answerKeys = Object.keys(submittedAnswers);
       let score = 0;
       const feedback = [];
 
       // Fetch compiled curriculum data for authoritative grading
       let moduleQuestions = [];
       try {
-        const courseDataRes = await fetch(`${url.origin}/course_data.json`);
-        if (courseDataRes.ok) {
-          const courseData = await courseDataRes.json();
-          const targetModule = (courseData.modules || []).find(m => m.id === mId);
-          if (targetModule && targetModule.quizzes && targetModule.quizzes[studentTrack]) {
-            moduleQuestions = targetModule.quizzes[studentTrack].multipleChoice || [];
+        // Try modular chunk first, then full course data
+        const chunkRes = await fetch(`${url.origin}/course_data/module_${mId}.json`);
+        if (chunkRes.ok) {
+          const mod = await chunkRes.json();
+          if (mod.tracks && mod.tracks[studentTrack] && mod.tracks[studentTrack].parsedQuestions) {
+            moduleQuestions = mod.tracks[studentTrack].parsedQuestions.multipleChoice || [];
+          }
+        } else {
+          const courseDataRes = await fetch(`${url.origin}/course_data.json`);
+          if (courseDataRes.ok) {
+            const courseData = await courseDataRes.json();
+            const targetModule = (courseData.modules || []).find(m => m.id === mId);
+            if (targetModule && targetModule.tracks && targetModule.tracks[studentTrack]) {
+              moduleQuestions = targetModule.tracks[studentTrack].parsedQuestions?.multipleChoice || [];
+            }
           }
         }
       } catch (e) {
-        console.warn('Could not fetch authoritative course data for grading, falling back to heuristic:', e.message);
+        console.warn('Could not fetch authoritative course data for grading:', e.message);
       }
 
-      const total = moduleQuestions.length > 0 ? moduleQuestions.length : Math.max(answerKeys.length, 5);
-
-      if (moduleQuestions.length > 0) {
-        moduleQuestions.forEach((q, idx) => {
-          const selected = (submittedAnswers[q.id] || submittedAnswers[idx] || '').toString().trim().toUpperCase();
-          const isCorrect = q.correctAnswer ? (selected === q.correctAnswer.toUpperCase()) : Boolean(selected);
-          if (isCorrect) score++;
-
-          feedback.push({
-            questionId: q.id,
-            questionIndex: idx,
-            selectedAnswer: selected,
-            correctAnswer: q.correctAnswer || 'A',
-            isCorrect,
-            explanation: q.explanation || 'Refer to student handout and classical Maliki fiqh text.'
-          });
-        });
-      } else {
-        // Fallback grading if course_data not reached
-        answerKeys.forEach((key, idx) => {
-          const selected = (submittedAnswers[key] || '').toString().trim().toUpperCase();
-          score++;
-          feedback.push({
-            questionIndex: idx,
-            selectedAnswer: selected,
-            isCorrect: true,
-            explanation: 'Refer to student handout and classical Maliki fiqh text.'
-          });
-        });
+      if (!moduleQuestions || moduleQuestions.length === 0) {
+        return jsonResponse({
+          success: false,
+          error: 'Authoritative quiz curriculum is temporarily unavailable for grading. Please retry in a moment.'
+        }, 503, {}, request);
       }
 
-      const percentage = total > 0 ? Math.round((score / total) * 100) : 100;
+      const total = moduleQuestions.length;
+
+      moduleQuestions.forEach((q, idx) => {
+        const selected = (submittedAnswers[q.id] || submittedAnswers[idx] || '').toString().trim().toUpperCase();
+        const isCorrect = q.correctAnswer ? (selected === q.correctAnswer.toUpperCase()) : false;
+        if (isCorrect) score++;
+
+        feedback.push({
+          questionId: q.id,
+          questionIndex: idx,
+          selectedAnswer: selected,
+          correctAnswer: q.correctAnswer || 'A',
+          isCorrect,
+          explanation: q.explanation || 'Refer to student lesson handout and classical Maliki fiqh text.'
+        });
+      });
+
+      const percentage = total > 0 ? Math.round((score / total) * 100) : 0;
       const passed = percentage >= 80;
 
       if (env.DB) {
@@ -771,7 +930,7 @@ export async function onRequest(context) {
     if (!authUser || authUser.role !== 'super_admin') {
       return jsonResponse({ success: false, error: 'Forbidden: Super Admin only' }, 403, {}, request);
     }
-    let totalParents = 1, totalKids = 0, totalQuizSubmissions = 0, totalCompletedModules = 0, avgQuizScore = 90, clientErrorsCount = 0;
+    let totalParents = 1, totalKids = 0, totalQuizSubmissions = 0, totalCompletedModules = 0, avgQuizScore = 90, clientErrorsCount = 0, cspViolationsCount = 0;
     const uptime = Math.floor((Date.now() - globalThis._WORKER_START_TIME) / 1000);
 
     if (env.DB) {
@@ -781,7 +940,8 @@ export async function onRequest(context) {
         const qCount = await env.DB.prepare('SELECT COUNT(*) as c FROM quiz_results').first();
         const pCount = await env.DB.prepare('SELECT COUNT(*) as c FROM module_progress WHERE completed = 1').first();
         const qAvg = await env.DB.prepare('SELECT AVG(score) as avg FROM quiz_results').first();
-        const eCount = await env.DB.prepare('SELECT COUNT(*) as c FROM telemetry_logs').first().catch(() => ({ c: 0 }));
+        const eCount = await env.DB.prepare("SELECT COUNT(*) as c FROM telemetry_logs WHERE source != 'csp'").first().catch(() => ({ c: 0 }));
+        const cspCount = await env.DB.prepare("SELECT COUNT(*) as c FROM telemetry_logs WHERE source = 'csp'").first().catch(() => ({ c: 0 }));
 
         totalParents = uCount ? uCount.c : 0;
         totalKids = cCount ? cCount.c : 0;
@@ -789,6 +949,7 @@ export async function onRequest(context) {
         totalCompletedModules = pCount ? pCount.c : 0;
         avgQuizScore = qAvg && qAvg.avg ? Math.round(qAvg.avg) : 90;
         clientErrorsCount = eCount ? eCount.c : 0;
+        cspViolationsCount = cspCount ? cspCount.c : 0;
 
         // Periodic maintenance cleanup
         await env.DB.prepare('DELETE FROM reset_tokens WHERE used = 1 OR expires_at < ?').bind(Date.now()).run().catch(() => {});
@@ -810,7 +971,7 @@ export async function onRequest(context) {
           nodeEnv: 'production',
           storage: 'Cloudflare D1 SQL',
           clientErrorsCount,
-          cspViolationsCount: 0,
+          cspViolationsCount,
           status: '100% Operational (Cloudflare Global Edge)'
         }
       }

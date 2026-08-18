@@ -301,26 +301,30 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // Fetch Course Data with Retry Support
-  function loadCourseData() {
-    fetch('/api/course-data')
-      .then(res => res.json())
+  // Fast Startup Course Data Loader with Manifest Indexing
+  async function loadCourseData() {
+    try {
+      // First try lightweight manifest index (~11.8 KB)
+      const manifestRes = await fetch('/modules_manifest.json');
+      if (manifestRes.ok) {
+        courseData = await manifestRes.json();
+        initApp();
+        return;
+      }
+    } catch (e) {
+      console.warn('Manifest load notice, falling back to full bundle:', e);
+    }
+
+    // Fallback to full course_data.json or API
+    fetch('/course_data.json')
+      .then(r => r.json())
       .then(data => {
         courseData = data;
         initApp();
       })
-      .catch(err => {
-        console.warn('API fetch failed, trying local file fallback...', err);
-        fetch('/course_data.json')
-          .then(r => r.json())
-          .then(data => {
-            courseData = data;
-            initApp();
-          })
-          .catch(e => {
-            console.error('Fatal: Could not load course data', e);
-            showToast('Loading Error', 'Failed to load course curriculum data.', 'error', 0, () => loadCourseData(), 'Retry Loading');
-          });
+      .catch(e => {
+        console.error('Fatal: Could not load course data', e);
+        showToast('Loading Error', 'Failed to load course curriculum data.', 'error', 0, () => loadCourseData(), 'Retry Loading');
       });
   }
   loadCourseData();
@@ -333,6 +337,8 @@ document.addEventListener('DOMContentLoaded', () => {
     renderDashboard();
     updateProgressUI();
     setupEventListeners();
+    setupLegalModal();
+    syncCloudProgress();
   }
 
   function setupTheme() {
@@ -662,7 +668,40 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     renderSidebarModules();
-    switchTab(activeTab);
+
+    // Check if full module tracks are loaded; if not, lazy-load chunk
+    if (!mod.tracks) {
+      handoutContent.innerHTML = `
+        <div class="skeleton-loader">
+          <div class="skeleton-shimmer skeleton-title"></div>
+          <div class="skeleton-shimmer skeleton-badge"></div>
+          <div class="skeleton-shimmer skeleton-paragraph"></div>
+          <div class="skeleton-shimmer skeleton-paragraph"></div>
+          <div class="skeleton-shimmer skeleton-paragraph short"></div>
+          <div class="skeleton-shimmer skeleton-card"></div>
+        </div>
+      `;
+      fetch(`/course_data/module_${moduleId}.json`)
+        .then(r => r.json())
+        .then(fullMod => {
+          Object.assign(mod, fullMod);
+          if (activeModuleId === moduleId) {
+            switchTab(activeTab);
+          }
+        })
+        .catch(err => {
+          console.warn('Chunk load error, falling back to full bundle...', err);
+          fetch('/course_data.json')
+            .then(r => r.json())
+            .then(fullData => {
+              const target = (fullData.modules || []).find(m => m.id === moduleId);
+              if (target) Object.assign(mod, target);
+              if (activeModuleId === moduleId) switchTab(activeTab);
+            });
+        });
+    } else {
+      switchTab(activeTab);
+    }
   }
 
   function switchTab(tabName) {
@@ -3933,6 +3972,54 @@ document.addEventListener('DOMContentLoaded', () => {
           timestamp: new Date().toISOString()
         })
       }).catch(() => {});
+    });
+  }
+
+  function setupLegalModal() {
+    const legalModal = document.getElementById('privacyTermsModal');
+    const openPrivacyBtn = document.getElementById('openPrivacyModalBtn');
+    const openTermsBtn = document.getElementById('openTermsModalBtn');
+    const openCookieBtn = document.getElementById('openCookieModalBtn');
+    const closeBtn = document.getElementById('privacyTermsCloseBtn');
+    const closeBottomBtn = document.getElementById('legalCloseBottomBtn');
+
+    function openModal() {
+      if (legalModal) {
+        legalModal.style.opacity = '1';
+        legalModal.style.visibility = 'visible';
+      }
+    }
+
+    function closeModal() {
+      if (legalModal) {
+        legalModal.style.opacity = '0';
+        legalModal.style.visibility = 'hidden';
+      }
+    }
+
+    if (openPrivacyBtn) openPrivacyBtn.addEventListener('click', (e) => { e.preventDefault(); openModal(); });
+    if (openTermsBtn) openTermsBtn.addEventListener('click', (e) => { e.preventDefault(); openModal(); });
+    if (openCookieBtn) openCookieBtn.addEventListener('click', (e) => { e.preventDefault(); openModal(); });
+    if (closeBtn) closeBtn.addEventListener('click', closeModal);
+    if (closeBottomBtn) closeBottomBtn.addEventListener('click', closeModal);
+    if (legalModal) {
+      legalModal.addEventListener('click', (e) => {
+        if (e.target === legalModal) closeModal();
+      });
+    }
+
+    // Connect curriculum footer links to category filter
+    document.querySelectorAll('.footer-nav-link').forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const filter = link.dataset.filter;
+        showDashboard();
+        const catBtn = document.querySelector(`.filter-btn[data-category="${filter}"]`);
+        if (catBtn) {
+          catBtn.click();
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+      });
     });
   }
 

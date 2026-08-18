@@ -3,14 +3,18 @@
  * Provides offline caching, network-first curriculum loading, and background resilience.
  */
 
-const CACHE_NAME = 'islamic-studies-v1';
+const CACHE_NAME = 'islamic-studies-vmsyqakau';
 const STATIC_ASSETS = [
   '/',
   '/index.html',
   '/style.css',
   '/app.js',
   '/manifest.json',
+  '/modules_manifest.json',
   '/course_data.json',
+  '/icons/icon-192.png',
+  '/icons/icon-512.png',
+  '/icons/icon.svg',
   'https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800&display=swap',
   'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css',
   'https://cdn.jsdelivr.net/npm/marked/marked.min.js',
@@ -56,8 +60,8 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // Handle course data: Stale-While-Revalidate
-  if (url.pathname.endsWith('course_data.json')) {
+  // Handle course data & modular chunks: Stale-While-Revalidate
+  if (url.pathname.includes('course_data') || url.pathname.includes('modules_manifest')) {
     event.respondWith(
       caches.open(CACHE_NAME).then((cache) => {
         return cache.match(request).then((cachedResponse) => {

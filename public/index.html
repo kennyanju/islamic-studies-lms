@@ -20,7 +20,10 @@
   <!-- DOMPurify HTML Sanitizer -->
   <script src="https://cdn.jsdelivr.net/npm/dompurify@3.1.6/dist/purify.min.js"></script>
 
-  <!-- Web App Manifest for Offline PWA Support -->
+  <!-- Web App Manifest & App Icons -->
+  <link rel="icon" type="image/svg+xml" href="/icons/favicon.svg">
+  <link rel="alternate icon" type="image/png" href="/icons/icon-192.png">
+  <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
   <link rel="manifest" href="/manifest.json">
   <meta name="theme-color" content="#059669">
   
@@ -1499,7 +1502,7 @@
           <div class="form-group">
             <label for="newPasswordInput"><i class="fa-solid fa-lock" aria-hidden="true"></i> New Password</label>
             <div class="password-input-wrap">
-              <input type="password" id="newPasswordInput" placeholder="Create strong new password" required class="form-input" minlength="6" autocomplete="new-password">
+              <input type="password" id="newPasswordInput" placeholder="Create strong new password (min 8 chars)" required class="form-input" minlength="8" autocomplete="new-password">
               <button type="button" class="btn-password-toggle" data-target="newPasswordInput" aria-label="Show password" aria-pressed="false">
                 <i class="fa-solid fa-eye" aria-hidden="true"></i>
               </button>
@@ -1517,7 +1520,7 @@
           <div class="form-group">
             <label for="confirmNewPasswordInput"><i class="fa-solid fa-lock" aria-hidden="true"></i> Confirm New Password</label>
             <div class="password-input-wrap">
-              <input type="password" id="confirmNewPasswordInput" placeholder="Confirm your new password" required class="form-input" minlength="6" autocomplete="new-password">
+              <input type="password" id="confirmNewPasswordInput" placeholder="Confirm your new password" required class="form-input" minlength="8" autocomplete="new-password">
               <button type="button" class="btn-password-toggle" data-target="confirmNewPasswordInput" aria-label="Show password" aria-pressed="false">
                 <i class="fa-solid fa-eye" aria-hidden="true"></i>
               </button>
@@ -1530,6 +1533,77 @@
       </div>
     </div>
   </div>
+
+  <!-- Privacy Policy & Legal Modal -->
+  <div class="modal-backdrop" id="privacyTermsModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="legalModalHeading">
+    <div class="modal-card legal-modal-card">
+      <button class="modal-close-btn" id="privacyTermsCloseBtn" aria-label="Close modal">&times;</button>
+      <div class="modal-header">
+        <div class="modal-icon" aria-hidden="true"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i></div>
+        <h2 id="legalModalHeading">Privacy Policy & Security Commitments</h2>
+        <p>Transparency, learner privacy, and data security standards</p>
+      </div>
+      <div class="modal-body legal-modal-body">
+        <div class="legal-section">
+          <h3><i class="fa-solid fa-lock"></i> 1. Family & Child Privacy Guarantee</h3>
+          <p>The Islamic Studies Family LMS is built with family privacy as our foremost priority. We do not sell, rent, or monetize personal data. Learner accounts are managed directly by parents or educators with optional 4-digit PIN security codes.</p>
+        </div>
+        <div class="legal-section">
+          <h3><i class="fa-solid fa-database"></i> 2. What Information We Store</h3>
+          <p>We collect and securely store only the minimum data necessary to operate the educational platform:</p>
+          <ul>
+            <li><strong>Parent / Educator Accounts:</strong> Email address, display name, and salted PBKDF2 password hashes (100,000 rounds).</li>
+            <li><strong>Learner Profiles:</strong> Name or nickname, avatar icon, assigned learning track (Level 1 or Level 2), and optional PIN hash.</li>
+            <li><strong>Curriculum Progress:</strong> Module completion markers, quiz scores, and verified completion certificates.</li>
+          </ul>
+        </div>
+        <div class="legal-section">
+          <h3><i class="fa-solid fa-cookie-bite"></i> 3. Cookies & Session Management</h3>
+          <p>We utilize strictly necessary session cookies (<code>cf_session</code>) configured with <code>HttpOnly</code>, <code>Secure</code>, and <code>SameSite=Lax</code> flags to safeguard your account. No advertising or tracking cookies are used.</p>
+        </div>
+        <div class="legal-section">
+          <h3><i class="fa-solid fa-book-open"></i> 4. Educational Integrity</h3>
+          <p>All curriculum lessons, handouts, and teacher presentation slides are developed following orthodox classical Sunni scholarship (Maliki Fiqh & Ash'ari Creed) for private family and classroom instruction.</p>
+        </div>
+      </div>
+      <div class="modal-footer" style="padding: 16px 24px; border-top: 1px solid var(--border-color, #334155); text-align: right;">
+        <button class="btn-cancel-modal" id="legalCloseBottomBtn">Understood & Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Global Public Portal Footer -->
+  <footer class="app-global-footer">
+    <div class="footer-container">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <i class="fa-solid fa-kaaba"></i>
+          <span>Islamic Studies Family LMS</span>
+        </div>
+        <p class="footer-tagline">Authentic Maliki Fiqh, Ash'ari Creed, and Seerah education designed for families, youth, and educators.</p>
+      </div>
+      <div class="footer-links-col">
+        <h4>Curriculum</h4>
+        <a href="#" class="footer-nav-link" data-filter="Aqidah (Creed)">Aqidah & Creed</a>
+        <a href="#" class="footer-nav-link" data-filter="Fiqh (Jurisprudence)">Maliki Fiqh & Salah</a>
+        <a href="#" class="footer-nav-link" data-filter="Seerah (History)">Seerah & History</a>
+        <a href="#" class="footer-nav-link" data-filter="Character, Society & Family">Akhlaq & Family</a>
+      </div>
+      <div class="footer-links-col">
+        <h4>Trust & Privacy</h4>
+        <button class="footer-modal-btn" id="openPrivacyModalBtn">Privacy Policy</button>
+        <button class="footer-modal-btn" id="openTermsModalBtn">Terms of Service</button>
+        <button class="footer-modal-btn" id="openCookieModalBtn">Cookie & Security Policy</button>
+      </div>
+    </div>
+    <div class="footer-bottom-row">
+      <p>&copy; 2026 Islamic Studies Family LMS. 100% Ad-Free, Private & Secure.</p>
+      <div class="footer-badges">
+        <span class="trust-badge"><i class="fa-solid fa-shield-halved"></i> PBKDF2 & JWT Secured</span>
+        <span class="trust-badge"><i class="fa-solid fa-bolt"></i> Cloudflare Edge Network</span>
+      </div>
+    </div>
+  </footer>
 
   <!-- Floating Toast Notifications Container -->
   <div id="toastContainer" class="toast-container" aria-live="polite" aria-atomic="true"></div>

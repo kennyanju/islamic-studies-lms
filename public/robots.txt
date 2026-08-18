@@ -1,0 +1,15 @@
+# Robots.txt for Islamic Studies Family LMS
+User-agent: *
+Allow: /
+Allow: /style.css
+Allow: /app.js
+Allow: /course_data.json
+Allow: /modules_manifest.json
+Allow: /course_data/
+
+# Disallow private API endpoints & telemetry
+Disallow: /api/
+Disallow: /admin/
+Disallow: /telemetry/
+
+Sitemap: https://maliki-kids.workers.dev/sitemap.xml

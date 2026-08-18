@@ -484,7 +484,71 @@ modulesConfig.forEach(cfg => {
   console.log(`✓ Processed Module ${cfg.id}: ${cfg.title}`);
 });
 
+// 1. Write full monolithic course_data.json
 const outputPath = path.join(publicDir, 'course_data.json');
 fs.writeFileSync(outputPath, JSON.stringify(courseData, null, 2), 'utf8');
 
-console.log(`Successfully compiled course data to ${outputPath} (${(fs.statSync(outputPath).size / 1024).toFixed(1)} KB)`);
+// 2. Write individual module JSON files in public/course_data/
+const courseDataDir = path.join(publicDir, 'course_data');
+if (!fs.existsSync(courseDataDir)) {
+  fs.mkdirSync(courseDataDir, { recursive: true });
+}
+
+courseData.modules.forEach(mod => {
+  const modPath = path.join(courseDataDir, `module_${mod.id}.json`);
+  fs.writeFileSync(modPath, JSON.stringify(mod, null, 2), 'utf8');
+});
+
+// 3. Write lightweight modules_manifest.json (~15 KB)
+const manifestData = {
+  version: courseData.version,
+  compiledAt: courseData.compiledAt,
+  totalModules: courseData.totalModules,
+  modules: courseData.modules.map(mod => ({
+    id: mod.id,
+    title: mod.title,
+    category: mod.category,
+    description: mod.description,
+    icon: mod.icon,
+    estTime: mod.estTime,
+    bloomLevel: mod.bloomLevel,
+    objectives: mod.objectives,
+    malikiNotes: mod.malikiNotes,
+    tracksSummary: {
+      level1: {
+        targetAge: mod.tracks?.level1?.targetAge || 'Level 1 (10y)',
+        hasHandout: Boolean(mod.tracks?.level1?.handoutMd),
+        hasQuestions: Boolean(mod.tracks?.level1?.questionsMd),
+        questionCount: (mod.tracks?.level1?.parsedQuestions?.multipleChoice || []).length
+      },
+      level2: {
+        targetAge: mod.tracks?.level2?.targetAge || 'Level 2 (13y+)',
+        hasHandout: Boolean(mod.tracks?.level2?.handoutMd),
+        hasQuestions: Boolean(mod.tracks?.level2?.questionsMd),
+        questionCount: (mod.tracks?.level2?.parsedQuestions?.multipleChoice || []).length
+      },
+      teacher: {
+        slideCount: (mod.teacher?.parsedSlides || []).length,
+        hasVoiceScript: Boolean(mod.teacher?.voiceScriptMd)
+      }
+    }
+  }))
+};
+
+const manifestPath = path.join(publicDir, 'modules_manifest.json');
+fs.writeFileSync(manifestPath, JSON.stringify(manifestData, null, 2), 'utf8');
+
+// 4. Update sw.js with build timestamp
+const swPath = path.join(publicDir, 'sw.js');
+if (fs.existsSync(swPath)) {
+  let swContent = fs.readFileSync(swPath, 'utf8');
+  const buildTag = `islamic-studies-v${Date.now().toString(36)}`;
+  swContent = swContent.replace(/const CACHE_NAME = 'islamic-studies-[^']+';/, `const CACHE_NAME = '${buildTag}';`);
+  fs.writeFileSync(swPath, swContent, 'utf8');
+}
+
+console.log(`Successfully compiled course data:`);
+console.log(`  - Monolithic: ${outputPath} (${(fs.statSync(outputPath).size / 1024).toFixed(1)} KB)`);
+console.log(`  - Manifest:   ${manifestPath} (${(fs.statSync(manifestPath).size / 1024).toFixed(1)} KB)`);
+console.log(`  - Modular:    ${courseDataDir}/ (${courseData.modules.length} module files)`);
+
