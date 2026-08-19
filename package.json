@@ -11,10 +11,14 @@
     "test:smoke": "node compile.js && jest tests/smoke.test.js --forceExit",
     "smoke": "npm run test:smoke",
     "deploy": "node compile.js && wrangler deploy",
+    "deploy:staging": "node compile.js && wrangler deploy --env staging",
+    "deploy:prod": "node compile.js && wrangler deploy --env production",
     "worker:deploy": "node compile.js && wrangler deploy",
     "pages:deploy": "node compile.js && wrangler pages deploy public",
     "d1:migrate:local": "wrangler d1 migrations apply islamic-studies-db --local",
-    "d1:migrate:remote": "wrangler d1 migrations apply islamic-studies-db --remote"
+    "d1:migrate:remote": "wrangler d1 migrations apply islamic-studies-db --remote",
+    "d1:backup:remote": "wrangler d1 export islamic-studies-db --remote --output ./data/backup-remote.sql",
+    "d1:backup:local": "wrangler d1 export islamic-studies-db --local --output ./data/backup-local.sql"
   },
   "keywords": [
     "lms",

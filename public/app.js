@@ -3085,6 +3085,10 @@ document.addEventListener('DOMContentLoaded', () => {
       return { success: true, user: safe };
     }
     return { success: false, error: 'Invalid email or password.' };
+  function getTurnstileToken(form) {
+    if (!form) return null;
+    const input = form.querySelector('[name="cf-turnstile-response"]') || form.querySelector('[name="turnstileToken"]');
+    return input ? input.value : null;
   }
 
   // Email Sign In Form Submit (Modal)
@@ -3094,6 +3098,7 @@ document.addEventListener('DOMContentLoaded', () => {
       hideAuthAlert();
       const email = authEmailInput.value.trim();
       const password = authPasswordInput.value;
+      const turnstileToken = getTurnstileToken(emailAuthForm);
 
       try {
         let data = null;
@@ -3103,7 +3108,7 @@ document.addEventListener('DOMContentLoaded', () => {
           const res = await fetch('/api/auth/login', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email, password })
+            body: JSON.stringify({ email, password, turnstileToken })
           });
           const ct = res.headers.get('content-type') || '';
           if (ct.includes('application/json')) {
@@ -3153,6 +3158,7 @@ document.addEventListener('DOMContentLoaded', () => {
       hideAuthAlert(homeAuthAlertMsg);
       const email = homeAuthEmailInput.value.trim();
       const password = homeAuthPasswordInput.value;
+      const turnstileToken = getTurnstileToken(homeEmailAuthForm);
 
       try {
         let data = null;
@@ -3162,7 +3168,7 @@ document.addEventListener('DOMContentLoaded', () => {
           const res = await fetch('/api/auth/login', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email, password })
+            body: JSON.stringify({ email, password, turnstileToken })
           });
           const ct = res.headers.get('content-type') || '';
           if (ct.includes('application/json')) {
@@ -3217,13 +3223,14 @@ document.addEventListener('DOMContentLoaded', () => {
       const email = signUpEmailInput.value.trim();
       const password = signUpPasswordInput.value;
       const role = signUpRoleSelect.value;
+      const turnstileToken = getTurnstileToken(signUpForm);
 
       if (!displayName || !email || !password) {
         showAuthAlert('Please fill in your name, email address, and password.', 'error');
         return;
       }
-      if (password.length < 6) {
-        showAuthAlert('Password must be at least 6 characters long.', 'error');
+      if (password.length < 8) {
+        showAuthAlert('Password must be at least 8 characters long.', 'error');
         return;
       }
 
@@ -3235,7 +3242,7 @@ document.addEventListener('DOMContentLoaded', () => {
           const res = await fetch('/api/auth/register', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ displayName, email, password, role })
+            body: JSON.stringify({ displayName, email, password, role, turnstileToken })
           });
           const ct = res.headers.get('content-type') || '';
           if (ct.includes('application/json')) {
@@ -3725,6 +3732,7 @@ document.addEventListener('DOMContentLoaded', () => {
       forgotForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         const email = document.getElementById('forgotEmailInput')?.value.trim();
+        const turnstileToken = getTurnstileToken(forgotForm);
         if (!email) return;
 
         const submitBtn = document.getElementById('forgotSubmitBtn');
@@ -3737,7 +3745,7 @@ document.addEventListener('DOMContentLoaded', () => {
           const res = await fetch('/api/auth/forgot-password', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email })
+            body: JSON.stringify({ email, turnstileToken })
           });
           let data = null;
           try {

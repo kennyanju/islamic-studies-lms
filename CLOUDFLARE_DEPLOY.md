@@ -1,6 +1,6 @@
 # Cloudflare Workers & Pages Deployment Guide with Cloudflare D1 SQL
 
-This guide provides instructions to deploy the Islamic Studies Family LMS to **Cloudflare Pages / Workers** with **Cloudflare D1 SQL database**.
+This guide provides complete instructions to deploy the Islamic Studies Family LMS to **Cloudflare Workers** with **Cloudflare D1 SQL database**, multi-environment configuration, and email deliverability.
 
 ---
 
@@ -10,73 +10,100 @@ This guide provides instructions to deploy the Islamic Studies Family LMS to **C
                        ┌────────────────────────────────────────────────────────┐
                        │               Cloudflare Global Edge Network           │
                        │                                                        │
-  User Requests  ───►  │  1. Static Assets: HTML, CSS, JS, course_data.json     │
-                       │  2. Serverless Edge API: functions/api/[[route]].js    │
+  User Requests  ───►  │  1. Static Assets: HTML, CSS, JS, course_data/ chunks  │
+                       │  2. Serverless Edge API: worker.js + Functions Router  │
                        │  3. Database: Cloudflare D1 Serverless SQL Database    │
                        └────────────────────────────────────────────────────────┘
 ```
 
 ---
 
-## Quick CLI Deployment (Wrangler)
+## 1. Quick CLI Deployment (Wrangler)
 
 ### Step 1: Log in to Cloudflare CLI
 ```bash
 npx wrangler login
 ```
-*(Or set `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` in your environment)*
+*(Or set `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` in your environment / CI secrets)*
 
-### Step 2: Create D1 Database (if not already created)
+### Step 2: Provision Production D1 Database
 ```bash
 npx wrangler d1 create islamic-studies-db
 ```
-Copy the generated `database_id` and ensure it is in [`wrangler.toml`](./wrangler.toml).
+Verify the generated `database_id` is set in [`wrangler.toml`](./wrangler.toml).
 
-### Step 3: Apply D1 SQL Migrations
+### Step 3: Apply Remote SQL Migrations
 ```bash
-npx wrangler d1 migrations apply islamic-studies-db --remote
+npm run d1:migrate:remote
 ```
 
-### Step 4: Build Curriculum & Deploy
+### Step 4: Configure Production Secrets (Crucial for Go-Live)
+Set your production environment secrets securely via Wrangler:
 ```bash
-npm run deploy
+# 1. JWT Session Secret (Random 32+ characters)
+npx wrangler secret put SESSION_SECRET
+
+# 2. Resend API Key for Transactional Emails
+npx wrangler secret put RESEND_API_KEY
+
+# 3. Cloudflare Turnstile Secret Key (for bot defense)
+npx wrangler secret put TURNSTILE_SECRET_KEY
+
+# 4. Super Admin Initial Password
+npx wrangler secret put ADMIN_PASSWORD
 ```
-*(Runs `node compile.js && wrangler deploy` for Cloudflare Workers with Static Assets, or run `npm run pages:deploy` for Cloudflare Pages)*
+
+### Step 5: Build Curriculum & Deploy
+```bash
+# Deploy to Production:
+npm run deploy:prod
+
+# Deploy to Staging:
+npm run deploy:staging
+```
 
 ---
 
-## Web Dashboard Deployment (Git Integration)
+## 2. Custom Domain & DNS Email Deliverability
 
-### Option A: Cloudflare Workers (Recommended for modern unified builds)
-1. **Connect to GitHub**:
-   - Go to [Cloudflare Dashboard](https://dash.cloudflare.com/) > **Workers & Pages** > **Create application** > **Worker** > **Connect to Git**.
-   - Select repository `kennyanju/islamic-studies-lms`.
-2. **Build Settings**:
-   - **Build command**: `npm run build`
-   - **Deploy command**: `npx wrangler deploy` (default)
-3. **Bind D1 Database**:
-   - In project settings, bind D1 database `islamic-studies-db` to binding `DB`.
+To guarantee high deliverability for Welcome and Password Reset emails sent via Resend:
 
-### Option B: Cloudflare Pages
-1. **Connect to GitHub**:
-   - Go to [Cloudflare Dashboard](https://dash.cloudflare.com/) > **Workers & Pages** > **Create application** > **Pages** > **Connect to Git**.
-   - Select `kennyanju/islamic-studies-lms`.
-2. **Build Settings**:
-   - **Framework preset**: `None`
-   - **Build command**: `npm run build`
-   - **Build output directory**: `public`
-3. **Bind D1 Database**:
-   - Go to **Project Settings** > **Functions** > **D1 Database Bindings**:
-     - Variable name: `DB`
-     - Database: `islamic-studies-db`
+### A. Custom Domain in Cloudflare
+1. Go to **Workers & Pages** > **maliki-kids** > **Settings** > **Domains & Routes**.
+2. Add your custom domain (e.g. `learn.malikikids.com`).
+3. Set SSL/TLS encryption mode to **Full (strict)**.
+4. Enable **DNSSEC** under your zone DNS settings.
+
+### B. SPF, DKIM & DMARC DNS Records (Resend Domain Verification)
+Add the following DNS records in Cloudflare DNS for your custom domain:
+
+| Type | Name | Content | Proxy status |
+|---|---|---|---|
+| **TXT** | `@` or `send` | `v=spf1 include:resend.com ~all` | DNS only |
+| **CNAME** | `resend._domainkey` | `dkim.resend.com` | DNS only |
+| **TXT** | `_dmarc` | `v=DMARC1; p=none; sp=none; pct=100;` | DNS only |
 
 ---
 
-## Local Development & Emulation
+## 3. Automated CI/CD (GitHub Actions)
 
-To emulate Cloudflare Worker/Pages Functions and local D1 database locally:
+Continuous Integration and Continuous Deployment is automated via `.github/workflows/deploy.yml`:
+1. Add the following repository secrets under **GitHub** > **Settings** > **Secrets and variables** > **Actions**:
+   - `CLOUDFLARE_API_TOKEN` (Create via Cloudflare Dashboard > My Profile > API Tokens > Edit Cloudflare Workers template)
+   - `CLOUDFLARE_ACCOUNT_ID` (Find on Cloudflare Dashboard sidebar)
+2. Pushing to the `main` branch runs unit and smoke tests, compiles curriculum chunks, and deploys directly to production.
+
+---
+
+## 4. Local Development & Emulation
+
+To emulate Cloudflare Worker and local D1 database:
 ```bash
 npm run d1:migrate:local
 npx wrangler dev
 ```
 
+To backup the live database:
+```bash
+npm run d1:backup:remote
+```

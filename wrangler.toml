@@ -7,12 +7,35 @@ compatibility_flags = ["nodejs_compat"]
 [assets]
 directory = "./public"
 
-# Cloudflare D1 Serverless SQL Database Binding
+# Default Cloudflare D1 Serverless SQL Database Binding
 [[d1_databases]]
 binding = "DB"
 database_name = "islamic-studies-db"
 database_id = "da41214f-fa8a-4b74-a285-15067db9a7d2"
 migrations_dir = "migrations"
 
+# -----------------------------------------------------------------------------
+# Staging Environment
+# -----------------------------------------------------------------------------
+[env.staging]
+name = "maliki-kids-staging"
+[env.staging.assets]
+directory = "./public"
+[[env.staging.d1_databases]]
+binding = "DB"
+database_name = "islamic-studies-db"
+database_id = "da41214f-fa8a-4b74-a285-15067db9a7d2"
+migrations_dir = "migrations"
 
-
+# -----------------------------------------------------------------------------
+# Production Environment
+# -----------------------------------------------------------------------------
+[env.production]
+name = "maliki-kids"
+[env.production.assets]
+directory = "./public"
+[[env.production.d1_databases]]
+binding = "DB"
+database_name = "islamic-studies-db"
+database_id = "da41214f-fa8a-4b74-a285-15067db9a7d2"
+migrations_dir = "migrations"

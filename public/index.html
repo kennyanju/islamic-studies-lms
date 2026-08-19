@@ -1252,6 +1252,7 @@
               </button>
             </div>
           </div>
+          <div class="turnstile-container" id="signInTurnstile" style="margin: 12px 0; display: none;"></div>
           <button type="submit" class="btn-submit-auth">
             <i class="fa-solid fa-right-to-bracket" aria-hidden="true"></i> Sign In to Portal
           </button>
@@ -1270,7 +1271,7 @@
           <div class="form-group">
             <label for="signUpPasswordInput"><i class="fa-solid fa-lock" aria-hidden="true"></i> Password</label>
             <div class="password-input-wrap">
-              <input type="password" id="signUpPasswordInput" placeholder="Create strong password" required class="form-input" minlength="6" autocomplete="new-password">
+              <input type="password" id="signUpPasswordInput" placeholder="Create strong password (min 8 chars)" required class="form-input" minlength="8" autocomplete="new-password">
               <button type="button" class="btn-password-toggle" data-target="signUpPasswordInput" aria-label="Show password" aria-pressed="false">
                 <i class="fa-solid fa-eye" aria-hidden="true"></i>
               </button>
@@ -1292,6 +1293,7 @@
               <option value="teacher">Educator / Teacher</option>
             </select>
           </div>
+          <div class="turnstile-container" id="signUpTurnstile" style="margin: 12px 0; display: none;"></div>
           <button type="submit" class="btn-submit-auth gold">
             <i class="fa-solid fa-user-plus" aria-hidden="true"></i> Complete Sign Up
           </button>
@@ -1478,6 +1480,7 @@
             <label for="forgotEmailInput"><i class="fa-solid fa-envelope" aria-hidden="true"></i> Email Address</label>
             <input type="email" id="forgotEmailInput" placeholder="parent@example.com" required class="form-input" autocomplete="email">
           </div>
+          <div class="turnstile-container" id="forgotTurnstile" style="margin: 12px 0; display: none;"></div>
           <button type="submit" class="btn-submit-auth" id="forgotSubmitBtn">
             <i class="fa-solid fa-paper-plane" aria-hidden="true"></i> Send Password Reset Link
           </button>

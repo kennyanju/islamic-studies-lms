@@ -3,7 +3,7 @@
  * Provides offline caching, network-first curriculum loading, and background resilience.
  */
 
-const CACHE_NAME = 'islamic-studies-vmsyqakau';
+const CACHE_NAME = 'islamic-studies-vmt0j2ouw';
 const STATIC_ASSETS = [
   '/',
   '/index.html',

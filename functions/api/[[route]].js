@@ -145,13 +145,31 @@ function parseCookies(cookieHeader) {
   return list;
 }
 
-function jsonResponse(data, status = 200, headers = {}, request = null) {
+function resolveCorsOrigin(request, env) {
+  if (!request) return '*';
+  const reqOrigin = request.headers.get('Origin');
+  if (!reqOrigin) return '*';
+
+  // If ALLOWED_ORIGINS configured (e.g. "https://malikikids.com,https://learn.malikikids.com")
+  if (env && env.ALLOWED_ORIGINS) {
+    const allowedList = env.ALLOWED_ORIGINS.split(',').map(s => s.trim().toLowerCase()).filter(Boolean);
+    const originLower = reqOrigin.toLowerCase();
+    if (allowedList.includes(originLower)) {
+      return reqOrigin;
+    }
+    return allowedList[0] || '*';
+  }
+
+  return reqOrigin;
+}
+
+function jsonResponse(data, status = 200, headers = {}, request = null, env = null) {
   const origin = request ? request.headers.get('Origin') : null;
-  const corsOrigin = origin || '*';
+  const corsOrigin = resolveCorsOrigin(request, env);
   const corsHeaders = {
     'Content-Type': 'application/json',
     'Access-Control-Allow-Origin': corsOrigin,
-    'Access-Control-Allow-Credentials': origin ? 'true' : 'false',
+    'Access-Control-Allow-Credentials': (origin && corsOrigin !== '*') ? 'true' : 'false',
     'Vary': 'Origin',
     ...headers
   };
@@ -162,10 +180,35 @@ function jsonResponse(data, status = 200, headers = {}, request = null) {
 }
 
 // --------------------------------------------------------------------------
+// Cloudflare Turnstile Bot Defense Verification Helper
+// --------------------------------------------------------------------------
+async function verifyTurnstileToken(token, secret, clientIp) {
+  if (!secret) return { success: true }; // Passed when Turnstile is not configured
+  if (!token) return { success: false, error: 'Turnstile verification token missing' };
+
+  try {
+    const formData = new FormData();
+    formData.append('secret', secret);
+    formData.append('response', token);
+    if (clientIp) formData.append('remoteip', clientIp);
+
+    const res = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
+      method: 'POST',
+      body: formData
+    });
+    const outcome = await res.json();
+    return { success: Boolean(outcome.success), data: outcome };
+  } catch (e) {
+    console.warn('Turnstile verification network error:', e.message);
+    return { success: false, error: 'Turnstile service unavailable' };
+  }
+}
+
+// --------------------------------------------------------------------------
 // Cloudflare Edge Email Dispatch Engine (Resend REST API / Web Standards)
 // --------------------------------------------------------------------------
 async function sendEdgeEmail({ to, subject, html, text, env }) {
-  const from = (env && env.EMAIL_FROM) || 'Islamic Studies LMS <onboarding@resend.dev>';
+  const from = (env && (env.EMAIL_FROM || env.FROM_EMAIL)) || 'Islamic Studies LMS <onboarding@resend.dev>';
   const apiKey = env && env.RESEND_API_KEY;
 
   if (apiKey) {
@@ -335,25 +378,36 @@ export async function onRequest(context) {
 
   // Handle CORS preflight OPTIONS request
   if (method === 'OPTIONS') {
-    const origin = request.headers.get('Origin') || '*';
+    const corsOrigin = resolveCorsOrigin(request, env);
     return new Response(null, {
       status: 204,
       headers: {
-        'Access-Control-Allow-Origin': origin,
+        'Access-Control-Allow-Origin': corsOrigin,
         'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
         'Access-Control-Allow-Headers': 'Content-Type, Authorization, Cookie',
-        'Access-Control-Allow-Credentials': origin !== '*' ? 'true' : 'false',
+        'Access-Control-Allow-Credentials': corsOrigin !== '*' ? 'true' : 'false',
         'Access-Control-Max-Age': '86400',
         'Vary': 'Origin'
       }
     });
   }
 
-  // Rate Limiting on Auth Endpoints
-  if (path.startsWith('/auth/')) {
-    const isAllowed = checkRateLimit(clientIp, 'auth', 40, 60);
-    if (!isAllowed) {
-      return jsonResponse({ success: false, error: 'Too many authentication attempts. Please wait a moment and try again.' }, 429, {}, request);
+  // Tiered Rate Limiting on Auth & Sensitive Endpoints
+  if (path === '/auth/login') {
+    if (!checkRateLimit(clientIp, 'auth_login', 10, 60)) {
+      return jsonResponse({ success: false, error: 'Too many login attempts. Please wait 1 minute before retrying.' }, 429, {}, request, env);
+    }
+  } else if (path === '/auth/register') {
+    if (!checkRateLimit(clientIp, 'auth_register', 5, 60)) {
+      return jsonResponse({ success: false, error: 'Too many account registration requests. Please wait a moment and try again.' }, 429, {}, request, env);
+    }
+  } else if (path === '/auth/forgot-password' || path === '/auth/reset-password') {
+    if (!checkRateLimit(clientIp, 'auth_reset', 5, 60)) {
+      return jsonResponse({ success: false, error: 'Too many password reset requests. Please wait a moment.' }, 429, {}, request, env);
+    }
+  } else if (path.startsWith('/auth/')) {
+    if (!checkRateLimit(clientIp, 'auth_general', 30, 60)) {
+      return jsonResponse({ success: false, error: 'Too many authentication attempts. Please wait a moment and try again.' }, 429, {}, request, env);
     }
   }
 
@@ -362,37 +416,65 @@ export async function onRequest(context) {
   const token = cookies['cf_session'] || (request.headers.get('Authorization') || '').replace(/^Bearer\s+/i, '');
   const authUser = await verifyJwt(token, jwtSecret);
 
-  // 1. Health Endpoint
+  // 1. Deep Health Endpoint
   if (path === '/health' && method === 'GET') {
     const uptime = Math.floor((Date.now() - globalThis._WORKER_START_TIME) / 1000);
+    let dbStatus = 'disconnected';
+    let dbLatencyMs = null;
+
+    if (env.DB) {
+      const start = Date.now();
+      try {
+        await env.DB.prepare('SELECT 1 as ping').first();
+        dbStatus = 'healthy';
+        dbLatencyMs = Date.now() - start;
+      } catch (dbErr) {
+        dbStatus = 'error: ' + dbErr.message;
+      }
+    } else {
+      dbStatus = 'unbound (edge memory mode)';
+    }
+
+    const isHealthy = dbStatus === 'healthy' || dbStatus === 'unbound (edge memory mode)';
     return jsonResponse({
-      status: 'ok',
+      status: isHealthy ? 'ok' : 'degraded',
       timestamp: new Date().toISOString(),
       storage: env.DB ? 'Cloudflare D1 SQL' : 'Edge Memory',
+      databaseStatus: dbStatus,
+      databaseLatencyMs: dbLatencyMs,
       uptime,
       edge: 'Cloudflare Global Network',
-      storageHealthy: true
-    }, 200, {}, request);
+      storageHealthy: isHealthy
+    }, isHealthy ? 200 : 503, {}, request, env);
   }
 
   // 2. Auth: Session Verification (Me)
   if (path === '/auth/me' && method === 'GET') {
     if (!authUser) {
-      return jsonResponse({ success: false, user: null }, 200, {}, request);
+      return jsonResponse({ success: false, user: null }, 200, {}, request, env);
     }
-    return jsonResponse({ success: true, user: authUser }, 200, {}, request);
+    return jsonResponse({ success: true, user: authUser }, 200, {}, request, env);
   }
 
   // 3. Auth: Register
   if (path === '/auth/register' && method === 'POST') {
     try {
       const body = await request.json();
-      const { email, password, displayName, role } = body;
+      const { email, password, displayName, role, turnstileToken } = body;
+
+      // Turnstile Bot Defense
+      if (env.TURNSTILE_SECRET_KEY) {
+        const turnstile = await verifyTurnstileToken(turnstileToken, env.TURNSTILE_SECRET_KEY, clientIp);
+        if (!turnstile.success) {
+          return jsonResponse({ success: false, error: 'Security verification failed. Please complete the captcha check and try again.' }, 400, {}, request, env);
+        }
+      }
+
       if (!email || !password || typeof password !== 'string' || password.length < 8) {
-        return jsonResponse({ success: false, error: 'Valid email and secure password (min 8 characters) are required.' }, 400, {}, request);
+        return jsonResponse({ success: false, error: 'Valid email and secure password (min 8 characters) are required.' }, 400, {}, request, env);
       }
       if (email.length > 254 || (displayName && displayName.length > 100)) {
-        return jsonResponse({ success: false, error: 'Input exceeds maximum allowed length.' }, 400, {}, request);
+        return jsonResponse({ success: false, error: 'Input exceeds maximum allowed length.' }, 400, {}, request, env);
       }
 
       const cleanEmail = email.trim().toLowerCase();
@@ -404,7 +486,7 @@ export async function onRequest(context) {
         try {
           const existing = await env.DB.prepare('SELECT uid FROM users WHERE email = ?').bind(cleanEmail).first();
           if (existing) {
-            return jsonResponse({ success: false, error: 'An account with this email already exists.' }, 400, {}, request);
+            return jsonResponse({ success: false, error: 'An account with this email already exists.' }, 400, {}, request, env);
           }
           const pHash = await hashPassword(password);
 
@@ -428,9 +510,9 @@ export async function onRequest(context) {
       const sessionToken = await signJwt(user, jwtSecret);
       return jsonResponse({ success: true, user }, 200, {
         'Set-Cookie': `cf_session=${sessionToken}; Path=/; HttpOnly; SameSite=Lax; Secure; Max-Age=604800`
-      }, request);
+      }, request, env);
     } catch (err) {
-      return jsonResponse({ success: false, error: 'Registration error: ' + err.message }, 500, {}, request);
+      return jsonResponse({ success: false, error: 'Registration error: ' + err.message }, 500, {}, request, env);
     }
   }
 
@@ -438,9 +520,18 @@ export async function onRequest(context) {
   if (path === '/auth/login' && method === 'POST') {
     try {
       const body = await request.json();
-      const { email, password } = body;
+      const { email, password, turnstileToken } = body;
+
+      // Turnstile Bot Defense
+      if (env.TURNSTILE_SECRET_KEY) {
+        const turnstile = await verifyTurnstileToken(turnstileToken, env.TURNSTILE_SECRET_KEY, clientIp);
+        if (!turnstile.success) {
+          return jsonResponse({ success: false, error: 'Security verification failed. Please complete the captcha check and try again.' }, 400, {}, request, env);
+        }
+      }
+
       if (!email || !password || typeof password !== 'string') {
-        return jsonResponse({ success: false, error: 'Email and password are required.' }, 400, {}, request);
+        return jsonResponse({ success: false, error: 'Email and password are required.' }, 400, {}, request, env);
       }
       const cleanEmail = email.trim().toLowerCase();
 
@@ -462,7 +553,7 @@ export async function onRequest(context) {
               const sessionToken = await signJwt(user, jwtSecret);
               return jsonResponse({ success: true, user }, 200, {
                 'Set-Cookie': `cf_session=${sessionToken}; Path=/; HttpOnly; SameSite=Lax; Secure; Max-Age=604800`
-              }, request);
+              }, request, env);
             }
           }
         } catch (dbErr) {
@@ -470,9 +561,9 @@ export async function onRequest(context) {
         }
       }
 
-      return jsonResponse({ success: false, error: 'Invalid email or password.' }, 401, {}, request);
+      return jsonResponse({ success: false, error: 'Invalid email or password.' }, 401, {}, request, env);
     } catch (err) {
-      return jsonResponse({ success: false, error: 'Login error: ' + err.message }, 500, {}, request);
+      return jsonResponse({ success: false, error: 'Login error: ' + err.message }, 500, {}, request, env);
     }
   }
 
@@ -480,15 +571,24 @@ export async function onRequest(context) {
   if (path === '/auth/logout' && method === 'POST') {
     return jsonResponse({ success: true }, 200, {
       'Set-Cookie': `cf_session=; Path=/; HttpOnly; SameSite=Lax; Secure; Max-Age=0`
-    }, request);
+    }, request, env);
   }
 
   // 6. Auth: Forgot Password & Reset Password
   if (path === '/auth/forgot-password' && method === 'POST') {
     try {
       const body = await request.json();
-      const { email } = body;
-      if (!email) return jsonResponse({ success: false, error: 'Email is required' }, 400, {}, request);
+      const { email, turnstileToken } = body;
+
+      // Turnstile Bot Defense
+      if (env.TURNSTILE_SECRET_KEY) {
+        const turnstile = await verifyTurnstileToken(turnstileToken, env.TURNSTILE_SECRET_KEY, clientIp);
+        if (!turnstile.success) {
+          return jsonResponse({ success: false, error: 'Security verification failed. Please complete the captcha check.' }, 400, {}, request, env);
+        }
+      }
+
+      if (!email) return jsonResponse({ success: false, error: 'Email is required' }, 400, {}, request, env);
 
       const cleanEmail = email.trim().toLowerCase();
       const resetToken = 'rst_' + crypto.randomUUID().replace(/-/g, '');
@@ -515,9 +615,9 @@ export async function onRequest(context) {
       return jsonResponse({
         success: true,
         message: 'If an account matches that email address, password reset instructions have been dispatched.'
-      }, 200, {}, request);
+      }, 200, {}, request, env);
     } catch (e) {
-      return jsonResponse({ success: false, error: e.message }, 500, {}, request);
+      return jsonResponse({ success: false, error: e.message }, 500, {}, request, env);
     }
   }
 
@@ -951,7 +1051,8 @@ export async function onRequest(context) {
         clientErrorsCount = eCount ? eCount.c : 0;
         cspViolationsCount = cspCount ? cspCount.c : 0;
 
-        // Periodic maintenance cleanup
+        // Periodic maintenance cleanup (prune logs older than 30 days & expired tokens)
+        await env.DB.prepare("DELETE FROM telemetry_logs WHERE created_at < datetime('now', '-30 days')").run().catch(() => {});
         await env.DB.prepare('DELETE FROM reset_tokens WHERE used = 1 OR expires_at < ?').bind(Date.now()).run().catch(() => {});
       } catch (err) {
         console.warn('D1 admin overview error:', err.message);
