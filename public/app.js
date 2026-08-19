@@ -15,9 +15,10 @@ document.addEventListener('DOMContentLoaded', () => {
   let isAutoScrolling = false;
   let autoScrollInterval = null;
 
-  let userProgress = JSON.parse(localStorage.getItem('lms_progress') || '{}');
-  let quizScores = JSON.parse(localStorage.getItem('lms_quiz_scores') || '{}');
-  let userReflections = JSON.parse(localStorage.getItem('lms_reflections') || '{}');
+  let activeChild = JSON.parse(localStorage.getItem('lms_active_child') || 'null');
+  let userProgress = JSON.parse(localStorage.getItem(`lms_progress_${activeChild ? activeChild.id : 'global'}`) || '{}');
+  let quizScores = JSON.parse(localStorage.getItem(`lms_quiz_scores_${activeChild ? activeChild.id : 'global'}`) || '{}');
+  let userReflections = JSON.parse(localStorage.getItem(`lms_reflections_${activeChild ? activeChild.id : 'global'}`) || '{}');
 
   // DOM Elements
   const themeToggleBtn = document.getElementById('themeToggleBtn');
@@ -494,8 +495,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // 2. Compute Progress for Active Child / User
-    const localProg = JSON.parse(localStorage.getItem('lms_progress') || '{}');
-    const localScores = JSON.parse(localStorage.getItem('lms_quiz_scores') || '{}');
+    const localProg = JSON.parse(localStorage.getItem(`lms_progress_${activeChild ? activeChild.id : 'global'}`) || '{}');
+    const localScores = JSON.parse(localStorage.getItem(`lms_quiz_scores_${activeChild ? activeChild.id : 'global'}`) || '{}');
     const childProgKey = activeChild ? `child_${activeChild.id}` : (currentUser ? `user_${currentUser.uid}` : 'guest');
     const activeProgMap = localProg[childProgKey] || userProgress || {};
 
@@ -621,6 +622,12 @@ document.addEventListener('DOMContentLoaded', () => {
   if (dashboardJumpBtn) dashboardJumpBtn.addEventListener('click', showDashboard);
 
   function openModule(moduleId) {
+    if (activeTrack !== 'teacher' && moduleId > 1) {
+      if (!userProgress[`mod_${moduleId - 1}`]) {
+        showToast('Module Locked 🔒', `You must pass Module ${moduleId - 1} before starting Module ${moduleId}.`, 'error');
+        return;
+      }
+    }
     activeModuleId = moduleId;
     const mod = courseData.modules.find(m => m.id === moduleId);
     if (!mod) return;
@@ -770,6 +777,23 @@ document.addEventListener('DOMContentLoaded', () => {
     } catch (e) {}
   }
 
+  
+  window.resetChildProgressAPI = async function(childId, moduleId = null) {
+    if (!currentUser) return;
+    try {
+      const res = await fetch('/api/parent/progress/reset', {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ childId, moduleId })
+      });
+      if (res.ok) {
+        showToast('Success', 'Progress reset successfully.', 'success');
+        syncCloudProgress(childId);
+      }
+    } catch(e) {
+      console.error(e);
+    }
+  };
   async function syncCloudProgress(studentId = null) {
     try {
       const sId = studentId || (activeChild ? activeChild.id : (currentUser ? currentUser.uid : null));
@@ -777,9 +801,9 @@ document.addEventListener('DOMContentLoaded', () => {
       const res = await fetch(`/api/quiz/progress?studentId=${encodeURIComponent(sId)}`);
       if (res.ok) {
         const data = await res.json();
-        if (data.success && data.progress) {
-          userProgress = { ...userProgress, ...data.progress };
-          localStorage.setItem('lms_progress', JSON.stringify(userProgress));
+        if (data.success && (data.progress || data.data)) { const syncData = data.progress || data.data;
+          userProgress = { ...userProgress, ...syncData };
+          localStorage.setItem(`lms_progress_${activeChild ? activeChild.id : 'global'}`, JSON.stringify(userProgress));
           renderSidebarModules();
           renderDashboard();
           updateProgressUI();
@@ -795,7 +819,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const mod = courseData.modules.find(m => m.id === activeModuleId);
     const key = `mod_${activeModuleId}`;
     userProgress[key] = !userProgress[key];
-    localStorage.setItem('lms_progress', JSON.stringify(userProgress));
+    localStorage.setItem(`lms_progress_${activeChild ? activeChild.id : 'global'}`, JSON.stringify(userProgress));
     
     // Asynchronously sync with Cloudflare D1 Backend
     persistModuleProgress(activeModuleId, userProgress[key], activeTrack);
@@ -1193,7 +1217,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const ta = item.querySelector('textarea');
         ta.addEventListener('input', (e) => {
           userReflections[saveKey] = e.target.value;
-          localStorage.setItem('lms_reflections', JSON.stringify(userReflections));
+          localStorage.setItem(`lms_reflections_${activeChild ? activeChild.id : 'global'}`, JSON.stringify(userReflections));
         });
 
         refSection.appendChild(item);
@@ -1327,12 +1351,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const scoreKey = `quiz_${activeModuleId}_${activeTrack}`;
       quizScores[scoreKey] = { score: data.score, total: data.total, percentage: data.percentage };
-      localStorage.setItem('lms_quiz_scores', JSON.stringify(quizScores));
+      localStorage.setItem(`lms_quiz_scores_${activeChild ? activeChild.id : 'global'}`, JSON.stringify(quizScores));
       showQuizScoreBanner(data.score, data.total);
 
       if (data.passed) {
         userProgress[`mod_${activeModuleId}`] = true;
-        localStorage.setItem('lms_progress', JSON.stringify(userProgress));
+        localStorage.setItem(`lms_progress_${activeChild ? activeChild.id : 'global'}`, JSON.stringify(userProgress));
         persistModuleProgress(activeModuleId, true, activeTrack);
         renderSidebarModules();
         updateProgressUI();
@@ -1541,8 +1565,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // State
   let currentUser = JSON.parse(localStorage.getItem('lms_user') || 'null');
   let familyChildren = [];
-  let activeChild = JSON.parse(localStorage.getItem('lms_active_child') || 'null');
-
+  
   // DOM Elements - Navigation & Header
   const learnerSwitcherBtn = document.getElementById('learnerSwitcherBtn');
   const headerLearnerAvatar = document.getElementById('headerLearnerAvatar');
@@ -1808,6 +1831,9 @@ document.addEventListener('DOMContentLoaded', () => {
       if (signOutHeaderBtn) signOutHeaderBtn.style.display = 'inline-flex';
       if (sidebarSignOutBtn) sidebarSignOutBtn.style.display = 'flex';
       const isSuper = currentUser.role === 'super_admin';
+      const isTeacher = currentUser.role === 'teacher' || currentUser.role === 'educator';
+      const trackTeacher = document.getElementById('trackTeacher');
+      if (trackTeacher) trackTeacher.style.display = (isSuper || isTeacher) ? 'inline-flex' : 'none';
       if (adminNavBtn) adminNavBtn.style.display = isSuper ? 'inline-flex' : 'none';
       if (sidebarAdminBtn) sidebarAdminBtn.style.display = isSuper ? 'inline-flex' : 'none';
       if (parentAdminBanner) parentAdminBanner.style.display = isSuper ? 'flex' : 'none';
@@ -1963,6 +1989,10 @@ document.addEventListener('DOMContentLoaded', () => {
   function setActiveChild(child) {
     activeChild = child;
     localStorage.setItem('lms_active_child', JSON.stringify(activeChild));
+    userProgress = JSON.parse(localStorage.getItem(`lms_progress_${activeChild ? activeChild.id : 'global'}`) || '{}');
+    quizScores = JSON.parse(localStorage.getItem(`lms_quiz_scores_${activeChild ? activeChild.id : 'global'}`) || '{}');
+    userReflections = JSON.parse(localStorage.getItem(`lms_reflections_${activeChild ? activeChild.id : 'global'}`) || '{}');
+
     if (headerLearnerAvatar) headerLearnerAvatar.textContent = child.avatar || '🌟';
     if (headerLearnerName) headerLearnerName.textContent = child.name;
     if (statActiveLearnerName) statActiveLearnerName.textContent = child.name;
@@ -2043,8 +2073,8 @@ document.addEventListener('DOMContentLoaded', () => {
     let allActivityLogs = [];
 
     // Check Local Progress First
-    const localProg = JSON.parse(localStorage.getItem('lms_progress') || '{}');
-    const localScores = JSON.parse(localStorage.getItem('lms_quiz_scores') || '{}');
+    const localProg = JSON.parse(localStorage.getItem(`lms_progress_${activeChild ? activeChild.id : 'global'}`) || '{}');
+    const localScores = JSON.parse(localStorage.getItem(`lms_quiz_scores_${activeChild ? activeChild.id : 'global'}`) || '{}');
 
     // Count completions from local storage
     const completedKeys = Object.keys(localProg).filter(k => localProg[k]);
@@ -2063,8 +2093,8 @@ document.addEventListener('DOMContentLoaded', () => {
         if (res.ok) {
           const data = await res.json();
           if (data.success) {
-            if (data.progress && data.progress.length > 0) {
-              completedModulesCount = Math.max(completedModulesCount, data.progress.length);
+            if ((data.progress || data.data) && Object.keys(data.progress || data.data).length > 0) {
+              completedModulesCount = Math.max(completedModulesCount, Object.keys(data.progress || data.data).length);
             }
             if (data.quizResults && data.quizResults.length > 0) {
               const totalPct = data.quizResults.reduce((acc, q) => acc + (q.maxScore ? (q.score / q.maxScore) * 100 : (q.percentage || 0)), 0);
@@ -2355,8 +2385,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const localUsers = getClientUsersDb();
     const localKids = JSON.parse(localStorage.getItem('lms_children') || '[]');
-    const localProg = JSON.parse(localStorage.getItem('lms_progress') || '{}');
-    const localScores = JSON.parse(localStorage.getItem('lms_quiz_scores') || '{}');
+    const localProg = JSON.parse(localStorage.getItem(`lms_progress_${activeChild ? activeChild.id : 'global'}`) || '{}');
+    const localScores = JSON.parse(localStorage.getItem(`lms_quiz_scores_${activeChild ? activeChild.id : 'global'}`) || '{}');
 
     // If server users were retrieved, also merge any local client registrations not yet synced
     if (users && Array.isArray(users)) {
@@ -3064,18 +3094,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const pHash = await hashClientPassword(password);
 
     // Check built-in Super Admin
-    if (cleanEmail === 'admin@islamicstudies.org' && password === 'Admin@Islam2026!') {
-      return {
-        success: true,
-        user: {
-          uid: 'admin_local_1',
-          email: 'admin@islamicstudies.org',
-          displayName: 'Portal Administrator',
-          role: 'super_admin',
-          provider: 'local',
-          isVerified: true
-        }
-      };
+          };
     }
 
     const users = getClientUsersDb();

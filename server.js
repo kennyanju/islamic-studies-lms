@@ -658,9 +658,9 @@ app.put('/api/user/profile', requireAuth, async (req, res, next) => {
    Parent Children Management API
    ========================================================================== */
 
-app.get('/api/parent/children', requireAuth, requireParentOwnership, async (req, res, next) => {
+app.get('/api/parent/children', requireAuth, async (req, res, next) => {
   try {
-    const parentUid = req.query.parentUid || req.session.user.uid;
+    const parentUid = req.session.user.uid;
     const children = await db.getChildren(parentUid);
     res.json({ success: true, children: children.map(safeChild) });
   } catch (err) {
@@ -751,6 +751,36 @@ app.delete('/api/parent/children/:id', requireAuth, async (req, res, next) => {
   }
 });
 
+// Sync Progress (R1)
+app.get('/api/progress/sync', requireAuth, async (req, res, next) => {
+  try {
+    const parentUid = req.session.user.uid;
+    const progressData = await db.getParentProgress(parentUid);
+    res.json({ success: true, data: progressData });
+  } catch (err) {
+    next(err);
+  }
+});
+
+// Reset Progress (R5)
+app.delete('/api/parent/progress/reset', requireAuth, async (req, res, next) => {
+  try {
+    const { childId, moduleId } = req.body;
+    if (!childId) return res.status(400).json({ success: false, error: 'childId required' });
+    
+    // Verify ownership
+    const child = await db.getChildById(childId);
+    if (!child || child.parentUid !== req.session.user.uid) {
+      return res.status(403).json({ success: false, error: 'Unauthorized' });
+    }
+    
+    await db.resetChildProgress(childId, moduleId);
+    res.json({ success: true });
+  } catch (err) {
+    next(err);
+  }
+});
+
 // Server-side PIN verification
 app.post('/api/parent/children/:id/verify-pin', requireAuth, async (req, res, next) => {
   try {
@@ -830,13 +860,30 @@ app.post('/api/public/child/:id/verify-pin', async (req, res, next) => {
    Server-Side Quiz Grading & Validation API
    ========================================================================== */
 
-app.post('/api/quiz/grade', validateModuleId, async (req, res, next) => {
+const quizLimiter = rateLimit({
+  windowMs: 60 * 1000,
+  max: 10,
+  message: { success: false, error: 'Too many quiz submissions. Please wait.' }
+});
+
+app.post('/api/quiz/grade', validateModuleId, quizLimiter, async (req, res, next) => {
   try {
     const moduleId = req.validModuleId;
     const track = req.body.track === 'level2' ? 'level2' : 'level1';
     const submittedAnswers = req.body.answers || {};
+    const reflections = req.body.reflections || {};
     const childId = req.body.childId || null;
-    const sessionUid = req.session ? req.session.user?.uid : 'guest';
+    let sessionUid = req.session ? req.session.user?.uid : null;
+    
+    if (!sessionUid) {
+       sessionUid = req.body.guestId || require('crypto').randomUUID();
+    }
+    
+    // Check attempt limits (R14)
+    const attempts = await db.getQuizAttemptCount(sessionUid, childId, moduleId);
+    if (attempts >= 3) {
+      return res.status(429).json({ success: false, error: 'Daily attempt limit (3) reached for this module. Try again tomorrow.' });
+    }
 
     if (!compiledCourseData || !compiledCourseData.modules) {
       loadCompiledCourseData();
@@ -860,14 +907,31 @@ app.post('/api/quiz/grade', validateModuleId, async (req, res, next) => {
     const total = questions.length;
     const feedbackList = [];
 
+    const keys = Object.keys(submittedAnswers || {});
+    const hasZeroKey = keys.includes('0') || keys.includes(0);
+
     questions.forEach((q, idx) => {
-      const studentAns = (submittedAnswers[idx] || '').toString().trim().toUpperCase();
+      let rawAns;
+      if (hasZeroKey) {
+        rawAns = submittedAnswers[idx] !== undefined ? submittedAnswers[idx] : submittedAnswers[String(idx)];
+      } else {
+        const qId = q.id !== undefined ? q.id : (idx + 1);
+        rawAns = submittedAnswers[qId] !== undefined ? submittedAnswers[qId] :
+                 submittedAnswers[String(qId)] !== undefined ? submittedAnswers[String(qId)] :
+                 submittedAnswers[`q${qId}`] !== undefined ? submittedAnswers[`q${qId}`] :
+                 submittedAnswers[`q_${qId}`] !== undefined ? submittedAnswers[`q_${qId}`] :
+                 submittedAnswers[idx + 1] !== undefined ? submittedAnswers[idx + 1] :
+                 submittedAnswers[String(idx + 1)];
+      }
+
+      const studentAns = (rawAns || '').toString().trim().toUpperCase();
       const correctAns = (q.correctAnswer || 'A').toString().trim().toUpperCase();
       const isCorrect = studentAns === correctAns;
 
       if (isCorrect) correctCount++;
 
       feedbackList.push({
+        questionId: q.id || `q_${idx}`,
         questionIndex: idx,
         questionText: q.question,
         selectedAnswer: studentAns,
@@ -891,6 +955,29 @@ app.post('/api/quiz/grade', validateModuleId, async (req, res, next) => {
       percentage,
       passed
     });
+
+    // Save reflections (R15)
+    if (Object.keys(reflections).length > 0) {
+      for (const qId of Object.keys(reflections)) {
+        await db.saveReflection({
+          studentId: childId || sessionUid,
+          moduleId,
+          questionId: qId,
+          responseText: reflections[qId]
+        });
+      }
+    }
+    
+    // Notification on Pass (R4)
+    if (passed && childId && req.session?.user?.email) {
+      const child = await db.getChildById(childId);
+      emailService.sendEdgeEmail({
+        to: req.session.user.email,
+        subject: `🎉 ${child?.name || 'Your child'} just passed Module ${moduleId}!`,
+        text: `Great news! They scored ${percentage}% on the quiz. Log in to view their certificate.`,
+        html: `<p>Great news! They scored <strong>${percentage}%</strong> on the quiz.</p><p>Log in to view their certificate.</p>`
+      }).catch(err => console.warn('Notification email failed:', err.message));
+    }
 
     res.json({
       success: true,
@@ -1000,8 +1087,8 @@ app.put('/api/admin/users/:uid/role', requireAdmin, async (req, res, next) => {
     const { uid } = req.params;
     const { role } = req.body;
 
-    if (!['parent', 'super_admin'].includes(role)) {
-      return res.status(400).json({ success: false, error: 'Role must be parent or super_admin' });
+    if (!['parent', 'teacher', 'super_admin'].includes(role)) {
+      return res.status(400).json({ success: false, error: 'Role must be parent, teacher, or super_admin' });
     }
 
     const updated = await db.updateUser(uid, { role });
@@ -1026,6 +1113,16 @@ app.delete('/api/admin/users/:uid', requireAdmin, async (req, res, next) => {
       return res.status(404).json({ success: false, error: 'User not found.' });
     }
     res.json({ success: true, message: 'User deleted successfully.' });
+  } catch (err) {
+    next(err);
+  }
+});
+
+// Audit Logs (R19)
+app.get('/api/admin/audit', requireAdmin, async (req, res, next) => {
+  try {
+    const logs = await db.getAuditLogs();
+    res.json({ success: true, logs });
   } catch (err) {
     next(err);
   }

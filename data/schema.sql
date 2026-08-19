@@ -56,3 +56,24 @@ CREATE TABLE IF NOT EXISTS module_progress (
 );
 
 CREATE INDEX IF NOT EXISTS idx_progress_target ON module_progress(target_key);
+
+CREATE TABLE IF NOT EXISTS certificates (
+  id VARCHAR(64) PRIMARY KEY,
+  student_id VARCHAR(64) NOT NULL,
+  module_id INT NOT NULL,
+  score INT NOT NULL,
+  issued_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE INDEX IF NOT EXISTS idx_certificates_student ON certificates(student_id);
+
+CREATE TABLE IF NOT EXISTS reflections (
+  id VARCHAR(64) PRIMARY KEY,
+  student_id VARCHAR(64) NOT NULL,
+  module_id INT NOT NULL,
+  question_id VARCHAR(64) NOT NULL,
+  response_text TEXT NOT NULL,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE INDEX IF NOT EXISTS idx_reflections_student ON reflections(student_id);

@@ -702,7 +702,7 @@ export async function onRequest(context) {
 
   // 8. Parent Children CRUD
   if (path === '/parent/children' && method === 'GET') {
-    const parentUid = authUser ? authUser.uid : url.searchParams.get('parentUid');
+    const parentUid = authUser ? authUser.uid : null;
     if (!parentUid || !env.DB) return jsonResponse({ success: true, children: [] }, 200, {}, request);
 
     try {
@@ -779,6 +779,59 @@ export async function onRequest(context) {
     }
 
     return jsonResponse({ success: true, message: 'Child profile deleted successfully' }, 200, {}, request);
+  }
+
+  // 8.5 Parent Progress Sync & Reset
+  if (path === '/progress/sync' && method === 'GET') {
+    if (!authUser) return jsonResponse({ success: false, error: 'Authentication required' }, 401, {}, request);
+    
+    if (env.DB) {
+      try {
+        const { results: children } = await env.DB.prepare('SELECT id FROM children WHERE parent_uid = ?').bind(authUser.uid).all();
+        const progressData = {};
+        for (const child of children || []) {
+          const targetKey = `child_${child.id}`;
+          const pRows = await env.DB.prepare('SELECT module_id as moduleId, level, completed FROM module_progress WHERE student_id = ?').bind(child.id).all();
+          progressData[targetKey] = {};
+          (pRows.results || []).forEach(r => {
+            if (r.completed) progressData[targetKey][`mod_${r.moduleId}`] = true;
+          });
+          const qRows = await env.DB.prepare('SELECT * FROM quiz_results WHERE student_id = ?').bind(child.id).all();
+          progressData[`${targetKey}_scores`] = qRows.results || [];
+        }
+        return jsonResponse({ success: true, data: progressData }, 200, {}, request);
+      } catch (err) {
+        return jsonResponse({ success: false, error: err.message }, 500, {}, request);
+      }
+    }
+    return jsonResponse({ success: true, data: {} }, 200, {}, request);
+  }
+
+  if (path === '/parent/progress/reset' && method === 'DELETE') {
+    if (!authUser) return jsonResponse({ success: false, error: 'Authentication required' }, 401, {}, request);
+    try {
+      const body = await request.json();
+      const { childId, moduleId } = body;
+      if (!childId) return jsonResponse({ success: false, error: 'childId required' }, 400, {}, request);
+      
+      if (env.DB) {
+        const child = await env.DB.prepare('SELECT parent_uid FROM children WHERE id = ?').bind(childId).first();
+        if (!child || child.parent_uid !== authUser.uid) {
+          return jsonResponse({ success: false, error: 'Unauthorized' }, 403, {}, request);
+        }
+        
+        if (moduleId) {
+          await env.DB.prepare('DELETE FROM module_progress WHERE student_id = ? AND module_id = ?').bind(childId, moduleId).run();
+          await env.DB.prepare('DELETE FROM quiz_results WHERE student_id = ? AND module_id = ?').bind(childId, moduleId).run();
+        } else {
+          await env.DB.prepare('DELETE FROM module_progress WHERE student_id = ?').bind(childId).run();
+          await env.DB.prepare('DELETE FROM quiz_results WHERE student_id = ?').bind(childId).run();
+        }
+      }
+      return jsonResponse({ success: true }, 200, {}, request);
+    } catch (err) {
+      return jsonResponse({ success: false, error: err.message }, 500, {}, request);
+    }
   }
 
   // 9. Public Direct Child Access (Match by Exact UUID or Profile Name)
@@ -864,16 +917,32 @@ export async function onRequest(context) {
 
   // 10. Authoritative Quiz Grading & Progress Tracking
   if (path === '/quiz/grade' && method === 'POST') {
+    if (!checkRateLimit(clientIp, 'quiz_grade', 10, 60)) {
+      return jsonResponse({ success: false, error: 'Too many quiz submissions. Please wait.' }, 429, {}, request, env);
+    }
     try {
       const body = await request.json();
-      const { moduleId, track, answers, childId } = body;
+      const { moduleId, track, answers, reflections, childId, guestId } = body;
       const mId = parseInt(moduleId, 10);
       const studentTrack = track === 'level2' ? 'level2' : 'level1';
-      const studentId = childId || (authUser ? authUser.uid : 'guest');
+      let studentId = childId || (authUser ? authUser.uid : null);
+      if (!studentId) studentId = guestId || crypto.randomUUID();
 
       const submittedAnswers = answers || {};
+      const submittedReflections = reflections || {};
       let score = 0;
       const feedback = [];
+      
+      if (env.DB) {
+        const attemptsCount = await env.DB.prepare(`
+          SELECT COUNT(*) as count 
+          FROM quiz_results 
+          WHERE student_id = ? AND module_id = ? AND DATE(created_at) = DATE('now')
+        `).bind(studentId, mId).first();
+        if (attemptsCount && attemptsCount.count >= 3) {
+          return jsonResponse({ success: false, error: 'Daily attempt limit (3) reached for this module. Try again tomorrow.' }, 429, {}, request, env);
+        }
+      }
 
       // Fetch compiled curriculum data for authoritative grading
       let moduleQuestions = [];
@@ -906,15 +975,29 @@ export async function onRequest(context) {
         }, 503, {}, request);
       }
 
-      const total = moduleQuestions.length;
+      const keys = Object.keys(submittedAnswers || {});
+      const hasZeroKey = keys.includes('0') || keys.includes(0);
 
       moduleQuestions.forEach((q, idx) => {
-        const selected = (submittedAnswers[q.id] || submittedAnswers[idx] || '').toString().trim().toUpperCase();
+        let rawAns;
+        if (hasZeroKey) {
+          rawAns = submittedAnswers[idx] !== undefined ? submittedAnswers[idx] : submittedAnswers[String(idx)];
+        } else {
+          const qId = q.id !== undefined ? q.id : (idx + 1);
+          rawAns = submittedAnswers[qId] !== undefined ? submittedAnswers[qId] :
+                   submittedAnswers[String(qId)] !== undefined ? submittedAnswers[String(qId)] :
+                   submittedAnswers[`q${qId}`] !== undefined ? submittedAnswers[`q${qId}`] :
+                   submittedAnswers[`q_${qId}`] !== undefined ? submittedAnswers[`q_${qId}`] :
+                   submittedAnswers[idx + 1] !== undefined ? submittedAnswers[idx + 1] :
+                   submittedAnswers[String(idx + 1)];
+        }
+
+        const selected = (rawAns || '').toString().trim().toUpperCase();
         const isCorrect = q.correctAnswer ? (selected === q.correctAnswer.toUpperCase()) : false;
         if (isCorrect) score++;
 
         feedback.push({
-          questionId: q.id,
+          questionId: q.id || `q_${idx}`,
           questionIndex: idx,
           selectedAnswer: selected,
           correctAnswer: q.correctAnswer || 'A',
@@ -932,11 +1015,31 @@ export async function onRequest(context) {
           'INSERT INTO quiz_results (id, student_id, module_id, level, score, total, percentage, passed, answers_json) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)'
         ).bind(quizId, studentId, mId, studentTrack, score, total, percentage, passed ? 1 : 0, JSON.stringify(submittedAnswers)).run();
 
+        if (Object.keys(submittedReflections).length > 0) {
+          for (const qId of Object.keys(submittedReflections)) {
+             const refId = 'ref_' + Date.now().toString(36) + '_' + Math.random().toString(36).substring(2, 6);
+             await env.DB.prepare(
+               'INSERT INTO reflections (id, student_id, module_id, question_id, response_text) VALUES (?, ?, ?, ?, ?)'
+             ).bind(refId, studentId, mId, qId, submittedReflections[qId]).run().catch(() => {});
+          }
+        }
+
         if (passed) {
           const progId = `prog_${studentId}_${mId}`;
           await env.DB.prepare(
             'INSERT OR REPLACE INTO module_progress (id, student_id, module_id, level, completed, updated_at) VALUES (?, ?, ?, ?, 1, CURRENT_TIMESTAMP)'
           ).bind(progId, studentId, mId, studentTrack).run();
+          
+          if (childId && authUser && authUser.email) {
+             const childRow = await env.DB.prepare('SELECT name FROM children WHERE id = ?').bind(childId).first();
+             sendEdgeEmail({
+               to: authUser.email,
+               subject: `🎉 ${childRow?.name || 'Your child'} just passed Module ${mId}!`,
+               text: `Great news! They scored ${percentage}% on the quiz. Log in to view their certificate.`,
+               html: `<p>Great news! They scored <strong>${percentage}%</strong> on the quiz.</p><p>Log in to view their certificate.</p>`,
+               env
+             }).catch(err => console.warn('Notification email failed:', err.message));
+          }
         }
       }
 
@@ -1047,9 +1150,12 @@ export async function onRequest(context) {
         totalKids = cCount ? cCount.c : 0;
         totalQuizSubmissions = qCount ? qCount.c : 0;
         totalCompletedModules = pCount ? pCount.c : 0;
-        avgQuizScore = qAvg && qAvg.avg ? Math.round(qAvg.avg) : 90;
+        avgQuizScore = qAvg && qAvg.avg ? Math.round(qAvg.avg) : 0;
         clientErrorsCount = eCount ? eCount.c : 0;
         cspViolationsCount = cspCount ? cspCount.c : 0;
+        
+        const passedRow = await env.DB.prepare('SELECT COUNT(*) as c FROM quiz_results WHERE percentage >= 80 OR passed = 1').first();
+        const passRate = totalQuizSubmissions > 0 ? Math.round(((passedRow ? passedRow.c : 0) / totalQuizSubmissions) * 100) : 0;
 
         // Periodic maintenance cleanup (prune logs older than 30 days & expired tokens)
         await env.DB.prepare("DELETE FROM telemetry_logs WHERE created_at < datetime('now', '-30 days')").run().catch(() => {});
@@ -1058,6 +1164,10 @@ export async function onRequest(context) {
         console.warn('D1 admin overview error:', err.message);
       }
     }
+    
+    // Default passRate logic if DB not active or error
+    const finalPassRate = (env.DB && typeof passRate !== 'undefined') ? passRate : (totalQuizSubmissions > 0 ? 0 : 0);
+
     return jsonResponse({
       success: true,
       stats: {
@@ -1066,7 +1176,7 @@ export async function onRequest(context) {
         totalQuizSubmissions,
         totalCompletedModules,
         avgQuizScore,
-        passRate: 95,
+        passRate: finalPassRate,
         system: {
           uptime,
           nodeEnv: 'production',
@@ -1147,6 +1257,22 @@ export async function onRequest(context) {
       ).bind(authUser.uid, 'DELETE_USER', targetUid, clientIp).run().catch(() => {});
     }
     return jsonResponse({ success: true, message: 'User deleted successfully' }, 200, {}, request);
+  }
+
+  // 15. Admin Audit Logs
+  if (path === '/admin/audit' && method === 'GET') {
+    if (!authUser || authUser.role !== 'super_admin') {
+      return jsonResponse({ success: false, error: 'Forbidden: Super Admin only' }, 403, {}, request);
+    }
+    if (env.DB) {
+      try {
+        const { results } = await env.DB.prepare('SELECT * FROM audit_log ORDER BY created_at DESC LIMIT 200').all();
+        return jsonResponse({ success: true, logs: results || [] }, 200, {}, request);
+      } catch (e) {
+        return jsonResponse({ success: false, error: e.message }, 500, {}, request);
+      }
+    }
+    return jsonResponse({ success: true, logs: [] }, 200, {}, request);
   }
 
   // Fallback for unmatched API routes
