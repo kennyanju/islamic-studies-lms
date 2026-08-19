@@ -53,10 +53,11 @@ describe('Child Profiles & Access Control API Tests', () => {
     expect(res.body.children.some(c => c.id === createdChildId)).toBe(true);
   });
 
-  test('GET /api/parent/children - Parent 2 cannot access Parent 1 children', async () => {
+  test('GET /api/parent/children - Parent 2 cannot access Parent 1 children (returns own children)', async () => {
     const res = await agent2.get(`/api/parent/children?parentUid=${user1Uid}`);
-    expect(res.statusCode).toBe(403); // Forbidden
-    expect(res.body.success).toBe(false);
+    expect(res.statusCode).toBe(200);
+    expect(res.body.success).toBe(true);
+    expect(res.body.children.length).toBe(0); // agent2 has no children yet
   });
 
   test('POST /api/parent/children/:id/verify-pin - Server verification with correct PIN', async () => {
