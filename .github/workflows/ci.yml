@@ -10,11 +10,12 @@ jobs:
   build-and-test:
     runs-on: ubuntu-latest
     env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
       ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: true
 
     strategy:
       matrix:
-        node-version: [18.x, 20.x]
+        node-version: [20.x, 22.x]
 
     steps:
       - name: Checkout Repository
