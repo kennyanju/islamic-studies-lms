@@ -1287,39 +1287,12 @@ document.addEventListener('DOMContentLoaded', () => {
         console.warn('Network issue reaching server quiz grading endpoint, using client grading engine:', netErr);
       }
 
-      // 2. Client-Side Grading Fallback Engine (High Reliability)
+      // 2. Server Error Handling (Remove Client-Side Bypass)
       if (!data || !data.success) {
-        let correctCount = 0;
-        const total = mcqs.length;
-        const feedbackList = [];
-
-        mcqs.forEach((q, idx) => {
-          const studentAns = (answers[idx] || '').toString().trim().toUpperCase();
-          const correctAns = (q.correctAnswer || 'A').toString().trim().toUpperCase();
-          const isCorrect = studentAns === correctAns;
-          if (isCorrect) correctCount++;
-
-          feedbackList.push({
-            questionIndex: idx,
-            questionText: q.question,
-            selectedAnswer: studentAns,
-            correctAnswer: correctAns,
-            isCorrect,
-            explanation: q.explanation || `Correct Answer is (${correctAns}). Refer to lesson notes and summary.`
-          });
-        });
-
-        const percentage = total > 0 ? Math.round((correctCount / total) * 100) : 100;
-        data = {
-          success: true,
-          moduleId: activeModuleId,
-          track,
-          score: correctCount,
-          total,
-          percentage,
-          passed: percentage >= 80,
-          feedback: feedbackList
-        };
+        showToast('Quiz Grading Error', data?.error || 'Unable to contact grading server. Please try again.', 'error');
+        submitQuizBtn.disabled = false;
+        submitQuizBtn.innerHTML = 'Submit Quiz <i class="fa-solid fa-paper-plane"></i>';
+        return;
       }
 
       // 3. Display option feedback and explanations
@@ -1880,7 +1853,7 @@ document.addEventListener('DOMContentLoaded', () => {
     try {
       // Fetch latest children from server BEFORE logging out to persist them
       if (currentUser) {
-        const res = await fetch(`/api/parent/children?parentUid=${encodeURIComponent(currentUser.uid)}`);
+        const res = await fetch(`/api/parent/children`);
         if (res.ok) {
           const data = await res.json();
           if (data.success && data.children && Array.isArray(data.children)) {
@@ -1942,7 +1915,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     try {
-      const res = await fetch(`/api/parent/children?parentUid=${encodeURIComponent(currentUser.uid)}`);
+      const res = await fetch(`/api/parent/children`);
       if (res.status === 401 || res.status === 403) {
         currentUser = null;
         familyChildren = [];
@@ -2089,20 +2062,23 @@ document.addEventListener('DOMContentLoaded', () => {
     // Try fetching live server sync data
     if (currentUser) {
       try {
-        const res = await fetch(`/api/progress/sync?parentUid=${currentUser.uid}`);
+        const res = await fetch(`/api/progress/sync`);
         if (res.ok) {
-          const data = await res.json();
-          if (data.success) {
-            if ((data.progress || data.data) && Object.keys(data.progress || data.data).length > 0) {
-              completedModulesCount = Math.max(completedModulesCount, Object.keys(data.progress || data.data).length);
-            }
-            if (data.quizResults && data.quizResults.length > 0) {
-              const totalPct = data.quizResults.reduce((acc, q) => acc + (q.maxScore ? (q.score / q.maxScore) * 100 : (q.percentage || 0)), 0);
-              quizAvg = Math.round(totalPct / data.quizResults.length);
+          const resJson = await res.json();
+          if (resJson.success) {
+            const pData = resJson.data || resJson.progress || {};
+            const childKey = `child_${activeChild ? activeChild.id : 'global'}`;
+            const childProg = pData[childKey] || {};
+            completedModulesCount = Math.max(completedModulesCount, Object.keys(childProg).filter(k => childProg[k]).length);
+            
+            const childScores = pData[`${childKey}_scores`] || [];
+            if (childScores.length > 0) {
+              const totalPct = childScores.reduce((acc, q) => acc + (q.maxScore ? (q.score / q.maxScore) * 100 : (q.percentage || 0)), 0);
+              quizAvg = Math.round(totalPct / childScores.length);
               
               allActivityLogs = [
-                ...data.quizResults.map(q => ({ type: 'quiz', item: q, date: new Date(q.timestamp || q.createdAt || Date.now()) })),
-                ...(data.reflections || []).map(r => ({ type: 'reflection', item: r, date: new Date(r.timestamp || Date.now()) }))
+                ...childScores.map(q => ({ type: 'quiz', item: q, date: new Date(q.timestamp || q.createdAt || Date.now()) })),
+                ...(resJson.reflections || []).map(r => ({ type: 'reflection', item: r, date: new Date(r.timestamp || Date.now()) }))
               ];
             }
           }
@@ -2205,9 +2181,8 @@ document.addEventListener('DOMContentLoaded', () => {
           const isPinProtected = child.hasPin || (child.pinCode && child.pinCode.trim().length > 0);
 
           // Calculate approximate progress for this child
-          const childProgKey = `child_${child.id}`;
           const childTrack = child.assignedTrack || 'level1';
-          const childProg = localProg[childProgKey] || {};
+          const childProg = JSON.parse(localStorage.getItem(`lms_progress_${child.id}`) || '{}');
           const childCompletedCount = Object.keys(childProg).filter(k => childProg[k]).length;
           const childPct = Math.round((childCompletedCount / 9) * 100);
 
@@ -2600,6 +2575,10 @@ document.addEventListener('DOMContentLoaded', () => {
         roleBadge = '<span class="role-badge teacher">🎓 Educator</span>';
       }
 
+      let actionLabel = 'Make Teacher';
+      if (isTeacher) actionLabel = 'Make Admin';
+      if (isSuperAdmin) actionLabel = 'Make Parent';
+
       row.innerHTML = `
         <td>
           <strong>${escapeHtml(u.displayName || u.email)}</strong><br>
@@ -2612,7 +2591,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <td>${u.createdAt ? new Date(u.createdAt).toLocaleDateString() : 'Active'}</td>
         <td>
           <button class="btn-action-role" data-uid="${u.uid}" data-current="${u.role}">
-            <i class="fa-solid fa-arrows-rotate"></i> ${isSuperAdmin ? 'Make Parent' : 'Make Admin'}
+            <i class="fa-solid fa-arrows-rotate"></i> ${actionLabel}
           </button>
           <button class="btn-action-delete" data-uid="${u.uid}" title="Delete User Account">
             <i class="fa-solid fa-trash"></i> Delete
@@ -2621,7 +2600,9 @@ document.addEventListener('DOMContentLoaded', () => {
       `;
 
       row.querySelector('.btn-action-role').addEventListener('click', async () => {
-        const newRole = u.role === 'super_admin' ? 'parent' : 'super_admin';
+        let newRole = 'teacher';
+        if (u.role === 'teacher') newRole = 'super_admin';
+        if (u.role === 'super_admin') newRole = 'parent';
         try {
           await fetch(`/api/admin/users/${u.uid}/role`, {
             method: 'PUT',

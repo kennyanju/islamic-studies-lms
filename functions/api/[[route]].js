@@ -710,8 +710,8 @@ export async function onRequest(context) {
       const body = await request.json().catch(() => ({}));
       const token = body.token;
       const targetPass = body.newPassword || body.password;
-      if (!token || !targetPass || typeof targetPass !== 'string' || targetPass.length < 8) {
-        return jsonResponse({ success: false, error: 'Valid token and secure new password (min 8 characters) are required.' }, 400, {}, request);
+      if (!token || !targetPass || typeof targetPass !== 'string' || targetPass.length < 6) {
+        return jsonResponse({ success: false, error: 'Valid token and secure new password (min 6 characters) are required.' }, 400, {}, request);
       }
 
       let updatedUser = null;
@@ -857,7 +857,10 @@ export async function onRequest(context) {
     const childId = path.split('/')[3];
 
     if (env.DB) {
-      await env.DB.prepare('DELETE FROM children WHERE id = ? AND parent_uid = ?').bind(childId, authUser.uid).run();
+      const { meta } = await env.DB.prepare('DELETE FROM children WHERE id = ? AND parent_uid = ?').bind(childId, authUser.uid).run();
+      if (!meta || meta.changes === 0) {
+        return jsonResponse({ success: false, error: 'Child not found or unauthorized' }, 403, {}, request);
+      }
       await env.DB.prepare('DELETE FROM module_progress WHERE student_id = ?').bind(childId).run();
       await env.DB.prepare('DELETE FROM quiz_results WHERE student_id = ?').bind(childId).run();
     }
@@ -1090,6 +1093,7 @@ export async function onRequest(context) {
         });
       });
 
+      const total = moduleQuestions.length;
       const percentage = total > 0 ? Math.round((score / total) * 100) : 0;
       const passed = percentage >= 80;
 
