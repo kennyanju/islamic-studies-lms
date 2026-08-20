@@ -3093,10 +3093,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const cleanEmail = email.trim().toLowerCase();
     const pHash = await hashClientPassword(password);
 
-    // Check built-in Super Admin
-          };
-    }
-
     const users = getClientUsersDb();
     const match = users.find(u => u.email === cleanEmail && u.passwordHash === pHash);
     if (match) {
@@ -3104,6 +3100,8 @@ document.addEventListener('DOMContentLoaded', () => {
       return { success: true, user: safe };
     }
     return { success: false, error: 'Invalid email or password.' };
+  }
+
   function getTurnstileToken(form) {
     if (!form) return null;
     const input = form.querySelector('[name="cf-turnstile-response"]') || form.querySelector('[name="turnstileToken"]');
@@ -3248,8 +3246,8 @@ document.addEventListener('DOMContentLoaded', () => {
         showAuthAlert('Please fill in your name, email address, and password.', 'error');
         return;
       }
-      if (password.length < 8) {
-        showAuthAlert('Password must be at least 8 characters long.', 'error');
+      if (password.length < 6) {
+        showAuthAlert('Password must be at least 6 characters long.', 'error');
         return;
       }
 

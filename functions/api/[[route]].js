@@ -322,11 +322,95 @@ function buildWelcomeHtml({ appUrl, email, displayName, role }) {
 }
 
 // --------------------------------------------------------------------------
-// Super Admin First-Run Bootstrap Helper
+// Super Admin First-Run Bootstrap Helper & D1 Schema Assurance
 // --------------------------------------------------------------------------
+let _d1SchemaInitialized = false;
+async function ensureD1Schema(env) {
+  if (!env || !env.DB || _d1SchemaInitialized) return;
+  try {
+    await env.DB.exec(`
+      CREATE TABLE IF NOT EXISTS users (
+        uid TEXT PRIMARY KEY,
+        email TEXT UNIQUE NOT NULL,
+        display_name TEXT,
+        role TEXT DEFAULT 'parent',
+        is_verified INTEGER DEFAULT 1,
+        provider TEXT DEFAULT 'local',
+        password_hash TEXT,
+        created_at TEXT DEFAULT CURRENT_TIMESTAMP,
+        updated_at TEXT DEFAULT CURRENT_TIMESTAMP
+      );
+      CREATE TABLE IF NOT EXISTS children (
+        id TEXT PRIMARY KEY,
+        parent_uid TEXT NOT NULL,
+        name TEXT NOT NULL,
+        avatar TEXT DEFAULT '🌟',
+        assigned_track TEXT DEFAULT 'level1',
+        pin_hash TEXT,
+        created_at TEXT DEFAULT CURRENT_TIMESTAMP,
+        updated_at TEXT DEFAULT CURRENT_TIMESTAMP
+      );
+      CREATE TABLE IF NOT EXISTS module_progress (
+        id TEXT PRIMARY KEY,
+        student_id TEXT NOT NULL,
+        module_id INTEGER NOT NULL,
+        level TEXT NOT NULL,
+        completed INTEGER DEFAULT 1,
+        updated_at TEXT DEFAULT CURRENT_TIMESTAMP
+      );
+      CREATE TABLE IF NOT EXISTS quiz_results (
+        id TEXT PRIMARY KEY,
+        student_id TEXT NOT NULL,
+        module_id INTEGER NOT NULL,
+        level TEXT NOT NULL,
+        score INTEGER NOT NULL,
+        total INTEGER NOT NULL,
+        percentage REAL NOT NULL,
+        passed INTEGER DEFAULT 0,
+        answers_json TEXT,
+        created_at TEXT DEFAULT CURRENT_TIMESTAMP
+      );
+      CREATE TABLE IF NOT EXISTS reset_tokens (
+        token TEXT PRIMARY KEY,
+        uid TEXT NOT NULL,
+        email TEXT NOT NULL,
+        expires_at INTEGER NOT NULL,
+        used INTEGER DEFAULT 0,
+        created_at TEXT DEFAULT CURRENT_TIMESTAMP
+      );
+      CREATE TABLE IF NOT EXISTS reflections (
+        id TEXT PRIMARY KEY,
+        student_id TEXT NOT NULL,
+        module_id INTEGER NOT NULL,
+        reflection_text TEXT,
+        updated_at TEXT DEFAULT CURRENT_TIMESTAMP
+      );
+      CREATE TABLE IF NOT EXISTS certificates (
+        id TEXT PRIMARY KEY,
+        student_id TEXT NOT NULL,
+        track TEXT NOT NULL,
+        cert_number TEXT UNIQUE NOT NULL,
+        issued_at TEXT DEFAULT CURRENT_TIMESTAMP
+      );
+      CREATE TABLE IF NOT EXISTS telemetry_logs (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        message TEXT,
+        source TEXT,
+        stack TEXT,
+        url TEXT,
+        created_at TEXT DEFAULT CURRENT_TIMESTAMP
+      );
+    `);
+    _d1SchemaInitialized = true;
+  } catch (e) {
+    // Non-fatal if exec is not supported or already created
+  }
+}
+
 async function ensureSuperAdminBootstrap(env) {
   if (!env || !env.DB) return;
   try {
+    await ensureD1Schema(env);
     const countRow = await env.DB.prepare('SELECT COUNT(*) as c FROM users').first();
     if (countRow && countRow.c === 0) {
       const adminEmail = (env.ADMIN_EMAIL || 'admin@islamicstudies.org').trim().toLowerCase();
@@ -470,8 +554,8 @@ export async function onRequest(context) {
         }
       }
 
-      if (!email || !password || typeof password !== 'string' || password.length < 8) {
-        return jsonResponse({ success: false, error: 'Valid email and secure password (min 8 characters) are required.' }, 400, {}, request, env);
+      if (!email || !password || typeof password !== 'string' || password.length < 6) {
+        return jsonResponse({ success: false, error: 'Valid email and secure password (min 6 characters) are required.' }, 400, {}, request, env);
       }
       if (email.length > 254 || (displayName && displayName.length > 100)) {
         return jsonResponse({ success: false, error: 'Input exceeds maximum allowed length.' }, 400, {}, request, env);
