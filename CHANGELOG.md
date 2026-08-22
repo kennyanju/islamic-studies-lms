@@ -4,7 +4,14 @@ All notable changes to the **Islamic Studies Family LMS** will be documented in 
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
----
+## [1.1.0] - 2026-08-22
+
+### 🎨 Added
+- **Level 1 (~10y) Playful Comic Card Deck**: Transformed dense markdown text into an engaging, illustrated story card deck with topic-based emoji mascots (🌟, 🪽, 📖, 📜, 💧, 🕌, 🌙, 🪙, 🌸), tactile golden Arabic term badges, and "💡 Key Discovery" callout speech bubbles.
+- **Child-Friendly Collapsible Details**: Integrated smooth "Explore More Details 👇" expandable accordions on cards to keep text bite-sized and approachable for 10-year-olds without losing any educational depth.
+- **Fast Jump Card Navigation**: Added quick-access pill navigation in the quest hero header to let learners jump to any story card instantly.
+- **Gamified Interactive Quiz Engine**: Overhauled Level 1 multiple choice options with large tactile buttons, vibrant letter badges (A/B/C/D), interactive word bank token chips for fill-in-the-blanks, and child-friendly reflection prompts.
+- **Celebratory Confetti Showers**: Integrated `canvas-confetti` (with offline fallback engine) triggering celebratory confetti showers on passed exams and correct answers.
 
 ## [1.0.1] - 2026-08-22
 

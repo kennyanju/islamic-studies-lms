@@ -805,6 +805,478 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  // --------------------------------------------------------------------------
+  // Confetti Animation Engine (Canvas-Confetti with Offline DOM Fallback)
+  // --------------------------------------------------------------------------
+  function triggerConfetti(options = {}) {
+    if (typeof window.confetti === 'function') {
+      try {
+        window.confetti({
+          particleCount: options.particleCount || 60,
+          spread: options.spread || 70,
+          origin: options.origin || { y: 0.6 },
+          colors: options.colors || [
+            '#059669',
+            '#10b981',
+            '#f59e0b',
+            '#d97706',
+            '#3b82f6',
+            '#8b5cf6',
+            '#ec4899',
+            '#14b8a6'
+          ]
+        });
+        return;
+      } catch (e) {
+        console.warn('Canvas confetti error, using fallback:', e);
+      }
+    }
+
+    // Lightweight DOM Fallback
+    const count = options.particleCount || 30;
+    const container = document.createElement('div');
+    container.className = 'confetti-fallback-container';
+    container.style.cssText =
+      'position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;z-index:9999;overflow:hidden;';
+    document.body.appendChild(container);
+
+    const colors = [
+      '#059669',
+      '#10b981',
+      '#f59e0b',
+      '#3b82f6',
+      '#8b5cf6',
+      '#ec4899',
+      '#f43f5e',
+      '#14b8a6'
+    ];
+    for (let i = 0; i < count; i++) {
+      const p = document.createElement('div');
+      const size = Math.random() * 8 + 6;
+      const color = colors[Math.floor(Math.random() * colors.length)];
+      p.style.cssText = `
+        position: absolute;
+        width: ${size}px;
+        height: ${size * (Math.random() > 0.5 ? 1 : 1.6)}px;
+        background: ${color};
+        border-radius: ${Math.random() > 0.5 ? '50%' : '2px'};
+        left: ${Math.random() * 100}vw;
+        top: -20px;
+        opacity: 1;
+        transform: rotate(${Math.random() * 360}deg);
+        transition: transform 2.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), top 2.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 2.5s ease-out;
+      `;
+      container.appendChild(p);
+
+      setTimeout(() => {
+        p.style.top = `${window.innerHeight + 20}px`;
+        p.style.transform = `rotate(${Math.random() * 720}deg) translateX(${(Math.random() - 0.5) * 150}px)`;
+        p.style.opacity = '0';
+      }, 20);
+    }
+
+    setTimeout(() => {
+      if (container.parentNode) container.parentNode.removeChild(container);
+    }, 3000);
+  }
+
+  // --------------------------------------------------------------------------
+  // Level 1 (~10y) Playful Comic Card Renderer & Theming
+  // --------------------------------------------------------------------------
+  function detectCardTheme(title = '', rawContent = '') {
+    const t = (title || '').toLowerCase();
+    const c = (rawContent || '').toLowerCase();
+
+    function match(k) {
+      return t.includes(k) || (t.length < 5 && c.includes(k));
+    }
+
+    if (match('screen') || match('digital') || match('social media') || match('internet')) {
+      return { emoji: '📱', theme: 'theme-sky', label: 'Mindful Tech & Screen' };
+    }
+    if (match('neighbor') || match('40-house')) {
+      return { emoji: '🏘️', theme: 'theme-teal', label: 'Kind Neighbors' };
+    }
+    if (match('parent') || match('family') || match('first circle')) {
+      return { emoji: '🏡', theme: 'theme-coral', label: 'Family & Respect' };
+    }
+    if (match('friend') || match('peer pressure') || match('company')) {
+      return { emoji: '🤝', theme: 'theme-amber', label: 'True Friends & Companions' };
+    }
+    if (match('hajj') || match('umrah') || match("ka'bah") || match('kaaba')) {
+      return { emoji: '🕋', theme: 'theme-gold', label: "Sacred Ka'bah & Hajj" };
+    }
+    if (
+      match('who is allah') ||
+      match('names of allah') ||
+      match('names of mercy') ||
+      match('tawhid') ||
+      match('transcendence') ||
+      match('what is allah like')
+    ) {
+      return { emoji: '🌟', theme: 'theme-gold', label: 'Who is Allah? (Tawhid)' };
+    }
+    if (
+      match('angel') ||
+      match('jibril') ||
+      match('unseen companion') ||
+      match('creations of light')
+    ) {
+      return { emoji: '🪽', theme: 'theme-sky', label: 'Angels of Light' };
+    }
+    if (
+      match('quran') ||
+      match('holy book') ||
+      match('tafseer') ||
+      match('surah') ||
+      match('hadith') ||
+      match('sunnah') ||
+      match('madhhab')
+    ) {
+      return { emoji: '📖', theme: 'theme-emerald', label: 'Holy Quran & Sunnah' };
+    }
+    if (
+      match('seerah') ||
+      match('prophet') ||
+      match('makkah') ||
+      match('madinah') ||
+      match('khadijah') ||
+      match('badr') ||
+      match('uhud') ||
+      match('caliph') ||
+      match('farewell') ||
+      match('sunset of prophet')
+    ) {
+      return { emoji: '📜', theme: 'theme-amber', label: 'Noble Seerah & Heroes' };
+    }
+    if (
+      match('wudu') ||
+      match('ablution') ||
+      match('water') ||
+      match('taharah') ||
+      match('purity') ||
+      match('ghusl') ||
+      match('tayammum')
+    ) {
+      return { emoji: '💧', theme: 'theme-teal', label: 'Purity & Taharah' };
+    }
+    if (
+      match('salah') ||
+      match('prayer') ||
+      match('mosque') ||
+      match('masjid') ||
+      match('imam malik') ||
+      match('sujud') ||
+      match('standing in prayer') ||
+      match('fiqh corner')
+    ) {
+      return { emoji: '🕌', theme: 'theme-emerald', label: 'Salah & Prayer' };
+    }
+    if (
+      match('fast') ||
+      match('ramadan') ||
+      match('sawm') ||
+      match('moon sighting') ||
+      match('breaks the fast')
+    ) {
+      return { emoji: '🌙', theme: 'theme-purple', label: 'Ramadan & Fasting' };
+    }
+    if (match('eid')) {
+      return { emoji: '🎉', theme: 'theme-purple', label: 'Joyous Eid Day' };
+    }
+    if (
+      match('zakah') ||
+      match('zakat') ||
+      match('charity') ||
+      match('sadaqah') ||
+      match('fitr') ||
+      match('purifying our money') ||
+      match('wealth') ||
+      match('marketplace')
+    ) {
+      return { emoji: '🪙', theme: 'theme-gold', label: 'Zakah, Sadaqah & Wealth' };
+    }
+    if (
+      match('qadar') ||
+      match('destiny') ||
+      match('choices') ||
+      match('justice') ||
+      match('fairness') ||
+      match('scale') ||
+      match('being responsible')
+    ) {
+      return { emoji: '⚖️', theme: 'theme-violet', label: 'Qadar & Good Choices' };
+    }
+    if (
+      match('iman') ||
+      match('pillar') ||
+      match('faith') ||
+      match('creed') ||
+      match('belief') ||
+      match('niyyah') ||
+      match('intention')
+    ) {
+      return { emoji: '💖', theme: 'theme-coral', label: 'Pillars of Faith & Heart' };
+    }
+    if (
+      match('halal') ||
+      match('haram') ||
+      match('modesty') ||
+      match('haya') ||
+      match('character') ||
+      match('akhlaq') ||
+      match('manner') ||
+      match("muru'ah") ||
+      match('jewels')
+    ) {
+      return { emoji: '🌸', theme: 'theme-coral', label: 'Akhlaq & Beautiful Character' };
+    }
+    if (
+      match('reflection') ||
+      match('challenge') ||
+      match('action') ||
+      match('question') ||
+      match('think')
+    ) {
+      return { emoji: '🎯', theme: 'theme-violet', label: 'Scholar Reflection Quest' };
+    }
+    if (
+      match('source') ||
+      match('reference') ||
+      match('bibliography') ||
+      match('glossary') ||
+      match('table of contents')
+    ) {
+      return { emoji: '📚', theme: 'theme-slate', label: 'Knowledge Guide' };
+    }
+    return { emoji: '💡', theme: 'theme-emerald', label: 'Young Scholar Discovery' };
+  }
+
+  function extractKeyTakeaway(sectionMd) {
+    if (!sectionMd) return null;
+    const quoteMatch = sectionMd.match(/^>\s*(.+)/m);
+    if (quoteMatch && quoteMatch[1].trim().length > 10) {
+      return quoteMatch[1].replace(/[*_#]/g, '').trim();
+    }
+    const italicQuote = sectionMd.match(/[*_][“\"]([^”\"\n]{10,140})[”\"][*_]/);
+    if (italicQuote) {
+      return italicQuote[1].trim();
+    }
+    const boldMatches = sectionMd.matchAll(/\*\*([^*]{10,120})\*\*/g);
+    for (const m of boldMatches) {
+      const text = m[1].trim();
+      if (
+        !text.startsWith('Age Group') &&
+        !text.startsWith('Topics') &&
+        !text.startsWith('Theological Guidance') &&
+        !text.startsWith('Level:')
+      ) {
+        return text;
+      }
+    }
+    return null;
+  }
+
+  function highlightArabicInHtml(rawHtml) {
+    if (!rawHtml) return '';
+    return rawHtml.replace(
+      /\(([\u0600-\u06FF\s]+)\)/g,
+      '<span class="comic-arabic-pill">($1)</span>'
+    );
+  }
+
+  function renderLevel1Handout(md, mod) {
+    if (!md) {
+      handoutContent.innerHTML = '<p>No content available.</p>';
+      return;
+    }
+
+    // Split markdown by ## headings
+    const rawSections = md.split(/(?=^##\s+)/m).filter((s) => s.trim().length > 0);
+
+    // Filter out purely header-only stubs
+    const validSections = rawSections.filter((s) => {
+      const isJustStub = s.trim().startsWith('#') && !s.includes('##') && s.length < 150;
+      return !isJustStub;
+    });
+
+    const sections = validSections.length > 0 ? validSections : [md];
+    const totalCards = sections.length;
+
+    // 1. Top Playful Intro Hero
+    let jumpButtonsHtml = '';
+    sections.forEach((sec, idx) => {
+      const headingMatch = sec.match(/^##\s+(.*)/m);
+      const rawTitle = headingMatch ? headingMatch[1].trim() : `Card ${idx + 1}`;
+      const cleanTitle = rawTitle
+        .replace(/^(Page|Chapter)\s+\d+:\s*/i, '')
+        .replace(/^Student (Handout|Guide).*/i, 'Overview')
+        .trim();
+      const theme = detectCardTheme(cleanTitle, sec);
+      jumpButtonsHtml += `
+        <button type="button" class="comic-jump-btn" data-target="comic-card-${idx}">
+          ${theme.emoji} ${idx + 1}. ${escapeHtml(cleanTitle.substring(0, 20))}${cleanTitle.length > 20 ? '...' : ''}
+        </button>
+      `;
+    });
+
+    const heroHtml = `
+      <div class="comic-intro-hero">
+        <div class="comic-intro-hero-content">
+          <div class="comic-mascot-avatar" aria-hidden="true">🦁</div>
+          <div class="comic-intro-text">
+            <div class="comic-intro-badge">
+              <i class="fa-solid fa-sparkles"></i> Level 1 Scholar Quest (~10y)
+            </div>
+            <h2 class="comic-intro-title">${escapeHtml(mod.title || 'Islamic Studies Quest')}</h2>
+            <p class="comic-intro-desc">${escapeHtml(mod.description || 'Embark on an illustrated adventure of faith, character, and learning!')}</p>
+            <div class="comic-stats-bar">
+              <span class="comic-stat-pill"><i class="fa-solid fa-clock" style="color:#fbbf24;"></i> ${mod.estTime || '10 mins read'}</span>
+              <span class="comic-stat-pill"><i class="fa-solid fa-layer-group" style="color:#34d399;"></i> ${totalCards} Story Cards</span>
+              <span class="comic-stat-pill"><i class="fa-solid fa-trophy" style="color:#f472b6;"></i> Certificate Ready</span>
+            </div>
+          </div>
+        </div>
+        <div class="comic-jump-pills" aria-label="Fast card navigation">
+          ${jumpButtonsHtml}
+        </div>
+      </div>
+    `;
+
+    // 2. Render Cards Deck
+    let cardsHtml = '';
+    sections.forEach((sec, idx) => {
+      const headingMatch = sec.match(/^##\s+(.*)/m);
+      const rawTitle = headingMatch ? headingMatch[1].trim() : `Card ${idx + 1}`;
+      const cleanTitle = rawTitle
+        .replace(/^(Page|Chapter)\s+\d+:\s*/i, '')
+        .replace(/^Student (Handout|Guide).*/i, 'Welcome & Overview')
+        .trim();
+
+      const theme = detectCardTheme(cleanTitle, sec);
+      const takeaway = extractKeyTakeaway(sec);
+
+      // Strip heading from body
+      const bodyMd = sec.replace(/^##\s+.*$/m, '').trim();
+
+      // Render markdown for body
+      let bodyHtml = renderMarkdown(bodyMd);
+      bodyHtml = highlightArabicInHtml(bodyHtml);
+
+      // Split into preview & collapsible details if content is large
+      const parserDiv = document.createElement('div');
+      parserDiv.innerHTML = bodyHtml;
+      const childNodes = Array.from(parserDiv.children);
+
+      let immediateHtml = '';
+      let expandableHtml = '';
+      let hasExpandable = false;
+
+      if (childNodes.length > 3) {
+        hasExpandable = true;
+        const immediateElements = childNodes.slice(0, 2);
+        const expandableElements = childNodes.slice(2);
+        immediateHtml = immediateElements.map((el) => el.outerHTML).join('');
+        expandableHtml = expandableElements.map((el) => el.outerHTML).join('');
+      } else {
+        immediateHtml = bodyHtml;
+      }
+
+      let calloutHtml = '';
+      if (takeaway) {
+        calloutHtml = `
+          <div class="comic-callout-bubble" role="note">
+            <div class="comic-callout-icon" aria-hidden="true">💡</div>
+            <div class="comic-callout-text"><strong>Key Discovery:</strong> ${escapeHtml(takeaway)}</div>
+          </div>
+        `;
+      }
+
+      let expandBtnHtml = '';
+      if (hasExpandable) {
+        expandBtnHtml = `
+          <div class="comic-expand-container collapsed" id="expand_card_${idx}">
+            ${expandableHtml}
+          </div>
+          <button type="button" class="comic-expand-btn" data-expand-target="expand_card_${idx}" aria-expanded="false">
+            <span>Explore More Details</span> <i class="fa-solid fa-chevron-down"></i>
+          </button>
+        `;
+      }
+
+      cardsHtml += `
+        <article class="comic-card ${theme.theme}" id="comic-card-${idx}" aria-labelledby="card_title_${idx}">
+          <header class="comic-card-header">
+            <div class="comic-card-icon-wrap" aria-hidden="true">
+              ${theme.emoji}
+            </div>
+            <div class="comic-card-title-group">
+              <div class="comic-card-meta">
+                <span class="comic-card-num-pill">Card ${idx + 1} of ${totalCards}</span>
+                <span class="comic-card-topic-pill">${escapeHtml(theme.label)}</span>
+              </div>
+              <h3 class="comic-card-title" id="card_title_${idx}">${escapeHtml(cleanTitle)}</h3>
+            </div>
+          </header>
+
+          ${calloutHtml}
+
+          <div class="comic-card-body">
+            ${immediateHtml}
+            ${expandBtnHtml}
+          </div>
+        </article>
+      `;
+    });
+
+    handoutContent.innerHTML = `
+      <div class="level1-handout-container">
+        ${heroHtml}
+        <div class="comic-cards-deck">
+          ${cardsHtml}
+        </div>
+      </div>
+    `;
+
+    // 3. Attach interactive listeners for expand/collapse and jump navigation
+    const expandBtns = handoutContent.querySelectorAll('.comic-expand-btn');
+    expandBtns.forEach((btn) => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetId = btn.dataset.expandTarget;
+        const targetEl = document.getElementById(targetId);
+        if (!targetEl) return;
+
+        const isExpanded = targetEl.classList.contains('expanded');
+        if (isExpanded) {
+          targetEl.classList.remove('expanded');
+          targetEl.classList.add('collapsed');
+          btn.classList.remove('active');
+          btn.setAttribute('aria-expanded', 'false');
+          btn.querySelector('span').textContent = 'Explore More Details';
+        } else {
+          targetEl.classList.remove('collapsed');
+          targetEl.classList.add('expanded');
+          btn.classList.add('active');
+          btn.setAttribute('aria-expanded', 'true');
+          btn.querySelector('span').textContent = 'Show Less';
+        }
+      });
+    });
+
+    const jumpBtns = handoutContent.querySelectorAll('.comic-jump-btn');
+    jumpBtns.forEach((btn) => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetId = btn.dataset.target;
+        const targetEl = document.getElementById(targetId);
+        if (targetEl) {
+          targetEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      });
+    });
+  }
+
   function renderHandout(mod) {
     if (!mod || !mod.tracks) {
       handoutContent.innerHTML = '<p>Loading module content...</p>';
@@ -812,9 +1284,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     const tracks = mod.tracks || {};
     const trackObj = activeTrack === 'level2' ? tracks.level2 : tracks.level1;
-    let md = trackObj ? trackObj.handoutMd : null;
+    const md = trackObj ? trackObj.handoutMd : null;
     if (md) {
-      handoutContent.innerHTML = renderMarkdown(md);
+      if (activeTrack === 'level1') {
+        renderLevel1Handout(md, mod);
+      } else {
+        handoutContent.innerHTML = renderMarkdown(md);
+      }
     } else {
       handoutContent.innerHTML = `<pre>${escapeHtml(md || 'No handout content available.')}</pre>`;
     }
@@ -1207,6 +1683,9 @@ document.addEventListener('DOMContentLoaded', () => {
     quizScoreBanner.style.display = 'none';
     quizQuestionsArea.innerHTML = '';
 
+    const isLevel1 = activeTrack === 'level1';
+    quizQuestionsArea.classList.toggle('level1-quiz-mode', isLevel1);
+
     if (!mod || !mod.tracks) {
       quizQuestionsArea.innerHTML = '<p>No questions available for this module track.</p>';
       submitQuizBtn.style.display = 'none';
@@ -1237,7 +1716,9 @@ document.addEventListener('DOMContentLoaded', () => {
     if (pq.multipleChoice.length > 0) {
       const mcqSection = document.createElement('div');
       mcqSection.className = 'quiz-card';
-      mcqSection.innerHTML = `<h3><i class="fa-solid fa-list-check"></i> Multiple Choice Questions</h3>`;
+      mcqSection.innerHTML = isLevel1
+        ? `<h3><i class="fa-solid fa-gamepad" style="color:var(--emerald-primary);"></i> 🌟 Module Quest Quiz (${pq.multipleChoice.length} Questions)</h3>`
+        : `<h3><i class="fa-solid fa-list-check"></i> Multiple Choice Questions</h3>`;
 
       pq.multipleChoice.forEach((q, idx) => {
         const qBox = document.createElement('div');
@@ -1249,7 +1730,11 @@ document.addEventListener('DOMContentLoaded', () => {
         q.options.forEach((opt) => {
           optsHtml += `
             <button type="button" class="opt-btn" data-qid="${q.id}" data-opt="${opt.key}">
-              <span class="opt-key" style="font-weight:700;">${opt.key})</span>
+              ${
+                isLevel1
+                  ? `<span class="opt-key-badge key-${opt.key}">${opt.key}</span>`
+                  : `<span class="opt-key" style="font-weight:700;">${opt.key})</span>`
+              }
               <span>${opt.text}</span>
             </button>
           `;
@@ -1286,7 +1771,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
       let wordBankHtml = '';
       if (pq.fillBlanks[0] && pq.fillBlanks[0].wordBank.length > 0) {
-        wordBankHtml = `<div style="background:var(--input-bg);padding:12px;border-radius:var(--radius-sm);margin-bottom:16px;"><strong>Word Bank:</strong> ${pq.fillBlanks[0].wordBank.map((w) => `<span style="background:var(--card-bg);padding:2px 8px;margin:2px;border-radius:4px;display:inline-block;font-size:0.85rem;">${w}</span>`).join(' ')}</div>`;
+        if (isLevel1) {
+          wordBankHtml = `
+            <div class="level1-wordbank-container">
+              <span style="font-weight:700;font-size:0.9rem;margin-right:4px;"><i class="fa-solid fa-wand-magic-sparkles" style="color:#f59e0b;"></i> Word Bank (Click to fill):</span>
+              ${pq.fillBlanks[0].wordBank
+                .map(
+                  (w) =>
+                    `<button type="button" class="level1-wordbank-chip">${escapeHtml(w)}</button>`
+                )
+                .join(' ')}
+            </div>
+          `;
+        } else {
+          wordBankHtml = `<div style="background:var(--input-bg);padding:12px;border-radius:var(--radius-sm);margin-bottom:16px;"><strong>Word Bank:</strong> ${pq.fillBlanks[0].wordBank.map((w) => `<span style="background:var(--card-bg);padding:2px 8px;margin:2px;border-radius:4px;display:inline-block;font-size:0.85rem;">${w}</span>`).join(' ')}</div>`;
+        }
       }
 
       let fibLinesHtml = '';
@@ -1304,6 +1803,29 @@ document.addEventListener('DOMContentLoaded', () => {
         <div>${fibLinesHtml}</div>
       `;
 
+      if (isLevel1) {
+        const chips = fibSection.querySelectorAll('.level1-wordbank-chip');
+        chips.forEach((chip) => {
+          chip.addEventListener('click', () => {
+            const word = chip.textContent.trim();
+            const inputs = fibSection.querySelectorAll('.fib-input');
+            let filled = false;
+            for (const input of inputs) {
+              if (!input.value.trim()) {
+                input.value = word;
+                input.focus();
+                filled = true;
+                break;
+              }
+            }
+            if (!filled && inputs.length > 0) {
+              inputs[0].value = word;
+              inputs[0].focus();
+            }
+          });
+        });
+      }
+
       quizQuestionsArea.appendChild(fibSection);
     }
 
@@ -1311,7 +1833,9 @@ document.addEventListener('DOMContentLoaded', () => {
       const refSection = document.createElement('div');
       refSection.className = 'quiz-card';
       refSection.style.marginTop = '24px';
-      refSection.innerHTML = `<h3><i class="fa-solid fa-comment-dots"></i> Reflection & Short Answer</h3>`;
+      refSection.innerHTML = isLevel1
+        ? `<h3><i class="fa-solid fa-feather-pointed" style="color:#a855f7;"></i> ✍️ Young Scholar Reflection</h3>`
+        : `<h3><i class="fa-solid fa-comment-dots"></i> Reflection & Short Answer</h3>`;
 
       pq.reflection.forEach((ref) => {
         const item = document.createElement('div');
@@ -1322,7 +1846,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         item.innerHTML = `
           <p><strong>${ref.id}. ${ref.question}</strong></p>
-          <textarea class="reflection-input" data-refkey="${saveKey}" placeholder="Write your thoughts or response here...">${savedText}</textarea>
+          <textarea class="reflection-input" data-refkey="${saveKey}" placeholder="${isLevel1 ? 'Write your thoughts or story here...' : 'Write your thoughts or response here...'}">${savedText}</textarea>
         `;
 
         const ta = item.querySelector('textarea');
@@ -1493,6 +2017,11 @@ document.addEventListener('DOMContentLoaded', () => {
         persistModuleProgress(activeModuleId, true, activeTrack);
         renderSidebarModules();
         updateProgressUI();
+
+        // Celebratory Confetti Shower
+        triggerConfetti({ particleCount: 90, spread: 80 });
+        setTimeout(() => triggerConfetti({ particleCount: 50, spread: 100 }), 450);
+
         showToast(
           'MashaAllah! Exam Passed 🏆',
           `You scored ${data.percentage}% on Module ${activeModuleId}! Certificate unlocked.`,
