@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "commonjs",
+    "allowJs": true,
+    "checkJs": false,
+    "strict": false,
+    "moduleResolution": "node",
+    "baseUrl": "./"
+  },
+  "include": [
+    "server.js",
+    "compile.js",
+    "worker.js",
+    "lib/**/*",
+    "public/**/*.js",
+    "functions/**/*",
+    "tests/**/*"
+  ],
+  "exclude": ["node_modules", "coverage", ".wrangler"]
+}

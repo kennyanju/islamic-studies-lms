@@ -50,7 +50,7 @@ describe('Super Admin Access & Management Tests', () => {
     expect(res.statusCode).toBe(200);
     expect(res.body.success).toBe(true);
     expect(Array.isArray(res.body.users)).toBe(true);
-    const target = res.body.users.find(u => u.uid === targetParentUid);
+    const target = res.body.users.find((u) => u.uid === targetParentUid);
     expect(target).toBeDefined();
     expect(target.email).toContain('parent_admin_test_');
   });
@@ -71,8 +71,7 @@ describe('Super Admin Access & Management Tests', () => {
     expect(res.body.success).toBe(true);
 
     const checkRes = await adminAgent.get('/api/admin/users');
-    const target = checkRes.body.users.find(u => u.uid === targetParentUid);
+    const target = checkRes.body.users.find((u) => u.uid === targetParentUid);
     expect(target).toBeUndefined();
   });
 });
-

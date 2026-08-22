@@ -3,7 +3,6 @@
    ========================================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
-  
   // App State
   let courseData = null;
   let activeModuleId = null;
@@ -16,9 +15,15 @@ document.addEventListener('DOMContentLoaded', () => {
   let autoScrollInterval = null;
 
   let activeChild = JSON.parse(localStorage.getItem('lms_active_child') || 'null');
-  let userProgress = JSON.parse(localStorage.getItem(`lms_progress_${activeChild ? activeChild.id : 'global'}`) || '{}');
-  let quizScores = JSON.parse(localStorage.getItem(`lms_quiz_scores_${activeChild ? activeChild.id : 'global'}`) || '{}');
-  let userReflections = JSON.parse(localStorage.getItem(`lms_reflections_${activeChild ? activeChild.id : 'global'}`) || '{}');
+  let userProgress = JSON.parse(
+    localStorage.getItem(`lms_progress_${activeChild ? activeChild.id : 'global'}`) || '{}'
+  );
+  let quizScores = JSON.parse(
+    localStorage.getItem(`lms_quiz_scores_${activeChild ? activeChild.id : 'global'}`) || '{}'
+  );
+  let userReflections = JSON.parse(
+    localStorage.getItem(`lms_reflections_${activeChild ? activeChild.id : 'global'}`) || '{}'
+  );
 
   // DOM Elements
   const themeToggleBtn = document.getElementById('themeToggleBtn');
@@ -37,7 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const modulesList = document.getElementById('modulesList');
   const modulesGrid = document.getElementById('modulesGrid');
   const categoryFilters = document.getElementById('categoryFilters');
-  
+
   const progressPercent = document.getElementById('progressPercent');
   const progressBarFill = document.getElementById('progressBarFill');
   const progressSubtext = document.getElementById('progressSubtext');
@@ -122,12 +127,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const nextSlideBtn = document.getElementById('nextSlideBtn');
   const slideCounter = document.getElementById('slideCounter');
   const fullscreenSlidesBtn = document.getElementById('fullscreenSlidesBtn');
-  
+
   const voiceScriptContent = document.getElementById('voiceScriptContent');
 
   if (window.marked) {
     const renderer = new marked.Renderer();
-    renderer.image = function(href, title, text) {
+    renderer.image = function (href, title, text) {
       return `<img src="${href}" alt="${text || ''}" title="${title || ''}" loading="lazy" decoding="async" class="responsive-img" />`;
     };
     marked.setOptions({
@@ -176,7 +181,9 @@ document.addEventListener('DOMContentLoaded', () => {
         focusTarget = modalEl.querySelector(initialFocusSelector);
       }
       if (!focusTarget) {
-        focusTarget = modalEl.querySelector('input:not([type="hidden"]):not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), [tabindex="0"]');
+        focusTarget = modalEl.querySelector(
+          'input:not([type="hidden"]):not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), [tabindex="0"]'
+        );
       }
       if (focusTarget) {
         focusTarget.focus();
@@ -195,9 +202,13 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         if (e.key === 'Tab') {
-          const focusable = Array.from(modalEl.querySelectorAll(
-            'button:not([disabled]), [href], input:not([type="hidden"]):not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
-          )).filter(el => el.offsetWidth > 0 || el.offsetHeight > 0 || el === document.activeElement);
+          const focusable = Array.from(
+            modalEl.querySelectorAll(
+              'button:not([disabled]), [href], input:not([type="hidden"]):not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+            )
+          ).filter(
+            (el) => el.offsetWidth > 0 || el.offsetHeight > 0 || el === document.activeElement
+          );
 
           if (focusable.length === 0) return;
 
@@ -225,7 +236,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!modalEl) return;
     modalEl.classList.remove('is-open');
     modalEl.setAttribute('aria-hidden', 'true');
-    
+
     if (modalEl._trapKeyHandler) {
       modalEl.removeEventListener('keydown', modalEl._trapKeyHandler);
       modalEl._trapKeyHandler = null;
@@ -235,7 +246,11 @@ document.addEventListener('DOMContentLoaded', () => {
       currentlyOpenModal = null;
     }
 
-    if (restoreFocus && modalEl._previouslyFocusedElement && typeof modalEl._previouslyFocusedElement.focus === 'function') {
+    if (
+      restoreFocus &&
+      modalEl._previouslyFocusedElement &&
+      typeof modalEl._previouslyFocusedElement.focus === 'function'
+    ) {
       try {
         modalEl._previouslyFocusedElement.focus();
       } catch (err) {}
@@ -247,7 +262,14 @@ document.addEventListener('DOMContentLoaded', () => {
   // --------------------------------------------------------------------------
   const toastContainer = document.getElementById('toastContainer');
 
-  function showToast(title, message, type = 'success', duration = 4500, actionCallback = null, actionLabel = 'Retry') {
+  function showToast(
+    title,
+    message,
+    type = 'success',
+    duration = 4500,
+    actionCallback = null,
+    actionLabel = 'Retry'
+  ) {
     if (!toastContainer) return;
 
     const toast = document.createElement('div');
@@ -318,14 +340,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Fallback to full course_data.json or API
     fetch('/course_data.json')
-      .then(r => r.json())
-      .then(data => {
+      .then((r) => r.json())
+      .then((data) => {
         courseData = data;
         initApp();
       })
-      .catch(e => {
+      .catch((e) => {
         console.error('Fatal: Could not load course data', e);
-        showToast('Loading Error', 'Failed to load course curriculum data.', 'error', 0, () => loadCourseData(), 'Retry Loading');
+        showToast(
+          'Loading Error',
+          'Failed to load course curriculum data.',
+          'error',
+          0,
+          () => loadCourseData(),
+          'Retry Loading'
+        );
       });
   }
   loadCourseData();
@@ -379,7 +408,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function setupTrackButtons() {
     updateTrackActiveBtn();
 
-    [trackL1, trackL2, trackTeacher].forEach(btn => {
+    [trackL1, trackL2, trackTeacher].forEach((btn) => {
       btn.addEventListener('click', () => {
         switchTrack(btn.dataset.track);
       });
@@ -387,7 +416,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function updateTrackActiveBtn() {
-    [trackL1, trackL2, trackTeacher].forEach(btn => {
+    [trackL1, trackL2, trackTeacher].forEach((btn) => {
       btn.classList.toggle('active', btn.dataset.track === activeTrack);
     });
   }
@@ -395,9 +424,9 @@ document.addEventListener('DOMContentLoaded', () => {
   function setupCategoryFilters() {
     if (!categoryFilters) return;
     const pills = categoryFilters.querySelectorAll('.filter-pill');
-    pills.forEach(pill => {
+    pills.forEach((pill) => {
       pill.addEventListener('click', () => {
-        pills.forEach(p => p.classList.remove('active'));
+        pills.forEach((p) => p.classList.remove('active'));
         pill.classList.add('active');
         activeCategoryFilter = pill.dataset.cat;
         renderDashboard();
@@ -407,7 +436,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function renderSidebarModules() {
     modulesList.innerHTML = '';
-    courseData.modules.forEach(mod => {
+    courseData.modules.forEach((mod) => {
       const isCompleted = userProgress[`mod_${mod.id}`];
       const li = document.createElement('li');
       li.className = `module-nav-item ${activeModuleId === mod.id ? 'active' : ''} ${isCompleted ? 'completed' : ''}`;
@@ -449,10 +478,14 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if (learnerHeroBanner) {
-      learnerHeroBanner.className = `hero-banner ${isL2 ? 'level2-hero' : (isTeacher ? 'admin-hero' : 'level1-hero')}`;
+      learnerHeroBanner.className = `hero-banner ${isL2 ? 'level2-hero' : isTeacher ? 'admin-hero' : 'level1-hero'}`;
     }
 
-    const learnerName = activeChild ? activeChild.name : (currentUser ? (currentUser.displayName || 'Family Learner') : 'Guest Explorer');
+    const learnerName = activeChild
+      ? activeChild.name
+      : currentUser
+        ? currentUser.displayName || 'Family Learner'
+        : 'Guest Explorer';
     const learnerAvatar = activeChild ? activeChild.avatar : '🌟';
 
     if (learnerAvatarBadge) {
@@ -495,30 +528,45 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // 2. Compute Progress for Active Child / User
-    const localProg = JSON.parse(localStorage.getItem(`lms_progress_${activeChild ? activeChild.id : 'global'}`) || '{}');
-    const localScores = JSON.parse(localStorage.getItem(`lms_quiz_scores_${activeChild ? activeChild.id : 'global'}`) || '{}');
-    const childProgKey = activeChild ? `child_${activeChild.id}` : (currentUser ? `user_${currentUser.uid}` : 'guest');
+    const localProg = JSON.parse(
+      localStorage.getItem(`lms_progress_${activeChild ? activeChild.id : 'global'}`) || '{}'
+    );
+    const localScores = JSON.parse(
+      localStorage.getItem(`lms_quiz_scores_${activeChild ? activeChild.id : 'global'}`) || '{}'
+    );
+    const childProgKey = activeChild
+      ? `child_${activeChild.id}`
+      : currentUser
+        ? `user_${currentUser.uid}`
+        : 'guest';
     const activeProgMap = localProg[childProgKey] || userProgress || {};
 
     let completedCount = 0;
-    courseData.modules.forEach(m => {
+    courseData.modules.forEach((m) => {
       if (activeProgMap[`mod_${m.id}`] || userProgress[`mod_${m.id}`]) completedCount++;
     });
 
     const scoreKeys = Object.keys(localScores);
     let avgQuizScore = 0;
     if (scoreKeys.length > 0) {
-      const sum = scoreKeys.reduce((acc, k) => acc + (localScores[k].percentage || localScores[k].score || 0), 0);
+      const sum = scoreKeys.reduce(
+        (acc, k) => acc + (localScores[k].percentage || localScores[k].score || 0),
+        0
+      );
       avgQuizScore = Math.round(sum / scoreKeys.length);
     } else if (completedCount > 0) {
       avgQuizScore = 90;
     }
 
     if (learnerStatCompleted) learnerStatCompleted.textContent = `${completedCount} / 9`;
-    if (learnerStatAvgQuiz) learnerStatAvgQuiz.textContent = avgQuizScore > 0 ? `${avgQuizScore}%` : '0%';
-    if (learnerStatStreak) learnerStatStreak.textContent = completedCount > 0 ? `${Math.min(completedCount + 1, 7)} Days` : '1 Day';
+    if (learnerStatAvgQuiz)
+      learnerStatAvgQuiz.textContent = avgQuizScore > 0 ? `${avgQuizScore}%` : '0%';
+    if (learnerStatStreak)
+      learnerStatStreak.textContent =
+        completedCount > 0 ? `${Math.min(completedCount + 1, 7)} Days` : '1 Day';
     if (learnerStatCert) {
-      learnerStatCert.textContent = completedCount >= 9 ? '🎉 Earned!' : (completedCount > 0 ? 'In Progress' : 'Not Started');
+      learnerStatCert.textContent =
+        completedCount >= 9 ? '🎉 Earned!' : completedCount > 0 ? 'In Progress' : 'Not Started';
     }
 
     // 3. Recommended Next Lesson Spotlight
@@ -531,11 +579,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const nextActionQuizBtn = document.getElementById('nextActionQuizBtn');
 
     // Find first uncompleted module
-    let nextMod = courseData.modules.find(m => !(activeProgMap[`mod_${m.id}`] || userProgress[`mod_${m.id}`]));
+    let nextMod = courseData.modules.find(
+      (m) => !(activeProgMap[`mod_${m.id}`] || userProgress[`mod_${m.id}`])
+    );
     if (!nextMod) nextMod = courseData.modules[0]; // fallback to first if all completed
 
     if (nextActionCard && nextMod) {
-      if (nextActionIcon) nextActionIcon.innerHTML = `<i class="fa-solid ${nextMod.icon || 'fa-book'}"></i>`;
+      if (nextActionIcon)
+        nextActionIcon.innerHTML = `<i class="fa-solid ${nextMod.icon || 'fa-book'}"></i>`;
       if (nextActionTitle) nextActionTitle.textContent = `Module ${nextMod.id}: ${nextMod.title}`;
       if (nextActionDesc) nextActionDesc.textContent = nextMod.description;
       if (nextActionBadge) {
@@ -561,23 +612,25 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // 5. Render Filtered Modules Grid
-    const filteredMods = courseData.modules.filter(mod => {
+    const filteredMods = courseData.modules.filter((mod) => {
       if (activeCategoryFilter === 'all') return true;
       const cat = mod.category.toLowerCase();
       if (activeCategoryFilter === 'aqidah') return cat.includes('aqidah');
       if (activeCategoryFilter === 'fiqh') return cat.includes('fiqh');
       if (activeCategoryFilter === 'seerah') return cat.includes('seerah');
-      if (activeCategoryFilter === 'akhlaq') return cat.includes('akhlaq') || cat.includes('ethics');
+      if (activeCategoryFilter === 'akhlaq')
+        return cat.includes('akhlaq') || cat.includes('ethics');
       return true;
     });
 
-    filteredMods.forEach(mod => {
+    filteredMods.forEach((mod) => {
       const isCompleted = activeProgMap[`mod_${mod.id}`] || userProgress[`mod_${mod.id}`];
-      const quizScore = localScores[`quiz_${mod.id}_${activeTrack}`]?.percentage || (isCompleted ? 100 : null);
-      
+      const quizScore =
+        localScores[`quiz_${mod.id}_${activeTrack}`]?.percentage || (isCompleted ? 100 : null);
+
       const card = document.createElement('div');
       card.className = `module-card ${isL2 ? 'level2-card' : 'level1-card'} ${isCompleted ? 'completed' : ''}`;
-      
+
       card.innerHTML = `
         <div>
           <div class="module-card-header">
@@ -596,12 +649,12 @@ document.addEventListener('DOMContentLoaded', () => {
           <div class="module-card-meta-row">
             <span><i class="fa-solid fa-clock"></i> ${mod.estTime || '45m'}</span>
             <span>•</span>
-            <span><i class="fa-solid fa-brain"></i> ${isL2 ? (mod.bloomLevel || 'Analytical') : 'Foundational'}</span>
+            <span><i class="fa-solid fa-brain"></i> ${isL2 ? mod.bloomLevel || 'Analytical' : 'Foundational'}</span>
             ${quizScore !== null ? `<span>•</span><span style="color: var(--emerald-primary); font-weight: 700;">Score: ${quizScore}%</span>` : ''}
           </div>
         </div>
         <div class="module-card-footer">
-          <span>${isCompleted ? (isL2 ? '✓ Completed (Review)' : '⭐ Completed! (Review)') : (isL2 ? 'Study Module' : 'Start Fun Lesson')}</span>
+          <span>${isCompleted ? (isL2 ? '✓ Completed (Review)' : '⭐ Completed! (Review)') : isL2 ? 'Study Module' : 'Start Fun Lesson'}</span>
           <i class="fa-solid fa-arrow-right"></i>
         </div>
       `;
@@ -624,12 +677,16 @@ document.addEventListener('DOMContentLoaded', () => {
   function openModule(moduleId) {
     if (activeTrack !== 'teacher' && moduleId > 1) {
       if (!userProgress[`mod_${moduleId - 1}`]) {
-        showToast('Module Locked 🔒', `You must pass Module ${moduleId - 1} before starting Module ${moduleId}.`, 'error');
+        showToast(
+          'Module Locked 🔒',
+          `You must pass Module ${moduleId - 1} before starting Module ${moduleId}.`,
+          'error'
+        );
         return;
       }
     }
     activeModuleId = moduleId;
-    const mod = courseData.modules.find(m => m.id === moduleId);
+    const mod = courseData.modules.find((m) => m.id === moduleId);
     if (!mod) return;
 
     dashboardView.style.display = 'none';
@@ -639,9 +696,11 @@ document.addEventListener('DOMContentLoaded', () => {
     moduleCategory.textContent = mod.category;
     moduleTitle.textContent = `Module ${mod.id}: ${mod.title}`;
     moduleDescription.textContent = mod.description;
-    
-    if (moduleEstTime) moduleEstTime.innerHTML = `<i class="fa-solid fa-clock"></i> ${mod.estTime || '45 mins'}`;
-    if (moduleBloomLevel) moduleBloomLevel.innerHTML = `<i class="fa-solid fa-brain"></i> ${mod.bloomLevel || 'Understanding'}`;
+
+    if (moduleEstTime)
+      moduleEstTime.innerHTML = `<i class="fa-solid fa-clock"></i> ${mod.estTime || '45 mins'}`;
+    if (moduleBloomLevel)
+      moduleBloomLevel.innerHTML = `<i class="fa-solid fa-brain"></i> ${mod.bloomLevel || 'Understanding'}`;
 
     let trackName = 'Level 1 (10 Years Old)';
     if (activeTrack === 'level2') trackName = 'Level 2 (13+ Years Old)';
@@ -655,7 +714,7 @@ document.addEventListener('DOMContentLoaded', () => {
       'Apply ethical guidelines in everyday decision-making.',
       'Extract timeless lessons from the noble Seerah.'
     ];
-    objs.forEach(obj => {
+    objs.forEach((obj) => {
       const li = document.createElement('li');
       li.textContent = obj;
       objectivesList.appendChild(li);
@@ -689,19 +748,19 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>
       `;
       fetch(`/course_data/module_${moduleId}.json`)
-        .then(r => r.json())
-        .then(fullMod => {
+        .then((r) => r.json())
+        .then((fullMod) => {
           Object.assign(mod, fullMod);
           if (activeModuleId === moduleId) {
             switchTab(activeTab);
           }
         })
-        .catch(err => {
+        .catch((err) => {
           console.warn('Chunk load error, falling back to full bundle...', err);
           fetch('/course_data.json')
-            .then(r => r.json())
-            .then(fullData => {
-              const target = (fullData.modules || []).find(m => m.id === moduleId);
+            .then((r) => r.json())
+            .then((fullData) => {
+              const target = (fullData.modules || []).find((m) => m.id === moduleId);
               if (target) Object.assign(mod, target);
               if (activeModuleId === moduleId) switchTab(activeTab);
             });
@@ -714,17 +773,17 @@ document.addEventListener('DOMContentLoaded', () => {
   function switchTab(tabName) {
     activeTab = tabName;
     const tabBtns = moduleTabNav.querySelectorAll('.tab-btn');
-    tabBtns.forEach(btn => {
+    tabBtns.forEach((btn) => {
       btn.classList.toggle('active', btn.dataset.tab === tabName);
     });
 
     const tabContents = document.querySelectorAll('.tab-content');
-    tabContents.forEach(c => c.classList.remove('active'));
+    tabContents.forEach((c) => c.classList.remove('active'));
 
     const activeContent = document.getElementById(`${tabName}Tab`);
     if (activeContent) activeContent.classList.add('active');
 
-    const mod = courseData.modules.find(m => m.id === activeModuleId);
+    const mod = courseData.modules.find((m) => m.id === activeModuleId);
     if (!mod) return;
 
     if (tabName === 'handout') {
@@ -756,14 +815,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const isComp = userProgress[`mod_${mod.id}`];
     markHandoutCompleteBtn.classList.toggle('completed', !!isComp);
-    markHandoutCompleteBtn.querySelector('span').textContent = isComp ? 'Completed ✓' : 'Mark as Completed';
+    markHandoutCompleteBtn.querySelector('span').textContent = isComp
+      ? 'Completed ✓'
+      : 'Mark as Completed';
   }
-
-
 
   async function persistModuleProgress(moduleId, completed = true, level = activeTrack) {
     try {
-      const sId = activeChild ? activeChild.id : (currentUser ? currentUser.uid : 'guest');
+      const sId = activeChild ? activeChild.id : currentUser ? currentUser.uid : 'guest';
       fetch('/api/quiz/progress', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -777,8 +836,7 @@ document.addEventListener('DOMContentLoaded', () => {
     } catch (e) {}
   }
 
-  
-  window.resetChildProgressAPI = async function(childId, moduleId = null) {
+  window.resetChildProgressAPI = async function (childId, moduleId = null) {
     if (!currentUser) return;
     try {
       const res = await fetch('/api/parent/progress/reset', {
@@ -790,20 +848,25 @@ document.addEventListener('DOMContentLoaded', () => {
         showToast('Success', 'Progress reset successfully.', 'success');
         syncCloudProgress(childId);
       }
-    } catch(e) {
+    } catch (e) {
       console.error(e);
     }
   };
   async function syncCloudProgress(studentId = null) {
     try {
-      const sId = studentId || (activeChild ? activeChild.id : (currentUser ? currentUser.uid : null));
+      const sId =
+        studentId || (activeChild ? activeChild.id : currentUser ? currentUser.uid : null);
       if (!sId) return;
       const res = await fetch(`/api/quiz/progress?studentId=${encodeURIComponent(sId)}`);
       if (res.ok) {
         const data = await res.json();
-        if (data.success && (data.progress || data.data)) { const syncData = data.progress || data.data;
+        if (data.success && (data.progress || data.data)) {
+          const syncData = data.progress || data.data;
           userProgress = { ...userProgress, ...syncData };
-          localStorage.setItem(`lms_progress_${activeChild ? activeChild.id : 'global'}`, JSON.stringify(userProgress));
+          localStorage.setItem(
+            `lms_progress_${activeChild ? activeChild.id : 'global'}`,
+            JSON.stringify(userProgress)
+          );
           renderSidebarModules();
           renderDashboard();
           updateProgressUI();
@@ -816,11 +879,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
   markHandoutCompleteBtn.addEventListener('click', () => {
     if (activeModuleId === null) return;
-    const mod = courseData.modules.find(m => m.id === activeModuleId);
+    const mod = courseData.modules.find((m) => m.id === activeModuleId);
     const key = `mod_${activeModuleId}`;
     userProgress[key] = !userProgress[key];
-    localStorage.setItem(`lms_progress_${activeChild ? activeChild.id : 'global'}`, JSON.stringify(userProgress));
-    
+    localStorage.setItem(
+      `lms_progress_${activeChild ? activeChild.id : 'global'}`,
+      JSON.stringify(userProgress)
+    );
+
     // Asynchronously sync with Cloudflare D1 Backend
     persistModuleProgress(activeModuleId, userProgress[key], activeTrack);
 
@@ -830,7 +896,11 @@ document.addEventListener('DOMContentLoaded', () => {
     if (mod) renderHandout(mod);
 
     if (userProgress[key]) {
-      showToast('Module Completed! 🎉', `Module ${activeModuleId}: ${mod ? mod.title : ''} marked completed. Keep up the great study!`, 'celebration');
+      showToast(
+        'Module Completed! 🎉',
+        `Module ${activeModuleId}: ${mod ? mod.title : ''} marked completed. Keep up the great study!`,
+        'celebration'
+      );
     } else {
       showToast('Progress Updated', `Module ${activeModuleId} marked as in-progress.`, 'info');
     }
@@ -853,7 +923,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // Restore saved font size and last slide index for this module
     applySavedTpFontSize();
     const savedSlide = parseInt(localStorage.getItem(`lms_tp_slide_${mod.id}`) || '0', 10);
-    currentTpSlideIndex = (!isNaN(savedSlide) && savedSlide >= 0 && savedSlide < total) ? savedSlide : 0;
+    currentTpSlideIndex =
+      !isNaN(savedSlide) && savedSlide >= 0 && savedSlide < total ? savedSlide : 0;
 
     updateTeleprompterDisplay(mod, slides, scriptSlides);
 
@@ -895,7 +966,8 @@ document.addEventListener('DOMContentLoaded', () => {
       tpCuePill.style.display = sc.direction ? 'block' : 'none';
       tpCueText.textContent = sc.direction || '';
 
-      tpScriptText.textContent = sc.script || sc.summary || 'Follow presentation slides for discussion.';
+      tpScriptText.textContent =
+        sc.script || sc.summary || 'Follow presentation slides for discussion.';
 
       tpAnalogyCard.style.display = sc.analogy ? 'block' : 'none';
       tpAnalogyText.textContent = sc.analogy || '';
@@ -979,13 +1051,19 @@ document.addEventListener('DOMContentLoaded', () => {
     tpAutoScrollBtn.addEventListener('click', () => {
       const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       if (prefersReducedMotion && !isAutoScrolling) {
-        showToast('Reduced Motion Active', 'Continuous auto-scrolling is paused because reduced motion is enabled in system settings.', 'info');
+        showToast(
+          'Reduced Motion Active',
+          'Continuous auto-scrolling is paused because reduced motion is enabled in system settings.',
+          'info'
+        );
         return;
       }
 
       isAutoScrolling = !isAutoScrolling;
       tpAutoScrollBtn.classList.toggle('active', isAutoScrolling);
-      tpAutoScrollBtn.innerHTML = isAutoScrolling ? '<i class="fa-solid fa-pause"></i> Auto-Scroll: ON' : '<i class="fa-solid fa-angles-down"></i> Auto-Scroll: OFF';
+      tpAutoScrollBtn.innerHTML = isAutoScrolling
+        ? '<i class="fa-solid fa-pause"></i> Auto-Scroll: ON'
+        : '<i class="fa-solid fa-angles-down"></i> Auto-Scroll: OFF';
 
       if (isAutoScrolling) {
         lastTpFrameTime = 0;
@@ -1051,10 +1129,12 @@ document.addEventListener('DOMContentLoaded', () => {
   // Reveal Check Question Answer
   if (tpShowAnswerBtn) {
     tpShowAnswerBtn.addEventListener('click', () => {
-      const mod = courseData.modules.find(m => m.id === activeModuleId);
+      const mod = courseData.modules.find((m) => m.id === activeModuleId);
       const sc = mod && mod.teacher.parsedVoiceScript[currentTpSlideIndex];
       if (sc && sc.checkQuestion) {
-        alert(`Question: ${sc.checkQuestion}\n\nAnswer Guidance: Refer to student handout and Maliki fiqh key for full breakdown.`);
+        alert(
+          `Question: ${sc.checkQuestion}\n\nAnswer Guidance: Refer to student handout and Maliki fiqh key for full breakdown.`
+        );
       }
     });
   }
@@ -1093,8 +1173,6 @@ document.addEventListener('DOMContentLoaded', () => {
     akToggleL2.classList.toggle('active', activeAkLevel === 'level2');
   }
 
-
-
   // --------------------------------------------------------------------------
   // INTERACTIVE QUIZ ENGINE & CERTIFICATE GENERATOR
   // --------------------------------------------------------------------------
@@ -1111,7 +1189,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const pq = trackData.parsedQuestions;
 
     if (!pq || (!pq.multipleChoice.length && !pq.fillBlanks.length && !pq.reflection.length)) {
-      const cleanMd = pq && pq.studentQuestionsMd ? pq.studentQuestionsMd : (trackData.questionsMd || '').replace(/##?\s*.*Answer\s+Key[\s\S]*/i, '');
+      const cleanMd =
+        pq && pq.studentQuestionsMd
+          ? pq.studentQuestionsMd
+          : (trackData.questionsMd || '').replace(/##?\s*.*Answer\s+Key[\s\S]*/i, '');
       if (cleanMd) {
         quizQuestionsArea.innerHTML = `<div class="content-card"><div class="markdown-body">${renderMarkdown(cleanMd)}</div></div>`;
       } else {
@@ -1135,7 +1216,7 @@ document.addEventListener('DOMContentLoaded', () => {
         qBox.dataset.qNum = q.id;
 
         let optsHtml = '';
-        q.options.forEach(opt => {
+        q.options.forEach((opt) => {
           optsHtml += `
             <button type="button" class="opt-btn" data-qid="${q.id}" data-opt="${opt.key}">
               <span class="opt-key" style="font-weight:700;">${opt.key})</span>
@@ -1154,10 +1235,10 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
 
         const btns = qBox.querySelectorAll('.opt-btn');
-        btns.forEach(b => {
+        btns.forEach((b) => {
           b.addEventListener('click', (e) => {
             e.preventDefault();
-            btns.forEach(x => x.classList.remove('selected'));
+            btns.forEach((x) => x.classList.remove('selected'));
             b.classList.add('selected');
           });
         });
@@ -1172,17 +1253,17 @@ document.addEventListener('DOMContentLoaded', () => {
       const fibSection = document.createElement('div');
       fibSection.className = 'quiz-card';
       fibSection.style.marginTop = '24px';
-      
+
       let wordBankHtml = '';
       if (pq.fillBlanks[0] && pq.fillBlanks[0].wordBank.length > 0) {
-        wordBankHtml = `<div style="background:var(--input-bg);padding:12px;border-radius:var(--radius-sm);margin-bottom:16px;"><strong>Word Bank:</strong> ${pq.fillBlanks[0].wordBank.map(w => `<span style="background:var(--card-bg);padding:2px 8px;margin:2px;border-radius:4px;display:inline-block;font-size:0.85rem;">${w}</span>`).join(' ')}</div>`;
+        wordBankHtml = `<div style="background:var(--input-bg);padding:12px;border-radius:var(--radius-sm);margin-bottom:16px;"><strong>Word Bank:</strong> ${pq.fillBlanks[0].wordBank.map((w) => `<span style="background:var(--card-bg);padding:2px 8px;margin:2px;border-radius:4px;display:inline-block;font-size:0.85rem;">${w}</span>`).join(' ')}</div>`;
       }
 
       let fibLinesHtml = '';
       pq.fillBlanks.forEach((fib, idx) => {
         fibLinesHtml += `
           <div style="margin-bottom: 14px; font-size: 0.95rem;">
-            <strong>${fib.id || (idx + 1)}.</strong> ${fib.text.replace(/__+/g, '<input type="text" class="fib-input" data-fibid="' + fib.id + '">')}
+            <strong>${fib.id || idx + 1}.</strong> ${fib.text.replace(/__+/g, '<input type="text" class="fib-input" data-fibid="' + fib.id + '">')}
           </div>
         `;
       });
@@ -1202,7 +1283,7 @@ document.addEventListener('DOMContentLoaded', () => {
       refSection.style.marginTop = '24px';
       refSection.innerHTML = `<h3><i class="fa-solid fa-comment-dots"></i> Reflection & Short Answer</h3>`;
 
-      pq.reflection.forEach(ref => {
+      pq.reflection.forEach((ref) => {
         const item = document.createElement('div');
         item.style.marginTop = '16px';
 
@@ -1217,7 +1298,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const ta = item.querySelector('textarea');
         ta.addEventListener('input', (e) => {
           userReflections[saveKey] = e.target.value;
-          localStorage.setItem(`lms_reflections_${activeChild ? activeChild.id : 'global'}`, JSON.stringify(userReflections));
+          localStorage.setItem(
+            `lms_reflections_${activeChild ? activeChild.id : 'global'}`,
+            JSON.stringify(userReflections)
+          );
         });
 
         refSection.appendChild(item);
@@ -1236,7 +1320,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Server-Side Quiz Grading & Maliki Scholarly Explanations Engine
   // --------------------------------------------------------------------------
   submitQuizBtn.addEventListener('click', async () => {
-    const mod = courseData.modules.find(m => m.id === activeModuleId);
+    const mod = courseData.modules.find((m) => m.id === activeModuleId);
     if (!mod) return;
 
     const track = activeTrack === 'level2' ? 'level2' : 'level1';
@@ -1279,12 +1363,18 @@ document.addEventListener('DOMContentLoaded', () => {
             try {
               data = JSON.parse(text);
             } catch (jsonErr) {
-              console.warn('Server grading returned non-JSON response, using client grading engine:', jsonErr);
+              console.warn(
+                'Server grading returned non-JSON response, using client grading engine:',
+                jsonErr
+              );
             }
           }
         }
       } catch (netErr) {
-        console.warn('Network issue reaching server quiz grading endpoint, using client grading engine:', netErr);
+        console.warn(
+          'Network issue reaching server quiz grading endpoint, using client grading engine:',
+          netErr
+        );
       }
 
       // 2. Client-Side Grading Fallback (when server is unreachable or returns non-success)
@@ -1309,7 +1399,9 @@ document.addEventListener('DOMContentLoaded', () => {
             selectedAnswer: studentAns,
             correctAnswer: correctAns,
             isCorrect,
-            explanation: q.explanation || `Correct Answer is (${correctAns}). Refer to student handout for full breakdown.`
+            explanation:
+              q.explanation ||
+              `Correct Answer is (${correctAns}). Refer to student handout for full breakdown.`
           });
         });
 
@@ -1327,7 +1419,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // 3. Display option feedback and explanations
       if (data.feedback && Array.isArray(data.feedback)) {
-        data.feedback.forEach(item => {
+        data.feedback.forEach((item) => {
           const qObj = mcqs[item.questionIndex];
           if (!qObj) return;
           const qBox = quizQuestionsArea.querySelector(`[data-q-num="${qObj.id}"]`);
@@ -1336,7 +1428,7 @@ document.addEventListener('DOMContentLoaded', () => {
           const optBtns = qBox.querySelectorAll('.opt-btn');
           const expBox = qBox.querySelector(`#exp_${qObj.id}`);
 
-          optBtns.forEach(btn => {
+          optBtns.forEach((btn) => {
             const key = btn.dataset.opt;
             if (key === item.correctAnswer) {
               btn.classList.add('correct');
@@ -1354,18 +1446,32 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const scoreKey = `quiz_${activeModuleId}_${activeTrack}`;
       quizScores[scoreKey] = { score: data.score, total: data.total, percentage: data.percentage };
-      localStorage.setItem(`lms_quiz_scores_${activeChild ? activeChild.id : 'global'}`, JSON.stringify(quizScores));
+      localStorage.setItem(
+        `lms_quiz_scores_${activeChild ? activeChild.id : 'global'}`,
+        JSON.stringify(quizScores)
+      );
       showQuizScoreBanner(data.score, data.total);
 
       if (data.passed) {
         userProgress[`mod_${activeModuleId}`] = true;
-        localStorage.setItem(`lms_progress_${activeChild ? activeChild.id : 'global'}`, JSON.stringify(userProgress));
+        localStorage.setItem(
+          `lms_progress_${activeChild ? activeChild.id : 'global'}`,
+          JSON.stringify(userProgress)
+        );
         persistModuleProgress(activeModuleId, true, activeTrack);
         renderSidebarModules();
         updateProgressUI();
-        showToast('MashaAllah! Exam Passed 🏆', `You scored ${data.percentage}% on Module ${activeModuleId}! Certificate unlocked.`, 'celebration');
+        showToast(
+          'MashaAllah! Exam Passed 🏆',
+          `You scored ${data.percentage}% on Module ${activeModuleId}! Certificate unlocked.`,
+          'celebration'
+        );
       } else {
-        showToast('Quiz Completed', `Score: ${data.score}/${data.total} (${data.percentage}%). Review topics and try again!`, 'info');
+        showToast(
+          'Quiz Completed',
+          `Score: ${data.score}/${data.total} (${data.percentage}%). Review topics and try again!`,
+          'info'
+        );
       }
     } catch (err) {
       console.error('Quiz submission error:', err);
@@ -1377,7 +1483,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   retryQuizBtn.addEventListener('click', () => {
-    const mod = courseData.modules.find(m => m.id === activeModuleId);
+    const mod = courseData.modules.find((m) => m.id === activeModuleId);
     if (mod) renderQuiz(mod);
   });
 
@@ -1396,7 +1502,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function launchCertificate(pct) {
-    const mod = courseData.modules.find(m => m.id === activeModuleId);
+    const mod = courseData.modules.find((m) => m.id === activeModuleId);
     certModuleName.textContent = mod ? `Module ${mod.id}: ${mod.title}` : 'Islamic Studies Module';
     certScoreBadge.textContent = `Score Achieved: ${pct}%`;
     certDateText.textContent = `Issue Date: ${new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}`;
@@ -1413,7 +1519,9 @@ document.addEventListener('DOMContentLoaded', () => {
   function renderSlides(mod) {
     const slides = mod.teacher.parsedSlides || [];
     if (slides.length === 0) {
-      slideContent.innerHTML = mod.teacher.slidesMd ? renderMarkdown(mod.teacher.slidesMd) : '<p>No slide presentation deck available.</p>';
+      slideContent.innerHTML = mod.teacher.slidesMd
+        ? renderMarkdown(mod.teacher.slidesMd)
+        : '<p>No slide presentation deck available.</p>';
       slideCounter.textContent = '1 of 1';
       return;
     }
@@ -1450,7 +1558,7 @@ document.addEventListener('DOMContentLoaded', () => {
   fullscreenSlidesBtn.addEventListener('click', () => {
     const frame = document.getElementById('slideFrame');
     if (!document.fullscreenElement) {
-      frame.requestFullscreen().catch(err => console.error(err));
+      frame.requestFullscreen().catch((err) => console.error(err));
     } else {
       document.exitFullscreen();
     }
@@ -1466,7 +1574,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function updateProgressUI() {
-    const completedMods = Object.keys(userProgress).filter(k => userProgress[k]).length;
+    const completedMods = Object.keys(userProgress).filter((k) => userProgress[k]).length;
     const total = 9;
     const pct = Math.round((completedMods / total) * 100);
     progressPercent.textContent = `${pct}%`;
@@ -1483,12 +1591,16 @@ document.addEventListener('DOMContentLoaded', () => {
   function performSearch(query) {
     if (!courseData || !courseData.modules) return;
     const results = [];
-    courseData.modules.forEach(mod => {
+    courseData.modules.forEach((mod) => {
       const h10 = (mod.tracks.level1.handoutMd || '').toLowerCase();
       const h13 = (mod.tracks.level2.handoutMd || '').toLowerCase();
       const script = (mod.teacher.voiceScriptMd || '').toLowerCase();
 
-      if (mod.title.toLowerCase().includes(query) || mod.description.toLowerCase().includes(query) || mod.category.toLowerCase().includes(query)) {
+      if (
+        mod.title.toLowerCase().includes(query) ||
+        mod.description.toLowerCase().includes(query) ||
+        mod.category.toLowerCase().includes(query)
+      ) {
         results.push({ module: mod, snippet: mod.description });
       } else if (h10.includes(query) || h13.includes(query) || script.includes(query)) {
         const text = h10 || h13 || script;
@@ -1498,15 +1610,17 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
-    if (searchResultsCount) searchResultsCount.textContent = `${results.length} result${results.length === 1 ? '' : 's'}`;
+    if (searchResultsCount)
+      searchResultsCount.textContent = `${results.length} result${results.length === 1 ? '' : 's'}`;
     searchResultsList.innerHTML = '';
 
     if (results.length === 0) {
-      searchResultsList.innerHTML = '<p class="text-muted" style="padding: 12px;">No matching course topics found.</p>';
+      searchResultsList.innerHTML =
+        '<p class="text-muted" style="padding: 12px;">No matching course topics found.</p>';
       return;
     }
 
-    results.forEach(res => {
+    results.forEach((res) => {
       const item = document.createElement('div');
       item.className = 'search-item';
       item.setAttribute('role', 'button');
@@ -1568,7 +1682,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // State
   let currentUser = JSON.parse(localStorage.getItem('lms_user') || 'null');
   let familyChildren = [];
-  
+
   // DOM Elements - Navigation & Header
   const learnerSwitcherBtn = document.getElementById('learnerSwitcherBtn');
   const headerLearnerAvatar = document.getElementById('headerLearnerAvatar');
@@ -1832,14 +1946,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function updateAuthUI() {
     if (currentUser) {
-      if (authHeaderText) authHeaderText.textContent = currentUser.displayName || currentUser.email.split('@')[0];
+      if (authHeaderText)
+        authHeaderText.textContent = currentUser.displayName || currentUser.email.split('@')[0];
       if (authHeaderIcon) authHeaderIcon.className = 'fa-solid fa-user-circle';
       if (signOutHeaderBtn) signOutHeaderBtn.style.display = 'inline-flex';
       if (sidebarSignOutBtn) sidebarSignOutBtn.style.display = 'flex';
       const isSuper = currentUser.role === 'super_admin';
       const isTeacher = currentUser.role === 'teacher' || currentUser.role === 'educator';
       const trackTeacher = document.getElementById('trackTeacher');
-      if (trackTeacher) trackTeacher.style.display = (isSuper || isTeacher) ? 'inline-flex' : 'none';
+      if (trackTeacher) trackTeacher.style.display = isSuper || isTeacher ? 'inline-flex' : 'none';
       if (adminNavBtn) adminNavBtn.style.display = isSuper ? 'inline-flex' : 'none';
       if (sidebarAdminBtn) sidebarAdminBtn.style.display = isSuper ? 'inline-flex' : 'none';
       if (parentAdminBanner) parentAdminBanner.style.display = isSuper ? 'flex' : 'none';
@@ -1865,10 +1980,13 @@ document.addEventListener('DOMContentLoaded', () => {
     if (profileUserEmail) profileUserEmail.textContent = currentUser.email || '';
     if (profileNameInput) profileNameInput.value = currentUser.displayName || '';
     if (profileUserPhoto) {
-      profileUserPhoto.src = currentUser.photoURL || `https://api.dicebear.com/7.x/avataaars/svg?seed=${encodeURIComponent(currentUser.email || 'user')}`;
+      profileUserPhoto.src =
+        currentUser.photoURL ||
+        `https://api.dicebear.com/7.x/avataaars/svg?seed=${encodeURIComponent(currentUser.email || 'user')}`;
     }
     if (profileUserRole) {
-      profileUserRole.textContent = currentUser.role === 'super_admin' ? '⚡ Super Admin' : '👨‍👩‍👧 Parent Account';
+      profileUserRole.textContent =
+        currentUser.role === 'super_admin' ? '⚡ Super Admin' : '👨‍👩‍👧 Parent Account';
     }
     if (profileUserProvider) {
       const p = currentUser.provider || 'google.com';
@@ -1905,7 +2023,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // Note: Retain lms_children in storage so direct kid URLs and local family profiles remain accessible
     updateAuthUI();
     if (userProfileModal) closeAccessibleModal(userProfileModal);
-    showToast('Signed Out Successfully', 'You have been safely signed out of your account.', 'info');
+    showToast(
+      'Signed Out Successfully',
+      'You have been safely signed out of your account.',
+      'info'
+    );
     switchView('authLanding');
   }
 
@@ -1933,7 +2055,8 @@ document.addEventListener('DOMContentLoaded', () => {
   // Family & Children Management
   async function fetchFamilyChildren() {
     if (!currentUser) {
-      const cached = localStorage.getItem('lms_children') || localStorage.getItem('lms_local_children');
+      const cached =
+        localStorage.getItem('lms_children') || localStorage.getItem('lms_local_children');
       if (cached) {
         try {
           const parsed = JSON.parse(cached);
@@ -1967,14 +2090,18 @@ document.addEventListener('DOMContentLoaded', () => {
       } else {
         const cached = localStorage.getItem('lms_children');
         if (cached) {
-          try { familyChildren = JSON.parse(cached); } catch (e) {}
+          try {
+            familyChildren = JSON.parse(cached);
+          } catch (e) {}
         }
       }
     } catch (err) {
       console.warn('Children sync notice:', err);
       const cached = localStorage.getItem('lms_children');
       if (cached) {
-        try { familyChildren = JSON.parse(cached); } catch (e) {}
+        try {
+          familyChildren = JSON.parse(cached);
+        } catch (e) {}
       }
     }
 
@@ -1985,7 +2112,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!activeChild && familyChildren.length > 0) {
       setActiveChild(familyChildren[0]);
     } else if (activeChild) {
-      const refreshed = familyChildren.find(c => c.id === activeChild.id);
+      const refreshed = familyChildren.find((c) => c.id === activeChild.id);
       if (refreshed) setActiveChild(refreshed);
       else if (familyChildren.length > 0) setActiveChild(familyChildren[0]);
       else activeChild = null;
@@ -1995,9 +2122,15 @@ document.addEventListener('DOMContentLoaded', () => {
   function setActiveChild(child) {
     activeChild = child;
     localStorage.setItem('lms_active_child', JSON.stringify(activeChild));
-    userProgress = JSON.parse(localStorage.getItem(`lms_progress_${activeChild ? activeChild.id : 'global'}`) || '{}');
-    quizScores = JSON.parse(localStorage.getItem(`lms_quiz_scores_${activeChild ? activeChild.id : 'global'}`) || '{}');
-    userReflections = JSON.parse(localStorage.getItem(`lms_reflections_${activeChild ? activeChild.id : 'global'}`) || '{}');
+    userProgress = JSON.parse(
+      localStorage.getItem(`lms_progress_${activeChild ? activeChild.id : 'global'}`) || '{}'
+    );
+    quizScores = JSON.parse(
+      localStorage.getItem(`lms_quiz_scores_${activeChild ? activeChild.id : 'global'}`) || '{}'
+    );
+    userReflections = JSON.parse(
+      localStorage.getItem(`lms_reflections_${activeChild ? activeChild.id : 'global'}`) || '{}'
+    );
 
     if (headerLearnerAvatar) headerLearnerAvatar.textContent = child.avatar || '🌟';
     if (headerLearnerName) headerLearnerName.textContent = child.name;
@@ -2016,7 +2149,8 @@ document.addEventListener('DOMContentLoaded', () => {
       targetChildId.value = child.id;
       pinChallengeInput.value = '';
       pinErrorMsg.style.display = 'none';
-      document.getElementById('pinChallengeTitle').textContent = `Unlock ${escapeHtml(child.name)}'s Profile`;
+      document.getElementById('pinChallengeTitle').textContent =
+        `Unlock ${escapeHtml(child.name)}'s Profile`;
       openAccessibleModal(pinChallengeModal, '#pinChallengeInput');
     } else {
       setActiveChild(child);
@@ -2044,7 +2178,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if (statParentKidsCount) statParentKidsCount.textContent = familyChildren.length;
-    if (statActiveLearnerName) statActiveLearnerName.textContent = activeChild ? activeChild.name : 'None';
+    if (statActiveLearnerName)
+      statActiveLearnerName.textContent = activeChild ? activeChild.name : 'None';
 
     // Active Learner Spotlight
     const spotlightEl = document.getElementById('activeLearnerSpotlight');
@@ -2079,16 +2214,23 @@ document.addEventListener('DOMContentLoaded', () => {
     let allActivityLogs = [];
 
     // Check Local Progress First
-    const localProg = JSON.parse(localStorage.getItem(`lms_progress_${activeChild ? activeChild.id : 'global'}`) || '{}');
-    const localScores = JSON.parse(localStorage.getItem(`lms_quiz_scores_${activeChild ? activeChild.id : 'global'}`) || '{}');
+    const localProg = JSON.parse(
+      localStorage.getItem(`lms_progress_${activeChild ? activeChild.id : 'global'}`) || '{}'
+    );
+    const localScores = JSON.parse(
+      localStorage.getItem(`lms_quiz_scores_${activeChild ? activeChild.id : 'global'}`) || '{}'
+    );
 
     // Count completions from local storage
-    const completedKeys = Object.keys(localProg).filter(k => localProg[k]);
+    const completedKeys = Object.keys(localProg).filter((k) => localProg[k]);
     completedModulesCount = completedKeys.length;
 
     const scoreKeys = Object.keys(localScores);
     if (scoreKeys.length > 0) {
-      const sum = scoreKeys.reduce((acc, k) => acc + (localScores[k].percentage || localScores[k].score || 0), 0);
+      const sum = scoreKeys.reduce(
+        (acc, k) => acc + (localScores[k].percentage || localScores[k].score || 0),
+        0
+      );
       quizAvg = Math.round(sum / scoreKeys.length);
     }
 
@@ -2102,16 +2244,30 @@ document.addEventListener('DOMContentLoaded', () => {
             const pData = resJson.data || resJson.progress || {};
             const childKey = `child_${activeChild ? activeChild.id : 'global'}`;
             const childProg = pData[childKey] || {};
-            completedModulesCount = Math.max(completedModulesCount, Object.keys(childProg).filter(k => childProg[k]).length);
-            
+            completedModulesCount = Math.max(
+              completedModulesCount,
+              Object.keys(childProg).filter((k) => childProg[k]).length
+            );
+
             const childScores = pData[`${childKey}_scores`] || [];
             if (childScores.length > 0) {
-              const totalPct = childScores.reduce((acc, q) => acc + (q.maxScore ? (q.score / q.maxScore) * 100 : (q.percentage || 0)), 0);
+              const totalPct = childScores.reduce(
+                (acc, q) => acc + (q.maxScore ? (q.score / q.maxScore) * 100 : q.percentage || 0),
+                0
+              );
               quizAvg = Math.round(totalPct / childScores.length);
-              
+
               allActivityLogs = [
-                ...childScores.map(q => ({ type: 'quiz', item: q, date: new Date(q.timestamp || q.createdAt || Date.now()) })),
-                ...(resJson.reflections || []).map(r => ({ type: 'reflection', item: r, date: new Date(r.timestamp || Date.now()) }))
+                ...childScores.map((q) => ({
+                  type: 'quiz',
+                  item: q,
+                  date: new Date(q.timestamp || q.createdAt || Date.now())
+                })),
+                ...(resJson.reflections || []).map((r) => ({
+                  type: 'reflection',
+                  item: r,
+                  date: new Date(r.timestamp || Date.now())
+                }))
               ];
             }
           }
@@ -2129,7 +2285,7 @@ document.addEventListener('DOMContentLoaded', () => {
       familyActivityList.innerHTML = '';
       if (allActivityLogs.length === 0 && scoreKeys.length > 0) {
         // Build activity logs from local storage if server returned no records
-        scoreKeys.forEach(k => {
+        scoreKeys.forEach((k) => {
           const sc = localScores[k];
           allActivityLogs.push({
             type: 'quiz',
@@ -2154,13 +2310,16 @@ document.addEventListener('DOMContentLoaded', () => {
           </p>
         `;
       } else {
-        allActivityLogs.slice(0, 10).forEach(log => {
+        allActivityLogs.slice(0, 10).forEach((log) => {
           const div = document.createElement('div');
           div.className = 'activity-item';
-          const childObj = familyChildren.find(c => c.id === log.item.childId) || activeChild || { name: 'Learner', avatar: '🌟' };
-          
+          const childObj = familyChildren.find((c) => c.id === log.item.childId) ||
+            activeChild || { name: 'Learner', avatar: '🌟' };
+
           if (log.type === 'quiz') {
-            const pct = log.item.percentage || Math.round(((log.item.score || 0) / (log.item.maxScore || 1)) * 100);
+            const pct =
+              log.item.percentage ||
+              Math.round(((log.item.score || 0) / (log.item.maxScore || 1)) * 100);
             div.innerHTML = `
               <div class="activity-user">
                 <span class="act-icon font-gold" style="font-size: 1.4rem;">${childObj.avatar || '🌟'}</span>
@@ -2207,7 +2366,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const emptyBtn = document.getElementById('emptyAddChildBtn');
         if (emptyBtn) emptyBtn.addEventListener('click', () => openChildModal(null));
       } else {
-        familyChildren.forEach(child => {
+        familyChildren.forEach((child) => {
           const isActive = activeChild && activeChild.id === child.id;
           const card = document.createElement('div');
           card.className = `child-card ${isActive ? 'active-learner' : ''}`;
@@ -2216,7 +2375,7 @@ document.addEventListener('DOMContentLoaded', () => {
           // Calculate approximate progress for this child
           const childTrack = child.assignedTrack || 'level1';
           const childProg = JSON.parse(localStorage.getItem(`lms_progress_${child.id}`) || '{}');
-          const childCompletedCount = Object.keys(childProg).filter(k => childProg[k]).length;
+          const childCompletedCount = Object.keys(childProg).filter((k) => childProg[k]).length;
           const childPct = Math.round((childCompletedCount / 9) * 100);
 
           card.innerHTML = `
@@ -2295,7 +2454,11 @@ document.addEventListener('DOMContentLoaded', () => {
             e.stopPropagation();
             const kidUrl = `${window.location.origin}/?kid=${encodeURIComponent(child.id)}`;
             navigator.clipboard.writeText(kidUrl);
-            showToast('Kids Access Link Copied! 📋', `Direct access URL copied: ${kidUrl}`, 'success');
+            showToast(
+              'Kids Access Link Copied! 📋',
+              `Direct access URL copied: ${kidUrl}`,
+              'success'
+            );
           });
           card.querySelector('.edit-child-btn').addEventListener('click', () => {
             openChildModal(child);
@@ -2325,7 +2488,7 @@ document.addEventListener('DOMContentLoaded', () => {
         console.error('Error deleting child profile:', err);
       }
     }
-    familyChildren = familyChildren.filter(c => c.id !== childId);
+    familyChildren = familyChildren.filter((c) => c.id !== childId);
     localStorage.setItem('lms_children', JSON.stringify(familyChildren));
     await fetchFamilyChildren();
     renderParentDashboard();
@@ -2347,7 +2510,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const hrs = Math.floor((currentTotalSec % 86400) / 3600);
     const mins = Math.floor((currentTotalSec % 3600) / 60);
     const secs = currentTotalSec % 60;
-    
+
     if (days > 0) {
       healthUptime.textContent = `${days}d ${hrs}h ${mins}m ${secs}s`;
     } else if (hrs > 0) {
@@ -2393,13 +2556,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const localUsers = getClientUsersDb();
     const localKids = JSON.parse(localStorage.getItem('lms_children') || '[]');
-    const localProg = JSON.parse(localStorage.getItem(`lms_progress_${activeChild ? activeChild.id : 'global'}`) || '{}');
-    const localScores = JSON.parse(localStorage.getItem(`lms_quiz_scores_${activeChild ? activeChild.id : 'global'}`) || '{}');
+    const localProg = JSON.parse(
+      localStorage.getItem(`lms_progress_${activeChild ? activeChild.id : 'global'}`) || '{}'
+    );
+    const localScores = JSON.parse(
+      localStorage.getItem(`lms_quiz_scores_${activeChild ? activeChild.id : 'global'}`) || '{}'
+    );
 
     // If server users were retrieved, also merge any local client registrations not yet synced
     if (users && Array.isArray(users)) {
-      localUsers.forEach(lu => {
-        if (!users.some(u => u.email.toLowerCase() === lu.email.toLowerCase())) {
+      localUsers.forEach((lu) => {
+        if (!users.some((u) => u.email.toLowerCase() === lu.email.toLowerCase())) {
           users.push({
             ...lu,
             childrenCount: lu.uid === currentUser?.uid ? localKids.length : 0,
@@ -2413,7 +2580,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!stats || !users) {
       // Add default admin if not present
       const allUsers = [...localUsers];
-      if (!allUsers.some(u => u.email === 'admin@islamicstudies.org')) {
+      if (!allUsers.some((u) => u.email === 'admin@islamicstudies.org')) {
         allUsers.unshift({
           uid: 'admin_master_1',
           email: 'admin@islamicstudies.org',
@@ -2425,9 +2592,15 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       const scoreKeys = Object.keys(localScores);
-      const avgScore = scoreKeys.length > 0
-        ? Math.round(scoreKeys.reduce((acc, k) => acc + (localScores[k].percentage || localScores[k].score || 0), 0) / scoreKeys.length)
-        : 92;
+      const avgScore =
+        scoreKeys.length > 0
+          ? Math.round(
+              scoreKeys.reduce(
+                (acc, k) => acc + (localScores[k].percentage || localScores[k].score || 0),
+                0
+              ) / scoreKeys.length
+            )
+          : 92;
 
       const completedCount = Object.keys(localProg).length;
 
@@ -2437,11 +2610,15 @@ document.addEventListener('DOMContentLoaded', () => {
         totalCompletedModules: completedCount,
         avgQuizScore: avgScore,
         passRate: Math.min(100, Math.round(avgScore * 1.05)),
-        moduleStats: (courseData && courseData.modules ? courseData.modules : []).map(m => ({
+        moduleStats: (courseData && courseData.modules ? courseData.modules : []).map((m) => ({
           moduleId: m.id,
           completions: localProg[`${m.id}_level1`] || localProg[`${m.id}_level2`] ? 1 : 0,
-          quizAttempts: localScores[`quiz_${m.id}_level1`] || localScores[`quiz_${m.id}_level2`] ? 1 : 0,
-          avgScore: localScores[`quiz_${m.id}_level1`]?.percentage || localScores[`quiz_${m.id}_level2`]?.percentage || 90
+          quizAttempts:
+            localScores[`quiz_${m.id}_level1`] || localScores[`quiz_${m.id}_level2`] ? 1 : 0,
+          avgScore:
+            localScores[`quiz_${m.id}_level1`]?.percentage ||
+            localScores[`quiz_${m.id}_level2`]?.percentage ||
+            90
         })),
         system: {
           uptime: healthData?.uptime ? Math.floor(healthData.uptime) : 3600,
@@ -2453,7 +2630,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       };
 
-      users = allUsers.map(u => ({
+      users = allUsers.map((u) => ({
         ...u,
         childrenCount: u.uid === currentUser?.uid ? localKids.length : 0,
         children: u.uid === currentUser?.uid ? localKids : []
@@ -2474,36 +2651,41 @@ document.addEventListener('DOMContentLoaded', () => {
     // Accurately compute Total Children across all families + local store
     let childrenFromUsers = 0;
     if (users && Array.isArray(users)) {
-      users.forEach(u => {
-        childrenFromUsers += (u.childrenCount || (Array.isArray(u.children) ? u.children.length : 0));
+      users.forEach((u) => {
+        childrenFromUsers += u.childrenCount || (Array.isArray(u.children) ? u.children.length : 0);
       });
     }
     const finalKidsCount = Math.max(stats.totalKids || 0, childrenFromUsers, localKids.length);
 
     // Render KPI Metrics
-    if (statAdminTotalParents) statAdminTotalParents.textContent = stats.totalParents || users.length || 0;
+    if (statAdminTotalParents)
+      statAdminTotalParents.textContent = stats.totalParents || users.length || 0;
     if (statAdminTotalKids) statAdminTotalKids.textContent = finalKidsCount;
-    if (statAdminTotalCompletions) statAdminTotalCompletions.textContent = stats.totalCompletedModules || 0;
+    if (statAdminTotalCompletions)
+      statAdminTotalCompletions.textContent = stats.totalCompletedModules || 0;
     if (statAdminAvgQuiz) statAdminAvgQuiz.textContent = `${stats.avgQuizScore || 0}%`;
 
     // Render Module-by-Module Engagement Grid
     const modulesGridEl = document.getElementById('adminModulesAnalyticsGrid');
     if (modulesGridEl) {
       modulesGridEl.innerHTML = '';
-      const modulesList = (courseData && courseData.modules) ? courseData.modules : [
-        { id: 1, title: "Foundations of Belief", icon: "fa-kaaba" },
-        { id: 2, title: "Purification & Prayer", icon: "fa-hands-wash" },
-        { id: 3, title: "Seerah: Early Life of Prophet ﷺ", icon: "fa-book-quran" },
-        { id: 4, title: "Deepening Belief & the Quran", icon: "fa-quran" },
-        { id: 5, title: "Fiqh of Fasting & Zakah", icon: "fa-moon" },
-        { id: 6, title: "Seerah: Madinah Community", icon: "fa-mosque" },
-        { id: 7, title: "Applied Fiqh & Everyday Life", icon: "fa-scale-balanced" },
-        { id: 8, title: "Character, Society & Family", icon: "fa-heart" },
-        { id: 9, title: "Living Faith Today", icon: "fa-compass" }
-      ];
+      const modulesList =
+        courseData && courseData.modules
+          ? courseData.modules
+          : [
+              { id: 1, title: 'Foundations of Belief', icon: 'fa-kaaba' },
+              { id: 2, title: 'Purification & Prayer', icon: 'fa-hands-wash' },
+              { id: 3, title: 'Seerah: Early Life of Prophet ﷺ', icon: 'fa-book-quran' },
+              { id: 4, title: 'Deepening Belief & the Quran', icon: 'fa-quran' },
+              { id: 5, title: 'Fiqh of Fasting & Zakah', icon: 'fa-moon' },
+              { id: 6, title: 'Seerah: Madinah Community', icon: 'fa-mosque' },
+              { id: 7, title: 'Applied Fiqh & Everyday Life', icon: 'fa-scale-balanced' },
+              { id: 8, title: 'Character, Society & Family', icon: 'fa-heart' },
+              { id: 9, title: 'Living Faith Today', icon: 'fa-compass' }
+            ];
 
-      modulesList.forEach(m => {
-        const mStat = (stats.moduleStats || []).find(ms => ms.moduleId === m.id) || {
+      modulesList.forEach((m) => {
+        const mStat = (stats.moduleStats || []).find((ms) => ms.moduleId === m.id) || {
           completions: 0,
           quizAttempts: 0,
           avgScore: 0
@@ -2540,7 +2722,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (healthStorage) healthStorage.textContent = stats.system?.storage || 'FILE (JSON Store)';
     if (healthStatus) {
-      const statusText = stats.system?.status || (healthData?.status === 'ok' ? '100% Operational' : '100% Operational (Live)');
+      const statusText =
+        stats.system?.status ||
+        (healthData?.status === 'ok' ? '100% Operational' : '100% Operational (Live)');
       healthStatus.innerHTML = `<span style="color:#10b981;font-weight:700;"><i class="fa-solid fa-circle" style="font-size:0.6rem;margin-right:5px;vertical-align:middle;"></i> ${statusText}</span>`;
     }
     if (healthErrors) {
@@ -2569,13 +2753,19 @@ document.addEventListener('DOMContentLoaded', () => {
         const data = await res.json();
         if (data.success && Array.isArray(data.logs) && data.logs.length > 0) {
           adminTelemetryTableBody.innerHTML = '';
-          data.logs.forEach(log => {
+          data.logs.forEach((log) => {
             const tr = document.createElement('tr');
             const isCsp = log.source === 'csp';
             const sourceBadge = isCsp
               ? '<span class="role-badge" style="background: rgba(239, 68, 68, 0.15); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.3);">CSP</span>'
               : '<span class="role-badge" style="background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.3);">Client</span>';
-            const timeStr = log.createdAt ? new Date(log.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' }) : 'Recent';
+            const timeStr = log.createdAt
+              ? new Date(log.createdAt).toLocaleTimeString([], {
+                  hour: '2-digit',
+                  minute: '2-digit',
+                  second: '2-digit'
+                })
+              : 'Recent';
             tr.innerHTML = `
               <td style="color: var(--text-subtle); font-size: 0.85rem; white-space: nowrap;">${escapeHtml(timeStr)}</td>
               <td>${sourceBadge}</td>
@@ -2590,7 +2780,8 @@ document.addEventListener('DOMContentLoaded', () => {
     } catch (e) {
       console.warn('Failed to fetch admin telemetry logs:', e);
     }
-    adminTelemetryTableBody.innerHTML = '<tr><td colspan="4" style="text-align:center; padding: 20px; color: var(--text-muted);">No errors logged. All systems running cleanly.</td></tr>';
+    adminTelemetryTableBody.innerHTML =
+      '<tr><td colspan="4" style="text-align:center; padding: 20px; color: var(--text-muted);">No errors logged. All systems running cleanly.</td></tr>';
   }
 
   // Admin User Filtering & Table Render
@@ -2601,10 +2792,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const query = (adminUserSearchInput ? adminUserSearchInput.value : '').toLowerCase().trim();
     const roleFilter = adminRoleFilterSelect ? adminRoleFilterSelect.value : 'all';
 
-    const filtered = adminUsersCache.filter(u => {
+    const filtered = adminUsersCache.filter((u) => {
       const nameMatch = (u.displayName || '').toLowerCase().includes(query);
       const emailMatch = (u.email || '').toLowerCase().includes(query);
-      const kidsMatch = u.children && u.children.some(c => c.name.toLowerCase().includes(query));
+      const kidsMatch = u.children && u.children.some((c) => c.name.toLowerCase().includes(query));
       const textMatches = query === '' || nameMatch || emailMatch || kidsMatch;
 
       const roleMatches = roleFilter === 'all' || u.role === roleFilter;
@@ -2617,9 +2808,12 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
-    filtered.forEach(u => {
+    filtered.forEach((u) => {
       const row = document.createElement('tr');
-      const kidsListStr = u.children && u.children.length > 0 ? u.children.map(c => `${c.avatar} ${c.name}`).join(', ') : 'None';
+      const kidsListStr =
+        u.children && u.children.length > 0
+          ? u.children.map((c) => `${c.avatar} ${c.name}`).join(', ')
+          : 'None';
       const isSuperAdmin = u.role === 'super_admin';
       const isTeacher = u.role === 'teacher' || u.role === 'educator';
       let iconClass = 'fa-solid fa-envelope';
@@ -2683,7 +2877,11 @@ document.addEventListener('DOMContentLoaded', () => {
       });
 
       row.querySelector('.btn-action-delete').addEventListener('click', async () => {
-        if (confirm(`Are you sure you want to delete account ${u.email}? This will remove associated child profiles.`)) {
+        if (
+          confirm(
+            `Are you sure you want to delete account ${u.email}? This will remove associated child profiles.`
+          )
+        ) {
           try {
             const res = await fetch(`/api/admin/users/${u.uid}`, { method: 'DELETE' });
             const data = await res.json();
@@ -2710,7 +2908,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (familyChildren.length === 0) {
       learnerModalList.innerHTML = `<p style="text-align: center; color: var(--text-muted); padding: 10px;">No profiles found. Create one in the Parent Portal!</p>`;
     } else {
-      familyChildren.forEach(child => {
+      familyChildren.forEach((child) => {
         const isActive = activeChild && activeChild.id === child.id;
         const item = document.createElement('div');
         item.className = `learner-select-item ${isActive ? 'active' : ''}`;
@@ -2751,7 +2949,9 @@ document.addEventListener('DOMContentLoaded', () => {
       selectedChildAvatar.value = childToEdit.avatar || '🌟';
       childTrackSelect.value = childToEdit.assignedTrack || 'level1';
       childPinInput.value = '';
-      childPinInput.placeholder = childToEdit.hasPin ? 'Leave blank to keep existing PIN' : 'e.g. 1234 (Optional)';
+      childPinInput.placeholder = childToEdit.hasPin
+        ? 'Leave blank to keep existing PIN'
+        : 'e.g. 1234 (Optional)';
 
       if (directLinkGroup && directLinkInput) {
         directLinkGroup.style.display = 'block';
@@ -2779,7 +2979,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Reset avatar active state
-    avatarSelectorGrid.querySelectorAll('.avatar-opt').forEach(opt => {
+    avatarSelectorGrid.querySelectorAll('.avatar-opt').forEach((opt) => {
       opt.classList.toggle('active', opt.dataset.avatar === selectedChildAvatar.value);
     });
 
@@ -2807,7 +3007,11 @@ document.addEventListener('DOMContentLoaded', () => {
       await renderAdminDashboard();
       if (icon) icon.classList.remove('fa-spin');
       adminRefreshBtn.disabled = false;
-      showToast('Admin Metrics Refreshed ⚡', 'Live system telemetry, uptime, and user registries updated.', 'success');
+      showToast(
+        'Admin Metrics Refreshed ⚡',
+        'Live system telemetry, uptime, and user registries updated.',
+        'success'
+      );
     });
   }
   if (adminRefreshLogsBtn) {
@@ -2826,7 +3030,9 @@ document.addEventListener('DOMContentLoaded', () => {
           await fetch('/api/admin/telemetry', { method: 'DELETE' });
           await renderAdminTelemetry();
           const healthErrors = document.getElementById('healthClientErrors');
-          if (healthErrors) healthErrors.innerHTML = '<span style="color:#10b981;font-weight:700;"><i class="fa-solid fa-circle-check" style="margin-right:4px;"></i> 0 Errors (Healthy)</span>';
+          if (healthErrors)
+            healthErrors.innerHTML =
+              '<span style="color:#10b981;font-weight:700;"><i class="fa-solid fa-circle-check" style="margin-right:4px;"></i> 0 Errors (Healthy)</span>';
           showToast('Logs Cleared', 'All telemetry logs have been purged.', 'success', 3000);
         } catch (e) {
           showToast('Error', 'Failed to clear logs.', 'error');
@@ -2834,8 +3040,10 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
-  if (adminUserSearchInput) adminUserSearchInput.addEventListener('input', filterAndRenderAdminUsers);
-  if (adminRoleFilterSelect) adminRoleFilterSelect.addEventListener('change', filterAndRenderAdminUsers);
+  if (adminUserSearchInput)
+    adminUserSearchInput.addEventListener('input', filterAndRenderAdminUsers);
+  if (adminRoleFilterSelect)
+    adminRoleFilterSelect.addEventListener('change', filterAndRenderAdminUsers);
   if (learnerSwitcherBtn) learnerSwitcherBtn.addEventListener('click', openLearnerModal);
   if (learnerModalParentBtn) {
     learnerModalParentBtn.addEventListener('click', () => {
@@ -2877,11 +3085,11 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Interactive Guest Module Preview Buttons on Homepage
-  document.querySelectorAll('.btn-preview-module').forEach(btn => {
+  document.querySelectorAll('.btn-preview-module').forEach((btn) => {
     btn.addEventListener('click', () => {
       const mId = parseInt(btn.dataset.moduleId, 10);
       if (mId) {
-        loadModule(mId);
+        openModule(mId);
         switchView('module');
       }
     });
@@ -2898,32 +3106,47 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Homepage Landing Auth Tabs
-  if (homeAuthTabSignIn) homeAuthTabSignIn.addEventListener('click', () => switchHomeAuthTab('signin'));
-  if (homeAuthTabSignUp) homeAuthTabSignUp.addEventListener('click', () => switchHomeAuthTab('signup'));
+  if (homeAuthTabSignIn)
+    homeAuthTabSignIn.addEventListener('click', () => switchHomeAuthTab('signin'));
+  if (homeAuthTabSignUp)
+    homeAuthTabSignUp.addEventListener('click', () => switchHomeAuthTab('signup'));
 
   // Auth Tabs Click Handlers in Modal
   if (authTabSignIn) authTabSignIn.addEventListener('click', () => switchAuthTab('signin'));
   if (authTabSignUp) authTabSignUp.addEventListener('click', () => switchAuthTab('signup'));
 
-  if (authModalCloseBtn) authModalCloseBtn.addEventListener('click', () => closeAccessibleModal(authModal));
-  if (userProfileModalCloseBtn) userProfileModalCloseBtn.addEventListener('click', () => closeAccessibleModal(userProfileModal));
-  if (childModalCloseBtn) childModalCloseBtn.addEventListener('click', () => closeAccessibleModal(childModal));
-  if (cancelChildBtn) cancelChildBtn.addEventListener('click', () => closeAccessibleModal(childModal));
-  if (learnerModalCloseBtn) learnerModalCloseBtn.addEventListener('click', () => closeAccessibleModal(learnerModal));
-  if (pinChallengeCloseBtn) pinChallengeCloseBtn.addEventListener('click', () => closeAccessibleModal(pinChallengeModal));
-  if (pinChallengeCancelBtn) pinChallengeCancelBtn.addEventListener('click', () => closeAccessibleModal(pinChallengeModal));
+  if (authModalCloseBtn)
+    authModalCloseBtn.addEventListener('click', () => closeAccessibleModal(authModal));
+  if (userProfileModalCloseBtn)
+    userProfileModalCloseBtn.addEventListener('click', () =>
+      closeAccessibleModal(userProfileModal)
+    );
+  if (childModalCloseBtn)
+    childModalCloseBtn.addEventListener('click', () => closeAccessibleModal(childModal));
+  if (cancelChildBtn)
+    cancelChildBtn.addEventListener('click', () => closeAccessibleModal(childModal));
+  if (learnerModalCloseBtn)
+    learnerModalCloseBtn.addEventListener('click', () => closeAccessibleModal(learnerModal));
+  if (pinChallengeCloseBtn)
+    pinChallengeCloseBtn.addEventListener('click', () => closeAccessibleModal(pinChallengeModal));
+  if (pinChallengeCancelBtn)
+    pinChallengeCancelBtn.addEventListener('click', () => closeAccessibleModal(pinChallengeModal));
 
   if (addChildBtn) addChildBtn.addEventListener('click', () => openChildModal(null));
   if (adminRefreshBtn) adminRefreshBtn.addEventListener('click', renderAdminDashboard);
 
-  if (adminUserSearchInput) adminUserSearchInput.addEventListener('input', filterAndRenderAdminUsers);
-  if (adminRoleFilterSelect) adminRoleFilterSelect.addEventListener('change', filterAndRenderAdminUsers);
+  if (adminUserSearchInput)
+    adminUserSearchInput.addEventListener('input', filterAndRenderAdminUsers);
+  if (adminRoleFilterSelect)
+    adminRoleFilterSelect.addEventListener('change', filterAndRenderAdminUsers);
 
   // Avatar selector grid handler
   if (avatarSelectorGrid) {
-    avatarSelectorGrid.querySelectorAll('.avatar-opt').forEach(btn => {
+    avatarSelectorGrid.querySelectorAll('.avatar-opt').forEach((btn) => {
       btn.addEventListener('click', () => {
-        avatarSelectorGrid.querySelectorAll('.avatar-opt').forEach(b => b.classList.remove('active'));
+        avatarSelectorGrid
+          .querySelectorAll('.avatar-opt')
+          .forEach((b) => b.classList.remove('active'));
         btn.classList.add('active');
         selectedChildAvatar.value = btn.dataset.avatar;
       });
@@ -2978,7 +3201,7 @@ document.addEventListener('DOMContentLoaded', () => {
           };
         }
 
-        familyChildren = familyChildren.map(c => c.id === editId ? { ...c, ...savedChild } : c);
+        familyChildren = familyChildren.map((c) => (c.id === editId ? { ...c, ...savedChild } : c));
       } else {
         // Create new child profile
         try {
@@ -3011,11 +3234,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // Generate direct kids access URL
       const directKidUrl = `${window.location.origin}/?kid=${encodeURIComponent(savedChild.id)}`;
-      showToast(
-        'Child Profile Saved! 🎉',
-        `Direct Access URL: ${directKidUrl}`,
-        'success'
-      );
+      showToast('Child Profile Saved! 🎉', `Direct Access URL: ${directKidUrl}`, 'success');
 
       // Auto-set as active child if none was active
       if (!activeChild) {
@@ -3045,10 +3264,14 @@ document.addEventListener('DOMContentLoaded', () => {
         const data = await res.json();
         if (data.success && data.verified) {
           closeAccessibleModal(pinChallengeModal);
-          const matchedChild = data.child || familyChildren.find(c => c.id === childId);
+          const matchedChild = data.child || familyChildren.find((c) => c.id === childId);
           if (matchedChild) setActiveChild(matchedChild);
           closeAccessibleModal(learnerModal);
-          showToast(`Welcome back, ${matchedChild?.name || 'Learner'}! 🌟`, 'PIN verified successfully.', 'success');
+          showToast(
+            `Welcome back, ${matchedChild?.name || 'Learner'}! 🌟`,
+            'PIN verified successfully.',
+            'success'
+          );
           switchView('dashboard');
         } else {
           pinErrorMsg.textContent = data.error || 'Incorrect PIN. Please try again.';
@@ -3111,11 +3334,18 @@ document.addEventListener('DOMContentLoaded', () => {
   // Client-Side WebCrypto Authentication Engine (Fallback for Static / Offline Edge)
   // --------------------------------------------------------------------------
   async function hashClientPassword(pwd) {
-    if (typeof window !== 'undefined' && window.crypto && window.crypto.subtle && typeof window.crypto.subtle.digest === 'function') {
+    if (
+      typeof window !== 'undefined' &&
+      window.crypto &&
+      window.crypto.subtle &&
+      typeof window.crypto.subtle.digest === 'function'
+    ) {
       try {
         const enc = new TextEncoder();
         const buf = await window.crypto.subtle.digest('SHA-256', enc.encode(pwd));
-        return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
+        return Array.from(new Uint8Array(buf))
+          .map((b) => b.toString(16).padStart(2, '0'))
+          .join('');
       } catch (e) {
         console.warn('Subtle crypto digest failed, falling back to simple hash:', e);
       }
@@ -3123,7 +3353,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let hash = 0;
     for (let i = 0; i < pwd.length; i++) {
       const char = pwd.charCodeAt(i);
-      hash = ((hash << 5) - hash) + char;
+      hash = (hash << 5) - hash + char;
       hash = hash & hash;
     }
     return 'fallback_' + Math.abs(hash).toString(16);
@@ -3145,8 +3375,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const cleanEmail = email.trim().toLowerCase();
     const pHash = await hashClientPassword(password);
     const users = getClientUsersDb();
-    if (users.some(u => u.email === cleanEmail)) {
-      return { success: false, error: 'An account with this email already exists. Please sign in.' };
+    if (users.some((u) => u.email === cleanEmail)) {
+      return {
+        success: false,
+        error: 'An account with this email already exists. Please sign in.'
+      };
     }
     const user = {
       uid: 'u_local_' + Date.now().toString(36) + '_' + Math.random().toString(36).substring(2, 6),
@@ -3166,7 +3399,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const pHash = await hashClientPassword(password);
 
     const users = getClientUsersDb();
-    const match = users.find(u => u.email === cleanEmail && u.passwordHash === pHash);
+    const match = users.find((u) => u.email === cleanEmail && u.passwordHash === pHash);
     if (match) {
       const { passwordHash, ...safe } = match;
       return { success: true, user: safe };
@@ -3176,7 +3409,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function getTurnstileToken(form) {
     if (!form) return null;
-    const input = form.querySelector('[name="cf-turnstile-response"]') || form.querySelector('[name="turnstileToken"]');
+    const input =
+      form.querySelector('[name="cf-turnstile-response"]') ||
+      form.querySelector('[name="turnstileToken"]');
     return input ? input.value : null;
   }
 
@@ -3362,7 +3597,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Mirror to local users list so admin dashboard reflects registered parents immediately
         const localUsers = getClientUsersDb();
-        const existingIdx = localUsers.findIndex(u => u.email.toLowerCase() === data.user.email.toLowerCase());
+        const existingIdx = localUsers.findIndex(
+          (u) => u.email.toLowerCase() === data.user.email.toLowerCase()
+        );
         if (existingIdx === -1) {
           localUsers.push(data.user);
         } else {
@@ -3399,7 +3636,11 @@ document.addEventListener('DOMContentLoaded', () => {
       const role = homeSignUpRoleSelect.value;
 
       if (!displayName || !email || !password) {
-        showAuthAlert('Please enter your full name, email address, and a password.', 'error', homeAuthAlertMsg);
+        showAuthAlert(
+          'Please enter your full name, email address, and a password.',
+          'error',
+          homeAuthAlertMsg
+        );
         return;
       }
       if (password.length < 6) {
@@ -3448,7 +3689,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Mirror to local users list so admin dashboard reflects registered parents immediately
         const localUsers = getClientUsersDb();
-        const existingIdx = localUsers.findIndex(u => u.email.toLowerCase() === data.user.email.toLowerCase());
+        const existingIdx = localUsers.findIndex(
+          (u) => u.email.toLowerCase() === data.user.email.toLowerCase()
+        );
         if (existingIdx === -1) {
           localUsers.push(data.user);
         } else {
@@ -3469,7 +3712,11 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 600);
       } catch (err) {
         console.error('Homepage sign up error:', err);
-        showAuthAlert('Unable to complete registration. Please try again.', 'error', homeAuthAlertMsg);
+        showAuthAlert(
+          'Unable to complete registration. Please try again.',
+          'error',
+          homeAuthAlertMsg
+        );
       }
     });
   }
@@ -3492,11 +3739,26 @@ document.addEventListener('DOMContentLoaded', () => {
     const cleanLower = cleanKidId.toLowerCase();
 
     // Check if parameter is a generic mode flag (e.g. ?child or ?kid or ?learner)
-    const genericTokens = ['child', 'kid', 'learner', 'student', 'true', '1', 'yes', 'null', 'undefined', ''];
+    const genericTokens = [
+      'child',
+      'kid',
+      'learner',
+      'student',
+      'true',
+      '1',
+      'yes',
+      'null',
+      'undefined',
+      ''
+    ];
     if (genericTokens.includes(cleanLower)) {
       if (activeChild) {
         setActiveChild(activeChild);
-        showToast(`Welcome Back, ${activeChild.name}! 🌟`, `Ready for ${activeChild.assignedTrack === 'level2' ? 'Level 2 (13y+)' : 'Level 1 (~10y)'} learning.`, 'info');
+        showToast(
+          `Welcome Back, ${activeChild.name}! 🌟`,
+          `Ready for ${activeChild.assignedTrack === 'level2' ? 'Level 2 (13y+)' : 'Level 1 (~10y)'} learning.`,
+          'info'
+        );
       } else if (familyChildren.length === 1) {
         attemptSelectLearner(familyChildren[0]);
       } else if (familyChildren.length > 1) {
@@ -3509,19 +3771,27 @@ document.addEventListener('DOMContentLoaded', () => {
           familyChildren = localKids;
           openLearnerModal();
         } else {
-          showToast('Welcome to Islamic Studies! 📖', 'Explore all 9 modules across Aqidah, Maliki Fiqh, and Seerah.', 'info');
+          showToast(
+            'Welcome to Islamic Studies! 📖',
+            'Explore all 9 modules across Aqidah, Maliki Fiqh, and Seerah.',
+            'info'
+          );
         }
       }
       return;
     }
 
     // 1. Search in current memory state (by ID, Name, or partial match)
-    let targetChild = familyChildren.find(c => 
-      c.id === cleanKidId || 
-      (c.id && c.id.toLowerCase() === cleanLower) || 
-      (c.name && c.name.trim().toLowerCase() === cleanLower) ||
-      (c.id && (c.id.toLowerCase().includes(cleanLower) || cleanLower.includes(c.id.toLowerCase()))) ||
-      (c.name && (c.name.trim().toLowerCase().includes(cleanLower) || cleanLower.includes(c.name.trim().toLowerCase())))
+    let targetChild = familyChildren.find(
+      (c) =>
+        c.id === cleanKidId ||
+        (c.id && c.id.toLowerCase() === cleanLower) ||
+        (c.name && c.name.trim().toLowerCase() === cleanLower) ||
+        (c.id &&
+          (c.id.toLowerCase().includes(cleanLower) || cleanLower.includes(c.id.toLowerCase()))) ||
+        (c.name &&
+          (c.name.trim().toLowerCase().includes(cleanLower) ||
+            cleanLower.includes(c.name.trim().toLowerCase())))
     );
 
     // 2. Query public endpoint from server / edge D1
@@ -3541,29 +3811,37 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 3. Check local storage lists (lms_children and lms_local_children)
     if (!targetChild) {
-      const localKids = JSON.parse(localStorage.getItem('lms_children') || localStorage.getItem('lms_local_children') || '[]');
-      targetChild = localKids.find(c => 
-        c.id === cleanKidId || 
-        (c.id && c.id.toLowerCase() === cleanLower) || 
-        (c.name && c.name.trim().toLowerCase() === cleanLower) ||
-        (c.id && (c.id.toLowerCase().includes(cleanLower) || cleanLower.includes(c.id.toLowerCase()))) ||
-        (c.name && (c.name.trim().toLowerCase().includes(cleanLower) || cleanLower.includes(c.name.trim().toLowerCase())))
+      const localKids = JSON.parse(
+        localStorage.getItem('lms_children') || localStorage.getItem('lms_local_children') || '[]'
+      );
+      targetChild = localKids.find(
+        (c) =>
+          c.id === cleanKidId ||
+          (c.id && c.id.toLowerCase() === cleanLower) ||
+          (c.name && c.name.trim().toLowerCase() === cleanLower) ||
+          (c.id &&
+            (c.id.toLowerCase().includes(cleanLower) || cleanLower.includes(c.id.toLowerCase()))) ||
+          (c.name &&
+            (c.name.trim().toLowerCase().includes(cleanLower) ||
+              cleanLower.includes(c.name.trim().toLowerCase())))
       );
     }
 
     // 4. Fallback to active child if cached
     if (!targetChild && activeChild) {
-      if (activeChild.id === cleanKidId || 
-          (activeChild.id && activeChild.id.toLowerCase() === cleanLower) || 
-          (activeChild.name && activeChild.name.trim().toLowerCase() === cleanLower) ||
-          (activeChild.name && activeChild.name.trim().toLowerCase().includes(cleanLower))) {
+      if (
+        activeChild.id === cleanKidId ||
+        (activeChild.id && activeChild.id.toLowerCase() === cleanLower) ||
+        (activeChild.name && activeChild.name.trim().toLowerCase() === cleanLower) ||
+        (activeChild.name && activeChild.name.trim().toLowerCase().includes(cleanLower))
+      ) {
         targetChild = activeChild;
       }
     }
 
     if (targetChild) {
       // Ensure target child is recorded in memory state
-      if (!familyChildren.some(c => c.id === targetChild.id)) {
+      if (!familyChildren.some((c) => c.id === targetChild.id)) {
         familyChildren.push(targetChild);
       }
 
@@ -3571,22 +3849,36 @@ document.addEventListener('DOMContentLoaded', () => {
         targetChildId.value = targetChild.id;
         pinChallengeInput.value = '';
         pinErrorMsg.style.display = 'none';
-        const titleEl = document.getElementById('pinChallengeTitle') || document.querySelector('#pinChallengeModal h2');
+        const titleEl =
+          document.getElementById('pinChallengeTitle') ||
+          document.querySelector('#pinChallengeModal h2');
         if (titleEl) {
           titleEl.innerHTML = `${targetChild.avatar || '🌟'} Welcome, ${escapeHtml(targetChild.name)}!`;
         }
         openAccessibleModal(pinChallengeModal, '#pinChallengeInput');
       } else {
         setActiveChild(targetChild);
-        showToast(`Welcome, ${targetChild.name}! 🌟`, `Ready for ${targetChild.assignedTrack === 'level2' ? 'Level 2 (13y+)' : 'Level 1 (~10y)'} learning.`, 'success');
+        showToast(
+          `Welcome, ${targetChild.name}! 🌟`,
+          `Ready for ${targetChild.assignedTrack === 'level2' ? 'Level 2 (13y+)' : 'Level 1 (~10y)'} learning.`,
+          'success'
+        );
       }
     } else {
       // Graceful fallback: If any children exist, offer learner picker instead of blocking
-      const availableKids = familyChildren.length > 0 ? familyChildren : JSON.parse(localStorage.getItem('lms_children') || '[]');
+      const availableKids =
+        familyChildren.length > 0
+          ? familyChildren
+          : JSON.parse(localStorage.getItem('lms_children') || '[]');
       if (availableKids.length > 0) {
         familyChildren = availableKids;
         openLearnerModal();
-        showToast('Learner Profile Notice', `Could not find profile matching "${cleanKidId}". Please select a profile below.`, 'info', 5000);
+        showToast(
+          'Learner Profile Notice',
+          `Could not find profile matching "${cleanKidId}". Please select a profile below.`,
+          'info',
+          5000
+        );
       } else {
         showToast('Course Curriculum', 'Welcome! Explore all 9 Islamic Studies modules.', 'info');
       }
@@ -3627,18 +3919,26 @@ document.addEventListener('DOMContentLoaded', () => {
     } catch (e) {
       console.warn('Session verification notice (maintaining active local session):', e);
     }
-    
+
     updateAuthUI();
     await fetchFamilyChildren();
 
     // 3. Handle Direct Kids Access Link (?kid=... or ?child=... or #kid=... or pathname /child/...)
     const urlParams = new URLSearchParams(window.location.search);
-    let kidIdParam = urlParams.get('kid') || urlParams.get('child') || urlParams.get('learner') || urlParams.get('student');
-    
+    let kidIdParam =
+      urlParams.get('kid') ||
+      urlParams.get('child') ||
+      urlParams.get('learner') ||
+      urlParams.get('student');
+
     if (!kidIdParam && window.location.hash) {
       const hashClean = window.location.hash.replace(/^#\/?/, '');
       const hashParams = new URLSearchParams(hashClean);
-      kidIdParam = hashParams.get('kid') || hashParams.get('child') || hashParams.get('learner') || hashParams.get('student');
+      kidIdParam =
+        hashParams.get('kid') ||
+        hashParams.get('child') ||
+        hashParams.get('learner') ||
+        hashParams.get('student');
       if (!kidIdParam && (hashClean.startsWith('child_') || hashClean.startsWith('kid_'))) {
         kidIdParam = hashClean;
       }
@@ -3694,7 +3994,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // --------------------------------------------------------------------------
   function initPasswordUX() {
     // 1. Password Reveal Toggles
-    document.querySelectorAll('.btn-password-toggle').forEach(btn => {
+    document.querySelectorAll('.btn-password-toggle').forEach((btn) => {
       btn.addEventListener('click', () => {
         const targetId = btn.dataset.target;
         const input = document.getElementById(targetId);
@@ -3709,7 +4009,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 2. Password Strength Evaluator
     function evaluatePasswordStrength(pass) {
-      if (!pass) return { score: 0, label: 'Weak', class: 'weak', hint: 'Enter at least 6 characters' };
+      if (!pass)
+        return { score: 0, label: 'Weak', class: 'weak', hint: 'Enter at least 6 characters' };
       let score = 0;
       if (pass.length >= 8) score += 1;
       if (/[A-Z]/.test(pass)) score += 1;
@@ -3717,10 +4018,28 @@ document.addEventListener('DOMContentLoaded', () => {
       if (/[0-9]/.test(pass)) score += 1;
       if (/[^A-Za-z0-9]/.test(pass)) score += 1;
 
-      if (score <= 1) return { score: 1, label: 'Weak', class: 'weak', hint: 'Use 8+ chars with letters & numbers' };
-      if (score === 2) return { score: 2, label: 'Fair', class: 'fair', hint: 'Good start. Add uppercase or symbols' };
-      if (score === 3 || score === 4) return { score: 3, label: 'Good', class: 'good', hint: 'Strong password. Excellent!' };
-      return { score: 5, label: 'Excellent', class: 'strong', hint: 'Very strong secure password! 🛡️' };
+      if (score <= 1)
+        return {
+          score: 1,
+          label: 'Weak',
+          class: 'weak',
+          hint: 'Use 8+ chars with letters & numbers'
+        };
+      if (score === 2)
+        return {
+          score: 2,
+          label: 'Fair',
+          class: 'fair',
+          hint: 'Good start. Add uppercase or symbols'
+        };
+      if (score === 3 || score === 4)
+        return { score: 3, label: 'Good', class: 'good', hint: 'Strong password. Excellent!' };
+      return {
+        score: 5,
+        label: 'Excellent',
+        class: 'strong',
+        hint: 'Very strong secure password! 🛡️'
+      };
     }
 
     function setupStrengthListener(inputId, containerId, fillId, labelId, criteriaId) {
@@ -3746,9 +4065,27 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }
 
-    setupStrengthListener('homeSignUpPasswordInput', 'homePasswordStrengthContainer', 'homeStrengthFill', 'homeStrengthLabel', 'homeStrengthCriteria');
-    setupStrengthListener('signUpPasswordInput', 'modalPasswordStrengthContainer', 'modalStrengthFill', 'modalStrengthLabel', 'modalStrengthCriteria');
-    setupStrengthListener('newPasswordInput', 'resetPasswordStrengthContainer', 'resetStrengthFill', 'resetStrengthLabel', 'resetStrengthCriteria');
+    setupStrengthListener(
+      'homeSignUpPasswordInput',
+      'homePasswordStrengthContainer',
+      'homeStrengthFill',
+      'homeStrengthLabel',
+      'homeStrengthCriteria'
+    );
+    setupStrengthListener(
+      'signUpPasswordInput',
+      'modalPasswordStrengthContainer',
+      'modalStrengthFill',
+      'modalStrengthLabel',
+      'modalStrengthCriteria'
+    );
+    setupStrengthListener(
+      'newPasswordInput',
+      'resetPasswordStrengthContainer',
+      'resetStrengthFill',
+      'resetStrengthLabel',
+      'resetStrengthCriteria'
+    );
 
     // 3. Pre-submit Live Validation Indicators
     function attachLiveValidator(inputId, validatorFn) {
@@ -3770,12 +4107,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    attachLiveValidator('authEmailInput', v => emailRegex.test(v.trim()));
-    attachLiveValidator('homeAuthEmailInput', v => emailRegex.test(v.trim()));
-    attachLiveValidator('signUpEmailInput', v => emailRegex.test(v.trim()));
-    attachLiveValidator('homeSignUpEmailInput', v => emailRegex.test(v.trim()));
-    attachLiveValidator('signUpPasswordInput', v => v.length >= 6);
-    attachLiveValidator('homeSignUpPasswordInput', v => v.length >= 6);
+    attachLiveValidator('authEmailInput', (v) => emailRegex.test(v.trim()));
+    attachLiveValidator('homeAuthEmailInput', (v) => emailRegex.test(v.trim()));
+    attachLiveValidator('signUpEmailInput', (v) => emailRegex.test(v.trim()));
+    attachLiveValidator('homeSignUpEmailInput', (v) => emailRegex.test(v.trim()));
+    attachLiveValidator('signUpPasswordInput', (v) => v.length >= 6);
+    attachLiveValidator('homeSignUpPasswordInput', (v) => v.length >= 6);
   }
 
   // --------------------------------------------------------------------------
@@ -3795,14 +4132,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const confirmPassInput = document.getElementById('confirmNewPasswordInput');
 
     // Open Forgot Password modal from any button
-    document.querySelectorAll('.open-forgot-password-btn').forEach(btn => {
+    document.querySelectorAll('.open-forgot-password-btn').forEach((btn) => {
       btn.addEventListener('click', (e) => {
         e.preventDefault();
         closeAccessibleModal(authModal);
         if (forgotAlert) forgotAlert.style.display = 'none';
         const forgotEmail = document.getElementById('forgotEmailInput');
         if (forgotEmail) {
-          const prefill = (document.getElementById('homeAuthEmailInput') || document.getElementById('authEmailInput'))?.value || '';
+          const prefill =
+            (
+              document.getElementById('homeAuthEmailInput') ||
+              document.getElementById('authEmailInput')
+            )?.value || '';
           forgotEmail.value = prefill;
         }
         openAccessibleModal(forgotModal, '#forgotEmailInput');
@@ -3846,7 +4187,11 @@ document.addEventListener('DOMContentLoaded', () => {
               forgotAlert.style.display = 'block';
               forgotAlert.innerHTML = `<i class="fa-solid fa-circle-check"></i> ${escapeHtml(data.message || 'Password reset link sent! Check your inbox.')}`;
             }
-            showToast('Reset Link Dispatched! ✉️', 'Please check your email for password reset instructions.', 'success');
+            showToast(
+              'Reset Link Dispatched! ✉️',
+              'Please check your email for password reset instructions.',
+              'success'
+            );
             setTimeout(() => {
               closeAccessibleModal(forgotModal);
             }, 3000);
@@ -3854,7 +4199,8 @@ document.addEventListener('DOMContentLoaded', () => {
             if (forgotAlert) {
               forgotAlert.className = 'auth-alert-msg error';
               forgotAlert.style.display = 'block';
-              forgotAlert.textContent = (data && data.error) ? data.error : 'Unable to process request.';
+              forgotAlert.textContent =
+                data && data.error ? data.error : 'Unable to process request.';
             }
           }
         } catch (err) {
@@ -3862,12 +4208,14 @@ document.addEventListener('DOMContentLoaded', () => {
           if (forgotAlert) {
             forgotAlert.className = 'auth-alert-msg error';
             forgotAlert.style.display = 'block';
-            forgotAlert.textContent = 'Network error submitting request. Please verify connection and try again.';
+            forgotAlert.textContent =
+              'Network error submitting request. Please verify connection and try again.';
           }
         } finally {
           if (submitBtn) {
             submitBtn.disabled = false;
-            submitBtn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Send Password Reset Link';
+            submitBtn.innerHTML =
+              '<i class="fa-solid fa-paper-plane"></i> Send Password Reset Link';
           }
         }
       });
@@ -3936,7 +4284,11 @@ document.addEventListener('DOMContentLoaded', () => {
               updateAuthUI();
               await fetchFamilyChildren();
             }
-            showToast('Password Updated! 🎉', 'You are now signed in with your new password.', 'success');
+            showToast(
+              'Password Updated! 🎉',
+              'You are now signed in with your new password.',
+              'success'
+            );
             setTimeout(() => {
               closeAccessibleModal(resetModal);
               if (currentUser) {
@@ -3947,7 +4299,10 @@ document.addEventListener('DOMContentLoaded', () => {
             if (resetAlert) {
               resetAlert.className = 'auth-alert-msg error';
               resetAlert.style.display = 'block';
-              resetAlert.textContent = (data && data.error) ? data.error : 'Password reset failed. The link may have expired.';
+              resetAlert.textContent =
+                data && data.error
+                  ? data.error
+                  : 'Password reset failed. The link may have expired.';
             }
           }
         } catch (err) {
@@ -3980,7 +4335,7 @@ document.addEventListener('DOMContentLoaded', () => {
       mobileSidebarOpen.focus();
     });
 
-    moduleTabNav.querySelectorAll('.tab-btn').forEach(btn => {
+    moduleTabNav.querySelectorAll('.tab-btn').forEach((btn) => {
       btn.addEventListener('click', () => switchTab(btn.dataset.tab));
     });
 
@@ -4012,11 +4367,14 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
-
-
     // Online / Offline Connectivity Notifications
     window.addEventListener('offline', () => {
-      showToast('Offline Mode Active', 'You are currently offline. Please reconnect to access all features.', 'info', 5000);
+      showToast(
+        'Offline Mode Active',
+        'You are currently offline. Please reconnect to access all features.',
+        'info',
+        5000
+      );
     });
     window.addEventListener('online', () => {
       showToast('Back Online 🌐', 'Internet connection restored.', 'success', 4000);
@@ -4054,7 +4412,7 @@ document.addEventListener('DOMContentLoaded', () => {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          message: e.reason ? (e.reason.message || String(e.reason)) : 'Unhandled Promise Rejection',
+          message: e.reason ? e.reason.message || String(e.reason) : 'Unhandled Promise Rejection',
           stack: e.reason ? e.reason.stack : null,
           url: window.location.href,
           timestamp: new Date().toISOString()
@@ -4085,9 +4443,21 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
 
-    if (openPrivacyBtn) openPrivacyBtn.addEventListener('click', (e) => { e.preventDefault(); openModal(); });
-    if (openTermsBtn) openTermsBtn.addEventListener('click', (e) => { e.preventDefault(); openModal(); });
-    if (openCookieBtn) openCookieBtn.addEventListener('click', (e) => { e.preventDefault(); openModal(); });
+    if (openPrivacyBtn)
+      openPrivacyBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        openModal();
+      });
+    if (openTermsBtn)
+      openTermsBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        openModal();
+      });
+    if (openCookieBtn)
+      openCookieBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        openModal();
+      });
     if (closeBtn) closeBtn.addEventListener('click', closeModal);
     if (closeBottomBtn) closeBottomBtn.addEventListener('click', closeModal);
     if (legalModal) {
@@ -4097,7 +4467,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Connect curriculum footer links to category filter
-    document.querySelectorAll('.footer-nav-link').forEach(link => {
+    document.querySelectorAll('.footer-nav-link').forEach((link) => {
       link.addEventListener('click', (e) => {
         e.preventDefault();
         const filter = link.dataset.filter;
@@ -4114,12 +4484,14 @@ document.addEventListener('DOMContentLoaded', () => {
   // Register Progressive Web App (PWA) Service Worker for Installability ("Add to Home Screen")
   if ('serviceWorker' in navigator && window.location.protocol.startsWith('http')) {
     window.addEventListener('load', () => {
-      navigator.serviceWorker.register('/sw.js').then((reg) => {
-        console.log('✅ [PWA] Zero-Cache Service Worker active for installability:', reg.scope);
-      }).catch((err) => {
-        console.warn('⚠️ [PWA] Service Worker registration notice:', err);
-      });
+      navigator.serviceWorker
+        .register('/sw.js')
+        .then((reg) => {
+          console.log('✅ [PWA] Zero-Cache Service Worker active for installability:', reg.scope);
+        })
+        .catch((err) => {
+          console.warn('⚠️ [PWA] Service Worker registration notice:', err);
+        });
     });
   }
-
 });

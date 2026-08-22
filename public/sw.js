@@ -11,14 +11,17 @@ self.addEventListener('install', (event) => {
 // Activate immediately and purge any stale legacy caches
 self.addEventListener('activate', (event) => {
   event.waitUntil(
-    caches.keys().then((cacheNames) => {
-      return Promise.all(
-        cacheNames.map((cacheName) => {
-          console.log(`[PWA ServiceWorker] Purging legacy cache: ${cacheName}`);
-          return caches.delete(cacheName);
-        })
-      );
-    }).then(() => self.clients.claim())
+    caches
+      .keys()
+      .then((cacheNames) => {
+        return Promise.all(
+          cacheNames.map((cacheName) => {
+            console.log(`[PWA ServiceWorker] Purging legacy cache: ${cacheName}`);
+            return caches.delete(cacheName);
+          })
+        );
+      })
+      .then(() => self.clients.claim())
   );
 });
 

@@ -50,7 +50,7 @@ describe('Child Profiles & Access Control API Tests', () => {
     expect(res.statusCode).toBe(200);
     expect(res.body.success).toBe(true);
     expect(Array.isArray(res.body.children)).toBe(true);
-    expect(res.body.children.some(c => c.id === createdChildId)).toBe(true);
+    expect(res.body.children.some((c) => c.id === createdChildId)).toBe(true);
   });
 
   test('GET /api/parent/children - Parent 2 cannot access Parent 1 children (returns own children)', async () => {
@@ -84,9 +84,10 @@ describe('Child Profiles & Access Control API Tests', () => {
   });
 
   test('GET /api/public/child/:id - Public learner access works without parent session', async () => {
+    const uniqueChildName = `Maryam_${Date.now()}`;
     // 1. Create a child
     const res = await agent1.post('/api/parent/children').send({
-      name: 'Maryam',
+      name: uniqueChildName,
       avatar: '🌸',
       assignedTrack: 'level2',
       pinCode: '5555'
@@ -97,15 +98,36 @@ describe('Child Profiles & Access Control API Tests', () => {
     // 2. Parent signs out
     await agent1.post('/api/auth/logout');
 
-    // 3. Child profile remains accessible via public URL endpoint
+    // 3. Child profile remains accessible via public URL endpoint (by ID)
     const pubRes = await request(app).get(`/api/public/child/${maryamId}`);
     expect(pubRes.statusCode).toBe(200);
     expect(pubRes.body.success).toBe(true);
-    expect(pubRes.body.child.name).toBe('Maryam');
+    expect(pubRes.body.child.name).toBe(uniqueChildName);
     expect(pubRes.body.child.assignedTrack).toBe('level2');
     expect(pubRes.body.child.hasPin).toBe(true);
 
-    // 4. Clean up
+    // 4. Child profile accessible via public URL endpoint (by name case-insensitively)
+    const pubResByName = await request(app).get(
+      `/api/public/child/${encodeURIComponent(uniqueChildName.toLowerCase())}`
+    );
+    expect(pubResByName.statusCode).toBe(200);
+    expect(pubResByName.body.success).toBe(true);
+    expect(pubResByName.body.child.id).toBe(maryamId);
+
+    // 5. Verify PIN via public endpoint
+    const wrongPin = await request(app)
+      .post(`/api/public/child/${maryamId}/verify-pin`)
+      .send({ pin: '0000' });
+    expect(wrongPin.statusCode).toBe(401);
+    expect(wrongPin.body.verified).toBe(false);
+
+    const correctPin = await request(app)
+      .post(`/api/public/child/${maryamId}/verify-pin`)
+      .send({ pin: '5555' });
+    expect(correctPin.statusCode).toBe(200);
+    expect(correctPin.body.verified).toBe(true);
+
+    // 6. Clean up
     await db.deleteChild(maryamId);
   });
 

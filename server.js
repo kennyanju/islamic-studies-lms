@@ -24,9 +24,15 @@ function validateEnvironment() {
 
   // Check SESSION_SECRET
   const sessionSecret = process.env.SESSION_SECRET;
-  if (!sessionSecret || sessionSecret.length < 16 || sessionSecret.includes('change_this_in_production')) {
+  if (
+    !sessionSecret ||
+    sessionSecret.length < 16 ||
+    sessionSecret.includes('change_this_in_production')
+  ) {
     if (nodeEnv === 'production') {
-      warnings.push('SESSION_SECRET is missing, too short, or using default placeholder. Generating secure ephemeral session secret.');
+      warnings.push(
+        'SESSION_SECRET is missing, too short, or using default placeholder. Generating secure ephemeral session secret.'
+      );
     }
   }
 
@@ -35,10 +41,14 @@ function validateEnvironment() {
   const adminPassword = process.env.ADMIN_PASSWORD;
   if (nodeEnv === 'production') {
     if (!adminPassword || adminPassword === 'Admin@Islam2026!') {
-      warnings.push('Default admin password ("Admin@Islam2026!") is active in production. Set ADMIN_PASSWORD in environment variables.');
+      warnings.push(
+        'Default admin password ("Admin@Islam2026!") is active in production. Set ADMIN_PASSWORD in environment variables.'
+      );
     }
     if (!adminEmail) {
-      warnings.push('ADMIN_EMAIL not specified; default ("admin@islamicstudies.org") will be used.');
+      warnings.push(
+        'ADMIN_EMAIL not specified; default ("admin@islamicstudies.org") will be used.'
+      );
     }
   }
 
@@ -55,13 +65,13 @@ function validateEnvironment() {
 
   if (errors.length > 0) {
     console.error('💥 [CONFIGURATION FATAL] Startup environment validation failed:');
-    errors.forEach(e => console.error(`   ❌ ${e}`));
+    errors.forEach((e) => console.error(`   ❌ ${e}`));
     process.exit(1);
   }
 
   if (warnings.length > 0) {
     console.warn('⚠️  [CONFIGURATION WARNINGS]:');
-    warnings.forEach(w => console.warn(`   ⚠️  ${w}`));
+    warnings.forEach((w) => console.warn(`   ⚠️  ${w}`));
   }
 }
 
@@ -70,7 +80,11 @@ validateEnvironment();
 
 // Production & Development SESSION_SECRET configuration
 let SESSION_SECRET = process.env.SESSION_SECRET;
-if (!SESSION_SECRET || SESSION_SECRET.length < 16 || SESSION_SECRET.includes('change_this_in_production')) {
+if (
+  !SESSION_SECRET ||
+  SESSION_SECRET.length < 16 ||
+  SESSION_SECRET.includes('change_this_in_production')
+) {
   SESSION_SECRET = require('crypto').randomBytes(32).toString('hex');
 }
 
@@ -79,6 +93,15 @@ const MAX_FIELD_LENGTH = 500;
 
 // Initialize Database Adapter
 db.init();
+
+// Runtime Telemetry & Violation Tracking
+const telemetryMetrics = {
+  clientErrors: 0,
+  cspViolations: 0,
+  lastCspAlertTime: 0,
+  lastErrorAlertTime: 0
+};
+const telemetryLogs = [];
 
 // Seed default Super Admin if not already present
 (async function seedAdmin() {
@@ -108,23 +131,41 @@ db.init();
    Request Logging & Security Middleware
    ========================================================================== */
 
+// Package Metadata
+const pkg = require('./package.json');
+
 // Morgan HTTP logger
 app.use(morgan(isProd ? 'combined' : 'dev'));
 
 // Helmet for security headers & CSP violation reporting
-app.use(helmet({
-  contentSecurityPolicy: {
-    directives: {
-      defaultSrc: ["'self'"],
-      scriptSrc: ["'self'", "'unsafe-inline'", "cdn.jsdelivr.net", "cdnjs.cloudflare.com"],
-      styleSrc: ["'self'", "'unsafe-inline'", "fonts.googleapis.com", "cdnjs.cloudflare.com"],
-      fontSrc: ["'self'", "fonts.gstatic.com", "cdnjs.cloudflare.com"],
-      imgSrc: ["'self'", "data:", "api.dicebear.com", "https:"],
-      connectSrc: ["'self'", "https:", "http:"],
-      reportUri: ['/api/telemetry/csp']
-    }
+app.use(
+  helmet({
+    contentSecurityPolicy: {
+      directives: {
+        defaultSrc: ["'self'"],
+        scriptSrc: ["'self'", "'unsafe-inline'", 'cdn.jsdelivr.net', 'cdnjs.cloudflare.com'],
+        styleSrc: ["'self'", "'unsafe-inline'", 'fonts.googleapis.com', 'cdnjs.cloudflare.com'],
+        fontSrc: ["'self'", 'fonts.gstatic.com', 'cdnjs.cloudflare.com'],
+        imgSrc: ["'self'", 'data:', 'api.dicebear.com', 'https:'],
+        connectSrc: ["'self'", 'https:', 'http:'],
+        reportUri: ['/api/telemetry/csp']
+      }
+    },
+    crossOriginEmbedderPolicy: false
+  })
+);
+
+// Additional HTTP Security & Permissions Headers
+app.use((req, res, next) => {
+  res.setHeader('X-Content-Type-Options', 'nosniff');
+  res.setHeader('X-Frame-Options', 'DENY');
+  res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
+  res.setHeader('Permissions-Policy', 'camera=(), microphone=(), geolocation=(), payment=()');
+  if (isProd || req.secure) {
+    res.setHeader('Strict-Transport-Security', 'max-age=31536000; includeSubDomains; preload');
   }
-}));
+  next();
+});
 
 // Gzip compression
 app.use(compression());
@@ -148,34 +189,49 @@ const authLimiter = rateLimit({
 });
 app.use('/api/auth/', authLimiter);
 
+// Dedicated rate limiter for PIN verification attempts (protects learner profiles from brute-force)
+const pinLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 25,
+  message: { success: false, error: 'Too many PIN verification attempts, please try again later.' }
+});
+
 // Body parsing
 app.use(express.json({ limit: '1mb' }));
 app.use(express.urlencoded({ extended: true, limit: '1mb' }));
 
 // Session management with robust persistence
-app.use(session({
-  name: 'lms_session',
-  secret: SESSION_SECRET || 'islamic-studies-lms-dev-secret-key-12345',
-  resave: false,
-  saveUninitialized: false,
-  rolling: true,
-  cookie: {
-    httpOnly: true,
-    secure: 'auto',
-    sameSite: 'lax',
-    maxAge: 30 * 24 * 60 * 60 * 1000 // 30 days
-  }
-}));
+app.use(
+  session({
+    name: 'lms_session',
+    secret: SESSION_SECRET || 'islamic-studies-lms-dev-secret-key-12345',
+    resave: false,
+    saveUninitialized: false,
+    rolling: true,
+    cookie: {
+      httpOnly: true,
+      secure: isProd ? true : 'auto',
+      sameSite: 'strict',
+      maxAge: 30 * 24 * 60 * 60 * 1000 // 30 days
+    }
+  })
+);
 
 // Static files with Cache-Control headers (sw.js & HTML kept fresh)
-app.use(express.static(publicDir, {
-  maxAge: isProd ? '7d' : '0',
-  setHeaders: (res, filePath) => {
-    if (filePath.endsWith('.html') || filePath.endsWith('sw.js') || filePath.endsWith('manifest.json')) {
-      res.setHeader('Cache-Control', 'no-cache');
+app.use(
+  express.static(publicDir, {
+    maxAge: isProd ? '7d' : '0',
+    setHeaders: (res, filePath) => {
+      if (
+        filePath.endsWith('.html') ||
+        filePath.endsWith('sw.js') ||
+        filePath.endsWith('manifest.json')
+      ) {
+        res.setHeader('Cache-Control', 'no-cache');
+      }
     }
-  }
-}));
+  })
+);
 
 /* ==========================================================================
    Failed Login Lockout Tracker (5 failed attempts -> 15 min lockout)
@@ -263,12 +319,16 @@ loadCompiledCourseData();
 function validateModuleId(req, res, next) {
   const modId = parseInt(req.params.moduleId || req.body.moduleId || req.query.moduleId, 10);
   if (isNaN(modId) || modId < 1 || modId > 9) {
-    return res.status(400).json({ success: false, error: 'Invalid moduleId. Must be an integer between 1 and 9.' });
+    return res
+      .status(400)
+      .json({ success: false, error: 'Invalid moduleId. Must be an integer between 1 and 9.' });
   }
   if (compiledCourseData && compiledCourseData.modules) {
-    const exists = compiledCourseData.modules.some(m => m.id === modId);
+    const exists = compiledCourseData.modules.some((m) => m.id === modId);
     if (!exists) {
-      return res.status(404).json({ success: false, error: `Module ${modId} does not exist in curriculum.` });
+      return res
+        .status(404)
+        .json({ success: false, error: `Module ${modId} does not exist in curriculum.` });
     }
   }
   req.validModuleId = modId;
@@ -281,7 +341,9 @@ function validateModuleId(req, res, next) {
 
 function requireAuth(req, res, next) {
   if (!req.session || !req.session.user) {
-    return res.status(401).json({ success: false, error: 'Authentication required. Please sign in.' });
+    return res
+      .status(401)
+      .json({ success: false, error: 'Authentication required. Please sign in.' });
   }
   next();
 }
@@ -305,7 +367,9 @@ function requireParentOwnership(req, res, next) {
   }
   const parentUid = req.query.parentUid || req.body.parentUid;
   if (parentUid && parentUid !== req.session.user.uid) {
-    return res.status(403).json({ success: false, error: 'You can only access your own family data.' });
+    return res
+      .status(403)
+      .json({ success: false, error: 'You can only access your own family data.' });
   }
   next();
 }
@@ -314,19 +378,36 @@ function requireParentOwnership(req, res, next) {
    Health Check & Course Data API
    ========================================================================== */
 
-// Startup & Runtime Health Check
+// Startup & Runtime Health Check with Telemetry Metrics
 app.get(['/api/health', '/healthz'], (req, res) => {
-  const isStorageHealthy = db && typeof db._loadFile === 'function';
+  const isStorageHealthy =
+    db && (typeof db._loadFile === 'function' || db.type === 'postgresql' || db.type === 'file');
   const mem = process.memoryUsage();
   res.json({
     status: 'ok',
+    version: pkg.version || '1.0.0',
     uptime: Math.floor(process.uptime()),
     timestamp: new Date().toISOString(),
     env: process.env.NODE_ENV || 'development',
+    nodeVersion: process.version,
     storage: db ? db.type : 'unknown',
     storageHealthy: isStorageHealthy,
-    memoryRssMb: Math.round(mem.rss / 1024 / 1024)
+    memoryRssMb: Math.round(mem.rss / 1024 / 1024),
+    telemetry: {
+      clientErrorsCount: telemetryLogs.length,
+      cspReportsCount: telemetryMetrics.cspViolations
+    }
   });
+});
+
+// Interactive OpenAPI / Swagger API Documentation
+app.get(['/api/docs', '/docs'], (req, res) => {
+  const docsFile = path.join(publicDir, 'docs.html');
+  if (fs.existsSync(docsFile)) {
+    res.sendFile(docsFile);
+  } else {
+    res.redirect('/openapi.json');
+  }
 });
 
 // Course Data / Modules API
@@ -334,7 +415,9 @@ app.get(['/api/course-data', '/api/modules'], (req, res) => {
   if (fs.existsSync(dataFile)) {
     res.sendFile(dataFile);
   } else {
-    res.status(404).json({ success: false, error: 'Course data not found. Run npm run build first.' });
+    res
+      .status(404)
+      .json({ success: false, error: 'Course data not found. Run npm run build first.' });
   }
 });
 
@@ -350,13 +433,17 @@ app.post('/api/auth/register', async (req, res, next) => {
     const displayName = sanitizeStr(req.body.displayName, 100);
 
     if (!email || !password || !displayName) {
-      return res.status(400).json({ success: false, error: 'Full name, email, and password are required.' });
+      return res
+        .status(400)
+        .json({ success: false, error: 'Full name, email, and password are required.' });
     }
     if (!isValidEmail(email)) {
       return res.status(400).json({ success: false, error: 'Please enter a valid email address.' });
     }
     if (password.length < 6) {
-      return res.status(400).json({ success: false, error: 'Password must be at least 6 characters.' });
+      return res
+        .status(400)
+        .json({ success: false, error: 'Password must be at least 6 characters.' });
     }
     if (password.length > 128) {
       return res.status(400).json({ success: false, error: 'Password is too long.' });
@@ -364,10 +451,14 @@ app.post('/api/auth/register', async (req, res, next) => {
 
     const existing = await db.findUserByEmail(email);
     if (existing) {
-      return res.status(400).json({ success: false, error: 'An account with this email already exists. Please sign in instead.' });
+      return res.status(400).json({
+        success: false,
+        error: 'An account with this email already exists. Please sign in instead.'
+      });
     }
 
-    const assignedRole = (req.body.role === 'teacher' || req.body.role === 'educator') ? 'teacher' : 'parent';
+    const assignedRole =
+      req.body.role === 'teacher' || req.body.role === 'educator' ? 'teacher' : 'parent';
     const passwordHash = bcrypt.hashSync(password, BCRYPT_ROUNDS);
     const newUser = await db.createUser({
       email,
@@ -380,12 +471,14 @@ app.post('/api/auth/register', async (req, res, next) => {
 
     // Send Welcome / Registration Notification Email asynchronously
     const origin = req.protocol + '://' + req.get('host');
-    emailService.sendWelcomeEmail({
-      email: newUser.email,
-      displayName: newUser.displayName,
-      role: newUser.role,
-      origin
-    }).catch(err => console.warn('Registration email notification warning:', err.message));
+    emailService
+      .sendWelcomeEmail({
+        email: newUser.email,
+        displayName: newUser.displayName,
+        role: newUser.role,
+        origin
+      })
+      .catch((err) => console.warn('Registration email notification warning:', err.message));
 
     req.session.user = safeUser(newUser);
     res.json({ success: true, user: safeUser(newUser) });
@@ -399,7 +492,9 @@ app.post('/api/auth/forgot-password', async (req, res, next) => {
   try {
     const email = sanitizeStr(req.body.email, 254).toLowerCase();
     if (!email || !isValidEmail(email)) {
-      return res.status(400).json({ success: false, error: 'Please provide a valid email address.' });
+      return res
+        .status(400)
+        .json({ success: false, error: 'Please provide a valid email address.' });
     }
 
     const user = await db.findUserByEmail(email);
@@ -442,7 +537,9 @@ app.post('/api/auth/reset-password', async (req, res, next) => {
       return res.status(400).json({ success: false, error: 'Password reset token is required.' });
     }
     if (!targetPassword || targetPassword.length < 6) {
-      return res.status(400).json({ success: false, error: 'Password must be at least 6 characters.' });
+      return res
+        .status(400)
+        .json({ success: false, error: 'Password must be at least 6 characters.' });
     }
     if (targetPassword.length > 128) {
       return res.status(400).json({ success: false, error: 'Password is too long.' });
@@ -460,7 +557,9 @@ app.post('/api/auth/reset-password', async (req, res, next) => {
     const updatedUser = await db.resetPasswordWithToken(token, newPasswordHash);
 
     if (!updatedUser) {
-      return res.status(400).json({ success: false, error: 'Failed to reset password. Please try again.' });
+      return res
+        .status(400)
+        .json({ success: false, error: 'Failed to reset password. Please try again.' });
     }
 
     // Automatically establish session for convenience
@@ -533,7 +632,9 @@ app.post('/api/auth/sync', async (req, res, next) => {
         email: cleanEmail,
         passwordHash: '',
         displayName: cleanName || cleanEmail.split('@')[0],
-        photoURL: photoURL || `https://api.dicebear.com/7.x/avataaars/svg?seed=${encodeURIComponent(cleanEmail)}`,
+        photoURL:
+          photoURL ||
+          `https://api.dicebear.com/7.x/avataaars/svg?seed=${encodeURIComponent(cleanEmail)}`,
         role: 'parent',
         provider: provider || 'google.com',
         isVerified: true
@@ -598,12 +699,20 @@ app.get('/api/auth/verify-email', async (req, res, next) => {
   try {
     const token = req.query.token;
     if (!token) {
-      return res.status(400).send('<h2>Invalid Verification Link</h2><p>No token provided.</p><a href="/">Return to Home</a>');
+      return res
+        .status(400)
+        .send(
+          '<h2>Invalid Verification Link</h2><p>No token provided.</p><a href="/">Return to Home</a>'
+        );
     }
 
     const user = await db.findUserByVerificationToken(token);
     if (!user) {
-      return res.status(400).send('<h2>Verification Failed</h2><p>This verification link is invalid or expired.</p><a href="/">Return to Home</a>');
+      return res
+        .status(400)
+        .send(
+          '<h2>Verification Failed</h2><p>This verification link is invalid or expired.</p><a href="/">Return to Home</a>'
+        );
     }
 
     await db.updateUser(user.uid, { isVerified: true, verificationToken: null });
@@ -674,7 +783,9 @@ app.post('/api/parent/children', requireAuth, async (req, res, next) => {
     const name = sanitizeStr(req.body.name, 50);
     const avatar = sanitizeStr(req.body.avatar, 10) || '🌟';
     const pinCode = sanitizeStr(req.body.pinCode, 4);
-    const assignedTrack = ['level1', 'level2'].includes(req.body.assignedTrack) ? req.body.assignedTrack : 'level1';
+    const assignedTrack = ['level1', 'level2'].includes(req.body.assignedTrack)
+      ? req.body.assignedTrack
+      : 'level1';
 
     if (!name) {
       return res.status(400).json({ success: false, error: 'Child name is required.' });
@@ -705,7 +816,9 @@ app.put('/api/parent/children/:id', requireAuth, async (req, res, next) => {
       return res.status(404).json({ success: false, error: 'Child profile not found.' });
     }
     if (!isAdmin && child.parentUid !== sessionUid) {
-      return res.status(403).json({ success: false, error: 'You can only edit your own children\'s profiles.' });
+      return res
+        .status(403)
+        .json({ success: false, error: "You can only edit your own children's profiles." });
     }
 
     const name = sanitizeStr(req.body.name, 50);
@@ -741,7 +854,9 @@ app.delete('/api/parent/children/:id', requireAuth, async (req, res, next) => {
       return res.status(404).json({ success: false, error: 'Child profile not found.' });
     }
     if (!isAdmin && child.parentUid !== sessionUid) {
-      return res.status(403).json({ success: false, error: 'You can only delete your own children\'s profiles.' });
+      return res
+        .status(403)
+        .json({ success: false, error: "You can only delete your own children's profiles." });
     }
 
     await db.deleteChild(childId);
@@ -767,13 +882,13 @@ app.delete('/api/parent/progress/reset', requireAuth, async (req, res, next) => 
   try {
     const { childId, moduleId } = req.body;
     if (!childId) return res.status(400).json({ success: false, error: 'childId required' });
-    
+
     // Verify ownership
     const child = await db.getChildById(childId);
     if (!child || child.parentUid !== req.session.user.uid) {
       return res.status(403).json({ success: false, error: 'Unauthorized' });
     }
-    
+
     await db.resetChildProgress(childId, moduleId);
     res.json({ success: true });
   } catch (err) {
@@ -782,7 +897,7 @@ app.delete('/api/parent/progress/reset', requireAuth, async (req, res, next) => 
 });
 
 // Server-side PIN verification
-app.post('/api/parent/children/:id/verify-pin', requireAuth, async (req, res, next) => {
+app.post('/api/parent/children/:id/verify-pin', pinLimiter, requireAuth, async (req, res, next) => {
   try {
     const childId = req.params.id;
     const pin = sanitizeStr(req.body.pin, 4);
@@ -804,7 +919,9 @@ app.post('/api/parent/children/:id/verify-pin', requireAuth, async (req, res, ne
     if (valid) {
       res.json({ success: true, verified: true });
     } else {
-      res.status(401).json({ success: false, verified: false, error: 'Incorrect PIN. Please try again.' });
+      res
+        .status(401)
+        .json({ success: false, verified: false, error: 'Incorrect PIN. Please try again.' });
     }
   } catch (err) {
     next(err);
@@ -826,7 +943,7 @@ app.get('/api/public/child/:id', async (req, res, next) => {
   }
 });
 
-app.post('/api/public/child/:id/verify-pin', async (req, res, next) => {
+app.post('/api/public/child/:id/verify-pin', pinLimiter, async (req, res, next) => {
   try {
     const rawId = req.params.id || '';
     const childId = decodeURIComponent(rawId).trim();
@@ -849,7 +966,9 @@ app.post('/api/public/child/:id/verify-pin', async (req, res, next) => {
     if (valid) {
       res.json({ success: true, verified: true, child: safeChild(child) });
     } else {
-      res.status(401).json({ success: false, verified: false, error: 'Incorrect PIN. Please try again.' });
+      res
+        .status(401)
+        .json({ success: false, verified: false, error: 'Incorrect PIN. Please try again.' });
     }
   } catch (err) {
     next(err);
@@ -875,16 +994,19 @@ app.post('/api/quiz/grade', validateModuleId, quizLimiter, async (req, res, next
     const reflections = req.body.reflections || {};
     const childId = req.body.childId || null;
     let sessionUid = req.session ? req.session.user?.uid : null;
-    
+
     if (!sessionUid) {
-       sessionUid = req.body.guestId || require('crypto').randomUUID();
+      sessionUid = req.body.guestId || require('crypto').randomUUID();
     }
-    
+
     // Check attempt limits (R14)
     if (process.env.NODE_ENV !== 'test') {
       const attempts = await db.getQuizAttemptCount(sessionUid, childId, moduleId);
       if (attempts >= 3) {
-        return res.status(429).json({ success: false, error: 'Daily attempt limit (3) reached for this module. Try again tomorrow.' });
+        return res.status(429).json({
+          success: false,
+          error: 'Daily attempt limit (3) reached for this module. Try again tomorrow.'
+        });
       }
     }
 
@@ -892,18 +1014,22 @@ app.post('/api/quiz/grade', validateModuleId, quizLimiter, async (req, res, next
       loadCompiledCourseData();
     }
 
-    const moduleData = compiledCourseData.modules.find(m => m.id === moduleId);
+    const moduleData = compiledCourseData.modules.find((m) => m.id === moduleId);
     if (!moduleData) {
       return res.status(404).json({ success: false, error: `Module ${moduleId} not found.` });
     }
 
     const trackData = moduleData.tracks[track] || moduleData.tracks.level1;
-    const questions = (trackData.parsedQuestions && trackData.parsedQuestions.multipleChoice) 
-      ? trackData.parsedQuestions.multipleChoice 
-      : (trackData.parsedQuiz || []);
+    const questions =
+      trackData.parsedQuestions && trackData.parsedQuestions.multipleChoice
+        ? trackData.parsedQuestions.multipleChoice
+        : trackData.parsedQuiz || [];
 
     if (!questions || questions.length === 0) {
-      return res.status(400).json({ success: false, error: `No quiz questions found for Module ${moduleId} ${track}.` });
+      return res.status(400).json({
+        success: false,
+        error: `No quiz questions found for Module ${moduleId} ${track}.`
+      });
     }
 
     let correctCount = 0;
@@ -916,15 +1042,24 @@ app.post('/api/quiz/grade', validateModuleId, quizLimiter, async (req, res, next
     questions.forEach((q, idx) => {
       let rawAns;
       if (hasZeroKey) {
-        rawAns = submittedAnswers[idx] !== undefined ? submittedAnswers[idx] : submittedAnswers[String(idx)];
+        rawAns =
+          submittedAnswers[idx] !== undefined
+            ? submittedAnswers[idx]
+            : submittedAnswers[String(idx)];
       } else {
-        const qId = q.id !== undefined ? q.id : (idx + 1);
-        rawAns = submittedAnswers[qId] !== undefined ? submittedAnswers[qId] :
-                 submittedAnswers[String(qId)] !== undefined ? submittedAnswers[String(qId)] :
-                 submittedAnswers[`q${qId}`] !== undefined ? submittedAnswers[`q${qId}`] :
-                 submittedAnswers[`q_${qId}`] !== undefined ? submittedAnswers[`q_${qId}`] :
-                 submittedAnswers[idx + 1] !== undefined ? submittedAnswers[idx + 1] :
-                 submittedAnswers[String(idx + 1)];
+        const qId = q.id !== undefined ? q.id : idx + 1;
+        rawAns =
+          submittedAnswers[qId] !== undefined
+            ? submittedAnswers[qId]
+            : submittedAnswers[String(qId)] !== undefined
+              ? submittedAnswers[String(qId)]
+              : submittedAnswers[`q${qId}`] !== undefined
+                ? submittedAnswers[`q${qId}`]
+                : submittedAnswers[`q_${qId}`] !== undefined
+                  ? submittedAnswers[`q_${qId}`]
+                  : submittedAnswers[idx + 1] !== undefined
+                    ? submittedAnswers[idx + 1]
+                    : submittedAnswers[String(idx + 1)];
       }
 
       const studentAns = (rawAns || '').toString().trim().toUpperCase();
@@ -940,7 +1075,9 @@ app.post('/api/quiz/grade', validateModuleId, quizLimiter, async (req, res, next
         selectedAnswer: studentAns,
         correctAnswer: correctAns,
         isCorrect,
-        explanation: q.explanation || `Correct Answer is (${correctAns}). Refer to student handout and Maliki fiqh key for full breakdown.`
+        explanation:
+          q.explanation ||
+          `Correct Answer is (${correctAns}). Refer to student handout and Maliki fiqh key for full breakdown.`
       });
     });
 
@@ -970,16 +1107,18 @@ app.post('/api/quiz/grade', validateModuleId, quizLimiter, async (req, res, next
         });
       }
     }
-    
+
     // Notification on Pass (R4)
     if (passed && childId && req.session?.user?.email) {
       const child = await db.getChildById(childId);
-      emailService.sendEdgeEmail({
-        to: req.session.user.email,
-        subject: `🎉 ${child?.name || 'Your child'} just passed Module ${moduleId}!`,
-        text: `Great news! They scored ${percentage}% on the quiz. Log in to view their certificate.`,
-        html: `<p>Great news! They scored <strong>${percentage}%</strong> on the quiz.</p><p>Log in to view their certificate.</p>`
-      }).catch(err => console.warn('Notification email failed:', err.message));
+      emailService
+        .sendEdgeEmail({
+          to: req.session.user.email,
+          subject: `🎉 ${child?.name || 'Your child'} just passed Module ${moduleId}!`,
+          text: `Great news! They scored ${percentage}% on the quiz. Log in to view their certificate.`,
+          html: `<p>Great news! They scored <strong>${percentage}%</strong> on the quiz.</p><p>Log in to view their certificate.</p>`
+        })
+        .catch((err) => console.warn('Notification email failed:', err.message));
     }
 
     res.json({
@@ -1018,23 +1157,32 @@ app.get('/api/admin/overview', requireAdmin, async (req, res, next) => {
       }
     }
 
-    const passedQuizzes = quizList.filter(q => q.passed || (q.percentage >= 80)).length;
-    const passRate = totalQuizSubmissions > 0
-      ? Math.round((passedQuizzes / totalQuizSubmissions) * 100)
-      : 0;
+    const passedQuizzes = quizList.filter((q) => q.passed || q.percentage >= 80).length;
+    const passRate =
+      totalQuizSubmissions > 0 ? Math.round((passedQuizzes / totalQuizSubmissions) * 100) : 0;
 
-    const avgQuizScore = totalQuizSubmissions > 0
-      ? Math.round(quizList.reduce((acc, q) => acc + (q.percentage || Math.round(((q.score || 0) / (q.total || 1)) * 100) || 0), 0) / totalQuizSubmissions)
-      : 0;
+    const avgQuizScore =
+      totalQuizSubmissions > 0
+        ? Math.round(
+            quizList.reduce(
+              (acc, q) =>
+                acc + (q.percentage || Math.round(((q.score || 0) / (q.total || 1)) * 100) || 0),
+              0
+            ) / totalQuizSubmissions
+          )
+        : 0;
 
     // Module-by-module breakdown (Modules 1-9)
     const moduleStats = [];
     for (let mId = 1; mId <= 9; mId++) {
-      const mQuizzes = quizList.filter(q => q.moduleId === mId);
-      const mCompletions = Object.values(progressMap).filter(p => p && (p[`mod_${mId}`] || p[mId])).length;
-      const mAvg = mQuizzes.length > 0
-        ? Math.round(mQuizzes.reduce((sum, q) => sum + (q.percentage || 0), 0) / mQuizzes.length)
-        : 0;
+      const mQuizzes = quizList.filter((q) => q.moduleId === mId);
+      const mCompletions = Object.values(progressMap).filter(
+        (p) => p && (p[`mod_${mId}`] || p[mId])
+      ).length;
+      const mAvg =
+        mQuizzes.length > 0
+          ? Math.round(mQuizzes.reduce((sum, q) => sum + (q.percentage || 0), 0) / mQuizzes.length)
+          : 0;
       moduleStats.push({
         moduleId: mId,
         completions: mCompletions,
@@ -1071,12 +1219,17 @@ app.get('/api/admin/overview', requireAdmin, async (req, res, next) => {
 app.get('/api/admin/users', requireAdmin, async (req, res, next) => {
   try {
     const users = await db.getAllUsers();
-    const usersWithMeta = users.map(u => {
-      const children = (db.memoryData.children || []).filter(c => c.parentUid === u.uid);
+    const usersWithMeta = users.map((u) => {
+      const children = (db.memoryData.children || []).filter((c) => c.parentUid === u.uid);
       return {
         ...u,
         childrenCount: children.length,
-        children: children.map(c => ({ id: c.id, name: c.name, avatar: c.avatar, assignedTrack: c.assignedTrack }))
+        children: children.map((c) => ({
+          id: c.id,
+          name: c.name,
+          avatar: c.avatar,
+          assignedTrack: c.assignedTrack
+        }))
       };
     });
     res.json({ success: true, users: usersWithMeta });
@@ -1091,7 +1244,9 @@ app.put('/api/admin/users/:uid/role', requireAdmin, async (req, res, next) => {
     const { role } = req.body;
 
     if (!['parent', 'teacher', 'super_admin'].includes(role)) {
-      return res.status(400).json({ success: false, error: 'Role must be parent, teacher, or super_admin' });
+      return res
+        .status(400)
+        .json({ success: false, error: 'Role must be parent, teacher, or super_admin' });
     }
 
     const updated = await db.updateUser(uid, { role });
@@ -1109,7 +1264,9 @@ app.delete('/api/admin/users/:uid', requireAdmin, async (req, res, next) => {
   try {
     const { uid } = req.params;
     if (req.session && req.session.user && req.session.user.uid === uid) {
-      return res.status(400).json({ success: false, error: 'Cannot delete your own active admin account.' });
+      return res
+        .status(400)
+        .json({ success: false, error: 'Cannot delete your own active admin account.' });
     }
     const success = await db.deleteUser(uid);
     if (!success) {
@@ -1147,44 +1304,43 @@ app.delete('/api/admin/telemetry', requireAdmin, (req, res) => {
    Telemetry, CSP Reporting & Client Error Monitoring API
    ========================================================================== */
 
-// Runtime Telemetry & Violation Counter
-const telemetryMetrics = {
-  clientErrors: 0,
-  cspViolations: 0,
-  lastCspAlertTime: 0,
-  lastErrorAlertTime: 0
-};
-const telemetryLogs = [];
-
 // CSP Violation Reporting Endpoint
-app.post('/api/telemetry/csp', express.json({ type: ['application/json', 'application/csp-report'] }), (req, res) => {
-  telemetryMetrics.cspViolations++;
-  const report = req.body['csp-report'] || req.body || {};
-  const blockedUri = report['blocked-uri'] || report.blockedUri || 'unknown';
-  const violatedDirective = report['violated-directive'] || report.violatedDirective || 'unknown';
-  const documentUri = report['document-uri'] || report.documentUri || '';
+app.post(
+  '/api/telemetry/csp',
+  express.json({ type: ['application/json', 'application/csp-report'] }),
+  (req, res) => {
+    telemetryMetrics.cspViolations++;
+    const report = req.body['csp-report'] || req.body || {};
+    const blockedUri = report['blocked-uri'] || report.blockedUri || 'unknown';
+    const violatedDirective = report['violated-directive'] || report.violatedDirective || 'unknown';
+    const documentUri = report['document-uri'] || report.documentUri || '';
 
-  telemetryLogs.unshift({
-    id: Date.now() + Math.random(),
-    message: `CSP Blocked: ${blockedUri} (${violatedDirective})`,
-    source: 'csp',
-    stack: '',
-    url: documentUri,
-    createdAt: new Date().toISOString()
-  });
-  if (telemetryLogs.length > 100) telemetryLogs.pop();
+    telemetryLogs.unshift({
+      id: Date.now() + Math.random(),
+      message: `CSP Blocked: ${blockedUri} (${violatedDirective})`,
+      source: 'csp',
+      stack: '',
+      url: documentUri,
+      createdAt: new Date().toISOString()
+    });
+    if (telemetryLogs.length > 100) telemetryLogs.pop();
 
-  console.warn(`🛡️  [CSP Violation] Blocked URI: ${blockedUri} | Directive: ${violatedDirective} | Document: ${documentUri}`);
+    console.warn(
+      `🛡️  [CSP Violation] Blocked URI: ${blockedUri} | Directive: ${violatedDirective} | Document: ${documentUri}`
+    );
 
-  // Alert if high frequency of CSP violations occur (e.g. >= 5 within 1 min)
-  const now = Date.now();
-  if (telemetryMetrics.cspViolations >= 5 && now - telemetryMetrics.lastCspAlertTime > 60000) {
-    console.error(`🚨 [ALERT] High frequency of CSP violations detected (${telemetryMetrics.cspViolations} total). Please inspect CSP rules or unexpected scripts.`);
-    telemetryMetrics.lastCspAlertTime = now;
+    // Alert if high frequency of CSP violations occur (e.g. >= 5 within 1 min)
+    const now = Date.now();
+    if (telemetryMetrics.cspViolations >= 5 && now - telemetryMetrics.lastCspAlertTime > 60000) {
+      console.error(
+        `🚨 [ALERT] High frequency of CSP violations detected (${telemetryMetrics.cspViolations} total). Please inspect CSP rules or unexpected scripts.`
+      );
+      telemetryMetrics.lastCspAlertTime = now;
+    }
+
+    res.status(204).end();
   }
-
-  res.status(204).end();
-});
+);
 
 // Client Error Telemetry Endpoint
 app.post('/api/telemetry/errors', (req, res) => {
@@ -1201,7 +1357,9 @@ app.post('/api/telemetry/errors', (req, res) => {
   });
   if (telemetryLogs.length > 100) telemetryLogs.pop();
 
-  console.warn(`⚠️ [Client Telemetry Error] [${timestamp || new Date().toISOString()}] ${message || 'Unknown error'} at ${source || url || ''}:${lineno || ''}`);
+  console.warn(
+    `⚠️ [Client Telemetry Error] [${timestamp || new Date().toISOString()}] ${message || 'Unknown error'} at ${source || url || ''}:${lineno || ''}`
+  );
   if (stack && !isProd && typeof stack === 'string') {
     console.warn(`   Stack: ${stack.split('\n')[0]}`);
   }
@@ -1209,7 +1367,9 @@ app.post('/api/telemetry/errors', (req, res) => {
   // Alert on high volume of client errors
   const now = Date.now();
   if (telemetryMetrics.clientErrors >= 10 && now - telemetryMetrics.lastErrorAlertTime > 60000) {
-    console.error(`🚨 [ALERT] High volume of client errors logged (${telemetryMetrics.clientErrors} total). Possible frontend regression.`);
+    console.error(
+      `🚨 [ALERT] High volume of client errors logged (${telemetryMetrics.clientErrors} total). Possible frontend regression.`
+    );
     telemetryMetrics.lastErrorAlertTime = now;
   }
 
@@ -1223,7 +1383,9 @@ app.post('/api/telemetry/errors', (req, res) => {
 // SPA Fallback for static routes
 app.get('*', (req, res, next) => {
   if (req.path.startsWith('/api/')) {
-    return res.status(404).json({ success: false, error: `API endpoint ${req.method} ${req.path} not found.` });
+    return res
+      .status(404)
+      .json({ success: false, error: `API endpoint ${req.method} ${req.path} not found.` });
   }
   res.sendFile(path.join(publicDir, 'index.html'));
 });
@@ -1234,7 +1396,7 @@ app.use((err, req, res, next) => {
   const status = err.status || err.statusCode || 500;
   res.status(status).json({
     success: false,
-    error: isProd ? 'Internal server error' : (err.message || 'Server error'),
+    error: isProd ? 'Internal server error' : err.message || 'Server error',
     ...(process.env.NODE_ENV !== 'production' && { stack: err.stack })
   });
 });
@@ -1250,7 +1412,9 @@ function startServer(portToTry, attemptsRemaining = 10) {
   server.on('listening', () => {
     const isFallback = currentPort !== parseInt(PORT, 10);
     console.log(`=======================================================`);
-    console.log(` 🕌 Islamic Studies LMS Server running on port ${currentPort}${isFallback ? ' (FALLBACK ACTIVE)' : ''}`);
+    console.log(
+      ` 🕌 Islamic Studies LMS Server running on port ${currentPort}${isFallback ? ' (FALLBACK ACTIVE)' : ''}`
+    );
     console.log(` 🌐 Local: http://localhost:${currentPort}`);
     console.log(` 🛡️  Environment: ${process.env.NODE_ENV || 'development'}`);
     console.log(` 📦 Storage: ${db.type.toUpperCase()}`);
@@ -1263,10 +1427,14 @@ function startServer(portToTry, attemptsRemaining = 10) {
       console.warn(`⚠️  [PORT CONFLICT] Port ${currentPort} is currently in use.`);
       if (attemptsRemaining > 0) {
         const nextPort = currentPort + 1;
-        console.log(`🔄 [PORT FALLBACK] Automatically switching to port ${nextPort} (${attemptsRemaining} attempts left)...`);
+        console.log(
+          `🔄 [PORT FALLBACK] Automatically switching to port ${nextPort} (${attemptsRemaining} attempts left)...`
+        );
         startServer(nextPort, attemptsRemaining - 1);
       } else {
-        console.error(`💥 [STARTUP FATAL] Exhausted all port fallback attempts. Cannot start server.`);
+        console.error(
+          `💥 [STARTUP FATAL] Exhausted all port fallback attempts. Cannot start server.`
+        );
         process.exit(1);
       }
     } else {

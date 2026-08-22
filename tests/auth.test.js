@@ -6,13 +6,11 @@ describe('Authentication & Session API Tests', () => {
   const testPassword = 'Password123!';
 
   test('POST /api/auth/register - Successfully register new parent', async () => {
-    const res = await request(app)
-      .post('/api/auth/register')
-      .send({
-        displayName: 'Test Parent',
-        email: testEmail,
-        password: testPassword
-      });
+    const res = await request(app).post('/api/auth/register').send({
+      displayName: 'Test Parent',
+      email: testEmail,
+      password: testPassword
+    });
 
     expect(res.statusCode).toBe(200);
     expect(res.body.success).toBe(true);
@@ -23,13 +21,11 @@ describe('Authentication & Session API Tests', () => {
   });
 
   test('POST /api/auth/register - Reject duplicate registration', async () => {
-    const res = await request(app)
-      .post('/api/auth/register')
-      .send({
-        displayName: 'Duplicate Parent',
-        email: testEmail,
-        password: testPassword
-      });
+    const res = await request(app).post('/api/auth/register').send({
+      displayName: 'Duplicate Parent',
+      email: testEmail,
+      password: testPassword
+    });
 
     expect(res.statusCode).toBe(400);
     expect(res.body.success).toBe(false);
@@ -37,24 +33,20 @@ describe('Authentication & Session API Tests', () => {
   });
 
   test('POST /api/auth/login - Fail on wrong password', async () => {
-    const res = await request(app)
-      .post('/api/auth/login')
-      .send({
-        email: testEmail,
-        password: 'wrongpassword'
-      });
+    const res = await request(app).post('/api/auth/login').send({
+      email: testEmail,
+      password: 'wrongpassword'
+    });
 
     expect(res.statusCode).toBe(401);
     expect(res.body.success).toBe(false);
   });
 
   test('POST /api/auth/login - Success on correct password and acquire cookie', async () => {
-    const res = await request(app)
-      .post('/api/auth/login')
-      .send({
-        email: testEmail,
-        password: testPassword
-      });
+    const res = await request(app).post('/api/auth/login').send({
+      email: testEmail,
+      password: testPassword
+    });
 
     expect(res.statusCode).toBe(200);
     expect(res.body.success).toBe(true);
@@ -108,11 +100,15 @@ describe('Authentication & Session API Tests', () => {
     expect(pubRes.body.child.hasPin).toBe(true);
 
     // Verify PIN via public endpoint
-    const wrongPinRes = await request(app).post(`/api/public/child/${childId}/verify-pin`).send({ pin: '9999' });
+    const wrongPinRes = await request(app)
+      .post(`/api/public/child/${childId}/verify-pin`)
+      .send({ pin: '9999' });
     expect(wrongPinRes.statusCode).toBe(401);
     expect(wrongPinRes.body.verified).toBe(false);
 
-    const correctPinRes = await request(app).post(`/api/public/child/${childId}/verify-pin`).send({ pin: '4321' });
+    const correctPinRes = await request(app)
+      .post(`/api/public/child/${childId}/verify-pin`)
+      .send({ pin: '4321' });
     expect(correctPinRes.statusCode).toBe(200);
     expect(correctPinRes.body.verified).toBe(true);
     expect(correctPinRes.body.child.name).toBe('Ibrahim Test');
@@ -130,46 +126,38 @@ describe('Authentication & Session API Tests', () => {
     expect(resetToken).toBeDefined();
 
     // 2. Reject invalid reset token
-    const badTokenRes = await request(app)
-      .post('/api/auth/reset-password')
-      .send({
-        token: 'invalid_token_12345',
-        password: 'NewPassword2026!'
-      });
+    const badTokenRes = await request(app).post('/api/auth/reset-password').send({
+      token: 'invalid_token_12345',
+      password: 'NewPassword2026!'
+    });
 
     expect(badTokenRes.statusCode).toBe(400);
     expect(badTokenRes.body.success).toBe(false);
 
     // 3. Reject short password
-    const shortPassRes = await request(app)
-      .post('/api/auth/reset-password')
-      .send({
-        token: resetToken,
-        password: '123'
-      });
+    const shortPassRes = await request(app).post('/api/auth/reset-password').send({
+      token: resetToken,
+      password: '123'
+    });
 
     expect(shortPassRes.statusCode).toBe(400);
 
     // 4. Successfully reset password with valid token
     const newPassword = 'NewPassword2026!';
-    const resetRes = await request(app)
-      .post('/api/auth/reset-password')
-      .send({
-        token: resetToken,
-        password: newPassword
-      });
+    const resetRes = await request(app).post('/api/auth/reset-password').send({
+      token: resetToken,
+      password: newPassword
+    });
 
     expect(resetRes.statusCode).toBe(200);
     expect(resetRes.body.success).toBe(true);
     expect(resetRes.body.user.email).toBe(testEmail);
 
     // 5. Verify user can now log in with the new password
-    const loginRes = await request(app)
-      .post('/api/auth/login')
-      .send({
-        email: testEmail,
-        password: newPassword
-      });
+    const loginRes = await request(app).post('/api/auth/login').send({
+      email: testEmail,
+      password: newPassword
+    });
 
     expect(loginRes.statusCode).toBe(200);
     expect(loginRes.body.success).toBe(true);
@@ -179,12 +167,10 @@ describe('Authentication & Session API Tests', () => {
     const forgot2 = await request(app).post('/api/auth/forgot-password').send({ email: testEmail });
     expect(forgot2.body.debugToken).toBeDefined();
 
-    const reset2 = await request(app)
-      .post('/api/auth/reset-password')
-      .send({
-        token: forgot2.body.debugToken,
-        newPassword: 'AnotherPassword2026!'
-      });
+    const reset2 = await request(app).post('/api/auth/reset-password').send({
+      token: forgot2.body.debugToken,
+      newPassword: 'AnotherPassword2026!'
+    });
 
     expect(reset2.statusCode).toBe(200);
     expect(reset2.body.success).toBe(true);

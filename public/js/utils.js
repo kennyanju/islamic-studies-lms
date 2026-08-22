@@ -5,11 +5,12 @@
 
 export function escapeHtml(str) {
   if (typeof str !== 'string') return '';
-  return str.replace(/&/g, '&amp;')
-            .replace(/</g, '&lt;')
-            .replace(/>/g, '&gt;')
-            .replace(/"/g, '&quot;')
-            .replace(/'/g, '&#039;');
+  return str
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
 }
 
 export function renderMarkdown(md) {
@@ -43,7 +44,9 @@ export function openAccessibleModal(modalEl, initialFocusSelector = null) {
       focusTarget = modalEl.querySelector(initialFocusSelector);
     }
     if (!focusTarget) {
-      focusTarget = modalEl.querySelector('input:not([type="hidden"]):not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), [tabindex="0"]');
+      focusTarget = modalEl.querySelector(
+        'input:not([type="hidden"]):not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), [tabindex="0"]'
+      );
     }
     if (focusTarget) {
       focusTarget.focus();
@@ -61,9 +64,13 @@ export function openAccessibleModal(modalEl, initialFocusSelector = null) {
       }
 
       if (e.key === 'Tab') {
-        const focusable = Array.from(modalEl.querySelectorAll(
-          'button:not([disabled]), [href], input:not([type="hidden"]):not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
-        )).filter(el => el.offsetWidth > 0 || el.offsetHeight > 0 || el === document.activeElement);
+        const focusable = Array.from(
+          modalEl.querySelectorAll(
+            'button:not([disabled]), [href], input:not([type="hidden"]):not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+          )
+        ).filter(
+          (el) => el.offsetWidth > 0 || el.offsetHeight > 0 || el === document.activeElement
+        );
 
         if (focusable.length === 0) return;
 
@@ -91,7 +98,7 @@ export function closeAccessibleModal(modalEl, restoreFocus = true) {
   if (!modalEl) return;
   modalEl.classList.remove('is-open');
   modalEl.setAttribute('aria-hidden', 'true');
-  
+
   if (modalEl._trapKeyHandler) {
     modalEl.removeEventListener('keydown', modalEl._trapKeyHandler);
     modalEl._trapKeyHandler = null;
@@ -101,7 +108,11 @@ export function closeAccessibleModal(modalEl, restoreFocus = true) {
     currentlyOpenModal = null;
   }
 
-  if (restoreFocus && modalEl._previouslyFocusedElement && typeof modalEl._previouslyFocusedElement.focus === 'function') {
+  if (
+    restoreFocus &&
+    modalEl._previouslyFocusedElement &&
+    typeof modalEl._previouslyFocusedElement.focus === 'function'
+  ) {
     try {
       modalEl._previouslyFocusedElement.focus();
     } catch (err) {}
@@ -113,7 +124,14 @@ export function closeAccessibleModal(modalEl, restoreFocus = true) {
 // --------------------------------------------------------------------------
 const toastContainer = document.getElementById('toastContainer');
 
-export function showToast(title, message, type = 'success', duration = 4500, actionCallback = null, actionLabel = 'Retry') {
+export function showToast(
+  title,
+  message,
+  type = 'success',
+  duration = 4500,
+  actionCallback = null,
+  actionLabel = 'Retry'
+) {
   if (!toastContainer) return;
 
   const toast = document.createElement('div');

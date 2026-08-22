@@ -7,7 +7,12 @@
     "build": "node compile.js",
     "start": "node server.js",
     "dev": "node compile.js && node server.js",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix && prettier --write .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
     "test": "jest --runInBand --detectOpenHandles --forceExit",
+    "test:coverage": "jest --runInBand --detectOpenHandles --forceExit --coverage",
     "test:smoke": "node compile.js && jest tests/smoke.test.js --forceExit",
     "smoke": "npm run test:smoke",
     "deploy": "node compile.js && wrangler deploy",
@@ -43,7 +48,9 @@
     "nodemailer": "^9.0.5"
   },
   "devDependencies": {
+    "eslint": "^9.39.5",
     "jest": "^30.4.2",
+    "prettier": "^3.9.6",
     "supertest": "^7.2.2",
     "wrangler": "^4.124.0"
   }

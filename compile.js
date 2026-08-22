@@ -15,16 +15,18 @@ const modulesConfig = [
     mdDir: 'MD Foundations of Belief',
     title: 'Foundations of Belief',
     category: 'Aqidah (Creed)',
-    description: 'Explore Tawhid, Ash\'ari creed, Pillars of Iman vs. Islam, Angels, Divine Books, and Maliki theological principles.',
+    description:
+      "Explore Tawhid, Ash'ari creed, Pillars of Iman vs. Islam, Angels, Divine Books, and Maliki theological principles.",
     icon: 'fa-kaaba',
     estTime: '45 mins',
     bloomLevel: 'Understanding & Applying',
     objectives: [
       'Articulate the difference between Iman (faith) and Islam (practice) according to the Hadith of Jibril.',
-      'Explain the 20 necessary attributes of Allah (Sifat Wajibah) in Ash\'ari theological tradition.',
-      'Identify foundational classical texts of Maliki Aqidah such as Al-Risala of Ibn Abi Zayd al-Qayrawani and Matn Ibn \'Ashir.'
+      "Explain the 20 necessary attributes of Allah (Sifat Wajibah) in Ash'ari theological tradition.",
+      "Identify foundational classical texts of Maliki Aqidah such as Al-Risala of Ibn Abi Zayd al-Qayrawani and Matn Ibn 'Ashir."
     ],
-    malikiNotes: 'Rooted in Al-\'Aqidah al-Sanusiyyah and Al-Risala of Ibn Abi Zayd al-Qayrawani. Emphasizes Tanzih (divine transcendence without anthropomorphism).'
+    malikiNotes:
+      "Rooted in Al-'Aqidah al-Sanusiyyah and Al-Risala of Ibn Abi Zayd al-Qayrawani. Emphasizes Tanzih (divine transcendence without anthropomorphism)."
   },
   {
     id: 2,
@@ -32,16 +34,18 @@ const modulesConfig = [
     mdDir: 'MD Purification & Prayer',
     title: 'Purification & Prayer',
     category: 'Fiqh (Jurisprudence)',
-    description: 'Master Taharah, Wudu, Ghusl, Tayammum, and Fard/Sunnah elements of Salah according to Maliki fiqh.',
+    description:
+      'Master Taharah, Wudu, Ghusl, Tayammum, and Fard/Sunnah elements of Salah according to Maliki fiqh.',
     icon: 'fa-hands-wash',
     estTime: '60 mins',
     bloomLevel: 'Applying & Executing',
     objectives: [
-      'List the 7 Obligatory Acts (Farad\'i) of Wudu in Maliki fiqh, including Dalk (rubbing) and Muwalat (continuity).',
+      "List the 7 Obligatory Acts (Farad'i) of Wudu in Maliki fiqh, including Dalk (rubbing) and Muwalat (continuity).",
       'Distinguish between Fard (obligatory), Sunnah, and Mustahabb elements of ritual Salah.',
       'Demonstrate the prevalent Maliki position of Sadl (letting arms rest naturally) and Sujud as-Sahw (pre vs post salam).'
     ],
-    malikiNotes: 'Based on Al-Muwatta of Imam Malik and Matn Ibn \'Ashir. Notes 7 Fard of Wudu (Niyyah, Face, Arms, Head, Feet, Dalk, Muwalat) and Sadl during Qiyam.'
+    malikiNotes:
+      "Based on Al-Muwatta of Imam Malik and Matn Ibn 'Ashir. Notes 7 Fard of Wudu (Niyyah, Face, Arms, Head, Feet, Dalk, Muwalat) and Sadl during Qiyam."
   },
   {
     id: 3,
@@ -49,7 +53,8 @@ const modulesConfig = [
     mdDir: 'MD Seerah The Early Life of the Prophet ',
     title: 'Seerah: Early Life of the Prophet ﷺ',
     category: 'Seerah (History)',
-    description: 'Trace the noble lineage, birth, youth, marriage to Khadijah (RA), and early revelation of Prophet Muhammad ﷺ.',
+    description:
+      'Trace the noble lineage, birth, youth, marriage to Khadijah (RA), and early revelation of Prophet Muhammad ﷺ.',
     icon: 'fa-book-quran',
     estTime: '50 mins',
     bloomLevel: 'Analyzing & Synthesizing',
@@ -58,7 +63,8 @@ const modulesConfig = [
       'Analyze the noble character (Al-Amin) of Prophet Muhammad ﷺ prior to prophethood.',
       'Extract practical leadership and moral lessons for contemporary Muslim youth.'
     ],
-    malikiNotes: 'Historical narrative drawn from Ibn Hisham and Al-Qadi \'Iyad\'s Al-Shifa, highlighting love for the Prophet ﷺ as an essential foundation of faith.'
+    malikiNotes:
+      "Historical narrative drawn from Ibn Hisham and Al-Qadi 'Iyad's Al-Shifa, highlighting love for the Prophet ﷺ as an essential foundation of faith."
   },
   {
     id: 4,
@@ -66,16 +72,18 @@ const modulesConfig = [
     mdDir: 'MD Deepening Belief & the Quran',
     title: 'Deepening Belief & the Quran',
     category: 'Aqidah & Quran',
-    description: 'Understand the miracles of the Quran, Divine Attributes, Al-Qadar (Destiny), and strengthening inner conviction.',
+    description:
+      'Understand the miracles of the Quran, Divine Attributes, Al-Qadar (Destiny), and strengthening inner conviction.',
     icon: 'fa-scroll',
     estTime: '55 mins',
     bloomLevel: 'Evaluating & Reasoning',
     objectives: [
-      'Explain the linguistic and spiritual inimitability (I\'jaz) of the Noble Quran.',
+      "Explain the linguistic and spiritual inimitability (I'jaz) of the Noble Quran.",
       'Describe the correct understanding of Al-Qadar (Divine Decree) balancing divine will and human responsibility.',
-      'Identify key Quranic preservation milestones during the era of Abu Bakr and \'Uthman (RA).'
+      "Identify key Quranic preservation milestones during the era of Abu Bakr and 'Uthman (RA)."
     ],
-    malikiNotes: 'In accordance with classical Sunni creed (Ash\'ari/Maturidi), affirming divine decree without fatalism or coercion.'
+    malikiNotes:
+      "In accordance with classical Sunni creed (Ash'ari/Maturidi), affirming divine decree without fatalism or coercion."
   },
   {
     id: 5,
@@ -83,7 +91,8 @@ const modulesConfig = [
     mdDir: 'MD Fiqh of Fasting Zakah & Community',
     title: 'Fiqh of Fasting, Zakah & Community',
     category: 'Fiqh (Jurisprudence)',
-    description: 'Comprehensive guide to Sawm (Fasting), Zakat calculation, Eid celebrations, and community worship.',
+    description:
+      'Comprehensive guide to Sawm (Fasting), Zakat calculation, Eid celebrations, and community worship.',
     icon: 'fa-moon',
     estTime: '60 mins',
     bloomLevel: 'Applying & Analyzing',
@@ -92,7 +101,8 @@ const modulesConfig = [
       'Calculate Zakah across gold, currency, and trade goods using Nisab benchmarks.',
       'Explain the community responsibilities associated with Zakat al-Fitr and Eid congregational prayers.'
     ],
-    malikiNotes: 'Reflects Mukhtasar Khalil and Al-Risala rulings on Sawm (single Niyyah on night 1 of Ramadan suffices) and Zakah thresholds.'
+    malikiNotes:
+      'Reflects Mukhtasar Khalil and Al-Risala rulings on Sawm (single Niyyah on night 1 of Ramadan suffices) and Zakah thresholds.'
   },
   {
     id: 6,
@@ -100,16 +110,18 @@ const modulesConfig = [
     mdDir: 'MD Seerah Madinah & the Building of a Community',
     title: 'Seerah: Madinah & Building a Community',
     category: 'Seerah (History)',
-    description: 'The Hijrah to Madinah, building the Prophet\'s Mosque, the Constitution of Madinah, and key historical battles.',
+    description:
+      "The Hijrah to Madinah, building the Prophet's Mosque, the Constitution of Madinah, and key historical battles.",
     icon: 'fa-mosque',
     estTime: '55 mins',
     bloomLevel: 'Analyzing & Reflecting',
     objectives: [
-      'Examine the strategic significance of the Hijrah and the brotherhood (Mu\'akhah) established in Madinah.',
+      "Examine the strategic significance of the Hijrah and the brotherhood (Mu'akhah) established in Madinah.",
       'Analyze the Constitution of Madinah as a foundational charter of pluralism and civic duty.',
       'Understand the defensive context of key historical encounters (Badr, Uhud, Al-Khandaq).'
     ],
-    malikiNotes: 'Highlights the practice of the people of Madinah (\'Amal Ahl al-Madinah\') as a fundamental source of law in Maliki methodology.'
+    malikiNotes:
+      "Highlights the practice of the people of Madinah ('Amal Ahl al-Madinah') as a fundamental source of law in Maliki methodology."
   },
   {
     id: 7,
@@ -117,7 +129,8 @@ const modulesConfig = [
     mdDir: 'MD Applied Fiqh & Everyday Life',
     title: 'Applied Fiqh & Everyday Life',
     category: 'Fiqh (Jurisprudence)',
-    description: 'Practical halal and haram in food, finance, clothing, digital ethics, and everyday decision-making.',
+    description:
+      'Practical halal and haram in food, finance, clothing, digital ethics, and everyday decision-making.',
     icon: 'fa-scale-balanced',
     estTime: '50 mins',
     bloomLevel: 'Applying & Decision Making',
@@ -126,7 +139,8 @@ const modulesConfig = [
       'Identify halal vs. haram principles in dietary laws, slaughter conditions, and digital ethics.',
       'Formulate principled decision-making frameworks for navigating complex contemporary social situations.'
     ],
-    malikiNotes: 'Applies Maliki legal maxims (Al-Qawa\'id al-Fiqhiyyah) such as "Al-Aslu fi al-Ashya\'i al-Ibahah" (permissibility is the baseline).'
+    malikiNotes:
+      'Applies Maliki legal maxims (Al-Qawa\'id al-Fiqhiyyah) such as "Al-Aslu fi al-Ashya\'i al-Ibahah" (permissibility is the baseline).'
   },
   {
     id: 8,
@@ -134,7 +148,8 @@ const modulesConfig = [
     mdDir: 'MD Character, Society & Family',
     title: 'Character, Society & Family',
     category: 'Akhlaq & Adab (Ethics)',
-    description: 'Islamic etiquette (Adab), honoring parents, family rights, honesty, humility, and avoiding social vices.',
+    description:
+      'Islamic etiquette (Adab), honoring parents, family rights, honesty, humility, and avoiding social vices.',
     icon: 'fa-heart',
     estTime: '45 mins',
     bloomLevel: 'Evaluating & Internalizing',
@@ -143,7 +158,8 @@ const modulesConfig = [
       'Evaluate spiritual diseases of the heart (pride, envy, ostentation) and their remedies.',
       'Implement strategies for conflict resolution and speech preservation in family life.'
     ],
-    malikiNotes: 'Draws from Imam Malik\'s emphasis on Adab before knowledge, citing Al-Adab al-Mufrad and classical ethical treatises.'
+    malikiNotes:
+      "Draws from Imam Malik's emphasis on Adab before knowledge, citing Al-Adab al-Mufrad and classical ethical treatises."
   },
   {
     id: 9,
@@ -151,16 +167,18 @@ const modulesConfig = [
     mdDir: 'MD Seerah, History & Living Faith Today',
     title: 'Seerah, History & Living Faith Today',
     category: 'Seerah & Modern Life',
-    description: 'The Conquest of Makkah, Farewell Pilgrimage, legacy of the Sahabah, and applying Islam in contemporary society.',
+    description:
+      'The Conquest of Makkah, Farewell Pilgrimage, legacy of the Sahabah, and applying Islam in contemporary society.',
     icon: 'fa-compass',
     estTime: '50 mins',
     bloomLevel: 'Creating & Living Faith',
     objectives: [
       'Summarize the lessons of magnanimity and mercy demonstrated during Fath Makkah.',
-      'Analyze the key human rights and equality proclamations in the Farewell Sermon (Khutbat al-Wada\').',
+      "Analyze the key human rights and equality proclamations in the Farewell Sermon (Khutbat al-Wada').",
       'Formulate a personal action plan for living an authentic, active Muslim life in contemporary global society.'
     ],
-    malikiNotes: 'Synthesizes Seerah with living faith, reflecting Imam Malik\'s principle: "Nothing will rectify the end of this nation except what rectified its beginning."'
+    malikiNotes:
+      'Synthesizes Seerah with living faith, reflecting Imam Malik\'s principle: "Nothing will rectify the end of this nation except what rectified its beginning."'
   }
 ];
 
@@ -181,7 +199,15 @@ function findMdFile(dir, pattern) {
 }
 
 function parseQuestionsComprehensive(markdownText) {
-  if (!markdownText) return { multipleChoice: [], fillBlanks: [], matching: [], reflection: [], answerKeyRaw: '', studentQuestionsMd: '' };
+  if (!markdownText)
+    return {
+      multipleChoice: [],
+      fillBlanks: [],
+      matching: [],
+      reflection: [],
+      answerKeyRaw: '',
+      studentQuestionsMd: ''
+    };
 
   const lines = markdownText.split(/\r?\n/);
   const mcq = [];
@@ -213,30 +239,56 @@ function parseQuestionsComprehensive(markdownText) {
 
     studentLines.push(line);
 
-    if (/^(##|###|####)\s*(Part\s*(A|1)|Questions)/i.test(trimmed) || /Multiple\s+Choice/i.test(trimmed)) {
-      if (currentMcq) { mcq.push(currentMcq); currentMcq = null; }
+    if (
+      /^(##|###|####)\s*(Part\s*(A|1)|Questions)/i.test(trimmed) ||
+      /Multiple\s+Choice/i.test(trimmed)
+    ) {
+      if (currentMcq) {
+        mcq.push(currentMcq);
+        currentMcq = null;
+      }
       currentSection = 'MCQ';
       continue;
-    } else if (/^(##|###|####)\s*Part\s*(B|2)/i.test(trimmed) && /True\s+or\s+False/i.test(trimmed)) {
-      if (currentMcq) { mcq.push(currentMcq); currentMcq = null; }
+    } else if (
+      /^(##|###|####)\s*Part\s*(B|2)/i.test(trimmed) &&
+      /True\s+or\s+False/i.test(trimmed)
+    ) {
+      if (currentMcq) {
+        mcq.push(currentMcq);
+        currentMcq = null;
+      }
       currentSection = 'TF';
       continue;
     } else if (/^(##|###|####)\s*Part\s*(B|2)/i.test(trimmed) && /Fill\s+in/i.test(trimmed)) {
-      if (currentMcq) { mcq.push(currentMcq); currentMcq = null; }
+      if (currentMcq) {
+        mcq.push(currentMcq);
+        currentMcq = null;
+      }
       currentSection = 'FIB';
       continue;
     } else if (/^(##|###|####)\s*Part\s*C/i.test(trimmed) || /Matching/i.test(trimmed)) {
-      if (currentMcq) { mcq.push(currentMcq); currentMcq = null; }
+      if (currentMcq) {
+        mcq.push(currentMcq);
+        currentMcq = null;
+      }
       currentSection = 'MATCH';
       continue;
-    } else if (/^(##|###|####)\s*Part\s*(D|3|4)/i.test(trimmed) || /Short\s+Answer|Reflection|Scenario/i.test(trimmed)) {
-      if (currentMcq) { mcq.push(currentMcq); currentMcq = null; }
+    } else if (
+      /^(##|###|####)\s*Part\s*(D|3|4)/i.test(trimmed) ||
+      /Short\s+Answer|Reflection|Scenario/i.test(trimmed)
+    ) {
+      if (currentMcq) {
+        mcq.push(currentMcq);
+        currentMcq = null;
+      }
       currentSection = 'REFLECT';
       continue;
     }
 
     if (currentSection === 'MCQ') {
-      const qMatch = trimmed.match(/^(?:####|###|##)?\s*(?:\*\*)?\s*(\d+)\s*[\.\)]\s*(.*?)(?:\*\*)?$/);
+      const qMatch = trimmed.match(
+        /^(?:####|###|##)?\s*(?:\*\*)?\s*(\d+)\s*[\.\)]\s*(.*?)(?:\*\*)?$/
+      );
       const optMatch = trimmed.match(/^(?:\*\s*)?\(?\s*([a-dA-D])[\.\)]\s*(.*)/);
 
       if (qMatch && !optMatch) {
@@ -253,7 +305,9 @@ function parseQuestionsComprehensive(markdownText) {
         });
       }
     } else if (currentSection === 'TF') {
-      const tfMatch = trimmed.match(/^(?:####|###|##)?\s*(?:\*\*)?\s*(\d+)\s*[\.\)]\s*(.*?)(?:\*\*)?$/);
+      const tfMatch = trimmed.match(
+        /^(?:####|###|##)?\s*(?:\*\*)?\s*(\d+)\s*[\.\)]\s*(.*?)(?:\*\*)?$/
+      );
       if (tfMatch && !trimmed.toLowerCase().includes('true or false?')) {
         if (currentMcq) mcq.push(currentMcq);
         currentMcq = {
@@ -269,10 +323,16 @@ function parseQuestionsComprehensive(markdownText) {
       if (trimmed.includes('Vocabulary Bank:') || trimmed.includes('Word Bank:')) {
         const wbMatch = trimmed.match(/(Vocabulary|Word) Bank:\s*\*?([^*]+)\*?/i);
         if (wbMatch) {
-          wordBank = wbMatch[2].replace(/\*/g, '').split(/,|\n/).map(w => w.trim()).filter(Boolean);
+          wordBank = wbMatch[2]
+            .replace(/\*/g, '')
+            .split(/,|\n/)
+            .map((w) => w.trim())
+            .filter(Boolean);
         }
       } else {
-        const fibMatch = trimmed.match(/^(?:####|###|##)?\s*(?:\*\*)?\s*(\d+)\s*[\.\)]\s*(.*?)(?:\*\*)?$/);
+        const fibMatch = trimmed.match(
+          /^(?:####|###|##)?\s*(?:\*\*)?\s*(\d+)\s*[\.\)]\s*(.*?)(?:\*\*)?$/
+        );
         if (fibMatch) {
           fillBlanks.push({
             id: parseInt(fibMatch[1], 10),
@@ -296,7 +356,9 @@ function parseQuestionsComprehensive(markdownText) {
         }
       }
     } else if (currentSection === 'REFLECT') {
-      const refMatch = trimmed.match(/^(?:####|###|##)?\s*(?:\*\*)?\s*(\d+)\s*[\.\)]\s*(.*?)(?:\*\*)?$/);
+      const refMatch = trimmed.match(
+        /^(?:####|###|##)?\s*(?:\*\*)?\s*(\d+)\s*[\.\)]\s*(.*?)(?:\*\*)?$/
+      );
       if (refMatch) {
         reflection.push({
           id: parseInt(refMatch[1], 10),
@@ -314,8 +376,11 @@ function parseQuestionsComprehensive(markdownText) {
   const studentQuestionsMd = studentLines.join('\n').trim();
 
   // Parse correct answers and extract explanations from answerKeyRaw
-  mcq.forEach(q => {
-    const keyRegex1 = new RegExp(`(?:^|\\n)\\s*${q.id}\\.\\s*(?:\\*\\*)?\\s*\\(?([a-dA-D])\\)?(?:[\\:\\-\\s]+(.*))?`, 'i');
+  mcq.forEach((q) => {
+    const keyRegex1 = new RegExp(
+      `(?:^|\\n)\\s*${q.id}\\.\\s*(?:\\*\\*)?\\s*\\(?([a-dA-D])\\)?(?:[\\:\\-\\s]+(.*))?`,
+      'i'
+    );
     const m1 = answerKeyRaw.match(keyRegex1);
     if (m1) {
       q.correctAnswer = m1[1].toUpperCase();
@@ -323,7 +388,10 @@ function parseQuestionsComprehensive(markdownText) {
         q.explanation = m1[2].replace(/^\*\*|\*\*$/g, '').trim();
       }
     } else {
-      const tfRegex = new RegExp(`(?:^|\\n)\\s*${q.id}\\.\\s*(?:\\*\\*)?\\s*(True|False)(?:[\\:\\-\\s]+(.*))?`, 'i');
+      const tfRegex = new RegExp(
+        `(?:^|\\n)\\s*${q.id}\\.\\s*(?:\\*\\*)?\\s*(True|False)(?:[\\:\\-\\s]+(.*))?`,
+        'i'
+      );
       const mTF = answerKeyRaw.match(tfRegex);
       if (mTF) {
         q.correctAnswer = mTF[1].toLowerCase() === 'true' ? 'A' : 'B';
@@ -354,7 +422,11 @@ function parseSlidesFast(slidesMd) {
     const line = lines[i];
     const trimmed = line.trim();
 
-    if (trimmed.startsWith('# Slide') || trimmed.startsWith('## Slide') || (trimmed.startsWith('# ') && slides.length > 0 && line.length < 50)) {
+    if (
+      trimmed.startsWith('# Slide') ||
+      trimmed.startsWith('## Slide') ||
+      (trimmed.startsWith('# ') && slides.length > 0 && line.length < 50)
+    ) {
       if (currentSlide) {
         currentSlide.content = currentSlide.lines.join('\n');
         delete currentSlide.lines;
@@ -390,23 +462,25 @@ function parseVoiceScript(voiceScriptMd) {
   const sections = voiceScriptMd.split(/\n(?=##\s+Slide\s+\d+)/i);
   sections.forEach((sec, idx) => {
     const trimmed = sec.trim();
-    if (!trimmed || !trimmed.toLowerCase().includes("slide")) return;
+    if (!trimmed || !trimmed.toLowerCase().includes('slide')) return;
 
     const titleMatch = trimmed.match(/##\s+Slide\s+\d+:?\s*(.*)/i);
     const summaryMatch = trimmed.match(/\*\s*\*\*Slide Summary:\*\*\s*(.*)/i);
     const directionMatch = trimmed.match(/\*\s*\*\*Delivery Direction:\*\*\s*(.*)/i);
-    const scriptMatch = trimmed.match(/\*\s*\*\*Narrative Script:\*\*\s*([\s\S]*?)(?=\n\*\s*\*\*|\n---|$)/i);
+    const scriptMatch = trimmed.match(
+      /\*\s*\*\*Narrative Script:\*\*\s*([\s\S]*?)(?=\n\*\s*\*\*|\n---|$)/i
+    );
     const analogyMatch = trimmed.match(/\*\s*\*\*Concept Analogy:\*\*\s*(.*)/i);
     const checkMatch = trimmed.match(/\*\s*\*\*Check-for-Understanding Question:\*\*\s*(.*)/i);
 
     slides.push({
       slideNum: slides.length + 1,
       title: titleMatch ? titleMatch[1].trim() : `Slide ${idx + 1}`,
-      summary: summaryMatch ? summaryMatch[1].trim() : "",
-      direction: directionMatch ? directionMatch[1].trim() : "",
-      script: scriptMatch ? scriptMatch[1].trim().replace(/^"|"$/g, "") : "",
-      analogy: analogyMatch ? analogyMatch[1].trim() : "",
-      checkQuestion: checkMatch ? checkMatch[1].trim() : "",
+      summary: summaryMatch ? summaryMatch[1].trim() : '',
+      direction: directionMatch ? directionMatch[1].trim() : '',
+      script: scriptMatch ? scriptMatch[1].trim().replace(/^"|"$/g, '') : '',
+      analogy: analogyMatch ? analogyMatch[1].trim() : '',
+      checkQuestion: checkMatch ? checkMatch[1].trim() : '',
       rawSection: trimmed
     });
   });
@@ -422,20 +496,21 @@ const courseData = {
   modules: []
 };
 
-modulesConfig.forEach(cfg => {
+modulesConfig.forEach((cfg) => {
   const fullMdDir = path.join(rootDir, cfg.folder, cfg.mdDir);
-  
+
   const handout10Path = findMdFile(fullMdDir, /(handout|student_handout)_10/i);
   const questions10Path = findMdFile(fullMdDir, /questions_10/i);
-  
+
   const handout13Path = findMdFile(fullMdDir, /(handout|student_handout)_13/i);
   const questions13Path = findMdFile(fullMdDir, /questions_13/i);
-  
+
   const slidesPath = findMdFile(fullMdDir, /teacher_slides/i);
 
   const voiceScriptDir = path.join(rootDir, 'Voice Script for teacher');
-  const voiceScriptPath = findMdFile(voiceScriptDir, new RegExp(`${cfg.id}\\s*—.*Voice Script`, 'i')) ||
-                          findMdFile(voiceScriptDir, new RegExp(`${cfg.id}\\s*—`, 'i'));
+  const voiceScriptPath =
+    findMdFile(voiceScriptDir, new RegExp(`${cfg.id}\\s*—.*Voice Script`, 'i')) ||
+    findMdFile(voiceScriptDir, new RegExp(`${cfg.id}\\s*—`, 'i'));
 
   const handout10Raw = handout10Path ? fs.readFileSync(handout10Path, 'utf8') : '';
   const handout13Raw = handout13Path ? fs.readFileSync(handout13Path, 'utf8') : '';
@@ -494,7 +569,7 @@ if (!fs.existsSync(courseDataDir)) {
   fs.mkdirSync(courseDataDir, { recursive: true });
 }
 
-courseData.modules.forEach(mod => {
+courseData.modules.forEach((mod) => {
   const modPath = path.join(courseDataDir, `module_${mod.id}.json`);
   fs.writeFileSync(modPath, JSON.stringify(mod, null, 2), 'utf8');
 });
@@ -504,7 +579,7 @@ const manifestData = {
   version: courseData.version,
   compiledAt: courseData.compiledAt,
   totalModules: courseData.totalModules,
-  modules: courseData.modules.map(mod => ({
+  modules: courseData.modules.map((mod) => ({
     id: mod.id,
     title: mod.title,
     category: mod.category,
@@ -543,12 +618,18 @@ const swPath = path.join(publicDir, 'sw.js');
 if (fs.existsSync(swPath)) {
   let swContent = fs.readFileSync(swPath, 'utf8');
   const buildTag = `islamic-studies-v${Date.now().toString(36)}`;
-  swContent = swContent.replace(/const CACHE_NAME = 'islamic-studies-[^']+';/, `const CACHE_NAME = '${buildTag}';`);
+  swContent = swContent.replace(
+    /const CACHE_NAME = 'islamic-studies-[^']+';/,
+    `const CACHE_NAME = '${buildTag}';`
+  );
   fs.writeFileSync(swPath, swContent, 'utf8');
 }
 
 console.log(`Successfully compiled course data:`);
-console.log(`  - Monolithic: ${outputPath} (${(fs.statSync(outputPath).size / 1024).toFixed(1)} KB)`);
-console.log(`  - Manifest:   ${manifestPath} (${(fs.statSync(manifestPath).size / 1024).toFixed(1)} KB)`);
+console.log(
+  `  - Monolithic: ${outputPath} (${(fs.statSync(outputPath).size / 1024).toFixed(1)} KB)`
+);
+console.log(
+  `  - Manifest:   ${manifestPath} (${(fs.statSync(manifestPath).size / 1024).toFixed(1)} KB)`
+);
 console.log(`  - Modular:    ${courseDataDir}/ (${courseData.modules.length} module files)`);
-

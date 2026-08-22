@@ -17,14 +17,14 @@ describe('Server-Side Quiz Grading & Module Validation Tests', () => {
       moduleId: 1,
       track: 'level1',
       answers: {
-        "0": "B",
-        "1": "C",
-        "2": "B",
-        "3": "C",
-        "4": "B",
-        "5": "B",
-        "6": "B",
-        "7": "C"
+        0: 'B',
+        1: 'C',
+        2: 'B',
+        3: 'C',
+        4: 'B',
+        5: 'B',
+        6: 'B',
+        7: 'C'
       }
     });
 

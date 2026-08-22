@@ -1,0 +1,263 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Islamic Studies Family LMS API",
+    "version": "1.0.0",
+    "description": "Interactive REST API for Islamic Studies Family LMS — Maliki Fiqh, Ash'ari Creed, authentic Seerah, child progress tracking, parent dashboard, and Educator teleprompter tools.",
+    "contact": {
+      "name": "Islamic Studies LMS Support",
+      "email": "support@islamicstudies.org"
+    }
+  },
+  "servers": [
+    {
+      "url": "/",
+      "description": "Current Environment (Edge / Express Server)"
+    }
+  ],
+  "tags": [
+    { "name": "System & Health", "description": "System status, metrics, and curriculum metadata" },
+    {
+      "name": "Authentication",
+      "description": "User registration, login, logout, and password resets"
+    },
+    {
+      "name": "Parent & Family",
+      "description": "Child profiles, PIN management, progress, and reflections"
+    },
+    { "name": "Public Learner", "description": "Direct child access routes and PIN verification" },
+    { "name": "Quiz & Progress", "description": "Server-side grading and progress tracking" },
+    {
+      "name": "Telemetry & Observability",
+      "description": "CSP violation reporting and client-side error telemetry"
+    },
+    { "name": "Admin", "description": "Super admin metrics and user management" }
+  ],
+  "paths": {
+    "/api/health": {
+      "get": {
+        "tags": ["System & Health"],
+        "summary": "Health check & runtime telemetry",
+        "responses": {
+          "200": {
+            "description": "System health and memory metrics",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": { "type": "string", "example": "ok" },
+                    "version": { "type": "string", "example": "1.0.0" },
+                    "uptime": { "type": "integer", "example": 120 },
+                    "timestamp": { "type": "string", "format": "date-time" },
+                    "env": { "type": "string", "example": "production" },
+                    "storage": { "type": "string", "example": "cloudflare-d1" },
+                    "storageHealthy": { "type": "boolean", "example": true }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/modules": {
+      "get": {
+        "tags": ["System & Health"],
+        "summary": "Get compiled course modules curriculum",
+        "responses": {
+          "200": {
+            "description": "Full course structure and lessons",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/auth/register": {
+      "post": {
+        "tags": ["Authentication"],
+        "summary": "Register a new parent account",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["email", "password"],
+                "properties": {
+                  "email": { "type": "string", "format": "email" },
+                  "password": { "type": "string", "minLength": 6 },
+                  "displayName": { "type": "string" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Registration successful" },
+          "400": { "description": "Invalid input parameters" },
+          "409": { "description": "Email already registered" }
+        }
+      }
+    },
+    "/api/auth/login": {
+      "post": {
+        "tags": ["Authentication"],
+        "summary": "Authenticate user session",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["email", "password"],
+                "properties": {
+                  "email": { "type": "string", "format": "email" },
+                  "password": { "type": "string" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Login successful" },
+          "401": { "description": "Invalid credentials" }
+        }
+      }
+    },
+    "/api/auth/logout": {
+      "post": {
+        "tags": ["Authentication"],
+        "summary": "Terminate current user session",
+        "responses": {
+          "200": { "description": "Logged out successfully" }
+        }
+      }
+    },
+    "/api/parent/children": {
+      "get": {
+        "tags": ["Parent & Family"],
+        "summary": "List child profiles belonging to current parent",
+        "responses": {
+          "200": { "description": "List of children" },
+          "401": { "description": "Authentication required" }
+        }
+      },
+      "post": {
+        "tags": ["Parent & Family"],
+        "summary": "Create a new child profile",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["name"],
+                "properties": {
+                  "name": { "type": "string" },
+                  "avatar": { "type": "string" },
+                  "assignedTrack": { "type": "string", "enum": ["level1", "level2", "teacher"] },
+                  "pinCode": { "type": "string", "pattern": "^[0-9]{4}$" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Child profile created" },
+          "400": { "description": "Validation error" }
+        }
+      }
+    },
+    "/api/public/child/{id}": {
+      "get": {
+        "tags": ["Public Learner"],
+        "summary": "Public lookup for direct child learner URL (by ID or name)",
+        "parameters": [
+          { "name": "id", "in": "path", "required": true, "schema": { "type": "string" } }
+        ],
+        "responses": {
+          "200": { "description": "Learner profile found" },
+          "404": { "description": "Learner not found" }
+        }
+      }
+    },
+    "/api/public/child/{id}/verify-pin": {
+      "post": {
+        "tags": ["Public Learner"],
+        "summary": "Verify 4-digit PIN for direct learner login",
+        "parameters": [
+          { "name": "id", "in": "path", "required": true, "schema": { "type": "string" } }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["pin"],
+                "properties": {
+                  "pin": { "type": "string", "example": "1234" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "PIN verified successfully" },
+          "401": { "description": "Incorrect PIN" }
+        }
+      }
+    },
+    "/api/quiz/grade": {
+      "post": {
+        "tags": ["Quiz & Progress"],
+        "summary": "Grade quiz questions securely on server-side",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["moduleId", "answers"],
+                "properties": {
+                  "moduleId": { "type": "integer" },
+                  "childId": { "type": "string" },
+                  "answers": { "type": "object" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Quiz graded with score and feedback breakdown" },
+          "400": { "description": "Invalid submission format" }
+        }
+      }
+    },
+    "/api/telemetry/csp": {
+      "post": {
+        "tags": ["Telemetry & Observability"],
+        "summary": "Ingest Content Security Policy violation reports",
+        "responses": {
+          "204": { "description": "Report received" }
+        }
+      }
+    },
+    "/api/telemetry/errors": {
+      "post": {
+        "tags": ["Telemetry & Observability"],
+        "summary": "Ingest client-side runtime errors",
+        "responses": {
+          "200": { "description": "Error logged" }
+        }
+      }
+    }
+  }
+}

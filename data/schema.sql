@@ -77,3 +77,40 @@ CREATE TABLE IF NOT EXISTS reflections (
 );
 
 CREATE INDEX IF NOT EXISTS idx_reflections_student ON reflections(student_id);
+
+CREATE TABLE IF NOT EXISTS reset_tokens (
+  token VARCHAR(128) PRIMARY KEY,
+  uid VARCHAR(64) NOT NULL REFERENCES users(uid) ON DELETE CASCADE,
+  email VARCHAR(255) NOT NULL,
+  expires_at BIGINT NOT NULL,
+  used INT DEFAULT 0 NOT NULL,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE INDEX IF NOT EXISTS idx_reset_token ON reset_tokens(token);
+CREATE INDEX IF NOT EXISTS idx_reset_expires ON reset_tokens(expires_at, used);
+
+CREATE TABLE IF NOT EXISTS telemetry_logs (
+  id SERIAL PRIMARY KEY,
+  message TEXT,
+  source VARCHAR(128),
+  stack TEXT,
+  url TEXT,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE INDEX IF NOT EXISTS idx_telemetry_created ON telemetry_logs(created_at);
+
+CREATE TABLE IF NOT EXISTS audit_log (
+  id SERIAL PRIMARY KEY,
+  actor_uid VARCHAR(64) NOT NULL,
+  action VARCHAR(64) NOT NULL,
+  target_uid VARCHAR(64),
+  metadata TEXT,
+  ip_address VARCHAR(64),
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE INDEX IF NOT EXISTS idx_audit_actor ON audit_log(actor_uid);
+CREATE INDEX IF NOT EXISTS idx_audit_action ON audit_log(action);
+CREATE INDEX IF NOT EXISTS idx_audit_created ON audit_log(created_at);

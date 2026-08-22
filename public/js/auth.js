@@ -18,14 +18,17 @@ export function evaluatePasswordStrength(pass) {
   if (/[0-9]/.test(pass)) score += 1;
   if (/[^A-Za-z0-9]/.test(pass)) score += 1;
 
-  if (score <= 1) return { score: 1, label: 'Weak', class: 'weak', hint: 'Use 8+ chars with letters & numbers' };
-  if (score === 2) return { score: 2, label: 'Fair', class: 'fair', hint: 'Good start. Add uppercase or symbols' };
-  if (score === 3 || score === 4) return { score: 3, label: 'Good', class: 'good', hint: 'Strong password. Excellent!' };
+  if (score <= 1)
+    return { score: 1, label: 'Weak', class: 'weak', hint: 'Use 8+ chars with letters & numbers' };
+  if (score === 2)
+    return { score: 2, label: 'Fair', class: 'fair', hint: 'Good start. Add uppercase or symbols' };
+  if (score === 3 || score === 4)
+    return { score: 3, label: 'Good', class: 'good', hint: 'Strong password. Excellent!' };
   return { score: 5, label: 'Excellent', class: 'strong', hint: 'Very strong secure password! 🛡️' };
 }
 
 export function initPasswordUX() {
-  document.querySelectorAll('.btn-password-toggle').forEach(btn => {
+  document.querySelectorAll('.btn-password-toggle').forEach((btn) => {
     btn.addEventListener('click', () => {
       const targetId = btn.dataset.target;
       const input = document.getElementById(targetId);
@@ -61,8 +64,20 @@ export function initPasswordUX() {
     });
   }
 
-  setupStrengthListener('homeSignUpPasswordInput', 'homePasswordStrengthContainer', 'homeStrengthFill', 'homeStrengthLabel', 'homeStrengthCriteria');
-  setupStrengthListener('signUpPasswordInput', 'modalPasswordStrengthContainer', 'modalStrengthFill', 'modalStrengthLabel', 'modalStrengthCriteria');
+  setupStrengthListener(
+    'homeSignUpPasswordInput',
+    'homePasswordStrengthContainer',
+    'homeStrengthFill',
+    'homeStrengthLabel',
+    'homeStrengthCriteria'
+  );
+  setupStrengthListener(
+    'signUpPasswordInput',
+    'modalPasswordStrengthContainer',
+    'modalStrengthFill',
+    'modalStrengthLabel',
+    'modalStrengthCriteria'
+  );
 }
 
 /**

@@ -24,17 +24,21 @@ export default {
       console.error('Unhandled Worker Edge Exception:', err);
       const isApi = new URL(request.url).pathname.startsWith('/api');
       if (isApi) {
-        return new Response(JSON.stringify({
-          success: false,
-          error: 'Internal Server Error. The request could not be processed.',
-          details: err.message
-        }), {
-          status: 500,
-          headers: { 'Content-Type': 'application/json' }
-        });
+        return new Response(
+          JSON.stringify({
+            success: false,
+            error: 'Internal Server Error. The request could not be processed.',
+            details: err.message
+          }),
+          {
+            status: 500,
+            headers: { 'Content-Type': 'application/json' }
+          }
+        );
       }
 
-      return new Response(`<!DOCTYPE html>
+      return new Response(
+        `<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
@@ -54,10 +58,12 @@ export default {
     <a href="/">Reload Application</a>
   </div>
 </body>
-</html>`, {
-        status: 500,
-        headers: { 'Content-Type': 'text/html; charset=utf-8' }
-      });
+</html>`,
+        {
+          status: 500,
+          headers: { 'Content-Type': 'text/html; charset=utf-8' }
+        }
+      );
     }
   }
 };

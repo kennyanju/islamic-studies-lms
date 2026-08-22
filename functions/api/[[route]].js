@@ -57,7 +57,9 @@ async function verifyPassword(password, storedHash) {
 }
 
 function bufToHex(buf) {
-  return Array.from(buf).map(b => b.toString(16).padStart(2, '0')).join('');
+  return Array.from(buf)
+    .map((b) => b.toString(16).padStart(2, '0'))
+    .join('');
 }
 
 function hexToBuf(hex) {
@@ -78,6 +80,9 @@ function getJwtSecret(env) {
   if (!globalThis._EPHEMERAL_JWT_SECRET) {
     const randBytes = crypto.getRandomValues(new Uint8Array(32));
     globalThis._EPHEMERAL_JWT_SECRET = bufToHex(randBytes);
+    console.warn(
+      '⚠️ [Security Notice] Worker SESSION_SECRET not set in environment secrets; using cryptographically generated ephemeral secret.'
+    );
   }
   return globalThis._EPHEMERAL_JWT_SECRET;
 }
@@ -148,9 +153,11 @@ async function signJwt(payload, secret) {
   const enc = new TextEncoder();
   const header = { alg: 'HS256', typ: 'JWT' };
   const b64Header = base64UrlEncode(JSON.stringify(header));
-  const b64Payload = base64UrlEncode(JSON.stringify({ ...payload, exp: Math.floor(Date.now() / 1000) + (7 * 86400) }));
+  const b64Payload = base64UrlEncode(
+    JSON.stringify({ ...payload, exp: Math.floor(Date.now() / 1000) + 7 * 86400 })
+  );
   const dataToSign = `${b64Header}.${b64Payload}`;
-  
+
   const key = await crypto.subtle.importKey(
     'raw',
     enc.encode(secret),
@@ -182,7 +189,7 @@ async function verifyJwt(token, secret) {
     const sigBytes = base64UrlToBytes(b64Sig);
     const isValid = await crypto.subtle.verify('HMAC', key, sigBytes, enc.encode(dataToSign));
     if (!isValid) return null;
-    
+
     const payload = JSON.parse(base64UrlDecode(b64Payload));
     if (payload.exp && payload.exp < Math.floor(Date.now() / 1000)) return null;
     return payload;
@@ -194,7 +201,7 @@ async function verifyJwt(token, secret) {
 function parseCookies(cookieHeader) {
   const list = {};
   if (!cookieHeader) return list;
-  cookieHeader.split(';').forEach(cookie => {
+  cookieHeader.split(';').forEach((cookie) => {
     let [name, ...rest] = cookie.split('=');
     name = name.trim();
     if (!name) return;
@@ -211,7 +218,9 @@ function resolveCorsOrigin(request, env) {
 
   // If ALLOWED_ORIGINS configured (e.g. "https://malikikids.com,https://learn.malikikids.com")
   if (env && env.ALLOWED_ORIGINS) {
-    const allowedList = env.ALLOWED_ORIGINS.split(',').map(s => s.trim().toLowerCase()).filter(Boolean);
+    const allowedList = env.ALLOWED_ORIGINS.split(',')
+      .map((s) => s.trim().toLowerCase())
+      .filter(Boolean);
     const originLower = reqOrigin.toLowerCase();
     if (allowedList.includes(originLower)) {
       return reqOrigin;
@@ -228,8 +237,8 @@ function jsonResponse(data, status = 200, headers = {}, request = null, env = nu
   const corsHeaders = {
     'Content-Type': 'application/json',
     'Access-Control-Allow-Origin': corsOrigin,
-    'Access-Control-Allow-Credentials': (origin && corsOrigin !== '*') ? 'true' : 'false',
-    'Vary': 'Origin',
+    'Access-Control-Allow-Credentials': origin && corsOrigin !== '*' ? 'true' : 'false',
+    Vary: 'Origin',
     ...headers
   };
   return new Response(JSON.stringify(data), {
@@ -267,7 +276,8 @@ async function verifyTurnstileToken(token, secret, clientIp) {
 // Cloudflare Edge Email Dispatch Engine (Resend REST API / Web Standards)
 // --------------------------------------------------------------------------
 async function sendEdgeEmail({ to, subject, html, text, env }) {
-  const from = (env && (env.EMAIL_FROM || env.FROM_EMAIL)) || 'Islamic Studies LMS <onboarding@resend.dev>';
+  const from =
+    (env && (env.EMAIL_FROM || env.FROM_EMAIL)) || 'Islamic Studies LMS <onboarding@resend.dev>';
   const apiKey = env && env.RESEND_API_KEY;
 
   if (apiKey) {
@@ -275,7 +285,7 @@ async function sendEdgeEmail({ to, subject, html, text, env }) {
       const res = await fetch('https://api.resend.com/emails', {
         method: 'POST',
         headers: {
-          'Authorization': `Bearer ${apiKey}`,
+          Authorization: `Bearer ${apiKey}`,
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
@@ -294,7 +304,9 @@ async function sendEdgeEmail({ to, subject, html, text, env }) {
     }
   }
 
-  console.log(`✉️ [Edge Simulated Email] To: ${to} | Subject: "${subject}" (Set RESEND_API_KEY in Cloudflare Worker secrets for live email delivery)`);
+  console.log(
+    `✉️ [Edge Simulated Email] To: ${to} | Subject: "${subject}" (Set RESEND_API_KEY in Cloudflare Worker secrets for live email delivery)`
+  );
   return { success: true, simulated: true };
 }
 
@@ -478,7 +490,9 @@ async function ensureSuperAdminBootstrap(env) {
       const uid = 'admin_root_' + Date.now().toString(36);
       await env.DB.prepare(
         'INSERT INTO users (uid, email, display_name, role, is_verified, provider, password_hash) VALUES (?, ?, ?, ?, 1, ?, ?)'
-      ).bind(uid, adminEmail, 'Super Administrator', 'super_admin', 'local', pHash).run();
+      )
+        .bind(uid, adminEmail, 'Super Administrator', 'super_admin', 'local', pHash)
+        .run();
       console.log(`👑 [Bootstrap] Initial Super Admin account created for ${adminEmail}`);
     }
   } catch (err) {
@@ -514,7 +528,10 @@ export async function onRequest(context) {
   const path = url.pathname.replace(/^\/api/, '');
   const method = request.method;
   const jwtSecret = getJwtSecret(env);
-  const clientIp = request.headers.get('CF-Connecting-IP') || request.headers.get('x-forwarded-for') || '127.0.0.1';
+  const clientIp =
+    request.headers.get('CF-Connecting-IP') ||
+    request.headers.get('x-forwarded-for') ||
+    '127.0.0.1';
 
   // Ensure first-run Super Admin is initialized if users table is empty
   await ensureSuperAdminBootstrap(env);
@@ -530,7 +547,7 @@ export async function onRequest(context) {
         'Access-Control-Allow-Headers': 'Content-Type, Authorization, Cookie',
         'Access-Control-Allow-Credentials': corsOrigin !== '*' ? 'true' : 'false',
         'Access-Control-Max-Age': '86400',
-        'Vary': 'Origin'
+        Vary: 'Origin'
       }
     });
   }
@@ -538,25 +555,57 @@ export async function onRequest(context) {
   // Tiered Rate Limiting on Auth & Sensitive Endpoints
   if (path === '/auth/login') {
     if (!checkRateLimit(clientIp, 'auth_login', 10, 60)) {
-      return jsonResponse({ success: false, error: 'Too many login attempts. Please wait 1 minute before retrying.' }, 429, {}, request, env);
+      return jsonResponse(
+        { success: false, error: 'Too many login attempts. Please wait 1 minute before retrying.' },
+        429,
+        {},
+        request,
+        env
+      );
     }
   } else if (path === '/auth/register') {
     if (!checkRateLimit(clientIp, 'auth_register', 5, 60)) {
-      return jsonResponse({ success: false, error: 'Too many account registration requests. Please wait a moment and try again.' }, 429, {}, request, env);
+      return jsonResponse(
+        {
+          success: false,
+          error: 'Too many account registration requests. Please wait a moment and try again.'
+        },
+        429,
+        {},
+        request,
+        env
+      );
     }
   } else if (path === '/auth/forgot-password' || path === '/auth/reset-password') {
     if (!checkRateLimit(clientIp, 'auth_reset', 5, 60)) {
-      return jsonResponse({ success: false, error: 'Too many password reset requests. Please wait a moment.' }, 429, {}, request, env);
+      return jsonResponse(
+        { success: false, error: 'Too many password reset requests. Please wait a moment.' },
+        429,
+        {},
+        request,
+        env
+      );
     }
   } else if (path.startsWith('/auth/')) {
     if (!checkRateLimit(clientIp, 'auth_general', 30, 60)) {
-      return jsonResponse({ success: false, error: 'Too many authentication attempts. Please wait a moment and try again.' }, 429, {}, request, env);
+      return jsonResponse(
+        {
+          success: false,
+          error: 'Too many authentication attempts. Please wait a moment and try again.'
+        },
+        429,
+        {},
+        request,
+        env
+      );
     }
   }
 
   // Extract authenticated user from signed JWT cookie or Authorization header
   const cookies = parseCookies(request.headers.get('Cookie') || '');
-  const token = cookies['cf_session'] || (request.headers.get('Authorization') || '').replace(/^Bearer\s+/i, '');
+  const token =
+    cookies['cf_session'] ||
+    (request.headers.get('Authorization') || '').replace(/^Bearer\s+/i, '');
   const authUser = await verifyJwt(token, jwtSecret);
 
   // 1. Deep Health Endpoint
@@ -579,16 +628,23 @@ export async function onRequest(context) {
     }
 
     const isHealthy = dbStatus === 'healthy' || dbStatus === 'unbound (edge memory mode)';
-    return jsonResponse({
-      status: isHealthy ? 'ok' : 'degraded',
-      timestamp: new Date().toISOString(),
-      storage: env.DB ? 'Cloudflare D1 SQL' : 'Edge Memory',
-      databaseStatus: dbStatus,
-      databaseLatencyMs: dbLatencyMs,
-      uptime,
-      edge: 'Cloudflare Global Network',
-      storageHealthy: isHealthy
-    }, isHealthy ? 200 : 503, {}, request, env);
+    return jsonResponse(
+      {
+        status: isHealthy ? 'ok' : 'degraded',
+        version: '1.0.0',
+        timestamp: new Date().toISOString(),
+        storage: env.DB ? 'Cloudflare D1 SQL' : 'Edge Memory',
+        databaseStatus: dbStatus,
+        databaseLatencyMs: dbLatencyMs,
+        uptime,
+        edge: 'Cloudflare Global Network',
+        storageHealthy: isHealthy
+      },
+      isHealthy ? 200 : 503,
+      {},
+      request,
+      env
+    );
   }
 
   // 2. Auth: Session Verification (Me)
@@ -607,55 +663,119 @@ export async function onRequest(context) {
 
       // Turnstile Bot Defense
       if (env.TURNSTILE_SECRET_KEY) {
-        const turnstile = await verifyTurnstileToken(turnstileToken, env.TURNSTILE_SECRET_KEY, clientIp);
+        const turnstile = await verifyTurnstileToken(
+          turnstileToken,
+          env.TURNSTILE_SECRET_KEY,
+          clientIp
+        );
         if (!turnstile.success) {
-          return jsonResponse({ success: false, error: 'Security verification failed. Please complete the captcha check and try again.' }, 400, {}, request, env);
+          return jsonResponse(
+            {
+              success: false,
+              error:
+                'Security verification failed. Please complete the captcha check and try again.'
+            },
+            400,
+            {},
+            request,
+            env
+          );
         }
       }
 
       if (!email || !password || typeof password !== 'string' || password.length < 6) {
-        return jsonResponse({ success: false, error: 'Valid email and secure password (min 6 characters) are required.' }, 400, {}, request, env);
+        return jsonResponse(
+          {
+            success: false,
+            error: 'Valid email and secure password (min 6 characters) are required.'
+          },
+          400,
+          {},
+          request,
+          env
+        );
       }
       if (email.length > 254 || (displayName && displayName.length > 100)) {
-        return jsonResponse({ success: false, error: 'Input exceeds maximum allowed length.' }, 400, {}, request, env);
+        return jsonResponse(
+          { success: false, error: 'Input exceeds maximum allowed length.' },
+          400,
+          {},
+          request,
+          env
+        );
       }
 
       const cleanEmail = email.trim().toLowerCase();
-      const userRole = (role === 'teacher' || role === 'educator') ? 'teacher' : 'parent';
+      const userRole = role === 'teacher' || role === 'educator' ? 'teacher' : 'parent';
       const name = (displayName || cleanEmail.split('@')[0]).trim().slice(0, 100);
-      const uid = 'user_' + Date.now().toString(36) + '_' + Math.random().toString(36).substring(2, 8);
+      const uid =
+        'user_' + Date.now().toString(36) + '_' + Math.random().toString(36).substring(2, 8);
 
       if (env.DB) {
         try {
-          const existing = await env.DB.prepare('SELECT uid FROM users WHERE email = ?').bind(cleanEmail).first();
+          const existing = await env.DB.prepare('SELECT uid FROM users WHERE email = ?')
+            .bind(cleanEmail)
+            .first();
           if (existing) {
-            return jsonResponse({ success: false, error: 'An account with this email already exists.' }, 400, {}, request, env);
+            return jsonResponse(
+              { success: false, error: 'An account with this email already exists.' },
+              400,
+              {},
+              request,
+              env
+            );
           }
           const pHash = await hashPassword(password);
 
           await env.DB.prepare(
             'INSERT INTO users (uid, email, display_name, role, is_verified, provider, password_hash) VALUES (?, ?, ?, ?, 1, ?, ?)'
-          ).bind(uid, cleanEmail, name, userRole, 'local', pHash).run();
+          )
+            .bind(uid, cleanEmail, name, userRole, 'local', pHash)
+            .run();
 
           // Dispatch Welcome Email in the background
           sendEdgeEmail({
             to: cleanEmail,
             subject: 'Welcome to Islamic Studies Family LMS 🕌',
-            html: buildWelcomeHtml({ appUrl: url.origin, email: cleanEmail, displayName: name, role: userRole }),
+            html: buildWelcomeHtml({
+              appUrl: url.origin,
+              email: cleanEmail,
+              displayName: name,
+              role: userRole
+            }),
             env
-          }).catch(e => console.warn('Welcome email notice:', e.message));
+          }).catch((e) => console.warn('Welcome email notice:', e.message));
         } catch (dbErr) {
           console.warn('D1 insert warning:', dbErr.message);
         }
       }
 
-      const user = { uid, email: cleanEmail, displayName: name, role: userRole, isVerified: true, provider: 'local' };
+      const user = {
+        uid,
+        email: cleanEmail,
+        displayName: name,
+        role: userRole,
+        isVerified: true,
+        provider: 'local'
+      };
       const sessionToken = await signJwt(user, jwtSecret);
-      return jsonResponse({ success: true, user }, 200, {
-        'Set-Cookie': `cf_session=${sessionToken}; Path=/; HttpOnly; SameSite=Lax; Secure; Max-Age=604800`
-      }, request, env);
+      return jsonResponse(
+        { success: true, user },
+        200,
+        {
+          'Set-Cookie': `cf_session=${sessionToken}; Path=/; HttpOnly; SameSite=Strict; Secure; Max-Age=604800`
+        },
+        request,
+        env
+      );
     } catch (err) {
-      return jsonResponse({ success: false, error: 'Registration error: ' + err.message }, 500, {}, request, env);
+      return jsonResponse(
+        { success: false, error: 'Registration error: ' + err.message },
+        500,
+        {},
+        request,
+        env
+      );
     }
   }
 
@@ -667,21 +787,43 @@ export async function onRequest(context) {
 
       // Turnstile Bot Defense
       if (env.TURNSTILE_SECRET_KEY) {
-        const turnstile = await verifyTurnstileToken(turnstileToken, env.TURNSTILE_SECRET_KEY, clientIp);
+        const turnstile = await verifyTurnstileToken(
+          turnstileToken,
+          env.TURNSTILE_SECRET_KEY,
+          clientIp
+        );
         if (!turnstile.success) {
-          return jsonResponse({ success: false, error: 'Security verification failed. Please complete the captcha check and try again.' }, 400, {}, request, env);
+          return jsonResponse(
+            {
+              success: false,
+              error:
+                'Security verification failed. Please complete the captcha check and try again.'
+            },
+            400,
+            {},
+            request,
+            env
+          );
         }
       }
 
       if (!email || !password || typeof password !== 'string') {
-        return jsonResponse({ success: false, error: 'Email and password are required.' }, 400, {}, request, env);
+        return jsonResponse(
+          { success: false, error: 'Email and password are required.' },
+          400,
+          {},
+          request,
+          env
+        );
       }
       const cleanEmail = email.trim().toLowerCase();
 
       // Check Cloudflare D1 Database
       if (env.DB) {
         try {
-          const row = await env.DB.prepare('SELECT * FROM users WHERE email = ?').bind(cleanEmail).first();
+          const row = await env.DB.prepare('SELECT * FROM users WHERE email = ?')
+            .bind(cleanEmail)
+            .first();
           if (row) {
             const isMatch = await verifyPassword(password, row.password_hash);
             if (isMatch) {
@@ -694,9 +836,15 @@ export async function onRequest(context) {
                 provider: row.provider
               };
               const sessionToken = await signJwt(user, jwtSecret);
-              return jsonResponse({ success: true, user }, 200, {
-                'Set-Cookie': `cf_session=${sessionToken}; Path=/; HttpOnly; SameSite=Lax; Secure; Max-Age=604800`
-              }, request, env);
+              return jsonResponse(
+                { success: true, user },
+                200,
+                {
+                  'Set-Cookie': `cf_session=${sessionToken}; Path=/; HttpOnly; SameSite=Strict; Secure; Max-Age=604800`
+                },
+                request,
+                env
+              );
             }
           }
         } catch (dbErr) {
@@ -704,17 +852,35 @@ export async function onRequest(context) {
         }
       }
 
-      return jsonResponse({ success: false, error: 'Invalid email or password.' }, 401, {}, request, env);
+      return jsonResponse(
+        { success: false, error: 'Invalid email or password.' },
+        401,
+        {},
+        request,
+        env
+      );
     } catch (err) {
-      return jsonResponse({ success: false, error: 'Login error: ' + err.message }, 500, {}, request, env);
+      return jsonResponse(
+        { success: false, error: 'Login error: ' + err.message },
+        500,
+        {},
+        request,
+        env
+      );
     }
   }
 
   // 5. Auth: Logout
   if (path === '/auth/logout' && method === 'POST') {
-    return jsonResponse({ success: true }, 200, {
-      'Set-Cookie': `cf_session=; Path=/; HttpOnly; SameSite=Lax; Secure; Max-Age=0`
-    }, request, env);
+    return jsonResponse(
+      { success: true },
+      200,
+      {
+        'Set-Cookie': `cf_session=; Path=/; HttpOnly; SameSite=Strict; Secure; Max-Age=0`
+      },
+      request,
+      env
+    );
   }
 
   // 6. Auth: Forgot Password & Reset Password
@@ -725,40 +891,69 @@ export async function onRequest(context) {
 
       // Turnstile Bot Defense
       if (env.TURNSTILE_SECRET_KEY) {
-        const turnstile = await verifyTurnstileToken(turnstileToken, env.TURNSTILE_SECRET_KEY, clientIp);
+        const turnstile = await verifyTurnstileToken(
+          turnstileToken,
+          env.TURNSTILE_SECRET_KEY,
+          clientIp
+        );
         if (!turnstile.success) {
-          return jsonResponse({ success: false, error: 'Security verification failed. Please complete the captcha check.' }, 400, {}, request, env);
+          return jsonResponse(
+            {
+              success: false,
+              error: 'Security verification failed. Please complete the captcha check.'
+            },
+            400,
+            {},
+            request,
+            env
+          );
         }
       }
 
-      if (!email) return jsonResponse({ success: false, error: 'Email is required' }, 400, {}, request, env);
+      if (!email)
+        return jsonResponse({ success: false, error: 'Email is required' }, 400, {}, request, env);
 
       const cleanEmail = email.trim().toLowerCase();
       const resetToken = 'rst_' + crypto.randomUUID().replace(/-/g, '');
       const expiresAt = Date.now() + 3600000; // 1 hour
 
       if (env.DB) {
-        const user = await env.DB.prepare('SELECT uid, display_name FROM users WHERE email = ?').bind(cleanEmail).first();
+        const user = await env.DB.prepare('SELECT uid, display_name FROM users WHERE email = ?')
+          .bind(cleanEmail)
+          .first();
         if (user) {
           await env.DB.prepare(
             'INSERT INTO reset_tokens (token, uid, email, expires_at, used) VALUES (?, ?, ?, ?, 0)'
-          ).bind(resetToken, user.uid, cleanEmail, expiresAt).run();
+          )
+            .bind(resetToken, user.uid, cleanEmail, expiresAt)
+            .run();
 
           const resetUrl = `${url.origin}/?resetToken=${encodeURIComponent(resetToken)}&email=${encodeURIComponent(cleanEmail)}`;
           sendEdgeEmail({
             to: cleanEmail,
             subject: 'Password Reset Request - Islamic Studies LMS 🔐',
-            html: buildPasswordResetHtml({ resetUrl, email: cleanEmail, displayName: user.display_name }),
+            html: buildPasswordResetHtml({
+              resetUrl,
+              email: cleanEmail,
+              displayName: user.display_name
+            }),
             env
-          }).catch(e => console.warn('Password reset email dispatch notice:', e.message));
+          }).catch((e) => console.warn('Password reset email dispatch notice:', e.message));
         }
       }
 
       // Security: Do NOT leak reset token in public JSON payload
-      return jsonResponse({
-        success: true,
-        message: 'If an account matches that email address, password reset instructions have been dispatched.'
-      }, 200, {}, request, env);
+      return jsonResponse(
+        {
+          success: true,
+          message:
+            'If an account matches that email address, password reset instructions have been dispatched.'
+        },
+        200,
+        {},
+        request,
+        env
+      );
     } catch (e) {
       return jsonResponse({ success: false, error: e.message }, 500, {}, request, env);
     }
@@ -770,24 +965,46 @@ export async function onRequest(context) {
       const token = body.token;
       const targetPass = body.newPassword || body.password;
       if (!token || !targetPass || typeof targetPass !== 'string' || targetPass.length < 6) {
-        return jsonResponse({ success: false, error: 'Valid token and secure new password (min 6 characters) are required.' }, 400, {}, request);
+        return jsonResponse(
+          {
+            success: false,
+            error: 'Valid token and secure new password (min 6 characters) are required.'
+          },
+          400,
+          {},
+          request
+        );
       }
 
       let updatedUser = null;
       if (env.DB) {
         const record = await env.DB.prepare(
           'SELECT * FROM reset_tokens WHERE token = ? AND used = 0'
-        ).bind(token).first();
+        )
+          .bind(token)
+          .first();
 
         if (!record || record.expires_at < Date.now()) {
-          return jsonResponse({ success: false, error: 'Invalid or expired password reset token. Please request a new one.' }, 400, {}, request);
+          return jsonResponse(
+            {
+              success: false,
+              error: 'Invalid or expired password reset token. Please request a new one.'
+            },
+            400,
+            {},
+            request
+          );
         }
 
         const pHash = await hashPassword(targetPass);
-        await env.DB.prepare('UPDATE users SET password_hash = ? WHERE uid = ?').bind(pHash, record.uid).run();
+        await env.DB.prepare('UPDATE users SET password_hash = ? WHERE uid = ?')
+          .bind(pHash, record.uid)
+          .run();
         await env.DB.prepare('UPDATE reset_tokens SET used = 1 WHERE token = ?').bind(token).run();
 
-        const userRow = await env.DB.prepare('SELECT * FROM users WHERE uid = ?').bind(record.uid).first();
+        const userRow = await env.DB.prepare('SELECT * FROM users WHERE uid = ?')
+          .bind(record.uid)
+          .first();
         if (userRow) {
           updatedUser = {
             uid: userRow.uid,
@@ -802,20 +1019,29 @@ export async function onRequest(context) {
         // Audit Log
         await env.DB.prepare(
           'INSERT INTO audit_log (actor_uid, action, target_uid, ip_address) VALUES (?, ?, ?, ?)'
-        ).bind(record.uid, 'PASSWORD_RESET', record.uid, clientIp).run().catch(() => {});
+        )
+          .bind(record.uid, 'PASSWORD_RESET', record.uid, clientIp)
+          .run()
+          .catch(() => {});
       }
 
       let cookieHeader = {};
       if (updatedUser) {
         const sessionToken = await signJwt(updatedUser, jwtSecret);
-        cookieHeader['Set-Cookie'] = `cf_session=${sessionToken}; Path=/; HttpOnly; SameSite=Lax; Secure; Max-Age=604800`;
+        cookieHeader['Set-Cookie'] =
+          `cf_session=${sessionToken}; Path=/; HttpOnly; SameSite=Strict; Secure; Max-Age=604800`;
       }
 
-      return jsonResponse({
-        success: true,
-        message: 'Password has been successfully reset. You are now signed in.',
-        user: updatedUser
-      }, 200, cookieHeader, request);
+      return jsonResponse(
+        {
+          success: true,
+          message: 'Password has been successfully reset. You are now signed in.',
+          user: updatedUser
+        },
+        200,
+        cookieHeader,
+        request
+      );
     } catch (e) {
       return jsonResponse({ success: false, error: e.message }, 500, {}, request);
     }
@@ -823,21 +1049,29 @@ export async function onRequest(context) {
 
   // 7. User Profile Update
   if (path === '/user/profile' && method === 'PUT') {
-    if (!authUser) return jsonResponse({ success: false, error: 'Authentication required' }, 401, {}, request);
+    if (!authUser)
+      return jsonResponse({ success: false, error: 'Authentication required' }, 401, {}, request);
     try {
       const body = await request.json();
       const { displayName } = body;
       const cleanName = (displayName || '').trim().slice(0, 100);
 
       if (env.DB && cleanName) {
-        await env.DB.prepare('UPDATE users SET display_name = ? WHERE uid = ?').bind(cleanName, authUser.uid).run();
+        await env.DB.prepare('UPDATE users SET display_name = ? WHERE uid = ?')
+          .bind(cleanName, authUser.uid)
+          .run();
       }
 
       const updatedUser = { ...authUser, displayName: cleanName };
       const sessionToken = await signJwt(updatedUser, jwtSecret);
-      return jsonResponse({ success: true, user: updatedUser }, 200, {
-        'Set-Cookie': `cf_session=${sessionToken}; Path=/; HttpOnly; SameSite=Lax; Secure; Max-Age=604800`
-      }, request);
+      return jsonResponse(
+        { success: true, user: updatedUser },
+        200,
+        {
+          'Set-Cookie': `cf_session=${sessionToken}; Path=/; HttpOnly; SameSite=Strict; Secure; Max-Age=604800`
+        },
+        request
+      );
     } catch (e) {
       return jsonResponse({ success: false, error: e.message }, 500, {}, request);
     }
@@ -846,12 +1080,15 @@ export async function onRequest(context) {
   // 8. Parent Children CRUD
   if (path === '/parent/children' && method === 'GET') {
     const parentUid = authUser ? authUser.uid : null;
-    if (!parentUid || !env.DB) return jsonResponse({ success: true, children: [] }, 200, {}, request);
+    if (!parentUid || !env.DB)
+      return jsonResponse({ success: true, children: [] }, 200, {}, request);
 
     try {
       const { results } = await env.DB.prepare(
         'SELECT id, name, avatar, assigned_track as assignedTrack, CASE WHEN pin_hash IS NOT NULL AND pin_hash != "" THEN 1 ELSE 0 END as hasPin FROM children WHERE parent_uid = ?'
-      ).bind(parentUid).all();
+      )
+        .bind(parentUid)
+        .all();
 
       return jsonResponse({ success: true, children: results || [] }, 200, {}, request);
     } catch (err) {
@@ -860,89 +1097,146 @@ export async function onRequest(context) {
   }
 
   if (path === '/parent/children' && method === 'POST') {
-    if (!authUser) return jsonResponse({ success: false, error: 'Authentication required' }, 401, {}, request);
+    if (!authUser)
+      return jsonResponse({ success: false, error: 'Authentication required' }, 401, {}, request);
     const body = await request.json();
     const { name, avatar, assignedTrack, pin } = body;
-    if (!name || typeof name !== 'string') return jsonResponse({ success: false, error: 'Name is required' }, 400, {}, request);
+    if (!name || typeof name !== 'string')
+      return jsonResponse({ success: false, error: 'Name is required' }, 400, {}, request);
 
     const childId = 'child_' + crypto.randomUUID().replace(/-/g, '').slice(0, 12);
     const pinHash = pin ? await hashPassword(pin) : null;
     const cleanName = name.trim().slice(0, 100);
     const cleanAvatar = (avatar || '🌟').slice(0, 10);
-    const cleanTrack = (assignedTrack === 'level2' || assignedTrack === 'teacher') ? assignedTrack : 'level1';
+    const cleanTrack =
+      assignedTrack === 'level2' || assignedTrack === 'teacher' ? assignedTrack : 'level1';
 
     if (env.DB) {
       await env.DB.prepare(
         'INSERT INTO children (id, parent_uid, name, avatar, assigned_track, pin_hash) VALUES (?, ?, ?, ?, ?, ?)'
-      ).bind(childId, authUser.uid, cleanName, cleanAvatar, cleanTrack, pinHash).run();
+      )
+        .bind(childId, authUser.uid, cleanName, cleanAvatar, cleanTrack, pinHash)
+        .run();
     }
 
-    return jsonResponse({
-      success: true,
-      child: { id: childId, name: cleanName, avatar: cleanAvatar, assignedTrack: cleanTrack, hasPin: Boolean(pin) }
-    }, 200, {}, request);
+    return jsonResponse(
+      {
+        success: true,
+        child: {
+          id: childId,
+          name: cleanName,
+          avatar: cleanAvatar,
+          assignedTrack: cleanTrack,
+          hasPin: Boolean(pin)
+        }
+      },
+      200,
+      {},
+      request
+    );
   }
 
   if (path.match(/^\/parent\/children\/[^/]+$/) && method === 'PUT') {
-    if (!authUser) return jsonResponse({ success: false, error: 'Authentication required' }, 401, {}, request);
+    if (!authUser)
+      return jsonResponse({ success: false, error: 'Authentication required' }, 401, {}, request);
     const childId = path.split('/')[3];
     const body = await request.json();
     const { name, avatar, assignedTrack, pin } = body;
     const cleanName = (name || '').trim().slice(0, 100);
     const cleanAvatar = (avatar || '🌟').slice(0, 10);
-    const cleanTrack = (assignedTrack === 'level2' || assignedTrack === 'teacher') ? assignedTrack : 'level1';
+    const cleanTrack =
+      assignedTrack === 'level2' || assignedTrack === 'teacher' ? assignedTrack : 'level1';
 
     if (env.DB) {
       const pinHash = pin ? await hashPassword(pin) : null;
       if (pin) {
         await env.DB.prepare(
           'UPDATE children SET name = ?, avatar = ?, assigned_track = ?, pin_hash = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ? AND parent_uid = ?'
-        ).bind(cleanName, cleanAvatar, cleanTrack, pinHash, childId, authUser.uid).run();
+        )
+          .bind(cleanName, cleanAvatar, cleanTrack, pinHash, childId, authUser.uid)
+          .run();
       } else {
         await env.DB.prepare(
           'UPDATE children SET name = ?, avatar = ?, assigned_track = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ? AND parent_uid = ?'
-        ).bind(cleanName, cleanAvatar, cleanTrack, childId, authUser.uid).run();
+        )
+          .bind(cleanName, cleanAvatar, cleanTrack, childId, authUser.uid)
+          .run();
       }
     }
 
-    return jsonResponse({
-      success: true,
-      child: { id: childId, name: cleanName, avatar: cleanAvatar, assignedTrack: cleanTrack, hasPin: Boolean(pin) }
-    }, 200, {}, request);
+    return jsonResponse(
+      {
+        success: true,
+        child: {
+          id: childId,
+          name: cleanName,
+          avatar: cleanAvatar,
+          assignedTrack: cleanTrack,
+          hasPin: Boolean(pin)
+        }
+      },
+      200,
+      {},
+      request
+    );
   }
 
   if (path.match(/^\/parent\/children\/[^/]+$/) && method === 'DELETE') {
-    if (!authUser) return jsonResponse({ success: false, error: 'Authentication required' }, 401, {}, request);
+    if (!authUser)
+      return jsonResponse({ success: false, error: 'Authentication required' }, 401, {}, request);
     const childId = path.split('/')[3];
 
     if (env.DB) {
-      const { meta } = await env.DB.prepare('DELETE FROM children WHERE id = ? AND parent_uid = ?').bind(childId, authUser.uid).run();
+      const { meta } = await env.DB.prepare('DELETE FROM children WHERE id = ? AND parent_uid = ?')
+        .bind(childId, authUser.uid)
+        .run();
       if (!meta || meta.changes === 0) {
-        return jsonResponse({ success: false, error: 'Child not found or unauthorized' }, 403, {}, request);
+        return jsonResponse(
+          { success: false, error: 'Child not found or unauthorized' },
+          403,
+          {},
+          request
+        );
       }
       await env.DB.prepare('DELETE FROM module_progress WHERE student_id = ?').bind(childId).run();
       await env.DB.prepare('DELETE FROM quiz_results WHERE student_id = ?').bind(childId).run();
     }
 
-    return jsonResponse({ success: true, message: 'Child profile deleted successfully' }, 200, {}, request);
+    return jsonResponse(
+      { success: true, message: 'Child profile deleted successfully' },
+      200,
+      {},
+      request
+    );
   }
 
   // 8.5 Parent Progress Sync & Reset
   if (path === '/progress/sync' && method === 'GET') {
-    if (!authUser) return jsonResponse({ success: false, error: 'Authentication required' }, 401, {}, request);
-    
+    if (!authUser)
+      return jsonResponse({ success: false, error: 'Authentication required' }, 401, {}, request);
+
     if (env.DB) {
       try {
-        const { results: children } = await env.DB.prepare('SELECT id FROM children WHERE parent_uid = ?').bind(authUser.uid).all();
+        const { results: children } = await env.DB.prepare(
+          'SELECT id FROM children WHERE parent_uid = ?'
+        )
+          .bind(authUser.uid)
+          .all();
         const progressData = {};
         for (const child of children || []) {
           const targetKey = `child_${child.id}`;
-          const pRows = await env.DB.prepare('SELECT module_id as moduleId, level, completed FROM module_progress WHERE student_id = ?').bind(child.id).all();
+          const pRows = await env.DB.prepare(
+            'SELECT module_id as moduleId, level, completed FROM module_progress WHERE student_id = ?'
+          )
+            .bind(child.id)
+            .all();
           progressData[targetKey] = {};
-          (pRows.results || []).forEach(r => {
+          (pRows.results || []).forEach((r) => {
             if (r.completed) progressData[targetKey][`mod_${r.moduleId}`] = true;
           });
-          const qRows = await env.DB.prepare('SELECT * FROM quiz_results WHERE student_id = ?').bind(child.id).all();
+          const qRows = await env.DB.prepare('SELECT * FROM quiz_results WHERE student_id = ?')
+            .bind(child.id)
+            .all();
           progressData[`${targetKey}_scores`] = qRows.results || [];
         }
         return jsonResponse({ success: true, data: progressData }, 200, {}, request);
@@ -954,23 +1248,33 @@ export async function onRequest(context) {
   }
 
   if (path === '/parent/progress/reset' && method === 'DELETE') {
-    if (!authUser) return jsonResponse({ success: false, error: 'Authentication required' }, 401, {}, request);
+    if (!authUser)
+      return jsonResponse({ success: false, error: 'Authentication required' }, 401, {}, request);
     try {
       const body = await request.json();
       const { childId, moduleId } = body;
-      if (!childId) return jsonResponse({ success: false, error: 'childId required' }, 400, {}, request);
-      
+      if (!childId)
+        return jsonResponse({ success: false, error: 'childId required' }, 400, {}, request);
+
       if (env.DB) {
-        const child = await env.DB.prepare('SELECT parent_uid FROM children WHERE id = ?').bind(childId).first();
+        const child = await env.DB.prepare('SELECT parent_uid FROM children WHERE id = ?')
+          .bind(childId)
+          .first();
         if (!child || child.parent_uid !== authUser.uid) {
           return jsonResponse({ success: false, error: 'Unauthorized' }, 403, {}, request);
         }
-        
+
         if (moduleId) {
-          await env.DB.prepare('DELETE FROM module_progress WHERE student_id = ? AND module_id = ?').bind(childId, moduleId).run();
-          await env.DB.prepare('DELETE FROM quiz_results WHERE student_id = ? AND module_id = ?').bind(childId, moduleId).run();
+          await env.DB.prepare('DELETE FROM module_progress WHERE student_id = ? AND module_id = ?')
+            .bind(childId, moduleId)
+            .run();
+          await env.DB.prepare('DELETE FROM quiz_results WHERE student_id = ? AND module_id = ?')
+            .bind(childId, moduleId)
+            .run();
         } else {
-          await env.DB.prepare('DELETE FROM module_progress WHERE student_id = ?').bind(childId).run();
+          await env.DB.prepare('DELETE FROM module_progress WHERE student_id = ?')
+            .bind(childId)
+            .run();
           await env.DB.prepare('DELETE FROM quiz_results WHERE student_id = ?').bind(childId).run();
         }
       }
@@ -984,29 +1288,47 @@ export async function onRequest(context) {
   if (path.match(/^\/public\/child\/[^/]+$/) && method === 'GET') {
     const rawChildId = path.split('/')[3] || '';
     const childId = decodeURIComponent(rawChildId).trim();
-    if (!env.DB) return jsonResponse({ success: false, error: 'Database not initialized' }, 404, {}, request);
+    if (!env.DB)
+      return jsonResponse({ success: false, error: 'Database not initialized' }, 404, {}, request);
 
     try {
       const row = await env.DB.prepare(
         'SELECT id, name, avatar, assigned_track as assignedTrack, CASE WHEN pin_hash IS NOT NULL AND pin_hash != "" THEN 1 ELSE 0 END as hasPin FROM children WHERE id = ? OR LOWER(id) = LOWER(?) OR LOWER(name) = LOWER(?)'
-      ).bind(childId, childId, childId).first();
+      )
+        .bind(childId, childId, childId)
+        .first();
 
       if (!row) {
-        return jsonResponse({ success: false, error: 'Learner profile not found.' }, 404, {}, request);
+        return jsonResponse(
+          { success: false, error: 'Learner profile not found.' },
+          404,
+          {},
+          request
+        );
       }
 
-      return jsonResponse({
-        success: true,
-        child: {
-          id: row.id,
-          name: row.name,
-          avatar: row.avatar || '🌟',
-          assignedTrack: row.assignedTrack || 'level1',
-          hasPin: Boolean(row.hasPin)
-        }
-      }, 200, {}, request);
+      return jsonResponse(
+        {
+          success: true,
+          child: {
+            id: row.id,
+            name: row.name,
+            avatar: row.avatar || '🌟',
+            assignedTrack: row.assignedTrack || 'level1',
+            hasPin: Boolean(row.hasPin)
+          }
+        },
+        200,
+        {},
+        request
+      );
     } catch (err) {
-      return jsonResponse({ success: false, error: 'Error fetching learner: ' + err.message }, 500, {}, request);
+      return jsonResponse(
+        { success: false, error: 'Error fetching learner: ' + err.message },
+        500,
+        {},
+        request
+      );
     }
   }
 
@@ -1020,14 +1342,50 @@ export async function onRequest(context) {
     try {
       const row = await env.DB.prepare(
         'SELECT id, name, avatar, assigned_track as assignedTrack, pin_hash, CASE WHEN pin_hash IS NOT NULL AND pin_hash != "" THEN 1 ELSE 0 END as hasPin FROM children WHERE id = ? OR LOWER(id) = LOWER(?) OR LOWER(name) = LOWER(?)'
-      ).bind(childId, childId, childId).first();
+      )
+        .bind(childId, childId, childId)
+        .first();
 
       if (!row) {
-        return jsonResponse({ success: false, error: 'Learner profile not found.' }, 404, {}, request);
+        return jsonResponse(
+          { success: false, error: 'Learner profile not found.' },
+          404,
+          {},
+          request
+        );
       }
 
       if (!row.pin_hash) {
-        return jsonResponse({
+        return jsonResponse(
+          {
+            success: true,
+            verified: true,
+            child: {
+              id: row.id,
+              name: row.name,
+              avatar: row.avatar || '🌟',
+              assignedTrack: row.assignedTrack || 'level1',
+              hasPin: false
+            }
+          },
+          200,
+          {},
+          request
+        );
+      }
+
+      const isMatch = await verifyPassword(pin, row.pin_hash);
+      if (!isMatch) {
+        return jsonResponse(
+          { success: false, verified: false, error: 'Incorrect PIN. Please try again.' },
+          401,
+          {},
+          request
+        );
+      }
+
+      return jsonResponse(
+        {
           success: true,
           verified: true,
           child: {
@@ -1035,36 +1393,33 @@ export async function onRequest(context) {
             name: row.name,
             avatar: row.avatar || '🌟',
             assignedTrack: row.assignedTrack || 'level1',
-            hasPin: false
+            hasPin: true
           }
-        }, 200, {}, request);
-      }
-
-      const isMatch = await verifyPassword(pin, row.pin_hash);
-      if (!isMatch) {
-        return jsonResponse({ success: false, verified: false, error: 'Incorrect PIN. Please try again.' }, 401, {}, request);
-      }
-
-      return jsonResponse({
-        success: true,
-        verified: true,
-        child: {
-          id: row.id,
-          name: row.name,
-          avatar: row.avatar || '🌟',
-          assignedTrack: row.assignedTrack || 'level1',
-          hasPin: true
-        }
-      }, 200, {}, request);
+        },
+        200,
+        {},
+        request
+      );
     } catch (err) {
-      return jsonResponse({ success: false, error: 'Error verifying PIN: ' + err.message }, 500, {}, request);
+      return jsonResponse(
+        { success: false, error: 'Error verifying PIN: ' + err.message },
+        500,
+        {},
+        request
+      );
     }
   }
 
   // 10. Authoritative Quiz Grading & Progress Tracking
   if (path === '/quiz/grade' && method === 'POST') {
     if (!checkRateLimit(clientIp, 'quiz_grade', 10, 60)) {
-      return jsonResponse({ success: false, error: 'Too many quiz submissions. Please wait.' }, 429, {}, request, env);
+      return jsonResponse(
+        { success: false, error: 'Too many quiz submissions. Please wait.' },
+        429,
+        {},
+        request,
+        env
+      );
     }
     try {
       const body = await request.json();
@@ -1078,15 +1433,28 @@ export async function onRequest(context) {
       const submittedReflections = reflections || {};
       let score = 0;
       const feedback = [];
-      
+
       if (env.DB) {
-        const attemptsCount = await env.DB.prepare(`
+        const attemptsCount = await env.DB.prepare(
+          `
           SELECT COUNT(*) as count 
           FROM quiz_results 
           WHERE student_id = ? AND module_id = ? AND DATE(created_at) = DATE('now')
-        `).bind(studentId, mId).first();
+        `
+        )
+          .bind(studentId, mId)
+          .first();
         if (attemptsCount && attemptsCount.count >= 3) {
-          return jsonResponse({ success: false, error: 'Daily attempt limit (3) reached for this module. Try again tomorrow.' }, 429, {}, request, env);
+          return jsonResponse(
+            {
+              success: false,
+              error: 'Daily attempt limit (3) reached for this module. Try again tomorrow.'
+            },
+            429,
+            {},
+            request,
+            env
+          );
         }
       }
 
@@ -1104,9 +1472,10 @@ export async function onRequest(context) {
           const courseDataRes = await fetch(`${url.origin}/course_data.json`);
           if (courseDataRes.ok) {
             const courseData = await courseDataRes.json();
-            const targetModule = (courseData.modules || []).find(m => m.id === mId);
+            const targetModule = (courseData.modules || []).find((m) => m.id === mId);
             if (targetModule && targetModule.tracks && targetModule.tracks[studentTrack]) {
-              moduleQuestions = targetModule.tracks[studentTrack].parsedQuestions?.multipleChoice || [];
+              moduleQuestions =
+                targetModule.tracks[studentTrack].parsedQuestions?.multipleChoice || [];
             }
           }
         }
@@ -1115,10 +1484,16 @@ export async function onRequest(context) {
       }
 
       if (!moduleQuestions || moduleQuestions.length === 0) {
-        return jsonResponse({
-          success: false,
-          error: 'Authoritative quiz curriculum is temporarily unavailable for grading. Please retry in a moment.'
-        }, 503, {}, request);
+        return jsonResponse(
+          {
+            success: false,
+            error:
+              'Authoritative quiz curriculum is temporarily unavailable for grading. Please retry in a moment.'
+          },
+          503,
+          {},
+          request
+        );
       }
 
       const keys = Object.keys(submittedAnswers || {});
@@ -1127,19 +1502,28 @@ export async function onRequest(context) {
       moduleQuestions.forEach((q, idx) => {
         let rawAns;
         if (hasZeroKey) {
-          rawAns = submittedAnswers[idx] !== undefined ? submittedAnswers[idx] : submittedAnswers[String(idx)];
+          rawAns =
+            submittedAnswers[idx] !== undefined
+              ? submittedAnswers[idx]
+              : submittedAnswers[String(idx)];
         } else {
-          const qId = q.id !== undefined ? q.id : (idx + 1);
-          rawAns = submittedAnswers[qId] !== undefined ? submittedAnswers[qId] :
-                   submittedAnswers[String(qId)] !== undefined ? submittedAnswers[String(qId)] :
-                   submittedAnswers[`q${qId}`] !== undefined ? submittedAnswers[`q${qId}`] :
-                   submittedAnswers[`q_${qId}`] !== undefined ? submittedAnswers[`q_${qId}`] :
-                   submittedAnswers[idx + 1] !== undefined ? submittedAnswers[idx + 1] :
-                   submittedAnswers[String(idx + 1)];
+          const qId = q.id !== undefined ? q.id : idx + 1;
+          rawAns =
+            submittedAnswers[qId] !== undefined
+              ? submittedAnswers[qId]
+              : submittedAnswers[String(qId)] !== undefined
+                ? submittedAnswers[String(qId)]
+                : submittedAnswers[`q${qId}`] !== undefined
+                  ? submittedAnswers[`q${qId}`]
+                  : submittedAnswers[`q_${qId}`] !== undefined
+                    ? submittedAnswers[`q_${qId}`]
+                    : submittedAnswers[idx + 1] !== undefined
+                      ? submittedAnswers[idx + 1]
+                      : submittedAnswers[String(idx + 1)];
         }
 
         const selected = (rawAns || '').toString().trim().toUpperCase();
-        const isCorrect = q.correctAnswer ? (selected === q.correctAnswer.toUpperCase()) : false;
+        const isCorrect = q.correctAnswer ? selected === q.correctAnswer.toUpperCase() : false;
         if (isCorrect) score++;
 
         feedback.push({
@@ -1148,7 +1532,8 @@ export async function onRequest(context) {
           selectedAnswer: selected,
           correctAnswer: q.correctAnswer || 'A',
           isCorrect,
-          explanation: q.explanation || 'Refer to student lesson handout and classical Maliki fiqh text.'
+          explanation:
+            q.explanation || 'Refer to student lesson handout and classical Maliki fiqh text.'
         });
       });
 
@@ -1157,17 +1542,34 @@ export async function onRequest(context) {
       const passed = percentage >= 80;
 
       if (env.DB) {
-        const quizId = 'quiz_' + Date.now().toString(36) + '_' + Math.random().toString(36).substring(2, 6);
+        const quizId =
+          'quiz_' + Date.now().toString(36) + '_' + Math.random().toString(36).substring(2, 6);
         await env.DB.prepare(
           'INSERT INTO quiz_results (id, student_id, module_id, level, score, total, percentage, passed, answers_json) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)'
-        ).bind(quizId, studentId, mId, studentTrack, score, total, percentage, passed ? 1 : 0, JSON.stringify(submittedAnswers)).run();
+        )
+          .bind(
+            quizId,
+            studentId,
+            mId,
+            studentTrack,
+            score,
+            total,
+            percentage,
+            passed ? 1 : 0,
+            JSON.stringify(submittedAnswers)
+          )
+          .run();
 
         if (Object.keys(submittedReflections).length > 0) {
           for (const qId of Object.keys(submittedReflections)) {
-             const refId = 'ref_' + Date.now().toString(36) + '_' + Math.random().toString(36).substring(2, 6);
-             await env.DB.prepare(
-               'INSERT INTO reflections (id, student_id, module_id, question_id, response_text) VALUES (?, ?, ?, ?, ?)'
-             ).bind(refId, studentId, mId, qId, submittedReflections[qId]).run().catch(() => {});
+            const refId =
+              'ref_' + Date.now().toString(36) + '_' + Math.random().toString(36).substring(2, 6);
+            await env.DB.prepare(
+              'INSERT INTO reflections (id, student_id, module_id, question_id, response_text) VALUES (?, ?, ?, ?, ?)'
+            )
+              .bind(refId, studentId, mId, qId, submittedReflections[qId])
+              .run()
+              .catch(() => {});
           }
         }
 
@@ -1175,48 +1577,65 @@ export async function onRequest(context) {
           const progId = `prog_${studentId}_${mId}`;
           await env.DB.prepare(
             'INSERT OR REPLACE INTO module_progress (id, student_id, module_id, level, completed, updated_at) VALUES (?, ?, ?, ?, 1, CURRENT_TIMESTAMP)'
-          ).bind(progId, studentId, mId, studentTrack).run();
-          
+          )
+            .bind(progId, studentId, mId, studentTrack)
+            .run();
+
           if (childId && authUser && authUser.email) {
-             const childRow = await env.DB.prepare('SELECT name FROM children WHERE id = ?').bind(childId).first();
-             sendEdgeEmail({
-               to: authUser.email,
-               subject: `🎉 ${childRow?.name || 'Your child'} just passed Module ${mId}!`,
-               text: `Great news! They scored ${percentage}% on the quiz. Log in to view their certificate.`,
-               html: `<p>Great news! They scored <strong>${percentage}%</strong> on the quiz.</p><p>Log in to view their certificate.</p>`,
-               env
-             }).catch(err => console.warn('Notification email failed:', err.message));
+            const childRow = await env.DB.prepare('SELECT name FROM children WHERE id = ?')
+              .bind(childId)
+              .first();
+            sendEdgeEmail({
+              to: authUser.email,
+              subject: `🎉 ${childRow?.name || 'Your child'} just passed Module ${mId}!`,
+              text: `Great news! They scored ${percentage}% on the quiz. Log in to view their certificate.`,
+              html: `<p>Great news! They scored <strong>${percentage}%</strong> on the quiz.</p><p>Log in to view their certificate.</p>`,
+              env
+            }).catch((err) => console.warn('Notification email failed:', err.message));
           }
         }
       }
 
-      return jsonResponse({
-        success: true,
-        moduleId: mId,
-        track: studentTrack,
-        score,
-        total,
-        percentage,
-        passed,
-        feedback
-      }, 200, {}, request);
+      return jsonResponse(
+        {
+          success: true,
+          moduleId: mId,
+          track: studentTrack,
+          score,
+          total,
+          percentage,
+          passed,
+          feedback
+        },
+        200,
+        {},
+        request
+      );
     } catch (e) {
-      return jsonResponse({ success: false, error: 'Grading error: ' + e.message }, 500, {}, request);
+      return jsonResponse(
+        { success: false, error: 'Grading error: ' + e.message },
+        500,
+        {},
+        request
+      );
     }
   }
 
   // 11. Module Progress Endpoints
   if (path === '/quiz/progress' && method === 'GET') {
     const studentId = url.searchParams.get('studentId') || (authUser ? authUser.uid : null);
-    if (!studentId || !env.DB) return jsonResponse({ success: true, progress: {} }, 200, {}, request);
+    if (!studentId || !env.DB)
+      return jsonResponse({ success: true, progress: {} }, 200, {}, request);
 
     try {
       const { results } = await env.DB.prepare(
         'SELECT module_id as moduleId, level, completed FROM module_progress WHERE student_id = ?'
-      ).bind(studentId).all();
+      )
+        .bind(studentId)
+        .all();
 
       const progressMap = {};
-      (results || []).forEach(r => {
+      (results || []).forEach((r) => {
         if (r.completed) progressMap[`mod_${r.moduleId}`] = true;
       });
       return jsonResponse({ success: true, progress: progressMap }, 200, {}, request);
@@ -1237,10 +1656,17 @@ export async function onRequest(context) {
         const progId = `prog_${sId}_${mId}`;
         await env.DB.prepare(
           'INSERT OR REPLACE INTO module_progress (id, student_id, module_id, level, completed, updated_at) VALUES (?, ?, ?, ?, ?, CURRENT_TIMESTAMP)'
-        ).bind(progId, sId, mId, lvl, completed ? 1 : 0).run();
+        )
+          .bind(progId, sId, mId, lvl, completed ? 1 : 0)
+          .run();
       }
 
-      return jsonResponse({ success: true, moduleId: mId, completed: Boolean(completed) }, 200, {}, request);
+      return jsonResponse(
+        { success: true, moduleId: mId, completed: Boolean(completed) },
+        200,
+        {},
+        request
+      );
     } catch (e) {
       return jsonResponse({ success: false, error: e.message }, 500, {}, request);
     }
@@ -1253,7 +1679,14 @@ export async function onRequest(context) {
       if (env.DB) {
         await env.DB.prepare(
           'INSERT INTO telemetry_logs (message, source, stack, url) VALUES (?, ?, ?, ?)'
-        ).bind((body.message || '').slice(0, 500), (body.source || '').slice(0, 200), (body.stack || '').slice(0, 1000), (body.url || '').slice(0, 300)).run();
+        )
+          .bind(
+            (body.message || '').slice(0, 500),
+            (body.source || '').slice(0, 200),
+            (body.stack || '').slice(0, 1000),
+            (body.url || '').slice(0, 300)
+          )
+          .run();
       }
       return jsonResponse({ success: true, logged: true }, 200, {}, request);
     } catch (e) {
@@ -1267,7 +1700,9 @@ export async function onRequest(context) {
       if (env.DB) {
         await env.DB.prepare(
           'INSERT INTO telemetry_logs (message, source, stack, url) VALUES (?, ?, ?, ?)'
-        ).bind('CSP Violation: ' + JSON.stringify(body).slice(0, 500), 'csp', '', url.href).run();
+        )
+          .bind('CSP Violation: ' + JSON.stringify(body).slice(0, 500), 'csp', '', url.href)
+          .run();
       }
       return new Response(null, { status: 204 });
     } catch (e) {
@@ -1278,9 +1713,21 @@ export async function onRequest(context) {
   // 13. Admin Overview Dashboard
   if (path === '/admin/overview' && method === 'GET') {
     if (!authUser || authUser.role !== 'super_admin') {
-      return jsonResponse({ success: false, error: 'Forbidden: Super Admin only' }, 403, {}, request);
+      return jsonResponse(
+        { success: false, error: 'Forbidden: Super Admin only' },
+        403,
+        {},
+        request
+      );
     }
-    let totalParents = 1, totalKids = 0, totalQuizSubmissions = 0, totalCompletedModules = 0, avgQuizScore = 90, clientErrorsCount = 0, cspViolationsCount = 0;
+    let totalParents = 1,
+      totalKids = 0,
+      totalQuizSubmissions = 0,
+      totalCompletedModules = 0,
+      avgQuizScore = 90,
+      clientErrorsCount = 0,
+      cspViolationsCount = 0,
+      passRate = 0;
     const uptime = Math.floor((Date.now() - globalThis._WORKER_START_TIME) / 1000);
 
     if (env.DB) {
@@ -1288,10 +1735,20 @@ export async function onRequest(context) {
         const uCount = await env.DB.prepare('SELECT COUNT(*) as c FROM users').first();
         const cCount = await env.DB.prepare('SELECT COUNT(*) as c FROM children').first();
         const qCount = await env.DB.prepare('SELECT COUNT(*) as c FROM quiz_results').first();
-        const pCount = await env.DB.prepare('SELECT COUNT(*) as c FROM module_progress WHERE completed = 1').first();
+        const pCount = await env.DB.prepare(
+          'SELECT COUNT(*) as c FROM module_progress WHERE completed = 1'
+        ).first();
         const qAvg = await env.DB.prepare('SELECT AVG(score) as avg FROM quiz_results').first();
-        const eCount = await env.DB.prepare("SELECT COUNT(*) as c FROM telemetry_logs WHERE source != 'csp'").first().catch(() => ({ c: 0 }));
-        const cspCount = await env.DB.prepare("SELECT COUNT(*) as c FROM telemetry_logs WHERE source = 'csp'").first().catch(() => ({ c: 0 }));
+        const eCount = await env.DB.prepare(
+          "SELECT COUNT(*) as c FROM telemetry_logs WHERE source != 'csp'"
+        )
+          .first()
+          .catch(() => ({ c: 0 }));
+        const cspCount = await env.DB.prepare(
+          "SELECT COUNT(*) as c FROM telemetry_logs WHERE source = 'csp'"
+        )
+          .first()
+          .catch(() => ({ c: 0 }));
 
         totalParents = uCount ? uCount.c : 0;
         totalKids = cCount ? cCount.c : 0;
@@ -1300,46 +1757,65 @@ export async function onRequest(context) {
         avgQuizScore = qAvg && qAvg.avg ? Math.round(qAvg.avg) : 0;
         clientErrorsCount = eCount ? eCount.c : 0;
         cspViolationsCount = cspCount ? cspCount.c : 0;
-        
-        const passedRow = await env.DB.prepare('SELECT COUNT(*) as c FROM quiz_results WHERE percentage >= 80 OR passed = 1').first();
-        const passRate = totalQuizSubmissions > 0 ? Math.round(((passedRow ? passedRow.c : 0) / totalQuizSubmissions) * 100) : 0;
+
+        const passedRow = await env.DB.prepare(
+          'SELECT COUNT(*) as c FROM quiz_results WHERE percentage >= 80 OR passed = 1'
+        ).first();
+        passRate =
+          totalQuizSubmissions > 0
+            ? Math.round(((passedRow ? passedRow.c : 0) / totalQuizSubmissions) * 100)
+            : 0;
 
         // Periodic maintenance cleanup (prune logs older than 30 days & expired tokens)
-        await env.DB.prepare("DELETE FROM telemetry_logs WHERE created_at < datetime('now', '-30 days')").run().catch(() => {});
-        await env.DB.prepare('DELETE FROM reset_tokens WHERE used = 1 OR expires_at < ?').bind(Date.now()).run().catch(() => {});
+        await env.DB.prepare(
+          "DELETE FROM telemetry_logs WHERE created_at < datetime('now', '-30 days')"
+        )
+          .run()
+          .catch(() => {});
+        await env.DB.prepare('DELETE FROM reset_tokens WHERE used = 1 OR expires_at < ?')
+          .bind(Date.now())
+          .run()
+          .catch(() => {});
       } catch (err) {
         console.warn('D1 admin overview error:', err.message);
       }
     }
-    
-    // Default passRate logic if DB not active or error
-    const finalPassRate = (env.DB && typeof passRate !== 'undefined') ? passRate : (totalQuizSubmissions > 0 ? 0 : 0);
 
-    return jsonResponse({
-      success: true,
-      stats: {
-        totalParents,
-        totalKids,
-        totalQuizSubmissions,
-        totalCompletedModules,
-        avgQuizScore,
-        passRate: finalPassRate,
-        system: {
-          uptime,
-          nodeEnv: 'production',
-          storage: 'Cloudflare D1 SQL',
-          clientErrorsCount,
-          cspViolationsCount,
-          status: '100% Operational (Cloudflare Global Edge)'
+    return jsonResponse(
+      {
+        success: true,
+        stats: {
+          totalParents,
+          totalKids,
+          totalQuizSubmissions,
+          totalCompletedModules,
+          avgQuizScore,
+          passRate,
+          system: {
+            uptime,
+            nodeEnv: 'production',
+            storage: 'Cloudflare D1 SQL',
+            clientErrorsCount,
+            cspViolationsCount,
+            status: '100% Operational (Cloudflare Global Edge)'
+          }
         }
-      }
-    }, 200, {}, request);
+      },
+      200,
+      {},
+      request
+    );
   }
 
   // 14. Admin Users List & Role Management
   if (path === '/admin/users' && method === 'GET') {
     if (!authUser || authUser.role !== 'super_admin') {
-      return jsonResponse({ success: false, error: 'Forbidden: Super Admin only' }, 403, {}, request);
+      return jsonResponse(
+        { success: false, error: 'Forbidden: Super Admin only' },
+        403,
+        {},
+        request
+      );
     }
     let usersList = [];
     if (env.DB) {
@@ -1351,8 +1827,8 @@ export async function onRequest(context) {
           'SELECT id, parent_uid as parentUid, name, avatar, assigned_track as assignedTrack FROM children'
         ).all();
         const allKids = childrenRows?.results || [];
-        usersList = (results || []).map(u => {
-          const userKids = allKids.filter(k => k.parentUid === u.uid);
+        usersList = (results || []).map((u) => {
+          const userKids = allKids.filter((k) => k.parentUid === u.uid);
           return {
             ...u,
             childrenCount: userKids.length,
@@ -1368,7 +1844,12 @@ export async function onRequest(context) {
 
   if (path.match(/^\/admin\/users\/[^/]+\/role$/) && method === 'PUT') {
     if (!authUser || authUser.role !== 'super_admin') {
-      return jsonResponse({ success: false, error: 'Forbidden: Super Admin only' }, 403, {}, request);
+      return jsonResponse(
+        { success: false, error: 'Forbidden: Super Admin only' },
+        403,
+        {},
+        request
+      );
     }
     const targetUid = path.split('/')[3];
     const body = await request.json();
@@ -1382,18 +1863,31 @@ export async function onRequest(context) {
       await env.DB.prepare('UPDATE users SET role = ? WHERE uid = ?').bind(role, targetUid).run();
       await env.DB.prepare(
         'INSERT INTO audit_log (actor_uid, action, target_uid, metadata, ip_address) VALUES (?, ?, ?, ?, ?)'
-      ).bind(authUser.uid, 'CHANGE_ROLE', targetUid, JSON.stringify({ newRole: role }), clientIp).run().catch(() => {});
+      )
+        .bind(authUser.uid, 'CHANGE_ROLE', targetUid, JSON.stringify({ newRole: role }), clientIp)
+        .run()
+        .catch(() => {});
     }
     return jsonResponse({ success: true, uid: targetUid, role }, 200, {}, request);
   }
 
   if (path.match(/^\/admin\/users\/[^/]+$/) && method === 'DELETE') {
     if (!authUser || authUser.role !== 'super_admin') {
-      return jsonResponse({ success: false, error: 'Forbidden: Super Admin only' }, 403, {}, request);
+      return jsonResponse(
+        { success: false, error: 'Forbidden: Super Admin only' },
+        403,
+        {},
+        request
+      );
     }
     const targetUid = path.split('/')[3];
     if (authUser.uid === targetUid) {
-      return jsonResponse({ success: false, error: 'Cannot delete active super admin account' }, 400, {}, request);
+      return jsonResponse(
+        { success: false, error: 'Cannot delete active super admin account' },
+        400,
+        {},
+        request
+      );
     }
 
     if (env.DB) {
@@ -1401,7 +1895,10 @@ export async function onRequest(context) {
       await env.DB.prepare('DELETE FROM children WHERE parent_uid = ?').bind(targetUid).run();
       await env.DB.prepare(
         'INSERT INTO audit_log (actor_uid, action, target_uid, ip_address) VALUES (?, ?, ?, ?)'
-      ).bind(authUser.uid, 'DELETE_USER', targetUid, clientIp).run().catch(() => {});
+      )
+        .bind(authUser.uid, 'DELETE_USER', targetUid, clientIp)
+        .run()
+        .catch(() => {});
     }
     return jsonResponse({ success: true, message: 'User deleted successfully' }, 200, {}, request);
   }
@@ -1409,11 +1906,18 @@ export async function onRequest(context) {
   // 15. Admin Audit Logs
   if (path === '/admin/audit' && method === 'GET') {
     if (!authUser || authUser.role !== 'super_admin') {
-      return jsonResponse({ success: false, error: 'Forbidden: Super Admin only' }, 403, {}, request);
+      return jsonResponse(
+        { success: false, error: 'Forbidden: Super Admin only' },
+        403,
+        {},
+        request
+      );
     }
     if (env.DB) {
       try {
-        const { results } = await env.DB.prepare('SELECT * FROM audit_log ORDER BY created_at DESC LIMIT 200').all();
+        const { results } = await env.DB.prepare(
+          'SELECT * FROM audit_log ORDER BY created_at DESC LIMIT 200'
+        ).all();
         return jsonResponse({ success: true, logs: results || [] }, 200, {}, request);
       } catch (e) {
         return jsonResponse({ success: false, error: e.message }, 500, {}, request);
@@ -1425,11 +1929,18 @@ export async function onRequest(context) {
   // 16. Admin Telemetry & Error Logs
   if (path === '/admin/telemetry' && method === 'GET') {
     if (!authUser || authUser.role !== 'super_admin') {
-      return jsonResponse({ success: false, error: 'Forbidden: Super Admin only' }, 403, {}, request);
+      return jsonResponse(
+        { success: false, error: 'Forbidden: Super Admin only' },
+        403,
+        {},
+        request
+      );
     }
     if (env.DB) {
       try {
-        const { results } = await env.DB.prepare('SELECT id, message, source, stack, url, created_at as createdAt FROM telemetry_logs ORDER BY id DESC LIMIT 100').all();
+        const { results } = await env.DB.prepare(
+          'SELECT id, message, source, stack, url, created_at as createdAt FROM telemetry_logs ORDER BY id DESC LIMIT 100'
+        ).all();
         return jsonResponse({ success: true, logs: results || [] }, 200, {}, request);
       } catch (e) {
         return jsonResponse({ success: false, error: e.message }, 500, {}, request);
@@ -1440,7 +1951,12 @@ export async function onRequest(context) {
 
   if (path === '/admin/telemetry' && method === 'DELETE') {
     if (!authUser || authUser.role !== 'super_admin') {
-      return jsonResponse({ success: false, error: 'Forbidden: Super Admin only' }, 403, {}, request);
+      return jsonResponse(
+        { success: false, error: 'Forbidden: Super Admin only' },
+        403,
+        {},
+        request
+      );
     }
     if (env.DB) {
       try {
@@ -1454,5 +1970,10 @@ export async function onRequest(context) {
   }
 
   // Fallback for unmatched API routes
-  return jsonResponse({ success: false, error: `Cloudflare Edge API route not found: ${method} ${path}` }, 404, {}, request);
+  return jsonResponse(
+    { success: false, error: `Cloudflare Edge API route not found: ${method} ${path}` },
+    404,
+    {},
+    request
+  );
 }

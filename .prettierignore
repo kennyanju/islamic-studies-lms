@@ -1,0 +1,19 @@
+node_modules
+.wrangler
+coverage
+data/
+public/course_data*
+public/modules_manifest.json
+public/course_data/
+package-lock.json
+*.md
+1 — Foundations of Belief/
+2— Purification & Prayer/
+3 — Seerah The Early Life of the Prophet /
+4— Deepening Belief & the Quran/
+5— Fiqh of Fasting Zakah & Community/
+6— Seerah Madinah & the Building of a Community/
+7— Applied Fiqh & Everyday Life/
+8— Character, Society & Family/
+9— Seerah, History & Living Faith Today/
+Voice Script for teacher/
