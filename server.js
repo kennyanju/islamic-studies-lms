@@ -161,6 +161,11 @@ app.use((req, res, next) => {
   res.setHeader('X-Frame-Options', 'DENY');
   res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
   res.setHeader('Permissions-Policy', 'camera=(), microphone=(), geolocation=(), payment=()');
+  res.setHeader(
+    'Report-To',
+    '{"group":"csp-endpoint","max_age":86400,"endpoints":[{"url":"/api/telemetry/csp"}]}'
+  );
+  res.setHeader('Reporting-Endpoints', 'csp-endpoint="/api/telemetry/csp"');
   if (isProd || req.secure) {
     res.setHeader('Strict-Transport-Security', 'max-age=31536000; includeSubDomains; preload');
   }

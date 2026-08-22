@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ---
 
+## [1.0.1] - 2026-08-22
+
+### 🐛 Fixed
+- **Null Safety on Module Tracks Access**: Fixed `TypeError: Cannot read properties of undefined (reading 'level1')` on direct `?kid=` URLs and search by guarding `mod.tracks` and `courseData` across `renderHandout`, `renderAnswerKeys`, `renderQuiz`, `submitQuizBtn`, `renderSlides`, `renderVoiceScript`, `performSearch`, and `openModule`.
+- **Modern CSP Reporting Standards**: Added `Report-To` and `Reporting-Endpoints` headers and `report-to csp-endpoint` directive in `public/_headers` and `server.js` for CSP Level 3 compliance alongside `report-uri`.
+
 ## [1.0.0] - 2026-08-22
 
 ### 🚀 Added

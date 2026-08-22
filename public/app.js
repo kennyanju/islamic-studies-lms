@@ -436,6 +436,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function renderSidebarModules() {
     modulesList.innerHTML = '';
+    if (!courseData || !courseData.modules) return;
     courseData.modules.forEach((mod) => {
       const isCompleted = userProgress[`mod_${mod.id}`];
       const li = document.createElement('li');
@@ -456,6 +457,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function renderDashboard() {
     if (!modulesGrid) return;
     modulesGrid.innerHTML = '';
+    if (!courseData || !courseData.modules) return;
 
     const isL2 = activeTrack === 'level2';
     const isTeacher = activeTrack === 'teacher';
@@ -675,6 +677,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (dashboardJumpBtn) dashboardJumpBtn.addEventListener('click', showDashboard);
 
   function openModule(moduleId) {
+    if (!courseData || !courseData.modules) return;
     if (activeTrack !== 'teacher' && moduleId > 1) {
       if (!userProgress[`mod_${moduleId - 1}`]) {
         showToast(
@@ -783,6 +786,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const activeContent = document.getElementById(`${tabName}Tab`);
     if (activeContent) activeContent.classList.add('active');
 
+    if (!courseData || !courseData.modules) return;
     const mod = courseData.modules.find((m) => m.id === activeModuleId);
     if (!mod) return;
 
@@ -802,7 +806,13 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function renderHandout(mod) {
-    let md = activeTrack === 'level2' ? mod.tracks.level2.handoutMd : mod.tracks.level1.handoutMd;
+    if (!mod || !mod.tracks) {
+      handoutContent.innerHTML = '<p>Loading module content...</p>';
+      return;
+    }
+    const tracks = mod.tracks || {};
+    const trackObj = activeTrack === 'level2' ? tracks.level2 : tracks.level1;
+    let md = trackObj ? trackObj.handoutMd : null;
     if (md) {
       handoutContent.innerHTML = renderMarkdown(md);
     } else {
@@ -911,6 +921,10 @@ document.addEventListener('DOMContentLoaded', () => {
   // --------------------------------------------------------------------------
 
   function renderTeleprompter(mod) {
+    if (!mod || !mod.teacher) {
+      tpSlideContent.innerHTML = '<p>No slides available for teleprompter.</p>';
+      return;
+    }
     const slides = mod.teacher.parsedSlides || [];
     const scriptSlides = mod.teacher.parsedVoiceScript || [];
     const total = Math.max(slides.length, scriptSlides.length);
@@ -1129,8 +1143,13 @@ document.addEventListener('DOMContentLoaded', () => {
   // Reveal Check Question Answer
   if (tpShowAnswerBtn) {
     tpShowAnswerBtn.addEventListener('click', () => {
+      if (!courseData || !courseData.modules) return;
       const mod = courseData.modules.find((m) => m.id === activeModuleId);
-      const sc = mod && mod.teacher.parsedVoiceScript[currentTpSlideIndex];
+      const sc =
+        mod &&
+        mod.teacher &&
+        mod.teacher.parsedVoiceScript &&
+        mod.teacher.parsedVoiceScript[currentTpSlideIndex];
       if (sc && sc.checkQuestion) {
         alert(
           `Question: ${sc.checkQuestion}\n\nAnswer Guidance: Refer to student handout and Maliki fiqh key for full breakdown.`
@@ -1158,8 +1177,15 @@ document.addEventListener('DOMContentLoaded', () => {
       renderAnswerKeys(mod);
     };
 
-    const trackData = activeAkLevel === 'level2' ? mod.tracks.level2 : mod.tracks.level1;
-    const akRaw = trackData.parsedQuestions.answerKeyRaw;
+    if (!mod || !mod.tracks) {
+      answerKeyContent.innerHTML = `<p class="text-muted">Master answer key compiled within module script. Refer to voice scripts or slides for full explanation.</p>`;
+      return;
+    }
+
+    const tracks = mod.tracks || {};
+    const trackData =
+      (activeAkLevel === 'level2' ? tracks.level2 : tracks.level1) || tracks.level1 || {};
+    const akRaw = trackData.parsedQuestions ? trackData.parsedQuestions.answerKeyRaw : null;
 
     if (akRaw) {
       answerKeyContent.innerHTML = renderMarkdown(akRaw);
@@ -1181,12 +1207,16 @@ document.addEventListener('DOMContentLoaded', () => {
     quizScoreBanner.style.display = 'none';
     quizQuestionsArea.innerHTML = '';
 
-    let trackData = mod.tracks.level1;
-    if (activeTrack === 'level2') {
-      trackData = mod.tracks.level2;
+    if (!mod || !mod.tracks) {
+      quizQuestionsArea.innerHTML = '<p>No questions available for this module track.</p>';
+      submitQuizBtn.style.display = 'none';
+      return;
     }
 
-    const pq = trackData.parsedQuestions;
+    const tracks = mod.tracks || {};
+    let trackData =
+      (activeTrack === 'level2' ? tracks.level2 : tracks.level1) || tracks.level1 || {};
+    const pq = trackData.parsedQuestions || { multipleChoice: [], fillBlanks: [], reflection: [] };
 
     if (!pq || (!pq.multipleChoice.length && !pq.fillBlanks.length && !pq.reflection.length)) {
       const cleanMd =
@@ -1320,12 +1350,14 @@ document.addEventListener('DOMContentLoaded', () => {
   // Server-Side Quiz Grading & Maliki Scholarly Explanations Engine
   // --------------------------------------------------------------------------
   submitQuizBtn.addEventListener('click', async () => {
+    if (!courseData || !courseData.modules) return;
     const mod = courseData.modules.find((m) => m.id === activeModuleId);
-    if (!mod) return;
+    if (!mod || !mod.tracks) return;
 
     const track = activeTrack === 'level2' ? 'level2' : 'level1';
-    let trackData = track === 'level2' ? mod.tracks.level2 : mod.tracks.level1;
-    const mcqs = trackData.parsedQuestions.multipleChoice || [];
+    const tracks = mod.tracks || {};
+    let trackData = (track === 'level2' ? tracks.level2 : tracks.level1) || tracks.level1 || {};
+    const mcqs = (trackData.parsedQuestions && trackData.parsedQuestions.multipleChoice) || [];
 
     const answers = {};
     mcqs.forEach((q, idx) => {
@@ -1517,6 +1549,11 @@ document.addEventListener('DOMContentLoaded', () => {
   // --------------------------------------------------------------------------
 
   function renderSlides(mod) {
+    if (!mod || !mod.teacher) {
+      slideContent.innerHTML = '<p>No slide presentation deck available.</p>';
+      slideCounter.textContent = '0 of 0';
+      return;
+    }
     const slides = mod.teacher.parsedSlides || [];
     if (slides.length === 0) {
       slideContent.innerHTML = mod.teacher.slidesMd
@@ -1565,6 +1602,10 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   function renderVoiceScript(mod) {
+    if (!mod || !mod.teacher) {
+      voiceScriptContent.innerHTML = `<pre>No teacher voice script recorded for this module.</pre>`;
+      return;
+    }
     const scriptMd = mod.teacher.voiceScriptMd;
     if (scriptMd) {
       voiceScriptContent.innerHTML = renderMarkdown(scriptMd);
@@ -1592,14 +1633,18 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!courseData || !courseData.modules) return;
     const results = [];
     courseData.modules.forEach((mod) => {
-      const h10 = (mod.tracks.level1.handoutMd || '').toLowerCase();
-      const h13 = (mod.tracks.level2.handoutMd || '').toLowerCase();
-      const script = (mod.teacher.voiceScriptMd || '').toLowerCase();
+      const tracks = mod.tracks || {};
+      const t1 = tracks.level1 || {};
+      const t2 = tracks.level2 || {};
+      const teacher = mod.teacher || {};
+      const h10 = (t1.handoutMd || '').toLowerCase();
+      const h13 = (t2.handoutMd || '').toLowerCase();
+      const script = (teacher.voiceScriptMd || '').toLowerCase();
 
       if (
-        mod.title.toLowerCase().includes(query) ||
-        mod.description.toLowerCase().includes(query) ||
-        mod.category.toLowerCase().includes(query)
+        (mod.title && mod.title.toLowerCase().includes(query)) ||
+        (mod.description && mod.description.toLowerCase().includes(query)) ||
+        (mod.category && mod.category.toLowerCase().includes(query))
       ) {
         results.push({ module: mod, snippet: mod.description });
       } else if (h10.includes(query) || h13.includes(query) || script.includes(query)) {

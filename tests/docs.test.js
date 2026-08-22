@@ -35,5 +35,7 @@ describe('OpenAPI Documentation & Health API Tests', () => {
     expect(res.headers['x-frame-options']).toBe('DENY');
     expect(res.headers['referrer-policy']).toBe('strict-origin-when-cross-origin');
     expect(res.headers['permissions-policy']).toBeTruthy();
+    expect(res.headers['report-to']).toBeTruthy();
+    expect(res.headers['reporting-endpoints']).toContain('csp-endpoint');
   });
 });
