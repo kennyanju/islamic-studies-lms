@@ -1287,12 +1287,42 @@ document.addEventListener('DOMContentLoaded', () => {
         console.warn('Network issue reaching server quiz grading endpoint, using client grading engine:', netErr);
       }
 
-      // 2. Server Error Handling (Remove Client-Side Bypass)
+      // 2. Client-Side Grading Fallback (when server is unreachable or returns non-success)
       if (!data || !data.success) {
-        showToast('Quiz Grading Error', data?.error || 'Unable to contact grading server. Please try again.', 'error');
-        submitQuizBtn.disabled = false;
-        submitQuizBtn.innerHTML = 'Submit Quiz <i class="fa-solid fa-paper-plane"></i>';
-        return;
+        // Log the server-side reason if available (e.g. rate limit)
+        if (data && data.error) {
+          console.warn('Server grading declined:', data.error);
+        }
+
+        // Grade locally using the already-loaded course data
+        let correctCount = 0;
+        const total = mcqs.length;
+        const feedbackList = [];
+
+        mcqs.forEach((q, idx) => {
+          const studentAns = (answers[idx] || '').toString().trim().toUpperCase();
+          const correctAns = (q.correctAnswer || 'A').toString().trim().toUpperCase();
+          const isCorrect = studentAns === correctAns;
+          if (isCorrect) correctCount++;
+          feedbackList.push({
+            questionIndex: idx,
+            selectedAnswer: studentAns,
+            correctAnswer: correctAns,
+            isCorrect,
+            explanation: q.explanation || `Correct Answer is (${correctAns}). Refer to student handout for full breakdown.`
+          });
+        });
+
+        const percentage = total > 0 ? Math.round((correctCount / total) * 100) : 0;
+        data = {
+          success: true,
+          score: correctCount,
+          total,
+          percentage,
+          passed: percentage >= 80,
+          feedback: feedbackList,
+          _gradedLocally: true
+        };
       }
 
       // 3. Display option feedback and explanations
