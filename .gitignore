@@ -7,3 +7,8 @@ node_modules/
 *.pptx
 data/db.json*
 .wrangler/
+
+# Generated curriculum build artifacts
+public/course_data.json
+public/modules_manifest.json
+public/course_data/

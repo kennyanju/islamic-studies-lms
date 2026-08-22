@@ -1131,6 +1131,18 @@ app.get('/api/admin/audit', requireAdmin, async (req, res, next) => {
   }
 });
 
+// Admin Telemetry & Error Logs API
+app.get('/api/admin/telemetry', requireAdmin, (req, res) => {
+  res.json({ success: true, logs: telemetryLogs });
+});
+
+app.delete('/api/admin/telemetry', requireAdmin, (req, res) => {
+  telemetryLogs.length = 0;
+  telemetryMetrics.clientErrors = 0;
+  telemetryMetrics.cspViolations = 0;
+  res.json({ success: true, message: 'Telemetry logs cleared' });
+});
+
 /* ==========================================================================
    Telemetry, CSP Reporting & Client Error Monitoring API
    ========================================================================== */
@@ -1142,6 +1154,7 @@ const telemetryMetrics = {
   lastCspAlertTime: 0,
   lastErrorAlertTime: 0
 };
+const telemetryLogs = [];
 
 // CSP Violation Reporting Endpoint
 app.post('/api/telemetry/csp', express.json({ type: ['application/json', 'application/csp-report'] }), (req, res) => {
@@ -1150,6 +1163,16 @@ app.post('/api/telemetry/csp', express.json({ type: ['application/json', 'applic
   const blockedUri = report['blocked-uri'] || report.blockedUri || 'unknown';
   const violatedDirective = report['violated-directive'] || report.violatedDirective || 'unknown';
   const documentUri = report['document-uri'] || report.documentUri || '';
+
+  telemetryLogs.unshift({
+    id: Date.now() + Math.random(),
+    message: `CSP Blocked: ${blockedUri} (${violatedDirective})`,
+    source: 'csp',
+    stack: '',
+    url: documentUri,
+    createdAt: new Date().toISOString()
+  });
+  if (telemetryLogs.length > 100) telemetryLogs.pop();
 
   console.warn(`🛡️  [CSP Violation] Blocked URI: ${blockedUri} | Directive: ${violatedDirective} | Document: ${documentUri}`);
 
@@ -1167,6 +1190,17 @@ app.post('/api/telemetry/csp', express.json({ type: ['application/json', 'applic
 app.post('/api/telemetry/errors', (req, res) => {
   telemetryMetrics.clientErrors++;
   const { message, source, lineno, colno, stack, url, timestamp } = req.body || {};
+
+  telemetryLogs.unshift({
+    id: Date.now() + Math.random(),
+    message: message || 'Unknown client error',
+    source: `${source || 'client'}${lineno ? `:${lineno}` : ''}`,
+    stack: stack || '',
+    url: url || '',
+    createdAt: timestamp || new Date().toISOString()
+  });
+  if (telemetryLogs.length > 100) telemetryLogs.pop();
+
   console.warn(`⚠️ [Client Telemetry Error] [${timestamp || new Date().toISOString()}] ${message || 'Unknown error'} at ${source || url || ''}:${lineno || ''}`);
   if (stack && !isProd && typeof stack === 'string') {
     console.warn(`   Stack: ${stack.split('\n')[0]}`);

@@ -1630,6 +1630,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const adminUserSearchInput = document.getElementById('adminUserSearchInput');
   const adminRoleFilterSelect = document.getElementById('adminRoleFilterSelect');
   const adminSignOutBtn = document.getElementById('adminSignOutBtn');
+  const adminRefreshLogsBtn = document.getElementById('adminRefreshLogsBtn');
+  const adminClearLogsBtn = document.getElementById('adminClearLogsBtn');
+  const adminTelemetryTableBody = document.getElementById('adminTelemetryTableBody');
 
   // Modal Elements - Auth & Signup/Signin
   const authModal = document.getElementById('authModal');
@@ -2554,6 +2557,40 @@ document.addEventListener('DOMContentLoaded', () => {
     // Render Users Table
     adminUsersCache = users || [];
     filterAndRenderAdminUsers();
+    renderAdminTelemetry();
+  }
+
+  // Admin Telemetry & Error Logs Renderer
+  async function renderAdminTelemetry() {
+    if (!adminTelemetryTableBody) return;
+    try {
+      const res = await fetch('/api/admin/telemetry');
+      if (res.ok) {
+        const data = await res.json();
+        if (data.success && Array.isArray(data.logs) && data.logs.length > 0) {
+          adminTelemetryTableBody.innerHTML = '';
+          data.logs.forEach(log => {
+            const tr = document.createElement('tr');
+            const isCsp = log.source === 'csp';
+            const sourceBadge = isCsp
+              ? '<span class="role-badge" style="background: rgba(239, 68, 68, 0.15); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.3);">CSP</span>'
+              : '<span class="role-badge" style="background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.3);">Client</span>';
+            const timeStr = log.createdAt ? new Date(log.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' }) : 'Recent';
+            tr.innerHTML = `
+              <td style="color: var(--text-subtle); font-size: 0.85rem; white-space: nowrap;">${escapeHtml(timeStr)}</td>
+              <td>${sourceBadge}</td>
+              <td style="font-family: monospace; font-size: 0.85rem; color: var(--text-main); word-break: break-word;">${escapeHtml(log.message || 'No message')}</td>
+              <td style="color: var(--text-muted); font-size: 0.8rem; word-break: break-all;">${escapeHtml(log.url || log.source || 'N/A')}</td>
+            `;
+            adminTelemetryTableBody.appendChild(tr);
+          });
+          return;
+        }
+      }
+    } catch (e) {
+      console.warn('Failed to fetch admin telemetry logs:', e);
+    }
+    adminTelemetryTableBody.innerHTML = '<tr><td colspan="4" style="text-align:center; padding: 20px; color: var(--text-muted);">No errors logged. All systems running cleanly.</td></tr>';
   }
 
   // Admin User Filtering & Table Render
@@ -2771,6 +2808,30 @@ document.addEventListener('DOMContentLoaded', () => {
       if (icon) icon.classList.remove('fa-spin');
       adminRefreshBtn.disabled = false;
       showToast('Admin Metrics Refreshed ⚡', 'Live system telemetry, uptime, and user registries updated.', 'success');
+    });
+  }
+  if (adminRefreshLogsBtn) {
+    adminRefreshLogsBtn.addEventListener('click', async () => {
+      const icon = adminRefreshLogsBtn.querySelector('i');
+      if (icon) icon.classList.add('fa-spin');
+      await renderAdminTelemetry();
+      if (icon) icon.classList.remove('fa-spin');
+      showToast('Telemetry Refreshed', 'Latest security & error logs fetched.', 'info', 2000);
+    });
+  }
+  if (adminClearLogsBtn) {
+    adminClearLogsBtn.addEventListener('click', async () => {
+      if (confirm('Clear all telemetry and CSP violation error logs?')) {
+        try {
+          await fetch('/api/admin/telemetry', { method: 'DELETE' });
+          await renderAdminTelemetry();
+          const healthErrors = document.getElementById('healthClientErrors');
+          if (healthErrors) healthErrors.innerHTML = '<span style="color:#10b981;font-weight:700;"><i class="fa-solid fa-circle-check" style="margin-right:4px;"></i> 0 Errors (Healthy)</span>';
+          showToast('Logs Cleared', 'All telemetry logs have been purged.', 'success', 3000);
+        } catch (e) {
+          showToast('Error', 'Failed to clear logs.', 'error');
+        }
+      }
     });
   }
   if (adminUserSearchInput) adminUserSearchInput.addEventListener('input', filterAndRenderAdminUsers);
@@ -4050,6 +4111,15 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-
+  // Register Progressive Web App (PWA) Service Worker for Installability ("Add to Home Screen")
+  if ('serviceWorker' in navigator && window.location.protocol.startsWith('http')) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/sw.js').then((reg) => {
+        console.log('✅ [PWA] Zero-Cache Service Worker active for installability:', reg.scope);
+      }).catch((err) => {
+        console.warn('⚠️ [PWA] Service Worker registration notice:', err);
+      });
+    });
+  }
 
 });

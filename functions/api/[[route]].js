@@ -83,13 +83,72 @@ function getJwtSecret(env) {
 }
 
 // --------------------------------------------------------------------------
+// Universal UTF-8 Safe Base64URL Encoding / Decoding Helpers
+// --------------------------------------------------------------------------
+function base64UrlEncode(str) {
+  if (typeof Buffer !== 'undefined') {
+    return Buffer.from(str, 'utf8').toString('base64url');
+  }
+  const bytes = new TextEncoder().encode(str);
+  let binary = '';
+  for (let i = 0; i < bytes.length; i++) {
+    binary += String.fromCharCode(bytes[i]);
+  }
+  return btoa(binary).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+}
+
+function base64UrlDecode(b64url) {
+  if (typeof Buffer !== 'undefined') {
+    return Buffer.from(b64url, 'base64url').toString('utf8');
+  }
+  let b64 = b64url.replace(/-/g, '+').replace(/_/g, '/');
+  while (b64.length % 4) {
+    b64 += '=';
+  }
+  const binary = atob(b64);
+  const bytes = new Uint8Array(binary.length);
+  for (let i = 0; i < binary.length; i++) {
+    bytes[i] = binary.charCodeAt(i);
+  }
+  return new TextDecoder().decode(bytes);
+}
+
+function bytesToBase64Url(bytes) {
+  if (typeof Buffer !== 'undefined') {
+    return Buffer.from(bytes).toString('base64url');
+  }
+  let binary = '';
+  const u8 = new Uint8Array(bytes);
+  for (let i = 0; i < u8.length; i++) {
+    binary += String.fromCharCode(u8[i]);
+  }
+  return btoa(binary).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+}
+
+function base64UrlToBytes(b64url) {
+  if (typeof Buffer !== 'undefined') {
+    return new Uint8Array(Buffer.from(b64url, 'base64url'));
+  }
+  let b64 = b64url.replace(/-/g, '+').replace(/_/g, '/');
+  while (b64.length % 4) {
+    b64 += '=';
+  }
+  const binary = atob(b64);
+  const bytes = new Uint8Array(binary.length);
+  for (let i = 0; i < binary.length; i++) {
+    bytes[i] = binary.charCodeAt(i);
+  }
+  return bytes;
+}
+
+// --------------------------------------------------------------------------
 // JWT Session Token Engine (HMAC-SHA256)
 // --------------------------------------------------------------------------
 async function signJwt(payload, secret) {
   const enc = new TextEncoder();
   const header = { alg: 'HS256', typ: 'JWT' };
-  const b64Header = btoa(JSON.stringify(header)).replace(/=/g, '');
-  const b64Payload = btoa(JSON.stringify({ ...payload, exp: Math.floor(Date.now() / 1000) + (7 * 86400) })).replace(/=/g, '');
+  const b64Header = base64UrlEncode(JSON.stringify(header));
+  const b64Payload = base64UrlEncode(JSON.stringify({ ...payload, exp: Math.floor(Date.now() / 1000) + (7 * 86400) }));
   const dataToSign = `${b64Header}.${b64Payload}`;
   
   const key = await crypto.subtle.importKey(
@@ -100,7 +159,7 @@ async function signJwt(payload, secret) {
     ['sign']
   );
   const signature = await crypto.subtle.sign('HMAC', key, enc.encode(dataToSign));
-  const b64Sig = btoa(String.fromCharCode(...new Uint8Array(signature))).replace(/=/g, '');
+  const b64Sig = bytesToBase64Url(signature);
   return `${dataToSign}.${b64Sig}`;
 }
 
@@ -120,11 +179,11 @@ async function verifyJwt(token, secret) {
       false,
       ['verify']
     );
-    const sigBytes = Uint8Array.from(atob(b64Sig), c => c.charCodeAt(0));
+    const sigBytes = base64UrlToBytes(b64Sig);
     const isValid = await crypto.subtle.verify('HMAC', key, sigBytes, enc.encode(dataToSign));
     if (!isValid) return null;
     
-    const payload = JSON.parse(atob(b64Payload));
+    const payload = JSON.parse(base64UrlDecode(b64Payload));
     if (payload.exp && payload.exp < Math.floor(Date.now() / 1000)) return null;
     return payload;
   } catch (e) {
@@ -1361,6 +1420,37 @@ export async function onRequest(context) {
       }
     }
     return jsonResponse({ success: true, logs: [] }, 200, {}, request);
+  }
+
+  // 16. Admin Telemetry & Error Logs
+  if (path === '/admin/telemetry' && method === 'GET') {
+    if (!authUser || authUser.role !== 'super_admin') {
+      return jsonResponse({ success: false, error: 'Forbidden: Super Admin only' }, 403, {}, request);
+    }
+    if (env.DB) {
+      try {
+        const { results } = await env.DB.prepare('SELECT id, message, source, stack, url, created_at as createdAt FROM telemetry_logs ORDER BY id DESC LIMIT 100').all();
+        return jsonResponse({ success: true, logs: results || [] }, 200, {}, request);
+      } catch (e) {
+        return jsonResponse({ success: false, error: e.message }, 500, {}, request);
+      }
+    }
+    return jsonResponse({ success: true, logs: [] }, 200, {}, request);
+  }
+
+  if (path === '/admin/telemetry' && method === 'DELETE') {
+    if (!authUser || authUser.role !== 'super_admin') {
+      return jsonResponse({ success: false, error: 'Forbidden: Super Admin only' }, 403, {}, request);
+    }
+    if (env.DB) {
+      try {
+        await env.DB.prepare('DELETE FROM telemetry_logs').run();
+        return jsonResponse({ success: true, message: 'Telemetry logs cleared' }, 200, {}, request);
+      } catch (e) {
+        return jsonResponse({ success: false, error: e.message }, 500, {}, request);
+      }
+    }
+    return jsonResponse({ success: true, message: 'Telemetry logs cleared' }, 200, {}, request);
   }
 
   // Fallback for unmatched API routes

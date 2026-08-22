@@ -931,6 +931,36 @@
             </div>
           </div>
         </div>
+
+        <!-- Telemetry & Error Logs Detailed Viewer -->
+        <div class="dashboard-section" style="margin-top: 2rem;">
+          <div class="dashboard-filter-bar">
+            <h2><i class="fa-solid fa-triangle-exclamation"></i> Live Client Errors & CSP Security Logs</h2>
+            <div class="admin-search-group">
+              <button class="btn-secondary-action" id="adminRefreshLogsBtn" aria-label="Refresh telemetry error logs">
+                <i class="fa-solid fa-arrows-rotate" aria-hidden="true"></i> Refresh Logs
+              </button>
+              <button class="btn-secondary-action" id="adminClearLogsBtn" style="color: #ef4444; border-color: rgba(239, 68, 68, 0.3);" aria-label="Clear all telemetry error logs">
+                <i class="fa-solid fa-trash" aria-hidden="true"></i> Clear Logs
+              </button>
+            </div>
+          </div>
+          <div class="table-responsive" role="region" aria-label="Telemetry and Error Logs Table" tabindex="0">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th scope="col" style="width: 140px;">Timestamp</th>
+                  <th scope="col" style="width: 100px;">Source</th>
+                  <th scope="col">Error Message / Violation</th>
+                  <th scope="col">Location / URL</th>
+                </tr>
+              </thead>
+              <tbody id="adminTelemetryTableBody">
+                <tr><td colspan="4" style="text-align:center; padding: 20px; color: var(--text-muted);">No errors logged. All systems running cleanly.</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
 
       <!-- Module View Container -->
