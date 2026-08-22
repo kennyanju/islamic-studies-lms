@@ -3951,23 +3951,14 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
-    // PWA Service Worker Registration
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js').then(reg => {
-          console.log('✓ Service Worker registered for offline study:', reg.scope);
-        }).catch(err => {
-          console.warn('Service Worker registration failed:', err);
-        });
-      });
-    }
+
 
     // Online / Offline Connectivity Notifications
     window.addEventListener('offline', () => {
-      showToast('Offline Mode Active', 'You are currently offline. Full course curriculum & voice scripts remain available from offline cache.', 'info', 5000);
+      showToast('Offline Mode Active', 'You are currently offline. Please reconnect to access all features.', 'info', 5000);
     });
     window.addEventListener('online', () => {
-      showToast('Back Online 🌐', 'Internet connection restored. Progress will sync with the server.', 'success', 4000);
+      showToast('Back Online 🌐', 'Internet connection restored.', 'success', 4000);
     });
 
     // Client Error Telemetry Logging
@@ -4059,15 +4050,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Register Progressive Web App (PWA) Service Worker for Offline Resilience
-  if ('serviceWorker' in navigator && window.location.protocol.startsWith('http')) {
-    window.addEventListener('load', () => {
-      navigator.serviceWorker.register('/sw.js').then((reg) => {
-        console.log('✅ [PWA] Service Worker registered:', reg.scope);
-      }).catch((err) => {
-        console.warn('⚠️ [PWA] Service Worker registration notice:', err);
-      });
-    });
-  }
+
 
 });
