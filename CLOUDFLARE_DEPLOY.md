@@ -69,7 +69,7 @@ npm run deploy:staging
 To guarantee high deliverability for Welcome and Password Reset emails sent via Resend:
 
 ### A. Custom Domain in Cloudflare
-1. Go to **Workers & Pages** > **maliki-kids** > **Settings** > **Domains & Routes**.
+1. Go to **Workers & Pages** > **islamic-studies-lms** > **Settings** > **Domains & Routes**.
 2. Add your custom domain (e.g. `learn.malikikids.com`).
 3. Set SSL/TLS encryption mode to **Full (strict)**.
 4. Enable **DNSSEC** under your zone DNS settings.

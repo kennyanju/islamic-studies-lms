@@ -12,4 +12,5 @@ Disallow: /api/
 Disallow: /admin/
 Disallow: /telemetry/
 
-Sitemap: https://maliki-kids.workers.dev/sitemap.xml
+# Sitemaps
+Sitemap: https://islamic-studies-lms.workers.dev/sitemap.xml
