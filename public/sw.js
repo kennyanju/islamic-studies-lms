@@ -1,38 +1,132 @@
 /**
- * Islamic Studies Family LMS - Zero-Cache PWA Service Worker
- * Enables PWA installability ("Add to Home Screen") while guaranteeing 100% fresh network delivery.
+ * Islamic Studies Family LMS - Resilient Offline-Ready Service Worker
+ * Features:
+ * - Cache-first for curriculum JSON modules & manifests
+ * - Stale-while-revalidate for CSS, JS, fonts, and HTML app shell
+ * - Network-only for dynamic API mutations
  */
 
-// Install immediately without waiting
+const CACHE_NAME = 'islamic-studies-vmtagro6x';
+const PRECACHE_ASSETS = [
+  '/',
+  '/index.html',
+  '/style.css',
+  '/app.js',
+  '/modules_manifest.json',
+  '/manifest.json',
+  '/icons/favicon.svg',
+  '/icons/icon-192.png',
+  '/icons/icon-512.png'
+];
+
+// 1. Precache Core Shell Assets on Install
 self.addEventListener('install', (event) => {
-  self.skipWaiting();
+  event.waitUntil(
+    caches
+      .open(CACHE_NAME)
+      .then((cache) => cache.addAll(PRECACHE_ASSETS))
+      .then(() => self.skipWaiting())
+      .catch((err) => {
+        console.warn('[ServiceWorker] Precache notice:', err);
+        return self.skipWaiting();
+      })
+  );
 });
 
-// Activate immediately and purge any stale legacy caches
+// 2. Clean up Old Caches on Activate
 self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches
       .keys()
-      .then((cacheNames) => {
-        return Promise.all(
-          cacheNames.map((cacheName) => {
-            console.log(`[PWA ServiceWorker] Purging legacy cache: ${cacheName}`);
-            return caches.delete(cacheName);
+      .then((cacheNames) =>
+        Promise.all(
+          cacheNames.map((name) => {
+            if (name !== CACHE_NAME) {
+              console.log(`[ServiceWorker] Purging legacy cache: ${name}`);
+              return caches.delete(name);
+            }
           })
-        );
-      })
+        )
+      )
       .then(() => self.clients.claim())
   );
 });
 
-// Transparent network pass-through required for PWA installability criteria
+// 3. Intelligent Fetch Routing
 self.addEventListener('fetch', (event) => {
-  // Always fetch directly from network without caching
+  const { request } = event;
+  const url = new URL(request.url);
+
+  // Skip non-GET requests and non-http schemes
+  if (request.method !== 'GET' || !url.protocol.startsWith('http')) {
+    return;
+  }
+
+  // Network-only for API requests
+  if (url.pathname.startsWith('/api/')) {
+    event.respondWith(
+      fetch(request).catch(
+        () =>
+          new Response(
+            JSON.stringify({ success: false, error: 'Offline - Unable to connect to server.' }),
+            { headers: { 'Content-Type': 'application/json' }, status: 503 }
+          )
+      )
+    );
+    return;
+  }
+
+  // Cache-first for Course Data chunks and Manifest
+  if (
+    url.pathname.startsWith('/course_data/') ||
+    url.pathname.endsWith('course_data.json') ||
+    url.pathname.endsWith('modules_manifest.json')
+  ) {
+    event.respondWith(
+      caches.match(request).then((cached) => {
+        if (cached) {
+          // Revalidate in background
+          fetch(request)
+            .then((res) => {
+              if (res.ok) {
+                const clone = res.clone();
+                caches.open(CACHE_NAME).then((cache) => cache.put(request, clone));
+              }
+            })
+            .catch(() => {});
+          return cached;
+        }
+        return fetch(request).then((res) => {
+          if (res.ok) {
+            const clone = res.clone();
+            caches.open(CACHE_NAME).then((cache) => cache.put(request, clone));
+          }
+          return res;
+        });
+      })
+    );
+    return;
+  }
+
+  // Stale-While-Revalidate for Static Assets & Navigation Shell
   event.respondWith(
-    fetch(event.request).catch((err) => {
-      // If network fails completely and user is offline, return basic network error
-      console.warn('[PWA ServiceWorker] Network request failed:', event.request.url);
-      throw err;
+    caches.match(request).then((cached) => {
+      const fetchPromise = fetch(request)
+        .then((res) => {
+          if (res.ok) {
+            const clone = res.clone();
+            caches.open(CACHE_NAME).then((cache) => cache.put(request, clone));
+          }
+          return res;
+        })
+        .catch((err) => {
+          if (cached) return cached;
+          if (request.mode === 'navigate') {
+            return caches.match('/index.html') || caches.match('/');
+          }
+          throw err;
+        });
+      return cached || fetchPromise;
     })
   );
 });

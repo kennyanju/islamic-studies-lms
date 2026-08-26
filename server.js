@@ -1113,17 +1113,39 @@ app.post('/api/quiz/grade', validateModuleId, quizLimiter, async (req, res, next
       }
     }
 
-    // Notification on Pass (R4)
-    if (passed && childId && req.session?.user?.email) {
-      const child = await db.getChildById(childId);
-      emailService
-        .sendEdgeEmail({
-          to: req.session.user.email,
-          subject: `🎉 ${child?.name || 'Your child'} just passed Module ${moduleId}!`,
-          text: `Great news! They scored ${percentage}% on the quiz. Log in to view their certificate.`,
-          html: `<p>Great news! They scored <strong>${percentage}%</strong> on the quiz.</p><p>Log in to view their certificate.</p>`
-        })
-        .catch((err) => console.warn('Notification email failed:', err.message));
+    // Parent Notification on Quiz Completion / Pass
+    if (childId) {
+      try {
+        const child = await db.getChildById(childId);
+        let targetEmail = req.session?.user?.email;
+        let parentName = req.session?.user?.displayName || 'Parent';
+
+        if (!targetEmail && child?.parentUid) {
+          const parentUser = await db.getUserByUid(child.parentUid);
+          if (parentUser?.email) {
+            targetEmail = parentUser.email;
+            parentName = parentUser.displayName || 'Parent';
+          }
+        }
+
+        if (targetEmail) {
+          emailService
+            .sendQuizCompletionEmail({
+              parentEmail: targetEmail,
+              parentName,
+              childName: child?.name || 'Your learner',
+              moduleId,
+              moduleTitle: moduleData?.title || `Module ${moduleId}`,
+              score: correctCount,
+              total,
+              percentage,
+              passed
+            })
+            .catch((err) => console.warn('Quiz completion email notice:', err.message));
+        }
+      } catch (emailErr) {
+        console.warn('Quiz completion email notice:', emailErr.message);
+      }
     }
 
     res.json({

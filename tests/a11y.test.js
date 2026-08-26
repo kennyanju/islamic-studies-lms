@@ -60,4 +60,44 @@ describe('Accessibility & Web Standards Compliance Tests', () => {
       expect(isAccessible).toBe(true);
     });
   });
+
+  test('All modal dialogs have role="dialog", aria-modal="true", and accessible labeling', () => {
+    const modalIds = [
+      'authModal',
+      'userProfileModal',
+      'childModal',
+      'learnerModal',
+      'pinChallengeModal',
+      'forgotPasswordModal',
+      'resetPasswordModal',
+      'privacyTermsModal',
+      'certModal'
+    ];
+
+    modalIds.forEach((id) => {
+      const modalRegex = new RegExp(`<div[^>]*id=["']${id}["'][^>]*>`, 'i');
+      const match = html.match(modalRegex);
+      expect(match).not.toBeNull();
+      const tagHtml = match[0];
+      expect(tagHtml).toMatch(/role=["']dialog["']/i);
+      expect(tagHtml).toMatch(/aria-modal=["']true["']/i);
+      expect(tagHtml).toMatch(/aria-labelledby=["'][^"']+["']/i);
+    });
+  });
+
+  test('CSS stylesheet includes :focus-visible indicators and print stylesheet', () => {
+    const cssPath = path.join(__dirname, '..', 'public', 'style.css');
+    const css = fs.readFileSync(cssPath, 'utf8');
+
+    expect(css).toContain(':focus-visible');
+    expect(css).toMatch(/outline:\s*3px solid/i);
+    expect(css).toContain('@media print');
+    expect(css).toContain('.streak-pill');
+    expect(css).toContain('.arabic-term');
+  });
+
+  test('Streak status pill has accessible role and labels', () => {
+    expect(html).toMatch(/id=["']headerStreakPill["'][^>]*role=["']status["']/i);
+    expect(html).toMatch(/id=["']headerStreakPill["'][^>]*aria-label=["'][^"']*streak/i);
+  });
 });

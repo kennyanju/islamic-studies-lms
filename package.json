@@ -6,7 +6,7 @@
   "scripts": {
     "build": "node compile.js",
     "start": "node server.js",
-    "dev": "node compile.js && node server.js",
+    "dev": "node compile.js && nodemon server.js",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix && prettier --write .",
     "format": "prettier --write .",
@@ -50,6 +50,7 @@
   "devDependencies": {
     "eslint": "^9.39.5",
     "jest": "^30.4.2",
+    "nodemon": "^3.1.14",
     "prettier": "^3.9.6",
     "supertest": "^7.2.2",
     "wrangler": "^4.124.0"

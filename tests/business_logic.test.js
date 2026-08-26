@@ -150,4 +150,65 @@ describe('Business Logic & Domain Rule Verification Tests', () => {
       expect(res.body.verified).toBe(false);
     });
   });
+
+  describe('4. Email Notifications & GDPR Deletion Cascading', () => {
+    const emailService = require('../lib/email');
+
+    test('sendQuizCompletionEmail triggers preview email delivery', async () => {
+      const emailResult = await emailService.sendQuizCompletionEmail({
+        parentEmail: 'parent_test@example.com',
+        parentName: 'Test Parent',
+        childName: 'Zayd',
+        moduleId: 1,
+        moduleTitle: 'Foundations of Belief',
+        score: 8,
+        total: 8,
+        percentage: 100,
+        passed: true
+      });
+      expect(emailResult.success).toBe(true);
+      expect(emailResult.mailId).toBeDefined();
+
+      const lastEmail = emailService.recentEmails[0];
+      expect(lastEmail.type).toBe('quiz_completion');
+      expect(lastEmail.to).toBe('parent_test@example.com');
+      expect(lastEmail.subject).toContain('Foundations of Belief');
+    });
+
+    test('GDPR: Parent 1 deletes child profile with cascade data cleanup', async () => {
+      // 1. Save dummy quiz result and reflection for child1Id
+      await db.saveQuizResult({
+        uid: parent1Uid,
+        childId: child1Id,
+        moduleId: 1,
+        track: 'level1',
+        score: 8,
+        total: 8,
+        percentage: 100,
+        passed: true
+      });
+      await db.saveReflection({
+        studentId: child1Id,
+        moduleId: 1,
+        questionId: 'r1',
+        responseText: 'Reflection test answer'
+      });
+
+      // 2. Perform GDPR Delete
+      const delRes = await parent1Agent.delete(`/api/parent/children/${child1Id}`);
+      expect(delRes.statusCode).toBe(200);
+      expect(delRes.body.success).toBe(true);
+
+      // 3. Verify child is deleted
+      const childCheck = await db.getChildById(child1Id);
+      expect(childCheck).toBeNull();
+
+      // 4. Verify cascade removed quiz results and reflections
+      const memory = db.memoryData;
+      const childQuizzes = memory.quizResults.filter((q) => q.childId === child1Id);
+      const childReflections = memory.reflections.filter((r) => r.studentId === child1Id);
+      expect(childQuizzes.length).toBe(0);
+      expect(childReflections.length).toBe(0);
+    });
+  });
 });

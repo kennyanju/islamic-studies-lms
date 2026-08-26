@@ -4,6 +4,28 @@ All notable changes to the **Islamic Studies Family LMS** will be documented in 
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.0] - 2026-08-26
+
+### ♿ Accessibility & Standards (WCAG 2.1 AA)
+- **Modal ARIA Dialog & Focus Trapping**: Added `role="dialog"`, `aria-modal="true"`, and `aria-labelledby` across all modal dialogs with keyboard Tab focus trapping and focus restoration on dismissal.
+- **High-Contrast Focus Rings**: Added `:focus-visible` high-contrast outline tokens across buttons, inputs, links, and select fields.
+- **Accessible Landmarks**: Verified proper ARIA labeling, group roles, and screen-reader status indicators across navigation and dashboard cards.
+
+### 🎮 Gamification & Learning Engagement
+- **Daily Learning Streaks**: Added header streak badge (`#headerStreakPill`) with flame animations and per-learner streak persistence in `localStorage`, celebrating consecutive daily lesson completions and quiz submissions.
+- **Interactive Quiz Timer**: Introduced optional timed quiz mode (3m, 5m, 10m, 15m) with visual countdown progress bar, amber/red warning animations, and automatic submission upon expiry.
+- **Arabic Typography & Unicode Isolation**: Automated bidirectional Arabic text wrapping (`<span class="arabic-term" lang="ar" dir="rtl">`) with Amiri font styling.
+
+### 🖨️ Print & PDF Export
+- **Printable Lesson Handouts**: Added "Print Handout" button and clean `@media print` stylesheets formatting curriculum content for paper printing and PDF export without sidebars or headers.
+- **Printable Completion Certificates**: Added "Print / Save PDF" button on certificate modal formatted for landscape certificate printing.
+
+### 🛡️ Compliance & Backend Hardening
+- **GDPR Learner Deletion Cascade**: Added cascade cleanup in `deleteChild` removing all associated quiz results, student reflections, and progress, with dedicated UI deletion action.
+- **Parent Email Alerts on Quiz Completion**: Added `sendQuizCompletionEmail` in `lib/email.js` automatically notifying parents with score breakdown upon quiz completion / pass.
+- **Offline-Ready Service Worker**: Upgraded `public/sw.js` with Cache-first caching for course data modules and manifest, Stale-while-revalidate for application shell, and Network-only for API requests.
+- **Developer Experience**: Added `nodemon` dev dependency with updated `npm run dev` script.
+
 ## [1.1.0] - 2026-08-22
 
 ### 🎨 Added

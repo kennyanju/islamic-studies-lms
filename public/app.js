@@ -152,10 +152,25 @@ document.addEventListener('DOMContentLoaded', () => {
       .replace(/'/g, '&#039;');
   }
 
+  function enhanceArabicText(html) {
+    if (!html || typeof html !== 'string') return html;
+    // Replace text nodes containing Arabic characters without altering HTML tags
+    return html.replace(/>([^<]+)</g, (match, textContent) => {
+      const arabicRegex =
+        /([\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\uFB50-\uFDFF\uFE70-\uFEFF]+(?:[\s\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\uFB50-\uFDFF\uFE70-\uFEFF]+)*)/g;
+      const enhanced = textContent.replace(
+        arabicRegex,
+        '<span class="arabic-term" lang="ar" dir="rtl">$1</span>'
+      );
+      return `>${enhanced}<`;
+    });
+  }
+
   function renderMarkdown(md) {
     if (!md) return '';
     const rawHtml = window.marked ? marked.parse(md) : md;
-    return window.DOMPurify ? DOMPurify.sanitize(rawHtml) : rawHtml;
+    const sanitized = window.DOMPurify ? DOMPurify.sanitize(rawHtml) : rawHtml;
+    return enhanceArabicText(sanitized);
   }
 
   // --------------------------------------------------------------------------
@@ -366,6 +381,7 @@ document.addEventListener('DOMContentLoaded', () => {
     renderSidebarModules();
     renderDashboard();
     updateProgressUI();
+    updateStreakUI();
     setupEventListeners();
     setupLegalModal();
     syncCloudProgress();
@@ -789,6 +805,10 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!courseData || !courseData.modules) return;
     const mod = courseData.modules.find((m) => m.id === activeModuleId);
     if (!mod) return;
+
+    if (tabName !== 'quiz') {
+      stopQuizTimer();
+    }
 
     if (tabName === 'handout') {
       renderHandout(mod);
@@ -1382,6 +1402,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (mod) renderHandout(mod);
 
     if (userProgress[key]) {
+      recordStreakActivity();
       showToast(
         'Module Completed! 🎉',
         `Module ${activeModuleId}: ${mod ? mod.title : ''} marked completed. Keep up the great study!`,
@@ -1678,10 +1699,84 @@ document.addEventListener('DOMContentLoaded', () => {
   // --------------------------------------------------------------------------
   // INTERACTIVE QUIZ ENGINE & CERTIFICATE GENERATOR
   // --------------------------------------------------------------------------
+  let quizTimerInterval = null;
+  let quizTimerRemainingSeconds = 0;
+  let quizTimerTotalSeconds = 0;
+
+  function stopQuizTimer() {
+    if (quizTimerInterval) {
+      clearInterval(quizTimerInterval);
+      quizTimerInterval = null;
+    }
+    const timerDisplay = document.getElementById('quizTimerDisplay');
+    if (timerDisplay) timerDisplay.style.display = 'none';
+  }
+
+  function startQuizTimer(seconds) {
+    stopQuizTimer();
+    if (!seconds || seconds <= 0) return;
+
+    quizTimerTotalSeconds = seconds;
+    quizTimerRemainingSeconds = seconds;
+
+    const timerDisplay = document.getElementById('quizTimerDisplay');
+    if (timerDisplay) timerDisplay.style.display = 'flex';
+    updateQuizTimerDisplay(seconds, seconds);
+
+    quizTimerInterval = setInterval(() => {
+      quizTimerRemainingSeconds--;
+      updateQuizTimerDisplay(quizTimerRemainingSeconds, quizTimerTotalSeconds);
+
+      if (quizTimerRemainingSeconds <= 0) {
+        stopQuizTimer();
+        showToast(
+          'Time Expired ⏱️',
+          'Quiz time limit reached. Submitting your answers automatically...',
+          'info'
+        );
+        if (submitQuizBtn && !submitQuizBtn.disabled) {
+          submitQuizBtn.click();
+        }
+      }
+    }, 1000);
+  }
+
+  function updateQuizTimerDisplay(remaining, total) {
+    const timerText = document.getElementById('quizTimerText');
+    const timerFill = document.getElementById('quizTimerFill');
+    if (!timerText || !timerFill) return;
+
+    const mins = Math.floor(Math.max(0, remaining) / 60);
+    const secs = Math.max(0, remaining) % 60;
+    timerText.textContent = `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+
+    const pct = Math.max(0, Math.min(100, (remaining / total) * 100));
+    timerFill.style.width = `${pct}%`;
+
+    if (remaining <= 15) {
+      timerText.classList.add('timer-warning');
+      timerFill.style.background = '#ef4444';
+    } else {
+      timerText.classList.remove('timer-warning');
+      timerFill.style.background = 'var(--emerald-primary, #059669)';
+    }
+  }
 
   function renderQuiz(mod) {
     quizScoreBanner.style.display = 'none';
     quizQuestionsArea.innerHTML = '';
+
+    // Initialize or restore optional quiz timer setting
+    const timerSelect = document.getElementById('quizTimerSelect');
+    const savedTimerSecs = parseInt(localStorage.getItem('lms_quiz_timer') || '0', 10);
+    if (timerSelect) {
+      timerSelect.value = isNaN(savedTimerSecs) ? '0' : String(savedTimerSecs);
+    }
+    if (savedTimerSecs > 0) {
+      startQuizTimer(savedTimerSecs);
+    } else {
+      stopQuizTimer();
+    }
 
     const isLevel1 = activeTrack === 'level1';
     quizQuestionsArea.classList.toggle('level1-quiz-mode', isLevel1);
@@ -2008,7 +2103,10 @@ document.addEventListener('DOMContentLoaded', () => {
       );
       showQuizScoreBanner(data.score, data.total);
 
+      stopQuizTimer();
+
       if (data.passed) {
+        recordStreakActivity();
         userProgress[`mod_${activeModuleId}`] = true;
         localStorage.setItem(
           `lms_progress_${activeChild ? activeChild.id : 'global'}`,
@@ -2028,6 +2126,7 @@ document.addEventListener('DOMContentLoaded', () => {
           'celebration'
         );
       } else {
+        recordStreakActivity();
         showToast(
           'Quiz Completed',
           `Score: ${data.score}/${data.total} (${data.percentage}%). Review topics and try again!`,
@@ -2067,9 +2166,14 @@ document.addEventListener('DOMContentLoaded', () => {
     certModuleName.textContent = mod ? `Module ${mod.id}: ${mod.title}` : 'Islamic Studies Module';
     certScoreBadge.textContent = `Score Achieved: ${pct}%`;
     certDateText.textContent = `Issue Date: ${new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}`;
+    if (certStudentName && activeChild?.name) {
+      certStudentName.value = activeChild.name;
+    }
     openAccessibleModal(certModal, '#certCloseBtn');
   }
 
+  const certPrintBtn = document.getElementById('certPrintBtn');
+  if (certPrintBtn) certPrintBtn.addEventListener('click', () => window.print());
   if (certCloseBtn) certCloseBtn.addEventListener('click', () => closeAccessibleModal(certModal));
   if (certDoneBtn) certDoneBtn.addEventListener('click', () => closeAccessibleModal(certModal));
 
@@ -2150,6 +2254,58 @@ document.addEventListener('DOMContentLoaded', () => {
     progressPercent.textContent = `${pct}%`;
     progressBarFill.style.width = `${pct}%`;
     if (progressSubtext) progressSubtext.textContent = `${completedMods} of 9 Modules Completed`;
+  }
+
+  // --------------------------------------------------------------------------
+  // DAILY LEARNING STREAK TRACKER
+  // --------------------------------------------------------------------------
+  function getLearnerStreakKey() {
+    return `lms_streak_${activeChild ? activeChild.id : 'global'}`;
+  }
+
+  function getLearnerStreak() {
+    try {
+      const data = JSON.parse(localStorage.getItem(getLearnerStreakKey()) || 'null');
+      if (data && typeof data.count === 'number') return data;
+    } catch (e) {}
+    return { count: 0, lastDate: null, bestStreak: 0 };
+  }
+
+  function recordStreakActivity() {
+    const today = new Date().toISOString().split('T')[0];
+    const streak = getLearnerStreak();
+
+    if (streak.lastDate === today) {
+      updateStreakUI();
+      return;
+    }
+
+    const yesterday = new Date(Date.now() - 86400000).toISOString().split('T')[0];
+    if (streak.lastDate === yesterday) {
+      streak.count += 1;
+    } else {
+      streak.count = 1;
+    }
+
+    streak.bestStreak = Math.max(streak.bestStreak || 1, streak.count);
+    streak.lastDate = today;
+
+    localStorage.setItem(getLearnerStreakKey(), JSON.stringify(streak));
+    updateStreakUI();
+  }
+
+  function updateStreakUI() {
+    const streak = getLearnerStreak();
+    const streakCountEl = document.getElementById('streakCount');
+    const headerStreakPill = document.getElementById('headerStreakPill');
+    if (streakCountEl) streakCountEl.textContent = streak.count || 0;
+    if (headerStreakPill) {
+      headerStreakPill.setAttribute(
+        'aria-label',
+        `Daily learning streak: ${streak.count || 0} consecutive ${streak.count === 1 ? 'day' : 'days'}`
+      );
+      headerStreakPill.title = `Daily Learning Streak: ${streak.count || 0}d (Personal Best: ${streak.bestStreak || streak.count || 0}d)`;
+    }
   }
 
   // --------------------------------------------------------------------------
@@ -2709,6 +2865,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (headerLearnerAvatar) headerLearnerAvatar.textContent = child.avatar || '🌟';
     if (headerLearnerName) headerLearnerName.textContent = child.name;
     if (statActiveLearnerName) statActiveLearnerName.textContent = child.name;
+    updateStreakUI();
 
     // Switch track UI if child track differs
     if (child.assignedTrack) {
@@ -3516,6 +3673,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const copyDirectLinkBtn = document.getElementById('copyDirectLinkBtn');
     const openDirectLinkBtn = document.getElementById('openDirectLinkBtn');
 
+    const deleteChildBtn = document.getElementById('deleteChildBtn');
+
     if (childToEdit) {
       document.getElementById('childModalTitle').textContent = 'Edit Child Profile';
       editingChildId.value = childToEdit.id;
@@ -3526,6 +3685,8 @@ document.addEventListener('DOMContentLoaded', () => {
       childPinInput.placeholder = childToEdit.hasPin
         ? 'Leave blank to keep existing PIN'
         : 'e.g. 1234 (Optional)';
+
+      if (deleteChildBtn) deleteChildBtn.style.display = 'inline-flex';
 
       if (directLinkGroup && directLinkInput) {
         directLinkGroup.style.display = 'block';
@@ -3549,6 +3710,7 @@ document.addEventListener('DOMContentLoaded', () => {
       childTrackSelect.value = 'level1';
       childPinInput.value = '';
       childPinInput.placeholder = 'e.g. 1234 (Optional)';
+      if (deleteChildBtn) deleteChildBtn.style.display = 'none';
       if (directLinkGroup) directLinkGroup.style.display = 'none';
     }
 
@@ -3818,6 +3980,63 @@ document.addEventListener('DOMContentLoaded', () => {
       await fetchFamilyChildren();
       if (parentDashboardView && parentDashboardView.style.display !== 'none') {
         renderParentDashboard();
+      }
+    });
+  }
+
+  // Delete Child Profile (GDPR Permanent Deletion)
+  const deleteChildBtn = document.getElementById('deleteChildBtn');
+  if (deleteChildBtn) {
+    deleteChildBtn.addEventListener('click', async () => {
+      const childId = editingChildId.value;
+      if (!childId) return;
+
+      const confirmDelete = window.confirm(
+        'Are you sure you want to permanently delete this learner profile and all associated quiz scores and progress? This action cannot be undone.'
+      );
+      if (!confirmDelete) return;
+
+      deleteChildBtn.disabled = true;
+      deleteChildBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Deleting...';
+
+      try {
+        const res = await fetch(`/api/parent/children/${encodeURIComponent(childId)}`, {
+          method: 'DELETE',
+          headers: { 'Content-Type': 'application/json' }
+        });
+        const data = await res.json().catch(() => ({}));
+
+        if (res.ok && data.success) {
+          showToast(
+            'Learner Deleted',
+            'Learner profile and records removed successfully.',
+            'success'
+          );
+          if (activeChild && (activeChild.id === childId || activeChild.name === childId)) {
+            activeChild = null;
+            localStorage.removeItem('lms_active_child');
+            if (headerLearnerName) headerLearnerName.textContent = 'Family Learner';
+            if (headerLearnerAvatar) headerLearnerAvatar.textContent = '🌟';
+            updateStreakUI();
+          }
+          closeAccessibleModal(childModal);
+          await fetchFamilyChildren();
+          if (parentDashboardView && parentDashboardView.style.display !== 'none') {
+            renderParentDashboard();
+          }
+        } else {
+          showToast('Deletion Error', data.error || 'Failed to delete learner profile.', 'error');
+        }
+      } catch (err) {
+        showToast(
+          'Network Error',
+          'Could not delete learner profile. Please check connection.',
+          'error'
+        );
+      } finally {
+        deleteChildBtn.disabled = false;
+        deleteChildBtn.innerHTML =
+          '<i class="fa-solid fa-trash" aria-hidden="true"></i> Delete Learner';
       }
     });
   }
@@ -4912,6 +5131,24 @@ document.addEventListener('DOMContentLoaded', () => {
     moduleTabNav.querySelectorAll('.tab-btn').forEach((btn) => {
       btn.addEventListener('click', () => switchTab(btn.dataset.tab));
     });
+
+    // Print Lesson Handout Listener
+    const printHandoutBtn = document.getElementById('printHandoutBtn');
+    if (printHandoutBtn) {
+      printHandoutBtn.addEventListener('click', () => window.print());
+    }
+
+    // Quiz Timer Duration Selector Listener
+    const quizTimerSelect = document.getElementById('quizTimerSelect');
+    if (quizTimerSelect) {
+      quizTimerSelect.addEventListener('change', () => {
+        const secs = parseInt(quizTimerSelect.value, 10) || 0;
+        localStorage.setItem('lms_quiz_timer', secs);
+        if (activeTab === 'quiz') {
+          startQuizTimer(secs);
+        }
+      });
+    }
 
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && sidebar.classList.contains('open')) {

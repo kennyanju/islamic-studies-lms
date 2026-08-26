@@ -5415,3 +5415,381 @@ body.theme-light .level1-wordbank-chip {
     font-size: 1.15rem;
   }
 }
+
+/* ==========================================================================
+   Comprehensive Improvement Enhancements:
+   - High-Contrast Focus Indicators (:focus-visible)
+   - Learning Streak Pill & Counter Animation
+   - Quiz Timer & Countdown Progress Bar
+   - Arabic Typography & RTL Text Isolation
+   - Full @media print Handout & Certificate Stylesheet
+   ========================================================================== */
+
+/* 1. High-Contrast Accessible Focus Rings */
+:focus-visible {
+  outline: 3px solid var(--emerald-primary, #059669) !important;
+  outline-offset: 2px !important;
+  border-radius: 4px;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[role="button"]:focus-visible,
+[tabindex="0"]:focus-visible {
+  outline: 3px solid var(--emerald-primary, #059669) !important;
+  outline-offset: 3px !important;
+}
+
+/* 2. Daily Learning Streak Pill */
+.streak-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: linear-gradient(135deg, rgba(234, 88, 12, 0.18), rgba(217, 119, 6, 0.22));
+  border: 1px solid rgba(249, 115, 22, 0.45);
+  border-radius: 9999px;
+  padding: 6px 14px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #fdba74;
+  cursor: default;
+  user-select: none;
+  box-shadow: 0 2px 8px rgba(234, 88, 12, 0.15);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.streak-pill:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(234, 88, 12, 0.25);
+}
+
+.streak-icon {
+  font-size: 1.1rem;
+  animation: flame-pulse 2s infinite ease-in-out;
+}
+
+.streak-count {
+  font-weight: 800;
+  color: #ffedd5;
+}
+
+.streak-unit {
+  font-size: 0.78rem;
+  opacity: 0.85;
+}
+
+body.theme-light .streak-pill {
+  background: #fff7ed;
+  border-color: #fdba74;
+  color: #c2410c;
+  box-shadow: 0 2px 6px rgba(234, 88, 12, 0.1);
+}
+
+body.theme-light .streak-count {
+  color: #9a3412;
+}
+
+@keyframes flame-pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.15) rotate(3deg);
+  }
+}
+
+/* 3. Quiz Controls & Timer Bar */
+.quiz-controls-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding: 12px 18px;
+  background: var(--card-bg, #131c2e);
+  border: 1px solid var(--card-border, #1e293b);
+  border-radius: var(--radius-md, 12px);
+  margin-bottom: 20px;
+}
+
+.quiz-timer-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+  color: var(--text-muted, #94a3b8);
+}
+
+.quiz-timer-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
+  color: var(--text-main, #f8fafc);
+}
+
+.quiz-timer-select {
+  background: var(--input-bg, #0b1120);
+  color: var(--text-main, #f8fafc);
+  border: 1px solid var(--card-border, #1e293b);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm, 8px);
+  font-size: 0.88rem;
+  cursor: pointer;
+  outline: none;
+}
+
+.quiz-timer-display {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--input-bg, #0b1120);
+  border: 1px solid var(--card-border, #1e293b);
+  padding: 6px 14px;
+  border-radius: 9999px;
+  min-width: 140px;
+}
+
+.timer-icon {
+  color: var(--gold-accent, #d97706);
+  font-size: 0.95rem;
+}
+
+.timer-text {
+  font-family: 'Inter', monospace;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--text-main, #f8fafc);
+  min-width: 45px;
+}
+
+.timer-text.timer-warning {
+  color: #ef4444 !important;
+  animation: timer-blink 1s infinite;
+}
+
+@keyframes timer-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+.timer-progress-track {
+  width: 60px;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 9999px;
+  overflow: hidden;
+}
+
+.timer-progress-fill {
+  height: 100%;
+  background: var(--emerald-primary, #059669);
+  transition: width 1s linear;
+}
+
+/* 4. Arabic Typography Utilities */
+.arabic-term,
+[lang="ar"],
+.arabic-text {
+  font-family: 'Amiri', 'Traditional Arabic', 'Scheherazade New', serif !important;
+  direction: rtl !important;
+  unicode-bidi: isolate !important;
+  font-size: 1.18em;
+  line-height: 1.8;
+  font-weight: 600;
+}
+
+.arabic-term {
+  display: inline-block;
+  padding: 0 4px;
+  color: #f59e0b;
+}
+
+body.theme-light .arabic-term {
+  color: #b45309;
+}
+
+/* 5. Print Button Styling */
+.btn-print-handout {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--input-bg, #0b1120);
+  border: 1px solid var(--card-border, #1e293b);
+  color: var(--text-main, #f8fafc);
+  padding: 8px 16px;
+  border-radius: var(--radius-sm, 8px);
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.btn-print-handout:hover {
+  background: var(--card-hover, #1a263e);
+  border-color: var(--emerald-primary);
+  color: var(--emerald-primary);
+}
+
+body.theme-light .btn-print-handout {
+  background: #ffffff;
+  border-color: #cbd5e1;
+  color: #1e293b;
+}
+
+body.theme-light .btn-print-handout:hover {
+  background: #f1f5f9;
+  border-color: #059669;
+  color: #059669;
+}
+
+/* 6. Comprehensive Print Stylesheet (@media print) */
+@media print {
+  /* Hide all non-printable UI scaffolding */
+  .sidebar,
+  .top-header,
+  .app-global-footer,
+  .tab-nav,
+  .content-toolbar,
+  .quiz-controls-bar,
+  .quiz-submit-bar,
+  .btn-mark-complete,
+  .btn-print-handout,
+  .modal-backdrop:not(.cert-modal-backdrop),
+  .skip-link,
+  .mobile-toggle,
+  .search-box,
+  .track-selector-container,
+  .progress-card,
+  .landing-top-bar,
+  .cert-close-btn,
+  .cert-modal-actions,
+  #toastContainer {
+    display: none !important;
+  }
+
+  /* Reset layout for clean paper printing */
+  html, body {
+    background: #ffffff !important;
+    color: #000000 !important;
+    font-size: 11pt !important;
+    line-height: 1.5 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .app-layout {
+    display: block !important;
+  }
+
+  .main-content {
+    margin: 0 !important;
+    padding: 10mm 15mm !important;
+    max-width: 100% !important;
+    background: #ffffff !important;
+  }
+
+  .view-container {
+    display: block !important;
+  }
+
+  .module-header-card,
+  .content-card,
+  .comic-card,
+  .objectives-card {
+    background: #ffffff !important;
+    color: #000000 !important;
+    border: 1px solid #e2e8f0 !important;
+    box-shadow: none !important;
+    page-break-inside: avoid;
+    margin-bottom: 12pt !important;
+  }
+
+  .module-title,
+  #moduleTitle,
+  h1, h2, h3, h4 {
+    color: #0f172a !important;
+    page-break-after: avoid;
+  }
+
+  .markdown-body {
+    color: #1e293b !important;
+    font-size: 11pt !important;
+  }
+
+  .markdown-body h2 {
+    border-bottom: 1px solid #cbd5e1 !important;
+    padding-bottom: 4pt !important;
+    margin-top: 12pt !important;
+  }
+
+  .markdown-body blockquote {
+    border-left: 3pt solid #059669 !important;
+    background: #f8fafc !important;
+    color: #334155 !important;
+    padding: 6pt 10pt !important;
+  }
+
+  /* Specific styling when printing Certificate of Completion */
+  .cert-modal-backdrop.active {
+    position: static !important;
+    background: #ffffff !important;
+    display: block !important;
+    padding: 0 !important;
+  }
+
+  .cert-modal-card {
+    background: #ffffff !important;
+    box-shadow: none !important;
+    border: none !important;
+    max-width: 100% !important;
+    width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .cert-frame {
+    border: 6pt double #b45309 !important;
+    background: #ffffff !important;
+    color: #000000 !important;
+    box-shadow: none !important;
+    padding: 15mm !important;
+    page-break-inside: avoid;
+  }
+
+  .cert-title {
+    color: #92400e !important;
+    font-size: 24pt !important;
+  }
+
+  .cert-name-input {
+    border-bottom: 2pt solid #000000 !important;
+    color: #000000 !important;
+    font-size: 18pt !important;
+    font-weight: bold !important;
+    background: transparent !important;
+  }
+
+  .cert-course-name {
+    color: #047857 !important;
+    font-size: 16pt !important;
+  }
+
+  .cert-score-badge {
+    background: #d1fae5 !important;
+    color: #065f46 !important;
+    border: 1pt solid #059669 !important;
+  }
+
+  .cert-seal {
+    color: #b45309 !important;
+  }
+
+  @page {
+    margin: 10mm;
+    size: auto;
+  }
+}
