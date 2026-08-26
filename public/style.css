@@ -5437,8 +5437,8 @@ a:focus-visible,
 input:focus-visible,
 select:focus-visible,
 textarea:focus-visible,
-[role="button"]:focus-visible,
-[tabindex="0"]:focus-visible {
+[role='button']:focus-visible,
+[tabindex='0']:focus-visible {
   outline: 3px solid var(--emerald-primary, #059669) !important;
   outline-offset: 3px !important;
 }
@@ -5458,7 +5458,9 @@ textarea:focus-visible,
   cursor: default;
   user-select: none;
   box-shadow: 0 2px 8px rgba(234, 88, 12, 0.15);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .streak-pill:hover {
@@ -5493,7 +5495,8 @@ body.theme-light .streak-count {
 }
 
 @keyframes flame-pulse {
-  0%, 100% {
+  0%,
+  100% {
     transform: scale(1);
   }
   50% {
@@ -5572,8 +5575,13 @@ body.theme-light .streak-count {
 }
 
 @keyframes timer-blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.4; }
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
 }
 
 .timer-progress-track {
@@ -5592,7 +5600,7 @@ body.theme-light .streak-count {
 
 /* 4. Arabic Typography Utilities */
 .arabic-term,
-[lang="ar"],
+[lang='ar'],
 .arabic-text {
   font-family: 'Amiri', 'Traditional Arabic', 'Scheherazade New', serif !important;
   direction: rtl !important;
@@ -5672,7 +5680,8 @@ body.theme-light .btn-print-handout:hover {
   }
 
   /* Reset layout for clean paper printing */
-  html, body {
+  html,
+  body {
     background: #ffffff !important;
     color: #000000 !important;
     font-size: 11pt !important;
@@ -5710,7 +5719,10 @@ body.theme-light .btn-print-handout:hover {
 
   .module-title,
   #moduleTitle,
-  h1, h2, h3, h4 {
+  h1,
+  h2,
+  h3,
+  h4 {
     color: #0f172a !important;
     page-break-after: avoid;
   }
