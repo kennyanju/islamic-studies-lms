@@ -438,14 +438,7 @@ function parseSlidesFast(slidesMd) {
         lines: [line]
       };
     } else {
-      if (!currentSlide) {
-        currentSlide = {
-          slideNum: 1,
-          title: 'Slide 1',
-          lines: []
-        };
-      }
-      currentSlide.lines.push(line);
+      if (currentSlide) currentSlide.lines.push(line);
     }
   }
   if (currentSlide) {
@@ -473,12 +466,24 @@ function parseVoiceScript(voiceScriptMd) {
     const analogyMatch = trimmed.match(/\*\s*\*\*Concept Analogy:\*\*\s*(.*)/i);
     const checkMatch = trimmed.match(/\*\s*\*\*Check-for-Understanding Question:\*\*\s*(.*)/i);
 
+    const script = scriptMatch ? scriptMatch[1].trim().replace(/^"|"$/g, '') : '';
+    const direction = directionMatch ? directionMatch[1].trim() : '';
+    const directionText = direction.toLowerCase();
+    const toneTag =
+      idx === 0 || /welcome|excited|enthusiasm/.test(directionText)
+        ? '[excited]'
+        : /awe|wonder|slow|soft/.test(directionText)
+          ? '[softly]'
+          : /question|curious|discussion/.test(directionText)
+            ? '[curious]'
+            : '[warmly]';
+
     slides.push({
       slideNum: slides.length + 1,
       title: titleMatch ? titleMatch[1].trim() : `Slide ${idx + 1}`,
       summary: summaryMatch ? summaryMatch[1].trim() : '',
-      direction: directionMatch ? directionMatch[1].trim() : '',
-      script: scriptMatch ? scriptMatch[1].trim().replace(/^"|"$/g, '') : '',
+      direction,
+      script: script ? `${toneTag} ${script} [pause]` : '',
       analogy: analogyMatch ? analogyMatch[1].trim() : '',
       checkQuestion: checkMatch ? checkMatch[1].trim() : '',
       rawSection: trimmed
@@ -508,7 +513,10 @@ modulesConfig.forEach((cfg) => {
   const slidesPath = findMdFile(fullMdDir, /teacher_slides/i);
 
   const voiceScriptDir = path.join(rootDir, 'Voice Script for teacher');
+  const voiceScriptNestedDir = path.join(voiceScriptDir, 'Voice scripts');
   const voiceScriptPath =
+    findMdFile(voiceScriptNestedDir, new RegExp(`${cfg.id}\\s*—.*Voice Script`, 'i')) ||
+    findMdFile(voiceScriptNestedDir, new RegExp(`${cfg.id}\\s*—`, 'i')) ||
     findMdFile(voiceScriptDir, new RegExp(`${cfg.id}\\s*—.*Voice Script`, 'i')) ||
     findMdFile(voiceScriptDir, new RegExp(`${cfg.id}\\s*—`, 'i'));
 

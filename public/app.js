@@ -2241,7 +2241,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     const scriptMd = mod.teacher.voiceScriptMd;
     if (scriptMd) {
-      voiceScriptContent.innerHTML = renderMarkdown(scriptMd);
+      const taggedScriptMd = scriptMd.replace(
+        /(\*\s*\*\*Narrative Script:\*\*\s*)([\s\S]*?)(?=\n\*\s*\*\*|\n---|$)/gi,
+        (_, label, script) => `${label}[warmly] ${script.trim()} [pause]`
+      );
+      voiceScriptContent.innerHTML = renderMarkdown(taggedScriptMd);
     } else {
       voiceScriptContent.innerHTML = `<pre>${escapeHtml(scriptMd || 'No teacher voice script recorded for this module.')}</pre>`;
     }
