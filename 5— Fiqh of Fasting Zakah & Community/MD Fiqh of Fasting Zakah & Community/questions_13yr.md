@@ -127,3 +127,16 @@
         *   List the key etiquettes: Ghusl, fine clothing, eating dates before prayer, reciting Takbeerat, taking different paths.
         *   Explain that on Eid day, fasting is strictly forbidden (*Haram*) and eating is an act of obedience.
         *   Analyze the spiritual nature of Eid joy: It is not about self-indulgence, but about celebrating the grace of Allah (*Fadl Allah*) in completing the fast. The celebration is anchored by the Eid prayer and Takbeerat, showing that in Islam, joy and worship are intimately connected.
+
+---
+
+## Teacher Answer Key
+
+1. B
+2. B
+3. C
+4. B
+5. B
+6. C
+7. B
+8. B

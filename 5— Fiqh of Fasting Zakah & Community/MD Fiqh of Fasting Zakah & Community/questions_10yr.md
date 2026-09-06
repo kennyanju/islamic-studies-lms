@@ -109,3 +109,18 @@
 
 20. **Why is voluntary charity called "Sadaqah"? What word does it come from?**
     *   *Answer:* It comes from the word *Sidq*, which means "truthfulness." Giving charity proves that a person's faith in Allah is true and sincere.
+
+---
+
+## Teacher Answer Key
+
+1. B
+2. B
+3. B
+4. B
+5. B
+6. A
+7. B
+8. B
+9. B
+10. A

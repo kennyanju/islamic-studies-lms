@@ -107,3 +107,18 @@
 
 20. **Give one example of Maslahah Mursalah (Public Interest) that we follow in modern schools or cities.**
     *   *Answer:* School fire drills or wearing seatbelts in a car. These are modern rules that aren't mentioned in the Quran directly, but they protect human life and safety, which is a major goal of Islamic law.
+
+---
+
+## Teacher Answer Key
+
+1. B
+2. A
+3. C
+4. B
+5. B
+6. B
+7. C
+8. C
+9. B
+10. C

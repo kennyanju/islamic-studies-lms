@@ -104,3 +104,18 @@
 
 20. **Discuss how the Maliki principle of Maslahah Mursalah (Unrestricted Public Interest) can be applied to create digital ethics for young Muslims using social media.**
     *   *Answer:* **Maslahah Mursalah** allows the creation of rules that bring general benefit or prevent harm to society where there is no specific textual evidence. In the digital age, this principle can be applied to create rules such as screen-time limits, guidelines prohibiting the sharing of private chat screenshots (to protect honor/lineage, *Hifdh al-'Ird*), and rules against cyberbullying. While social media did not exist in the time of early scholars, establishing these digital ethics directly serves the public interest by protecting the mental well-being (*'Aql*) and social harmony of the Muslim community.
+
+---
+
+## Teacher Answer Key
+
+1. B
+2. B
+3. D
+4. C
+5. B
+6. B
+7. B
+8. B
+9. B
+10. C

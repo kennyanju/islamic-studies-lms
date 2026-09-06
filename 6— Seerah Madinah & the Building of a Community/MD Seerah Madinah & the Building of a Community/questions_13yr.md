@@ -106,3 +106,18 @@
 
 20. **Why is the preservation of religion (Hifz al-Din) placed first among the Five Necessities, and how does it relate to the preservation of other human rights?**
     *   *Answer:* *Hifz al-Din* provides the ultimate moral and theological framework that makes life, intellect, family, and wealth sacred in the first place. Without a divine framework, human rights are subject to changing political opinions. By establishing the sanctity of religion, Islam establishes the absolute, unchanging divine protection for all other human rights.
+
+---
+
+## Teacher Answer Key
+
+1. B
+2. B
+3. B
+4. C
+5. B
+6. B
+7. B
+8. C
+9. B
+10. B

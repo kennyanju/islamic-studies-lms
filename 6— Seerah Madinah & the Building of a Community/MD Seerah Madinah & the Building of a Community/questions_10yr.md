@@ -107,3 +107,18 @@
 
 20. **Why did Imam Malik believe that the Practice of the People of Madinah ('Amal Ahl al-Madinah) is a strong source of law?**
     *   *Answer:* Because the children of the Companions in Madinah learned their daily actions directly from their parents, who learned from the Prophet (pbuh). This continuous living practice represents the Sunnah in action.
+
+---
+
+## Teacher Answer Key
+
+1. B
+2. B
+3. B
+4. B
+5. C
+6. B
+7. B
+8. B
+9. B
+10. B
