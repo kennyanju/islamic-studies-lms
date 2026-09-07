@@ -8,8 +8,8 @@ This assessment evaluates your comprehension of Islamic legal philosophy, social
 ### Questions
 
 #### 1. In Ash'ari theology, how are moral goodness (*Ḥusn*) and moral badness (*Qubḥ*) determined?
-*   a) Solely by human intellect (*‘Aql*) and social consensus
-*   b) By Divine Revelation (*Shar‘*) and the decree of Allah as *Al-Ḥākim* (The Lawgiver)
+*   a) By Divine Revelation (*Shar‘*) and the decree of Allah as *Al-Ḥākim* (The Lawgiver)
+*   b) Solely by human intellect (*‘Aql*) and social consensus
 *   c) By whatever is most profitable in the marketplace
 *   d) Through historical evolution and cultural adaptation
 
@@ -21,9 +21,9 @@ This assessment evaluates your comprehension of Islamic legal philosophy, social
 
 #### 3. Which of the following best describes the process of transforming a Permissible (*Mubāḥ*) action into a Recommended or Obligatory act of worship?
 *   a) Reciting a specific dhikr out loud 100 times before the action
-*   b) Intending (*Niyyah*) in the heart to do the action for a good purpose, such as gaining strength to worship Allah
+*   b) Only scholars can make this transformation; normal laypeople cannot
 *   c) Paying a scholar to bless the action beforehand
-*   d) Only scholars can make this transformation; normal laypeople cannot
+*   d) Intending (*Niyyah*) in the heart to do the action for a good purpose, such as gaining strength to worship Allah
 
 #### 4. To perform the ritual slaughter (*Dhakāh*) of a land animal correctly, which parts of the throat must be severed?
 *   a) Just the windpipe (*Ḥulqūm*)
@@ -32,16 +32,16 @@ This assessment evaluates your comprehension of Islamic legal philosophy, social
 *   d) The spinal cord and the esophagus
 
 #### 5. What is the Maliki ruling regarding meat where the slaughterer forgot to say *Bismillāh*?
-*   a) The meat is strictly *Ḥarām* to eat under all circumstances.
-*   b) The meat is *Ḥalāl* if the omission was due to forgetfulness (*Nisyān*), but *Ḥarām* if omitted intentionally.
+*   a) The meat is *Ḥalāl* if the omission was due to forgetfulness (*Nisyān*), but *Ḥarām* if omitted intentionally.
+*   b) The meat is strictly *Ḥarām* to eat under all circumstances.
 *   c) The meat is *Ḥalāl* under all circumstances, even if they intentionally refused to say it.
 *   d) The meat is only lawful for Christians and Jews, not Muslims.
 
 #### 6. How does the Maliki school view water-dwelling animals (seafood)?
 *   a) Only fish with scales are *Ḥalāl*; all other sea creatures (e.g., crabs, squid) are forbidden.
-*   b) All sea creatures are *Ḥalāl*, dead or alive, with no exceptions for shape, mammalian status, or names.
+*   b) Shellfish are *Ḥarām*, but all other sea creatures are *Ḥalāl*.
 *   c) Sea creatures are only *Ḥalāl* if they are ritually slaughtered on land.
-*   d) Shellfish are *Ḥarām*, but all other sea creatures are *Ḥalāl*.
+*   d) All sea creatures are *Ḥalāl*, dead or alive, with no exceptions for shape, mammalian status, or names.
 
 #### 7. What is the standard view of the Maliki school on eating predatory beasts with canines (like lions) and birds with talons (like eagles)?
 *   a) They are strictly *Ḥarām* (forbidden)
@@ -62,16 +62,16 @@ This assessment evaluates your comprehension of Islamic legal philosophy, social
 *   d) It must be covered only from the knee down.
 
 #### 10. A woman completes her Dhuhr prayer and notices that her feet were uncovered throughout the prayer. According to the Maliki school, what should she do?
-*   a) Her prayer is invalid; she must immediately repeat it.
-*   b) Her prayer is valid; however, since feet are *‘Awrah Khafīfah* (light awrah), it is disliked, and she is recommended (*Mustaḥabb*) to repeat it before the time of Dhuhr expires.
+*   a) Her prayer is valid; however, since feet are *‘Awrah Khafīfah* (light awrah), it is disliked, and she is recommended (*Mustaḥabb*) to repeat it before the time of Dhuhr expires.
+*   b) Her prayer is invalid; she must immediately repeat it.
 *   c) She is sinful and must pay expiation, but she does not need to repeat the prayer.
 *   d) She should do prostrations of forgetfulness (*Sujūd al-Sahw*).
 
 #### 11. What is the legal ruling on initiating the *Salām* greeting versus responding to it?
 *   a) Initiating is obligatory (*Farḍ*); responding is recommended (*Sunnah*).
-*   b) Initiating is recommended (*Sunnah*); responding is an individual or collective obligation (*Farḍ*).
+*   b) Both are obligatory for every single Muslim in every meeting.
 *   c) Both are recommended; there is no obligation in greetings.
-*   d) Both are obligatory for every single Muslim in every meeting.
+*   d) Initiating is recommended (*Sunnah*); responding is an individual or collective obligation (*Farḍ*).
 
 #### 12. If a group of three people is walking down a street and meets a single person who is sitting down, who should initiate the greeting according to the Sunnah protocol?
 *   a) The single person who is sitting down
@@ -80,22 +80,22 @@ This assessment evaluates your comprehension of Islamic legal philosophy, social
 *   d) They must greet at the exact same time
 
 #### 13. Which of the following is NOT part of the etiquette of seeking permission (*Isti’dhān*) to enter a home?
-*   a) Knocking or ringing the bell up to three times with intervals
-*   b) Standing directly in front of the door to face the host when it opens
+*   a) Standing directly in front of the door to face the host when it opens
+*   b) Knocking or ringing the bell up to three times with intervals
 *   c) Standing to the left or right of the door to protect the privacy inside
 *   d) Identifying yourself by name rather than saying "Me"
 
 #### 14. How does Islamic commercial law define *Gharar*?
 *   a) A fair trade transaction with high profit margins
-*   b) Excessive uncertainty, ambiguity, or deception in a contract regarding the price, item, or delivery
-*   c) A loan that accrues interest over time
+*   b) A loan that accrues interest over time
+*   c) Excessive uncertainty, ambiguity, or deception in a contract regarding the price, item, or delivery
 *   d) A trade where the seller donates a portion to charity
 
 #### 15. Why is *Ribā* (interest/usury) strictly prohibited in Islamic law?
 *   a) It prevents merchants from making any profit.
-*   b) It is an exploitative practice that generates money from money without real value or risk, harming the poor.
+*   b) It slows down the speed of bank transfers.
 *   c) It was only forbidden in the pre-Islamic era but is allowed now.
-*   d) It slows down the speed of bank transfers.
+*   d) It is an exploitative practice that generates money from money without real value or risk, harming the poor.
 
 #### 16. What is the Maliki school’s position on *Khiyār al-Majlis* (the option to cancel a contract as long as the buyer and seller remain in the session)?
 *   a) They accept it fully, allowing cancellation for any reason before parting.
@@ -104,16 +104,16 @@ This assessment evaluates your comprehension of Islamic legal philosophy, social
 *   d) They leave it up to the government to decide.
 
 #### 17. How does the Maliki school view the timing of Hajj once the conditions of capability (*Istiṭā‘ah*) are met?
-*   a) It is a delayed obligation (*‘Alā al-Tarakhī*); you can go whenever you want in your lifetime.
-*   b) It is an immediate obligation (*‘Alā al-Fawr*); you must perform it in the next available season or you commit a sin.
+*   a) It is an immediate obligation (*‘Alā al-Fawr*); you must perform it in the next available season or you commit a sin.
+*   b) It is a delayed obligation (*‘Alā al-Tarakhī*); you can go whenever you want in your lifetime.
 *   c) It is only recommended, not obligatory.
 *   d) It is immediately obligatory for men, but delayed for women.
 
 #### 18. What is the status of ritual purity (*Wuḍū’*) for performing *Ṭawāf* (circumambulation) in the Maliki school?
 *   a) It is recommended, but not a condition of validity.
-*   b) It is a condition of validity (*Sharṭ Ṣiḥḥah*); if Wudu breaks, the *Ṭawāf* is void and must be restarted from the beginning with continuity.
+*   b) If Wudu breaks, you can complete *Ṭawāf* and make Wudu before the Salah.
 *   c) Wudu is only required for the first three rounds of *Ṭawāf*.
-*   d) If Wudu breaks, you can complete *Ṭawāf* and make Wudu before the Salah.
+*   d) It is a condition of validity (*Sharṭ Ṣiḥḥah*); if Wudu breaks, the *Ṭawāf* is void and must be restarted from the beginning with continuity.
 
 #### 19. In the Maliki school, how is the pacing between Safa and Marwah (*Sa‘y*) classified?
 *   a) It is a voluntary act (*Nāfilah*).
@@ -131,23 +131,23 @@ This assessment evaluates your comprehension of Islamic legal philosophy, social
 
 ### Answer Key & Explanations
 
-1.  **b) By Divine Revelation (*Shar‘*) and the decree of Allah as *Al-Ḥākim* (The Lawgiver).** *Explanation*: In Ash'ari theology, the moral value (goodness or badness) of actions is determined by Allah's command through revelation, not by the independent judgment of human intellect.
+1.  **a) By Divine Revelation (*Shar‘*) and the decree of Allah as *Al-Ḥākim* (The Lawgiver).** *Explanation*: In Ash'ari theology, the moral value (goodness or badness) of actions is determined by Allah's command through revelation, not by the independent judgment of human intellect.
 2.  **c) Obligatory actions are rewarded if performed and punished if omitted, while Recommended actions are rewarded if performed but carry no sin or punishment if omitted.** *Explanation*: This defines the standard legal classification of *Farḍ* vs. *Mandūb* in Usul al-Fiqh.
-3.  **b) Intending (*Niyyah*) in the heart to do the action for a good purpose, such as gaining strength to worship Allah.** *Explanation*: Intention (*Niyyah*) redirects the purpose of a neutral (*Mubāḥ*) act toward the worship of Allah, turning it into a rewarded act.
+3.  **d) Intending (*Niyyah*) in the heart to do the action for a good purpose, such as gaining strength to worship Allah.** *Explanation*: Intention (*Niyyah*) redirects the purpose of a neutral (*Mubāḥ*) act toward the worship of Allah, turning it into a rewarded act.
 4.  **b) The windpipe (*Ḥulqūm*), the gullet (*Marī’*), and the two jugular veins (*Wadajayn*).** *Explanation*: In the Maliki school, all four passages must be severed completely for the slaughter (*Dhakāh*) to be legally valid.
-5.  **b) The meat is *Ḥalāl* if the omission was due to forgetfulness (*Nisyān*), but *Ḥarām* if omitted intentionally.** *Explanation*: **Maliki Position**: Saying *Bismillāh* is a condition of validity if remembered. Forgetfulness is excused, but intentional omission invalidates the slaughter.
-6.  **b) All sea creatures are *Ḥalāl*, dead or alive, with no exceptions for shape, mammalian status, or names.** *Explanation*: **Maliki Position**: The school adopts the most inclusive interpretation of Surah al-Ma'idah (5:96), allowing all water-dwelling animals without exception.
+5.  **a) The meat is *Ḥalāl* if the omission was due to forgetfulness (*Nisyān*), but *Ḥarām* if omitted intentionally.** *Explanation*: **Maliki Position**: Saying *Bismillāh* is a condition of validity if remembered. Forgetfulness is excused, but intentional omission invalidates the slaughter.
+6.  **d) All sea creatures are *Ḥalāl*, dead or alive, with no exceptions for shape, mammalian status, or names.** *Explanation*: **Maliki Position**: The school adopts the most inclusive interpretation of Surah al-Ma'idah (5:96), allowing all water-dwelling animals without exception.
 7.  **c) They are *Makrūh* (disliked).** *Explanation*: **Maliki Position**: The standard view of the school is that predatory beasts with canines and birds with talons are disliked (*Makrūh*) to eat, rather than strictly forbidden (*Ḥarām*), based on the text of Surah al-An'am (6:145).
 8.  **b) It stems directly from knowing that Allah is *Al-Raqīb* (The Watchful) and *Al-Baṣīr* (The All-Seeing), motivating us to act respectably.** *Explanation*: True modesty is a spiritual state of the heart that arises from a deep belief (*‘Aqīdah*) in Allah’s attributes of constant awareness and sight.
 9.  **c) It is *‘Awrah Khafīfah* (light awrah); exposing it in public is disliked/prohibited, but exposing it does not invalidate prayer.** *Explanation*: **Maliki Position**: The thigh is light awrah. While exposing it in public is a violation of modesty, it does not invalidate prayer like exposing the heavy awrah (*‘Awrah Mughallaẓah*).
-10. **b) Her prayer is valid; however, since feet are *‘Awrah Khafīfah* (light awrah), it is disliked, and she is recommended (*Mustaḥabb*) to repeat it before the time of Dhuhr expires.** *Explanation*: **Maliki Position**: Exposing the light awrah in prayer does not invalidate it, but it is disliked. She should repeat it within the time block (*Al-Waqt al-Mukhtār*) if possible.
-11. **b) Initiating is recommended (*Sunnah*); responding is an individual or collective obligation (*Farḍ*).** *Explanation*: Initiating *Salām* is a Sunnah Mu'akkadah, but returning it is an absolute obligation (*Farḍ ‘Ayn* if alone, *Farḍ Kifāyah* if in a group).
+10. **a) Her prayer is valid; however, since feet are *‘Awrah Khafīfah* (light awrah), it is disliked, and she is recommended (*Mustaḥabb*) to repeat it before the time of Dhuhr expires.** *Explanation*: **Maliki Position**: Exposing the light awrah in prayer does not invalidate it, but it is disliked. She should repeat it within the time block (*Al-Waqt al-Mukhtār*) if possible.
+11. **d) Initiating is recommended (*Sunnah*); responding is an individual or collective obligation (*Farḍ*).** *Explanation*: Initiating *Salām* is a Sunnah Mu'akkadah, but returning it is an absolute obligation (*Farḍ ‘Ayn* if alone, *Farḍ Kifāyah* if in a group).
 12. **b) The walking group.** *Explanation*: The Sunnah protocol dictates that the walking party greets the sitting party, the younger greets the older, and the smaller group greets the larger group.
-13. **b) Standing directly in front of the door to face the host when it opens.** *Explanation*: Standing directly in front of the door violates privacy by allowing your eyes to wander inside. You should stand to the side.
-14. **b) Excessive uncertainty, ambiguity, or deception in a contract regarding the price, item, or delivery.** *Explanation*: *Gharar* means contract ambiguity. Islam requires commercial clarity to prevent disputes and injustice.
-15. **b) It is an exploitative practice that generates money from money without real value or risk, harming the poor.** *Explanation*: *Ribā* is forbidden because it exploits human need and undermines productive trade.
+13. **a) Standing directly in front of the door to face the host when it opens.** *Explanation*: Standing directly in front of the door violates privacy by allowing your eyes to wander inside. You should stand to the side.
+14. **c) Excessive uncertainty, ambiguity, or deception in a contract regarding the price, item, or delivery.** *Explanation*: *Gharar* means contract ambiguity. Islam requires commercial clarity to prevent disputes and injustice.
+15. **d) It is an exploitative practice that generates money from money without real value or risk, harming the poor.** *Explanation*: *Ribā* is forbidden because it exploits human need and undermines productive trade.
 16. **b) They reject it; the contract becomes binding (*Lāzim*) immediately upon verbal agreement (offer and acceptance), based on *‘Amal Ahl al-Madīnah*.** *Explanation*: **Maliki Position**: The school does not recognize the "option of the session" (*Khiyār al-Majlis*). Once agreement is spoken or acted, the deal is final immediately, based on the inherited practice of Madinah.
-17. **b) It is an immediate obligation (*‘Alā al-Fawr*); you must perform it in the next available season or you commit a sin.** *Explanation*: **Maliki Position**: Hajj is obligatory immediately upon reaching capability (*Istiṭā‘ah*). You cannot delay it without a valid excuse.
-18. **b) It is a condition of validity (*Sharṭ Ṣiḥḥah*); if Wudu breaks, the *Ṭawāf* is void and must be restarted from the beginning with continuity.** *Explanation*: **Maliki Position**: Wudu is a condition for Tawaf. If lost, the Tawaf is voided and must be restarted from the beginning.
+17. **a) It is an immediate obligation (*‘Alā al-Fawr*); you must perform it in the next available season or you commit a sin.** *Explanation*: **Maliki Position**: Hajj is obligatory immediately upon reaching capability (*Istiṭā‘ah*). You cannot delay it without a valid excuse.
+18. **d) It is a condition of validity (*Sharṭ Ṣiḥḥah*); if Wudu breaks, the *Ṭawāf* is void and must be restarted from the beginning with continuity.** *Explanation*: **Maliki Position**: Wudu is a condition for Tawaf. If lost, the Tawaf is voided and must be restarted from the beginning.
 19. **c) It is an essential Pillar (*Rukn*); without it, Hajj and Umrah are invalid and cannot be fixed with sacrifice.** *Explanation*: **Maliki Position**: *Sa‘y* is a primary pillar (*Rukn*) of pilgrimage, not a secondary duty (*Wājib*).
 20. **b) The pebble must land within the designated basin surrounding the pillar to count; if it misses, another must be thrown.** *Explanation*: **Maliki Position**: The pebble must land in the target basin to count toward the stoning ritual. Missed stones do not count and must be re-thrown.

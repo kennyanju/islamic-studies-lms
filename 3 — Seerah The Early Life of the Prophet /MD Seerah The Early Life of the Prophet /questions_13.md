@@ -9,20 +9,20 @@ This assessment is designed to test your conceptual understanding, vocabulary, a
 
 **1. The pre-Islamic Arabs practiced *Shirk* (polytheism) by worshipping idols. Which of the following best describes their theological justification for this practice?**
 *   a) They believed that stone idols created the physical universe.
-*   b) They believed the idols acted as intermediaries (*shufa'a'*) to bring them closer to Allah.
-*   c) They believed that Allah did not exist and that nature was supreme.
+*   b) They believed that Allah did not exist and that nature was supreme.
+*   c) They believed the idols acted as intermediaries (*shufa'a'*) to bring them closer to Allah.
 *   d) They believed that the idols were superior to Allah in power.
 
 **2. Which term describes the pre-Islamic monotheists who rejected idolatry and maintained the legacy of Prophet Ibrahim (as) through sound intellect?**
-*   a) *Mutakallimun*
-*   b) *Hanifs*
+*   a) *Hanifs*
+*   b) *Mutakallimun*
 *   c) *Sahabah*
 *   d) *Ansar*
 
 **3. In Ash'ari creed, what is the term for the absolute protection of Prophets from committing major sins, minor base actions, or displaying repelling characters?**
 *   a) *Wahy*
-*   b) *'Ismah*
-*   c) *Asabiyyah*
+*   b) *Asabiyyah*
+*   c) *'Ismah*
 *   d) *Taqlid*
 
 **4. Under the Ash'ari creed, what is the distinction between *Kalam Nafsi* and *Kalam Lafzi*?**
@@ -96,9 +96,9 @@ This assessment is designed to test your conceptual understanding, vocabulary, a
 ## 🔑 Answer Key & Marking Guide (For Teacher/Parent)
 
 ### Part 1: Multiple Choice
-1.  **b) They believed the idols acted as intermediaries (*shufa'a'*) to bring them closer to Allah.**
-2.  **b) *Hanifs*** (hunafa').
-3.  **b) *'Ismah*** (Infallibility).
+1.  **c) They believed the idols acted as intermediaries (*shufa'a'*) to bring them closer to Allah.**
+2.  **a) *Hanifs*** (hunafa').
+3.  **c) *'Ismah*** (Infallibility).
 4.  **b) *Kalam Nafsi* is the eternal, soundless Speech of Allah's Essence, while *Kalam Lafzi* refers to the created Arabic letters and sounds that express it.**
 5.  **d) All of the above.**
 6.  **d) *Al-Ghanimah*** (The fourth necessary attribute is *Al-Tabligh* / Conveyance).

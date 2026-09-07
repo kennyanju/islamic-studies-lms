@@ -7,20 +7,20 @@
 
 1.  **What does the Ash'ari creed teach us about Allah's attribute Al-Ghani?**
     *   a) Allah needs us to fast so He can be strong.
-    *   b) Allah has no needs and is completely Self-Sufficient.
-    *   c) Allah only needs our prayers during Ramadan.
+    *   b) Allah only needs our prayers during Ramadan.
+    *   c) Allah has no needs and is completely Self-Sufficient.
     *   d) Allah needs us to give Zakah to feed Him.
 
 2.  **How is the start of the month of Ramadan officially established in Islamic law?**
     *   a) When the calendar says it is time.
-    *   b) By sighting the new crescent moon (Hilal) in the sky.
+    *   b) When the weather gets hot.
     *   c) By using astronomical computer math only.
-    *   d) When the weather gets hot.
+    *   d) By sighting the new crescent moon (Hilal) in the sky.
 
 3.  **According to the Maliki school, if the crescent moon is sighted in one land, who must fast?**
     *   a) Only the people in that exact city.
-    *   b) People in all other lands that hear the news and share the night.
-    *   c) Nobody has to fast until they see it with their own eyes.
+    *   b) Nobody has to fast until they see it with their own eyes.
+    *   c) People in all other lands that hear the news and share the night.
     *   d) Only the ruler of the country.
 
 4.  **What are the two pillars (Fara'id) of fasting?**
@@ -30,8 +30,8 @@
     *   d) Cleaning the house and taking a bath.
 
 5.  **According to the Maliki school, how many times must you make the intention (Niyyah) to fast for the month of Ramadan?**
-    *   a) Every single night of Ramadan.
-    *   b) Once at the beginning of the month (unless your fast is interrupted).
+    *   a) Once at the beginning of the month (unless your fast is interrupted).
+    *   b) Every single night of Ramadan.
     *   c) Only on Fridays.
     *   d) You do not need an intention at all.
 
@@ -43,14 +43,14 @@
 
 7.  **What is the meaning of Kaffarah in the fiqh of fasting?**
     *   a) A special pre-dawn meal.
-    *   b) A penalty/expiation to repair the sin of breaking the fast on purpose.
+    *   b) A voluntary charity given on Eid.
     *   c) The sunset meal to break the fast.
-    *   d) A voluntary charity given on Eid.
+    *   d) A penalty/expiation to repair the sin of breaking the fast on purpose.
 
 8.  **What is the preferred way to pay Kaffarah in the Maliki school?**
     *   a) Fasting for 2 lunar months.
-    *   b) Feeding 60 poor people.
-    *   c) Giving cash to a family member.
+    *   b) Giving cash to a family member.
+    *   c) Feeding 60 poor people.
     *   d) Praying 100 extra rak'ahs of prayer.
 
 9.  **One Sa' is a volumetric measurement. How many Amdad (double-handfuls) make up one Sa'?**
@@ -114,13 +114,13 @@
 
 ## Teacher Answer Key
 
-1. B
-2. B
-3. B
+1. C
+2. D
+3. C
 4. B
-5. B
+5. A
 6. A
-7. B
-8. B
+7. D
+8. C
 9. B
 10. A

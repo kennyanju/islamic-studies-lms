@@ -6,21 +6,21 @@
 *Select the best answer for each question.*
 
 1.  **What does the word Hijrah (هِجْرَة) mean in Islamic history?**
-    *   a) A vacation to another country.
-    *   b) Migration for the sake of Allah to protect one's faith.
+    *   a) Migration for the sake of Allah to protect one's faith.
+    *   b) A vacation to another country.
     *   c) Running away from a battle.
     *   d) Going on a business trip.
 
 2.  **Which city was renamed Al-Madinah al-Munawwarah (The Illuminated City)?**
     *   a) Makkah
-    *   b) Yathrib
+    *   b) Ta'if
     *   c) Quba'
-    *   d) Ta'if
+    *   d) Yathrib
 
 3.  **According to the Ash'ari creed, what are Asbab (أَسْبَاب)?**
     *   a) The miracles performed by prophets.
-    *   b) The physical, worldly means or steps we are commanded to take.
-    *   c) The bad deeds that dry out the heart.
+    *   b) The bad deeds that dry out the heart.
+    *   c) The physical, worldly means or steps we are commanded to take.
     *   d) The rules of inheritance in Islamic law.
 
 4.  **If you study hard for a test, what does the Ash'ari creed teach about your grade?**
@@ -36,8 +36,8 @@
     *   d) A dove
 
 6.  **Who were Al-Ansar (الأَنْصَار) in Madinah?**
-    *   a) The traders who came from Makkah.
-    *   b) The Helpers of Madinah who welcomed the Emigrants.
+    *   a) The Helpers of Madinah who welcomed the Emigrants.
+    *   b) The traders who came from Makkah.
     *   c) The non-Muslim tribes who refused to sign treaties.
     *   d) The scholars who wrote down the Quran.
 
@@ -49,14 +49,14 @@
 
 8.  **According to the Maliki school, what is Aman (أَمَان)?**
     *   a) A fast performed on Mondays.
-    *   b) The legal act of granting safety or protection to a non-Muslim.
+    *   b) A type of prayer posture.
     *   c) The collection of charity for orphans.
-    *   d) A type of prayer posture.
+    *   d) The legal act of granting safety or protection to a non-Muslim.
 
 9.  **According to Ash'ari creed, who is Al-Nasir (النَّاصِر)?**
     *   a) The ruler of Madinah.
-    *   b) The Giver of Victory (Allah).
-    *   c) The helper who carries the water.
+    *   b) The helper who carries the water.
+    *   c) The Giver of Victory (Allah).
     *   d) The leader of the archers.
 
 10. **Which of these is strictly FORBIDDEN in warfare according to Maliki ethics?**
@@ -112,13 +112,13 @@
 
 ## Teacher Answer Key
 
-1. B
-2. B
-3. B
+1. A
+2. D
+3. C
 4. B
 5. C
-6. B
+6. A
 7. B
-8. B
-9. B
+8. D
+9. C
 10. B

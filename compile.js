@@ -241,7 +241,7 @@ function parseQuestionsComprehensive(markdownText) {
 
     if (
       /^(##|###|####)\s*(Part\s*(A|1)|Questions)/i.test(trimmed) ||
-      /Multiple\s+Choice/i.test(trimmed)
+      (/^(##|###|####)/.test(trimmed) && /Multiple\s+Choice/i.test(trimmed))
     ) {
       if (currentMcq) {
         mcq.push(currentMcq);
@@ -266,7 +266,10 @@ function parseQuestionsComprehensive(markdownText) {
       }
       currentSection = 'FIB';
       continue;
-    } else if (/^(##|###|####)\s*Part\s*C/i.test(trimmed) || /Matching/i.test(trimmed)) {
+    } else if (
+      /^(##|###|####)\s*Part\s*C/i.test(trimmed) ||
+      (/^(##|###|####)/.test(trimmed) && /Matching/i.test(trimmed))
+    ) {
       if (currentMcq) {
         mcq.push(currentMcq);
         currentMcq = null;
@@ -274,8 +277,9 @@ function parseQuestionsComprehensive(markdownText) {
       currentSection = 'MATCH';
       continue;
     } else if (
-      /^(##|###|####)\s*Part\s*(D|3|4)/i.test(trimmed) ||
-      /Short\s+Answer|Reflection|Scenario/i.test(trimmed)
+      /^(##|###|####)\s*(Part\s*(B|C|D|3|4)|.*?(Short\s+Answer|Reflection|Scenario|Essay))/i.test(
+        trimmed
+      )
     ) {
       if (currentMcq) {
         mcq.push(currentMcq);

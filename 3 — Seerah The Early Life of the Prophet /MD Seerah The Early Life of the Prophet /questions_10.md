@@ -8,8 +8,8 @@ This assessment checks your understanding of the early life of the Prophet Muham
 ### Part 1: Multiple Choice (10 Questions)
 
 **1. What was the name of the noble family clan that the Prophet Muhammad ﷺ belonged to within the tribe of Quraysh?**
-*   a) Banu Makhzum
-*   b) Banu Hashim
+*   a) Banu Hashim
+*   b) Banu Makhzum
 *   c) Banu Umayyah
 *   d) Banu Zuhrah
 
@@ -22,8 +22,8 @@ This assessment checks your understanding of the early life of the Prophet Muham
 **3. Why did Mekkan families send their babies to live in the desert, as Muhammad ﷺ lived with Halimah?**
 *   a) To learn how to ride horses
 *   b) To escape the cold winter
-*   c) To build strong bodies, learn pure Arabic, and escape city diseases
-*   d) To learn how to trade caravans
+*   c) To learn how to trade caravans
+*   d) To build strong bodies, learn pure Arabic, and escape city diseases
 
 **4. Under the Ash'ari creed, what is the term for the divine protection of all Prophets from committing major sins?**
 *   a) *Wahy*
@@ -33,9 +33,9 @@ This assessment checks your understanding of the early life of the Prophet Muham
 
 **5. What is the name of the mountain and the cave where the first revelation descended upon the Prophet ﷺ?**
 *   a) Mount Uhud and Cave of Thawr
-*   b) Jabal al-Nur and Cave of Hira
+*   b) Jabal al-Rahmah and Cave of Arafat
 *   c) Mount Safa and Cave of Arqam
-*   d) Jabal al-Rahmah and Cave of Arafat
+*   d) Jabal al-Nur and Cave of Hira
 
 **6. What was the first word of the Qur'an revealed to the Prophet ﷺ by Angel Jibril (as)?**
 *   a) *Bismillah*
@@ -44,16 +44,16 @@ This assessment checks your understanding of the early life of the Prophet Muham
 *   d) *Qul*
 
 **7. Who was the Christian scholar that Khadijah (ra) took the Prophet ﷺ to see after the first revelation?**
-*   a) Addas
-*   b) Waraqah ibn Nawfal
+*   a) Waraqah ibn Nawfal
+*   b) Addas
 *   c) Najashi
 *   d) Zayd ibn 'Amr
 
 **8. Where did the early Muslims meet in secret during the first three years of dawah?**
 *   a) The Ka'bah
-*   b) Dar al-Arqam
+*   b) Ta'if
 *   c) Jabal al-Nur
-*   d) Ta'if
+*   d) Dar al-Arqam
 
 **9. When the Angel of the Mountains offered to crush the city of Ta'if, what was the Prophet's ﷺ response?**
 *   a) He told the Angel to crush them.
@@ -107,14 +107,14 @@ This assessment checks your understanding of the early life of the Prophet Muham
 ## 🔑 Answer Key & Marking Guide (For Teacher/Parent)
 
 ### Part 1: Multiple Choice
-1.  **b) Banu Hashim** (The noble clan of the Quraysh).
+1.  **a) Banu Hashim** (The noble clan of the Quraysh).
 2.  **c) The Truthful** (*Al-Amin* means the Trustworthy).
-3.  **c) To build strong bodies, learn pure Arabic, and escape city diseases**.
+3.  **d) To build strong bodies, learn pure Arabic, and escape city diseases**.
 4.  **b) *'Ismah*** (Infallibility/Protection from sins. *Wahy* means revelation, *Barakah* means blessings, *Fitrah* means natural state).
-5.  **b) Jabal al-Nur and Cave of Hira** (Jabal al-Nur is the mountain; Hira is the cave).
+5.  **d) Jabal al-Nur and Cave of Hira** (Jabal al-Nur is the mountain; Hira is the cave).
 6.  **c) *Iqra*** (Meaning: Read or Recite).
-7.  **b) Waraqah ibn Nawfal** (He recognized the Angel Jibril as the same Angel sent to Prophet Musa).
-8.  **b) Dar al-Arqam** (The House of Al-Arqam).
+7.  **a) Waraqah ibn Nawfal** (He recognized the Angel Jibril as the same Angel sent to Prophet Musa).
+8.  **d) Dar al-Arqam** (The House of Al-Arqam).
 9.  **c) He made a prayer for their descendants to worship Allah alone** (Demonstrating his attribute of Mercy).
 10. **b) Al-Muwatta'** (The book compiled by Imam Malik over 40 years).
 

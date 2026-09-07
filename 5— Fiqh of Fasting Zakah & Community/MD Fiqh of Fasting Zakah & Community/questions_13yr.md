@@ -6,16 +6,16 @@
 *Select the single best answer.*
 
 1.  **Which of the following best describes the Ash'ari theological understanding of the relationship between Allah's independence (*Al-Ghani*) and human worship?**
-    *   a) Allah requires our fasting and charity to manifest His sovereignty in the physical world.
-    *   b) Allah commands fasting and charity solely for our benefit, as He is absolutely independent (*Al-Ghani*), while we are completely dependent (*Al-Fuqara'*).
+    *   a) Allah commands fasting and charity solely for our benefit, as He is absolutely independent (*Al-Ghani*), while we are completely dependent (*Al-Fuqara'*).
+    *   b) Allah requires our fasting and charity to manifest His sovereignty in the physical world.
     *   c) Fasting changes Allah's state from displeased to pleased, thereby earning us mercy.
     *   d) Since Allah is Self-Sufficient, human actions have no spiritual value or consequences.
 
 2.  **Why does the Maliki school reject astronomical calculations (*Hisab*) as a substitute for visual sighting of the crescent moon (*Hilal*)?**
     *   a) Because astronomical science was considered inaccurate by classical scholars.
-    *   b) Because the Prophet (pbuh) explicitly tied the legal cause (*Sabab*) of the obligation of fasting to the physical act of visual sighting (*Ruyah*).
+    *   b) Because calculations are considered a disliked innovation (*Makruh*) in all cases.
     *   c) Because only scholars are allowed to look at the moon.
-    *   d) Because calculations are considered a disliked innovation (*Makruh*) in all cases.
+    *   d) Because the Prophet (pbuh) explicitly tied the legal cause (*Sabab*) of the obligation of fasting to the physical act of visual sighting (*Ruyah*).
 
 3.  **Under what circumstance is the Maliki rule of the "Single Intention" (*Niyyah Wahidah*) for Ramadan interrupted, requiring a fresh intention to be made?**
     *   a) Every Friday evening of the month.
@@ -30,8 +30,8 @@
     *   d) There is no difference; all schools require *Kaffarah* for eating, drinking, and intimacy.
 
 5.  **What is the legal priority order of *Kaffarah* options in the Maliki school, and how does it contrast with the Shafi'i school?**
-    *   a) Malikis require a strict sequence starting with fasting, whereas Shafi'is allow the person to choose freely.
-    *   b) Malikis prefer feeding 60 poor people over fasting two months, whereas Shafi'is rule that the options must be performed in a strict sequence (fasting first, and feeding only if unable).
+    *   a) Malikis prefer feeding 60 poor people over fasting two months, whereas Shafi'is rule that the options must be performed in a strict sequence (fasting first, and feeding only if unable).
+    *   b) Malikis require a strict sequence starting with fasting, whereas Shafi'is allow the person to choose freely.
     *   c) Both schools require freeing a slave as the only valid modern option.
     *   d) Malikis prefer fasting, while Shafi'is prefer feeding the poor.
 
@@ -43,9 +43,9 @@
 
 7.  **What is the core methodological difference between the Maliki and Hanafi schools regarding Zakah on the wealth of children and the insane?**
     *   a) Hanafis view Zakah as a right linked directly to the wealth (*Hakk Mali*), while Malikis view it as a physical worship (*Ibadah*) requiring legal accountability (*Taklif*).
-    *   b) Malikis view Zakah as a right linked directly to the wealth (*Hakk Mali*), while Hanafis view it as an act of worship requiring legal accountability (*Taklif*) which children lack.
+    *   b) Both schools exempt children and the insane from Zakah on wealth.
     *   c) Malikis exempt children because they do not have an intention (*Niyyah*), while Hanafis require guardians to pay it.
-    *   d) Both schools exempt children and the insane from Zakah on wealth.
+    *   d) Malikis view Zakah as a right linked directly to the wealth (*Hakk Mali*), while Hanafis view it as an act of worship requiring legal accountability (*Taklif*) which children lack.
 
 8.  **How is the duty of eradicating hunger in a local neighborhood classified under Islamic law?**
     *   a) As a *Fard 'Ayn* (individual obligation) on the poorest members of the town.
@@ -132,11 +132,11 @@
 
 ## Teacher Answer Key
 
-1. B
-2. B
+1. A
+2. D
 3. C
 4. B
-5. B
+5. A
 6. C
-7. B
+7. D
 8. B

@@ -33,14 +33,14 @@ describe('Business Logic & Domain Rule Verification Tests', () => {
         moduleId: 1,
         track: 'level1',
         answers: {
-          0: 'B',
+          0: 'A',
           1: 'C',
-          2: 'B',
+          2: 'D',
           3: 'C',
-          4: 'B',
+          4: 'A',
           5: 'B',
-          6: 'B',
-          7: 'C'
+          6: 'D',
+          7: 'B'
         }
       });
       expect(res.statusCode).toBe(200);
@@ -56,14 +56,14 @@ describe('Business Logic & Domain Rule Verification Tests', () => {
         moduleId: 1,
         track: 'level1',
         answers: {
-          q1: 'B',
+          q1: 'A',
           q2: 'C',
-          q3: 'B',
+          q3: 'D',
           q4: 'C',
-          q5: 'B',
+          q5: 'A',
           q6: 'B',
-          q7: 'B',
-          q8: 'C'
+          q7: 'D',
+          q8: 'B'
         }
       });
       expect(res.statusCode).toBe(200);
@@ -79,11 +79,11 @@ describe('Business Logic & Domain Rule Verification Tests', () => {
         moduleId: 1,
         track: 'level1',
         answers: {
-          0: 'B',
+          0: 'A',
           1: 'C',
-          2: 'B',
+          2: 'D',
           3: 'C',
-          4: 'B',
+          4: 'A',
           5: 'B',
           6: 'WRONG',
           7: 'WRONG'

@@ -6,15 +6,15 @@
 *Select the best answer for each question.*
 
 1.  **Under the Ash'ari creed, how are Al-Husn wal-Qubh (moral goodness and badness) determined?**
-    *   a) By human consensus and social contracts.
-    *   b) By Divine Revelation (*Al-Shar'*), which defines what is rewardable and what is punishable.
+    *   a) By Divine Revelation (*Al-Shar'*), which defines what is rewardable and what is punishable.
+    *   b) By human consensus and social contracts.
     *   c) By the logical utility of the action in a democratic vote.
     *   d) By natural evolution and survival instincts.
 
 2.  **In Ash'ari theology, what is the term used to describe human choice and responsibility in performing actions created by Allah?**
     *   a) *Qadar*
-    *   b) *Kasb* (Acquisition)
-    *   c) *Iradah* (Will)
+    *   b) *Iradah* (Will)
+    *   c) *Kasb* (Acquisition)
     *   d) *Muru'ah* (Chivalry)
 
 3.  **Which level of Sidq (truthfulness) requires absolute consistency between a person's public deeds and private state, avoiding hypocrisy?**
@@ -36,16 +36,16 @@
     *   d) Lacking *Muru'ah* invalidates your physical Wudu.
 
 6.  **Under Maliki law, in which scenario is parental permission an absolute requirement for a child?**
-    *   a) Performing the obligatory daily prayers (*Salah*).
-    *   b) Traveling for voluntary acts (like voluntary study abroad or voluntary military service) where parents will suffer from their absence.
+    *   a) Traveling for voluntary acts (like voluntary study abroad or voluntary military service) where parents will suffer from their absence.
+    *   b) Performing the obligatory daily prayers (*Salah*).
     *   c) Buying food from the local market.
     *   d) Performing obligatory Wudu.
 
 7.  **What is the legal definition of Nafaqah (maintenance) regarding parents in the Maliki school?**
     *   a) It is a voluntary charity given to parents when we feel like it.
-    *   b) It is a strict legal obligation on wealthy children to support their poor parents, enforceable by a judge.
+    *   b) It refers to the physical chores children must do for parents.
     *   c) It is a gift given to parents only on Eid holidays.
-    *   d) It refers to the physical chores children must do for parents.
+    *   d) It is a strict legal obligation on wealthy children to support their poor parents, enforceable by a judge.
 
 8.  **According to Imam Malik, what is the spatial limit that defines neighborly rights (Huquq al-Jiwar)?**
     *   a) The three houses next door on either side.
@@ -54,8 +54,8 @@
     *   d) Only relatives who live in the same town.
 
 9.  **In Maliki law, if a co-owner of a shared property wants to sell their share, what right does the neighbor/partner have?**
-    *   a) The right of *Sadd al-Dhara'i'* (blocking the path).
-    *   b) The right of *Shuf'ah* (Pre-emption), meaning they must be offered the share first.
+    *   a) The right of *Shuf'ah* (Pre-emption), meaning they must be offered the share first.
+    *   b) The right of *Sadd al-Dhara'i'* (blocking the path).
     *   c) The right of *Muru'ah* (chivalry).
     *   d) No special rights; the co-owner can sell to anyone without notifying them.
 
@@ -109,13 +109,13 @@
 
 ## Teacher Answer Key
 
-1. B
-2. B
+1. A
+2. C
 3. D
 4. C
 5. B
-6. B
-7. B
+6. A
+7. D
 8. B
-9. B
+9. A
 10. C

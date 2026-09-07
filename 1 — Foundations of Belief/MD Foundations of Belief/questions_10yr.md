@@ -7,8 +7,8 @@
 ## Part A: Multiple Choice (Circle the correct answer)
 
 ### 1. What is the Arabic word for the absolute Oneness and Uniqueness of Allah?
-* A) Fiqh
-* B) Tawhid (تَوْحِيد)
+* A) Tawhid (تَوْحِيد)
+* B) Fiqh
 * C) Iman
 * D) Shari'ah
 
@@ -20,9 +20,9 @@
 
 ### 3. Which of the following is a Pillar of **Iman** (Faith), and NOT a physical Pillar of **Islam**?
 * A) Giving Zakat (Charity)
-* B) Believing in the Angels (Mala'ikah)
+* B) Performing Hajj
 * C) Fasting in Ramadan
-* D) Performing Hajj
+* D) Believing in the Angels (Mala'ikah)
 
 ### 4. Which Archangel is responsible for rain and distributing sustenance (*Rizq*) by Allah's command?
 * A) Jibril (جِبْرِيل)
@@ -31,8 +31,8 @@
 * D) Malik al-Mawt (مَلَكُ الْمَوْت)
 
 ### 5. Which Holy Book was revealed to Prophet Dawud (David)?
-* A) Tawrah (تَوْرَاة)
-* B) Zabur (زَبُور)
+* A) Zabur (زَبُور)
+* B) Tawrah (تَوْرَاة)
 * C) Injil (إِنْجِيل)
 * D) Quran (قُرْآن)
 
@@ -44,14 +44,14 @@
 
 ### 7. If you decide to share your lunch with a classmate, who creates the physical action and who chooses it?
 * A) You create the action, and you choose it.
-* B) Allah creates the action, and you choose/intend it (*Kasb*).
+* B) The angel on your shoulder creates it.
 * C) Nobody chooses it; it is just random.
-* D) The angel on your shoulder creates it.
+* D) Allah creates the action, and you choose/intend it (*Kasb*).
 
 ### 8. What does the term *'Ismah* (عِصْمَة) mean when describing the Prophets?
 * A) They were very wealthy.
-* B) They had the ability to fly.
-* C) They were protected by Allah from committing sins (Infallibility).
+* B) They were protected by Allah from committing sins (Infallibility).
+* C) They had the ability to fly.
 * D) They only spoke to angels.
 
 ---
@@ -107,14 +107,14 @@ ________________________________________________________________________________
 
 ## Teacher Answer Key
 
-1. **B** - Tawhid (the Oneness of Allah)
+1. **A** - Tawhid (the Oneness of Allah)
 2. **C** - Allah is completely different from created things (Divine Transcendence)
-3. **B** - Believing in the Angels (Angels is a pillar of Iman; Zakat, Fasting, Hajj are pillars of Islam)
+3. **D** - Believing in the Angels (Angels is a pillar of Iman; Zakat, Fasting, Hajj are pillars of Islam)
 4. **C** - Mika'il (Michael)
-5. **B** - Zabur (Psalms)
+5. **A** - Zabur (Psalms)
 6. **B** - Resting naturally at the sides (*Sadl*)
-7. **B** - Allah creates the action, and you choose/intend it (*Kasb* / acquisition)
-8. **C** - Protected from committing sins (Infallibility)
+7. **D** - Allah creates the action, and you choose/intend it (*Kasb* / acquisition)
+8. **B** - Protected from committing sins (Infallibility)
 9. **Iman**
 10. **Quran**
 11. **Astaghfirullah**

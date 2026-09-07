@@ -6,8 +6,8 @@
 *Select the best answer for each question.*
 
 1.  **What does the Ash'ari creed teach us about Allah's attribute Al-Ghani?**
-    *   a) Allah needs our prayers to be strong.
-    *   b) Allah is completely rich and has no need for our worship.
+    *   a) Allah is completely rich and has no need for our worship.
+    *   b) Allah needs our prayers to be strong.
     *   c) Allah only needs our prayers on Fridays.
     *   d) Allah needs us to clean the earth for Him.
 
@@ -19,9 +19,9 @@
 
 3.  **If a cup of rosewater is mixed with plain water until it looks and smells completely like rosewater, what category of water does it become?**
     *   a) Al-Ma' al-Mutlaq (Purifying)
-    *   b) Al-Ma' al-Tahir (Pure but non-purifying)
+    *   b) Natural water
     *   c) Al-Ma' al-Najis (Impure)
-    *   d) Natural water
+    *   d) Al-Ma' al-Tahir (Pure but non-purifying)
 
 4.  **According to the Maliki school, what happens if a tiny drop of blood falls into a bucket of water but does NOT change its color, taste, or smell?**
     *   a) The water becomes impure instantly.
@@ -36,8 +36,8 @@
     *   d) 10
 
 6.  **Which of these actions is unique/obligatory in the Maliki school of Wudu?**
-    *   a) Rinsing the mouth.
-    *   b) Rubbing the limbs with the hand while washing (Dalk).
+    *   a) Rubbing the limbs with the hand while washing (Dalk).
+    *   b) Rinsing the mouth.
     *   c) Saying Bismillah.
     *   d) Sniffing water.
 
@@ -48,8 +48,8 @@
     *   d) You only need to wipe your ears.
 
 8.  **In the Maliki school, keeping the steps of Wudu in order (Tarteeb) is classified as a:**
-    *   a) Fard (Obligation)
-    *   b) Sunnah (Recommended practice of the Prophet)
+    *   a) Sunnah (Recommended practice of the Prophet)
+    *   b) Fard (Obligation)
     *   c) Makruh (Disliked act)
     *   d) Haram (Forbidden act)
 
@@ -111,14 +111,14 @@
 ---
 
 ## Answer Key
-1. **b** (Allah is Al-Ghani, rich and free of needs)
+1. **a** (Allah is Al-Ghani, rich and free of needs)
 2. **c** (Rainwater is natural water/Mutlaq)
-3. **b** (It has changed its name to rosewater, so it is Tahir)
+3. **d** (It has changed its name to rosewater, so it is Tahir)
 4. **b** (Water remains purifying/Tahur unless its qualities change, but is Makruh if other water is available)
 5. **c** (7 obligations)
-6. **b** (Rubbing - Dalk)
+6. **a** (Rubbing - Dalk)
 7. **b** (Wiping the entire head is a Fard)
-8. **b** (Tarteeb is a Sunnah in the Maliki school)
+8. **a** (Tarteeb is a Sunnah in the Maliki school)
 9. **d** (Wooden table is not part of the natural earth surface)
 10. **c** (Sadl - arms at the sides)
 11. No, because rubbing (*Dalk*) is an obligation.

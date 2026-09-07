@@ -7,16 +7,16 @@ This worksheet is designed to test your critical thinking, theological comprehen
 ## Part 1: Nuanced Multiple Choice (Questions 1-10)
 
 **1. In the Mālikī school, what is the legal status of *Niyyah* (intention) for acts of purification (*Ṭahārah*) like Wudu?**  
-a) It is a recommended practice (*Sunnah*) that increases reward but does not affect validity.  
-b) It is a structural pillar (*Rukn*) without which the act is invalid.  
+a) It is a structural pillar (*Rukn*) without which the act is invalid.  
+b) It is a recommended practice (*Sunnah*) that increases reward but does not affect validity.  
 c) It is a recommended etiquette (*Adab*) only.  
 d) It is required only when performing dry purification (*Tayammum*).  
 
 **2. Which of the following best defines *Riyā’* (spiritual ostentation) in Islamic ethics?**  
 a) Accidentally forgetting to make a correct intention before starting prayer.  
-b) Performing an act of worship with the intention of gaining human approval or admiration.  
+b) Doing an action purely to enjoy the physical health benefits.  
 c) Choosing to pray in a group rather than praying alone.  
-d) Doing an action purely to enjoy the physical health benefits.  
+d) Performing an act of worship with the intention of gaining human approval or admiration.  
 
 **3. In Ash‘arī theology, the concept of *Kasb* (Acquisition) serves to navigate between which two theological extremes?**  
 a) The Anthropomorphists and the Transcendentalists.  
@@ -31,8 +31,8 @@ c) *Al-Kalām al-Nafsī* is the eternal, uncreated attribute of Speech in Allah'
 d) There is no distinction; they are two names for the physical book.  
 
 **5. During the compilation of the Quran under Caliph Abu Bakr, what was the primary validation criterion established by Zayd ibn Thābit?**  
-a) He accepted any verse that was memorized by at least three Sahabah.  
-b) He only accepted verses in written form verified by two witnesses who saw it written in the direct presence of the Prophet ﷺ.  
+a) He only accepted verses in written form verified by two witnesses who saw it written in the direct presence of the Prophet ﷺ.  
+b) He accepted any verse that was memorized by at least three Sahabah.  
 c) He relied exclusively on his own personal manuscript of the Quran.  
 d) He translated all manuscripts into the Qurayshi dialect immediately.  
 
@@ -49,16 +49,16 @@ c) It must be recited in exactly one-third of our daily prayers.
 d) It was revealed in the third year of the prophetic mission.  
 
 **8. How do the Ash‘arī scholars address verses in the Quran that seem to attribute physical body parts (e.g., hand, face) to Allah?**  
-a) They accept them in their absolute literal physical sense.  
+a) They apply either *Tafwīḍ* (consigning the meaning to Allah while denying physical likeness) or *Ta’wīl* (interpreting the words metaphorically in line with classical Arabic grammar).  
 b) They reject the verses as unauthentic parts of the Quran.  
-c) They apply either *Tafwīḍ* (consigning the meaning to Allah while denying physical likeness) or *Ta’wīl* (interpreting the words metaphorically in line with classical Arabic grammar).  
+c) They accept them in their absolute literal physical sense.  
 d) They claim that these features are created and temporary attributes of Allah.  
 
 **9. What does the condition of *‘Adālah* (moral integrity) require of a narrator in the science of Hadith?**  
 a) That the narrator has a perfect photographic memory.  
-b) That the narrator is a practicing Muslim who avoids major sins and acts that violate public honor.  
+b) That the narrator has personally met the Prophet ﷺ.  
 c) That the narrator has written a book of history.  
-d) That the narrator has personally met the Prophet ﷺ.  
+d) That the narrator is a practicing Muslim who avoids major sins and acts that violate public honor.  
 
 **10. Why did Imam Malik argue that *‘Amal Ahl al-Madīnah* (practice of the people of Madinah) is a stronger proof of the Sunnah than a single-narrator Hadith?**  
 a) Because the people of Madinah were all prophets themselves.  
@@ -106,15 +106,15 @@ Analyze the four conditions of success outlined in Surah Al-`Aṣr (*Īmān*, *�
 ## Answer Key & Explanations
 
 ### Part 1 Answers
-1. **b) It is a structural pillar (*Rukn*) without which the act is invalid.** *[Mālikī Fiqh Flag]* In the Mālikī school, the *niyyah* is a strict pillar (*rukn*), not a sunnah or optional act.
-2. **b) Performing an act of worship with the intention of gaining human approval or admiration.** This is classified as the "minor shirk" (*ash-shirk al-asghar*).
+1. **a) It is a structural pillar (*Rukn*) without which the act is invalid.** *[Mālikī Fiqh Flag]* In the Mālikī school, the *niyyah* is a strict pillar (*rukn*), not a sunnah or optional act.
+2. **d) Performing an act of worship with the intention of gaining human approval or admiration.** This is classified as the "minor shirk" (*ash-shirk al-asghar*).
 3. **c) The Qadariyyah and the Jabariyyah.** *[Ash‘arī Creed Flag]* *Kasb* is the middle path: it rejects the *Qadariyyah* (who claimed humans create their own actions) and the *Jabariyyah* (who claimed humans have no choices/will).
 4. **c) *Al-Kalām al-Nafsī* is the eternal, uncreated attribute of Speech in Allah's Self, while *al-Kalām al-Lafẓī* is the created Arabic text we recite, which represents that eternal Speech.** *[Ash‘arī Creed Flag]* This distinction preserves the uncreated nature of Allah's attributes while recognizing the physical text is created in time.
-5. **b) He only accepted verses in written form verified by two witnesses who saw it written in the direct presence of the Prophet ﷺ.** This ensured absolute historical verification.
+5. **a) He only accepted verses in written form verified by two witnesses who saw it written in the direct presence of the Prophet ﷺ.** This ensured absolute historical verification.
 6. **c) To resolve dangerous disputes over regional pronunciation and dialectal variants by standardizing the script.** The expansion of the empire led to regional dialect variations that threatened community unity.
 7. **b) The Quran consists of three major divisions—Creed (*‘Aqīdah*), Law (*Fiqh*), and Narrative—and this Surah fully details the foundations of Creed.**
-8. **c) They apply either *Tafwīḍ* or *Ta’wīl*.** *[Ash‘arī Creed Flag]* Literal anthropomorphism (*Tashbīh*) is rejected. The school resolves these texts through *Tafwīḍ* (consigning the meaning to Allah) or *Ta’wīl* (metaphorical linguistic interpretation).
-9. **b) That the narrator is a practicing Muslim who avoids major sins and acts that violate public honor.** *‘Adālah* refers to moral character; *Ḍabṭ* refers to memory accuracy.
+8. **a) They apply either *Tafwīḍ* or *Ta’wīl*.** *[Ash‘arī Creed Flag]* Literal anthropomorphism (*Tashbīh*) is rejected. The school resolves these texts through *Tafwīḍ* (consigning the meaning to Allah) or *Ta’wīl* (metaphorical linguistic interpretation).
+9. **d) That the narrator is a practicing Muslim who avoids major sins and acts that violate public honor.** *‘Adālah* refers to moral character; *Ḍabṭ* refers to memory accuracy.
 10. **b) Because a single-narrator report is subject to human error, whereas the continuous, daily public practice of Madinah represents a mass-transmitted physical transmission.** *[Mālikī Fiqh Flag]* The lived practice of thousands in the Prophet’s ﷺ city has the strength of mass-transmission (*Tawātur*).
 
 ### Part 2 Answers

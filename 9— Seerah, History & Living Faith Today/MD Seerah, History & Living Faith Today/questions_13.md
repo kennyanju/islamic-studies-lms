@@ -7,16 +7,16 @@
 *Choose the single best answer that reflects authentic historical facts or Maliki/Ash'ari views.*
 
 ### 1. The general amnesty granted during the Conquest of Makkah (*Fatḥ Makkah*) was a demonstration of which primary Prophetic character trait?
-* A) Political compromise
-* B) Divine mercy (*Raḥmah*) and humility (*Tawāḍu‘*)
+* A) Divine mercy (*Raḥmah*) and humility (*Tawāḍu‘*)
+* B) Political compromise
 * C) Military exhaustion
 * D) Tactical delay
 
 ### 2. In his Farewell Sermon, why did the Prophet ﷺ specifically abolish usury (*Ribā*)?
 * A) To prevent the expansion of commercial business
-* B) To protect the poor from financial exploitation and promote economic justice
+* B) To force all merchants to become farmers
 * C) Because trading was forbidden in Islam
-* D) To force all merchants to become farmers
+* D) To protect the poor from financial exploitation and promote economic justice
 
 ### 3. Which statement best represents the Ash'ari theological position regarding the Prophet's ﷺ passing and his current state?
 * A) He has ceased to exist entirely and has no connection to the Ummah.
@@ -37,16 +37,16 @@
 * D) The confiscation of all books in the city
 
 ### 6. What was the primary reason Caliph ‘Uthmān standardized the pronunciation and script of the Quran into the official *Muṣḥaf*?
-* A) To make the Quran easier for children to read
-* B) To resolve rising disputes over differing regional dialects and pronunciations as the empire grew
+* A) To resolve rising disputes over differing regional dialects and pronunciations as the empire grew
+* B) To make the Quran easier for children to read
 * C) To add new chapters to the Quran
 * D) To change the vocabulary of the text
 
 ### 7. How does the Ash'ari school of creed view the political conflicts and battles that occurred during the rule of Caliph ‘Alī?
 * A) One side was completely insincere and exited Islam.
-* B) All sides acted out of a sincere effort to find the truth through legal reasoning (*Ijtihād*); we respect all the Companions and avoid speaking ill of them.
+* B) We should reject the reports of these conflicts entirely as myth.
 * C) The disputes were about theological dogmas, not political organization.
-* D) We should reject the reports of these conflicts entirely as myth.
+* D) All sides acted out of a sincere effort to find the truth through legal reasoning (*Ijtihād*); we respect all the Companions and avoid speaking ill of them.
 
 ### 8. What does the term *‘Amal Ahl al-Madīnah* refer to in Maliki jurisprudence?
 * A) The physical architecture of the city of Madinah
@@ -114,13 +114,13 @@
 ## Answer Key & Explanations
 
 ### Part 1: Multiple Choice
-1. **B) Divine mercy (*Raḥmah*) and humility (*Tawāḍu‘*).** (His action broke the historical pattern of revenge and established a precedent of mercy in victory).
-2. **B) To protect the poor from financial exploitation.** (Usury creates a system where wealth accumulates only among the rich, which violates Islamic social justice).
+1. **A) Divine mercy (*Raḥmah*) and humility (*Tawāḍu‘*).** (His action broke the historical pattern of revenge and established a precedent of mercy in victory).
+2. **D) To protect the poor from financial exploitation.** (Usury creates a system where wealth accumulates only among the rich, which violates Islamic social justice).
 3. **B) He enjoys a special, noble spiritual life in the intermediate realm (*Barzakh*)...** (Ash'ari creed balances high respect for the Prophet's continuing spiritual existence with the finality of his earthly legal mission).
 4. **C) To prevent the Quran from being lost after many memorizers died.** (The loss of memorizers in the Yamamah campaign created an urgent administrative need to write down the text).
 5. **B) The safety of Christian citizens, their property, and their churches.** (This covenant is a foundational text for religious tolerance in Islamic law).
-6. **B) To resolve rising disputes over differing regional dialects.** (As Islam expanded to non-Arab regions, standardization prevented divisions over how the Quran should be recited).
-7. **B) All sides acted out of a sincere effort to find the truth through legal reasoning (*Ijtihād*)...** (Sunni creed emphasizes holding a good opinion of all Sahabah, recognizing their status while acknowledging they were not infallible in political judgments).
+6. **A) To resolve rising disputes over differing regional dialects.** (As Islam expanded to non-Arab regions, standardization prevented divisions over how the Quran should be recited).
+7. **D) All sides acted out of a sincere effort to find the truth through legal reasoning (*Ijtihād*)...** (Sunni creed emphasizes holding a good opinion of all Sahabah, recognizing their status while acknowledging they were not infallible in political judgments).
 8. **C) The continuous, living practice of the scholars and community of Madinah.** (It represents a mass-transmitted, visual sunnah that Imam Malik prioritized).
 9. **C) Because it was the continuous living practice (*‘Amal*) of the scholars and people of Madinah.** (Imam Malik observed that the major successors did not cross their hands in obligatory prayers, indicating this was the original practice of the Prophet ﷺ).
 10. **B) Through trade routes, where local populations observed the honesty of Maliki merchants.** (The ethical practice of Islamic trade laws by Muslim merchants was the primary vehicle for the peaceful spread of Islam in West Africa).

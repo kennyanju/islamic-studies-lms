@@ -7,9 +7,9 @@
 
 1.  **What does the Ash'ari creed teach us about Al-Husn wal-Qubh (Goodness and Badness)?**
     *   a) Our own brains are the only things that decide what makes an action rewardable.
-    *   b) Goodness and badness of actions are determined by Allah's commands and laws.
+    *   b) There is no such thing as good and bad actions.
     *   c) Good and bad change depending on our mood.
-    *   d) There is no such thing as good and bad actions.
+    *   d) Goodness and badness of actions are determined by Allah's commands and laws.
 
 2.  **What is the meaning of the theological term Kasb (Acquisition)?**
     *   a) Allah is the Creator of all actions, but we choose our intentions and actions.
@@ -30,8 +30,8 @@
     *   d) Helping your family clean the house.
 
 5.  **Which of these is the first step recommended by the Prophet (pbuh) when you feel Ghadab (anger)?**
-    *   a) Shout as loud as you can to release the stress.
-    *   b) Say *A'udhu billahi min ash-Shaytan ir-Rajeem* (Seek refuge in Allah from Shaytan).
+    *   a) Say *A'udhu billahi min ash-Shaytan ir-Rajeem* (Seek refuge in Allah from Shaytan).
+    *   b) Shout as loud as you can to release the stress.
     *   c) Run around the block.
     *   d) Ignore the person forever.
 
@@ -50,8 +50,8 @@
 8.  **According to Imam Malik, how far does your neighborhood extend for Huquq al-Jiwar (neighborhood rights)?**
     *   a) Just the houses next door to you.
     *   b) 7 houses in every direction.
-    *   c) 40 houses in every direction.
-    *   d) The entire city.
+    *   c) The entire city.
+    *   d) 40 houses in every direction.
 
 9.  **What does the Maliki legal concept Sadd al-Dhara'i' mean?**
     *   a) Helping a friend cheat.
@@ -112,13 +112,13 @@
 
 ## Teacher Answer Key
 
-1. B
+1. D
 2. A
 3. C
 4. B
-5. B
+5. A
 6. B
 7. C
-8. C
+8. D
 9. B
 10. C

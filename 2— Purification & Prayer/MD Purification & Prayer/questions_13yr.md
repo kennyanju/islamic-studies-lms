@@ -12,8 +12,8 @@
     *   d) Worship is optional since Allah does not need it.
 
 2.  **A large container of well water is mixed with pure laundry soap. The water now looks cloudy and smells strongly of soap. Legally, what is its status in Maliki Fiqh?**
-    *   a) It remains Mutlaq/Tahur because soap is clean.
-    *   b) It is Tahir (pure but non-purifying); it cannot be used for Wudu.
+    *   a) It is Tahir (pure but non-purifying); it cannot be used for Wudu.
+    *   b) It remains Mutlaq/Tahur because soap is clean.
     *   c) It is Najis (impure) because its qualities changed.
     *   d) It is Makruh to use, but Wudu is still valid.
 
@@ -25,9 +25,9 @@
 
 4.  **How does the Maliki school differ from the Shafi'i school regarding the water volume threshold for impurities?**
     *   a) Shafi'is have no volume threshold, while Malikis use the Qullatayn (approx. 200 liters) rule.
-    *   b) Shafi'is rule that water under Qullatayn becomes impure automatically upon contact with filth, whereas Malikis focus on whether the filth actually altered the water's attributes.
+    *   b) There is no difference; both schools require Qullatayn.
     *   c) Malikis require water to be boiled before Wudu if a drop of filth falls into it.
-    *   d) There is no difference; both schools require Qullatayn.
+    *   d) Shafi'is rule that water under Qullatayn becomes impure automatically upon contact with filth, whereas Malikis focus on whether the filth actually altered the water's attributes.
 
 5.  **Which of the following represents an obligatory pillar (Fard) of Wudu in the Maliki school that is NOT a Fard in the Hanafi school?**
     *   a) Washing the face.
@@ -36,16 +36,16 @@
     *   d) Rinsing the mouth.
 
 6.  **What is the definition of "Dalk" in the context of Maliki purification?**
-    *   a) Pouring water three times over a limb.
-    *   b) Passing the hand over the body part during or immediately after pouring water.
+    *   a) Passing the hand over the body part during or immediately after pouring water.
+    *   b) Pouring water three times over a limb.
     *   c) Sniffing water deep into the nasal cavity.
     *   d) Wiping the ears with fresh water.
 
 7.  **If a person performs Wudu but forgets to follow the standard order (e.g., they wipe their head before washing their arms), what is the status of their Wudu in the Maliki school?**
     *   a) The Wudu is invalid, and they must repeat it.
-    *   b) The Wudu is valid because Tarteeb (order) is a Sunnah, not an obligation.
+    *   b) The Wudu is invalid only if they did it intentionally.
     *   c) The Wudu is valid only if they perform Tayammum immediately.
-    *   d) The Wudu is invalid only if they did it intentionally.
+    *   d) The Wudu is valid because Tarteeb (order) is a Sunnah, not an obligation.
 
 8.  **Why does the Maliki school prioritize the posture of Sadl (arms at the sides) during Qiyam in obligatory prayers?**
     *   a) Because there are no Hadiths supporting clasping the hands.
@@ -127,12 +127,12 @@
 
 ## Answer Key
 1. **c** (Allah is Al-Ghani and commands worship for our growth)
-2. **b** (It is Tahir because its name has changed from plain water to soap-water)
+2. **a** (It is Tahir because its name has changed from plain water to soap-water)
 3. **c** (It remains Tahur, but is Makruh if other water is available)
-4. **b** (Shafi'is use Qullatayn; Malikis focus on alteration/taghyir of attributes)
+4. **d** (Shafi'is use Qullatayn; Malikis focus on alteration/taghyir of attributes)
 5. **b** (Wiping the entire head - Mash al-Ra's - is a Fard in Maliki fiqh, but only a quarter is Fard in Hanafi)
-6. **b** (Passing the hand over the body part during or immediately after washing)
-7. **b** (Tarteeb is a Sunnah in the Maliki school, so the Wudu is valid)
+6. **a** (Passing the hand over the body part during or immediately after washing)
+7. **d** (Tarteeb is a Sunnah in the Maliki school, so the Wudu is valid)
 8. **b** (Based on 'Amal Ahl al-Madinah)
 9. Fatima does not have to undo her braids, provided water reaches her scalp through the hair roots.
 10. Yes, because a 30-second delay is not enough to break continuity (*Muwalat*).

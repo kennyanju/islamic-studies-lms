@@ -6,20 +6,20 @@
 *Select the best answer for each question.*
 
 1.  **Which statement best summarizes the Ash'ari creed's position on cause and effect (Asbab) during the Hijrah?**
-    *   a) Worldly preparations are useless because Allah dictates the outcome regardless of what we do.
-    *   b) Human beings are legally commanded to use the means (Asbab) with their physical bodies, but must recognize that only Allah creates the final effect.
+    *   a) Human beings are legally commanded to use the means (Asbab) with their physical bodies, but must recognize that only Allah creates the final effect.
+    *   b) Worldly preparations are useless because Allah dictates the outcome regardless of what we do.
     *   c) Physical causes possess an inherent, independent power to produce their own effects.
     *   d) Preparing for migration is a minor sin that shows a lack of Tawakkul.
 
 2.  **In the context of the Hijrah, why does a person who migrates to marry someone receive no spiritual reward, according to the Hadith on intention (Niyyah)?**
     *   a) Marriage is discouraged during travel.
-    *   b) The legal validity of an action is determined entirely by the internal intention (Niyyah) in the heart.
+    *   b) They did not travel the full distance.
     *   c) Only the migration of the Prophet (pbuh) was rewarded.
-    *   d) They did not travel the full distance.
+    *   d) The legal validity of an action is determined entirely by the internal intention (Niyyah) in the heart.
 
 3.  **The Constitution of Madinah declared that the Muslims and the Jewish tribes of Madinah were "Ummah Wahidah." In this context, this meant:**
-    *   a) They shared the exact same religious creed (Aqidah).
-    *   b) They formed a single civic coalition bound by mutual defense and equal justice.
+    *   a) They formed a single civic coalition bound by mutual defense and equal justice.
+    *   b) They shared the exact same religious creed (Aqidah).
     *   c) They were required to dress in the same way.
     *   d) The Jewish tribes were forced to convert.
 
@@ -31,9 +31,9 @@
 
 5.  **In Maliki fiqh, if a Muslim makes a hand gesture that a non-Muslim traveler interprets as a sign of safety, what is the ruling?**
     *   a) The safety is invalid because it was not written down.
-    *   b) The gesture is legally binding, and the non-Muslim traveler's life and property must be protected.
+    *   b) The traveler must immediately leave the city.
     *   c) The Muslim citizen must pay a fine for making gestures.
-    *   d) The traveler must immediately leave the city.
+    *   d) The gesture is legally binding, and the non-Muslim traveler's life and property must be protected.
 
 6.  **Under Ash'ari theology, how should the victory at the Battle of Badr be understood?**
     *   a) The Muslims won purely because their weapons were physically superior.
@@ -42,8 +42,8 @@
     *   d) The pagans lost because they were physically tired.
 
 7.  **What moral and spiritual failing at the Battle of Uhud led directly to the military setback?**
-    *   a) The Muslims had fewer numbers than at Badr.
-    *   b) The archers disobeyed the Prophet's explicit command due to a desire for worldly spoils (Ghanimah).
+    *   a) The archers disobeyed the Prophet's explicit command due to a desire for worldly spoils (Ghanimah).
+    *   b) The Muslims had fewer numbers than at Badr.
     *   c) The Prophet (pbuh) did not perform consultation (Shura).
     *   d) The guide led them to the wrong mountain.
 
@@ -55,9 +55,9 @@
 
 9.  **Why is the economic system of Riba (usury/interest) banned under the objective of protecting wealth (Hifz al-Mal)?**
     *   a) It prevents people from buying food.
-    *   b) It is an exploitative system that extracts wealth from the poor and concentrates it with the wealthy.
+    *   b) It was only banned because the Quraysh used it.
     *   c) It makes trade too slow.
-    *   d) It was only banned because the Quraysh used it.
+    *   d) It is an exploitative system that extracts wealth from the poor and concentrates it with the wealthy.
 
 10. **The methodology of 'Amal Ahl al-Madinah (Practice of the People of Madinah) is highly valued in the Maliki school because:**
     *   a) Madinah was the largest city in the world at that time.
@@ -111,13 +111,13 @@
 
 ## Teacher Answer Key
 
-1. B
-2. B
-3. B
+1. A
+2. D
+3. A
 4. C
-5. B
+5. D
 6. B
-7. B
+7. A
 8. C
-9. B
+9. D
 10. B

@@ -9,8 +9,8 @@
 ### 1. In Ash'ari epistemology, how are sound intellect (*'Aql*) and divine revelation (*Naql*) related?
 * A) Intellect is completely useless; we must only use revelation.
 * B) Intellect is superior to revelation and can change it.
-* C) Intellect logically proves the existence of the Creator, and revelation teaches us who He is and how to worship Him.
-* D) They contradict each other, and a Muslim must choose between them.
+* C) They contradict each other, and a Muslim must choose between them.
+* D) Intellect logically proves the existence of the Creator, and revelation teaches us who He is and how to worship Him.
 
 ### 2. Under the *Sifat al-Salbiyyah* (Divesting Attributes), what does the term *Qiyamuhu bi-Nafsihi* mean?
 * A) Allah stands up.
@@ -25,9 +25,9 @@
 * D) Tajsim (Corporealism)
 
 ### 4. Which of the following best describes the Ash'ari definition of *Kalam Nafsi* (Inner Speech)?
-* A) The letters and sounds we make when reciting the Quran.
+* A) An eternal, uncreated attribute of Allah that exists without language, letters, or sounds.
 * B) The black ink and paper used to print the Quran.
-* C) An eternal, uncreated attribute of Allah that exists without language, letters, or sounds.
+* C) The letters and sounds we make when reciting the Quran.
 * D) A translation of the Quran into English.
 
 ### 5. Why is the infallibility (*'Ismah*) of the Prophets a rational necessity in theology?
@@ -39,8 +39,8 @@
 ### 6. How does the Ash'ari concept of *Kasb* (Acquisition) explain human actions?
 * A) Humans create their own actions independent of Allah.
 * B) Humans are forced to do actions and have no choice whatsoever.
-* C) Allah creates the physical action and ability, but the human intends and chooses the action, acquiring its moral responsibility.
-* D) Actions are created by the recording angels.
+* C) Actions are created by the recording angels.
+* D) Allah creates the physical action and ability, but the human intends and chooses the action, acquiring its moral responsibility.
 
 ### 7. What is *'Amal Ahl al-Madinah* (Practice of the People of Madinah) in the Maliki school?
 * A) A special type of prayer done only in Madinah.
@@ -135,12 +135,12 @@ ________________________________________________________________________________
 
 ## Teacher Answer Key
 
-1. **C** - Intellect logically proves the Creator, and revelation tells us who He is.
+1. **D** - Intellect logically proves the Creator, and revelation tells us who He is.
 2. **B** - Allah is self-sufficient and doesn't need a creator or space to exist.
 3. **C** - Tafwid (affirming the text but delegating the exact meaning to Allah).
-4. **C** - An eternal, uncreated attribute of Allah that exists without language/letters/sounds.
+4. **A** - An eternal, uncreated attribute of Allah that exists without language/letters/sounds.
 5. **A** - If they sinned, Allah would be commanding us to follow sin, which is logically impossible.
-6. **C** - Allah creates the action, but the human chooses/intends it and acquires responsibility.
+6. **D** - Allah creates the action, but the human chooses/intends it and acquires responsibility.
 7. **B** - The legal practice of the children of the Sahabah in Madinah.
 8. **C** - It is omitted/silent before Al-Fatihah; we start directly with Al-Hamdu lillahi.
 9. **Matching Theology:** 1-B, 2-C, 3-D, 4-A

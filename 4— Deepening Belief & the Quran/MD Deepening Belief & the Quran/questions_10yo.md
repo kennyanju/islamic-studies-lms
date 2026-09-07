@@ -21,8 +21,8 @@ d) *Isnād* (Chain)
 **3. According to the Ash‘arī creed, who creates all of our actions?**  
 a) We create our actions independently.  
 b) The angels create our actions.  
-c) Allah creates all actions, and we choose them.  
-d) No one creates actions; they just happen.  
+c) No one creates actions; they just happen.  
+d) Allah creates all actions, and we choose them.  
 
 **4. How many years did it take for the entire Quran to be revealed?**  
 a) 10 years  
@@ -43,10 +43,10 @@ c) Uthman
 d) Ali  
 
 **7. What is the name of the standardized spelling style used in the official Quranic copies compiled by Caliph Uthman?**  
-a) *Rasm al-‘Uthmānī*  
+a) *Tafseer*  
 b) *Isnād*  
 c) *Matn*  
-d) *Tafseer*  
+d) *Rasm al-‘Uthmānī*  
 
 **8. What does the word *Aṣ-Ṣamad* mean in Surah Al-Ikhlāṣ?**  
 a) The One who has a son.  
@@ -57,8 +57,8 @@ d) The afternoon time.
 **9. What is the *Isnād* of a Hadith?**  
 a) The actual text or words of the Prophet ﷺ.  
 b) The biography of the author.  
-c) The chain of narrators showing who passed the report down.  
-d) The name of the chapter.  
+c) The name of the chapter.  
+d) The chain of narrators showing who passed the report down.  
 
 **10. What is Imam Malik's unique source of law that looks at the behavior of the people in the Prophet's ﷺ city?**  
 a) *Sadl*  
@@ -105,13 +105,13 @@ If a single person tells you they saw the Prophet ﷺ do something in a certain 
 ### Part 1 Answers
 1. **b) *Niyyah***. (Intention).
 2. **a) *Riyā’***. (Ostentation / Showing off). This is the "minor shirk" that destroys the rewards of our deeds.
-3. **c) Allah creates all actions, and we choose them**. *[Ash‘arī Creed Flag]* This is the concept of *Kasb* (Acquisition)—Allah is the Creator (*Khāliq*) of all actions, but humans are the choosers/acquirers (*Muktasib*).
+3. **d) Allah creates all actions, and we choose them**. *[Ash‘arī Creed Flag]* This is the concept of *Kasb* (Acquisition)—Allah is the Creator (*Khāliq*) of all actions, but humans are the choosers/acquirers (*Muktasib*).
 4. **b) 23 years**. (13 years in Makkah and 10 years in Madinah).
 5. **c) The eternal, uncreated Attribute of Speech belonging to Allah**. *[Ash‘arī Creed Flag]* *Al-Kalām al-Nafsī* refers to Allah's uncreated attribute of Speech, distinct from the physical paper, ink, and voice which are created (*al-Kalām al-Lafẓī*).
 6. **a) Abu Bakr**. He ordered the compilation after the Battle of Yamamah, on the advice of Umar.
-7. **a) *Rasm al-‘Uthmānī***. This is the sacred orthography of the Mushaf.
+7. **d) *Rasm al-‘Uthmānī***. This is the sacred orthography of the Mushaf.
 8. **b) The Self-Sufficient Besought of all**. *Aṣ-Ṣamad* means He is free of all needs, has no cavities, and does not eat or drink, while all creation depends on Him.
-9. **c) The chain of narrators showing who passed the report down**. The *Isnād* is the chain, while the *Matn* is the text.
+9. **d) The chain of narrators showing who passed the report down**. The *Isnād* is the chain, while the *Matn* is the text.
 10. **c) *‘Amal Ahl al-Madīnah***. This is the living practice of the people of Madinah.
 
 ### Part 2 Answers

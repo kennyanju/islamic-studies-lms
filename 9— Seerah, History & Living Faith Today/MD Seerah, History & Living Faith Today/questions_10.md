@@ -9,8 +9,8 @@
 ### 1. In what year of the Hijrah did the Conquest of Makkah (*Fatḥ Makkah*) take place?
 * A) 2nd Year
 * B) 5th Year
-* C) 8th Year
-* D) 10th Year
+* C) 10th Year
+* D) 8th Year
 
 ### 2. How did the Prophet Muhammad ﷺ enter Makkah during the Conquest?
 * A) Raising his sword and shouting in victory
@@ -19,8 +19,8 @@
 * D) Demanding that his enemies be punished immediately
 
 ### 3. What did the Prophet ﷺ tell the Quraysh chiefs who had spent twenty years fighting against him?
-* A) *"You must leave Makkah forever."*
-* B) *"Go, for you are free."*
+* A) *"Go, for you are free."*
+* B) *"You must leave Makkah forever."*
 * C) *"You must pay a heavy fine."*
 * D) *"I will take my revenge today."*
 
@@ -33,8 +33,8 @@
 ### 5. Who stood up to calm the Muslims after the Prophet ﷺ passed away, saying: *"Whoever worshipped Muhammad, know that Muhammad has passed away. But whoever worships Allah, know that Allah is Ever-Living..."*?
 * A) Sayyiduna ‘Umar ibn al-Khaṭṭāb
 * B) Sayyiduna ‘Ali ibn Abī Ṭālib
-* C) Sayyiduna Abu Bakr al-Ṣiddīq
-* D) Sayyiduna ‘Uthmān ibn ‘Affān
+* C) Sayyiduna ‘Uthmān ibn ‘Affān
+* D) Sayyiduna Abu Bakr al-Ṣiddīq
 
 ### 6. What does the Arabic word *Khalīfah* (Caliph) mean?
 * A) Prophet of Allah
@@ -49,16 +49,16 @@
 * D) Imam Malik
 
 ### 8. Which Caliph established the Islamic Hijri calendar starting from the year of Migration?
-* A) Sayyiduna Abu Bakr
-* B) Sayyiduna ‘Umar
+* A) Sayyiduna ‘Umar
+* B) Sayyiduna Abu Bakr
 * C) Sayyiduna ‘Uthmān
 * D) Sayyiduna ‘Alī
 
 ### 9. What is the name of the famous book of Hadith and Fiqh compiled by Imam Malik?
 * A) Sahih al-Bukhari
 * B) Sahih Muslim
-* C) The Muwaṭṭa’
-* D) The Riyāḍ al-Ṣāliḥīn
+* C) The Riyāḍ al-Ṣāliḥīn
+* D) The Muwaṭṭa’
 
 ### 10. In the Maliki school, how do students pray their obligatory prayers regarding their arm position?
 * A) Folding them over their chest
@@ -114,15 +114,15 @@
 ## Answer Key & Explanations
 
 ### Part 1: Multiple Choice
-1. **C) 8th Year.** (Fatḥ Makkah took place in Ramadan, 8 AH).
+1. **D) 8th Year.** (Fatḥ Makkah took place in Ramadan, 8 AH).
 2. **B) Bowing his head in deep humility (*Tawāḍu‘*) on his camel.** (He showed gratitude to Allah instead of pride).
-3. **B) "Go, for you are free."** (The Prophet ﷺ granted a general amnesty, showing mercy instead of revenge).
+3. **A) "Go, for you are free."** (The Prophet ﷺ granted a general amnesty, showing mercy instead of revenge).
 4. **C) Mount ‘Arafāt.** (This is where the Farewell Sermon was delivered).
-5. **C) Sayyiduna Abu Bakr al-Ṣiddīq.** (He kept the community stable and firm in their faith).
+5. **D) Sayyiduna Abu Bakr al-Ṣiddīq.** (He kept the community stable and firm in their faith).
 6. **B) Successor or Steward.** (A Caliph manages the political and social affairs of the community, succeeding the Prophet’s ﷺ leadership).
 7. **A) Sayyiduna Abu Bakr al-Ṣiddīq.** (He ordered the first collection of the Quran onto sheets of parchment after many memorizers died in battle).
-8. **B) Sayyiduna ‘Umar.** (He chose the Migration (*Hijrah*) as the starting point of the calendar).
-9. **C) The Muwaṭṭa’.** (This is Imam Malik’s compilation of Hadith, sayings of the Companions, and practices of Madinah).
+8. **A) Sayyiduna ‘Umar.** (He chose the Migration (*Hijrah*) as the starting point of the calendar).
+9. **D) The Muwaṭṭa’.** (This is Imam Malik’s compilation of Hadith, sayings of the Companions, and practices of Madinah).
 10. **C) Letting their arms rest naturally at their sides (*Sadl*).** (This is the dominant opinion in the Maliki school, representing the continuous practice of the people of Madinah).
 
 ### Part 2: Fill in the Blanks

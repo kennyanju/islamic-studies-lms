@@ -9,9 +9,9 @@ This assessment checks your understanding of the rules of dietary choices, modes
 
 #### 1. What does the Arabic word *Ḥalāl* mean?
 *   a) Forbidden and sinful
-*   b) Permissible and lawful
+*   b) Only for adults
 *   c) Disliked but okay
-*   d) Only for adults
+*   d) Permissible and lawful
 
 #### 2. What is the meaning of the word *Ḥarām*?
 *   a) Recommended
@@ -20,8 +20,8 @@ This assessment checks your understanding of the rules of dietary choices, modes
 *   d) Healthy
 
 #### 3. How can a neutral action (like sleeping or eating) become a rewarded act of worship?
-*   a) By doing it really fast
-*   b) By making a good intention (*Niyyah*) in your heart
+*   a) By making a good intention (*Niyyah*) in your heart
+*   b) By doing it really fast
 *   c) By telling all your friends about it
 *   d) Neutral actions can never be acts of worship
 
@@ -39,9 +39,9 @@ This assessment checks your understanding of the rules of dietary choices, modes
 
 #### 6. What is the spiritual quality of modesty, shyness, and respect before Allah and His creation called?
 *   a) *Barakah*
-*   b) *Ḥayā’*
+*   b) *Gharar*
 *   c) *Dhakāh*
-*   d) *Gharar*
+*   d) *Ḥayā’*
 
 #### 7. What does the word *‘Awrah* refer to in Islamic law?
 *   a) The parts of the body that must be covered in front of others and in prayer
@@ -69,9 +69,9 @@ This assessment checks your understanding of the rules of dietary choices, modes
 
 #### 11. Which hand should you use when eating and drinking?
 *   a) Left hand
-*   b) Right hand
+*   b) Both hands at the same time
 *   c) Either hand is exactly the same
-*   d) Both hands at the same time
+*   d) Right hand
 
 #### 12. Why do we say *Bismillāh* out loud before eating?
 *   a) To show off our Arabic skills
@@ -88,8 +88,8 @@ This assessment checks your understanding of the rules of dietary choices, modes
 #### 14. What is the ruling on responding when someone greets you with *As-Salāmu ‘Alaykum*?
 *   a) It is recommended (*Sunnah*)
 *   b) It is neutral (*Mubāḥ*)
-*   c) It is obligatory (*Farḍ*)
-*   d) It is disliked (*Makrūh*)
+*   c) It is disliked (*Makrūh*)
+*   d) It is obligatory (*Farḍ*)
 
 #### 15. When visiting a friend's house, how many times should you knock or ring the doorbell before leaving?
 *   a) As many times as it takes until they answer
@@ -98,8 +98,8 @@ This assessment checks your understanding of the rules of dietary choices, modes
 *   d) Exactly 5 times
 
 #### 16. How should you stand while waiting for a door to be opened?
-*   a) Directly in front of the door so you can see inside immediately
-*   b) To the left or right side of the door to protect the family’s privacy
+*   a) To the left or right side of the door to protect the family’s privacy
+*   b) Directly in front of the door so you can see inside immediately
 *   c) Facing away from the house completely
 *   d) Sitting on the doorstep
 
@@ -111,9 +111,9 @@ This assessment checks your understanding of the rules of dietary choices, modes
 
 #### 18. In the Maliki school, when is a contract of buying and selling locked and binding (*Lāzim*)?
 *   a) Only after you walk out of the shop door
-*   b) The moment the verbal agreement (offer and acceptance) is completed
+*   b) Contracts are never binding
 *   c) After 24 hours have passed
-*   d) Contracts are never binding
+*   d) The moment the verbal agreement (offer and acceptance) is completed
 
 #### 19. According to the Maliki school, if an adult has the money and health to go to Hajj, when must they go?
 *   a) Immediately, during the next Hajj season (*‘Alā al-Fawr*)
@@ -131,23 +131,23 @@ This assessment checks your understanding of the rules of dietary choices, modes
 
 ### Answer Key & Explanations
 
-1.  **b) Permissible and lawful.** *Explanation*: *Ḥalāl* means allowed by Allah's law.
+1.  **d) Permissible and lawful.** *Explanation*: *Ḥalāl* means allowed by Allah's law.
 2.  **c) Forbidden and sinful.** *Explanation*: *Ḥarām* is what Allah has prohibited, and doing it is a sin.
-3.  **b) By making a good intention (*Niyyah*) in your heart.** *Explanation*: In Ash'ari creed, all actions are created by Allah. When we form a good intention, Allah turns a simple daily action into an act of worship.
+3.  **a) By making a good intention (*Niyyah*) in your heart.** *Explanation*: In Ash'ari creed, all actions are created by Allah. When we form a good intention, Allah turns a simple daily action into an act of worship.
 4.  **b) Yes, because Allah excuses forgetfulness.** *Explanation*: **Maliki position**: If a Muslim forgets the *Tasmiyah*, the meat is still halal. But if they intentionally skip it, the meat is haram.
 5.  **c) All water-dwelling creatures without exception.** *Explanation*: **Maliki position**: Imam Malik ruled that everything living in the sea is halal, dead or alive, regardless of its shape or name.
-6.  **b) *Ḥayā’*.** *Explanation*: *Ḥayā’* is spiritual modesty and shyness that comes from knowing Allah is always watching us.
+6.  **d) *Ḥayā’*.** *Explanation*: *Ḥayā’* is spiritual modesty and shyness that comes from knowing Allah is always watching us.
 7.  **a) The parts of the body that must be covered in front of others and in prayer.** *Explanation*: Covering the *‘Awrah* is a basic requirement of modesty and prayer validity.
 8.  **c) It is *‘Awrah Khafīfah* (light awrah) and should still be covered in public.** *Explanation*: **Maliki position**: The thigh is light awrah for men. While exposing it doesn't break Salah, it is disliked and bad manners in public.
 9.  **a) Her entire body except her face and hands.** *Explanation*: This is the general boundary of modesty for women in front of non-mahrams and during prayer.
 10. **b) Her prayer is valid, but it is disliked; it is recommended to repeat it before the prayer time ends.** *Explanation*: **Maliki position**: The feet are light awrah. If uncovered, Salah remains valid, but it is disliked and recommended to repeat if time remains.
-11. **b) Right hand.** *Explanation*: The Prophet ﷺ taught us to use the right hand for eating and drinking, and the left hand for cleaning.
+11. **d) Right hand.** *Explanation*: The Prophet ﷺ taught us to use the right hand for eating and drinking, and the left hand for cleaning.
 12. **c) To prevent Shaytan from sharing our food.** *Explanation*: Saying *Bismillāh* brings blessing to the meal and keeps Shaytan away.
 13. **b) The person walking.** *Explanation*: The Sunnah order is that the walker greets the sitter, the young greet the old, and the smaller group greets the larger group.
-14. **c) It is obligatory (*Farḍ*).** *Explanation*: Initiating the greeting is a Sunnah, but responding to someone who greets you is a mandatory duty.
+14. **d) It is obligatory (*Farḍ*).** *Explanation*: Initiating the greeting is a Sunnah, but responding to someone who greets you is a mandatory duty.
 15. **c) Up to 3 times.** *Explanation*: The Sunnah limit is three knocks. If there is no answer, you must leave.
-16. **b) To the left or right side of the door to protect the family’s privacy.** *Explanation*: Standing to the side prevents you from looking inside the home when the door opens.
+16. **a) To the left or right side of the door to protect the family’s privacy.** *Explanation*: Standing to the side prevents you from looking inside the home when the door opens.
 17. **b) Tell the buyer about the broken wheel before taking their money.** *Explanation*: Hiding defects is a sin and removes the blessing (*Barakah*) from the money you earn.
-18. **b) The moment the verbal agreement (offer and acceptance) is completed.** *Explanation*: **Maliki position**: The school rejects the "option of the session." Once the buyer and seller agree, the deal is final immediately, based on the practice of Madinah.
+18. **d) The moment the verbal agreement (offer and acceptance) is completed.** *Explanation*: **Maliki position**: The school rejects the "option of the session." Once the buyer and seller agree, the deal is final immediately, based on the practice of Madinah.
 19. **a) Immediately, during the next Hajj season (*‘Alā al-Fawr*).** *Explanation*: **Maliki position**: Once you are able to perform Hajj, you must go immediately and cannot delay it without sin.
 20. **b) They must stop, make Wudu, and restart *Ṭawāf* from the very first round.** *Explanation*: **Maliki position**: Purity is a condition for Tawaf. If Wudu breaks, the Tawaf is void and must be restarted from the beginning with strict continuity.
