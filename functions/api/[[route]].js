@@ -1730,6 +1730,16 @@ export async function onRequest(context) {
       passRate = 0;
     const uptime = Math.floor((Date.now() - globalThis._WORKER_START_TIME) / 1000);
 
+    let moduleStats = [];
+    for (let mId = 1; mId <= 9; mId++) {
+      moduleStats.push({
+        moduleId: mId,
+        completions: 0,
+        quizAttempts: 0,
+        avgScore: 0
+      });
+    }
+
     if (env.DB) {
       try {
         const uCount = await env.DB.prepare('SELECT COUNT(*) as c FROM users').first();
@@ -1738,7 +1748,9 @@ export async function onRequest(context) {
         const pCount = await env.DB.prepare(
           'SELECT COUNT(*) as c FROM module_progress WHERE completed = 1'
         ).first();
-        const qAvg = await env.DB.prepare('SELECT AVG(score) as avg FROM quiz_results').first();
+        const qAvg = await env.DB.prepare(
+          'SELECT AVG(percentage) as avg FROM quiz_results'
+        ).first();
         const eCount = await env.DB.prepare(
           "SELECT COUNT(*) as c FROM telemetry_logs WHERE source != 'csp'"
         )
@@ -1766,6 +1778,42 @@ export async function onRequest(context) {
             ? Math.round(((passedRow ? passedRow.c : 0) / totalQuizSubmissions) * 100)
             : 0;
 
+        // Module-by-module breakdown (Modules 1-9)
+        const modQuizRows = await env.DB.prepare(
+          'SELECT module_id, COUNT(*) as quiz_attempts, ROUND(AVG(percentage)) as avg_score FROM quiz_results GROUP BY module_id'
+        )
+          .all()
+          .catch(() => ({ results: [] }));
+
+        const modProgRows = await env.DB.prepare(
+          'SELECT module_id, COUNT(DISTINCT student_id) as completions FROM module_progress WHERE completed = 1 GROUP BY module_id'
+        )
+          .all()
+          .catch(() => ({ results: [] }));
+
+        const quizMap = {};
+        ((modQuizRows && modQuizRows.results) || []).forEach((r) => {
+          quizMap[r.module_id] = {
+            quizAttempts: Number(r.quiz_attempts) || 0,
+            avgScore: Math.round(Number(r.avg_score) || 0)
+          };
+        });
+
+        const progMap = {};
+        ((modProgRows && modProgRows.results) || []).forEach((r) => {
+          progMap[r.module_id] = Number(r.completions) || 0;
+        });
+
+        moduleStats = [];
+        for (let mId = 1; mId <= 9; mId++) {
+          moduleStats.push({
+            moduleId: mId,
+            completions: progMap[mId] || 0,
+            quizAttempts: quizMap[mId]?.quizAttempts || 0,
+            avgScore: quizMap[mId]?.avgScore || 0
+          });
+        }
+
         // Periodic maintenance cleanup (prune logs older than 30 days & expired tokens)
         await env.DB.prepare(
           "DELETE FROM telemetry_logs WHERE created_at < datetime('now', '-30 days')"
@@ -1791,6 +1839,7 @@ export async function onRequest(context) {
           totalCompletedModules,
           avgQuizScore,
           passRate,
+          moduleStats,
           system: {
             uptime,
             nodeEnv: 'production',
