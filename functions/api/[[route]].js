@@ -2,6 +2,7 @@
  * Cloudflare Pages Functions - Full-Stack Edge API Router & Workers Backend
  * Enterprise-Hardened Architecture with Cloudflare D1 SQL & WebCrypto
  */
+import { buildCertificateHtml } from '../../lib/certificate.js';
 
 // Global Worker Deployment / Startup Timestamp
 if (!globalThis._WORKER_START_TIME) {
@@ -453,15 +454,16 @@ async function ensureD1Schema(env) {
         id TEXT PRIMARY KEY,
         student_id TEXT NOT NULL,
         module_id INTEGER NOT NULL,
-        reflection_text TEXT,
-        updated_at TEXT DEFAULT CURRENT_TIMESTAMP
+        question_id TEXT NOT NULL,
+        response_text TEXT NOT NULL,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
       );
       CREATE TABLE IF NOT EXISTS certificates (
         id TEXT PRIMARY KEY,
         student_id TEXT NOT NULL,
-        track TEXT NOT NULL,
-        cert_number TEXT UNIQUE NOT NULL,
-        issued_at TEXT DEFAULT CURRENT_TIMESTAMP
+        module_id INTEGER NOT NULL,
+        score INTEGER NOT NULL,
+        issued_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
       );
       CREATE TABLE IF NOT EXISTS telemetry_logs (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -1329,6 +1331,197 @@ export async function onRequest(context) {
         {},
         request
       );
+    }
+  }
+
+  // Public Direct Child Progress API
+  if (path.match(/^\/public\/child\/[^/]+\/progress$/) && method === 'GET') {
+    const rawChildId = path.split('/')[3] || '';
+    const childId = decodeURIComponent(rawChildId).trim();
+    if (!env.DB) {
+      return jsonResponse(
+        { success: true, progress: {}, completedModules: [], totalCompleted: 0 },
+        200,
+        {},
+        request
+      );
+    }
+    try {
+      const child = await env.DB.prepare(
+        'SELECT id, name, avatar, assigned_track as assignedTrack FROM children WHERE id = ? OR LOWER(id) = LOWER(?)'
+      )
+        .bind(childId, childId)
+        .first();
+
+      if (!child) {
+        return jsonResponse(
+          { success: false, error: 'Learner profile not found.' },
+          404,
+          {},
+          request
+        );
+      }
+
+      const { results } = await env.DB.prepare(
+        'SELECT module_id FROM module_progress WHERE student_id = ? AND completed = 1'
+      )
+        .bind(child.id)
+        .all();
+
+      const completedModules = (results || []).map((r) => r.module_id);
+      const progressObj = {};
+      for (const mId of completedModules) {
+        progressObj[`mod_${mId}`] = true;
+      }
+
+      return jsonResponse(
+        {
+          success: true,
+          child: {
+            id: child.id,
+            name: child.name,
+            avatar: child.avatar || '🌟',
+            assignedTrack: child.assignedTrack || 'level1'
+          },
+          progress: progressObj,
+          completedModules,
+          totalCompleted: completedModules.length
+        },
+        200,
+        {},
+        request
+      );
+    } catch (err) {
+      return jsonResponse(
+        { success: false, error: 'Error fetching progress: ' + err.message },
+        500,
+        {},
+        request
+      );
+    }
+  }
+
+  // Dedicated Printable HTML Certificate View Route
+  if (path.match(/^\/certificates\/[^/]+\/[^/]+\/view$/) && method === 'GET') {
+    const parts = path.split('/');
+    const studentId = decodeURIComponent(parts[2] || '');
+    const moduleId = parseInt(parts[3] || '1', 10);
+
+    let studentName = 'Honored Learner';
+    let track = 'level1';
+    let score = 100;
+
+    if (env.DB) {
+      try {
+        const child = await env.DB.prepare(
+          'SELECT id, name, assigned_track FROM children WHERE id = ? OR LOWER(id) = LOWER(?)'
+        )
+          .bind(studentId, studentId)
+          .first();
+
+        if (child) {
+          studentName = child.name;
+          track = child.assigned_track || 'level1';
+        } else {
+          const user = await env.DB.prepare('SELECT uid, display_name FROM users WHERE uid = ?')
+            .bind(studentId)
+            .first();
+          if (user) {
+            studentName = user.display_name || 'Honored Learner';
+          }
+        }
+
+        const quizRow = await env.DB.prepare(
+          'SELECT percentage, passed FROM quiz_results WHERE student_id = ? AND module_id = ? ORDER BY created_at DESC LIMIT 1'
+        )
+          .bind(studentId, moduleId)
+          .first();
+        if (quizRow) {
+          score = Math.round(quizRow.percentage || 100);
+        }
+
+        const certNumber = `CERT-${studentId.substring(0, 6).toUpperCase()}-M${moduleId}-${Date.now().toString(36).toUpperCase()}`;
+        await env.DB.prepare(
+          'INSERT OR IGNORE INTO certificates (id, student_id, module_id, score, issued_at) VALUES (?, ?, ?, ?, CURRENT_TIMESTAMP)'
+        )
+          .bind(certNumber, studentId, moduleId, score)
+          .run()
+          .catch(() => {});
+      } catch (e) {
+        // Graceful fallback
+      }
+    }
+
+    const verifyUrl = `${url.origin}/api/certificates/verify/CERT-${studentId}-M${moduleId}`;
+    const certHtml = buildCertificateHtml({
+      studentName,
+      moduleTitle: `Module ${moduleId}`,
+      moduleId,
+      track,
+      score,
+      verifyUrl
+    });
+
+    return new Response(certHtml, {
+      status: 200,
+      headers: {
+        'Content-Type': 'text/html; charset=utf-8',
+        'Cache-Control': 'no-cache'
+      }
+    });
+  }
+
+  // Certificate Verification API Route
+  if (path.match(/^\/certificates\/verify\/[^/]+$/) && method === 'GET') {
+    const certId = path.split('/')[3] || '';
+    if (!env.DB) {
+      return jsonResponse({ success: true, valid: true, certId }, 200, {}, request);
+    }
+    try {
+      const cert = await env.DB.prepare('SELECT * FROM certificates WHERE id = ?')
+        .bind(certId)
+        .first();
+
+      if (!cert) {
+        return jsonResponse(
+          {
+            success: false,
+            valid: false,
+            error: 'Certificate not found or invalid certificate ID.'
+          },
+          404,
+          {},
+          request
+        );
+      }
+
+      const child = await env.DB.prepare('SELECT name FROM children WHERE id = ?')
+        .bind(cert.student_id)
+        .first();
+      const user = !child
+        ? await env.DB.prepare('SELECT display_name FROM users WHERE uid = ?')
+            .bind(cert.student_id)
+            .first()
+        : null;
+
+      return jsonResponse(
+        {
+          success: true,
+          valid: true,
+          certificate: {
+            id: cert.id,
+            studentName: child ? child.name : user ? user.display_name : 'Learner',
+            moduleId: cert.module_id,
+            score: cert.score,
+            issuedAt: cert.issued_at
+          }
+        },
+        200,
+        {},
+        request
+      );
+    } catch (err) {
+      return jsonResponse({ success: false, error: err.message }, 500, {}, request);
     }
   }
 

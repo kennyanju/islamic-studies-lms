@@ -9,6 +9,7 @@ const rateLimit = require('express-rate-limit');
 const morgan = require('morgan');
 const db = require('./lib/db');
 const emailService = require('./lib/email');
+const { buildCertificateHtml } = require('./lib/certificate');
 
 const app = express();
 app.set('trust proxy', 1);
@@ -418,6 +419,7 @@ app.get(['/api/docs', '/docs'], (req, res) => {
 // Course Data / Modules API
 app.get(['/api/course-data', '/api/modules'], (req, res) => {
   if (fs.existsSync(dataFile)) {
+    res.setHeader('Cache-Control', 'public, max-age=3600, stale-while-revalidate=86400');
     res.sendFile(dataFile);
   } else {
     res
@@ -464,7 +466,7 @@ app.post('/api/auth/register', async (req, res, next) => {
 
     const assignedRole =
       req.body.role === 'teacher' || req.body.role === 'educator' ? 'teacher' : 'parent';
-    const passwordHash = bcrypt.hashSync(password, BCRYPT_ROUNDS);
+    const passwordHash = await bcrypt.hash(password, BCRYPT_ROUNDS);
     const newUser = await db.createUser({
       email,
       passwordHash,
@@ -558,7 +560,7 @@ app.post('/api/auth/reset-password', async (req, res, next) => {
       });
     }
 
-    const newPasswordHash = bcrypt.hashSync(targetPassword, BCRYPT_ROUNDS);
+    const newPasswordHash = await bcrypt.hash(targetPassword, BCRYPT_ROUNDS);
     const updatedUser = await db.resetPasswordWithToken(token, newPasswordHash);
 
     if (!updatedUser) {
@@ -602,7 +604,7 @@ app.post('/api/auth/login', async (req, res, next) => {
     }
 
     const user = await db.findUserByEmail(email);
-    if (!user || !user.passwordHash || !bcrypt.compareSync(password, user.passwordHash)) {
+    if (!user || !user.passwordHash || !(await bcrypt.compare(password, user.passwordHash))) {
       recordFailedLogin(lockoutKey);
       return res.status(401).json({ success: false, error: 'Invalid email or password.' });
     }
@@ -610,6 +612,13 @@ app.post('/api/auth/login', async (req, res, next) => {
     // Success - clear lockout counter
     clearFailedLogin(lockoutKey);
     await db.updateUser(user.uid, { lastLogin: new Date().toISOString() });
+
+    // Record audit event
+    await db.createAuditLog({
+      actorUid: user.uid,
+      action: 'USER_LOGIN',
+      ipAddress: ip
+    });
 
     req.session.user = safeUser(user);
     res.json({ success: true, user: safeUser(user) });
@@ -801,7 +810,7 @@ app.post('/api/parent/children', requireAuth, async (req, res, next) => {
       name,
       avatar,
       assignedTrack,
-      pinHash: pinCode ? bcrypt.hashSync(pinCode, BCRYPT_ROUNDS) : null
+      pinHash: pinCode ? await bcrypt.hash(pinCode, BCRYPT_ROUNDS) : null
     });
 
     res.json({ success: true, child: safeChild(newChild) });
@@ -835,7 +844,7 @@ app.put('/api/parent/children/:id', requireAuth, async (req, res, next) => {
     if (name) updates.name = name;
     if (avatar) updates.avatar = avatar;
     if (pinCode !== undefined) {
-      updates.pinHash = pinCode ? bcrypt.hashSync(sanitizeStr(pinCode, 4), BCRYPT_ROUNDS) : null;
+      updates.pinHash = pinCode ? await bcrypt.hash(sanitizeStr(pinCode, 4), BCRYPT_ROUNDS) : null;
     }
     if (assignedTrack && ['level1', 'level2'].includes(assignedTrack)) {
       updates.assignedTrack = assignedTrack;
@@ -916,14 +925,26 @@ app.post('/api/parent/children/:id/verify-pin', pinLimiter, requireAuth, async (
       return res.json({ success: true, verified: true });
     }
 
+    // Check PIN lockout
+    if (db.isPinLocked(child)) {
+      return res.status(429).json({
+        success: false,
+        verified: false,
+        error:
+          'Child profile is temporarily locked due to repeated incorrect PIN attempts. Please wait 15 minutes or ask your parent.'
+      });
+    }
+
     if (!pin) {
       return res.status(400).json({ success: false, error: 'PIN is required.' });
     }
 
-    const valid = bcrypt.compareSync(pin, child.pinHash);
+    const valid = await bcrypt.compare(pin, child.pinHash);
     if (valid) {
+      await db.clearPinAttempts(child.id);
       res.json({ success: true, verified: true });
     } else {
+      await db.recordFailedPinAttempt(child.id);
       res
         .status(401)
         .json({ success: false, verified: false, error: 'Incorrect PIN. Please try again.' });
@@ -963,18 +984,155 @@ app.post('/api/public/child/:id/verify-pin', pinLimiter, async (req, res, next) 
       return res.json({ success: true, verified: true, child: safeChild(child) });
     }
 
+    // Check PIN lockout
+    if (db.isPinLocked(child)) {
+      return res.status(429).json({
+        success: false,
+        verified: false,
+        error:
+          'Learner profile is temporarily locked due to repeated incorrect PIN attempts. Please wait 15 minutes or ask your parent.'
+      });
+    }
+
     if (!pin) {
       return res.status(400).json({ success: false, error: 'PIN is required.' });
     }
 
-    const valid = bcrypt.compareSync(pin, child.pinHash);
+    const valid = await bcrypt.compare(pin, child.pinHash);
     if (valid) {
+      await db.clearPinAttempts(child.id);
       res.json({ success: true, verified: true, child: safeChild(child) });
     } else {
+      await db.recordFailedPinAttempt(child.id);
       res
         .status(401)
         .json({ success: false, verified: false, error: 'Incorrect PIN. Please try again.' });
     }
+  } catch (err) {
+    next(err);
+  }
+});
+
+// Public Direct Child Progress API (Sharable family/learner progress overview)
+app.get('/api/public/child/:id/progress', async (req, res, next) => {
+  try {
+    const rawId = req.params.id || '';
+    const childId = decodeURIComponent(rawId).trim();
+    const child = await db.getChildById(childId);
+    if (!child) {
+      return res.status(404).json({ success: false, error: 'Learner profile not found.' });
+    }
+
+    const targetKey = `child_${child.id}`;
+    const progress = await db.getProgress(targetKey);
+    const completedModuleIds = Object.keys(progress)
+      .filter((k) => progress[k])
+      .map((k) => parseInt(k.replace('mod_', ''), 10))
+      .filter((n) => !isNaN(n));
+
+    res.json({
+      success: true,
+      child: safeChild(child),
+      progress,
+      completedModules: completedModuleIds,
+      totalCompleted: completedModuleIds.length
+    });
+  } catch (err) {
+    next(err);
+  }
+});
+
+// Dedicated Printable HTML Certificate View Route
+app.get('/api/certificates/:studentId/:moduleId/view', async (req, res, next) => {
+  try {
+    const { studentId, moduleId } = req.params;
+    const mId = parseInt(moduleId, 10);
+    if (!compiledCourseData) loadCompiledCourseData();
+    const mod = compiledCourseData?.modules?.find((m) => m.id === mId);
+
+    let studentName = 'Honored Learner';
+    let track = 'level1';
+
+    // Check if child or parent user
+    const child = await db.getChildById(studentId);
+    if (child) {
+      studentName = child.name;
+      track = child.assignedTrack || 'level1';
+    } else {
+      const user = await db.findUserById(studentId);
+      if (user) {
+        studentName = user.displayName || 'Honored Learner';
+      }
+    }
+
+    // Determine latest score
+    const quizList = await db.getAllQuizResults();
+    const passed = quizList
+      .filter(
+        (q) => (q.childId === studentId || q.uid === studentId) && q.moduleId === mId && q.passed
+      )
+      .pop();
+    const score = passed ? passed.percentage : 100;
+
+    const cert = await db.issueCertificate({
+      studentId,
+      moduleId: mId,
+      track,
+      score
+    });
+
+    const origin = req.protocol + '://' + req.get('host');
+    const verifyUrl = `${origin}/api/certificates/verify/${cert.id}`;
+
+    const html = buildCertificateHtml({
+      studentName,
+      moduleTitle: mod ? mod.title : `Module ${mId}`,
+      moduleId: mId,
+      track,
+      score,
+      certId: cert.id,
+      verifyUrl
+    });
+
+    res.setHeader('Content-Type', 'text/html; charset=utf-8');
+    res.send(html);
+  } catch (err) {
+    next(err);
+  }
+});
+
+// Certificate Public Verification Route
+app.get('/api/certificates/verify/:certId', async (req, res, next) => {
+  try {
+    const { certId } = req.params;
+    const cert = await db.getCertificate(certId);
+    if (!cert) {
+      return res.status(404).json({
+        success: false,
+        valid: false,
+        error: 'Certificate not found or invalid certificate ID.'
+      });
+    }
+
+    const child = await db.getChildById(cert.studentId);
+    const user = !child ? await db.findUserById(cert.studentId) : null;
+    const studentName = child ? child.name : user ? user.displayName : 'Learner';
+    if (!compiledCourseData) loadCompiledCourseData();
+    const mod = compiledCourseData?.modules?.find((m) => m.id === cert.moduleId);
+
+    res.json({
+      success: true,
+      valid: true,
+      certificate: {
+        id: cert.id,
+        studentName,
+        moduleId: cert.moduleId,
+        moduleTitle: mod ? mod.title : `Module ${cert.moduleId}`,
+        track: cert.track,
+        score: cert.score,
+        issuedAt: cert.issuedAt
+      }
+    });
   } catch (err) {
     next(err);
   }
@@ -1170,13 +1328,15 @@ app.post('/api/quiz/grade', validateModuleId, quizLimiter, async (req, res, next
 app.get('/api/admin/overview', requireAdmin, async (req, res, next) => {
   try {
     const users = await db.getAllUsers();
-    const totalKids = (db.memoryData.children || []).length;
-    const quizList = db.memoryData.quizResults || [];
+    const children = await db.getAllChildren();
+    const quizList = await db.getAllQuizResults();
+    const progressMap = await db.getProgressMap();
+
+    const totalKids = children.length;
     const totalQuizSubmissions = quizList.length;
 
     // Count all completed module instances across all children and users
     let totalCompletedModules = 0;
-    const progressMap = db.memoryData.progress || {};
     for (const key in progressMap) {
       const mods = progressMap[key] || {};
       for (const m in mods) {
@@ -1246,8 +1406,9 @@ app.get('/api/admin/overview', requireAdmin, async (req, res, next) => {
 app.get('/api/admin/users', requireAdmin, async (req, res, next) => {
   try {
     const users = await db.getAllUsers();
+    const allChildren = await db.getAllChildren();
     const usersWithMeta = users.map((u) => {
-      const children = (db.memoryData.children || []).filter((c) => c.parentUid === u.uid);
+      const children = allChildren.filter((c) => c.parentUid === u.uid);
       return {
         ...u,
         childrenCount: children.length,
@@ -1281,6 +1442,14 @@ app.put('/api/admin/users/:uid/role', requireAdmin, async (req, res, next) => {
       return res.status(404).json({ success: false, error: 'User not found.' });
     }
 
+    await db.createAuditLog({
+      actorUid: req.session.user.uid,
+      action: 'USER_ROLE_CHANGED',
+      targetUid: uid,
+      metadata: { newRole: role },
+      ipAddress: req.ip
+    });
+
     res.json({ success: true, user: safeUser(updated) });
   } catch (err) {
     next(err);
@@ -1299,6 +1468,14 @@ app.delete('/api/admin/users/:uid', requireAdmin, async (req, res, next) => {
     if (!success) {
       return res.status(404).json({ success: false, error: 'User not found.' });
     }
+
+    await db.createAuditLog({
+      actorUid: req.session.user.uid,
+      action: 'USER_DELETED',
+      targetUid: uid,
+      ipAddress: req.ip
+    });
+
     res.json({ success: true, message: 'User deleted successfully.' });
   } catch (err) {
     next(err);
