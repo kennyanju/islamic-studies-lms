@@ -4350,8 +4350,8 @@ document.addEventListener('DOMContentLoaded', () => {
         showAuthAlert('Please fill in your name, email address, and password.', 'error');
         return;
       }
-      if (password.length < 6) {
-        showAuthAlert('Password must be at least 6 characters long.', 'error');
+      if (password.length < 8) {
+        showAuthAlert('Password must be at least 8 characters long.', 'error', authAlertMsg);
         return;
       }
 
@@ -4440,8 +4440,8 @@ document.addEventListener('DOMContentLoaded', () => {
         );
         return;
       }
-      if (password.length < 6) {
-        showAuthAlert('Password must be at least 6 characters long.', 'error', homeAuthAlertMsg);
+      if (password.length < 8) {
+        showAuthAlert('Password must be at least 8 characters long.', 'error', homeAuthAlertMsg);
         return;
       }
 

@@ -17,14 +17,15 @@ describe('Input Validation & Sanitization Unit Tests', () => {
   });
 
   describe('Password validation', () => {
-    test('Valid passwords (6-128 chars) return true', () => {
+    test('Valid passwords (8-128 chars) return true', () => {
       expect(validator.isValidPassword('secret123')).toBe(true);
-      expect(validator.isValidPassword('123456')).toBe(true);
+      expect(validator.isValidPassword('12345678')).toBe(true);
     });
 
     test('Invalid passwords return false', () => {
       expect(validator.isValidPassword('')).toBe(false);
-      expect(validator.isValidPassword('12345')).toBe(false); // < 6
+      expect(validator.isValidPassword('1234567')).toBe(false); // < 8
+      expect(validator.isValidPassword('12345')).toBe(false);
       expect(validator.isValidPassword(null)).toBe(false);
     });
   });

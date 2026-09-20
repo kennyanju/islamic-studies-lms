@@ -685,11 +685,11 @@ export async function onRequest(context) {
         }
       }
 
-      if (!email || !password || typeof password !== 'string' || password.length < 6) {
+      if (!email || !password || typeof password !== 'string' || password.length < 8) {
         return jsonResponse(
           {
             success: false,
-            error: 'Valid email and secure password (min 6 characters) are required.'
+            error: 'Valid email and secure password (min 8 characters) are required.'
           },
           400,
           {},
@@ -819,6 +819,29 @@ export async function onRequest(context) {
         );
       }
       const cleanEmail = email.trim().toLowerCase();
+      const lockoutKey = `login_lockout:${cleanEmail}`;
+
+      // Check Cloudflare KV Login Lockout (5 failed attempts -> 15 min lockout)
+      if (env.LOGIN_KV) {
+        try {
+          const lockRecord = await env.LOGIN_KV.get(lockoutKey, 'json');
+          if (lockRecord && lockRecord.lockedUntil && Date.now() < lockRecord.lockedUntil) {
+            const minutesLeft = Math.ceil((lockRecord.lockedUntil - Date.now()) / 60000);
+            return jsonResponse(
+              {
+                success: false,
+                error: `Account temporarily locked due to 5 consecutive failed attempts. Please try again in ${minutesLeft} minute${minutesLeft === 1 ? '' : 's'}.`
+              },
+              429,
+              {},
+              request,
+              env
+            );
+          }
+        } catch (kvErr) {
+          console.warn('LOGIN_KV check notice:', kvErr.message);
+        }
+      }
 
       // Check Cloudflare D1 Database
       if (env.DB) {
@@ -829,6 +852,15 @@ export async function onRequest(context) {
           if (row) {
             const isMatch = await verifyPassword(password, row.password_hash);
             if (isMatch) {
+              // Success - clear lockout counter in KV
+              if (env.LOGIN_KV) {
+                try {
+                  await env.LOGIN_KV.delete(lockoutKey);
+                } catch {
+                  // Ignored
+                }
+              }
+
               const user = {
                 uid: row.uid,
                 email: row.email,
@@ -851,6 +883,20 @@ export async function onRequest(context) {
           }
         } catch (dbErr) {
           console.warn('D1 lookup notice:', dbErr.message);
+        }
+      }
+
+      // Failed login - increment attempt counter in LOGIN_KV
+      if (env.LOGIN_KV) {
+        try {
+          let rec = (await env.LOGIN_KV.get(lockoutKey, 'json')) || { count: 0, lockedUntil: null };
+          rec.count = (rec.count || 0) + 1;
+          if (rec.count >= 5) {
+            rec.lockedUntil = Date.now() + 15 * 60 * 1000;
+          }
+          await env.LOGIN_KV.put(lockoutKey, JSON.stringify(rec), { expirationTtl: 900 });
+        } catch (kvErr) {
+          console.warn('LOGIN_KV record notice:', kvErr.message);
         }
       }
 
@@ -966,11 +1012,11 @@ export async function onRequest(context) {
       const body = await request.json().catch(() => ({}));
       const token = body.token;
       const targetPass = body.newPassword || body.password;
-      if (!token || !targetPass || typeof targetPass !== 'string' || targetPass.length < 6) {
+      if (!token || !targetPass || typeof targetPass !== 'string' || targetPass.length < 8) {
         return jsonResponse(
           {
             success: false,
-            error: 'Valid token and secure new password (min 6 characters) are required.'
+            error: 'Valid token and secure new password (min 8 characters) are required.'
           },
           400,
           {},
@@ -1046,6 +1092,78 @@ export async function onRequest(context) {
       );
     } catch (e) {
       return jsonResponse({ success: false, error: e.message }, 500, {}, request);
+    }
+  }
+
+  // 7b. Auth: Verify Email Endpoint (with 72h token expiry check)
+  if (path === '/auth/verify-email' && method === 'GET') {
+    try {
+      const url = new URL(request.url);
+      const token = url.searchParams.get('token');
+      if (!token) {
+        return new Response(
+          '<h2>Invalid Verification Link</h2><p>No token provided.</p><a href="/">Return to Home</a>',
+          { status: 400, headers: { 'Content-Type': 'text/html; charset=utf-8' } }
+        );
+      }
+
+      if (env.DB) {
+        const user = await env.DB.prepare(
+          'SELECT * FROM users WHERE verification_token = ?'
+        )
+          .bind(token)
+          .first()
+          .catch(() => null);
+
+        if (!user) {
+          return new Response(
+            '<h2>Verification Failed</h2><p>This verification link is invalid or expired.</p><a href="/">Return to Home</a>',
+            { status: 400, headers: { 'Content-Type': 'text/html; charset=utf-8' } }
+          );
+        }
+
+        if (
+          user.verification_token_expires &&
+          new Date(user.verification_token_expires).getTime() <= Date.now()
+        ) {
+          return new Response(
+            '<h2>Verification Failed</h2><p>This verification link has expired (72-hour limit). Please request a new one.</p><a href="/">Return to Home</a>',
+            { status: 400, headers: { 'Content-Type': 'text/html; charset=utf-8' } }
+          );
+        }
+
+        await env.DB.prepare(
+          'UPDATE users SET is_verified = 1, verification_token = NULL, verification_token_expires = NULL WHERE uid = ?'
+        )
+          .bind(user.uid)
+          .run()
+          .catch(() => {});
+
+        return new Response(
+          `<!DOCTYPE html>
+          <html>
+          <head><title>Email Verified</title><style>body{font-family:sans-serif;background:#090d16;color:#f8fafc;display:flex;align-items:center;justify-content:center;height:100vh;margin:0;}.card{background:#131c2e;padding:32px;border-radius:12px;text-align:center;border:1px solid #10b981;max-width:400px;}a{color:#34d399;text-decoration:none;font-weight:bold;margin-top:16px;display:inline-block;}</style></head>
+          <body>
+            <div class="card">
+              <h1>Email Verified! ✓</h1>
+              <p>Your email <strong>${user.email}</strong> has been successfully verified.</p>
+              <a href="/">Return to Islamic Studies LMS →</a>
+            </div>
+          </body>
+          </html>`,
+          {
+            status: 200,
+            headers: { 'Content-Type': 'text/html; charset=utf-8' }
+          }
+        );
+      }
+
+      return new Response(
+        '<h2>Verification Complete</h2><a href="/">Return to Home</a>',
+        { status: 200, headers: { 'Content-Type': 'text/html; charset=utf-8' } }
+      );
+    } catch (e) {
+      return new Response('Internal Server Error', { status: 500 });
     }
   }
 
@@ -1749,7 +1867,7 @@ export async function onRequest(context) {
             total,
             percentage,
             passed ? 1 : 0,
-            JSON.stringify(submittedAnswers)
+            JSON.stringify(feedback)
           )
           .run();
 

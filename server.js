@@ -240,12 +240,28 @@ app.use(
 );
 
 /* ==========================================================================
-   Failed Login Lockout Tracker (5 failed attempts -> 15 min lockout)
+   Failed Login Lockout Tracker (Cloudflare KV with in-memory Map fallback)
+   Key format: login_lockout:{email} (5 failed attempts -> 15 min lockout)
    ========================================================================== */
 
 const failedLoginAttempts = new Map();
 
-function checkLoginLockout(key) {
+async function checkLoginLockout(email) {
+  const key = `login_lockout:${email}`;
+  const kv = globalThis.LOGIN_KV;
+  if (kv && typeof kv.get === 'function') {
+    try {
+      const raw = await kv.get(key, 'json');
+      if (!raw) return false;
+      if (raw.lockedUntil && Date.now() < raw.lockedUntil) {
+        return Math.ceil((raw.lockedUntil - Date.now()) / 60000);
+      }
+      return false;
+    } catch (e) {
+      console.warn('KV get failed, falling back to memory:', e.message);
+    }
+  }
+
   const record = failedLoginAttempts.get(key);
   if (!record) return false;
   if (record.lockedUntil && Date.now() < record.lockedUntil) {
@@ -259,16 +275,47 @@ function checkLoginLockout(key) {
   return false;
 }
 
-function recordFailedLogin(key) {
-  let record = failedLoginAttempts.get(key) || { count: 0, lockedUntil: null };
+async function recordFailedLogin(email) {
+  const key = `login_lockout:${email}`;
+  let record = null;
+  const kv = globalThis.LOGIN_KV;
+
+  if (kv && typeof kv.get === 'function') {
+    try {
+      record = await kv.get(key, 'json');
+    } catch {
+      // Ignored
+    }
+  }
+  if (!record) {
+    record = failedLoginAttempts.get(key) || { count: 0, lockedUntil: null };
+  }
+
   record.count += 1;
   if (record.count >= 5) {
     record.lockedUntil = Date.now() + 15 * 60 * 1000; // 15 min lockout
   }
+
+  if (kv && typeof kv.put === 'function') {
+    try {
+      await kv.put(key, JSON.stringify(record), { expirationTtl: 900 });
+    } catch (e) {
+      console.warn('KV put failed, falling back to memory:', e.message);
+    }
+  }
   failedLoginAttempts.set(key, record);
 }
 
-function clearFailedLogin(key) {
+async function clearFailedLogin(email) {
+  const key = `login_lockout:${email}`;
+  const kv = globalThis.LOGIN_KV;
+  if (kv && typeof kv.delete === 'function') {
+    try {
+      await kv.delete(key);
+    } catch {
+      // Ignored
+    }
+  }
   failedLoginAttempts.delete(key);
 }
 
@@ -447,10 +494,10 @@ app.post('/api/auth/register', async (req, res, next) => {
     if (!isValidEmail(email)) {
       return res.status(400).json({ success: false, error: 'Please enter a valid email address.' });
     }
-    if (password.length < 6) {
+    if (password.length < 8) {
       return res
         .status(400)
-        .json({ success: false, error: 'Password must be at least 6 characters.' });
+        .json({ success: false, error: 'Password must be at least 8 characters.' });
     }
     if (password.length > 128) {
       return res.status(400).json({ success: false, error: 'Password is too long.' });
@@ -543,10 +590,10 @@ app.post('/api/auth/reset-password', async (req, res, next) => {
     if (!token) {
       return res.status(400).json({ success: false, error: 'Password reset token is required.' });
     }
-    if (!targetPassword || targetPassword.length < 6) {
+    if (!targetPassword || targetPassword.length < 8) {
       return res
         .status(400)
-        .json({ success: false, error: 'Password must be at least 6 characters.' });
+        .json({ success: false, error: 'Password must be at least 8 characters.' });
     }
     if (targetPassword.length > 128) {
       return res.status(400).json({ success: false, error: 'Password is too long.' });
@@ -585,13 +632,16 @@ app.post('/api/auth/reset-password', async (req, res, next) => {
 // Login (Email + Password) with Rate-Limit Lockout
 app.post('/api/auth/login', async (req, res, next) => {
   try {
-    const email = sanitizeStr(req.body.email, 254).toLowerCase();
+    const email = sanitizeStr(req.body.email, 254).toLowerCase().trim();
     const password = req.body.password;
     const ip = req.ip || req.connection.remoteAddress;
-    const lockoutKey = `${ip}_${email}`;
 
-    // Check lockout
-    const minutesLeft = checkLoginLockout(lockoutKey);
+    if (!email || !password) {
+      return res.status(400).json({ success: false, error: 'Email and password are required.' });
+    }
+
+    // Check lockout (5 attempts -> 15 min lockout)
+    const minutesLeft = await checkLoginLockout(email);
     if (minutesLeft) {
       return res.status(429).json({
         success: false,
@@ -599,18 +649,14 @@ app.post('/api/auth/login', async (req, res, next) => {
       });
     }
 
-    if (!email || !password) {
-      return res.status(400).json({ success: false, error: 'Email and password are required.' });
-    }
-
     const user = await db.findUserByEmail(email);
     if (!user || !user.passwordHash || !(await bcrypt.compare(password, user.passwordHash))) {
-      recordFailedLogin(lockoutKey);
+      await recordFailedLogin(email);
       return res.status(401).json({ success: false, error: 'Invalid email or password.' });
     }
 
     // Success - clear lockout counter
-    clearFailedLogin(lockoutKey);
+    await clearFailedLogin(email);
     await db.updateUser(user.uid, { lastLogin: new Date().toISOString() });
 
     // Record audit event
@@ -696,7 +742,8 @@ app.post('/api/auth/send-verification', requireAuth, async (req, res, next) => {
     if (!user) return res.status(404).json({ success: false, error: 'User not found.' });
 
     const token = require('crypto').randomBytes(24).toString('hex');
-    await db.updateUser(user.uid, { verificationToken: token });
+    const tokenExpires = new Date(Date.now() + 72 * 3600 * 1000).toISOString();
+    await db.updateUser(user.uid, { verificationToken: token, verificationTokenExpires: tokenExpires });
 
     res.json({
       success: true,
@@ -729,7 +776,7 @@ app.get('/api/auth/verify-email', async (req, res, next) => {
         );
     }
 
-    await db.updateUser(user.uid, { isVerified: true, verificationToken: null });
+    await db.updateUser(user.uid, { isVerified: true, verificationToken: null, verificationTokenExpires: null });
     if (req.session && req.session.user && req.session.user.uid === user.uid) {
       req.session.user.isVerified = true;
     }
@@ -1256,7 +1303,8 @@ app.post('/api/quiz/grade', validateModuleId, quizLimiter, async (req, res, next
       score: correctCount,
       total,
       percentage,
-      passed
+      passed,
+      answers_json: JSON.stringify(feedbackList)
     });
 
     // Save reflections (R15)

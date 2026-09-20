@@ -106,13 +106,12 @@ describe('Child Profiles & Access Control API Tests', () => {
     expect(pubRes.body.child.assignedTrack).toBe('level2');
     expect(pubRes.body.child.hasPin).toBe(true);
 
-    // 4. Child profile accessible via public URL endpoint (by name case-insensitively)
+    // 4. Public endpoint enforces UUID lookup and rejects name-only lookup (P3-C collision defense)
     const pubResByName = await request(app).get(
       `/api/public/child/${encodeURIComponent(uniqueChildName.toLowerCase())}`
     );
-    expect(pubResByName.statusCode).toBe(200);
-    expect(pubResByName.body.success).toBe(true);
-    expect(pubResByName.body.child.id).toBe(maryamId);
+    expect(pubResByName.statusCode).toBe(404);
+    expect(pubResByName.body.success).toBe(false);
 
     // 5. Verify PIN via public endpoint
     const wrongPin = await request(app)
