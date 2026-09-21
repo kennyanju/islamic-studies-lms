@@ -1884,6 +1884,26 @@ export async function onRequest(context) {
           }
         }
 
+        // Update streak on children table (Sprint 3)
+        if (childId && env.DB) {
+          const todayStr = new Date().toISOString().split('T')[0];
+          const yesterdayStr = new Date(Date.now() - 86400000).toISOString().split('T')[0];
+          env.DB.prepare('SELECT last_study_date, current_streak FROM children WHERE id = ?')
+            .bind(childId)
+            .first()
+            .then((row) => {
+              if (!row || row.last_study_date === todayStr) return; // already updated today
+              const newStreak =
+                row.last_study_date === yesterdayStr ? (row.current_streak || 0) + 1 : 1;
+              return env.DB.prepare(
+                'UPDATE children SET last_study_date = ?, current_streak = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ?'
+              )
+                .bind(todayStr, newStreak, childId)
+                .run();
+            })
+            .catch(() => {});
+        }
+
         if (passed) {
           const progId = `prog_${studentId}_${mId}`;
           await env.DB.prepare(
@@ -2327,6 +2347,64 @@ export async function onRequest(context) {
       }
     }
     return jsonResponse({ success: true, message: 'Telemetry logs cleared' }, 200, {}, request);
+  }
+
+  // 17. Parent: view reflections for a specific child (Sprint 2)
+  if (path.match(/^\/parent\/children\/([^/]+)\/reflections$/) && method === 'GET') {
+    if (!authUser) {
+      return jsonResponse({ success: false, error: 'Authentication required' }, 401, {}, request);
+    }
+    const childId = path.split('/')[3];
+    if (env.DB) {
+      try {
+        const childRow = await env.DB.prepare('SELECT parent_uid FROM children WHERE id = ?')
+          .bind(childId)
+          .first();
+        if (!childRow) {
+          return jsonResponse({ success: false, error: 'Child profile not found.' }, 404, {}, request);
+        }
+        if (authUser.role !== 'super_admin' && childRow.parent_uid !== authUser.uid) {
+          return jsonResponse({ success: false, error: 'Access denied.' }, 403, {}, request);
+        }
+        const { results } = await env.DB.prepare(
+          'SELECT id, student_id, module_id, question_id, response_text, created_at FROM reflections WHERE student_id = ? ORDER BY created_at DESC'
+        )
+          .bind(childId)
+          .all();
+        return jsonResponse({ success: true, childId, reflections: results || [] }, 200, {}, request);
+      } catch (e) {
+        return jsonResponse({ success: false, error: e.message }, 500, {}, request);
+      }
+    }
+    return jsonResponse({ success: true, childId, reflections: [] }, 200, {}, request);
+  }
+
+  // 18. Admin: view all reflections (Sprint 2)
+  if (path === '/admin/reflections' && method === 'GET') {
+    if (!authUser || authUser.role !== 'super_admin') {
+      return jsonResponse(
+        { success: false, error: 'Forbidden: Super Admin only' },
+        403,
+        {},
+        request
+      );
+    }
+    if (env.DB) {
+      try {
+        const { results } = await env.DB.prepare(
+          'SELECT id, student_id, module_id, question_id, response_text, created_at FROM reflections ORDER BY created_at DESC LIMIT 500'
+        ).all();
+        return jsonResponse(
+          { success: true, total: (results || []).length, reflections: results || [] },
+          200,
+          {},
+          request
+        );
+      } catch (e) {
+        return jsonResponse({ success: false, error: e.message }, 500, {}, request);
+      }
+    }
+    return jsonResponse({ success: true, total: 0, reflections: [] }, 200, {}, request);
   }
 
   // Fallback for unmatched API routes

@@ -1311,12 +1311,20 @@ app.post('/api/quiz/grade', validateModuleId, quizLimiter, async (req, res, next
     if (Object.keys(reflections).length > 0) {
       for (const qId of Object.keys(reflections)) {
         await db.saveReflection({
+          childId: childId || null,
           studentId: childId || sessionUid,
           moduleId,
           questionId: qId,
           responseText: reflections[qId]
         });
       }
+    }
+
+    // Update streak for child profiles (Sprint 3)
+    if (childId) {
+      db.updateChildStreak(childId).catch((e) =>
+        console.warn('Streak update failed:', e.message)
+      );
     }
 
     // Parent Notification on Quiz Completion / Pass
@@ -1550,6 +1558,38 @@ app.delete('/api/admin/telemetry', requireAdmin, (req, res) => {
   telemetryMetrics.clientErrors = 0;
   telemetryMetrics.cspViolations = 0;
   res.json({ success: true, message: 'Telemetry logs cleared' });
+});
+
+// Parent: view reflections for a specific child (Sprint 2)
+app.get('/api/parent/children/:id/reflections', requireAuth, async (req, res, next) => {
+  try {
+    const childId = req.params.id;
+    const sessionUid = req.session.user.uid;
+    const isAdmin = req.session.user.role === 'super_admin';
+
+    const child = await db.getChildById(childId);
+    if (!child) {
+      return res.status(404).json({ success: false, error: 'Child profile not found.' });
+    }
+    if (!isAdmin && child.parentUid !== sessionUid) {
+      return res.status(403).json({ success: false, error: 'Access denied.' });
+    }
+
+    const reflections = await db.getReflectionsForChild(childId);
+    res.json({ success: true, childId, reflections });
+  } catch (err) {
+    next(err);
+  }
+});
+
+// Admin: view all reflections across all children (Sprint 2)
+app.get('/api/admin/reflections', requireAdmin, async (req, res, next) => {
+  try {
+    const reflections = await db.getAllReflections();
+    res.json({ success: true, total: reflections.length, reflections });
+  } catch (err) {
+    next(err);
+  }
 });
 
 /* ==========================================================================

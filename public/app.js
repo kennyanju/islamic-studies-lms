@@ -3154,6 +3154,9 @@ document.addEventListener('DOMContentLoaded', () => {
               <button class="btn-child-switch ${isActive ? 'btn-primary-action' : ''}" data-id="${escapeHtml(child.id)}">
                 <i class="fa-solid ${isActive ? 'fa-book-open' : 'fa-user-check'}"></i> ${isActive ? 'Start Learning' : 'Select Learner'}
               </button>
+              <a href="/reflections.html#${encodeURIComponent(child.id)}" class="btn-child-icon" title="View ${escapeHtml(child.name)}'s Reflections" style="text-decoration:none">
+                <i class="fa-solid fa-journal-whills"></i>
+              </a>
               <a href="${window.location.origin}/?kid=${encodeURIComponent(child.id)}" target="_blank" class="btn-child-icon open-kid-link-btn" data-id="${escapeHtml(child.id)}" title="Open Profile in New Tab">
                 <i class="fa-solid fa-arrow-up-right-from-square"></i>
               </a>

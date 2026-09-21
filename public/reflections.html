@@ -1,0 +1,665 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="View your child's reflections and personal insights from their Islamic Studies journey."
+    />
+    <title>Student Reflections — Islamic Studies Family LMS</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+
+    <link rel="icon" type="image/svg+xml" href="/icons/favicon.svg" />
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="theme-color" content="#059669" />
+    <link rel="stylesheet" href="/style.css" />
+
+    <style>
+      /* ─── Page-specific styles ─────────────────────────────────── */
+      :root {
+        --teal: #0d9488;
+        --teal-light: #14b8a6;
+        --emerald: #059669;
+        --emerald-light: #10b981;
+        --gold: #d97706;
+        --gold-light: #f59e0b;
+        --surface: #1e293b;
+        --surface-elevated: #273549;
+        --border: rgba(255, 255, 255, 0.08);
+        --text-primary: #f1f5f9;
+        --text-secondary: #94a3b8;
+        --radius: 14px;
+      }
+
+      * { box-sizing: border-box; }
+
+      body {
+        font-family: 'Inter', sans-serif;
+        background: #0f172a;
+        color: var(--text-primary);
+        margin: 0;
+        min-height: 100vh;
+      }
+
+      /* ─── Top nav bar ──────────────────────────────────────────── */
+      .ref-nav {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 16px 24px;
+        background: rgba(15, 23, 42, 0.9);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid var(--border);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
+
+      .ref-nav-logo {
+        font-family: 'Outfit', sans-serif;
+        font-size: 1.1rem;
+        font-weight: 700;
+        background: linear-gradient(135deg, var(--teal-light), var(--emerald-light));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        text-decoration: none;
+      }
+
+      .ref-nav-sep { color: var(--border); font-size: 1.4rem; }
+
+      .ref-nav h1 {
+        font-size: 1rem;
+        font-weight: 600;
+        margin: 0;
+        color: var(--text-primary);
+      }
+
+      .ref-nav-back {
+        margin-left: auto;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 8px 16px;
+        border-radius: 8px;
+        background: var(--surface-elevated);
+        border: 1px solid var(--border);
+        color: var(--text-secondary);
+        font-size: 0.85rem;
+        font-weight: 500;
+        text-decoration: none;
+        transition: all 0.2s;
+        cursor: pointer;
+      }
+      .ref-nav-back:hover { background: var(--surface); color: var(--text-primary); }
+
+      /* ─── Main layout ──────────────────────────────────────────── */
+      .ref-main {
+        max-width: 960px;
+        margin: 0 auto;
+        padding: 32px 20px 60px;
+      }
+
+      /* ─── Child selector ───────────────────────────────────────── */
+      .child-selector-bar {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        flex-wrap: wrap;
+        margin-bottom: 28px;
+      }
+
+      .child-selector-bar label {
+        font-size: 0.875rem;
+        font-weight: 600;
+        color: var(--text-secondary);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+
+      .child-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 18px;
+        border-radius: 99px;
+        border: 1.5px solid var(--border);
+        background: var(--surface);
+        color: var(--text-secondary);
+        font-size: 0.9rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+      .child-btn:hover { border-color: var(--teal); color: var(--teal-light); }
+      .child-btn.active {
+        background: linear-gradient(135deg, var(--teal), var(--emerald));
+        border-color: transparent;
+        color: #fff;
+        box-shadow: 0 4px 14px rgba(13, 148, 136, 0.35);
+      }
+      .child-btn .avatar { font-size: 1.1rem; }
+
+      /* ─── Module filter ────────────────────────────────────────── */
+      .filter-bar {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        flex-wrap: wrap;
+        margin-bottom: 24px;
+      }
+
+      .filter-bar label {
+        font-size: 0.85rem;
+        color: var(--text-secondary);
+        font-weight: 500;
+      }
+
+      .filter-select {
+        background: var(--surface-elevated);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        color: var(--text-primary);
+        font-size: 0.875rem;
+        padding: 7px 12px;
+        outline: none;
+        cursor: pointer;
+      }
+      .filter-select:focus { border-color: var(--teal); }
+
+      /* ─── Stats strip ──────────────────────────────────────────── */
+      .stats-strip {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+        gap: 12px;
+        margin-bottom: 28px;
+      }
+
+      .stat-card {
+        background: var(--surface-elevated);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 16px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .stat-card::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(135deg, var(--teal) 0%, transparent 70%);
+        opacity: 0.05;
+      }
+
+      .stat-value {
+        font-family: 'Outfit', sans-serif;
+        font-size: 1.8rem;
+        font-weight: 800;
+        background: linear-gradient(135deg, var(--teal-light), var(--emerald-light));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        line-height: 1;
+        margin-bottom: 4px;
+      }
+
+      .stat-label {
+        font-size: 0.75rem;
+        font-weight: 600;
+        color: var(--text-secondary);
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+      }
+
+      .streak-stat .stat-value {
+        background: linear-gradient(135deg, var(--gold), var(--gold-light));
+        -webkit-background-clip: text;
+        background-clip: text;
+      }
+
+      /* ─── Reflection cards ─────────────────────────────────────── */
+      .reflections-list {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      .reflection-card {
+        background: var(--surface-elevated);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 20px 22px;
+        position: relative;
+        transition: border-color 0.2s, box-shadow 0.2s;
+        animation: slideUp 0.35s ease both;
+      }
+
+      @keyframes slideUp {
+        from { opacity: 0; transform: translateY(12px); }
+        to   { opacity: 1; transform: translateY(0); }
+      }
+
+      .reflection-card:hover {
+        border-color: rgba(13, 148, 136, 0.35);
+        box-shadow: 0 4px 20px rgba(13, 148, 136, 0.1);
+      }
+
+      .reflection-card::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 3px;
+        background: linear-gradient(180deg, var(--teal), var(--emerald));
+        border-radius: 3px 0 0 3px;
+      }
+
+      .reflection-header {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 12px;
+        margin-bottom: 12px;
+      }
+
+      .reflection-module-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 4px 10px;
+        border-radius: 6px;
+        background: rgba(13, 148, 136, 0.15);
+        border: 1px solid rgba(13, 148, 136, 0.25);
+        color: var(--teal-light);
+        font-size: 0.78rem;
+        font-weight: 600;
+      }
+
+      .reflection-date {
+        font-size: 0.78rem;
+        color: var(--text-secondary);
+        white-space: nowrap;
+      }
+
+      .reflection-question {
+        font-size: 0.82rem;
+        font-weight: 600;
+        color: var(--text-secondary);
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        margin-bottom: 8px;
+      }
+
+      .reflection-text {
+        font-size: 0.95rem;
+        line-height: 1.65;
+        color: var(--text-primary);
+        font-family: 'Amiri', serif;
+      }
+
+      /* ─── Empty / loading states ───────────────────────────────── */
+      .state-container {
+        text-align: center;
+        padding: 60px 20px;
+        color: var(--text-secondary);
+      }
+
+      .state-icon {
+        font-size: 3rem;
+        margin-bottom: 16px;
+        opacity: 0.5;
+      }
+
+      .state-title {
+        font-size: 1.1rem;
+        font-weight: 600;
+        margin-bottom: 8px;
+        color: var(--text-primary);
+      }
+
+      .spinner {
+        width: 40px;
+        height: 40px;
+        border: 3px solid var(--border);
+        border-top-color: var(--teal-light);
+        border-radius: 50%;
+        animation: spin 0.8s linear infinite;
+        margin: 0 auto 16px;
+      }
+      @keyframes spin { to { transform: rotate(360deg); } }
+
+      /* ─── Error banner ─────────────────────────────────────────── */
+      .error-banner {
+        display: none;
+        align-items: center;
+        gap: 10px;
+        padding: 12px 16px;
+        background: rgba(239, 68, 68, 0.1);
+        border: 1px solid rgba(239, 68, 68, 0.3);
+        border-radius: var(--radius);
+        color: #fca5a5;
+        font-size: 0.875rem;
+        margin-bottom: 20px;
+      }
+      .error-banner.visible { display: flex; }
+
+      /* ─── Responsive ───────────────────────────────────────────── */
+      @media (max-width: 600px) {
+        .ref-nav { padding: 12px 16px; }
+        .ref-main { padding: 20px 14px 50px; }
+        .stats-strip { grid-template-columns: repeat(2, 1fr); }
+        .reflection-header { flex-direction: column; gap: 6px; }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ─── Navigation ──────────────────────────────────────────── -->
+    <nav class="ref-nav">
+      <a href="/" class="ref-nav-logo">☪ Islamic Studies LMS</a>
+      <span class="ref-nav-sep">/</span>
+      <h1>Student Reflections</h1>
+      <a href="/" class="ref-nav-back" id="backToAppBtn">
+        <i class="fa fa-arrow-left"></i> Back to Dashboard
+      </a>
+    </nav>
+
+    <!-- ─── Main content ────────────────────────────────────────── -->
+    <main class="ref-main" id="mainContent">
+      <!-- Auth gate (shown while checking session) -->
+      <div class="state-container" id="authCheck">
+        <div class="spinner"></div>
+        <p>Verifying session…</p>
+      </div>
+
+      <!-- Content (hidden until authenticated) -->
+      <div id="pageContent" style="display:none">
+        <!-- Child selector -->
+        <div class="child-selector-bar" id="childSelectorBar">
+          <label><i class="fa fa-users" style="margin-right:4px"></i>Select learner</label>
+          <div id="childButtons"></div>
+        </div>
+
+        <!-- Error banner -->
+        <div class="error-banner" id="errorBanner">
+          <i class="fa fa-circle-exclamation"></i>
+          <span id="errorMessage">Unable to load reflections.</span>
+        </div>
+
+        <!-- Stats strip -->
+        <div class="stats-strip" id="statsStrip" style="display:none">
+          <div class="stat-card">
+            <div class="stat-value" id="statTotal">0</div>
+            <div class="stat-label">Total Reflections</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value" id="statModules">0</div>
+            <div class="stat-label">Modules Covered</div>
+          </div>
+          <div class="stat-card streak-stat">
+            <div class="stat-value" id="statStreak">0 🔥</div>
+            <div class="stat-label">Study Streak</div>
+          </div>
+        </div>
+
+        <!-- Module filter -->
+        <div class="filter-bar" id="filterBar" style="display:none">
+          <label for="moduleFilter"><i class="fa fa-filter" style="margin-right:4px"></i>Filter by module</label>
+          <select class="filter-select" id="moduleFilter">
+            <option value="all">All Modules</option>
+          </select>
+        </div>
+
+        <!-- Reflections list -->
+        <div id="reflectionsList">
+          <div class="state-container" id="selectChildPrompt">
+            <div class="state-icon">📖</div>
+            <div class="state-title">Select a learner above</div>
+            <p>Choose a child profile to view their reflections.</p>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script>
+      /* ── Utility ─────────────────────────────────────────────── */
+      const $ = (id) => document.getElementById(id);
+      const apiBase = '/api';
+
+      function showError(msg) {
+        $('errorBanner').classList.add('visible');
+        $('errorMessage').textContent = msg;
+      }
+      function hideError() {
+        $('errorBanner').classList.remove('visible');
+      }
+
+      function formatDate(iso) {
+        if (!iso) return '';
+        const d = new Date(iso);
+        return d.toLocaleDateString('en-GB', {
+          day: 'numeric', month: 'short', year: 'numeric',
+          hour: '2-digit', minute: '2-digit'
+        });
+      }
+
+      /* ── Module name lookup ──────────────────────────────────── */
+      const MODULE_NAMES = {
+        1: 'Foundations of Belief',
+        2: 'Purification & Prayer',
+        3: 'Seerah: Early Life',
+        4: 'Deepening Belief & Quran',
+        5: 'Fiqh of Fasting, Zakāh & Community',
+        6: 'Seerah: Madinah',
+        7: 'Applied Fiqh & Everyday Life',
+        8: 'Character, Society & Family',
+        9: 'Seerah, History & Living Faith'
+      };
+
+      function moduleName(id) {
+        return MODULE_NAMES[id] || `Module ${id}`;
+      }
+
+      /* ── State ───────────────────────────────────────────────── */
+      let allChildren = [];
+      let activeChildId = null;
+      let allReflections = [];
+
+      /* ── Auth check ──────────────────────────────────────────── */
+      async function checkAuth() {
+        try {
+          const res = await fetch(`${apiBase}/auth/me`, { credentials: 'include' });
+          const data = await res.json();
+          if (!data.success || !data.user) {
+            window.location.href = '/?redirect=reflections';
+            return;
+          }
+          $('authCheck').style.display = 'none';
+          $('pageContent').style.display = 'block';
+          await loadChildren();
+        } catch (e) {
+          window.location.href = '/';
+        }
+      }
+
+      /* ── Load children ───────────────────────────────────────── */
+      async function loadChildren() {
+        try {
+          const res = await fetch(`${apiBase}/parent/children`, { credentials: 'include' });
+          const data = await res.json();
+          if (!data.success) throw new Error(data.error || 'Failed to load profiles');
+          allChildren = data.children || [];
+          renderChildButtons();
+          // Auto-select child from URL hash (e.g. /reflections.html#childId)
+          const hashId = decodeURIComponent(window.location.hash.replace('#', ''));
+          const hashChild = hashId && allChildren.find((c) => c.id === hashId);
+          if (hashChild) {
+            selectChild(hashChild.id);
+          } else if (allChildren.length === 1) {
+            selectChild(allChildren[0].id);
+          }
+        } catch (e) {
+          showError(e.message);
+        }
+      }
+
+      function renderChildButtons() {
+        const container = $('childButtons');
+        container.innerHTML = '';
+        allChildren.forEach((child) => {
+          const btn = document.createElement('button');
+          btn.className = 'child-btn';
+          btn.id = `childBtn_${child.id}`;
+          btn.innerHTML = `<span class="avatar">${child.avatar || '🌟'}</span>${child.name}`;
+          btn.addEventListener('click', () => selectChild(child.id));
+          container.appendChild(btn);
+        });
+      }
+
+      /* ── Select child & load reflections ─────────────────────── */
+      async function selectChild(childId) {
+        activeChildId = childId;
+        hideError();
+
+        // Update button states
+        document.querySelectorAll('.child-btn').forEach((btn) => btn.classList.remove('active'));
+        const activeBtn = $(`childBtn_${childId}`);
+        if (activeBtn) activeBtn.classList.add('active');
+
+        // Show loading
+        $('reflectionsList').innerHTML = `
+          <div class="state-container">
+            <div class="spinner"></div>
+            <p>Loading reflections…</p>
+          </div>`;
+        $('statsStrip').style.display = 'none';
+        $('filterBar').style.display = 'none';
+
+        try {
+          const res = await fetch(`${apiBase}/parent/children/${childId}/reflections`, {
+            credentials: 'include'
+          });
+          const data = await res.json();
+          if (!data.success) throw new Error(data.error || 'Could not load reflections');
+
+          allReflections = data.reflections || [];
+
+          // Populate module filter
+          const moduleIds = [...new Set(allReflections.map((r) => r.moduleId || r.module_id))].sort();
+          const select = $('moduleFilter');
+          select.innerHTML = '<option value="all">All Modules</option>';
+          moduleIds.forEach((mId) => {
+            const opt = document.createElement('option');
+            opt.value = mId;
+            opt.textContent = moduleName(mId);
+            select.appendChild(opt);
+          });
+
+          // Find child for streak
+          const child = allChildren.find((c) => c.id === childId);
+
+          renderStats(child);
+          renderReflections(allReflections);
+
+          if (allReflections.length > 0) {
+            $('statsStrip').style.display = 'grid';
+            $('filterBar').style.display = 'flex';
+          }
+        } catch (e) {
+          showError(e.message);
+          $('reflectionsList').innerHTML = '';
+        }
+      }
+
+      /* ── Stats ───────────────────────────────────────────────── */
+      function renderStats(child) {
+        $('statTotal').textContent = allReflections.length;
+        const uniqueModules = new Set(allReflections.map((r) => r.moduleId || r.module_id)).size;
+        $('statModules').textContent = uniqueModules;
+        const streak = child?.currentStreak || child?.current_streak || 0;
+        $('statStreak').textContent = `${streak} 🔥`;
+      }
+
+      /* ── Render reflections list ─────────────────────────────── */
+      function renderReflections(reflections) {
+        const list = $('reflectionsList');
+
+        if (!reflections.length) {
+          list.innerHTML = `
+            <div class="state-container">
+              <div class="state-icon">🌱</div>
+              <div class="state-title">No reflections yet</div>
+              <p>Reflections will appear here after quizzes are completed.</p>
+            </div>`;
+          return;
+        }
+
+        list.innerHTML = '<div class="reflections-list" id="reflectionsGrid"></div>';
+        const grid = $('reflectionsGrid');
+
+        reflections.forEach((r, i) => {
+          const mId = r.moduleId || r.module_id;
+          const qId = r.questionId || r.question_id;
+          const text = r.responseText || r.response_text || '';
+          const date = r.createdAt || r.created_at;
+
+          const card = document.createElement('div');
+          card.className = 'reflection-card';
+          card.style.animationDelay = `${i * 0.04}s`;
+          card.innerHTML = `
+            <div class="reflection-header">
+              <span class="reflection-module-badge">
+                <i class="fa fa-book-open"></i> ${moduleName(mId)}
+              </span>
+              <span class="reflection-date">${formatDate(date)}</span>
+            </div>
+            <div class="reflection-question">
+              <i class="fa fa-comment-dots" style="margin-right:4px;opacity:0.6"></i>
+              Reflection: ${String(qId).replace(/_/g, ' ')}
+            </div>
+            <div class="reflection-text">${escapeHtml(text)}</div>
+          `;
+          grid.appendChild(card);
+        });
+      }
+
+      function escapeHtml(str) {
+        return String(str)
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;')
+          .replace(/'/g, '&#039;');
+      }
+
+      /* ── Module filter listener ──────────────────────────────── */
+      $('moduleFilter').addEventListener('change', (e) => {
+        const val = e.target.value;
+        if (val === 'all') {
+          renderReflections(allReflections);
+        } else {
+          const filtered = allReflections.filter(
+            (r) => String(r.moduleId || r.module_id) === String(val)
+          );
+          renderReflections(filtered);
+        }
+      });
+
+      /* ── Boot ────────────────────────────────────────────────── */
+      checkAuth();
+    </script>
+  </body>
+</html>
