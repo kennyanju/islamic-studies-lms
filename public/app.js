@@ -365,38 +365,93 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // Fast Startup Course Data Loader with Manifest Indexing
+  // Fast Startup Course Data Loader with Multi-Source Fallbacks
   async function loadCourseData() {
+    const tryUrls = async (urls) => {
+      for (const u of urls) {
+        try {
+          const res = await fetch(u);
+          if (res.ok) {
+            const data = await res.json();
+            if (data && (data.modules || Array.isArray(data))) {
+              return data;
+            }
+          }
+        } catch (e) {}
+      }
+      return null;
+    };
+
+    // 1. Try manifest index (~18 KB)
+    const manifestCandidates = [
+      'modules_manifest.json',
+      './modules_manifest.json',
+      '/modules_manifest.json'
+    ];
+    let loaded = await tryUrls(manifestCandidates);
+    if (loaded) {
+      courseData = loaded;
+      initApp();
+      return;
+    }
+
+    // 2. Try full monolithic bundle or server API
+    const bundleCandidates = [
+      'course_data.json',
+      './course_data.json',
+      '/course_data.json',
+      '/api/course-data',
+      '/api/modules'
+    ];
+    loaded = await tryUrls(bundleCandidates);
+    if (loaded) {
+      courseData = loaded;
+      initApp();
+      return;
+    }
+
+    // 3. Fallback: Reconstruct from individual module chunks (modules 1..9)
     try {
-      // First try lightweight manifest index (~11.8 KB)
-      const manifestRes = await fetch('/modules_manifest.json');
-      if (manifestRes.ok) {
-        courseData = await manifestRes.json();
+      const chunkPromises = [];
+      for (let i = 1; i <= 9; i++) {
+        chunkPromises.push(
+          fetch(`course_data/module_${i}.json`)
+            .then((r) => (r.ok ? r.json() : null))
+            .catch(() =>
+              fetch(`./course_data/module_${i}.json`)
+                .then((r) => (r.ok ? r.json() : null))
+                .catch(() =>
+                  fetch(`/course_data/module_${i}.json`)
+                    .then((r) => (r.ok ? r.json() : null))
+                    .catch(() => null)
+                )
+            )
+        );
+      }
+      const chunks = (await Promise.all(chunkPromises)).filter(Boolean);
+      if (chunks.length > 0) {
+        chunks.sort((a, b) => a.id - b.id);
+        courseData = {
+          title: "Islamic Studies Curriculum (Ash'ari-Maliki)",
+          modules: chunks
+        };
         initApp();
         return;
       }
-    } catch (e) {
-      console.warn('Manifest load notice, falling back to full bundle:', e);
+    } catch (chunkErr) {
+      console.warn('Chunk reconstruction notice:', chunkErr);
     }
 
-    // Fallback to full course_data.json or API
-    fetch('/course_data.json')
-      .then((r) => r.json())
-      .then((data) => {
-        courseData = data;
-        initApp();
-      })
-      .catch((e) => {
-        console.error('Fatal: Could not load course data', e);
-        showToast(
-          'Loading Error',
-          'Failed to load course curriculum data.',
-          'error',
-          0,
-          () => loadCourseData(),
-          'Retry Loading'
-        );
-      });
+    // 4. If all fail, display error toast with retry button
+    console.error('Fatal: Could not load course data from any source');
+    showToast(
+      'Loading Error',
+      'Failed to load course curriculum data.',
+      'error',
+      0,
+      () => loadCourseData(),
+      'Retry Loading'
+    );
   }
   loadCourseData();
 
@@ -862,24 +917,47 @@ document.addEventListener('DOMContentLoaded', () => {
           <div class="skeleton-shimmer skeleton-card"></div>
         </div>
       `;
-      fetch(`/course_data/module_${moduleId}.json`)
-        .then((r) => r.json())
-        .then((fullMod) => {
-          Object.assign(mod, fullMod);
-          if (activeModuleId === moduleId) {
-            switchTab(activeTab);
-          }
-        })
-        .catch((err) => {
-          console.warn('Chunk load error, falling back to full bundle...', err);
-          fetch('/course_data.json')
-            .then((r) => r.json())
-            .then((fullData) => {
-              const target = (fullData.modules || []).find((m) => m.id === moduleId);
-              if (target) Object.assign(mod, target);
+      const loadChunk = async () => {
+        const chunkPaths = [
+          `course_data/module_${moduleId}.json`,
+          `./course_data/module_${moduleId}.json`,
+          `/course_data/module_${moduleId}.json`
+        ];
+        for (const p of chunkPaths) {
+          try {
+            const res = await fetch(p);
+            if (res.ok) {
+              const fullMod = await res.json();
+              Object.assign(mod, fullMod);
               if (activeModuleId === moduleId) switchTab(activeTab);
-            });
-        });
+              return true;
+            }
+          } catch (e) {}
+        }
+        return false;
+      };
+
+      loadChunk().then((success) => {
+        if (!success) {
+          const bundlePaths = ['course_data.json', './course_data.json', '/course_data.json'];
+          const tryBundle = async () => {
+            for (const bp of bundlePaths) {
+              try {
+                const r = await fetch(bp);
+                if (r.ok) {
+                  const fullData = await r.json();
+                  const target = (fullData.modules || []).find((m) => m.id === moduleId);
+                  if (target) Object.assign(mod, target);
+                  if (activeModuleId === moduleId) switchTab(activeTab);
+                  return;
+                }
+              } catch (e) {}
+            }
+            if (activeModuleId === moduleId) switchTab(activeTab);
+          };
+          tryBundle();
+        }
+      });
     } else {
       switchTab(activeTab);
     }
@@ -5564,7 +5642,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if ('serviceWorker' in navigator && window.location.protocol.startsWith('http')) {
     window.addEventListener('load', () => {
       navigator.serviceWorker
-        .register('/sw.js')
+        .register('sw.js')
         .then((reg) => {
           console.log('✅ [PWA] Zero-Cache Service Worker active for installability:', reg.scope);
         })

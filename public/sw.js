@@ -6,30 +6,38 @@
  * - Network-only for dynamic API mutations
  */
 
-const CACHE_NAME = 'islamic-studies-vmv3y5aex';
+const CACHE_NAME = 'islamic-studies-vmv3z9gnf';
 const PRECACHE_ASSETS = [
-  '/',
-  '/index.html',
-  '/style.css',
-  '/app.js',
-  '/modules_manifest.json',
-  '/manifest.json',
-  '/icons/favicon.svg',
-  '/icons/icon-192.png',
-  '/icons/icon-512.png'
+  './',
+  './index.html',
+  './style.css',
+  './app.js',
+  './modules_manifest.json',
+  './course_data.json',
+  './manifest.json',
+  './icons/favicon.svg',
+  './icons/icon-192.png',
+  './icons/icon-512.png'
 ];
 
-// 1. Precache Core Shell Assets on Install
+// 1. Precache Core Shell Assets on Install (fault-tolerant)
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches
       .open(CACHE_NAME)
-      .then((cache) => cache.addAll(PRECACHE_ASSETS))
+      .then((cache) =>
+        Promise.allSettled(
+          PRECACHE_ASSETS.map((asset) =>
+            fetch(asset)
+              .then((res) => {
+                if (res.ok) return cache.put(asset, res);
+              })
+              .catch(() => {})
+          )
+        )
+      )
       .then(() => self.skipWaiting())
-      .catch((err) => {
-        console.warn('[ServiceWorker] Precache notice:', err);
-        return self.skipWaiting();
-      })
+      .catch(() => self.skipWaiting())
   );
 });
 
@@ -78,7 +86,7 @@ self.addEventListener('fetch', (event) => {
 
   // Cache-first for Course Data chunks and Manifest
   if (
-    url.pathname.startsWith('/course_data/') ||
+    url.pathname.includes('/course_data/') ||
     url.pathname.endsWith('course_data.json') ||
     url.pathname.endsWith('modules_manifest.json')
   ) {

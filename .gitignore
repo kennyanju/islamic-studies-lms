@@ -12,10 +12,6 @@ data/db.json*
 .wrangler/
 coverage/
 
-# Generated curriculum build artifacts
-public/course_data.json
-public/modules_manifest.json
-
 # Python cache & video files
 __pycache__/
 *.pyc
