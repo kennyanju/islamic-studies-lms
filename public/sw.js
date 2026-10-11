@@ -6,7 +6,7 @@
  * - Network-only for dynamic API mutations
  */
 
-const CACHE_NAME = 'islamic-studies-vmv460hnc';
+const CACHE_NAME = 'islamic-studies-vmv46j9ox';
 const PRECACHE_ASSETS = [
   './',
   './index.html',

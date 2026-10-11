@@ -115,7 +115,7 @@ export function closeAccessibleModal(modalEl, restoreFocus = true) {
   ) {
     try {
       modalEl._previouslyFocusedElement.focus();
-    } catch (err) {}
+    } catch (_err) {}
   }
 }
 

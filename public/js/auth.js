@@ -3,8 +3,6 @@
  * Live pre-submit input validation, password reveal toggle, password strength meter
  */
 
-import { showToast } from './utils.js';
-
 export function isValidEmail(email) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }

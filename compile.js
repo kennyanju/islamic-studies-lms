@@ -193,7 +193,7 @@ function findMdFile(dir, pattern) {
       if (stat.isFile() && pattern.test(f)) {
         return fullPath;
       }
-    } catch (e) {}
+    } catch (_e) {}
   }
   return null;
 }

@@ -334,13 +334,13 @@ function isValidEmail(email) {
 
 function safeUser(user) {
   if (!user) return null;
-  const { passwordHash, ...safe } = user;
+  const { passwordHash: _passwordHash, ...safe } = user;
   return safe;
 }
 
 function safeChild(child) {
   if (!child) return null;
-  const { pinHash, ...safe } = child;
+  const { pinHash: _pinHash, ...safe } = child;
   safe.hasPin = !!(child.pinHash && child.pinHash.length > 0);
   return safe;
 }
@@ -411,7 +411,7 @@ function requireAdmin(req, res, next) {
   next();
 }
 
-function requireParentOwnership(req, res, next) {
+function _requireParentOwnership(req, res, next) {
   if (!req.session || !req.session.user) {
     return res.status(401).json({ success: false, error: 'Authentication required.' });
   }
@@ -1205,7 +1205,7 @@ const quizLimiter = rateLimit({
   windowMs: 60 * 1000,
   max: 10,
   message: { success: false, error: 'Too many quiz submissions. Please wait.' },
-  skip: (req) => process.env.NODE_ENV === 'test'
+  skip: (_req) => process.env.NODE_ENV === 'test'
 });
 
 app.post('/api/quiz/grade', validateModuleId, quizLimiter, async (req, res, next) => {
@@ -1655,7 +1655,7 @@ app.post(
 // Client Error Telemetry Endpoint
 app.post('/api/telemetry/errors', (req, res) => {
   telemetryMetrics.clientErrors++;
-  const { message, source, lineno, colno, stack, url, timestamp } = req.body || {};
+  const { message, source, lineno, colno: _colno, stack, url, timestamp } = req.body || {};
 
   telemetryLogs.unshift({
     id: Date.now() + Math.random(),
@@ -1691,7 +1691,7 @@ app.post('/api/telemetry/errors', (req, res) => {
    ========================================================================== */
 
 // SPA Fallback for static routes
-app.get('*', (req, res, next) => {
+app.get('*', (req, res, _next) => {
   if (req.path.startsWith('/api/')) {
     return res
       .status(404)
@@ -1701,7 +1701,7 @@ app.get('*', (req, res, next) => {
 });
 
 // Centralized 4-argument Express error handler
-app.use((err, req, res, next) => {
+app.use((err, req, res, _next) => {
   console.error('💥 [Server Error]:', err);
   const status = err.status || err.statusCode || 500;
   res.status(status).json({

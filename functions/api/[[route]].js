@@ -194,7 +194,7 @@ async function verifyJwt(token, secret) {
     const payload = JSON.parse(base64UrlDecode(b64Payload));
     if (payload.exp && payload.exp < Math.floor(Date.now() / 1000)) return null;
     return payload;
-  } catch (e) {
+  } catch (_e) {
     return null;
   }
 }
@@ -475,7 +475,7 @@ async function ensureD1Schema(env) {
       );
     `);
     _d1SchemaInitialized = true;
-  } catch (e) {
+  } catch (_e) {
     // Non-fatal if exec is not supported or already created
   }
 }
@@ -497,7 +497,7 @@ async function ensureSuperAdminBootstrap(env) {
         .run();
       console.log(`👑 [Bootstrap] Initial Super Admin account created for ${adminEmail}`);
     }
-  } catch (err) {
+  } catch (_err) {
     // Ignore if table not yet initialized
   }
 }
@@ -1160,7 +1160,7 @@ export async function onRequest(context) {
         status: 200,
         headers: { 'Content-Type': 'text/html; charset=utf-8' }
       });
-    } catch (e) {
+    } catch (_e) {
       return new Response('Internal Server Error', { status: 500 });
     }
   }
@@ -1209,7 +1209,7 @@ export async function onRequest(context) {
         .all();
 
       return jsonResponse({ success: true, children: results || [] }, 200, {}, request);
-    } catch (err) {
+    } catch (_err) {
       return jsonResponse({ success: true, children: [] }, 200, {}, request);
     }
   }
@@ -1569,7 +1569,7 @@ export async function onRequest(context) {
           .bind(certNumber, studentId, moduleId, score)
           .run()
           .catch(() => {});
-      } catch (e) {
+      } catch (_e) {
         // Graceful fallback
       }
     }
@@ -1976,7 +1976,7 @@ export async function onRequest(context) {
         if (r.completed) progressMap[`mod_${r.moduleId}`] = true;
       });
       return jsonResponse({ success: true, progress: progressMap }, 200, {}, request);
-    } catch (e) {
+    } catch (_e) {
       return jsonResponse({ success: true, progress: {} }, 200, {}, request);
     }
   }
@@ -2026,7 +2026,7 @@ export async function onRequest(context) {
           .run();
       }
       return jsonResponse({ success: true, logged: true }, 200, {}, request);
-    } catch (e) {
+    } catch (_e) {
       return jsonResponse({ success: true, logged: false }, 200, {}, request);
     }
   }
@@ -2042,7 +2042,7 @@ export async function onRequest(context) {
           .run();
       }
       return new Response(null, { status: 204 });
-    } catch (e) {
+    } catch (_e) {
       return new Response(null, { status: 204 });
     }
   }
