@@ -33,6 +33,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const trackL1 = document.getElementById('trackL1');
   const trackL2 = document.getElementById('trackL2');
+  const trackL3 = document.getElementById('trackL3');
+  const trackL4 = document.getElementById('trackL4');
+  const trackL5 = document.getElementById('trackL5');
   const trackTeacher = document.getElementById('trackTeacher');
 
   const sidebar = document.getElementById('sidebar');
@@ -69,10 +72,30 @@ document.addEventListener('DOMContentLoaded', () => {
   // Tab Buttons
   const handoutTabBtn = document.getElementById('handoutTabBtn');
   const quizTabBtn = document.getElementById('quizTabBtn');
+  const videoTabBtn = document.getElementById('videoTabBtn');
   const teleprompterTabBtn = document.getElementById('teleprompterTabBtn');
   const answerkeysTabBtn = document.getElementById('answerkeysTabBtn');
   const slidesTabBtn = document.getElementById('slidesTabBtn');
   const scriptTabBtn = document.getElementById('scriptTabBtn');
+
+  // Video Lesson Tab Elements
+  const lessonVideoPlayer = document.getElementById('lessonVideoPlayer');
+  const btnVideoLoadLocal = document.getElementById('btnVideoLoadLocal');
+  const videoFileInput = document.getElementById('videoFileInput');
+  const videoPlaybackSpeed = document.getElementById('videoPlaybackSpeed');
+  const videoFallbackCard = document.getElementById('videoFallbackCard');
+  const fallbackPickVideoBtn = document.getElementById('fallbackPickVideoBtn');
+  const fallbackViewSlidesBtn = document.getElementById('fallbackViewSlidesBtn');
+  const videoCurrentChapter = document.getElementById('videoCurrentChapter');
+  const videoJumpQuizBtn = document.getElementById('videoJumpQuizBtn');
+  const videoJumpHandoutBtn = document.getElementById('videoJumpHandoutBtn');
+  const drawerChaptersTabBtn = document.getElementById('drawerChaptersTabBtn');
+  const drawerScriptTabBtn = document.getElementById('drawerScriptTabBtn');
+  const drawerChaptersPane = document.getElementById('drawerChaptersPane');
+  const drawerScriptPane = document.getElementById('drawerScriptPane');
+  const videoChaptersList = document.getElementById('videoChaptersList');
+  const videoScriptContent = document.getElementById('videoScriptContent');
+  const videoChapterCount = document.getElementById('videoChapterCount');
 
   // Tab Contents
   const handoutContent = document.getElementById('handoutContent');
@@ -100,6 +123,9 @@ document.addEventListener('DOMContentLoaded', () => {
   // Answer Keys Elements
   const akToggleL1 = document.getElementById('akToggleL1');
   const akToggleL2 = document.getElementById('akToggleL2');
+  const akToggleL3 = document.getElementById('akToggleL3');
+  const akToggleL4 = document.getElementById('akToggleL4');
+  const akToggleL5 = document.getElementById('akToggleL5');
   const answerKeyContent = document.getElementById('answerKeyContent');
   let activeAkLevel = 'level1';
 
@@ -384,6 +410,7 @@ document.addEventListener('DOMContentLoaded', () => {
     updateStreakUI();
     setupEventListeners();
     setupLegalModal();
+    setupVideoControls();
     syncCloudProgress();
   }
 
@@ -421,19 +448,63 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  function getTrackLabel(trackKey) {
+    switch (trackKey) {
+      case 'level1':
+        return 'Level 1 (6–8y)';
+      case 'level2':
+        return 'Level 2 (8–10y)';
+      case 'level3':
+        return 'Level 3 (10–12y)';
+      case 'level4':
+        return 'Level 4 (12–14y)';
+      case 'level5':
+        return 'Level 5 (14–16+y)';
+      case 'teacher':
+        return 'Teacher Portal';
+      default:
+        return 'Level 1 (6–8y)';
+    }
+  }
+
+  function getTrackTagHtml(trackKey) {
+    switch (trackKey) {
+      case 'level1':
+        return '<span class="track-tag-pill level1">🌱 Level 1 (6–8y)</span>';
+      case 'level2':
+        return '<span class="track-tag-pill level2">🌿 Level 2 (8–10y)</span>';
+      case 'level3':
+        return '<span class="track-tag-pill level3">📘 Level 3 (10–12y)</span>';
+      case 'level4':
+        return '<span class="track-tag-pill level4">📖 Level 4 (12–14y)</span>';
+      case 'level5':
+        return '<span class="track-tag-pill level5">🎓 Level 5 (14–16+y)</span>';
+      case 'teacher':
+        return '<span class="track-tag-pill teacher">🧑‍🏫 Teacher Portal</span>';
+      default:
+        return '<span class="track-tag-pill level1">🌱 Level 1 (6–8y)</span>';
+    }
+  }
+
   function setupTrackButtons() {
     updateTrackActiveBtn();
 
-    [trackL1, trackL2, trackTeacher].forEach((btn) => {
-      btn.addEventListener('click', () => {
-        switchTrack(btn.dataset.track);
-      });
+    [trackL1, trackL2, trackL3, trackL4, trackL5, trackTeacher].forEach((btn) => {
+      if (btn) {
+        btn.addEventListener('click', () => {
+          switchTrack(btn.dataset.track);
+        });
+      }
     });
   }
 
   function updateTrackActiveBtn() {
-    [trackL1, trackL2, trackTeacher].forEach((btn) => {
-      btn.classList.toggle('active', btn.dataset.track === activeTrack);
+    [trackL1, trackL2, trackL3, trackL4, trackL5, trackTeacher].forEach((btn) => {
+      if (btn) {
+        const isAct = btn.dataset.track === activeTrack;
+        btn.classList.toggle('active', isAct);
+        btn.setAttribute('aria-pressed', isAct ? 'true' : 'false');
+      }
     });
   }
 
@@ -475,10 +546,9 @@ document.addEventListener('DOMContentLoaded', () => {
     modulesGrid.innerHTML = '';
     if (!courseData || !courseData.modules) return;
 
-    const isL2 = activeTrack === 'level2';
     const isTeacher = activeTrack === 'teacher';
 
-    // 1. Dynamic Hero Banner Theming & Text based on Level 1 vs Level 2
+    // 1. Dynamic Hero Banner Theming & Text based on 5 Levels
     const learnerHeroBanner = document.getElementById('learnerHeroBanner');
     const learnerAvatarBadge = document.getElementById('learnerAvatarBadge');
     const learnerTrackBadge = document.getElementById('learnerTrackBadge');
@@ -491,12 +561,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const learnerStatCert = document.getElementById('learnerStatCert');
 
     if (dashboardView) {
-      dashboardView.classList.toggle('level2-mode', isL2);
-      dashboardView.classList.toggle('level1-mode', !isL2 && !isTeacher);
+      ['level1-mode', 'level2-mode', 'level3-mode', 'level4-mode', 'level5-mode'].forEach((cls) => {
+        dashboardView.classList.toggle(cls, activeTrack === cls.replace('-mode', ''));
+      });
+      dashboardView.classList.toggle('teacher-mode', isTeacher);
     }
 
     if (learnerHeroBanner) {
-      learnerHeroBanner.className = `hero-banner ${isL2 ? 'level2-hero' : isTeacher ? 'admin-hero' : 'level1-hero'}`;
+      learnerHeroBanner.className = `hero-banner ${activeTrack}-hero`;
     }
 
     const learnerName = activeChild
@@ -507,18 +579,27 @@ document.addEventListener('DOMContentLoaded', () => {
     const learnerAvatar = activeChild ? activeChild.avatar : '🌟';
 
     if (learnerAvatarBadge) {
-      learnerAvatarBadge.innerHTML = `${learnerAvatar} ${isL2 ? 'Student' : 'Learner'}: <strong>${escapeHtml(learnerName)}</strong>`;
+      learnerAvatarBadge.innerHTML = `${learnerAvatar} ${isTeacher ? 'Instructor' : 'Learner'}: <strong>${escapeHtml(learnerName)}</strong>`;
     }
 
     if (learnerTrackBadge) {
-      if (isL2) {
-        learnerTrackBadge.innerHTML = `<i class="fa-solid fa-graduation-cap"></i> Level 2 Track (13y+)`;
-        learnerTrackBadge.className = 'hero-badge gold';
-      } else if (isTeacher) {
-        learnerTrackBadge.innerHTML = `<i class="fa-solid fa-chalkboard-user"></i> Teacher & Educator Mode`;
-        learnerTrackBadge.className = 'hero-badge';
+      if (activeTrack === 'level1') {
+        learnerTrackBadge.innerHTML = `<i class="fa-solid fa-seedling"></i> Level 1 Track (6–8y)`;
+        learnerTrackBadge.className = 'hero-badge level1-badge';
+      } else if (activeTrack === 'level2') {
+        learnerTrackBadge.innerHTML = `<i class="fa-solid fa-child"></i> Level 2 Track (8–10y)`;
+        learnerTrackBadge.className = 'hero-badge level2-badge';
+      } else if (activeTrack === 'level3') {
+        learnerTrackBadge.innerHTML = `<i class="fa-solid fa-book-open"></i> Level 3 Track (10–12y)`;
+        learnerTrackBadge.className = 'hero-badge level3-badge';
+      } else if (activeTrack === 'level4') {
+        learnerTrackBadge.innerHTML = `<i class="fa-solid fa-user-graduate"></i> Level 4 Track (12–14y)`;
+        learnerTrackBadge.className = 'hero-badge level4-badge gold';
+      } else if (activeTrack === 'level5') {
+        learnerTrackBadge.innerHTML = `<i class="fa-solid fa-landmark"></i> Level 5 Track (14–16+y)`;
+        learnerTrackBadge.className = 'hero-badge level5-badge purple';
       } else {
-        learnerTrackBadge.innerHTML = `<i class="fa-solid fa-seedling"></i> Level 1 Track (~10y)`;
+        learnerTrackBadge.innerHTML = `<i class="fa-solid fa-chalkboard-user"></i> Teacher & Educator Mode`;
         learnerTrackBadge.className = 'hero-badge';
       }
     }
@@ -526,22 +607,36 @@ document.addEventListener('DOMContentLoaded', () => {
     if (learnerWelcomeHeadline) {
       if (activeChild) {
         learnerWelcomeHeadline.textContent = `Welcome back, ${activeChild.name}! 🌟`;
-      } else if (isL2) {
-        learnerWelcomeHeadline.textContent = `Analytical Study & Islamic Knowledge Mastery`;
+      } else if (activeTrack === 'level1') {
+        learnerWelcomeHeadline.textContent = `Bismillah! Welcome to Your Learning Adventures`;
+      } else if (activeTrack === 'level2') {
+        learnerWelcomeHeadline.textContent = `Foundations of Faith, Daily Sunnahs & Prayer`;
+      } else if (activeTrack === 'level3') {
+        learnerWelcomeHeadline.textContent = `Systematic Fiqh, Creed & Moral Character`;
+      } else if (activeTrack === 'level4') {
+        learnerWelcomeHeadline.textContent = `Evidence, Madinan Statecraft & Prophetic Mission`;
+      } else if (activeTrack === 'level5') {
+        learnerWelcomeHeadline.textContent = `Advanced Epistemology, Usul & Contemporary Islamic Thought`;
       } else if (isTeacher) {
         learnerWelcomeHeadline.textContent = `Educator Portal & Curriculum Presentation Decks`;
       } else {
-        learnerWelcomeHeadline.textContent = `Bismillah! Welcome to Your Learning Adventures`;
+        learnerWelcomeHeadline.textContent = `Bismillah! Welcome to Your Learning Portal`;
       }
     }
 
     if (learnerWelcomeSubhead) {
-      if (isL2) {
-        learnerWelcomeSubhead.textContent = `Comprehensive 9-Module syllabus covering Ash'ari Aqidah proofs, Maliki legal maxims, Madinan statecraft, and contemporary Islamic ethics.`;
+      if (activeTrack === 'level1') {
+        learnerWelcomeSubhead.textContent = `Explore the wonder of Allah's creation, learn your first Wudu and Salah steps, and earn gold achievement stars!`;
+      } else if (activeTrack === 'level2') {
+        learnerWelcomeSubhead.textContent = `Master the 6 Pillars of Iman, conditions of prayer, short surahs, and follow the noble examples of the Sahabah.`;
+      } else if (activeTrack === 'level3') {
+        learnerWelcomeSubhead.textContent = `Comprehensive intermediate study: Ibn 'Ashir essentials, Taharah fara'id, Sujud as-Sahw clinic, and Seerah lessons.`;
+      } else if (activeTrack === 'level4') {
+        learnerWelcomeSubhead.textContent = `Deepening knowledge: Sanusi 20 Attributes, Maliki jurisprudence, Madinan battles, and adolescent Muslim ethics.`;
+      } else if (activeTrack === 'level5') {
+        learnerWelcomeSubhead.textContent = `Senior High capstone: Epistemology, Usul al-Fiqh, Islamic commercial law & finance, Bioethics, and Western Muslim civic leadership.`;
       } else if (isTeacher) {
         learnerWelcomeSubhead.textContent = `Deliver engaging classroom lessons with 200+ built-in presentation slides, teleprompter scripts, and discussion outlines.`;
-      } else {
-        learnerWelcomeSubhead.textContent = `Explore inspiring stories of the Prophets, master Wudu & Salah, and earn gold achievement stars for every completed quiz!`;
       }
     }
 
@@ -624,7 +719,12 @@ document.addEventListener('DOMContentLoaded', () => {
     // 4. Wire Track Switch Pill in Banner
     if (learnerTrackSwitchPill) {
       learnerTrackSwitchPill.onclick = () => {
-        const nextTrack = activeTrack === 'level1' ? 'level2' : 'level1';
+        const trackOrder = ['level1', 'level2', 'level3', 'level4', 'level5'];
+        const currentIdx = trackOrder.indexOf(activeTrack);
+        const nextTrack =
+          currentIdx >= 0 && currentIdx < trackOrder.length - 1
+            ? trackOrder[currentIdx + 1]
+            : trackOrder[0];
         switchTrack(nextTrack);
       };
     }
@@ -647,7 +747,7 @@ document.addEventListener('DOMContentLoaded', () => {
         localScores[`quiz_${mod.id}_${activeTrack}`]?.percentage || (isCompleted ? 100 : null);
 
       const card = document.createElement('div');
-      card.className = `module-card ${isL2 ? 'level2-card' : 'level1-card'} ${isCompleted ? 'completed' : ''}`;
+      card.className = `module-card ${activeTrack}-card ${isCompleted ? 'completed' : ''}`;
 
       card.innerHTML = `
         <div>
@@ -657,9 +757,7 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
             <div style="display: flex; gap: 6px; flex-wrap: wrap;">
               <span class="category-badge">${mod.category}</span>
-              <span class="track-tag-pill ${isL2 ? 'level2' : 'level1'}">
-                ${isL2 ? '📖 Level 2 (13y+)' : '🌱 Level 1 (~10y)'}
-              </span>
+              ${getTrackTagHtml(activeTrack)}
             </div>
           </div>
           <h3>Module ${mod.id}: ${mod.title}</h3>
@@ -667,12 +765,12 @@ document.addEventListener('DOMContentLoaded', () => {
           <div class="module-card-meta-row">
             <span><i class="fa-solid fa-clock"></i> ${mod.estTime || '45m'}</span>
             <span>•</span>
-            <span><i class="fa-solid fa-brain"></i> ${isL2 ? mod.bloomLevel || 'Analytical' : 'Foundational'}</span>
+            <span><i class="fa-solid fa-brain"></i> ${mod.bloomLevel || 'Foundational'}</span>
             ${quizScore !== null ? `<span>•</span><span style="color: var(--emerald-primary); font-weight: 700;">Score: ${quizScore}%</span>` : ''}
           </div>
         </div>
         <div class="module-card-footer">
-          <span>${isCompleted ? (isL2 ? '✓ Completed (Review)' : '⭐ Completed! (Review)') : isL2 ? 'Study Module' : 'Start Fun Lesson'}</span>
+          <span>${isCompleted ? '✓ Completed (Review)' : activeTrack === 'teacher' ? 'Open Classroom Deck' : (activeTrack === 'level1' || activeTrack === 'level2') ? 'Start Fun Lesson' : 'Study Module'}</span>
           <i class="fa-solid fa-arrow-right"></i>
         </div>
       `;
@@ -721,10 +819,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (moduleBloomLevel)
       moduleBloomLevel.innerHTML = `<i class="fa-solid fa-brain"></i> ${mod.bloomLevel || 'Understanding'}`;
 
-    let trackName = 'Level 1 (10 Years Old)';
-    if (activeTrack === 'level2') trackName = 'Level 2 (13+ Years Old)';
-    if (activeTrack === 'teacher') trackName = 'Teacher Portal & Teleprompter';
-    moduleTrackBadge.textContent = trackName;
+    moduleTrackBadge.textContent = getTrackLabel(activeTrack);
 
     // Populate SWBAT Objectives
     objectivesList.innerHTML = '';
@@ -739,7 +834,8 @@ document.addEventListener('DOMContentLoaded', () => {
       objectivesList.appendChild(li);
     });
 
-    // Show/Hide Teacher Dedicated Tabs
+    // Show/Hide Tabs
+    if (videoTabBtn) videoTabBtn.style.display = 'inline-flex';
     if (activeTrack === 'teacher') {
       teleprompterTabBtn.style.display = 'inline-flex';
       answerkeysTabBtn.style.display = 'inline-flex';
@@ -812,6 +908,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (tabName === 'handout') {
       renderHandout(mod);
+    } else if (tabName === 'video') {
+      renderVideo(mod);
     } else if (tabName === 'teleprompter') {
       renderTeleprompter(mod);
     } else if (tabName === 'answerkeys') {
@@ -822,6 +920,160 @@ document.addEventListener('DOMContentLoaded', () => {
       renderSlides(mod);
     } else if (tabName === 'voicescript') {
       renderVoiceScript(mod);
+    }
+  }
+
+  // --------------------------------------------------------------------------
+  // VIDEO LESSON PLAYER ENGINE
+  // --------------------------------------------------------------------------
+  let currentVideoSlide = null;
+
+  function renderVideo(mod) {
+    if (!mod) return;
+
+    const videoTitle = document.getElementById('videoPlayerTitle');
+    if (videoTitle) videoTitle.textContent = `Module ${mod.id}: ${mod.title}`;
+
+    const parsedSlides = (mod.teacher && mod.teacher.parsedSlides) || [];
+    const parsedVoiceScript = (mod.teacher && mod.teacher.parsedVoiceScript) || [];
+    const chapters = parsedVoiceScript.length > 0 ? parsedVoiceScript : parsedSlides;
+
+    if (videoChapterCount) videoChapterCount.textContent = chapters.length;
+
+    // Check default video source
+    const defaultVideoPath = `/videos/module_${mod.id}.mp4`;
+    if (lessonVideoPlayer) {
+      lessonVideoPlayer.src = defaultVideoPath;
+
+      // Handle video load success vs fallback
+      lessonVideoPlayer.oncanplay = () => {
+        if (videoFallbackCard) videoFallbackCard.style.display = 'none';
+      };
+
+      lessonVideoPlayer.onerror = () => {
+        if (videoFallbackCard) videoFallbackCard.style.display = 'flex';
+      };
+    }
+
+    // Populate Video Chapters Drawer
+    if (videoChaptersList) {
+      videoChaptersList.innerHTML = '';
+      chapters.forEach((chap, idx) => {
+        const li = document.createElement('li');
+        li.className = `video-chapter-item ${idx === 0 ? 'active' : ''}`;
+        li.innerHTML = `
+          <div class="chapter-number">${chap.slideNum || idx + 1}</div>
+          <div class="chapter-info">
+            <strong>${escapeHtml(chap.title || `Slide ${idx + 1}`)}</strong>
+            ${chap.summary ? `<small>${escapeHtml(chap.summary)}</small>` : ''}
+          </div>
+        `;
+        li.addEventListener('click', () => {
+          videoChaptersList
+            .querySelectorAll('.video-chapter-item')
+            .forEach((item) => item.classList.remove('active'));
+          li.classList.add('active');
+          selectVideoChapter(chap, idx, chapters.length);
+        });
+        videoChaptersList.appendChild(li);
+      });
+    }
+
+    // Select first chapter by default
+    if (chapters.length > 0) {
+      selectVideoChapter(chapters[0], 0, chapters.length);
+    }
+  }
+
+  function selectVideoChapter(chap, index, total) {
+    currentVideoSlide = chap;
+
+    if (videoCurrentChapter) {
+      videoCurrentChapter.innerHTML = `<i class="fa-solid fa-bookmark"></i> <span>Slide ${index + 1} of ${total}: <strong>${escapeHtml(chap.title || '')}</strong></span>`;
+    }
+
+    if (videoScriptContent) {
+      videoScriptContent.innerHTML = `
+        <div class="script-header-pill">
+          <i class="fa-solid fa-chalkboard-user"></i>
+          <span>${escapeHtml(chap.direction || 'Classroom Teacher Script')}</span>
+        </div>
+        <div class="script-body-text">
+          ${renderMarkdown(chap.script || chap.summary || 'Narrative script matching the slide presentation notes.')}
+        </div>
+        ${
+          chap.analogy
+            ? `<div class="script-analogy-box">
+                <strong><i class="fa-solid fa-lightbulb"></i> Concept Analogy:</strong>
+                <p>${escapeHtml(chap.analogy)}</p>
+               </div>`
+            : ''
+        }
+        ${
+          chap.checkQuestion
+            ? `<div class="script-question-box">
+                <strong><i class="fa-solid fa-circle-question"></i> Check for Understanding:</strong>
+                <p>${escapeHtml(chap.checkQuestion)}</p>
+               </div>`
+            : ''
+        }
+      `;
+    }
+  }
+
+  function setupVideoControls() {
+    if (btnVideoLoadLocal && videoFileInput) {
+      btnVideoLoadLocal.addEventListener('click', () => videoFileInput.click());
+    }
+    if (fallbackPickVideoBtn && videoFileInput) {
+      fallbackPickVideoBtn.addEventListener('click', () => videoFileInput.click());
+    }
+    if (fallbackViewSlidesBtn) {
+      fallbackViewSlidesBtn.addEventListener('click', () => switchTab('slides'));
+    }
+
+    if (videoFileInput) {
+      videoFileInput.addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        if (file && lessonVideoPlayer) {
+          const url = URL.createObjectURL(file);
+          lessonVideoPlayer.src = url;
+          lessonVideoPlayer.load();
+          lessonVideoPlayer.play().catch(() => {});
+          if (videoFallbackCard) videoFallbackCard.style.display = 'none';
+          showToast('Video Loaded! 🎥', `Now playing: ${file.name}`, 'success');
+        }
+      });
+    }
+
+    if (videoPlaybackSpeed && lessonVideoPlayer) {
+      videoPlaybackSpeed.addEventListener('change', () => {
+        const spd = parseFloat(videoPlaybackSpeed.value) || 1.0;
+        lessonVideoPlayer.playbackRate = spd;
+      });
+    }
+
+    if (drawerChaptersTabBtn && drawerScriptTabBtn && drawerChaptersPane && drawerScriptPane) {
+      drawerChaptersTabBtn.addEventListener('click', () => {
+        drawerChaptersTabBtn.classList.add('active');
+        drawerScriptTabBtn.classList.remove('active');
+        drawerChaptersPane.classList.add('active');
+        drawerScriptPane.classList.remove('active');
+      });
+
+      drawerScriptTabBtn.addEventListener('click', () => {
+        drawerScriptTabBtn.classList.add('active');
+        drawerChaptersTabBtn.classList.remove('active');
+        drawerScriptPane.classList.add('active');
+        drawerChaptersPane.classList.remove('active');
+      });
+    }
+
+    if (videoJumpQuizBtn) {
+      videoJumpQuizBtn.addEventListener('click', () => switchTab('quiz'));
+    }
+    if (videoJumpHandoutBtn) {
+      videoJumpHandoutBtn.addEventListener('click', () => switchTab('handout'));
     }
   }
 
@@ -1303,7 +1555,7 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
     const tracks = mod.tracks || {};
-    const trackObj = activeTrack === 'level2' ? tracks.level2 : tracks.level1;
+    const trackObj = tracks[activeTrack] || tracks.level3 || tracks.level1;
     const md = trackObj ? trackObj.handoutMd : null;
     if (md) {
       if (activeTrack === 'level1') {
@@ -1662,17 +1914,15 @@ document.addEventListener('DOMContentLoaded', () => {
   function renderAnswerKeys(mod) {
     updateAkToggleButtons();
 
-    akToggleL1.onclick = () => {
-      activeAkLevel = 'level1';
-      updateAkToggleButtons();
-      renderAnswerKeys(mod);
-    };
-
-    akToggleL2.onclick = () => {
-      activeAkLevel = 'level2';
-      updateAkToggleButtons();
-      renderAnswerKeys(mod);
-    };
+    [akToggleL1, akToggleL2, akToggleL3, akToggleL4, akToggleL5].forEach((btn, idx) => {
+      if (btn) {
+        btn.onclick = () => {
+          activeAkLevel = `level${idx + 1}`;
+          updateAkToggleButtons();
+          renderAnswerKeys(mod);
+        };
+      }
+    });
 
     if (!mod || !mod.tracks) {
       answerKeyContent.innerHTML = `<p class="text-muted">Master answer key compiled within module script. Refer to voice scripts or slides for full explanation.</p>`;
@@ -1680,8 +1930,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     const tracks = mod.tracks || {};
-    const trackData =
-      (activeAkLevel === 'level2' ? tracks.level2 : tracks.level1) || tracks.level1 || {};
+    const trackData = tracks[activeAkLevel] || tracks.level1 || {};
     const akRaw = trackData.parsedQuestions ? trackData.parsedQuestions.answerKeyRaw : null;
 
     if (akRaw) {
@@ -1692,8 +1941,13 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function updateAkToggleButtons() {
-    akToggleL1.classList.toggle('active', activeAkLevel === 'level1');
-    akToggleL2.classList.toggle('active', activeAkLevel === 'level2');
+    [akToggleL1, akToggleL2, akToggleL3, akToggleL4, akToggleL5].forEach((btn, idx) => {
+      if (btn) {
+        const lvl = `level${idx + 1}`;
+        btn.classList.toggle('active', activeAkLevel === lvl);
+        btn.setAttribute('aria-pressed', activeAkLevel === lvl ? 'true' : 'false');
+      }
+    });
   }
 
   // --------------------------------------------------------------------------
@@ -1788,8 +2042,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     const tracks = mod.tracks || {};
-    let trackData =
-      (activeTrack === 'level2' ? tracks.level2 : tracks.level1) || tracks.level1 || {};
+    let trackData = tracks[activeTrack] || tracks.level3 || tracks.level1 || {};
     const pq = trackData.parsedQuestions || { multipleChoice: [], fillBlanks: [], reflection: [] };
 
     if (!pq || (!pq.multipleChoice.length && !pq.fillBlanks.length && !pq.reflection.length)) {
@@ -1973,9 +2226,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const mod = courseData.modules.find((m) => m.id === activeModuleId);
     if (!mod || !mod.tracks) return;
 
-    const track = activeTrack === 'level2' ? 'level2' : 'level1';
+    const track = activeTrack;
     const tracks = mod.tracks || {};
-    let trackData = (track === 'level2' ? tracks.level2 : tracks.level1) || tracks.level1 || {};
+    let trackData = tracks[track] || tracks.level3 || tracks.level1 || {};
     const mcqs = (trackData.parsedQuestions && trackData.parsedQuestions.multipleChoice) || [];
 
     const answers = {};
@@ -2323,12 +2576,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const results = [];
     courseData.modules.forEach((mod) => {
       const tracks = mod.tracks || {};
-      const t1 = tracks.level1 || {};
-      const t2 = tracks.level2 || {};
+      const allHandoutTexts = Object.keys(tracks)
+        .map((k) => (tracks[k] && tracks[k].handoutMd) || '')
+        .join('\n');
       const teacher = mod.teacher || {};
-      const h10 = (t1.handoutMd || '').toLowerCase();
-      const h13 = (t2.handoutMd || '').toLowerCase();
-      const script = (teacher.voiceScriptMd || '').toLowerCase();
+      const fullText = (allHandoutTexts + '\n' + (teacher.voiceScriptMd || '')).toLowerCase();
 
       if (
         (mod.title && mod.title.toLowerCase().includes(query)) ||
@@ -2336,10 +2588,9 @@ document.addEventListener('DOMContentLoaded', () => {
         (mod.category && mod.category.toLowerCase().includes(query))
       ) {
         results.push({ module: mod, snippet: mod.description });
-      } else if (h10.includes(query) || h13.includes(query) || script.includes(query)) {
-        const text = h10 || h13 || script;
-        const snippetIdx = Math.max(0, text.indexOf(query));
-        const snippet = text.substring(Math.max(0, snippetIdx - 20), snippetIdx + 120) + '...';
+      } else if (fullText.includes(query)) {
+        const snippetIdx = Math.max(0, fullText.indexOf(query));
+        const snippet = fullText.substring(Math.max(0, snippetIdx - 20), snippetIdx + 120) + '...';
         results.push({ module: mod, snippet });
       }
     });
@@ -2930,7 +3181,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (spotlightAvatar) spotlightAvatar.textContent = activeChild.avatar || '🌟';
         if (spotlightName) spotlightName.textContent = activeChild.name;
         if (spotlightTrack) {
-          spotlightTrack.textContent = `${activeChild.assignedTrack === 'level2' ? 'Level 2 Track (13y+)' : 'Level 1 Track (~10y)'} • Active Learner Mode`;
+          spotlightTrack.textContent = `${getTrackLabel(activeChild.assignedTrack || 'level1')} • Active Learner Mode`;
         }
         if (spotlightStartBtn) {
           spotlightStartBtn.onclick = () => switchView('dashboard');
@@ -3121,8 +3372,8 @@ document.addEventListener('DOMContentLoaded', () => {
               <div class="child-details">
                 <h3>${escapeHtml(child.name)}</h3>
                 <div class="child-meta-badges">
-                  <span class="meta-pill ${childTrack === 'level2' ? 'gold' : ''}">
-                    <i class="fa-solid fa-graduation-cap"></i> ${childTrack === 'level2' ? 'Level 2 (13y+)' : 'Level 1 (~10y)'}
+                  <span class="meta-pill ${childTrack}">
+                    <i class="fa-solid fa-graduation-cap"></i> ${getTrackLabel(childTrack)}
                   </span>
                   ${isPinProtected ? '<span class="meta-pill pin"><i class="fa-solid fa-lock"></i> PIN Protected</span>' : ''}
                 </div>
@@ -3142,7 +3393,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <div class="child-stats-mini-row">
               <div class="child-mini-stat">
                 <span class="child-mini-stat-label">Assigned Track</span>
-                <span class="child-mini-stat-val">${childTrack === 'level2' ? 'Deepening (13y+)' : 'Foundations (~10y)'}</span>
+                <span class="child-mini-stat-val">${getTrackLabel(childTrack)}</span>
               </div>
               <div class="child-mini-stat">
                 <span class="child-mini-stat-label">Security PIN</span>
@@ -3348,16 +3599,26 @@ document.addEventListener('DOMContentLoaded', () => {
         totalCompletedModules: completedCount,
         avgQuizScore: avgScore,
         passRate: Math.min(100, Math.round(avgScore * 1.05)),
-        moduleStats: (courseData && courseData.modules ? courseData.modules : []).map((m) => ({
-          moduleId: m.id,
-          completions: localProg[`${m.id}_level1`] || localProg[`${m.id}_level2`] ? 1 : 0,
-          quizAttempts:
-            localScores[`quiz_${m.id}_level1`] || localScores[`quiz_${m.id}_level2`] ? 1 : 0,
-          avgScore:
-            localScores[`quiz_${m.id}_level1`]?.percentage ||
-            localScores[`quiz_${m.id}_level2`]?.percentage ||
-            90
-        })),
+        moduleStats: (courseData && courseData.modules ? courseData.modules : []).map((m) => {
+          const hasCompletion = ['level1', 'level2', 'level3', 'level4', 'level5'].some(
+            (lvl) => localProg[`${m.id}_${lvl}`] || localProg[`mod_${m.id}`]
+          );
+          let foundScore = null;
+          let hasAttempt = false;
+          for (const lvl of ['level1', 'level2', 'level3', 'level4', 'level5']) {
+            if (localScores[`quiz_${m.id}_${lvl}`]) {
+              hasAttempt = true;
+              foundScore = localScores[`quiz_${m.id}_${lvl}`].percentage;
+              break;
+            }
+          }
+          return {
+            moduleId: m.id,
+            completions: hasCompletion ? 1 : 0,
+            quizAttempts: hasAttempt ? 1 : 0,
+            avgScore: foundScore !== null ? foundScore : 90
+          };
+        }),
         system: {
           uptime: healthData?.uptime ? Math.floor(healthData.uptime) : 3600,
           nodeEnv: 'production',
@@ -3656,7 +3917,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <span style="font-size: 1.8rem;">${escapeHtml(child.avatar || '🌟')}</span>
             <div>
               <strong style="color: var(--text-main); font-size: 1.05rem;">${escapeHtml(child.name)}</strong><br>
-              <small style="color: var(--text-subtle);">${child.assignedTrack === 'level2' ? 'Level 2 (13y+)' : 'Level 1 (~10y)'} ${isPinProtected ? '• 🔒 PIN Protected' : ''}</small>
+              <small style="color: var(--text-subtle);">${getTrackLabel(child.assignedTrack || 'level1')} ${isPinProtected ? '• 🔒 PIN Protected' : ''}</small>
             </div>
           </div>
           ${isActive ? '<i class="fa-solid fa-circle-check" style="color: var(--emerald-primary); font-size: 1.2rem;"></i>' : '<button class="btn-child-switch" style="padding: 4px 10px; font-size: 0.75rem;">Select</button>'}
@@ -4556,7 +4817,7 @@ document.addEventListener('DOMContentLoaded', () => {
         setActiveChild(activeChild);
         showToast(
           `Welcome Back, ${activeChild.name}! 🌟`,
-          `Ready for ${activeChild.assignedTrack === 'level2' ? 'Level 2 (13y+)' : 'Level 1 (~10y)'} learning.`,
+          `Ready for ${getTrackLabel(activeChild.assignedTrack || 'level1')} learning.`,
           'info'
         );
       } else if (familyChildren.length === 1) {
@@ -4660,7 +4921,7 @@ document.addEventListener('DOMContentLoaded', () => {
         setActiveChild(targetChild);
         showToast(
           `Welcome, ${targetChild.name}! 🌟`,
-          `Ready for ${targetChild.assignedTrack === 'level2' ? 'Level 2 (13y+)' : 'Level 1 (~10y)'} learning.`,
+          `Ready for ${getTrackLabel(targetChild.assignedTrack || 'level1')} learning.`,
           'success'
         );
       }

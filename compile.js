@@ -508,11 +508,25 @@ const courseData = {
 modulesConfig.forEach((cfg) => {
   const fullMdDir = path.join(rootDir, cfg.folder, cfg.mdDir);
 
-  const handout10Path = findMdFile(fullMdDir, /(handout|student_handout)_10/i);
-  const questions10Path = findMdFile(fullMdDir, /questions_10/i);
+  // Level 1 (Ages 6-8)
+  const handout1Path = findMdFile(fullMdDir, /handout.*(level1|l1|age_?6|year_?1)/i);
+  const questions1Path = findMdFile(fullMdDir, /questions.*(level1|l1|age_?6|year_?1)/i);
 
-  const handout13Path = findMdFile(fullMdDir, /(handout|student_handout)_13/i);
-  const questions13Path = findMdFile(fullMdDir, /questions_13/i);
+  // Level 2 (Ages 8-10)
+  const handout2Path = findMdFile(fullMdDir, /handout.*(level2|l2|age_?8|year_?2)/i);
+  const questions2Path = findMdFile(fullMdDir, /questions.*(level2|l2|age_?8|year_?2)/i);
+
+  // Level 3 (Ages 10-12)
+  const handout3Path = findMdFile(fullMdDir, /(handout|student_handout).*(level3|l3|10|year_?3)/i);
+  const questions3Path = findMdFile(fullMdDir, /questions.*(level3|l3|10|year_?3)/i);
+
+  // Level 4 (Ages 12-14)
+  const handout4Path = findMdFile(fullMdDir, /(handout|student_handout).*(level4|l4|13|year_?4)/i);
+  const questions4Path = findMdFile(fullMdDir, /questions.*(level4|l4|13|year_?4)/i);
+
+  // Level 5 (Ages 14-16+)
+  const handout5Path = findMdFile(fullMdDir, /handout.*(level5|l5|age_?15|senior|year_?5)/i);
+  const questions5Path = findMdFile(fullMdDir, /questions.*(level5|l5|age_?15|senior|year_?5)/i);
 
   const slidesPath = findMdFile(fullMdDir, /teacher_slides/i);
 
@@ -524,15 +538,24 @@ modulesConfig.forEach((cfg) => {
     findMdFile(voiceScriptDir, new RegExp(`${cfg.id}\\s*—.*Voice Script`, 'i')) ||
     findMdFile(voiceScriptDir, new RegExp(`${cfg.id}\\s*—`, 'i'));
 
-  const handout10Raw = handout10Path ? fs.readFileSync(handout10Path, 'utf8') : '';
-  const handout13Raw = handout13Path ? fs.readFileSync(handout13Path, 'utf8') : '';
-  const questions10Raw = questions10Path ? fs.readFileSync(questions10Path, 'utf8') : '';
-  const questions13Raw = questions13Path ? fs.readFileSync(questions13Path, 'utf8') : '';
+  const handout1Raw = handout1Path ? fs.readFileSync(handout1Path, 'utf8') : '';
+  const questions1Raw = questions1Path ? fs.readFileSync(questions1Path, 'utf8') : '';
+  const handout2Raw = handout2Path ? fs.readFileSync(handout2Path, 'utf8') : '';
+  const questions2Raw = questions2Path ? fs.readFileSync(questions2Path, 'utf8') : '';
+  const handout3Raw = handout3Path ? fs.readFileSync(handout3Path, 'utf8') : '';
+  const questions3Raw = questions3Path ? fs.readFileSync(questions3Path, 'utf8') : '';
+  const handout4Raw = handout4Path ? fs.readFileSync(handout4Path, 'utf8') : '';
+  const questions4Raw = questions4Path ? fs.readFileSync(questions4Path, 'utf8') : '';
+  const handout5Raw = handout5Path ? fs.readFileSync(handout5Path, 'utf8') : '';
+  const questions5Raw = questions5Path ? fs.readFileSync(questions5Path, 'utf8') : '';
   const slidesRaw = slidesPath ? fs.readFileSync(slidesPath, 'utf8') : '';
   const voiceScriptRaw = voiceScriptPath ? fs.readFileSync(voiceScriptPath, 'utf8') : '';
 
-  const parsedQ10 = parseQuestionsComprehensive(questions10Raw);
-  const parsedQ13 = parseQuestionsComprehensive(questions13Raw);
+  const parsedQ1 = parseQuestionsComprehensive(questions1Raw);
+  const parsedQ2 = parseQuestionsComprehensive(questions2Raw);
+  const parsedQ3 = parseQuestionsComprehensive(questions3Raw);
+  const parsedQ4 = parseQuestionsComprehensive(questions4Raw);
+  const parsedQ5 = parseQuestionsComprehensive(questions5Raw);
   const parsedSlides = parseSlidesFast(slidesRaw);
   const parsedVoiceScript = parseVoiceScript(voiceScriptRaw);
 
@@ -548,16 +571,34 @@ modulesConfig.forEach((cfg) => {
     malikiNotes: cfg.malikiNotes,
     tracks: {
       level1: {
-        targetAge: '10 Years Old (Level 1)',
-        handoutMd: handout10Raw,
-        questionsMd: questions10Raw,
-        parsedQuestions: parsedQ10
+        targetAge: 'Ages 6–8 (Level 1: Foundations of Wonder & Practice)',
+        handoutMd: handout1Raw,
+        questionsMd: questions1Raw,
+        parsedQuestions: parsedQ1
       },
       level2: {
-        targetAge: '13+ Years Old (Level 2)',
-        handoutMd: handout13Raw,
-        questionsMd: questions13Raw,
-        parsedQuestions: parsedQ13
+        targetAge: 'Ages 8–10 (Level 2: Habits of Devotion & Character)',
+        handoutMd: handout2Raw,
+        questionsMd: questions2Raw,
+        parsedQuestions: parsedQ2
+      },
+      level3: {
+        targetAge: 'Ages 10–12 (Level 3: Systematic Practice & Understanding)',
+        handoutMd: handout3Raw,
+        questionsMd: questions3Raw,
+        parsedQuestions: parsedQ3
+      },
+      level4: {
+        targetAge: 'Ages 12–14 (Level 4: Evidence, Law & Prophetic Mission)',
+        handoutMd: handout4Raw,
+        questionsMd: questions4Raw,
+        parsedQuestions: parsedQ4
+      },
+      level5: {
+        targetAge: 'Ages 14–16+ (Level 5: Advanced Analysis, Usul & Contemporary Living)',
+        handoutMd: handout5Raw,
+        questionsMd: questions5Raw,
+        parsedQuestions: parsedQ5
       }
     },
     teacher: {
@@ -603,16 +644,34 @@ const manifestData = {
     malikiNotes: mod.malikiNotes,
     tracksSummary: {
       level1: {
-        targetAge: mod.tracks?.level1?.targetAge || 'Level 1 (10y)',
+        targetAge: mod.tracks?.level1?.targetAge || 'Level 1 (6–8y)',
         hasHandout: Boolean(mod.tracks?.level1?.handoutMd),
         hasQuestions: Boolean(mod.tracks?.level1?.questionsMd),
         questionCount: (mod.tracks?.level1?.parsedQuestions?.multipleChoice || []).length
       },
       level2: {
-        targetAge: mod.tracks?.level2?.targetAge || 'Level 2 (13y+)',
+        targetAge: mod.tracks?.level2?.targetAge || 'Level 2 (8–10y)',
         hasHandout: Boolean(mod.tracks?.level2?.handoutMd),
         hasQuestions: Boolean(mod.tracks?.level2?.questionsMd),
         questionCount: (mod.tracks?.level2?.parsedQuestions?.multipleChoice || []).length
+      },
+      level3: {
+        targetAge: mod.tracks?.level3?.targetAge || 'Level 3 (10–12y)',
+        hasHandout: Boolean(mod.tracks?.level3?.handoutMd),
+        hasQuestions: Boolean(mod.tracks?.level3?.questionsMd),
+        questionCount: (mod.tracks?.level3?.parsedQuestions?.multipleChoice || []).length
+      },
+      level4: {
+        targetAge: mod.tracks?.level4?.targetAge || 'Level 4 (12–14y)',
+        hasHandout: Boolean(mod.tracks?.level4?.handoutMd),
+        hasQuestions: Boolean(mod.tracks?.level4?.questionsMd),
+        questionCount: (mod.tracks?.level4?.parsedQuestions?.multipleChoice || []).length
+      },
+      level5: {
+        targetAge: mod.tracks?.level5?.targetAge || 'Level 5 (14–16+y)',
+        hasHandout: Boolean(mod.tracks?.level5?.handoutMd),
+        hasQuestions: Boolean(mod.tracks?.level5?.questionsMd),
+        questionCount: (mod.tracks?.level5?.parsedQuestions?.multipleChoice || []).length
       },
       teacher: {
         slideCount: (mod.teacher?.parsedSlides || []).length,
