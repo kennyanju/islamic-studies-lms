@@ -1505,6 +1505,12 @@ app.put('/api/admin/users/:uid/role', requireAdmin, async (req, res, next) => {
         .json({ success: false, error: 'Role must be parent, teacher, or super_admin' });
     }
 
+    if (req.session && req.session.user && req.session.user.uid === uid && role !== 'super_admin') {
+      return res
+        .status(400)
+        .json({ success: false, error: 'Cannot demote your own active super admin account.' });
+    }
+
     const updated = await db.updateUser(uid, { role });
     if (!updated) {
       return res.status(404).json({ success: false, error: 'User not found.' });

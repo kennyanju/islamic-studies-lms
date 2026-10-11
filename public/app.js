@@ -3002,6 +3002,11 @@ document.addEventListener('DOMContentLoaded', () => {
         if (parentDashboardView) parentDashboardView.style.display = 'block';
         renderParentDashboard();
       } else if (viewName === 'admin') {
+        if (!currentUser || currentUser.role !== 'super_admin') {
+          showToast('Access Denied', 'Super Administrator privileges are required.', 'warning');
+          switchView(currentUser ? 'dashboard' : 'authLanding');
+          return;
+        }
         if (adminDashboardView) adminDashboardView.style.display = 'block';
         renderAdminDashboard();
         adminUptimeTickerInterval = setInterval(updateAdminUptimeDisplay, 1000);
@@ -4019,7 +4024,10 @@ document.addEventListener('DOMContentLoaded', () => {
       const kidsMatch = u.children && u.children.some((c) => c.name.toLowerCase().includes(query));
       const textMatches = query === '' || nameMatch || emailMatch || kidsMatch;
 
-      const roleMatches = roleFilter === 'all' || u.role === roleFilter;
+      const roleMatches =
+        roleFilter === 'all' ||
+        u.role === roleFilter ||
+        (roleFilter === 'teacher' && u.role === 'educator');
 
       return textMatches && roleMatches;
     });
@@ -4037,6 +4045,8 @@ document.addEventListener('DOMContentLoaded', () => {
           : 'None';
       const isSuperAdmin = u.role === 'super_admin';
       const isTeacher = u.role === 'teacher' || u.role === 'educator';
+      const isSelf = currentUser && u.uid === currentUser.uid;
+
       let iconClass = 'fa-solid fa-envelope';
       let providerLabel = 'Email / Password';
       if ((u.provider || '').includes('google')) {
@@ -4063,7 +4073,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       row.innerHTML = `
         <td>
-          <strong>${escapeHtml(u.displayName || u.email)}</strong><br>
+          <strong>${escapeHtml(u.displayName || u.email)}</strong> ${isSelf ? '<span class="meta-pill gold" style="font-size:0.7rem;padding:2px 6px;">You</span>' : ''}<br>
           <small style="color: var(--text-subtle);">${escapeHtml(u.email)}</small>
         </td>
         <td><i class="${iconClass}"></i> ${providerLabel}</td>
@@ -4072,50 +4082,90 @@ document.addEventListener('DOMContentLoaded', () => {
         <td>${escapeHtml(kidsListStr)}</td>
         <td>${u.createdAt ? new Date(u.createdAt).toLocaleDateString() : 'Active'}</td>
         <td>
-          <button class="btn-action-role" data-uid="${u.uid}" data-current="${u.role}">
-            <i class="fa-solid fa-arrows-rotate"></i> ${actionLabel}
+          <button class="btn-action-role" data-uid="${u.uid}" data-current="${u.role}" ${isSelf ? 'disabled style="opacity:0.5;cursor:not-allowed;" title="Cannot change own admin role"' : ''}>
+            <i class="fa-solid fa-arrows-rotate"></i> ${isSelf ? 'Current Admin' : actionLabel}
           </button>
-          <button class="btn-action-delete" data-uid="${u.uid}" title="Delete User Account">
+          <button class="btn-action-delete" data-uid="${u.uid}" ${isSelf ? 'disabled style="opacity:0.5;cursor:not-allowed;" title="Cannot delete own active admin account"' : 'title="Delete User Account"'}>
             <i class="fa-solid fa-trash"></i> Delete
           </button>
         </td>
       `;
 
-      row.querySelector('.btn-action-role').addEventListener('click', async () => {
-        let newRole = 'teacher';
-        if (u.role === 'teacher') newRole = 'super_admin';
-        if (u.role === 'super_admin') newRole = 'parent';
-        try {
-          await fetch(`/api/admin/users/${u.uid}/role`, {
-            method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ role: newRole })
-          });
-          renderAdminDashboard();
-        } catch (err) {
-          console.error('Error toggling role:', err);
-        }
-      });
+      if (!isSelf) {
+        row.querySelector('.btn-action-role').addEventListener('click', async () => {
+          let newRole = 'teacher';
+          if (u.role === 'teacher' || u.role === 'educator') newRole = 'super_admin';
+          if (u.role === 'super_admin') newRole = 'parent';
 
-      row.querySelector('.btn-action-delete').addEventListener('click', async () => {
-        if (
-          confirm(
-            `Are you sure you want to delete account ${u.email}? This will remove associated child profiles.`
-          )
-        ) {
+          let success = false;
           try {
-            const res = await fetch(`/api/admin/users/${u.uid}`, { method: 'DELETE' });
-            const data = await res.json();
-            if (data.success) {
-              renderAdminDashboard();
-            } else {
-              alert(data.error || 'Failed to delete user.');
+            const res = await fetch(`/api/admin/users/${u.uid}/role`, {
+              method: 'PUT',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ role: newRole })
+            });
+            const data = await res.json().catch(() => ({}));
+            if (res.ok && data.success) {
+              success = true;
+            } else if (data.error) {
+              showToast('Role Update Failed', data.error, 'error');
+              return;
             }
           } catch (err) {
-            console.error('Error deleting user:', err);
+            console.warn('Backend role update notice (using local fallback):', err);
           }
-        }
-      });
+
+          // Keep client cache in sync
+          const localUsers = getClientUsersDb();
+          const userIdx = localUsers.findIndex((usr) => usr.uid === u.uid || usr.email === u.email);
+          if (userIdx !== -1) {
+            localUsers[userIdx].role = newRole;
+            localStorage.setItem('lms_local_users', JSON.stringify(localUsers));
+            success = true;
+          }
+
+          if (success) {
+            showToast('Role Updated', `${u.displayName || u.email} is now ${newRole}.`, 'success');
+            renderAdminDashboard();
+          } else {
+            showToast('Update Failed', 'Failed to update user role.', 'error');
+          }
+        });
+
+        row.querySelector('.btn-action-delete').addEventListener('click', async () => {
+          if (
+            confirm(
+              `Are you sure you want to delete account ${u.email}? This will remove associated child profiles.`
+            )
+          ) {
+            let deleted = false;
+            try {
+              const res = await fetch(`/api/admin/users/${u.uid}`, { method: 'DELETE' });
+              const data = await res.json().catch(() => ({}));
+              if (res.ok && data.success) {
+                deleted = true;
+              } else if (data.error) {
+                showToast('Deletion Error', data.error, 'error');
+                return;
+              }
+            } catch (err) {
+              console.warn('Backend delete user notice (using local fallback):', err);
+            }
+
+            // Always update local cache
+            const localUsers = getClientUsersDb().filter(
+              (usr) => usr.uid !== u.uid && usr.email !== u.email
+            );
+            localStorage.setItem('lms_local_users', JSON.stringify(localUsers));
+            deleted = true;
+
+            if (deleted) {
+              showToast('User Deleted', `Account ${u.email} removed successfully.`, 'success');
+              renderAdminDashboard();
+            }
+          }
+        });
+      }
 
       adminUsersTableBody.appendChild(row);
     });
@@ -4268,6 +4318,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (confirm('Clear all telemetry and CSP violation error logs?')) {
         try {
           await fetch('/api/admin/telemetry', { method: 'DELETE' });
+          window.__lms_client_errors = 0;
           await renderAdminTelemetry();
           const healthErrors = document.getElementById('healthClientErrors');
           if (healthErrors)
@@ -4373,12 +4424,6 @@ document.addEventListener('DOMContentLoaded', () => {
     pinChallengeCancelBtn.addEventListener('click', () => closeAccessibleModal(pinChallengeModal));
 
   if (addChildBtn) addChildBtn.addEventListener('click', () => openChildModal(null));
-  if (adminRefreshBtn) adminRefreshBtn.addEventListener('click', renderAdminDashboard);
-
-  if (adminUserSearchInput)
-    adminUserSearchInput.addEventListener('input', filterAndRenderAdminUsers);
-  if (adminRoleFilterSelect)
-    adminRoleFilterSelect.addEventListener('change', filterAndRenderAdminUsers);
 
   // Avatar selector grid handler
   if (avatarSelectorGrid) {

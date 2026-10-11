@@ -6,13 +6,15 @@ describe('Super Admin Access & Management Tests', () => {
   const parentAgent = request.agent(app);
 
   let targetParentUid = '';
+  let adminUid = '';
 
   beforeAll(async () => {
     // Admin login
-    await adminAgent.post('/api/auth/login').send({
+    const adminLoginRes = await adminAgent.post('/api/auth/login').send({
       email: 'admin@islamicstudies.org',
       password: 'Admin@Islam2026!'
     });
+    adminUid = adminLoginRes.body.user.uid;
 
     // Parent register
     const reg = await parentAgent.post('/api/auth/register').send({
@@ -73,5 +75,37 @@ describe('Super Admin Access & Management Tests', () => {
     const checkRes = await adminAgent.get('/api/admin/users');
     const target = checkRes.body.users.find((u) => u.uid === targetParentUid);
     expect(target).toBeUndefined();
+  });
+
+  test('PUT /api/admin/users/:uid/role - Active super admin cannot demote themselves', async () => {
+    const res = await adminAgent.put(`/api/admin/users/${adminUid}/role`).send({ role: 'parent' });
+    expect(res.statusCode).toBe(400);
+    expect(res.body.success).toBe(false);
+    expect(res.body.error).toContain('Cannot demote your own active super admin account');
+  });
+
+  test('DELETE /api/admin/users/:uid - Active super admin cannot delete themselves', async () => {
+    const res = await adminAgent.delete(`/api/admin/users/${adminUid}`);
+    expect(res.statusCode).toBe(400);
+    expect(res.body.success).toBe(false);
+    expect(res.body.error).toContain('Cannot delete your own active admin account');
+  });
+
+  test('GET /api/admin/audit - Admin can view system audit logs', async () => {
+    const res = await adminAgent.get('/api/admin/audit');
+    expect(res.statusCode).toBe(200);
+    expect(res.body.success).toBe(true);
+    expect(Array.isArray(res.body.logs)).toBe(true);
+  });
+
+  test('DELETE /api/admin/telemetry - Admin can purge telemetry and error logs', async () => {
+    const delRes = await adminAgent.delete('/api/admin/telemetry');
+    expect(delRes.statusCode).toBe(200);
+    expect(delRes.body.success).toBe(true);
+
+    const getRes = await adminAgent.get('/api/admin/telemetry');
+    expect(getRes.statusCode).toBe(200);
+    expect(getRes.body.success).toBe(true);
+    expect(getRes.body.logs).toEqual([]);
   });
 });

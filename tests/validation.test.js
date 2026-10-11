@@ -58,6 +58,18 @@ describe('Input Validation & Sanitization Unit Tests', () => {
       expect(result.errors).toHaveLength(0);
     });
 
+    test('All curriculum tracks level1-level5 and teacher are valid', () => {
+      const tracks = ['level1', 'level2', 'level3', 'level4', 'level5', 'teacher'];
+      tracks.forEach((track) => {
+        const res = validator.validateChildInput({
+          name: 'Child Name',
+          assignedTrack: track
+        });
+        expect(res.isValid).toBe(true);
+        expect(res.errors).toHaveLength(0);
+      });
+    });
+
     test('Missing name returns error', () => {
       const result = validator.validateChildInput({
         name: '',

@@ -2245,6 +2245,15 @@ export async function onRequest(context) {
       return jsonResponse({ success: false, error: 'Invalid role' }, 400, {}, request);
     }
 
+    if (authUser.uid === targetUid && role !== 'super_admin') {
+      return jsonResponse(
+        { success: false, error: 'Cannot demote your own active super admin account.' },
+        400,
+        {},
+        request
+      );
+    }
+
     if (env.DB) {
       await env.DB.prepare('UPDATE users SET role = ? WHERE uid = ?').bind(role, targetUid).run();
       await env.DB.prepare(
