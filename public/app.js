@@ -2233,11 +2233,7 @@ document.addEventListener('DOMContentLoaded', () => {
         q.options.forEach((opt) => {
           optsHtml += `
             <button type="button" class="opt-btn" data-qid="${q.id}" data-opt="${opt.key}">
-              ${
-                isLevel1
-                  ? `<span class="opt-key-badge key-${opt.key}">${opt.key}</span>`
-                  : `<span class="opt-key" style="font-weight:700;">${opt.key})</span>`
-              }
+              <span class="opt-key-badge key-${opt.key}">${opt.key}</span>
               <span>${opt.text}</span>
             </button>
           `;
@@ -2258,6 +2254,11 @@ document.addEventListener('DOMContentLoaded', () => {
             e.preventDefault();
             btns.forEach((x) => x.classList.remove('selected'));
             b.classList.add('selected');
+            // Tactile micro-bounce feedback
+            b.style.transform = 'scale(0.97)';
+            setTimeout(() => {
+              b.style.transform = '';
+            }, 120);
           });
         });
 
@@ -2558,8 +2559,40 @@ document.addEventListener('DOMContentLoaded', () => {
   function showQuizScoreBanner(score, total) {
     quizScoreBanner.style.display = 'flex';
     scoreDisplay.textContent = `${score} / ${total}`;
-    const pct = Math.round((score / total) * 100);
+    const pct = total > 0 ? Math.round((score / total) * 100) : 0;
     scorePercent.textContent = `${pct}%`;
+
+    const mascotAvatarEl = document.getElementById('quizMascotAvatar');
+    const celebrationTitleEl = document.getElementById('quizCelebrationTitle');
+    const mascotMessageEl = document.getElementById('quizMascotMessage');
+    const scoreStreakEl = document.getElementById('quizScoreStreak');
+
+    const streak = getLearnerStreak();
+    if (scoreStreakEl) {
+      const streakDays = (streak && streak.count) || 1;
+      scoreStreakEl.innerHTML = `<i class="fa-solid fa-fire font-amber" aria-hidden="true"></i> <span>${streakDays}-Day Learning Streak Active!</span>`;
+    }
+
+    if (pct === 100) {
+      if (mascotAvatarEl) mascotAvatarEl.textContent = '🌟';
+      if (celebrationTitleEl)
+        celebrationTitleEl.textContent = "Masha'Allah! Perfect Scholar Mastery! 🏆";
+      if (mascotMessageEl)
+        mascotMessageEl.textContent =
+          'Flawless score! You have mastered this lesson with great wisdom!';
+    } else if (pct >= 80) {
+      if (mascotAvatarEl) mascotAvatarEl.textContent = '🦁';
+      if (celebrationTitleEl)
+        celebrationTitleEl.textContent = 'Excellent Achievement! Quiz Passed! ⭐';
+      if (mascotMessageEl)
+        mascotMessageEl.textContent = 'Great dedication! Keep up the brilliant study journey!';
+    } else {
+      if (mascotAvatarEl) mascotAvatarEl.textContent = '🌱';
+      if (celebrationTitleEl) celebrationTitleEl.textContent = 'Quest Completed — Keep Growing! 📖';
+      if (mascotMessageEl)
+        mascotMessageEl.textContent =
+          'Good effort! Review the lesson cards and retry to unlock your certificate!';
+    }
 
     if (pct >= 80) {
       openCertBtn.style.display = 'inline-flex';
