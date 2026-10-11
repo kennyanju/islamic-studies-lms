@@ -3,7 +3,7 @@ node_modules
 coverage
 data/
 public/course_data*
-public/modules_manifest.json
+public/modules_manifest.*
 public/course_data/
 package-lock.json
 *.md

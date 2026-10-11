@@ -743,7 +743,10 @@ app.post('/api/auth/send-verification', requireAuth, async (req, res, next) => {
 
     const token = require('crypto').randomBytes(24).toString('hex');
     const tokenExpires = new Date(Date.now() + 72 * 3600 * 1000).toISOString();
-    await db.updateUser(user.uid, { verificationToken: token, verificationTokenExpires: tokenExpires });
+    await db.updateUser(user.uid, {
+      verificationToken: token,
+      verificationTokenExpires: tokenExpires
+    });
 
     res.json({
       success: true,
@@ -776,7 +779,11 @@ app.get('/api/auth/verify-email', async (req, res, next) => {
         );
     }
 
-    await db.updateUser(user.uid, { isVerified: true, verificationToken: null, verificationTokenExpires: null });
+    await db.updateUser(user.uid, {
+      isVerified: true,
+      verificationToken: null,
+      verificationTokenExpires: null
+    });
     if (req.session && req.session.user && req.session.user.uid === user.uid) {
       req.session.user.isVerified = true;
     }
@@ -844,7 +851,9 @@ app.post('/api/parent/children', requireAuth, async (req, res, next) => {
     const name = sanitizeStr(req.body.name, 50);
     const avatar = sanitizeStr(req.body.avatar, 10) || '🌟';
     const pinCode = sanitizeStr(req.body.pinCode, 4);
-    const assignedTrack = ['level1', 'level2', 'level3', 'level4', 'level5'].includes(req.body.assignedTrack)
+    const assignedTrack = ['level1', 'level2', 'level3', 'level4', 'level5'].includes(
+      req.body.assignedTrack
+    )
       ? req.body.assignedTrack
       : 'level1';
 
@@ -893,7 +902,10 @@ app.put('/api/parent/children/:id', requireAuth, async (req, res, next) => {
     if (pinCode !== undefined) {
       updates.pinHash = pinCode ? await bcrypt.hash(sanitizeStr(pinCode, 4), BCRYPT_ROUNDS) : null;
     }
-    if (assignedTrack && ['level1', 'level2', 'level3', 'level4', 'level5'].includes(assignedTrack)) {
+    if (
+      assignedTrack &&
+      ['level1', 'level2', 'level3', 'level4', 'level5'].includes(assignedTrack)
+    ) {
       updates.assignedTrack = assignedTrack;
     }
 
@@ -1324,9 +1336,7 @@ app.post('/api/quiz/grade', validateModuleId, quizLimiter, async (req, res, next
 
     // Update streak for child profiles (Sprint 3)
     if (childId) {
-      db.updateChildStreak(childId).catch((e) =>
-        console.warn('Streak update failed:', e.message)
-      );
+      db.updateChildStreak(childId).catch((e) => console.warn('Streak update failed:', e.message));
     }
 
     // Parent Notification on Quiz Completion / Pass

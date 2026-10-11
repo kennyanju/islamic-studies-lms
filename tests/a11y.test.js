@@ -39,7 +39,7 @@ describe('Accessibility & Web Standards Compliance Tests', () => {
   });
 
   test('Web App Manifest and touch icons are linked in head', () => {
-    expect(html).toMatch(/<link[^>]*rel=["']manifest["'][^>]*href=["']\/manifest\.json["']/i);
+    expect(html).toMatch(/<link[^>]*rel=["']manifest["'][^>]*href=["']\/?manifest\.json["']/i);
     expect(html).toMatch(/<link[^>]*rel=["'](icon|alternate icon)["'][^>]*href=["'][^"']*icon/i);
     expect(html).toMatch(
       /<link[^>]*rel=["']apple-touch-icon["'][^>]*href=["'][^"']*apple-touch-icon/i

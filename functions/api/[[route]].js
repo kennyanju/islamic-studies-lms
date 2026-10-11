@@ -1108,9 +1108,7 @@ export async function onRequest(context) {
       }
 
       if (env.DB) {
-        const user = await env.DB.prepare(
-          'SELECT * FROM users WHERE verification_token = ?'
-        )
+        const user = await env.DB.prepare('SELECT * FROM users WHERE verification_token = ?')
           .bind(token)
           .first()
           .catch(() => null);
@@ -1158,10 +1156,10 @@ export async function onRequest(context) {
         );
       }
 
-      return new Response(
-        '<h2>Verification Complete</h2><a href="/">Return to Home</a>',
-        { status: 200, headers: { 'Content-Type': 'text/html; charset=utf-8' } }
-      );
+      return new Response('<h2>Verification Complete</h2><a href="/">Return to Home</a>', {
+        status: 200,
+        headers: { 'Content-Type': 'text/html; charset=utf-8' }
+      });
     } catch (e) {
       return new Response('Internal Server Error', { status: 500 });
     }
@@ -2361,7 +2359,12 @@ export async function onRequest(context) {
           .bind(childId)
           .first();
         if (!childRow) {
-          return jsonResponse({ success: false, error: 'Child profile not found.' }, 404, {}, request);
+          return jsonResponse(
+            { success: false, error: 'Child profile not found.' },
+            404,
+            {},
+            request
+          );
         }
         if (authUser.role !== 'super_admin' && childRow.parent_uid !== authUser.uid) {
           return jsonResponse({ success: false, error: 'Access denied.' }, 403, {}, request);
@@ -2371,7 +2374,12 @@ export async function onRequest(context) {
         )
           .bind(childId)
           .all();
-        return jsonResponse({ success: true, childId, reflections: results || [] }, 200, {}, request);
+        return jsonResponse(
+          { success: true, childId, reflections: results || [] },
+          200,
+          {},
+          request
+        );
       } catch (e) {
         return jsonResponse({ success: false, error: e.message }, 500, {}, request);
       }

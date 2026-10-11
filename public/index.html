@@ -33,14 +33,14 @@
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
 
     <!-- Web App Manifest & App Icons -->
-    <link rel="icon" type="image/svg+xml" href="/icons/favicon.svg" />
-    <link rel="alternate icon" type="image/png" href="/icons/icon-192.png" />
-    <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
-    <link rel="manifest" href="/manifest.json" />
+    <link rel="icon" type="image/svg+xml" href="icons/favicon.svg" />
+    <link rel="alternate icon" type="image/png" href="icons/icon-192.png" />
+    <link rel="apple-touch-icon" href="icons/apple-touch-icon.png" />
+    <link rel="manifest" href="manifest.json" />
     <meta name="theme-color" content="#059669" />
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="/style.css" />
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body class="theme-dark unauthenticated-view">
     <!-- Accessible Skip to Main Content Navigation Link -->
@@ -79,28 +79,68 @@
           <span class="track-label" id="learningModeLabel"
             ><i class="fa-solid fa-sliders" aria-hidden="true"></i> Learning Mode</span
           >
-          <div class="track-selector track-selector-5levels" role="group" aria-labelledby="learningModeLabel">
-            <button class="track-btn active" data-track="level1" id="trackL1" aria-pressed="true" title="Level 1: Ages 6–8 (Foundations of Wonder)">
+          <div
+            class="track-selector track-selector-5levels"
+            role="group"
+            aria-labelledby="learningModeLabel"
+          >
+            <button
+              class="track-btn active"
+              data-track="level1"
+              id="trackL1"
+              aria-pressed="true"
+              title="Level 1: Ages 6–8 (Foundations of Wonder)"
+            >
               <i class="fa-solid fa-seedling" aria-hidden="true"></i>
               <span>L1 (6–8y)</span>
             </button>
-            <button class="track-btn" data-track="level2" id="trackL2" aria-pressed="false" title="Level 2: Ages 8–10 (Habits of Devotion)">
+            <button
+              class="track-btn"
+              data-track="level2"
+              id="trackL2"
+              aria-pressed="false"
+              title="Level 2: Ages 8–10 (Habits of Devotion)"
+            >
               <i class="fa-solid fa-child" aria-hidden="true"></i>
               <span>L2 (8–10y)</span>
             </button>
-            <button class="track-btn" data-track="level3" id="trackL3" aria-pressed="false" title="Level 3: Ages 10–12 (Systematic Practice)">
+            <button
+              class="track-btn"
+              data-track="level3"
+              id="trackL3"
+              aria-pressed="false"
+              title="Level 3: Ages 10–12 (Systematic Practice)"
+            >
               <i class="fa-solid fa-book-open" aria-hidden="true"></i>
               <span>L3 (10–12y)</span>
             </button>
-            <button class="track-btn" data-track="level4" id="trackL4" aria-pressed="false" title="Level 4: Ages 12–14 (Adolescent Fiqh & Mission)">
+            <button
+              class="track-btn"
+              data-track="level4"
+              id="trackL4"
+              aria-pressed="false"
+              title="Level 4: Ages 12–14 (Adolescent Fiqh & Mission)"
+            >
               <i class="fa-solid fa-user-graduate" aria-hidden="true"></i>
               <span>L4 (12–14y)</span>
             </button>
-            <button class="track-btn" data-track="level5" id="trackL5" aria-pressed="false" title="Level 5: Ages 14–16+ (Advanced Usul & Law)">
+            <button
+              class="track-btn"
+              data-track="level5"
+              id="trackL5"
+              aria-pressed="false"
+              title="Level 5: Ages 14–16+ (Advanced Usul & Law)"
+            >
               <i class="fa-solid fa-landmark" aria-hidden="true"></i>
               <span>L5 (14–16+y)</span>
             </button>
-            <button class="track-btn" data-track="teacher" id="trackTeacher" aria-pressed="false" title="Teacher Portal & Presentations">
+            <button
+              class="track-btn"
+              data-track="teacher"
+              id="trackTeacher"
+              aria-pressed="false"
+              title="Teacher Portal & Presentations"
+            >
               <i class="fa-solid fa-chalkboard-user" aria-hidden="true"></i>
               <span>Teacher</span>
             </button>
@@ -1596,26 +1636,35 @@
           </div>
 
           <!-- 2. Video Lesson Player Tab -->
-          <div
-            class="tab-content"
-            id="videoTab"
-            role="tabpanel"
-            aria-labelledby="videoTabBtn"
-          >
+          <div class="tab-content" id="videoTab" role="tabpanel" aria-labelledby="videoTabBtn">
             <div class="video-lesson-wrapper">
               <!-- Top Video Player Header & Controls Bar -->
               <div class="video-player-header">
                 <div class="video-title-area">
-                  <span class="video-badge"><i class="fa-solid fa-circle-play" aria-hidden="true"></i> Video Classroom</span>
+                  <span class="video-badge"
+                    ><i class="fa-solid fa-circle-play" aria-hidden="true"></i> Video
+                    Classroom</span
+                  >
                   <h3 id="videoPlayerTitle">Module Video Lesson</h3>
                 </div>
                 <div class="video-header-actions">
-                  <button class="btn-video-action" id="btnVideoLoadLocal" title="Load your recorded MP4 video file from your computer">
+                  <button
+                    class="btn-video-action"
+                    id="btnVideoLoadLocal"
+                    title="Load your recorded MP4 video file from your computer"
+                  >
                     <i class="fa-solid fa-folder-open" aria-hidden="true"></i> Load Local Video
                   </button>
-                  <input type="file" id="videoFileInput" accept="video/mp4,video/webm" style="display:none;" />
+                  <input
+                    type="file"
+                    id="videoFileInput"
+                    accept="video/mp4,video/webm"
+                    style="display: none"
+                  />
                   <div class="playback-speed-selector">
-                    <label for="videoPlaybackSpeed"><i class="fa-solid fa-gauge-high" aria-hidden="true"></i></label>
+                    <label for="videoPlaybackSpeed"
+                      ><i class="fa-solid fa-gauge-high" aria-hidden="true"></i
+                    ></label>
                     <select id="videoPlaybackSpeed" aria-label="Playback Speed">
                       <option value="0.75">0.75x</option>
                       <option value="1" selected>1.0x (Normal)</option>
@@ -1642,14 +1691,19 @@
                       </div>
                       <h4>Video Recording in Progress</h4>
                       <p id="videoFallbackText">
-                        The PowerPoint presentation and speaker voice script are ready. Once you record your video, drop <code>module_[id].mp4</code> into <code>/public/videos/</code> or click below to play your recorded MP4 file directly from your device!
+                        The PowerPoint presentation and speaker voice script are ready. Once you
+                        record your video, drop <code>module_[id].mp4</code> into
+                        <code>/public/videos/</code> or click below to play your recorded MP4 file
+                        directly from your device!
                       </p>
                       <div class="fallback-btn-row">
                         <button class="btn-fallback-primary" id="fallbackPickVideoBtn">
-                          <i class="fa-solid fa-upload" aria-hidden="true"></i> Select Recorded Video File
+                          <i class="fa-solid fa-upload" aria-hidden="true"></i> Select Recorded
+                          Video File
                         </button>
                         <button class="btn-fallback-secondary" id="fallbackViewSlidesBtn">
-                          <i class="fa-solid fa-presentation-screen" aria-hidden="true"></i> View Classroom Slides
+                          <i class="fa-solid fa-presentation-screen" aria-hidden="true"></i> View
+                          Classroom Slides
                         </button>
                       </div>
                     </div>
@@ -1658,7 +1712,8 @@
                   <!-- Quick Video Info & Learning Bar -->
                   <div class="video-bottom-infobar">
                     <div class="video-current-chapter" id="videoCurrentChapter">
-                      <i class="fa-solid fa-bookmark" aria-hidden="true"></i> <span>Chapter 1: Introduction</span>
+                      <i class="fa-solid fa-bookmark" aria-hidden="true"></i>
+                      <span>Chapter 1: Introduction</span>
                     </div>
                     <div class="video-nav-shortcuts">
                       <button class="btn-shortcut" id="videoJumpQuizBtn">
@@ -1676,7 +1731,10 @@
                   <div class="drawer-header">
                     <div class="drawer-tabs">
                       <button class="drawer-tab-btn active" id="drawerChaptersTabBtn">
-                        <i class="fa-solid fa-list-ol" aria-hidden="true"></i> Chapters (<span id="videoChapterCount">0</span>)
+                        <i class="fa-solid fa-list-ol" aria-hidden="true"></i> Chapters (<span
+                          id="videoChapterCount"
+                          >0</span
+                        >)
                       </button>
                       <button class="drawer-tab-btn" id="drawerScriptTabBtn">
                         <i class="fa-solid fa-scroll" aria-hidden="true"></i> Voice Script
@@ -1850,7 +1908,12 @@
               </p>
 
               <div class="track-answer-toggle" role="group" aria-label="Answer Key Level Selector">
-                <button class="track-btn active" id="akToggleL1" data-level="level1" aria-pressed="true">
+                <button
+                  class="track-btn active"
+                  id="akToggleL1"
+                  data-level="level1"
+                  aria-pressed="true"
+                >
                   Level 1 (6–8y)
                 </button>
                 <button class="track-btn" id="akToggleL2" data-level="level2" aria-pressed="false">
@@ -2594,10 +2657,16 @@
               >
               <select id="childTrackSelect" class="form-input">
                 <option value="level1">🌱 Level 1 (Ages 6–8 - Wonder & Sensory Practice)</option>
-                <option value="level2">🌿 Level 2 (Ages 8–10 - Pillars of Iman & Prayer Habits)</option>
+                <option value="level2">
+                  🌿 Level 2 (Ages 8–10 - Pillars of Iman & Prayer Habits)
+                </option>
                 <option value="level3">📘 Level 3 (Ages 10–12 - Systematic Fiqh & Belief)</option>
-                <option value="level4">📖 Level 4 (Ages 12–14 - Adolescent Fiqh, Creed & Seerah)</option>
-                <option value="level5">🎓 Level 5 (Ages 14–16+ - Advanced Usul, Law & Contemporary Issues)</option>
+                <option value="level4">
+                  📖 Level 4 (Ages 12–14 - Adolescent Fiqh, Creed & Seerah)
+                </option>
+                <option value="level5">
+                  🎓 Level 5 (Ages 14–16+ - Advanced Usul, Law & Contemporary Issues)
+                </option>
               </select>
             </div>
 
@@ -3115,7 +3184,9 @@
     <!-- Floating Toast Notifications Container -->
     <div id="toastContainer" class="toast-container" aria-live="polite" aria-atomic="true"></div>
 
+    <!-- Pre-compiled Manifest Data for Instant Offline Bootstrap -->
+    <script src="modules_manifest.js" defer></script>
     <!-- Custom App JS -->
-    <script src="/app.js"></script>
+    <script src="app.js" defer></script>
   </body>
 </html>

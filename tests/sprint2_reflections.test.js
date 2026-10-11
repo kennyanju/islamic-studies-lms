@@ -12,9 +12,7 @@ async function registerAndLogin(email, password = 'TestPass123!') {
   await request(app)
     .post('/api/auth/register')
     .send({ email, password, displayName: 'Test Parent' });
-  const res = await request(app)
-    .post('/api/auth/login')
-    .send({ email, password });
+  const res = await request(app).post('/api/auth/login').send({ email, password });
   return res.headers['set-cookie'];
 }
 
@@ -53,8 +51,7 @@ describe('Sprint 2: Reflection API', () => {
   });
 
   test('GET /api/parent/children/:id/reflections returns 401 without auth', async () => {
-    const res = await request(app)
-      .get(`/api/parent/children/${childId}/reflections`);
+    const res = await request(app).get(`/api/parent/children/${childId}/reflections`);
     expect(res.statusCode).toBe(401);
   });
 
@@ -77,7 +74,7 @@ describe('Sprint 2: Reflection API', () => {
     expect(r.responseText || r.response_text).toBe('I learned about the 6 pillars of Iman.');
   });
 
-  test('Cross-account access to another parent\'s child reflections returns 403', async () => {
+  test("Cross-account access to another parent's child reflections returns 403", async () => {
     const cookies2 = await registerAndLogin('refltest2@example.com');
     const res = await request(app)
       .get(`/api/parent/children/${childId}/reflections`)

@@ -684,6 +684,13 @@ const manifestData = {
 const manifestPath = path.join(publicDir, 'modules_manifest.json');
 fs.writeFileSync(manifestPath, JSON.stringify(manifestData, null, 2), 'utf8');
 
+const manifestJsPath = path.join(publicDir, 'modules_manifest.js');
+fs.writeFileSync(
+  manifestJsPath,
+  `window.__MODULES_MANIFEST__ = ${JSON.stringify(manifestData)};\n`,
+  'utf8'
+);
+
 // 4. Update sw.js with build timestamp
 const swPath = path.join(publicDir, 'sw.js');
 if (fs.existsSync(swPath)) {

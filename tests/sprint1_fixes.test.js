@@ -38,7 +38,7 @@ describe('Sprint 1 Fixes & Security Hardening Test Suite', () => {
   describe('1. NIST SP 800-63B Password Minimum (8 Characters)', () => {
     test('validator.isValidPassword enforces 8-character minimum', () => {
       expect(validator.isValidPassword('1234567')).toBe(false); // 7 chars
-      expect(validator.isValidPassword('12345678')).toBe(true);  // 8 chars
+      expect(validator.isValidPassword('12345678')).toBe(true); // 8 chars
       expect(validator.isValidPassword('SuperSecure123')).toBe(true);
     });
 
@@ -137,9 +137,7 @@ describe('Sprint 1 Fixes & Security Hardening Test Suite', () => {
     });
 
     test('Public endpoint rejects name-only query for child', async () => {
-      const res = await request(app)
-        .get('/api/public/child/Sprint1Child')
-        .expect(404);
+      const res = await request(app).get('/api/public/child/Sprint1Child').expect(404);
 
       expect(res.body.success).toBe(false);
       expect(res.body.error).toContain('not found');

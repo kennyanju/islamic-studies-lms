@@ -367,6 +367,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Fast Startup Course Data Loader with Multi-Source Fallbacks
   async function loadCourseData() {
+    // 0. Instant static fallback if pre-loaded via modules_manifest.js
+    if (
+      window.__MODULES_MANIFEST__ &&
+      (window.__MODULES_MANIFEST__.modules || Array.isArray(window.__MODULES_MANIFEST__))
+    ) {
+      courseData = window.__MODULES_MANIFEST__;
+      initApp();
+      return;
+    }
+
     const tryUrls = async (urls) => {
       for (const u of urls) {
         try {
@@ -495,11 +505,19 @@ document.addEventListener('DOMContentLoaded', () => {
     updateTrackActiveBtn();
     if (activeTrack === 'teacher') {
       activeTab = 'teleprompter';
-    } else if (activeTab === 'teleprompter' || activeTab === 'answerkeys') {
+    } else if (
+      activeTab === 'teleprompter' ||
+      activeTab === 'answerkeys' ||
+      activeTab === 'voicescript'
+    ) {
       activeTab = 'handout';
     }
     if (activeModuleId !== null) {
       openModule(activeModuleId);
+    } else {
+      renderDashboard();
+      renderSidebarModules();
+      updateProgressUI();
     }
   }
 
@@ -579,14 +597,24 @@ document.addEventListener('DOMContentLoaded', () => {
   function renderSidebarModules() {
     modulesList.innerHTML = '';
     if (!courseData || !courseData.modules) return;
+    const isPrivileged =
+      currentUser &&
+      (currentUser.role === 'admin' ||
+        currentUser.role === 'parent' ||
+        currentUser.role === 'super_admin');
     courseData.modules.forEach((mod) => {
       const isCompleted = userProgress[`mod_${mod.id}`];
+      const isLocked =
+        activeTrack !== 'teacher' &&
+        !isPrivileged &&
+        mod.id > 1 &&
+        !userProgress[`mod_${mod.id - 1}`];
       const li = document.createElement('li');
-      li.className = `module-nav-item ${activeModuleId === mod.id ? 'active' : ''} ${isCompleted ? 'completed' : ''}`;
+      li.className = `module-nav-item ${activeModuleId === mod.id ? 'active' : ''} ${isCompleted ? 'completed' : ''} ${isLocked ? 'locked' : ''}`;
       li.innerHTML = `
-        <i class="fa-solid ${mod.icon || 'fa-book'}"></i>
+        <i class="fa-solid ${isLocked ? 'fa-lock' : mod.icon || 'fa-book'}"></i>
         <span>${mod.id}. ${mod.title}</span>
-        ${isCompleted ? '<i class="fa-solid fa-check" style="margin-left:auto;font-size:0.75rem;"></i>' : ''}
+        ${isCompleted ? '<i class="fa-solid fa-check" style="margin-left:auto;font-size:0.75rem;"></i>' : isLocked ? '<i class="fa-solid fa-lock" style="margin-left:auto;font-size:0.7rem;opacity:0.6;"></i>' : ''}
       `;
       li.addEventListener('click', () => {
         openModule(mod.id);
@@ -726,15 +754,22 @@ document.addEventListener('DOMContentLoaded', () => {
       avgQuizScore = 90;
     }
 
-    if (learnerStatCompleted) learnerStatCompleted.textContent = `${completedCount} / 9`;
+    const totalModules = (courseData && courseData.modules && courseData.modules.length) || 9;
+    if (learnerStatCompleted)
+      learnerStatCompleted.textContent = `${completedCount} / ${totalModules}`;
     if (learnerStatAvgQuiz)
       learnerStatAvgQuiz.textContent = avgQuizScore > 0 ? `${avgQuizScore}%` : '0%';
-    if (learnerStatStreak)
-      learnerStatStreak.textContent =
-        completedCount > 0 ? `${Math.min(completedCount + 1, 7)} Days` : '1 Day';
+    if (learnerStatStreak) {
+      const streak = getLearnerStreak();
+      learnerStatStreak.textContent = `${streak.count || 0} ${streak.count === 1 ? 'Day' : 'Days'}`;
+    }
     if (learnerStatCert) {
       learnerStatCert.textContent =
-        completedCount >= 9 ? '🎉 Earned!' : completedCount > 0 ? 'In Progress' : 'Not Started';
+        completedCount >= totalModules
+          ? '🎉 Earned!'
+          : completedCount > 0
+            ? 'In Progress'
+            : 'Not Started';
     }
 
     // 3. Recommended Next Lesson Spotlight
@@ -757,8 +792,10 @@ document.addEventListener('DOMContentLoaded', () => {
         nextActionIcon.innerHTML = `<i class="fa-solid ${nextMod.icon || 'fa-book'}"></i>`;
       if (nextActionTitle) nextActionTitle.textContent = `Module ${nextMod.id}: ${nextMod.title}`;
       if (nextActionDesc) nextActionDesc.textContent = nextMod.description;
+      const isSenior =
+        activeTrack === 'level3' || activeTrack === 'level4' || activeTrack === 'level5';
       if (nextActionBadge) {
-        nextActionBadge.innerHTML = `<i class="fa-solid fa-play"></i> ${isL2 ? 'Recommended Study Focus' : 'Your Next Adventure!'}`;
+        nextActionBadge.innerHTML = `<i class="fa-solid fa-play"></i> ${isSenior ? 'Recommended Study Focus' : 'Your Next Adventure!'}`;
       }
       if (nextActionStartBtn) {
         nextActionStartBtn.onclick = () => openModule(nextMod.id);
@@ -798,21 +835,32 @@ document.addEventListener('DOMContentLoaded', () => {
 
     filteredMods.forEach((mod) => {
       const isCompleted = activeProgMap[`mod_${mod.id}`] || userProgress[`mod_${mod.id}`];
+      const isPrivileged =
+        currentUser &&
+        (currentUser.role === 'admin' ||
+          currentUser.role === 'parent' ||
+          currentUser.role === 'super_admin');
+      const isLocked =
+        activeTrack !== 'teacher' &&
+        !isPrivileged &&
+        mod.id > 1 &&
+        !(activeProgMap[`mod_${mod.id - 1}`] || userProgress[`mod_${mod.id - 1}`]);
       const quizScore =
         localScores[`quiz_${mod.id}_${activeTrack}`]?.percentage || (isCompleted ? 100 : null);
 
       const card = document.createElement('div');
-      card.className = `module-card ${activeTrack}-card ${isCompleted ? 'completed' : ''}`;
+      card.className = `module-card ${activeTrack}-card ${isCompleted ? 'completed' : ''} ${isLocked ? 'locked' : ''}`;
 
       card.innerHTML = `
         <div>
           <div class="module-card-header">
             <div class="module-card-icon">
-              <i class="fa-solid ${mod.icon || 'fa-book'}"></i>
+              <i class="fa-solid ${isLocked ? 'fa-lock' : mod.icon || 'fa-book'}"></i>
             </div>
             <div style="display: flex; gap: 6px; flex-wrap: wrap;">
               <span class="category-badge">${mod.category}</span>
               ${getTrackTagHtml(activeTrack)}
+              ${isLocked ? '<span class="status-pill status-locked"><i class="fa-solid fa-lock"></i> Locked</span>' : ''}
             </div>
           </div>
           <h3>Module ${mod.id}: ${mod.title}</h3>
@@ -825,8 +873,8 @@ document.addEventListener('DOMContentLoaded', () => {
           </div>
         </div>
         <div class="module-card-footer">
-          <span>${isCompleted ? '✓ Completed (Review)' : activeTrack === 'teacher' ? 'Open Classroom Deck' : (activeTrack === 'level1' || activeTrack === 'level2') ? 'Start Fun Lesson' : 'Study Module'}</span>
-          <i class="fa-solid fa-arrow-right"></i>
+          <span>${isLocked ? `Complete Module ${mod.id - 1} First` : isCompleted ? '✓ Completed (Review)' : activeTrack === 'teacher' ? 'Open Classroom Deck' : activeTrack === 'level1' || activeTrack === 'level2' ? 'Start Fun Lesson' : 'Study Module'}</span>
+          <i class="fa-solid ${isLocked ? 'fa-lock' : 'fa-arrow-right'}"></i>
         </div>
       `;
       card.addEventListener('click', () => openModule(mod.id));
@@ -847,7 +895,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function openModule(moduleId) {
     if (!courseData || !courseData.modules) return;
-    if (activeTrack !== 'teacher' && moduleId > 1) {
+    const isPrivileged =
+      currentUser &&
+      (currentUser.role === 'admin' ||
+        currentUser.role === 'parent' ||
+        currentUser.role === 'super_admin');
+    if (activeTrack !== 'teacher' && !isPrivileged && moduleId > 1) {
       if (!userProgress[`mod_${moduleId - 1}`]) {
         showToast(
           'Module Locked 🔒',
@@ -860,6 +913,13 @@ document.addEventListener('DOMContentLoaded', () => {
     activeModuleId = moduleId;
     const mod = courseData.modules.find((m) => m.id === moduleId);
     if (!mod) return;
+
+    if (
+      activeTrack !== 'teacher' &&
+      (activeTab === 'teleprompter' || activeTab === 'answerkeys' || activeTab === 'voicescript')
+    ) {
+      activeTab = 'handout';
+    }
 
     dashboardView.style.display = 'none';
     moduleView.style.display = 'block';
@@ -1019,7 +1079,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (videoChapterCount) videoChapterCount.textContent = chapters.length;
 
     // Check default video source
-    const defaultVideoPath = `/videos/module_${mod.id}.mp4`;
+    const defaultVideoPath = `videos/module_${mod.id}.mp4`;
     if (lessonVideoPlayer) {
       lessonVideoPlayer.src = defaultVideoPath;
 
@@ -1040,10 +1100,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const li = document.createElement('li');
         li.className = `video-chapter-item ${idx === 0 ? 'active' : ''}`;
         li.innerHTML = `
-          <div class="chapter-number">${chap.slideNum || idx + 1}</div>
-          <div class="chapter-info">
-            <strong>${escapeHtml(chap.title || `Slide ${idx + 1}`)}</strong>
-            ${chap.summary ? `<small>${escapeHtml(chap.summary)}</small>` : ''}
+          <div class="video-chapter-num">${chap.slideNum || idx + 1}</div>
+          <div class="video-chapter-info">
+            <div class="video-chapter-title">${escapeHtml(chap.title || `Slide ${idx + 1}`)}</div>
+            ${chap.summary ? `<div class="video-chapter-summary">${escapeHtml(chap.summary)}</div>` : ''}
           </div>
         `;
         li.addEventListener('click', () => {
@@ -1231,7 +1291,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // --------------------------------------------------------------------------
-  // Level 1 (~10y) Playful Comic Card Renderer & Theming
+  // Level 1 (Ages 6–8) Playful Comic Card Renderer & Theming
   // --------------------------------------------------------------------------
   function detectCardTheme(title = '', rawContent = '') {
     const t = (title || '').toLowerCase();
@@ -1476,7 +1536,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <div class="comic-mascot-avatar" aria-hidden="true">🦁</div>
           <div class="comic-intro-text">
             <div class="comic-intro-badge">
-              <i class="fa-solid fa-sparkles"></i> Level 1 Scholar Quest (~10y)
+              <i class="fa-solid fa-sparkles"></i> Level 1 Scholar Quest (Ages 6–8)
             </div>
             <h2 class="comic-intro-title">${escapeHtml(mod.title || 'Islamic Studies Quest')}</h2>
             <p class="comic-intro-desc">${escapeHtml(mod.description || 'Embark on an illustrated adventure of faith, character, and learning!')}</p>
@@ -2497,8 +2557,13 @@ document.addEventListener('DOMContentLoaded', () => {
     certModuleName.textContent = mod ? `Module ${mod.id}: ${mod.title}` : 'Islamic Studies Module';
     certScoreBadge.textContent = `Score Achieved: ${pct}%`;
     certDateText.textContent = `Issue Date: ${new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}`;
-    if (certStudentName && activeChild?.name) {
-      certStudentName.value = activeChild.name;
+    if (certStudentName) {
+      certStudentName.value =
+        activeChild && activeChild.name
+          ? activeChild.name
+          : currentUser && currentUser.displayName
+            ? currentUser.displayName
+            : 'Faithful Student';
     }
     openAccessibleModal(certModal, '#certCloseBtn');
   }
@@ -2584,11 +2649,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function updateProgressUI() {
     const completedMods = Object.keys(userProgress).filter((k) => userProgress[k]).length;
-    const total = 9;
+    const total = (courseData && courseData.modules && courseData.modules.length) || 9;
     const pct = Math.round((completedMods / total) * 100);
     progressPercent.textContent = `${pct}%`;
     progressBarFill.style.width = `${pct}%`;
-    if (progressSubtext) progressSubtext.textContent = `${completedMods} of 9 Modules Completed`;
+    if (progressSubtext)
+      progressSubtext.textContent = `${completedMods} of ${total} Modules Completed`;
   }
 
   // --------------------------------------------------------------------------
@@ -3200,9 +3266,17 @@ document.addEventListener('DOMContentLoaded', () => {
     if (statActiveLearnerName) statActiveLearnerName.textContent = child.name;
     updateStreakUI();
 
-    // Switch track UI if child track differs
-    if (child.assignedTrack) {
+    // Switch track UI if child track differs or re-render current view
+    if (child.assignedTrack && child.assignedTrack !== activeTrack) {
       switchTrack(child.assignedTrack);
+    } else {
+      if (activeModuleId !== null) {
+        openModule(activeModuleId);
+      } else {
+        renderDashboard();
+        renderSidebarModules();
+        updateProgressUI();
+      }
     }
   }
 
@@ -3420,7 +3494,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <div class="empty-child-card">
             <div class="empty-child-icon"><i class="fa-solid fa-child-reaching"></i></div>
             <h3>No Child Profiles Yet</h3>
-            <p>Add your children to assign personalized Level 1 (~10y) or Level 2 (13y+) tracks, track their quiz achievements, and print completion certificates!</p>
+            <p>Add your children to assign personalized Level 1–5 tracks, track their quiz achievements, and print completion certificates!</p>
             <button class="btn-primary-action" id="emptyAddChildBtn">
               <i class="fa-solid fa-user-plus"></i> Add Your First Child Profile
             </button>

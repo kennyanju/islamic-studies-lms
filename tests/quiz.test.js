@@ -15,7 +15,7 @@ describe('Server-Side Quiz Grading & Module Validation Tests', () => {
   test('POST /api/quiz/grade - Grade Module 1 quiz with answers', async () => {
     const res = await agent.post('/api/quiz/grade').send({
       moduleId: 1,
-      track: 'level1',
+      track: 'level3',
       answers: {
         0: 'A',
         1: 'C',

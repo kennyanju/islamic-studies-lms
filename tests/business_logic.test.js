@@ -31,7 +31,7 @@ describe('Business Logic & Domain Rule Verification Tests', () => {
     test('POST /api/quiz/grade - Grade with answers keyed by question index (0, 1, ...)', async () => {
       const res = await parent1Agent.post('/api/quiz/grade').send({
         moduleId: 1,
-        track: 'level1',
+        track: 'level3',
         answers: {
           0: 'A',
           1: 'C',
@@ -54,7 +54,7 @@ describe('Business Logic & Domain Rule Verification Tests', () => {
     test('POST /api/quiz/grade - Grade with answers keyed by question ID (e.g. q1, q2)', async () => {
       const res = await parent1Agent.post('/api/quiz/grade').send({
         moduleId: 1,
-        track: 'level1',
+        track: 'level3',
         answers: {
           q1: 'A',
           q2: 'C',
@@ -77,7 +77,7 @@ describe('Business Logic & Domain Rule Verification Tests', () => {
       // 6 out of 8 correct = 75% -> Failed
       const failRes = await parent1Agent.post('/api/quiz/grade').send({
         moduleId: 1,
-        track: 'level1',
+        track: 'level3',
         answers: {
           0: 'A',
           1: 'C',
