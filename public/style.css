@@ -5137,16 +5137,48 @@ body.unauthenticated-view .main-content {
 
 /* Legal Modal Styling */
 .legal-modal-card {
-  max-width: 680px;
-  max-height: 85vh;
+  max-width: 720px;
+  max-height: 88vh;
   display: flex;
   flex-direction: column;
+}
+
+.legal-tabs {
+  display: flex;
+  gap: 8px;
+  padding: 0 24px 14px 24px;
+  border-bottom: 1px solid var(--card-border, #1f2937);
+  background: var(--card-bg, #111827);
+  flex-wrap: wrap;
+}
+
+.legal-tabs .auth-tab-btn {
+  flex: 1;
+  min-width: 140px;
+  padding: 8px 14px;
+  font-size: 0.85rem;
+  border-radius: var(--radius-md, 8px);
+  cursor: pointer;
+  transition: var(--transition, all 0.2s);
 }
 
 .legal-modal-body {
   overflow-y: auto;
   padding: 24px;
   line-height: 1.6;
+  flex: 1;
+}
+
+.legal-tab-panel {
+  animation: fadeIn 0.2s ease-in-out;
+}
+
+.legal-modal-footer {
+  padding: 14px 24px;
+  border-top: 1px solid var(--border-color, #334155);
+  display: flex;
+  justify-content: flex-end;
+  background: var(--card-bg, #111827);
 }
 
 .legal-section {

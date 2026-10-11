@@ -38,4 +38,18 @@ describe('OpenAPI Documentation & Health API Tests', () => {
     expect(res.headers['report-to']).toBeTruthy();
     expect(res.headers['reporting-endpoints']).toContain('csp-endpoint');
   });
+
+  test('GET /privacy, /terms, and /cookies redirect to SPA policy views', async () => {
+    const resPrivacy = await request(app).get('/privacy');
+    expect(resPrivacy.statusCode).toBe(302);
+    expect(resPrivacy.headers.location).toBe('/#privacy');
+
+    const resTerms = await request(app).get('/terms');
+    expect(resTerms.statusCode).toBe(302);
+    expect(resTerms.headers.location).toBe('/#terms');
+
+    const resCookies = await request(app).get('/cookies');
+    expect(resCookies.statusCode).toBe(302);
+    expect(resCookies.headers.location).toBe('/#cookies');
+  });
 });

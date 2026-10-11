@@ -2895,7 +2895,7 @@
       </div>
     </div>
 
-    <!-- Privacy Policy & Legal Modal -->
+    <!-- Privacy Policy, Terms of Service & Cookie Security Modal -->
     <div
       class="modal-backdrop"
       id="privacyTermsModal"
@@ -2905,65 +2905,232 @@
       aria-labelledby="legalModalHeading"
     >
       <div class="modal-card legal-modal-card">
-        <button class="modal-close-btn" id="privacyTermsCloseBtn" aria-label="Close modal">
+        <button class="modal-close-btn" id="privacyTermsCloseBtn" aria-label="Close legal modal">
           &times;
         </button>
         <div class="modal-header">
           <div class="modal-icon" aria-hidden="true">
             <i class="fa-solid fa-shield-halved" aria-hidden="true"></i>
           </div>
-          <h2 id="legalModalHeading">Privacy Policy & Security Commitments</h2>
-          <p>Transparency, learner privacy, and data security standards</p>
+          <h2 id="legalModalHeading">Privacy Policy</h2>
+          <p id="legalModalSubheading">Transparency, learner safety, and data security standards</p>
         </div>
+
+        <!-- Accessible Legal Tabs -->
+        <div class="legal-tabs" role="tablist" aria-label="Trust and Legal Policies">
+          <button
+            type="button"
+            class="auth-tab-btn active"
+            id="legalTabPrivacyBtn"
+            role="tab"
+            aria-selected="true"
+            aria-controls="legalTabPrivacyContent"
+            data-legaltab="privacy"
+          >
+            <i class="fa-solid fa-user-shield" aria-hidden="true"></i> Privacy Policy
+          </button>
+          <button
+            type="button"
+            class="auth-tab-btn"
+            id="legalTabTermsBtn"
+            role="tab"
+            aria-selected="false"
+            aria-controls="legalTabTermsContent"
+            data-legaltab="terms"
+          >
+            <i class="fa-solid fa-file-contract" aria-hidden="true"></i> Terms of Service
+          </button>
+          <button
+            type="button"
+            class="auth-tab-btn"
+            id="legalTabCookieBtn"
+            role="tab"
+            aria-selected="false"
+            aria-controls="legalTabCookieContent"
+            data-legaltab="cookie"
+          >
+            <i class="fa-solid fa-cookie-bite" aria-hidden="true"></i> Cookie & Security
+          </button>
+        </div>
+
         <div class="modal-body legal-modal-body">
-          <div class="legal-section">
-            <h3><i class="fa-solid fa-lock"></i> 1. Family & Child Privacy Guarantee</h3>
-            <p>
-              The Islamic Studies Family LMS is built with family privacy as our foremost priority.
-              We do not sell, rent, or monetize personal data. Learner accounts are managed directly
-              by parents or educators with optional 4-digit PIN security codes.
-            </p>
+          <!-- 1. PRIVACY POLICY PANEL -->
+          <div
+            id="legalTabPrivacyContent"
+            class="legal-tab-panel"
+            role="tabpanel"
+            aria-labelledby="legalTabPrivacyBtn"
+          >
+            <div class="legal-section">
+              <h3><i class="fa-solid fa-shield-heart"></i> 1. Family & Child Privacy Guarantee</h3>
+              <p>
+                Islamic Studies Family LMS is engineered with child and family privacy as our core
+                foundation. We adhere strictly to the principle of minimal data collection. We do
+                not sell, rent, monetize, or profile learner data, and our platform is 100% ad-free.
+              </p>
+            </div>
+            <div class="legal-section">
+              <h3><i class="fa-solid fa-database"></i> 2. What Information We Store</h3>
+              <p>We collect only the essential data required to provide personalized learning:</p>
+              <ul>
+                <li>
+                  <strong>Parent & Educator Accounts:</strong> Email address, optional display name,
+                  and cryptographically salted PBKDF2 password hashes (100,000 iterations).
+                </li>
+                <li>
+                  <strong>Learner Profiles:</strong> Child first name or nickname, chosen avatar,
+                  age track level (Ages 6–16+), and optional 4-digit PIN hash for sibling privacy.
+                </li>
+                <li>
+                  <strong>Curriculum Progress:</strong> Completed lessons, quiz scores, daily
+                  streaks, learner reflections, and completion certificates.
+                </li>
+              </ul>
+            </div>
+            <div class="legal-section">
+              <h3>
+                <i class="fa-solid fa-user-check"></i> 3. Parental Rights & GDPR / COPPA Compliance
+              </h3>
+              <p>
+                Parents retain complete authority over their family records. From the Parent
+                Dashboard, parents may view, update, export, or permanently delete child profiles.
+                Deleting a child profile immediately triggers a cascading deletion of all associated
+                quiz scores, reflections, and certificates.
+              </p>
+            </div>
+            <div class="legal-section">
+              <h3><i class="fa-solid fa-ban"></i> 4. Zero Commercial Tracking</h3>
+              <p>
+                We do not integrate commercial analytics SDKs, behavioral advertising networks, or
+                third-party tracking pixels. Your family's educational journey remains entirely
+                private.
+              </p>
+            </div>
           </div>
-          <div class="legal-section">
-            <h3><i class="fa-solid fa-database"></i> 2. What Information We Store</h3>
-            <p>
-              We collect and securely store only the minimum data necessary to operate the
-              educational platform:
-            </p>
-            <ul>
-              <li>
-                <strong>Parent / Educator Accounts:</strong> Email address, display name, and salted
-                PBKDF2 password hashes (100,000 rounds).
-              </li>
-              <li>
-                <strong>Learner Profiles:</strong> Name or nickname, avatar icon, assigned learning
-                track (Level 1 or Level 2), and optional PIN hash.
-              </li>
-              <li>
-                <strong>Curriculum Progress:</strong> Module completion markers, quiz scores, and
-                verified completion certificates.
-              </li>
-            </ul>
+
+          <!-- 2. TERMS OF SERVICE PANEL -->
+          <div
+            id="legalTabTermsContent"
+            class="legal-tab-panel"
+            role="tabpanel"
+            aria-labelledby="legalTabTermsBtn"
+            style="display: none"
+          >
+            <div class="legal-section">
+              <h3>
+                <i class="fa-solid fa-graduation-cap"></i> 1. Educational Purpose & Free Access
+              </h3>
+              <p>
+                Islamic Studies Family LMS is provided as a non-commercial educational service to
+                support families, homeschoolers, students, and community madrasahs in learning
+                authentic Islamic knowledge.
+              </p>
+            </div>
+            <div class="legal-section">
+              <h3>
+                <i class="fa-solid fa-book-open"></i> 2. Classical Sunni Scholarship & Sources
+              </h3>
+              <p>
+                All 9 course modules are authored in accordance with orthodox classical Sunni
+                traditions: Ash'ari Aqidah, Maliki Fiqh, and authentic Seerah. Learning materials
+                are designed for educational enrichment and pedagogical discussion; they do not
+                constitute formal legal verdicts (<em>fatawa</em>) for specific personal disputes.
+              </p>
+            </div>
+            <div class="legal-section">
+              <h3>
+                <i class="fa-solid fa-users-gear"></i> 3. Account Responsibility & Family
+                Supervision
+              </h3>
+              <p>
+                Parents and educators are responsible for creating and supervising child profiles,
+                maintaining the confidentiality of account credentials, and guiding young learners
+                through the curriculum.
+              </p>
+            </div>
+            <div class="legal-section">
+              <h3><i class="fa-solid fa-certificate"></i> 4. Academic Integrity & Certificates</h3>
+              <p>
+                Personalized completion certificates are awarded upon passing module assessments
+                (80%+ score). Certificates include cryptographic verification hashes. Certificates
+                must not be altered, duplicated, or falsified.
+              </p>
+            </div>
+            <div class="legal-section">
+              <h3><i class="fa-solid fa-copyright"></i> 5. Intellectual Property & Fair Use</h3>
+              <p>
+                All structured curriculum texts, lesson notes, slide decks, and printable handouts
+                are protected. Parents and educators are granted a royalty-free license to print,
+                display, and distribute these materials for home and classroom learning.
+              </p>
+            </div>
           </div>
-          <div class="legal-section">
-            <h3><i class="fa-solid fa-cookie-bite"></i> 3. Cookies & Session Management</h3>
-            <p>
-              We utilize strictly necessary session cookies (<code>cf_session</code>) configured
-              with <code>HttpOnly</code>, <code>Secure</code>, and <code>SameSite=Lax</code> flags
-              to safeguard your account. No advertising or tracking cookies are used.
-            </p>
-          </div>
-          <div class="legal-section">
-            <h3><i class="fa-solid fa-book-open"></i> 4. Educational Integrity</h3>
-            <p>
-              All curriculum lessons, handouts, and teacher presentation slides are developed
-              following orthodox classical Sunni scholarship (Maliki Fiqh & Ash'ari Creed) for
-              private family and classroom instruction.
-            </p>
+
+          <!-- 3. COOKIE & SECURITY POLICY PANEL -->
+          <div
+            id="legalTabCookieContent"
+            class="legal-tab-panel"
+            role="tabpanel"
+            aria-labelledby="legalTabCookieBtn"
+            style="display: none"
+          >
+            <div class="legal-section">
+              <h3><i class="fa-solid fa-cookie"></i> 1. Strictly Necessary Cookies Only</h3>
+              <p>
+                We use strictly necessary session cookies (<code>cf_session</code>) solely to
+                maintain authenticated sessions for parents, teachers, and administrators.
+              </p>
+              <ul>
+                <li><code>HttpOnly</code>: Prevents malicious client-side JavaScript access.</li>
+                <li>
+                  <code>Secure</code>: Mandates transmission exclusively over encrypted HTTPS.
+                </li>
+                <li>
+                  <code>SameSite=Lax</code>: Protects against Cross-Site Request Forgery (CSRF).
+                </li>
+              </ul>
+            </div>
+            <div class="legal-section">
+              <h3><i class="fa-solid fa-eye-slash"></i> 2. Zero Tracking or Marketing Cookies</h3>
+              <p>
+                We do NOT place advertising cookies, retargeting pixels, social media widgets, or
+                third-party tracking cookies on your device.
+              </p>
+            </div>
+            <div class="legal-section">
+              <h3><i class="fa-solid fa-lock"></i> 3. Cryptographic Security Standards</h3>
+              <p>Our infrastructure employs enterprise-grade defense-in-depth measures:</p>
+              <ul>
+                <li>
+                  <strong>Password Hashing:</strong> PBKDF2-HMAC-SHA256 with unique 16-byte random
+                  salts and 100,000 computation rounds.
+                </li>
+                <li>
+                  <strong>Transport Layer Security:</strong> TLS 1.3 encryption across Cloudflare's
+                  global edge network.
+                </li>
+                <li>
+                  <strong>Content Security Policy (CSP):</strong> Strict script and object source
+                  restrictions to prevent Cross-Site Scripting (XSS).
+                </li>
+                <li>
+                  <strong>Brute-Force Rate Limiting:</strong> Intelligent throttling on login and
+                  child PIN entry attempts.
+                </li>
+              </ul>
+            </div>
+            <div class="legal-section">
+              <h3><i class="fa-solid fa-hard-drive"></i> 4. Offline Local Storage</h3>
+              <p>
+                The LMS PWA caches course syllabus modules and theme preferences in your browser's
+                local storage to facilitate instant offline study. You can clear this cache at any
+                time through your browser settings.
+              </p>
+            </div>
           </div>
         </div>
         <div
-          class="modal-footer"
+          class="modal-footer legal-modal-footer"
           style="
             padding: 16px 24px;
             border-top: 1px solid var(--border-color, #334155);
@@ -3001,9 +3168,33 @@
         </div>
         <div class="footer-links-col">
           <h4>Trust & Privacy</h4>
-          <button class="footer-modal-btn" id="openPrivacyModalBtn">Privacy Policy</button>
-          <button class="footer-modal-btn" id="openTermsModalBtn">Terms of Service</button>
-          <button class="footer-modal-btn" id="openCookieModalBtn">Cookie & Security Policy</button>
+          <button
+            type="button"
+            class="footer-modal-btn"
+            id="openPrivacyModalBtn"
+            aria-haspopup="dialog"
+            aria-controls="privacyTermsModal"
+          >
+            Privacy Policy
+          </button>
+          <button
+            type="button"
+            class="footer-modal-btn"
+            id="openTermsModalBtn"
+            aria-haspopup="dialog"
+            aria-controls="privacyTermsModal"
+          >
+            Terms of Service
+          </button>
+          <button
+            type="button"
+            class="footer-modal-btn"
+            id="openCookieModalBtn"
+            aria-haspopup="dialog"
+            aria-controls="privacyTermsModal"
+          >
+            Cookie & Security Policy
+          </button>
         </div>
       </div>
       <div class="footer-bottom-row">

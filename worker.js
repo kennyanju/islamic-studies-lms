@@ -14,6 +14,21 @@ export default {
         return await onRequest({ request, env, ctx });
       }
 
+      // Legal policy redirect aliases
+      if (url.pathname === '/privacy' || url.pathname === '/privacy-policy') {
+        return Response.redirect(`${url.origin}/#privacy`, 302);
+      }
+      if (url.pathname === '/terms' || url.pathname === '/terms-of-service') {
+        return Response.redirect(`${url.origin}/#terms`, 302);
+      }
+      if (
+        url.pathname === '/cookies' ||
+        url.pathname === '/cookie-policy' ||
+        url.pathname === '/security-policy'
+      ) {
+        return Response.redirect(`${url.origin}/#cookies`, 302);
+      }
+
       // Serve static assets via Cloudflare Workers Assets
       if (env.ASSETS) {
         return await env.ASSETS.fetch(request);

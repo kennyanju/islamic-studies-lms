@@ -100,4 +100,17 @@ describe('Accessibility & Web Standards Compliance Tests', () => {
     expect(html).toMatch(/id=["']headerStreakPill["'][^>]*role=["']status["']/i);
     expect(html).toMatch(/id=["']headerStreakPill["'][^>]*aria-label=["'][^"']*streak/i);
   });
+
+  test('Legal & Trust footer buttons and modal tabs are accessible and present', () => {
+    expect(html).toContain('id="openPrivacyModalBtn"');
+    expect(html).toContain('id="openTermsModalBtn"');
+    expect(html).toContain('id="openCookieModalBtn"');
+
+    expect(html).toContain('id="legalTabPrivacyBtn"');
+    expect(html).toContain('id="legalTabTermsBtn"');
+    expect(html).toContain('id="legalTabCookieBtn"');
+    expect(html).toContain('id="legalTabPrivacyContent"');
+    expect(html).toContain('id="legalTabTermsContent"');
+    expect(html).toContain('id="legalTabCookieContent"');
+  });
 });

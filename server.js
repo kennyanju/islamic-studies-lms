@@ -463,6 +463,13 @@ app.get(['/api/docs', '/docs'], (req, res) => {
   }
 });
 
+// Legal & Trust Direct Endpoints (Redirect to corresponding SPA view/hash)
+app.get(['/privacy', '/privacy-policy'], (req, res) => res.redirect('/#privacy'));
+app.get(['/terms', '/terms-of-service'], (req, res) => res.redirect('/#terms'));
+app.get(['/cookies', '/cookie-policy', '/security-policy'], (req, res) =>
+  res.redirect('/#cookies')
+);
+
 // Course Data / Modules API
 app.get(['/api/course-data', '/api/modules'], (req, res) => {
   if (fs.existsSync(dataFile)) {

@@ -5820,42 +5820,114 @@ document.addEventListener('DOMContentLoaded', () => {
     const closeBtn = document.getElementById('privacyTermsCloseBtn');
     const closeBottomBtn = document.getElementById('legalCloseBottomBtn');
 
-    function openModal() {
-      if (legalModal) {
-        legalModal.style.opacity = '1';
-        legalModal.style.visibility = 'visible';
-      }
+    const tabPrivacyBtn = document.getElementById('legalTabPrivacyBtn');
+    const tabTermsBtn = document.getElementById('legalTabTermsBtn');
+    const tabCookieBtn = document.getElementById('legalTabCookieBtn');
+
+    function switchLegalTab(tabName) {
+      const tabs = {
+        privacy: {
+          btn: tabPrivacyBtn,
+          panel: document.getElementById('legalTabPrivacyContent'),
+          title: 'Privacy Policy',
+          subtitle: 'Transparency, learner safety, and data security standards'
+        },
+        terms: {
+          btn: tabTermsBtn,
+          panel: document.getElementById('legalTabTermsContent'),
+          title: 'Terms of Service',
+          subtitle: 'Educational guidelines, classical scholarship, and permitted use'
+        },
+        cookie: {
+          btn: tabCookieBtn,
+          panel: document.getElementById('legalTabCookieContent'),
+          title: 'Cookie & Security Policy',
+          subtitle: 'Strictly necessary cookies, encryption standards, and zero tracking'
+        }
+      };
+
+      const heading = document.getElementById('legalModalHeading');
+      const subheading = document.getElementById('legalModalSubheading');
+
+      Object.keys(tabs).forEach((key) => {
+        const item = tabs[key];
+        if (!item.btn || !item.panel) return;
+        if (key === tabName) {
+          item.btn.classList.add('active');
+          item.btn.setAttribute('aria-selected', 'true');
+          item.panel.style.display = 'block';
+          if (heading && item.title) heading.textContent = item.title;
+          if (subheading && item.subtitle) subheading.textContent = item.subtitle;
+        } else {
+          item.btn.classList.remove('active');
+          item.btn.setAttribute('aria-selected', 'false');
+          item.panel.style.display = 'none';
+        }
+      });
+
+      const body = legalModal ? legalModal.querySelector('.legal-modal-body') : null;
+      if (body) body.scrollTop = 0;
     }
 
-    function closeModal() {
-      if (legalModal) {
-        legalModal.style.opacity = '0';
-        legalModal.style.visibility = 'hidden';
-      }
+    function openLegalTab(tabName) {
+      if (!legalModal) return;
+      switchLegalTab(tabName);
+      const targetBtn =
+        tabName === 'terms' ? tabTermsBtn : tabName === 'cookie' ? tabCookieBtn : tabPrivacyBtn;
+      openAccessibleModal(legalModal, targetBtn ? `#${targetBtn.id}` : null);
     }
 
-    if (openPrivacyBtn)
+    if (tabPrivacyBtn) tabPrivacyBtn.addEventListener('click', () => switchLegalTab('privacy'));
+    if (tabTermsBtn) tabTermsBtn.addEventListener('click', () => switchLegalTab('terms'));
+    if (tabCookieBtn) tabCookieBtn.addEventListener('click', () => switchLegalTab('cookie'));
+
+    if (openPrivacyBtn) {
       openPrivacyBtn.addEventListener('click', (e) => {
         e.preventDefault();
-        openModal();
-      });
-    if (openTermsBtn)
-      openTermsBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        openModal();
-      });
-    if (openCookieBtn)
-      openCookieBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        openModal();
-      });
-    if (closeBtn) closeBtn.addEventListener('click', closeModal);
-    if (closeBottomBtn) closeBottomBtn.addEventListener('click', closeModal);
-    if (legalModal) {
-      legalModal.addEventListener('click', (e) => {
-        if (e.target === legalModal) closeModal();
+        openLegalTab('privacy');
       });
     }
+    if (openTermsBtn) {
+      openTermsBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        openLegalTab('terms');
+      });
+    }
+    if (openCookieBtn) {
+      openCookieBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        openLegalTab('cookie');
+      });
+    }
+
+    if (closeBtn) closeBtn.addEventListener('click', () => closeAccessibleModal(legalModal));
+    if (closeBottomBtn)
+      closeBottomBtn.addEventListener('click', () => closeAccessibleModal(legalModal));
+    if (legalModal) {
+      legalModal.addEventListener('click', (e) => {
+        if (e.target === legalModal) closeAccessibleModal(legalModal);
+      });
+    }
+
+    // Support URL hash routing for direct links: #privacy, #terms, #cookies
+    function checkHashForLegal() {
+      const hash = (window.location.hash || '').toLowerCase();
+      if (hash === '#privacy' || hash === '#privacy-policy') {
+        openLegalTab('privacy');
+      } else if (hash === '#terms' || hash === '#terms-of-service') {
+        openLegalTab('terms');
+      } else if (
+        hash === '#cookie' ||
+        hash === '#cookies' ||
+        hash === '#security' ||
+        hash === '#cookie-policy'
+      ) {
+        openLegalTab('cookie');
+      }
+    }
+
+    window.addEventListener('hashchange', checkHashForLegal);
+    checkHashForLegal();
 
     // Connect curriculum footer links to category filter
     document.querySelectorAll('.footer-nav-link').forEach((link) => {
