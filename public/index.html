@@ -1162,8 +1162,8 @@
               </div>
               <h1 id="parentWelcomeTitle">Welcome, Parent!</h1>
               <p>
-                Manage your children's learning profiles, assign tracks (Level 1 vs Level 2),
-                monitor real-time quiz performance, and switch learner views.
+                Manage your children's learning profiles, assign tracks (Levels 1–5), monitor
+                real-time quiz performance, and switch learner views.
               </p>
 
               <div class="hero-stats">
@@ -2756,6 +2756,24 @@
                 aria-label="Permanently delete this learner profile and associated data (GDPR)"
               >
                 <i class="fa-solid fa-trash" aria-hidden="true"></i> Delete Learner
+              </button>
+              <button
+                type="button"
+                class="btn-warning-modal"
+                id="resetChildProgressBtn"
+                style="
+                  display: none;
+                  background: rgba(245, 158, 11, 0.15);
+                  color: #fbbf24;
+                  border: 1px solid rgba(245, 158, 11, 0.4);
+                  border-radius: 8px;
+                  padding: 10px 16px;
+                  cursor: pointer;
+                  margin-right: 8px;
+                "
+                aria-label="Reset curriculum progress for this child"
+              >
+                <i class="fa-solid fa-rotate-left" aria-hidden="true"></i> Reset Progress
               </button>
               <button
                 type="button"

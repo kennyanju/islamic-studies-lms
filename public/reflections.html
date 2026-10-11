@@ -20,10 +20,10 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
     />
 
-    <link rel="icon" type="image/svg+xml" href="/icons/favicon.svg" />
-    <link rel="manifest" href="/manifest.json" />
+    <link rel="icon" type="image/svg+xml" href="icons/favicon.svg" />
+    <link rel="manifest" href="manifest.json" />
     <meta name="theme-color" content="#059669" />
-    <link rel="stylesheet" href="/style.css" />
+    <link rel="stylesheet" href="style.css" />
 
     <style>
       /* ─── Page-specific styles ─────────────────────────────────── */
@@ -407,10 +407,10 @@
   <body>
     <!-- ─── Navigation ──────────────────────────────────────────── -->
     <nav class="ref-nav">
-      <a href="/" class="ref-nav-logo">☪ Islamic Studies LMS</a>
+      <a href="./" class="ref-nav-logo">☪ Islamic Studies LMS</a>
       <span class="ref-nav-sep">/</span>
       <h1>Student Reflections</h1>
-      <a href="/" class="ref-nav-back" id="backToAppBtn">
+      <a href="./" class="ref-nav-back" id="backToAppBtn">
         <i class="fa fa-arrow-left"></i> Back to Dashboard
       </a>
     </nav>
@@ -527,14 +527,28 @@
           const res = await fetch(`${apiBase}/auth/me`, { credentials: 'include' });
           const data = await res.json();
           if (!data.success || !data.user) {
-            window.location.href = '/?redirect=reflections';
+            const localUser = JSON.parse(localStorage.getItem('lms_user') || 'null');
+            if (localUser) {
+              $('authCheck').style.display = 'none';
+              $('pageContent').style.display = 'block';
+              await loadChildren();
+              return;
+            }
+            window.location.href = './?redirect=reflections';
             return;
           }
           $('authCheck').style.display = 'none';
           $('pageContent').style.display = 'block';
           await loadChildren();
         } catch (e) {
-          window.location.href = '/';
+          const localUser = JSON.parse(localStorage.getItem('lms_user') || 'null');
+          if (localUser) {
+            $('authCheck').style.display = 'none';
+            $('pageContent').style.display = 'block';
+            await loadChildren();
+            return;
+          }
+          window.location.href = './';
         }
       }
 
@@ -543,19 +557,23 @@
         try {
           const res = await fetch(`${apiBase}/parent/children`, { credentials: 'include' });
           const data = await res.json();
-          if (!data.success) throw new Error(data.error || 'Failed to load profiles');
-          allChildren = data.children || [];
-          renderChildButtons();
-          // Auto-select child from URL hash (e.g. /reflections.html#childId)
-          const hashId = decodeURIComponent(window.location.hash.replace('#', ''));
-          const hashChild = hashId && allChildren.find((c) => c.id === hashId);
-          if (hashChild) {
-            selectChild(hashChild.id);
-          } else if (allChildren.length === 1) {
-            selectChild(allChildren[0].id);
+          if (data && data.success && data.children) {
+            allChildren = data.children;
+          } else {
+            allChildren = JSON.parse(localStorage.getItem('lms_children') || '[]');
           }
         } catch (e) {
-          showError(e.message);
+          allChildren = JSON.parse(localStorage.getItem('lms_children') || '[]');
+        }
+
+        renderChildButtons();
+        // Auto-select child from URL hash (e.g. reflections.html#childId)
+        const hashId = decodeURIComponent(window.location.hash.replace('#', ''));
+        const hashChild = hashId && allChildren.find((c) => c.id === hashId);
+        if (hashChild) {
+          selectChild(hashChild.id);
+        } else if (allChildren.length > 0) {
+          selectChild(allChildren[0].id);
         }
       }
 
@@ -566,7 +584,7 @@
           const btn = document.createElement('button');
           btn.className = 'child-btn';
           btn.id = `childBtn_${child.id}`;
-          btn.innerHTML = `<span class="avatar">${child.avatar || '🌟'}</span>${child.name}`;
+          btn.innerHTML = `<span class="avatar">${child.avatar || '🌟'}</span>${escapeHtml(child.name)}`;
           btn.addEventListener('click', () => selectChild(child.id));
           container.appendChild(btn);
         });
@@ -595,15 +613,31 @@
           const res = await fetch(`${apiBase}/parent/children/${childId}/reflections`, {
             credentials: 'include'
           });
-          const data = await res.json();
-          if (!data.success) throw new Error(data.error || 'Could not load reflections');
-
-          allReflections = data.reflections || [];
+          const data = await res.json().catch(() => ({}));
+          if (data && data.success) {
+            allReflections = data.reflections || [];
+          } else {
+            // Local storage fallback
+            const localScores = JSON.parse(
+              localStorage.getItem(`lms_quiz_scores_${childId}`) || '{}'
+            );
+            allReflections = Object.keys(localScores)
+              .filter((k) => localScores[k] && localScores[k].reflections)
+              .flatMap((k) => {
+                const reflMap = localScores[k].reflections;
+                return Object.keys(reflMap).map((qKey) => ({
+                  moduleId: parseInt(k, 10) || 1,
+                  questionId: qKey,
+                  responseText: reflMap[qKey],
+                  createdAt: localScores[k].timestamp || new Date().toISOString()
+                }));
+              });
+          }
 
           // Populate module filter
-          const moduleIds = [
-            ...new Set(allReflections.map((r) => r.moduleId || r.module_id))
-          ].sort();
+          const moduleIds = [...new Set(allReflections.map((r) => r.moduleId || r.module_id))].sort(
+            (a, b) => Number(a) - Number(b)
+          );
           const select = $('moduleFilter');
           select.innerHTML = '<option value="all">All Modules</option>';
           moduleIds.forEach((mId) => {
@@ -624,7 +658,7 @@
             $('filterBar').style.display = 'flex';
           }
         } catch (e) {
-          showError(e.message);
+          showError(e.message || 'Could not load reflections');
           $('reflectionsList').innerHTML = '';
         }
       }

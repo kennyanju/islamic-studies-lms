@@ -130,6 +130,57 @@ describe('Child Profiles & Access Control API Tests', () => {
     await db.deleteChild(maryamId);
   });
 
+  test('POST & PUT /api/parent/children - Supports Levels 1-5 track assignments', async () => {
+    // Log back in as parent 1
+    await agent1.post('/api/auth/login').send({
+      email: parent1Email,
+      password: 'Password123!'
+    });
+
+    // Create child with Level 4 track
+    const createRes = await agent1.post('/api/parent/children').send({
+      name: 'Yusuf',
+      avatar: '📖',
+      assignedTrack: 'level4',
+      pinCode: '7890'
+    });
+    expect(createRes.statusCode).toBe(200);
+    expect(createRes.body.success).toBe(true);
+    expect(createRes.body.child.assignedTrack).toBe('level4');
+    const yusufId = createRes.body.child.id;
+
+    // Update child to Level 5 track
+    const updateRes = await agent1.put(`/api/parent/children/${yusufId}`).send({
+      assignedTrack: 'level5'
+    });
+    expect(updateRes.statusCode).toBe(200);
+    expect(updateRes.body.success).toBe(true);
+    expect(updateRes.body.child.assignedTrack).toBe('level5');
+
+    // Clean up
+    await agent1.delete(`/api/parent/children/${yusufId}`);
+  });
+
+  test('DELETE /api/parent/progress/reset - Parent can reset child curriculum progress with access control', async () => {
+    // Parent 2 cannot reset Parent 1 child progress
+    const unauthorizedRes = await agent2.delete('/api/parent/progress/reset').send({
+      childId: createdChildId
+    });
+    expect(unauthorizedRes.statusCode).toBe(403);
+    expect(unauthorizedRes.body.success).toBe(false);
+
+    // Missing childId validation
+    const badReq = await agent1.delete('/api/parent/progress/reset').send({});
+    expect(badReq.statusCode).toBe(400);
+
+    // Parent 1 can reset own child progress
+    const resetRes = await agent1.delete('/api/parent/progress/reset').send({
+      childId: createdChildId
+    });
+    expect(resetRes.statusCode).toBe(200);
+    expect(resetRes.body.success).toBe(true);
+  });
+
   test('DELETE /api/parent/children/:id - Parent 1 can delete their child', async () => {
     // Log back in
     await agent1.post('/api/auth/login').send({

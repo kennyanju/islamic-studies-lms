@@ -1733,19 +1733,39 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   window.resetChildProgressAPI = async function (childId, moduleId = null) {
-    if (!currentUser) return;
+    if (!childId) return;
     try {
-      const res = await fetch('/api/parent/progress/reset', {
-        method: 'DELETE',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ childId, moduleId })
-      });
-      if (res.ok) {
-        showToast('Success', 'Progress reset successfully.', 'success');
-        syncCloudProgress(childId);
+      if (currentUser) {
+        await fetch('/api/parent/progress/reset', {
+          method: 'DELETE',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ childId, moduleId })
+        });
+      }
+      if (moduleId) {
+        const localProg = JSON.parse(localStorage.getItem(`lms_progress_${childId}`) || '{}');
+        delete localProg[moduleId];
+        localStorage.setItem(`lms_progress_${childId}`, JSON.stringify(localProg));
+      } else {
+        localStorage.removeItem(`lms_progress_${childId}`);
+        localStorage.removeItem(`lms_quiz_scores_${childId}`);
+        if (activeChild && activeChild.id === childId) {
+          userProgress = {};
+          localStorage.removeItem('lms_progress_global');
+        }
+      }
+      showToast('Progress Reset', 'Learner progress has been reset.', 'success');
+      if (activeChild && activeChild.id === childId) {
+        renderSidebarModules();
+        renderDashboard();
+        updateProgressUI();
+      }
+      if (parentDashboardView && parentDashboardView.style.display !== 'none') {
+        renderParentDashboard();
       }
     } catch (e) {
       console.error(e);
+      showToast('Error', 'Failed to reset progress.', 'error');
     }
   };
   async function syncCloudProgress(studentId = null) {
@@ -2552,21 +2572,29 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  function launchCertificate(pct) {
-    const mod = courseData.modules.find((m) => m.id === activeModuleId);
-    certModuleName.textContent = mod ? `Module ${mod.id}: ${mod.title}` : 'Islamic Studies Module';
-    certScoreBadge.textContent = `Score Achieved: ${pct}%`;
+  function launchCertificate(pct, modId = null, studentName = null) {
+    const targetModId = modId || activeModuleId;
+    const mod =
+      courseData && courseData.modules
+        ? courseData.modules.find((m) => m.id === targetModId)
+        : null;
+    certModuleName.textContent = mod
+      ? `Module ${mod.id}: ${mod.title}`
+      : 'Islamic Studies Curriculum';
+    certScoreBadge.textContent = pct ? `Score Achieved: ${pct}%` : 'Certificate of Achievement';
     certDateText.textContent = `Issue Date: ${new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}`;
     if (certStudentName) {
       certStudentName.value =
-        activeChild && activeChild.name
+        studentName ||
+        (activeChild && activeChild.name
           ? activeChild.name
           : currentUser && currentUser.displayName
             ? currentUser.displayName
-            : 'Faithful Student';
+            : 'Faithful Student');
     }
     openAccessibleModal(certModal, '#certCloseBtn');
   }
+  window.launchCertificate = launchCertificate;
 
   const certPrintBtn = document.getElementById('certPrintBtn');
   if (certPrintBtn) certPrintBtn.addEventListener('click', () => window.print());
@@ -3351,25 +3379,47 @@ document.addEventListener('DOMContentLoaded', () => {
     let quizAvg = 0;
     let allActivityLogs = [];
 
-    // Check Local Progress First
-    const localProg = JSON.parse(
-      localStorage.getItem(`lms_progress_${activeChild ? activeChild.id : 'global'}`) || '{}'
-    );
-    const localScores = JSON.parse(
-      localStorage.getItem(`lms_quiz_scores_${activeChild ? activeChild.id : 'global'}`) || '{}'
-    );
+    const kidsToTrack =
+      familyChildren && familyChildren.length > 0
+        ? familyChildren
+        : activeChild
+          ? [activeChild]
+          : [{ id: 'global', name: 'Learner', avatar: '🌟' }];
 
-    // Count completions from local storage
-    const completedKeys = Object.keys(localProg).filter((k) => localProg[k]);
-    completedModulesCount = completedKeys.length;
+    const localScoresList = [];
+    kidsToTrack.forEach((child) => {
+      const childProg = JSON.parse(localStorage.getItem(`lms_progress_${child.id}`) || '{}');
+      const childScores = JSON.parse(localStorage.getItem(`lms_quiz_scores_${child.id}`) || '{}');
 
-    const scoreKeys = Object.keys(localScores);
-    if (scoreKeys.length > 0) {
-      const sum = scoreKeys.reduce(
-        (acc, k) => acc + (localScores[k].percentage || localScores[k].score || 0),
-        0
-      );
-      quizAvg = Math.round(sum / scoreKeys.length);
+      const completedKeys = Object.keys(childProg).filter((k) => childProg[k]);
+      completedModulesCount += completedKeys.length;
+
+      Object.keys(childScores).forEach((k) => {
+        const sc = childScores[k];
+        const pct =
+          sc.percentage !== undefined
+            ? sc.percentage
+            : sc.maxScore
+              ? Math.round((sc.score / sc.maxScore) * 100)
+              : sc.score || 0;
+        localScoresList.push(pct);
+        allActivityLogs.push({
+          type: 'quiz',
+          item: {
+            moduleId: sc.moduleId || k,
+            score: sc.score || 0,
+            maxScore: sc.total || sc.maxScore || 10,
+            percentage: pct,
+            childId: child.id
+          },
+          date: new Date(sc.timestamp || Date.now())
+        });
+      });
+    });
+
+    if (localScoresList.length > 0) {
+      const sum = localScoresList.reduce((acc, val) => acc + val, 0);
+      quizAvg = Math.round(sum / localScoresList.length);
     }
 
     // Try fetching live server sync data
@@ -3380,23 +3430,30 @@ document.addEventListener('DOMContentLoaded', () => {
           const resJson = await res.json();
           if (resJson.success) {
             const pData = resJson.data || resJson.progress || {};
-            const childKey = `child_${activeChild ? activeChild.id : 'global'}`;
-            const childProg = pData[childKey] || {};
-            completedModulesCount = Math.max(
-              completedModulesCount,
-              Object.keys(childProg).filter((k) => childProg[k]).length
-            );
+            let serverCompleted = 0;
+            let serverScores = [];
 
-            const childScores = pData[`${childKey}_scores`] || [];
-            if (childScores.length > 0) {
-              const totalPct = childScores.reduce(
+            kidsToTrack.forEach((child) => {
+              const childKey = `child_${child.id}`;
+              const childProg = pData[childKey] || {};
+              serverCompleted += Object.keys(childProg).filter((k) => childProg[k]).length;
+              const childScores = pData[`${childKey}_scores`] || [];
+              serverScores = serverScores.concat(childScores);
+            });
+
+            if (serverCompleted > completedModulesCount) {
+              completedModulesCount = serverCompleted;
+            }
+
+            if (serverScores.length > 0) {
+              const totalPct = serverScores.reduce(
                 (acc, q) => acc + (q.maxScore ? (q.score / q.maxScore) * 100 : q.percentage || 0),
                 0
               );
-              quizAvg = Math.round(totalPct / childScores.length);
+              quizAvg = Math.round(totalPct / serverScores.length);
 
               allActivityLogs = [
-                ...childScores.map((q) => ({
+                ...serverScores.map((q) => ({
                   type: 'quiz',
                   item: q,
                   date: new Date(q.timestamp || q.createdAt || Date.now())
@@ -3421,24 +3478,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // Render Family Activity List
     if (familyActivityList) {
       familyActivityList.innerHTML = '';
-      if (allActivityLogs.length === 0 && scoreKeys.length > 0) {
-        // Build activity logs from local storage if server returned no records
-        scoreKeys.forEach((k) => {
-          const sc = localScores[k];
-          allActivityLogs.push({
-            type: 'quiz',
-            item: {
-              moduleId: sc.moduleId || 1,
-              score: sc.score || 5,
-              maxScore: sc.total || sc.maxScore || 5,
-              percentage: sc.percentage || 100,
-              childId: activeChild?.id || null
-            },
-            date: new Date()
-          });
-        });
-      }
-
       allActivityLogs.sort((a, b) => b.date - a.date);
 
       if (allActivityLogs.length === 0) {
@@ -3514,7 +3553,16 @@ document.addEventListener('DOMContentLoaded', () => {
           const childTrack = child.assignedTrack || 'level1';
           const childProg = JSON.parse(localStorage.getItem(`lms_progress_${child.id}`) || '{}');
           const childCompletedCount = Object.keys(childProg).filter((k) => childProg[k]).length;
-          const childPct = Math.round((childCompletedCount / 9) * 100);
+          const totalCourseModules =
+            courseData && courseData.modules && courseData.modules.length > 0
+              ? courseData.modules.length
+              : 9;
+          const childPct = Math.min(
+            100,
+            Math.round((childCompletedCount / totalCourseModules) * 100)
+          );
+          const baseUrl = window.location.href.split('?')[0].split('#')[0];
+          const directKidUrl = `${baseUrl}?kid=${encodeURIComponent(child.id)}`;
 
           card.innerHTML = `
             ${isActive ? '<span class="active-learner-tag"><i class="fa-solid fa-circle-check"></i> Active Learner</span>' : ''}
@@ -3535,7 +3583,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <div class="child-progress-box">
               <div class="child-progress-head">
                 <span>Curriculum Progress</span>
-                <strong>${childCompletedCount} / 9 Modules (${childPct}%)</strong>
+                <strong>${childCompletedCount} / ${totalCourseModules} Modules (${childPct}%)</strong>
               </div>
               <div class="progress-bar-bg" style="height: 8px;">
                 <div class="progress-bar-fill" style="width: ${childPct}%;"></div>
@@ -3557,10 +3605,17 @@ document.addEventListener('DOMContentLoaded', () => {
               <button class="btn-child-switch ${isActive ? 'btn-primary-action' : ''}" data-id="${escapeHtml(child.id)}">
                 <i class="fa-solid ${isActive ? 'fa-book-open' : 'fa-user-check'}"></i> ${isActive ? 'Start Learning' : 'Select Learner'}
               </button>
-              <a href="/reflections.html#${encodeURIComponent(child.id)}" class="btn-child-icon" title="View ${escapeHtml(child.name)}'s Reflections" style="text-decoration:none">
+              ${
+                childCompletedCount > 0
+                  ? `<button class="btn-child-icon view-child-cert-btn" data-id="${escapeHtml(child.id)}" title="View ${escapeHtml(child.name)}'s Certificate">
+                      <i class="fa-solid fa-award"></i>
+                    </button>`
+                  : ''
+              }
+              <a href="reflections.html#${encodeURIComponent(child.id)}" class="btn-child-icon" title="View ${escapeHtml(child.name)}'s Reflections" style="text-decoration:none">
                 <i class="fa-solid fa-journal-whills"></i>
               </a>
-              <a href="${window.location.origin}/?kid=${encodeURIComponent(child.id)}" target="_blank" class="btn-child-icon open-kid-link-btn" data-id="${escapeHtml(child.id)}" title="Open Profile in New Tab">
+              <a href="${directKidUrl}" target="_blank" class="btn-child-icon open-kid-link-btn" data-id="${escapeHtml(child.id)}" title="Open Profile in New Tab">
                 <i class="fa-solid fa-arrow-up-right-from-square"></i>
               </a>
               <button class="btn-child-icon copy-kid-link-btn" data-id="${escapeHtml(child.id)}" title="Copy Kids Direct Access Link">
@@ -3591,13 +3646,21 @@ document.addEventListener('DOMContentLoaded', () => {
               attemptSelectLearner(child);
             }
           });
+
+          const certBtn = card.querySelector('.view-child-cert-btn');
+          if (certBtn) {
+            certBtn.addEventListener('click', (e) => {
+              e.stopPropagation();
+              launchCertificate(100, 1, child.name);
+            });
+          }
+
           card.querySelector('.copy-kid-link-btn').addEventListener('click', (e) => {
             e.stopPropagation();
-            const kidUrl = `${window.location.origin}/?kid=${encodeURIComponent(child.id)}`;
-            navigator.clipboard.writeText(kidUrl);
+            navigator.clipboard.writeText(directKidUrl);
             showToast(
               'Kids Access Link Copied! 📋',
-              `Direct access URL copied: ${kidUrl}`,
+              `Direct access URL copied: ${directKidUrl}`,
               'success'
             );
           });
@@ -3631,6 +3694,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     familyChildren = familyChildren.filter((c) => c.id !== childId);
     localStorage.setItem('lms_children', JSON.stringify(familyChildren));
+    if (activeChild && (activeChild.id === childId || activeChild.name === childId)) {
+      activeChild = null;
+      localStorage.removeItem('lms_active_child');
+      if (headerLearnerName) headerLearnerName.textContent = 'Family Learner';
+      if (headerLearnerAvatar) headerLearnerAvatar.textContent = '🌟';
+      updateStreakUI();
+    }
     await fetchFamilyChildren();
     renderParentDashboard();
   }
@@ -4094,6 +4164,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const openDirectLinkBtn = document.getElementById('openDirectLinkBtn');
 
     const deleteChildBtn = document.getElementById('deleteChildBtn');
+    const resetChildProgressBtn = document.getElementById('resetChildProgressBtn');
 
     if (childToEdit) {
       document.getElementById('childModalTitle').textContent = 'Edit Child Profile';
@@ -4107,10 +4178,22 @@ document.addEventListener('DOMContentLoaded', () => {
         : 'e.g. 1234 (Optional)';
 
       if (deleteChildBtn) deleteChildBtn.style.display = 'inline-flex';
+      if (resetChildProgressBtn) {
+        resetChildProgressBtn.style.display = 'inline-flex';
+        resetChildProgressBtn.onclick = async () => {
+          const confirmReset = window.confirm(
+            `Are you sure you want to reset all curriculum progress and quiz scores for ${childToEdit.name}? This will return their progress to 0% and cannot be undone.`
+          );
+          if (!confirmReset) return;
+          closeAccessibleModal(childModal);
+          await window.resetChildProgressAPI(childToEdit.id);
+        };
+      }
 
       if (directLinkGroup && directLinkInput) {
         directLinkGroup.style.display = 'block';
-        const url = `${window.location.origin}/?kid=${encodeURIComponent(childToEdit.id)}`;
+        const baseUrl = window.location.href.split('?')[0].split('#')[0];
+        const url = `${baseUrl}?kid=${encodeURIComponent(childToEdit.id)}`;
         directLinkInput.value = url;
         if (openDirectLinkBtn) {
           openDirectLinkBtn.href = url;
@@ -4131,6 +4214,7 @@ document.addEventListener('DOMContentLoaded', () => {
       childPinInput.value = '';
       childPinInput.placeholder = 'e.g. 1234 (Optional)';
       if (deleteChildBtn) deleteChildBtn.style.display = 'none';
+      if (resetChildProgressBtn) resetChildProgressBtn.style.display = 'none';
       if (directLinkGroup) directLinkGroup.style.display = 'none';
     }
 
@@ -4389,11 +4473,12 @@ document.addEventListener('DOMContentLoaded', () => {
       closeAccessibleModal(childModal);
 
       // Generate direct kids access URL
-      const directKidUrl = `${window.location.origin}/?kid=${encodeURIComponent(savedChild.id)}`;
+      const baseUrl = window.location.href.split('?')[0].split('#')[0];
+      const directKidUrl = `${baseUrl}?kid=${encodeURIComponent(savedChild.id)}`;
       showToast('Child Profile Saved! 🎉', `Direct Access URL: ${directKidUrl}`, 'success');
 
-      // Auto-set as active child if none was active
-      if (!activeChild) {
+      // Auto-set as active child if none was active or if active child was updated
+      if (!activeChild || activeChild.id === savedChild.id) {
         setActiveChild(savedChild);
       }
 

@@ -1226,8 +1226,11 @@ export async function onRequest(context) {
     const pinHash = pin ? await hashPassword(pin) : null;
     const cleanName = name.trim().slice(0, 100);
     const cleanAvatar = (avatar || '🌟').slice(0, 10);
-    const cleanTrack =
-      assignedTrack === 'level2' || assignedTrack === 'teacher' ? assignedTrack : 'level1';
+    const cleanTrack = ['level1', 'level2', 'level3', 'level4', 'level5', 'teacher'].includes(
+      assignedTrack
+    )
+      ? assignedTrack
+      : 'level1';
 
     if (env.DB) {
       await env.DB.prepare(
@@ -1262,8 +1265,11 @@ export async function onRequest(context) {
     const { name, avatar, assignedTrack, pin } = body;
     const cleanName = (name || '').trim().slice(0, 100);
     const cleanAvatar = (avatar || '🌟').slice(0, 10);
-    const cleanTrack =
-      assignedTrack === 'level2' || assignedTrack === 'teacher' ? assignedTrack : 'level1';
+    const cleanTrack = ['level1', 'level2', 'level3', 'level4', 'level5', 'teacher'].includes(
+      assignedTrack
+    )
+      ? assignedTrack
+      : 'level1';
 
     if (env.DB) {
       const pinHash = pin ? await hashPassword(pin) : null;
@@ -1734,7 +1740,9 @@ export async function onRequest(context) {
       const body = await request.json();
       const { moduleId, track, answers, reflections, childId, guestId } = body;
       const mId = parseInt(moduleId, 10);
-      const studentTrack = track === 'level2' ? 'level2' : 'level1';
+      const studentTrack = ['level1', 'level2', 'level3', 'level4', 'level5'].includes(track)
+        ? track
+        : 'level1';
       let studentId = childId || (authUser ? authUser.uid : null);
       if (!studentId) studentId = guestId || crypto.randomUUID();
 
