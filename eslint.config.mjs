@@ -8,6 +8,7 @@ export default [
       'public/course_data/**',
       'data/**',
       '.system_generated/**',
+      'coverage/**',
       'scratch/**'
     ]
   },

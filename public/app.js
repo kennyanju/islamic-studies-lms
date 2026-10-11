@@ -12,7 +12,6 @@ document.addEventListener('DOMContentLoaded', () => {
   let currentSlideIndex = 0;
   let currentTpSlideIndex = 0;
   let isAutoScrolling = false;
-  let autoScrollInterval = null;
 
   let activeChild = JSON.parse(localStorage.getItem('lms_active_child') || 'null');
   let userProgress = JSON.parse(
@@ -70,8 +69,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const moduleTabNav = document.getElementById('moduleTabNav');
 
   // Tab Buttons
-  const handoutTabBtn = document.getElementById('handoutTabBtn');
-  const quizTabBtn = document.getElementById('quizTabBtn');
   const videoTabBtn = document.getElementById('videoTabBtn');
   const teleprompterTabBtn = document.getElementById('teleprompterTabBtn');
   const answerkeysTabBtn = document.getElementById('answerkeysTabBtn');
@@ -294,7 +291,7 @@ document.addEventListener('DOMContentLoaded', () => {
     ) {
       try {
         modalEl._previouslyFocusedElement.focus();
-      } catch (err) {}
+      } catch (_err) {}
     }
   }
 
@@ -387,7 +384,7 @@ document.addEventListener('DOMContentLoaded', () => {
               return data;
             }
           }
-        } catch (e) {}
+        } catch (_e) {}
       }
       return null;
     };
@@ -992,7 +989,7 @@ document.addEventListener('DOMContentLoaded', () => {
               if (activeModuleId === moduleId) switchTab(activeTab);
               return true;
             }
-          } catch (e) {}
+          } catch (_e) {}
         }
         return false;
       };
@@ -1011,7 +1008,7 @@ document.addEventListener('DOMContentLoaded', () => {
                   if (activeModuleId === moduleId) switchTab(activeTab);
                   return;
                 }
-              } catch (e) {}
+              } catch (_e) {}
             }
             if (activeModuleId === moduleId) switchTab(activeTab);
           };
@@ -1064,7 +1061,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // --------------------------------------------------------------------------
   // VIDEO LESSON PLAYER ENGINE
   // --------------------------------------------------------------------------
-  let currentVideoSlide = null;
+  let _currentVideoSlide = null;
 
   function renderVideo(mod) {
     if (!mod) return;
@@ -1124,7 +1121,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function selectVideoChapter(chap, index, total) {
-    currentVideoSlide = chap;
+    _currentVideoSlide = chap;
 
     if (videoCurrentChapter) {
       videoCurrentChapter.innerHTML = `<i class="fa-solid fa-bookmark"></i> <span>Slide ${index + 1} of ${total}: <strong>${escapeHtml(chap.title || '')}</strong></span>`;
@@ -1729,7 +1726,7 @@ document.addEventListener('DOMContentLoaded', () => {
           completed
         })
       }).catch(() => {});
-    } catch (e) {}
+    } catch (_e) {}
   }
 
   window.resetChildProgressAPI = async function (childId, moduleId = null) {
@@ -2696,7 +2693,7 @@ document.addEventListener('DOMContentLoaded', () => {
     try {
       const data = JSON.parse(localStorage.getItem(getLearnerStreakKey()) || 'null');
       if (data && typeof data.count === 'number') return data;
-    } catch (e) {}
+    } catch (_e) {}
     return { count: 0, lastDate: null, bestStreak: 0 };
   }
 
@@ -3019,7 +3016,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     try {
       localStorage.setItem('lms_last_view', viewName);
-    } catch (e) {}
+    } catch (_e) {}
   }
 
   // Override showDashboard to use switchView
@@ -3084,7 +3081,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Auth Management: Sync Auth with Backend
-  async function syncAuthWithBackend(userObj) {
+  async function _syncAuthWithBackend(userObj) {
     try {
       const res = await fetch('/api/auth/sync', {
         method: 'POST',
@@ -3225,7 +3222,7 @@ document.addEventListener('DOMContentLoaded', () => {
           if (Array.isArray(parsed) && parsed.length > 0) {
             familyChildren = parsed;
           }
-        } catch (e) {}
+        } catch (_e) {}
       }
       renderChildrenGrid();
       renderLearnerSelector();
@@ -3254,7 +3251,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (cached) {
           try {
             familyChildren = JSON.parse(cached);
-          } catch (e) {}
+          } catch (_e) {}
         }
       }
     } catch (err) {
@@ -3263,7 +3260,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (cached) {
         try {
           familyChildren = JSON.parse(cached);
-        } catch (e) {}
+        } catch (_e) {}
       }
     }
 
@@ -3737,7 +3734,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Render Admin Dashboard
-  async function renderAdminDashboard(isBackgroundAuto = false) {
+  async function renderAdminDashboard(_isBackgroundAuto = false) {
     let stats = null;
     let users = null;
     let healthData = null;
@@ -4325,7 +4322,7 @@ document.addEventListener('DOMContentLoaded', () => {
             healthErrors.innerHTML =
               '<span style="color:#10b981;font-weight:700;"><i class="fa-solid fa-circle-check" style="margin-right:4px;"></i> 0 Errors (Healthy)</span>';
           showToast('Logs Cleared', 'All telemetry logs have been purged.', 'success', 3000);
-        } catch (e) {
+        } catch (_e) {
           showToast('Error', 'Failed to clear logs.', 'error');
         }
       }
@@ -4577,7 +4574,7 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
           showToast('Deletion Error', data.error || 'Failed to delete learner profile.', 'error');
         }
-      } catch (err) {
+      } catch (_err) {
         showToast(
           'Network Error',
           'Could not delete learner profile. Please check connection.',
@@ -4620,7 +4617,7 @@ document.addEventListener('DOMContentLoaded', () => {
           pinErrorMsg.textContent = data.error || 'Incorrect PIN. Please try again.';
           pinErrorMsg.style.display = 'block';
         }
-      } catch (err) {
+      } catch (_err) {
         pinErrorMsg.textContent = 'Connection error verifying PIN.';
         pinErrorMsg.style.display = 'block';
       }
@@ -4705,7 +4702,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function getClientUsersDb() {
     try {
       return JSON.parse(localStorage.getItem('lms_local_users') || '[]');
-    } catch (e) {
+    } catch (_e) {
       return [];
     }
   }
@@ -4744,7 +4741,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const users = getClientUsersDb();
     const match = users.find((u) => u.email === cleanEmail && u.passwordHash === pHash);
     if (match) {
-      const { passwordHash, ...safe } = match;
+      const { passwordHash: _passwordHash, ...safe } = match;
       return { success: true, user: safe };
     }
     return { success: false, error: 'Invalid email or password.' };
@@ -5523,7 +5520,7 @@ document.addEventListener('DOMContentLoaded', () => {
           let data = null;
           try {
             data = await res.json();
-          } catch (jsonErr) {}
+          } catch (_jsonErr) {}
           if (data && data.success) {
             if (forgotAlert) {
               forgotAlert.className = 'auth-alert-msg success';
@@ -5614,7 +5611,7 @@ document.addEventListener('DOMContentLoaded', () => {
           let data = null;
           try {
             data = await res.json();
-          } catch (jsonErr) {}
+          } catch (_jsonErr) {}
           if (data && data.success) {
             if (resetAlert) {
               resetAlert.className = 'auth-alert-msg success';
