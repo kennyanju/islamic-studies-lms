@@ -1,5 +1,5 @@
 # Presentation Slides: Purification & Prayer (Taharah & Salah)
-## A Guide for Teachers (Maliki Fiqh & Ash'ari Aqidah)
+## A Guide for Teachers
 
 ---
 

@@ -1,5 +1,5 @@
 # Presentation Slides: Seerah Madinah & the Building of a Community
-## A Guide for Teachers (Maliki Fiqh & Ash'ari Aqidah)
+## A Guide for Teachers
 
 ---
 

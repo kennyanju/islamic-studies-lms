@@ -1,5 +1,5 @@
 # Presentation Slides: Ramadan, Zakah, & Community Responsibility
-## A Guide for Teachers (Maliki Fiqh & Ash'ari Aqidah)
+## A Guide for Teachers
 
 ---
 

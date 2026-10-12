@@ -1,5 +1,5 @@
 # Presentation Slides: Character, Society & Family (Akhlaq & Mu'amalat)
-## A Guide for Teachers (Maliki Fiqh & Ash'ari Aqidah)
+## A Guide for Teachers
 
 ---
 

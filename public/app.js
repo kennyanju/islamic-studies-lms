@@ -450,7 +450,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (chunks.length > 0) {
         chunks.sort((a, b) => a.id - b.id);
         courseData = {
-          title: "Islamic Studies Curriculum (Ash'ari-Maliki)",
+          title: 'Islamic Studies Curriculum',
           modules: chunks
         };
         initApp();
@@ -1829,7 +1829,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if (malikiCitationText) {
-      malikiCitationText.textContent = mod.malikiNotes || "Maliki Fiqh & Ash'ari Aqidah Standard";
+      malikiCitationText.textContent = mod.malikiNotes || 'Fiqh & Aqidah Standard';
     }
 
     if (handoutStrandsList) {
@@ -1873,7 +1873,7 @@ document.addEventListener('DOMContentLoaded', () => {
     updateHandoutSessionBanner(mod, trackObj);
 
     if (malikiCitationTag) {
-      malikiCitationTag.innerHTML = `<i class="fa-solid fa-book-open"></i> ${mod.malikiNotes || "Maliki Fiqh & Ash'ari Aqidah Standard"}`;
+      malikiCitationTag.innerHTML = `<i class="fa-solid fa-book-open"></i> ${mod.malikiNotes || 'Fiqh & Aqidah Standard'}`;
     }
 
     const isComp = userProgress[`mod_${mod.id}`];

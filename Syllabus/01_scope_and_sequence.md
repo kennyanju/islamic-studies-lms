@@ -1,4 +1,4 @@
-# 01 — Scope and Sequence: 5-Level Ash'ari-Maliki Curriculum (Ages 6 to 16+)
+# 01 — Scope and Sequence: 5-Level Curriculum (Ages 6 to 16+)
 
 > **Overview**: A comprehensive, developmentally staged pedagogical master plan benchmarked against all 12 grades of the International Curricula Organization (ICO) Islamic Studies series. Spans from **Age 6 all the way to Age 16+**, structured into **5 Progressive Levels** that match the 5 learner tracks in the LMS app. Specially adapted for the **Ash'ari creed**, **Maliki madhhab**, and **Junaydi tazkiyah**, with systematic integration of the cross-cutting **"Other Scholars Say"** comparative framework.
 

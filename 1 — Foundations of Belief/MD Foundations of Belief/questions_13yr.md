@@ -1,6 +1,6 @@
 # Islamic Studies Worksheet: 20 Advanced Questions
 **Age Group:** 13 Years Old (Level 2)
-**Focus:** Beliefs (Aqidah) & Practices (Fiqh) - Ash'ari / Maliki Perspective
+**Focus:** Beliefs (Aqidah) & Practices (Fiqh)
 
 ---
 

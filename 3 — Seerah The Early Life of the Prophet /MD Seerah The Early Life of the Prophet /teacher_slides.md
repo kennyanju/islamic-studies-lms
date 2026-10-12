@@ -1,5 +1,5 @@
 # Presentation Slides: Seerah & Fiqh — Early Life, Revelation, and the Legacy of Madinah
-## A Guide for Teachers (Maliki Fiqh & Ash'ari Aqidah)
+## A Guide for Teachers
 
 ---
 

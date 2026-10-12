@@ -1,7 +1,7 @@
 # Voice Script: Character, Society & Family (Akhlaq & Mu'amalat)
-**Topic:** Humility, honesty, family ties, neighbor rights, peer pressure, digital ethics, justice, and Maliki/Ash'ari principles in social interactions.  
+**Topic:** Humility, honesty, family ties, neighbor rights, peer pressure, digital ethics, justice, and ethical principles in social interactions.  
 **Audience:** Parents/Teachers presenting to children aged 10-13.  
-**Creed/Law Framework:** Ash'ari Aqidah & Maliki Fiqh.  
+**Creed/Law Framework:** Classical Sunni Aqidah & Fiqh.  
 
 ---
 **Model Tuning:** ElevenLabs v3 with native expressive audio tags ([warmly], [thoughtful], [reverent], [pause], [short pause]).

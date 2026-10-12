@@ -1,7 +1,7 @@
 # Voice Script: Foundations of Belief
-**Topic:** Who is Allah? Names and Attributes, Pillars of Iman, Angels, Holy Books & Prophets, Qadar, and Maliki/Ash'ari Literacy.  
+**Topic:** Who is Allah? Names and Attributes, Pillars of Iman, Angels, Holy Books & Prophets, Qadar, and Foundational Islamic Literacy.  
 **Audience:** Parents/Teachers presenting to children aged 10–13.  
-**Creed/Law Framework:** Ash'ari Aqidah & Maliki Fiqh.  
+**Creed/Law Framework:** Classical Sunni Aqidah & Fiqh.  
 **Model Tuning:** ElevenLabs v3 with native expressive audio tags ([warmly], [thoughtful], [reverent], [pause], [short pause]).
 
 ---

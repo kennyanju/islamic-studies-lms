@@ -1,7 +1,7 @@
 # Presentation Slides: Islamic Creed (Aqidah) & Law (Fiqh) for Teachers
-**Topic:** Who is Allah? Names and Attributes, Pillars of Iman, Angels, Holy Books & Prophets, Qadar, and Maliki/Ash'ari Literacy.
+**Topic:** Who is Allah? Names and Attributes, Pillars of Iman, Angels, Holy Books & Prophets, Qadar, and Foundational Islamic Literacy.
 **Target Audience:** Parents / Teachers presenting to children aged 10-13.
-**Perspective:** Ash'ari Aqidah & Maliki Fiqh.
+**Perspective:** Classical Sunni Aqidah & Fiqh.
 
 ---
 
