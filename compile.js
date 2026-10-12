@@ -517,12 +517,20 @@ modulesConfig.forEach((cfg) => {
   const questions2Path = findMdFile(fullMdDir, /questions.*(level2|l2|age_?8|year_?2)/i);
 
   // Level 3 (Ages 10-12)
-  const handout3Path = findMdFile(fullMdDir, /(handout|student_handout).*(level3|l3|10|year_?3)/i);
-  const questions3Path = findMdFile(fullMdDir, /questions.*(level3|l3|10|year_?3)/i);
+  const handout3Path =
+    findMdFile(fullMdDir, /handout.*(level3|l3)/i) ||
+    findMdFile(fullMdDir, /(handout|student_handout).*(10|year_?3)/i);
+  const questions3Path =
+    findMdFile(fullMdDir, /questions.*(level3|l3)/i) ||
+    findMdFile(fullMdDir, /questions.*(10|year_?3)/i);
 
   // Level 4 (Ages 12-14)
-  const handout4Path = findMdFile(fullMdDir, /(handout|student_handout).*(level4|l4|13|year_?4)/i);
-  const questions4Path = findMdFile(fullMdDir, /questions.*(level4|l4|13|year_?4)/i);
+  const handout4Path =
+    findMdFile(fullMdDir, /handout.*(level4|l4)/i) ||
+    findMdFile(fullMdDir, /(handout|student_handout).*(13|year_?4)/i);
+  const questions4Path =
+    findMdFile(fullMdDir, /questions.*(level4|l4)/i) ||
+    findMdFile(fullMdDir, /questions.*(13|year_?4)/i);
 
   // Level 5 (Ages 14-16+)
   const handout5Path = findMdFile(fullMdDir, /handout.*(level5|l5|age_?15|senior|year_?5)/i);

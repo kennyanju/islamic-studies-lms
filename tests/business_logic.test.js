@@ -33,19 +33,21 @@ describe('Business Logic & Domain Rule Verification Tests', () => {
         moduleId: 1,
         track: 'level3',
         answers: {
-          0: 'A',
-          1: 'C',
-          2: 'D',
-          3: 'C',
-          4: 'A',
-          5: 'B',
-          6: 'D',
-          7: 'B'
+          0: 'B',
+          1: 'B',
+          2: 'B',
+          3: 'B',
+          4: 'B',
+          5: 'A',
+          6: 'B',
+          7: 'B',
+          8: 'A',
+          9: 'C'
         }
       });
       expect(res.statusCode).toBe(200);
       expect(res.body.success).toBe(true);
-      expect(res.body.score).toBe(8);
+      expect(res.body.score).toBe(10);
       expect(res.body.percentage).toBe(100);
       expect(res.body.passed).toBe(true);
       expect(res.body.feedback[0].questionId).toBeDefined();
@@ -56,41 +58,45 @@ describe('Business Logic & Domain Rule Verification Tests', () => {
         moduleId: 1,
         track: 'level3',
         answers: {
-          q1: 'A',
-          q2: 'C',
-          q3: 'D',
-          q4: 'C',
-          q5: 'A',
-          q6: 'B',
-          q7: 'D',
-          q8: 'B'
+          q1: 'B',
+          q2: 'B',
+          q3: 'B',
+          q4: 'B',
+          q5: 'B',
+          q6: 'A',
+          q7: 'B',
+          q8: 'B',
+          q9: 'A',
+          q10: 'C'
         }
       });
       expect(res.statusCode).toBe(200);
       expect(res.body.success).toBe(true);
-      expect(res.body.score).toBe(8);
+      expect(res.body.score).toBe(10);
       expect(res.body.percentage).toBe(100);
       expect(res.body.passed).toBe(true);
     });
 
     test('POST /api/quiz/grade - 80% passing threshold boundary condition', async () => {
-      // 6 out of 8 correct = 75% -> Failed
+      // 7 out of 10 correct = 70% -> Failed (< 80%)
       const failRes = await parent1Agent.post('/api/quiz/grade').send({
         moduleId: 1,
         track: 'level3',
         answers: {
-          0: 'A',
-          1: 'C',
-          2: 'D',
-          3: 'C',
-          4: 'A',
-          5: 'B',
-          6: 'WRONG',
-          7: 'WRONG'
+          0: 'B',
+          1: 'B',
+          2: 'B',
+          3: 'B',
+          4: 'B',
+          5: 'A',
+          6: 'B',
+          7: 'WRONG',
+          8: 'WRONG',
+          9: 'WRONG'
         }
       });
-      expect(failRes.body.score).toBe(6);
-      expect(failRes.body.percentage).toBe(75);
+      expect(failRes.body.score).toBe(7);
+      expect(failRes.body.percentage).toBe(70);
       expect(failRes.body.passed).toBe(false);
     });
   });

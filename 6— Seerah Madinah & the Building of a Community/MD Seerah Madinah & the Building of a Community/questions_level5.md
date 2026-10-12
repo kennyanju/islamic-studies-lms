@@ -1,73 +1,115 @@
-# Level 5 Seminar Assessment: Constitutionalism & Madinan Statecraft
-**Age Group:** Ages 14–16+ (Senior High / Level 5 Capstone Track)  
-**Focus:** The Charter of Madinah, Rules of Engagement, and 'Amal Ahl al-Madinah in Usul  
+# Level 5 Quiz: Seerah: Madinah & Building a Community
 
----
+## Part A: Multiple Choice Questions
+1. In what year did Prophet Muhammad ﷺ draft the landmark Constitution of Madinah (*Sahifat al-Madinah*)?
+   (A) 570 CE.
+   (B) 622 CE (1 AH).
+   (C) 750 CE.
+   (D) 1215 CE.
 
-## Part A: Advanced Multiple Choice
+2. How did Clause 25 of the Constitution of Madinah define the civic relationship of the Jewish tribes of Banu 'Awf with the Muslim community?
+   (A) As enslaved war captives without legal rights.
+   (B) As an autonomous religious community (*Ummah*) alongside the believers, enjoying full freedom of faith and property.
+   (C) As required to convert to Islam within thirty days.
+   (D) As exempt from paying any financial taxes.
 
-### 1. What groundbreaking civil principle was established in the Charter of Madinah regarding non-Muslim residents?
-* A) Forced conversion to Islam
-* B) Recognition of Jewish and confederate tribes as a distinct religious community with religious freedom and mutual civic obligations
-* C) Expulsion of all foreigners
-* D) Imposition of tribal feuds
+3. Who authored the foundational 8th-century treatise *Kitab al-Siyar al-Kabir*, establishing the first systematic code of Islamic international law?
+   (A) Imam Muhammad ibn al-Hasan al-Shaybani.
+   (B) Imam Ibn Khaldun.
+   (C) Imam al-Shafi'i.
+   (D) Imam al-Bukhari.
 
-### 2. Under classical Islamic jurisprudence of warfare (*Siyar*), which of the following is strictly prohibited?
-* A) Defending the state when attacked
-* B) Deliberately targeting non-combatants (children, women, religious monastics, farmers) and destroying crops
-* C) Signing peace treaties
-* D) Releasing prisoners of war
+4. In classical Islamic international law (*Fiqh al-Siyar*), how are nations that have signed peaceful bilateral treaties and diplomatic accords categorized?
+   (A) Dar al-Harb (Abode of War).
+   (B) Dar al-'Ahd / Dar al-Sulh (Abode of Covenant and Peace).
+   (C) Dar al-Jahiliyyah.
+   (D) Dar al-Kufr al-Mutlaq.
 
-### 3. Why did Imam Malik prioritize *'Amal Ahl al-Madinah* (Practice of the People of Madinah) over an isolated single-narrator hadith (*Khabar al-Ahad*)?
-* A) He did not possess hadith collections
-* B) The continuous public practice of thousands of companions in the city of revelation provides living mass-transmission (*Tawatur*), which yields higher epistemic certainty than a solitary chain
-* C) He believed only Madinans could be righteous
-* D) It was a government regulation
+5. What severe warning did Prophet Muhammad ﷺ give regarding someone who betrays or harms a non-Muslim treaty-partner (*Mu'ahid*)?
+   (A) He will be fined ten silver coins.
+   (B) The Prophet ﷺ himself will stand as his prosecuting adversary on the Day of Resurrection.
+   (C) He will be required to fast three days in winter.
+   (D) He must donate five camels to the mosque.
 
-### 4. What diplomatic strategy made the Treaty of Hudaybiyyah a "Manifest Victory" (*Fath Mubin*) according to Surah Al-Fath?
-* A) It gained rich treasures immediately
-* B) The cessation of hostilities allowed open intellectual and cultural interchange, leading more people to embrace Islam peacefully in two years than in the previous twenty
-* C) It eliminated all opponents
-* D) It ended all future negotiations
+6. Why did Imam Malik prioritize *'Amal Ahl al-Madinah* (The Living Practice of Madinah) over solitary isolated Hadiths (*Ahad*)?
+   (A) Because people in Madinah spoke a different dialect of Arabic.
+   (B) Because a living practice observed and transmitted continuously by thousands of Companions and Successors represents mass-transmitted certainty (*Tawatur*), immune to transmission errors.
+   (C) Because Madinah had more written manuscripts than Baghdad.
+   (D) Because the Abbasid caliph commanded him to ignore Hadiths.
 
-### 5. In modern political philosophy, how does the Charter of Madinah anticipate constitutional federalism?
-* A) By establishing a unitary empire with no autonomy
-* B) By creating a shared legal framework of mutual defense and civic rights while preserving autonomous religious jurisprudence for distinct communities
-* C) By banning private property
-* D) By dissolving all laws
+7. How does a Muslim's legal citizenship or residency visa in a contemporary Western country function in Islamic jurisprudence?
+   (A) As a temporary truce that can be broken whenever convenient.
+   (B) As a sacred, binding contract of security and mutual citizenship (*'Aqd al-Aman*) that must be fulfilled with absolute fidelity.
+   (C) As a secular document with zero Islamic religious relevance.
+   (D) As a barrier preventing the practice of personal faith.
 
----
+8. What pre-Islamic human rights alliance did the Prophet ﷺ praise in Madinah, declaring he would join it even after Islam?
+   (A) The Council of Makkah.
+   (B) Hilf al-Fudul (The League of the Virtuous).
+   (C) The Roman Senate.
+   (D) The Treaty of Basra.
 
-## Part B: Terminology & Fill-in-the-Blanks
-*Word Bank: Amal Ahl al-Madinah, Siyar, Hudaybiyyah, Muthlah, Mu'akhah*
+9. In classical Siyar, what is the legal ruling regarding diplomatic immunity for foreign ambassadors visiting a Muslim state?
+   (A) Ambassadors may be imprisoned for political leverage.
+   (B) They possess absolute diplomatic immunity (*Aman*) and cannot be harmed, detained, or assassinated, even if their state is at war.
+   (C) They must pay a special tariff on all their clothing.
+   (D) They are prohibited from entering public markets.
 
-6. The Islamic jurisprudence governing international relations, treaties, and warfare is termed **_________________**.
-7. The mutilation of fallen enemy corpses, strictly prohibited in Islamic law, is **_________________**.
-8. The formal pact of brotherhood instituted between the Muhajirun and the Ansar is called **_________________**.
-9. The 10-year armistice treaty that opened Arabia to rapid peaceful Islamization was **_________________**.
+10. What does the concept of "Muwatanah" signify in contemporary Islamic political thought?
+    (A) Monarchical inheritance of governmental thrones.
+    (B) Equal civic citizenship based on mutual rights, duties, and shared contributions to civil society.
+    (C) Establishing physical walls separating different religious groups.
+    (D) Banning non-citizens from purchasing real estate.
 
----
+## Part B: Fill in the Blanks
+Vocabulary Bank: Mu'ahid, Sahifat al-Madinah, Dar al-'Ahd, Al-Shaybani, Hilf al-Fudul
+1. The world's first written constitutional charter drafted in 622 CE is the ______.
+2. Under modern international treaties, non-belligerent nations fall under the legal category of ______.
+3. A non-Muslim citizen or resident protected by a binding civil covenant is termed a ______.
+4. The 8th-century jurist who authored the foundational text *Kitab al-Siyar al-Kabir* was Imam ______.
+5. The famous pre-Islamic human rights pact defending the oppressed praised by the Prophet ﷺ was ______.
 
-## Part C: Advanced Matching Matrix
-Pair 1: Charter of Madinah --- Foundational pluralistic civic treaty (622 CE)
-Pair 2: 'Amal Ahl al-Madinah --- Living communal transmission in Maliki legal methodology
-Pair 3: Abu Bakr's 10 Injunctions --- Early Islamic conventions protecting civilian non-combatants
-Pair 4: Treaty of Hudaybiyyah --- Diplomatic turning point described as *Fath Mubin*
+## Part C: Matching Juristic Concepts
+* Sahifat al-Madinah ─── The 622 CE constitutional charter establishing a pluralistic federal commonwealth
+* Dar al-'Ahd ─── Sovereign nations bound by peaceful diplomatic accords and treaties
+* Mu'ahid ─── A non-Muslim ally or citizen holding a sacred covenant of protection
+* Hilf al-Fudul ─── The inter-tribal human rights alliance praised by the Prophet ﷺ
+* Kitab al-Siyar al-Kabir ─── Al-Shaybani's masterwork codifying the world's first international humanitarian law
 
----
+## Part D: Senior Seminar Case Study & Reflection
+1. Analyze the constitutional genius of the Constitution of Madinah: How did it create a unified federal commonwealth (*Ummah Wahidah*) while preserving religious and cultural pluralism?
+2. A contemporary extremist group claims: "All non-Muslim nations today are Dar al-Harb, and Muslims are not bound to honor Western laws." Deconstruct this claim using classical *Fiqh al-Siyar* and the hadiths of the *Mu'ahid*.
+3. Detail how the concept of *Hilf al-Fudul* provides an Islamic mandate for modern Muslims to collaborate with non-Muslim civil rights, humanitarian, and environmental organizations.
+4. Explain why Imam Malik's reliance on *'Amal Ahl al-Madinah* represents a sophisticated sociological epistemology that protects religious law from isolated textual misinterpretations.
 
-## Part D: Analytical Essay Prompt
-10. Compare the ethical constraints of warfare articulated by Caliph Abu Bakr with the modern Fourth Geneva Convention. How does classical Islamic international law (*Siyar*) demonstrate divine moral restraint over realpolitik?
+## Answer Key & Marking Guide
+1. B - Drafted in 622 CE immediately following the Hijrah to Madinah.
+2. B - Clause 25 explicitly designated Jewish tribes as a constituent Ummah with religious autonomy.
+3. A - Imam Muhammad al-Shaybani pioneered classical international law in *Al-Siyar al-Kabir*.
+4. B - Bilateral diplomatic relations and UN charters place modern nations into Dar al-'Ahd.
+5. B - The Prophet ﷺ promised to personally oppose anyone who oppresses or betrays a Mu'ahid.
+6. B - Living communal consensus (*Tawatur*) carries definitive epistemic weight over solitary reports.
+7. B - Visas and citizenship constitute mutual security contracts (*'Aqd Aman*) binding under Shari'ah.
+8. B - The Prophet ﷺ endorsed Hilf al-Fudul for its noble commitment to defending the vulnerable.
+9. B - Diplomatic immunity is an established inviolable principle in prophetic practice.
+10. B - Muwatanah establishes shared civic rights and responsibilities within pluralistic societies.
 
----
+### Fill in the Blanks Key
+1. Sahifat al-Madinah - Constitution of Madinah.
+2. Dar al-'Ahd - Abode of Treaty/Peace.
+3. Mu'ahid - Covenant partner.
+4. Al-Shaybani - Father of Siyar.
+5. Hilf al-Fudul - League of the Virtuous.
 
-## Teacher Answer Key
-1. B) Religious freedom and civic mutual defense.
-2. B) Targeting non-combatants and destroying nature is forbidden.
-3. B) Living Tawatur of the city of revelation overrides isolated reports.
-4. B) Peaceful environment enabled exponential voluntary conversion.
-5. B) Shared defense with communal legal autonomy.
-6. Siyar
-7. Muthlah
-8. Mu'akhah
-9. Hudaybiyyah
+### Matching Key
+* Sahifat al-Madinah connects with The 622 CE constitutional charter establishing a pluralistic federal commonwealth.
+* Dar al-'Ahd connects with Sovereign nations bound by peaceful diplomatic accords and treaties.
+* Mu'ahid connects with A non-Muslim ally or citizen holding a sacred covenant of protection.
+* Hilf al-Fudul connects with The inter-tribal human rights alliance praised by the Prophet ﷺ.
+* Kitab al-Siyar al-Kabir connects with Al-Shaybani's masterwork codifying the world's first international humanitarian law.
+
+### Reflection Marking Rubric
+- Question 1: Awards full points for analyzing how shared civic defense and legal arbitration coexisted with internal religious and cultural self-determination.
+- Question 2: Awards full points for demonstrating that treaties, passports, and international charters establish binding covenants, making treason, violence, or fraud strictly haram.
+- Question 3: Awards full points for explaining that fighting injustice, defending human dignity, and protecting creation are universal goods that transcend sectarian divisions.
+- Question 4: Awards full points for contrasting solitary chain vulnerability with the living sociological transmission of thousands of people enacting law daily in the Prophet's city.

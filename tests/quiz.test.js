@@ -17,26 +17,28 @@ describe('Server-Side Quiz Grading & Module Validation Tests', () => {
       moduleId: 1,
       track: 'level3',
       answers: {
-        0: 'A',
-        1: 'C',
-        2: 'D',
-        3: 'C',
-        4: 'A',
-        5: 'B',
-        6: 'D',
-        7: 'B'
+        0: 'B',
+        1: 'B',
+        2: 'B',
+        3: 'B',
+        4: 'B',
+        5: 'A',
+        6: 'B',
+        7: 'B',
+        8: 'A',
+        9: 'C'
       }
     });
 
     expect(res.statusCode).toBe(200);
     expect(res.body.success).toBe(true);
     expect(res.body.moduleId).toBe(1);
-    expect(res.body.total).toBe(8);
-    expect(res.body.score).toBe(8);
+    expect(res.body.total).toBe(10);
+    expect(res.body.score).toBe(10);
     expect(res.body.percentage).toBe(100);
     expect(res.body.passed).toBe(true);
     expect(Array.isArray(res.body.feedback)).toBe(true);
-    expect(res.body.feedback.length).toBe(8);
+    expect(res.body.feedback.length).toBe(10);
     expect(res.body.feedback[0].explanation).toBeDefined();
   });
 
