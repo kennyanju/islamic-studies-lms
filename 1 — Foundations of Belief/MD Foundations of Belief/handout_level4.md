@@ -1,5 +1,6 @@
 # Level 4 Student Handout: Foundations of Belief
 **Age Group:** Ages 12–14 (Level 4 Track - Adolescent & Puberty / Years 7 & 8)  
+**ICO Curriculum Benchmark:** Aligned with ICO Grades 7 & 8 (Adolescent & Puberty Stage)  
 **Topics:** The 20 Necessary Attributes of Allah (The Sanusi Taxonomy), Prophetic Infallibility ('Ismah), and Kalam Proofs  
 **Classical Text Spine:** Sanusi's *Umm al-Barahin* & *Al-Risalah* of Ibn Abi Zayd al-Qayrawani  
 **Riwayah & Tajweed:** Hafs 'an 'Asim (Juz' 29: Surah Al-Mulk to Al-Muzzammil)

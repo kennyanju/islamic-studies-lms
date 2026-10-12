@@ -1,5 +1,6 @@
 # Level 3 Student Handout: Seerah, History & Living Faith Today
 **Age Group:** Ages 10–12 (Level 3 Track - Years 5 & 6)  
+**ICO Curriculum Benchmark:** Aligned with ICO Grades 5 & 6 (Pre-Adolescent Stage)  
 **Topics:** The Conquest of Makkah (Fath Makkah), The Cleansing of the Ka'bah, The Farewell Pilgrimage, and The Passing of the Beloved ﷺ  
 **Classical Text Spine:** *Al-Sirah al-Nabawiyyah* of Ibn Hisham & *Al-Shifa* of Qadi 'Iyad  
 **Riwayah & Tajweed:** Hafs 'an 'Asim (Juz' 30: Surah Al-Burooj to An-Nas review)

@@ -1,5 +1,6 @@
 # Level 4 Student Handout: Deepening Belief & the Quran
 **Age Group:** Ages 12–14 (Level 4 Track - Adolescent & Puberty / Years 7 & 8)  
+**ICO Curriculum Benchmark:** Aligned with ICO Grades 7 & 8 (Adolescent & Puberty Stage)  
 **Topics:** History of Textual Preservation, The Inimitability of the Quran (I'jaz), Rules of Meem Sakinah & Madd, and Thematic Study of Surah Al-Mulk  
 **Classical Text Spine:** *Al-Itqan fi 'Ulum al-Qur'an* (Imam al-Suyuti) & *Tafsir Ibn Kathir*  
 **Riwayah & Tajweed:** Hafs 'an 'Asim (Juz' 29: Surah Al-Mulk and Al-Qalam; Advanced Madd Rules)

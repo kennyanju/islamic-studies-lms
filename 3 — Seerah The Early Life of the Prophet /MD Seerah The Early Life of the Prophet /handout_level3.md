@@ -1,5 +1,6 @@
 # Level 3 Student Handout: Seerah: Early Life of the Prophet ﷺ
 **Age Group:** Ages 10–12 (Level 3 Track - Years 5 & 6)  
+**ICO Curriculum Benchmark:** Aligned with ICO Grades 5 & 6 (Pre-Adolescent Stage)  
 **Topics:** The Open Call at Safa, The Persecution of Believers, The Boycott of Shi'b Abi Talib, Abyssinia, The Year of Sorrow, and The Valley of Ta'if  
 **Classical Text Spine:** *Al-Sirah al-Nabawiyyah* of Ibn Hisham & *Al-Shifa* of Qadi 'Iyad  
 **Riwayah & Tajweed:** Hafs 'an 'Asim (Juz' 30: Surah At-Takwir and 'Abasa; Qalqalah Rules)

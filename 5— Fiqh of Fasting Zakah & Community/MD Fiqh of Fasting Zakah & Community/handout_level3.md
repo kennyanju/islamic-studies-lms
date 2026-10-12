@@ -1,5 +1,6 @@
 # Level 3 Student Handout: Fiqh of Fasting, Zakah & Community
 **Age Group:** Ages 10–12 (Level 3 Track - Years 5 & 6)  
+**ICO Curriculum Benchmark:** Aligned with ICO Grades 5 & 6 (Pre-Adolescent Stage)  
 **Topics:** The Pillars of Fasting (Sawm), The Maliki Ruling on Monthly Intention, Nullifiers & Exemptions, and The Joy of Ramadan  
 **Classical Text Spine:** *Matn Ibn 'Ashir* (Fasting Chapter) & *Al-Risalah* of Ibn Abi Zayd al-Qayrawani  
 **Riwayah & Tajweed:** Hafs 'an 'Asim (Juz' 30: Surah Al-Mutaffifin and Al-Infitar)

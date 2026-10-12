@@ -1,5 +1,6 @@
 # Level 5 Senior Seminar Guide: Deepening Belief & the Quran
 **Age Group:** Ages 14–16+ (Senior High / Level 5 Capstone Track)  
+**ICO Curriculum Benchmark:** Aligned with ICO Grades 9–12 Senior Benchmark (Senior High & Capstone Track)  
 **Topics:** Theology of Divine Speech (Kalam Nafsi vs Lafzi), The Seven Ahruf & Ten Qira'at, Thematic Tafsir of Surah Al-Kahf, and Defending the Manuscript Tradition  
 **Classical Text Spine:** *Al-Burhan fi 'Ulum al-Qur'an* (Imam al-Zarkashi), *Al-Iqtisad fil-I'tiqad* (Imam al-Ghazali), and *Tafsir al-Qurtubi*  
 **Riwayah & Advanced Tajweed:** Phonological comparison: Hafs 'an 'Asim vs. Warsh 'an Nafi'; The History of Orthography (Rasm 'Uthmani)

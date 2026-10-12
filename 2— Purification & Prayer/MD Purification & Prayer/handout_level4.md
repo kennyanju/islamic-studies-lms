@@ -1,5 +1,6 @@
 # Level 4 Student Handout: Purification & Prayer
 **Age Group:** Ages 12–14 (Level 4 Track - Adolescent & Puberty / Years 7 & 8)  
+**ICO Curriculum Benchmark:** Aligned with ICO Grades 7 & 8 (Adolescent & Puberty Stage)  
 **Topics:** Travel Concessions (Qasr & Jam'), Masah 'ala al-Khuffayn, Advanced Salah Mechanics, and The Practice of Sadl  
 **Classical Text Spine:** *Al-Risalah* of Ibn Abi Zayd al-Qayrawani & *Matn Ibn 'Ashir*  
 **Riwayah & Tajweed:** Hafs 'an 'Asim (Juz' 29: Surah Al-Haqqah and Al-Ma'arij; Meem Sakinah Rules)

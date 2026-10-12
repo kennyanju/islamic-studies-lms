@@ -1,5 +1,6 @@
 # Level 3 Student Handout: Deepening Belief & the Quran
 **Age Group:** Ages 10–12 (Level 3 Track - Years 5 & 6)  
+**ICO Curriculum Benchmark:** Aligned with ICO Grades 5 & 6 (Pre-Adolescent Stage)  
 **Topics:** The Miraculous Quran, The Science of Tajweed (Noon Sakinah & Qalqalah), and Thematic Tafsir of Surah An-Naba'  
 **Classical Text Spine:** *Tafsir Ibn Kathir*, *Matn al-Jazariyyah*, and *Al-Murshid al-Mu'in*  
 **Riwayah & Tajweed:** Hafs 'an 'Asim (Juz' 30: Surah An-Naba' and An-Nazi'at; Noon Sakinah & Qalqalah)

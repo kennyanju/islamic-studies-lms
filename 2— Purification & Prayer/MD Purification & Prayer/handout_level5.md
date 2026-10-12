@@ -1,5 +1,6 @@
 # Level 5 Senior Seminar Guide: Purification & Prayer
 **Age Group:** Ages 14–16+ (Senior High / Level 5 Capstone Track)  
+**ICO Curriculum Benchmark:** Aligned with ICO Grades 9–12 Senior Benchmark (Senior High & Capstone Track)  
 **Topics:** Usul al-Taharah, Evidentiary Derivations of Dalk & Wudu Pillars, Comparative Jurisprudence from *Bidayat al-Mujtahid*, and Modern Bio-Medical Fiqh  
 **Classical Text Spine:** *Bidayat al-Mujtahid wa Nihayat al-Muqtasid* (Ibn Rushd), *Al-Muwatta* (Imam Malik), and *Al-Dhakhirah* (Imam al-Qarafi)  
 **Riwayah & Advanced Tajweed:** Hafs 'an 'Asim with Warsh 'an Nafi' awareness; Advanced Rules of Waqf & Ibtida'

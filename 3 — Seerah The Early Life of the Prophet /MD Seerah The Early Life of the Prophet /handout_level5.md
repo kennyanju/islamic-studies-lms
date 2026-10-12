@@ -1,5 +1,6 @@
 # Level 5 Senior Seminar Guide: Seerah: Early Life of the Prophet ﷺ
 **Age Group:** Ages 14–16+ (Senior High / Level 5 Capstone Track)  
+**ICO Curriculum Benchmark:** Aligned with ICO Grades 9–12 Senior Benchmark (Senior High & Capstone Track)  
 **Topics:** Historiography of Seerah Sources, Theological Infallibility (*'Ismah*), Geopolitical Pre-Conditions of Arabia, and Refuting Orientalist Revisionism  
 **Classical Text Spine:** *Al-Shifa bi-Ta'rif Huquq al-Mustafa* (Qadi 'Iyad), *Al-Sirah al-Nabawiyyah fi Daw' al-Masadir al-Asliyyah* (Dr. Mahdi Rizqullah), and *Muqaddimah* of Ibn Khaldun  
 **Riwayah & Advanced Tajweed:** Hafs 'an 'Asim with Warsh 'an Nafi' awareness; The Science of Qira'at Origins

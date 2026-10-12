@@ -1,5 +1,6 @@
 # Level 4 Student Handout: Character, Society & Family
 **Age Group:** Ages 12–14 (Level 4 Track - Adolescent & Puberty / Years 7 & 8)  
+**ICO Curriculum Benchmark:** Aligned with ICO Grades 7 & 8 (Adolescent & Puberty Stage)  
 **Topics:** Islamic Brotherhood (*Ukhuwwah*), Overcoming Anger, Enjoining Good & Social Justice, and The Adab of Knowledge  
 **Classical Text Spine:** *Al-Arba'in al-Nawawiyyah* (Hadiths 21 to 35) & *Riyad al-Salihin*  
 **Riwayah & Tajweed:** Hafs 'an 'Asim (Juz' 29: Surah Al-Qalam and Al-Haqqah)

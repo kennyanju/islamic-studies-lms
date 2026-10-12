@@ -1,5 +1,6 @@
 # Level 4 Student Handout: Seerah: Early Life of the Prophet ﷺ
 **Age Group:** Ages 12–14 (Level 4 Track - Adolescent & Puberty / Years 7 & 8)  
+**ICO Curriculum Benchmark:** Aligned with ICO Grades 7 & 8 (Adolescent & Puberty Stage)  
 **Topics:** Al-Isra' wal-Mi'raj, The Pledges of 'Aqabah, and The Sublime Physical & Moral Shama'il of the Prophet ﷺ  
 **Classical Text Spine:** Qadi 'Iyad's *Al-Shifa bi-Ta'rif Huquq al-Mustafa* & Imam al-Tirmidhi's *Al-Shama'il al-Muhammadiyyah*  
 **Riwayah & Tajweed:** Hafs 'an 'Asim (Juz' 29: Surah Nuh and Al-Jinn; Secondary Madd Rules)

@@ -1,5 +1,6 @@
 # Level 5 Senior Seminar Guide: Seerah, History & Living Faith Today
 **Age Group:** Ages 14–16+ (Senior High / Level 5 Capstone Track)  
+**ICO Curriculum Benchmark:** Aligned with ICO Grades 9–12 Senior Benchmark (Senior High & Capstone Track)  
 **Topics:** Civilizational Historiography, The Golden Age Synthesis, North & West African Maliki Centers (Fes, Timbuktu, Cordoba), and The Western Muslim Leadership Manifesto  
 **Classical Text Spine:** *Al-Muqaddimah* of Ibn Khaldun, *Tartib al-Madarik* of Qadi 'Iyad, and *Al-I'tisam* of Imam al-Shatibi  
 **Riwayah & Advanced Tajweed:** Hafs 'an 'Asim with Warsh 'an Nafi' awareness; The Science of Transmission Chains in the Maghrib

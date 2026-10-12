@@ -1,5 +1,6 @@
 # Level 4 Student Handout: Applied Fiqh & Everyday Life
 **Age Group:** Ages 12–14 (Level 4 Track - Adolescent & Puberty / Years 7 & 8)  
+**ICO Curriculum Benchmark:** Aligned with ICO Grades 7 & 8 (Adolescent & Puberty Stage)  
 **Topics:** Modesty (Haya') and Islamic Dress, Financial Honesty in Commerce, and Digital Ethics in the Social Media Age  
 **Classical Text Spine:** *Al-Adab al-Mufrad* of Imam al-Bukhari & *Al-Risalah* of Ibn Abi Zayd  
 **Riwayah & Tajweed:** Hafs 'an 'Asim (Juz' 29: Surah Al-Insan and Al-Mursalat)

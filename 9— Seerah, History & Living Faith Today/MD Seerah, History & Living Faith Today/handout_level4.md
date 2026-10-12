@@ -1,5 +1,6 @@
 # Level 4 Student Handout: Seerah, History & Living Faith Today
 **Age Group:** Ages 12–14 (Level 4 Track - Adolescent & Puberty / Years 7 & 8)  
+**ICO Curriculum Benchmark:** Aligned with ICO Grades 7 & 8 (Adolescent & Puberty Stage)  
 **Topics:** The Four Rightly Guided Caliphs (*Al-Khulafa' al-Rashidun*), Leadership Models, and Defending the Honor of the Sahabah  
 **Classical Text Spine:** *Tarikh al-Khulafa'* of Imam al-Suyuti & *Al-Bidayah wan-Nihayah* of Ibn Kathir  
 **Riwayah & Tajweed:** Hafs 'an 'Asim (Juz' 29: Surah Al-Mulk to Al-Mursalat Review)

@@ -1,5 +1,6 @@
 # Level 5 Senior Seminar Guide: Fiqh of Fasting, Zakah & Community
 **Age Group:** Ages 14–16+ (Senior High / Level 5 Capstone Track)  
+**ICO Curriculum Benchmark:** Aligned with ICO Grades 9–12 Senior Benchmark (Senior High & Capstone Track)  
 **Topics:** Fiqh al-Mu'amalat, The Foundational Prohibitions (Riba, Gharar, Maysir), The 'Illah of Riba across Sunni Schools, and Contemporary Islamic Finance & Fintech  
 **Classical Text Spine:** *Bidayat al-Mujtahid* (Kitab al-Buyu' - Ibn Rushd), *Al-Muwatta* (Imam Malik), and AAOIFI Shari'ah Standards  
 **Riwayah & Advanced Tajweed:** Hafs 'an 'Asim with Warsh 'an Nafi' awareness; Rules of Waqf Tam, Kafi, and Hasan

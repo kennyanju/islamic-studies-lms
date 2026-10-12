@@ -1,5 +1,6 @@
 # Level 4 Student Handout: Seerah: Madinah & Building a Community
 **Age Group:** Ages 12–14 (Level 4 Track - Adolescent & Puberty / Years 7 & 8)  
+**ICO Curriculum Benchmark:** Aligned with ICO Grades 7 & 8 (Adolescent & Puberty Stage)  
 **Topics:** Defensive Warfare Ethics, The Battles of Badr, Uhud, and The Trench (Al-Khandaq), and The Treaty of Hudaybiyyah  
 **Classical Text Spine:** *Al-Sirah al-Nabawiyyah* of Ibn Hisham & *Al-Maghazi* of Al-Waqidi  
 **Riwayah & Tajweed:** Hafs 'an 'Asim (Juz' 29: Surah Al-Qalam and Al-Haqqah; Tajweed Drills)

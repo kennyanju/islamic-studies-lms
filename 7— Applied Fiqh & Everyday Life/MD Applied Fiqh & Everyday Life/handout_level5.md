@@ -1,5 +1,6 @@
 # Level 5 Senior Seminar Guide: Applied Fiqh & Everyday Life
 **Age Group:** Ages 14–16+ (Senior High / Level 5 Capstone Track)  
+**ICO Curriculum Benchmark:** Aligned with ICO Grades 9–12 Senior Benchmark (Senior High & Capstone Track)  
 **Topics:** Family Jurisprudence (Fiqh al-Usrah), Pillars of Nikah, Islamic Inheritance (*Mirath*) Mathematics, and Contemporary Bioethics  
 **Classical Text Spine:** *Al-Risalah* of Ibn Abi Zayd (Kitab al-Nikah & Bab al-Fara'id), *Bidayat al-Mujtahid* (Ibn Rushd), and International Islamic Fiqh Academy Resolutions  
 **Riwayah & Advanced Tajweed:** Hafs 'an 'Asim with Warsh 'an Nafi' awareness; Detailed Rules of Waqf & Tafsir of Surah An-Nisa (Verses 11–12)

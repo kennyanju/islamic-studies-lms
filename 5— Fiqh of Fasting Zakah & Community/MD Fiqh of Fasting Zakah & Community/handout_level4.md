@@ -1,5 +1,6 @@
 # Level 4 Student Handout: Fiqh of Fasting, Zakah & Community
 **Age Group:** Ages 12–14 (Level 4 Track - Adolescent & Puberty / Years 7 & 8)  
+**ICO Curriculum Benchmark:** Aligned with ICO Grades 7 & 8 (Adolescent & Puberty Stage)  
 **Topics:** Zakah Calculations & Nisab Math, Fasting Expiations (Kaffarah vs. Qada'), and The Complete Rites of Hajj  
 **Classical Text Spine:** *Matn Ibn 'Ashir* (Zakah, Siyam, Hajj) & *Al-Risalah* of Ibn Abi Zayd  
 **Riwayah & Tajweed:** Hafs 'an 'Asim (Juz' 29: Surah Al-Muzzammil and Al-Muddathir; Madd Rules)

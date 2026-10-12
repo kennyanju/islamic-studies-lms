@@ -1,5 +1,6 @@
 # Level 3 Student Handout: Seerah: Madinah & Building a Community
 **Age Group:** Ages 10–12 (Level 3 Track - Years 5 & 6)  
+**ICO Curriculum Benchmark:** Aligned with ICO Grades 5 & 6 (Pre-Adolescent Stage)  
 **Topics:** The Miraculous Hijrah, Building the Prophet's Mosque, The Fraternal Pact (Al-Mu'akhah), and The First Call to Prayer  
 **Classical Text Spine:** *Al-Sirah al-Nabawiyyah* of Ibn Hisham & *Zad al-Ma'ad* of Ibn al-Qayyim  
 **Riwayah & Tajweed:** Hafs 'an 'Asim (Juz' 30: Surah Al-Mutaffifin to At-Tariq; Tajweed Drills)

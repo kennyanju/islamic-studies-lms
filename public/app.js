@@ -98,6 +98,17 @@ document.addEventListener('DOMContentLoaded', () => {
   const handoutContent = document.getElementById('handoutContent');
   const malikiCitationTag = document.getElementById('malikiCitationTag');
   const markHandoutCompleteBtn = document.getElementById('markHandoutCompleteBtn');
+  const handoutIcoText = document.getElementById('handoutIcoText');
+  const handoutReadTimeText = document.getElementById('handoutReadTimeText');
+  const malikiCitationText = document.getElementById('malikiCitationText');
+  const handoutStrandsList = document.getElementById('handoutStrandsList');
+  const handoutTtsBtn = document.getElementById('handoutTtsBtn');
+  const handoutTtsLabel = document.getElementById('handoutTtsLabel');
+  const handoutFontDecBtn = document.getElementById('handoutFontDecBtn');
+  const handoutFontResetBtn = document.getElementById('handoutFontResetBtn');
+  const handoutFontIncBtn = document.getElementById('handoutFontIncBtn');
+  const handoutJumpQuizBtn = document.getElementById('handoutJumpQuizBtn');
+  const handoutProgressBar = document.getElementById('handoutProgressBar');
 
   // Teleprompter Elements
   const tpPrevBtn = document.getElementById('tpPrevBtn');
@@ -1684,6 +1695,163 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  const moduleStrandMap = {
+    1: ["'Aqeedah & Tawheed", 'Epistemology', 'Adab al-Ikhtilaf'],
+    2: ["'Ibaadaat & Taharah", 'Maliki Fiqh', 'Salah Practicum', 'Adab al-Ikhtilaf'],
+    3: ['Seerah al-Nabawiyyah', 'Prophetic Character', 'Makkan Milestones'],
+    4: ["'Ulum al-Qur'an", 'Tajweed Foundations', 'Tafsir Studies'],
+    5: ["'Ibaadaat & Sawm", 'Zakah & Community', 'Eid & Social Solidarity'],
+    6: ['Madinan Seerah', 'Charter of Madinah', 'Defensive Statecraft'],
+    7: ['Applied Fiqh', 'Halal & Pure Living', 'Financial Ethics', 'Digital Safety'],
+    8: ['Akhlaaq & Adab', 'Family Devotion (Birr)', 'Tazkiyat al-Nafs'],
+    9: ['Civilization & History', "Khulafa' al-Rashidun", 'Four Sunni Madhhabs', 'Living Faith']
+  };
+
+  const trackIcoBenchmarkMap = {
+    level1: 'ICO Benchmark: Grades 1–2 Aligned (Ages 6–8)',
+    level2: 'ICO Benchmark: Grades 3–4 Aligned (Ages 8–10)',
+    level3: 'ICO Benchmark: Grades 5–6 Aligned (Ages 10–12)',
+    level4: 'ICO Benchmark: Grades 7–8 Aligned (Ages 12–14)',
+    level5: 'ICO Benchmark: Grades 9–12 Senior Benchmark (Ages 14–16+)',
+    teacher: 'ICO Curriculum Master: Grades 1–12 Complete Alignment'
+  };
+
+  let isHandoutTtsPlaying = false;
+  let handoutTtsUtterance = null;
+  const handoutFontSizes = ['font-size-sm', 'font-size-md', 'font-size-lg', 'font-size-xl'];
+  let currentHandoutFontSize = localStorage.getItem('lms_handout_font_size') || 'font-size-md';
+
+  function applyHandoutFontSize(sizeClass) {
+    if (!handoutContent) return;
+    handoutFontSizes.forEach((cls) => handoutContent.classList.remove(cls));
+    handoutContent.classList.add(sizeClass);
+    currentHandoutFontSize = sizeClass;
+    try {
+      localStorage.setItem('lms_handout_font_size', sizeClass);
+    } catch (_e) {}
+  }
+
+  function changeHandoutFontSize(delta) {
+    const currentIndex = handoutFontSizes.indexOf(currentHandoutFontSize);
+    const newIndex = Math.max(
+      0,
+      Math.min(handoutFontSizes.length - 1, (currentIndex >= 0 ? currentIndex : 1) + delta)
+    );
+    applyHandoutFontSize(handoutFontSizes[newIndex]);
+  }
+
+  function stopHandoutTts() {
+    if (typeof window !== 'undefined' && window.speechSynthesis) {
+      window.speechSynthesis.cancel();
+    }
+    isHandoutTtsPlaying = false;
+    if (handoutTtsLabel) handoutTtsLabel.textContent = 'Listen';
+    if (handoutTtsBtn) {
+      handoutTtsBtn.classList.remove('active');
+      const icon = handoutTtsBtn.querySelector('i');
+      if (icon) icon.className = 'fa-solid fa-volume-high';
+    }
+  }
+
+  function handleHandoutTts() {
+    if (typeof window === 'undefined' || !window.speechSynthesis) {
+      alert('Text-to-Speech is not supported by your browser.');
+      return;
+    }
+
+    if (isHandoutTtsPlaying) {
+      stopHandoutTts();
+      return;
+    }
+
+    const textToSpeak = handoutContent ? handoutContent.innerText : '';
+    if (!textToSpeak || textToSpeak.trim().length === 0) return;
+
+    const cleanText = textToSpeak
+      .replace(
+        /[☀️🌴🌊🌸⭐🦁📖✨🕊️🤲💧🧼🕌🏛️📜🎨💎👑🌺🌙🍽️💰🎉🐪🎶🧱🤝🥩🔍📱💖😊🐱🌳🏘️🛡️🏰⚖️🍞🌾]/g,
+        ''
+      )
+      .replace(/https?:\/\/\S+/g, '')
+      .trim();
+
+    if (!cleanText) return;
+
+    const chunk = cleanText.substring(0, 3500);
+    const UtteranceClass = window.SpeechSynthesisUtterance;
+    if (!UtteranceClass) return;
+    handoutTtsUtterance = new UtteranceClass(chunk);
+    handoutTtsUtterance.rate = activeTrack === 'level1' || activeTrack === 'level2' ? 0.9 : 1.0;
+    handoutTtsUtterance.pitch = 1.0;
+
+    handoutTtsUtterance.onend = () => stopHandoutTts();
+    handoutTtsUtterance.onerror = () => stopHandoutTts();
+
+    window.speechSynthesis.speak(handoutTtsUtterance);
+    isHandoutTtsPlaying = true;
+    if (handoutTtsLabel) handoutTtsLabel.textContent = 'Stop';
+    if (handoutTtsBtn) {
+      handoutTtsBtn.classList.add('active');
+      const icon = handoutTtsBtn.querySelector('i');
+      if (icon) icon.className = 'fa-solid fa-circle-stop';
+    }
+  }
+
+  function updateHandoutProgress() {
+    if (!handoutProgressBar || !handoutContent) return;
+    const tabEl = document.getElementById('handoutTab');
+    if (!tabEl || !tabEl.classList.contains('active')) return;
+
+    const rect = handoutContent.getBoundingClientRect();
+    const windowH = window.innerHeight;
+    const totalH = handoutContent.offsetHeight;
+    if (totalH <= windowH) {
+      handoutProgressBar.style.width = '100%';
+      return;
+    }
+    const scrolled = Math.max(0, -rect.top);
+    const maxScroll = totalH - windowH + 100;
+    const pct = Math.min(100, Math.max(0, Math.round((scrolled / maxScroll) * 100)));
+    handoutProgressBar.style.width = `${pct}%`;
+  }
+
+  function updateHandoutSessionBanner(mod, trackObj) {
+    if (handoutIcoText) {
+      handoutIcoText.textContent =
+        trackIcoBenchmarkMap[activeTrack] || 'ICO Curricular Standard Aligned';
+    }
+
+    const md = trackObj && trackObj.handoutMd ? trackObj.handoutMd : '';
+    const wordCount = md.trim().split(/\s+/).filter(Boolean).length;
+    const estMins = Math.max(5, Math.ceil(wordCount / 140));
+    if (handoutReadTimeText) {
+      handoutReadTimeText.textContent = `${estMins} min study session`;
+    }
+
+    if (malikiCitationText) {
+      malikiCitationText.textContent = mod.malikiNotes || "Maliki Fiqh & Ash'ari Aqidah Standard";
+    }
+
+    if (handoutStrandsList) {
+      handoutStrandsList.innerHTML = '';
+      const strands = moduleStrandMap[mod.id] || ["'Aqeedah", 'Fiqh', 'Seerah', 'Akhlaaq'];
+      strands.forEach((strand) => {
+        const pill = document.createElement('span');
+        pill.className = 'handout-strand-pill';
+        pill.innerHTML = `<i class="fa-solid fa-tag"></i> ${escapeHtml(strand)}`;
+        handoutStrandsList.appendChild(pill);
+      });
+    }
+
+    applyHandoutFontSize(currentHandoutFontSize);
+
+    if (handoutProgressBar) {
+      handoutProgressBar.style.width = '0%';
+    }
+
+    stopHandoutTts();
+  }
+
   function renderHandout(mod) {
     if (!mod || !mod.tracks) {
       handoutContent.innerHTML = '<p>Loading module content...</p>';
@@ -1701,6 +1869,8 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
       handoutContent.innerHTML = `<pre>${escapeHtml(md || 'No handout content available.')}</pre>`;
     }
+
+    updateHandoutSessionBanner(mod, trackObj);
 
     if (malikiCitationTag) {
       malikiCitationTag.innerHTML = `<i class="fa-solid fa-book-open"></i> ${mod.malikiNotes || "Maliki Fiqh & Ash'ari Aqidah Standard"}`;
@@ -5717,6 +5887,28 @@ document.addEventListener('DOMContentLoaded', () => {
     if (printHandoutBtn) {
       printHandoutBtn.addEventListener('click', () => window.print());
     }
+
+    // Student Handout Session Interactive Listeners
+    if (handoutTtsBtn) {
+      handoutTtsBtn.addEventListener('click', handleHandoutTts);
+    }
+    if (handoutFontDecBtn) {
+      handoutFontDecBtn.addEventListener('click', () => changeHandoutFontSize(-1));
+    }
+    if (handoutFontResetBtn) {
+      handoutFontResetBtn.addEventListener('click', () => applyHandoutFontSize('font-size-md'));
+    }
+    if (handoutFontIncBtn) {
+      handoutFontIncBtn.addEventListener('click', () => changeHandoutFontSize(1));
+    }
+    if (handoutJumpQuizBtn) {
+      handoutJumpQuizBtn.addEventListener('click', () => {
+        switchTab('quiz');
+        const target = document.getElementById('quizQuestionsArea');
+        if (target) target.scrollIntoView({ behavior: 'smooth' });
+      });
+    }
+    window.addEventListener('scroll', updateHandoutProgress, { passive: true });
 
     // Quiz Timer Duration Selector Listener
     const quizTimerSelect = document.getElementById('quizTimerSelect');

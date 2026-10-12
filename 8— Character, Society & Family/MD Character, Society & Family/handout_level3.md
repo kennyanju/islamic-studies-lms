@@ -1,5 +1,6 @@
 # Level 3 Student Handout: Character, Society & Family
 **Age Group:** Ages 10–12 (Level 3 Track - Years 5 & 6)  
+**ICO Curriculum Benchmark:** Aligned with ICO Grades 5 & 6 (Pre-Adolescent Stage)  
 **Topics:** Sincerity (Ikhlas) vs. Ostentation (Riya'), Guarding the Tongue (Ghibah & Namimah), Filial Piety (Birr al-Walidayn), and The Rights of Neighbors  
 **Classical Text Spine:** *Al-Arba'in al-Nawawiyyah* (Hadiths 11 to 20) & *Al-Adab al-Mufrad* of Imam al-Bukhari  
 **Riwayah & Tajweed:** Hafs 'an 'Asim (Juz' 30: Surah Al-A'la and Al-Layl)

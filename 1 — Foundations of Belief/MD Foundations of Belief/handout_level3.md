@@ -1,5 +1,6 @@
 # Level 3 Student Handout: Foundations of Belief
 **Age Group:** Ages 10–12 (Level 3 Track - Years 5 & 6)  
+**ICO Curriculum Benchmark:** Aligned with ICO Grades 5 & 6 (Pre-Adolescent Stage)  
 **Topics:** The Three Judgments of the Mind, Divine Transcendence (Tanzih), The 6 Pillars of Iman, and Ibn 'Ashir's Creed  
 **Classical Text Spine:** *Ibn 'Ashir* (*Al-Murshid al-Mu'in* — Lines 11 to 25) & *Muqaddimat al-Risalah*  
 **Riwayah & Tajweed:** Hafs 'an 'Asim (Juz' 30: Surah Al-Burooj to An-Naba')

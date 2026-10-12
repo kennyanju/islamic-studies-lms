@@ -1,5 +1,6 @@
 # Level 3 Student Handout: Applied Fiqh & Everyday Life
 **Age Group:** Ages 10–12 (Level 3 Track - Years 5 & 6)  
+**ICO Curriculum Benchmark:** Aligned with ICO Grades 5 & 6 (Pre-Adolescent Stage)  
 **Topics:** Dietary Laws, The Rules of Halal Slaughter (Dhabh), Navigating Modern Grocery Labels, and Table Manners  
 **Classical Text Spine:** *Matn Ibn 'Ashir* & *Mukhtasar al-Akhdari*  
 **Riwayah & Tajweed:** Hafs 'an 'Asim (Juz' 30: Surah Al-Ghashiyah and Al-Fajr)

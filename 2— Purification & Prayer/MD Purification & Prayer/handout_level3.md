@@ -1,5 +1,6 @@
 # Level 3 Student Handout: Purification & Prayer
 **Age Group:** Ages 10–12 (Level 3 Track - Years 5 & 6)  
+**ICO Curriculum Benchmark:** Aligned with ICO Grades 5 & 6 (Pre-Adolescent Stage)  
 **Topics:** The 7 Fara'id of Wudu in Ibn 'Ashir, Ghusl, Tayammum with Pure Earth (Sa'id), The Madinan Adhan, and Sujud as-Sahw Clinic  
 **Classical Text Spine:** *Ibn 'Ashir* (*Al-Murshid al-Mu'in* — Taharah & Salah) & *Mukhtasar al-Akhdari*  
 **Riwayah & Tajweed:** Hafs 'an 'Asim (Juz' 30: Surah Al-Inshiqaq to Al-Infitar; Rules of Noon Sakinah & Tanween)

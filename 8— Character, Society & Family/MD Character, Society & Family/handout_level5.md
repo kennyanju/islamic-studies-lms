@@ -1,5 +1,6 @@
 # Level 5 Senior Seminar Guide: Character, Society & Family
 **Age Group:** Ages 14–16+ (Senior High / Level 5 Capstone Track)  
+**ICO Curriculum Benchmark:** Aligned with ICO Grades 9–12 Senior Benchmark (Senior High & Capstone Track)  
 **Topics:** Tazkiyat al-Nafs (Spiritual Purification), Curing the Four Major Heart Diseases (Hasad, Kibr, 'Ujb, Riya'), Junaydi Sufism, and The Architecture of Sincere Repentance  
 **Classical Text Spine:** *Matn Ibn 'Ashir* (Tazkiyah Chapter), *Qawa'id al-Tasawwuf* of Sidi Ahmad Zarruq, and *Ihya' 'Ulum al-Din* of Imam al-Ghazali  
 **Riwayah & Advanced Tajweed:** Hafs 'an 'Asim with Warsh 'an Nafi' awareness; Tafsir of Surah Al-Hujurat (Ethics of Global Brotherhood)

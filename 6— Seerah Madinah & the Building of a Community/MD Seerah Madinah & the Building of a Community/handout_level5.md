@@ -1,5 +1,6 @@
 # Level 5 Senior Seminar Guide: Seerah: Madinah & Building a Community
 **Age Group:** Ages 14–16+ (Senior High / Level 5 Capstone Track)  
+**ICO Curriculum Benchmark:** Aligned with ICO Grades 9–12 Senior Benchmark (Senior High & Capstone Track)  
 **Topics:** The Constitution of Madinah (*Sahifat al-Madinah*), Classical Islamic International Law (*Fiqh al-Siyar*), 'Amal Ahl al-Madinah as Legal Proof, and Modern Pluralistic Statecraft  
 **Classical Text Spine:** *Al-Muwatta* (Imam Malik), *Kitab al-Siyar al-Kabir* (Imam Muhammad al-Shaybani), and *Al-Amwal* (Ibn Zanjawayh)  
 **Riwayah & Advanced Tajweed:** Hafs 'an 'Asim with Warsh 'an Nafi' awareness; Linguistic Analysis of Madinan Covenant Terms

@@ -1,5 +1,6 @@
 # Level 5 Senior Seminar Guide: Foundations of Belief
 **Age Group:** Ages 14–16+ (Senior High / Level 5 Capstone Track)  
+**ICO Curriculum Benchmark:** Aligned with ICO Grades 9–12 Senior Benchmark (Senior High & Capstone Track)  
 **Topics:** Classical Epistemology (*Asbab al-'Ilm*), The Kalam Cosmological Argument, Answering Scientism & Materialism, The Ash'ari Doctrine of Kasb, and The Problem of Evil  
 **Classical Text Spine:** *Jawharat al-Tawhid* (Imam Ibrahim al-Laqani), *Al-Iqtisad fil-I'tiqad* (Imam al-Ghazali), and *Tahafut al-Falasifah*  
 **Riwayah & Advanced Tajweed:** Hafs 'an 'Asim with Warsh 'an Nafi' awareness; Surah Al-Kahf (complete study)

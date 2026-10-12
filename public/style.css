@@ -1273,9 +1273,211 @@ body.theme-light .content-card {
   gap: 12px;
 }
 
+/* Student Handout Session Alignment Banner & Study Controls */
+.handout-session-banner {
+  background: linear-gradient(135deg, rgba(20, 184, 166, 0.08) 0%, rgba(217, 119, 6, 0.08) 100%);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-lg);
+  padding: 16px 20px;
+  margin-bottom: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+body.theme-light .handout-session-banner {
+  background: linear-gradient(135deg, #f0fdf4 0%, #fffbeb 100%);
+  border-color: #e2e8f0;
+}
+
+.handout-session-banner-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.handout-ico-pill {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--primary-accent);
+  background-color: rgba(20, 184, 166, 0.15);
+  border: 1px solid rgba(20, 184, 166, 0.3);
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+body.theme-light .handout-ico-pill {
+  color: #0f766e;
+  background-color: #ccfbf1;
+  border-color: #99f6e4;
+}
+
+.handout-session-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.handout-read-time {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.handout-session-banner-bottom {
+  display: flex;
+  align-items: center;
+}
+
+.handout-strands-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.handout-strand-pill {
+  font-size: 0.76rem;
+  font-weight: 600;
+  padding: 4px 11px;
+  border-radius: var(--radius-full);
+  background-color: var(--input-bg);
+  border: 1px solid var(--card-border);
+  color: var(--text-main);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+body.theme-light .handout-strand-pill {
+  background-color: #f1f5f9;
+  border-color: #e2e8f0;
+  color: #334155;
+}
+
+.session-tool-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.btn-session-tool {
+  padding: 8px 16px;
+  border-radius: var(--radius-full);
+  font-size: 0.84rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.btn-session-tool.active {
+  background-color: var(--primary-accent);
+  color: #fff;
+  border-color: var(--primary-accent);
+}
+
+.font-zoom-control {
+  display: inline-flex;
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+  background-color: var(--input-bg);
+}
+
+.btn-font-zoom {
+  border: none;
+  background: transparent;
+  color: var(--text-main);
+  padding: 6px 12px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.btn-font-zoom:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+body.theme-light .btn-font-zoom:hover {
+  background-color: #e2e8f0;
+}
+
+.btn-jump-quiz {
+  background-color: var(--primary-accent);
+  color: #ffffff;
+  border: 1px solid var(--primary-accent);
+  padding: 9px 20px;
+  border-radius: var(--radius-full);
+  font-size: 0.88rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.15s ease;
+}
+
+.btn-jump-quiz:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(20, 184, 166, 0.35);
+}
+
+.handout-progress-track {
+  width: 100%;
+  height: 4px;
+  background-color: var(--input-bg);
+  border-radius: var(--radius-full);
+  margin-top: 10px;
+  margin-bottom: 22px;
+  overflow: hidden;
+}
+
+.handout-progress-bar {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--primary-accent), var(--gold-vibrant));
+  border-radius: var(--radius-full);
+  transition: width 0.1s ease-out;
+}
+
+/* Dynamic font size classes for #handoutContent */
+#handoutContent.font-size-sm {
+  font-size: 0.92rem;
+  line-height: 1.6;
+}
+
+#handoutContent.font-size-md {
+  font-size: 1.05rem;
+  line-height: 1.75;
+}
+
+#handoutContent.font-size-lg {
+  font-size: 1.2rem;
+  line-height: 1.85;
+}
+
+#handoutContent.font-size-xl {
+  font-size: 1.35rem;
+  line-height: 1.95;
+}
+
 .toolbar-right {
   display: flex;
   gap: 12px;
+  flex-wrap: wrap;
 }
 
 .maliki-citation-tag {

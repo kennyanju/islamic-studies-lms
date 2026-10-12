@@ -1415,12 +1415,75 @@
             aria-labelledby="handoutTabBtn"
           >
             <div class="content-card">
+              <!-- Session Alignment Banner -->
+              <div class="handout-session-banner" id="handoutSessionBanner">
+                <div class="handout-session-banner-top">
+                  <div class="handout-ico-pill" id="handoutIcoBadge">
+                    <i class="fa-solid fa-graduation-cap" aria-hidden="true"></i>
+                    <span id="handoutIcoText">ICO Benchmark: Grades 1–2 Aligned (Ages 6–8)</span>
+                  </div>
+                  <div class="handout-session-meta">
+                    <span class="handout-read-time" id="handoutReadTime">
+                      <i class="fa-regular fa-clock" aria-hidden="true"></i>
+                      <span id="handoutReadTimeText">15 min study session</span>
+                    </span>
+                    <span class="maliki-citation-tag" id="malikiCitationTag">
+                      <i class="fa-solid fa-book-open" aria-hidden="true"></i>
+                      <span id="malikiCitationText">Maliki Fiqh Reference</span>
+                    </span>
+                  </div>
+                </div>
+                <div class="handout-session-banner-bottom">
+                  <div
+                    class="handout-strands-list"
+                    id="handoutStrandsList"
+                    aria-label="Curriculum strands"
+                  >
+                    <!-- Populated dynamically by app.js -->
+                  </div>
+                </div>
+              </div>
+
+              <!-- Interactive Session Toolbar -->
               <div class="content-toolbar">
                 <div class="toolbar-left">
-                  <span class="maliki-citation-tag" id="malikiCitationTag"
-                    ><i class="fa-solid fa-book-open" aria-hidden="true"></i> Maliki Fiqh
-                    Reference</span
-                  >
+                  <div class="session-tool-group">
+                    <button
+                      class="btn-secondary-action btn-session-tool"
+                      id="handoutTtsBtn"
+                      aria-label="Listen to lesson handout text-to-speech"
+                      title="Read handout aloud (Text-to-Speech)"
+                    >
+                      <i class="fa-solid fa-volume-high" aria-hidden="true"></i>
+                      <span id="handoutTtsLabel">Listen</span>
+                    </button>
+                    <div class="font-zoom-control" role="group" aria-label="Text zoom">
+                      <button
+                        class="btn-secondary-action btn-font-zoom"
+                        id="handoutFontDecBtn"
+                        title="Smaller text"
+                        aria-label="Decrease text size"
+                      >
+                        A-
+                      </button>
+                      <button
+                        class="btn-secondary-action btn-font-zoom"
+                        id="handoutFontResetBtn"
+                        title="Normal text"
+                        aria-label="Reset text size"
+                      >
+                        A
+                      </button>
+                      <button
+                        class="btn-secondary-action btn-font-zoom"
+                        id="handoutFontIncBtn"
+                        title="Larger text"
+                        aria-label="Increase text size"
+                      >
+                        A+
+                      </button>
+                    </div>
+                  </div>
                 </div>
                 <div class="toolbar-right">
                   <button
@@ -1440,8 +1503,23 @@
                     <i class="fa-regular fa-circle-check" aria-hidden="true"></i>
                     <span>Mark as Completed</span>
                   </button>
+                  <button
+                    class="btn-primary-action btn-jump-quiz"
+                    id="handoutJumpQuizBtn"
+                    aria-label="Start interactive practice quiz"
+                    title="Jump to quiz questions for this module"
+                  >
+                    <i class="fa-solid fa-circle-question" aria-hidden="true"></i>
+                    <span>Practice Quiz</span>
+                  </button>
                 </div>
               </div>
+
+              <!-- Reading progress bar -->
+              <div class="handout-progress-track" aria-hidden="true">
+                <div class="handout-progress-bar" id="handoutProgressBar"></div>
+              </div>
+
               <div class="markdown-body" id="handoutContent"></div>
             </div>
           </div>
