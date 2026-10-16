@@ -114,12 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Tab Contents
   const handoutContent = document.getElementById('handoutContent');
-  const malikiCitationTag = document.getElementById('malikiCitationTag');
   const markHandoutCompleteBtn = document.getElementById('markHandoutCompleteBtn');
-  const handoutIcoText = document.getElementById('handoutIcoText');
-  const handoutReadTimeText = document.getElementById('handoutReadTimeText');
-  const malikiCitationText = document.getElementById('malikiCitationText');
-  const handoutStrandsList = document.getElementById('handoutStrandsList');
   const handoutTtsBtn = document.getElementById('handoutTtsBtn');
   const handoutTtsLabel = document.getElementById('handoutTtsLabel');
   const handoutFontDecBtn = document.getElementById('handoutFontDecBtn');
@@ -1317,13 +1312,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Split markdown by ## headings
     const rawSections = md.split(/(?=^##\s+)/m).filter((s) => s.trim().length > 0);
 
-    // Filter out purely header-only stubs
-    const validSections = rawSections.filter((s) => {
-      const isJustStub = s.trim().startsWith('#') && !s.includes('##') && s.length < 150;
-      return !isJustStub;
-    });
-
-    const sections = validSections.length > 0 ? validSections : [md];
+    // Filter out top-level preamble / metadata tables that do not have a ## heading
+    const storySections = rawSections.filter((s) => /^##\s+/m.test(s));
+    const sections = storySections.length > 0 ? storySections : rawSections;
     const totalCards = sections.length;
 
     // 1. Top Playful Intro Hero
@@ -1386,25 +1377,6 @@ document.addEventListener('DOMContentLoaded', () => {
       let bodyHtml = renderMarkdown(bodyMd);
       bodyHtml = highlightArabicInHtml(bodyHtml);
 
-      // Split into preview & collapsible details if content is large
-      const parserDiv = document.createElement('div');
-      parserDiv.innerHTML = bodyHtml;
-      const childNodes = Array.from(parserDiv.children);
-
-      let immediateHtml = '';
-      let expandableHtml = '';
-      let hasExpandable = false;
-
-      if (childNodes.length > 3) {
-        hasExpandable = true;
-        const immediateElements = childNodes.slice(0, 2);
-        const expandableElements = childNodes.slice(2);
-        immediateHtml = immediateElements.map((el) => el.outerHTML).join('');
-        expandableHtml = expandableElements.map((el) => el.outerHTML).join('');
-      } else {
-        immediateHtml = bodyHtml;
-      }
-
       let calloutHtml = '';
       if (takeaway) {
         calloutHtml = `
@@ -1412,18 +1384,6 @@ document.addEventListener('DOMContentLoaded', () => {
             <div class="comic-callout-icon" aria-hidden="true">💡</div>
             <div class="comic-callout-text"><strong>Key Discovery:</strong> ${escapeHtml(takeaway)}</div>
           </div>
-        `;
-      }
-
-      let expandBtnHtml = '';
-      if (hasExpandable) {
-        expandBtnHtml = `
-          <div class="comic-expand-container collapsed" id="expand_card_${idx}">
-            ${expandableHtml}
-          </div>
-          <button type="button" class="comic-expand-btn" data-expand-target="expand_card_${idx}" aria-expanded="false">
-            <span>Explore More Details</span> <i class="fa-solid fa-chevron-down"></i>
-          </button>
         `;
       }
 
@@ -1445,8 +1405,7 @@ document.addEventListener('DOMContentLoaded', () => {
           ${calloutHtml}
 
           <div class="comic-card-body">
-            ${immediateHtml}
-            ${expandBtnHtml}
+            ${bodyHtml}
           </div>
         </article>
       `;
@@ -1461,32 +1420,7 @@ document.addEventListener('DOMContentLoaded', () => {
       </div>
     `;
 
-    // 3. Attach interactive listeners for expand/collapse and jump navigation
-    const expandBtns = handoutContent.querySelectorAll('.comic-expand-btn');
-    expandBtns.forEach((btn) => {
-      btn.addEventListener('click', (e) => {
-        e.preventDefault();
-        const targetId = btn.dataset.expandTarget;
-        const targetEl = document.getElementById(targetId);
-        if (!targetEl) return;
-
-        const isExpanded = targetEl.classList.contains('expanded');
-        if (isExpanded) {
-          targetEl.classList.remove('expanded');
-          targetEl.classList.add('collapsed');
-          btn.classList.remove('active');
-          btn.setAttribute('aria-expanded', 'false');
-          btn.querySelector('span').textContent = 'Explore More Details';
-        } else {
-          targetEl.classList.remove('collapsed');
-          targetEl.classList.add('expanded');
-          btn.classList.add('active');
-          btn.setAttribute('aria-expanded', 'true');
-          btn.querySelector('span').textContent = 'Show Less';
-        }
-      });
-    });
-
+    // 3. Attach interactive listeners for jump navigation
     const jumpBtns = handoutContent.querySelectorAll('.comic-jump-btn');
     jumpBtns.forEach((btn) => {
       btn.addEventListener('click', (e) => {
@@ -1494,23 +1428,13 @@ document.addEventListener('DOMContentLoaded', () => {
         const targetId = btn.dataset.target;
         const targetEl = document.getElementById(targetId);
         if (targetEl) {
-          targetEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
       });
     });
   }
 
-  const moduleStrandMap = {
-    1: ["'Aqeedah & Tawheed", 'Epistemology', 'Adab al-Ikhtilaf'],
-    2: ["'Ibaadaat & Taharah", 'Maliki Fiqh', 'Salah Practicum', 'Adab al-Ikhtilaf'],
-    3: ['Seerah al-Nabawiyyah', 'Prophetic Character', 'Makkan Milestones'],
-    4: ["'Ulum al-Qur'an", 'Tajweed Foundations', 'Tafsir Studies'],
-    5: ["'Ibaadaat & Sawm", 'Zakah & Community', 'Eid & Social Solidarity'],
-    6: ['Madinan Seerah', 'Charter of Madinah', 'Defensive Statecraft'],
-    7: ['Applied Fiqh', 'Halal & Pure Living', 'Financial Ethics', 'Digital Safety'],
-    8: ['Akhlaaq & Adab', 'Family Devotion (Birr)', 'Tazkiyat al-Nafs'],
-    9: ['Civilization & History', "Khulafa' al-Rashidun", 'Four Sunni Madhhabs', 'Living Faith']
-  };
+
 
 
   let isHandoutTtsPlaying = false;
@@ -1613,32 +1537,6 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function updateHandoutSessionBanner(mod, trackObj) {
-    if (handoutIcoText) {
-      handoutIcoText.textContent = '';
-    }
-
-    const md = trackObj && trackObj.handoutMd ? trackObj.handoutMd : '';
-    const wordCount = md.trim().split(/\s+/).filter(Boolean).length;
-    const estMins = Math.max(5, Math.ceil(wordCount / 140));
-    if (handoutReadTimeText) {
-      handoutReadTimeText.textContent = `${estMins} min study session`;
-    }
-
-    if (malikiCitationText) {
-      malikiCitationText.textContent = mod.malikiNotes || 'Fiqh & Aqidah Standard';
-    }
-
-    if (handoutStrandsList) {
-      handoutStrandsList.innerHTML = '';
-      const strands = moduleStrandMap[mod.id] || ["'Aqeedah", 'Fiqh', 'Seerah', 'Akhlaaq'];
-      strands.forEach((strand) => {
-        const pill = document.createElement('span');
-        pill.className = 'handout-strand-pill';
-        pill.innerHTML = `<i class="fa-solid fa-tag"></i> ${escapeHtml(strand)}`;
-        handoutStrandsList.appendChild(pill);
-      });
-    }
-
     applyHandoutFontSize(currentHandoutFontSize);
 
     if (handoutProgressBar) {
@@ -1667,10 +1565,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     updateHandoutSessionBanner(mod, trackObj);
-
-    if (malikiCitationTag) {
-      malikiCitationTag.innerHTML = `<i class="fa-solid fa-book-open"></i> ${mod.malikiNotes || 'Fiqh & Aqidah Standard'}`;
-    }
 
     const isComp = userProgress[`mod_${mod.id}`];
     markHandoutCompleteBtn.classList.toggle('completed', !!isComp);
