@@ -1434,9 +1434,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-
-
-
   let isHandoutTtsPlaying = false;
   let handoutTtsUtterance = null;
   const handoutFontSizes = ['font-size-sm', 'font-size-md', 'font-size-lg', 'font-size-xl'];
@@ -1536,7 +1533,7 @@ document.addEventListener('DOMContentLoaded', () => {
     handoutProgressBar.style.width = `${pct}%`;
   }
 
-  function updateHandoutSessionBanner(mod, trackObj) {
+  function updateHandoutSessionBanner() {
     applyHandoutFontSize(currentHandoutFontSize);
 
     if (handoutProgressBar) {
@@ -1564,7 +1561,7 @@ document.addEventListener('DOMContentLoaded', () => {
       handoutContent.innerHTML = `<pre>${escapeHtml(md || 'No handout content available.')}</pre>`;
     }
 
-    updateHandoutSessionBanner(mod, trackObj);
+    updateHandoutSessionBanner();
 
     const isComp = userProgress[`mod_${mod.id}`];
     markHandoutCompleteBtn.classList.toggle('completed', !!isComp);

@@ -117,7 +117,7 @@ const modulesConfig = [
     bloomLevel: 'Analyzing & Reflecting',
     objectives: [
       "Examine the strategic significance of the Hijrah and the brotherhood (Mu'akhah) established in Madinah.",
-      'Analyze the Covenant of Madinah (Sahifat al-Madinah) and how it established mutual rights, security, and justice across Madinah\'s tribes and religious communities.',
+      "Analyze the Covenant of Madinah (Sahifat al-Madinah) and how it established mutual rights, security, and justice across Madinah's tribes and religious communities.",
       'Understand the defensive context of key historical encounters (Badr, Uhud, Al-Khandaq).'
     ],
     malikiNotes:
@@ -348,11 +348,7 @@ function parseQuestionsComprehensive(markdownText) {
     } else if (currentSection === 'MATCH') {
       if (trimmed.startsWith('#')) {
         currentMatchGroup = trimmed.replace(/^#+\s*/, '').trim();
-      } else if (
-        trimmed.includes('───') ||
-        trimmed.includes('---') ||
-        trimmed.includes('->')
-      ) {
+      } else if (trimmed.includes('───') || trimmed.includes('---') || trimmed.includes('->')) {
         const parts = trimmed
           .replace(/^\*\s*/, '')
           .replace(/^Pair\s+\d+:\s*/i, '')
