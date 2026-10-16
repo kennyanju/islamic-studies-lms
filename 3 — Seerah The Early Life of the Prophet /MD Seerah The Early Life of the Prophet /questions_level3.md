@@ -71,18 +71,11 @@
 ## Part B: Fill in the Blanks
 Vocabulary Bank: 'Am al-Huzn, Al-Amin, Negus, Sumayyah, Ahad
 
-6. Before prophethood, the Prophet's unblemished honesty earned him the universal title ______.
-7. The courageous companion who became the first martyr in Islamic history was Sayyidah ______.
-8. The declaration of unwavering Tawhid repeated by Bilal under torture was ______.
-9. The just Christian monarch who granted asylum to Muslim refugees in Abyssinia was the ______.
-10. The grief-stricken year in which both Abu Talib and Sayyidah Khadijah passed away is called ______.
-
-### Fill in the Blanks Key
-6. Al-Amin
-7. Sumayyah
-8. Ahad
-9. Negus
-10. 'Am al-Huzn
+1. Before prophethood, the Prophet's unblemished honesty earned him the universal title ______.
+2. The courageous companion who became the first martyr in Islamic history was Sayyidah ______.
+3. The declaration of unwavering Tawhid repeated by Bilal under torture was ______.
+4. The just Christian monarch who granted asylum to Muslim refugees in Abyssinia was the ______.
+5. The grief-stricken year in which both Abu Talib and Sayyidah Khadijah passed away is called ______.
 
 ---
 
@@ -93,25 +86,14 @@ Vocabulary Bank: 'Am al-Huzn, Al-Amin, Negus, Sumayyah, Ahad
 * Shi'b Abi Talib ─── The mountain ravine where Muslims endured three years of boycott
 * The Du'a of Ta'if ─── The supplication of humility and reliance uttered under the vineyard
 
-### Matching Key
-* Mount Safa ─── The hill where the Prophet ﷺ openly proclaimed Tawhid to Quraysh
-* Sayyidah Sumayyah ─── The first martyr in Islamic history
-* Sayyidina Ja'far ─── The eloquent spokesman who recited Surah Maryam to the Negus
-* Shi'b Abi Talib ─── The mountain ravine where Muslims endured three years of boycott
-* The Du'a of Ta'if ─── The supplication of humility and reliance uttered under the vineyard
-
 ---
 
 ## Part D: Reflection & Application
 
-11. Analyze the Prophet's approach at Mount Safa: Why did he establish his verified reputation for truthfulness (*Al-Amin*) before delivering the divine warning?
-12. What leadership and communication lessons can young Muslims extract from Sayyidina Ja'far's speech before the Negus of Abyssinia?
-13. Contrast the typical vengeance of worldly rulers with the Prophet's reaction to the hostility he encountered at Ta'if.
-14. How did enduring three years of hardship in Shi'b Abi Talib prepare the early Companions for the responsibilities of community building in Madinah?
-
-### Reflection Rubric
-* **Full Understanding:** Student provides structured, reflective responses citing specific Seerah details (such as the value of moral integrity before preaching, Ja'far's respectful diplomacy, the Prophet's prayer for the descendants of Ta'if, and perseverance under boycott).
-* **Basic Understanding:** Student provides brief answers without referencing Seerah context or practical moral applications.
+1. Analyze the Prophet's approach at Mount Safa: Why did he establish his verified reputation for truthfulness (*Al-Amin*) before delivering the divine warning?
+2. What leadership and communication lessons can young Muslims extract from Sayyidina Ja'far's speech before the Negus of Abyssinia?
+3. Contrast the typical vengeance of worldly rulers with the Prophet's reaction to the hostility he encountered at Ta'if.
+4. How did enduring three years of hardship in Shi'b Abi Talib prepare the early Companions for the responsibilities of community building in Madinah?
 
 ---
 
@@ -126,3 +108,21 @@ Vocabulary Bank: 'Am al-Huzn, Al-Amin, Negus, Sumayyah, Ahad
 8. C - Termites ate the parchment except the divine name, as recorded in Sirat Ibn Hisham.
 9. B - The passing of Abu Talib and Sayyidah Khadijah (RA) stripped away external protection and emotional solace.
 10. A - The Prophet's response at Ta'if demonstrates his role as a mercy to all creation (Sahih al-Bukhari 3231).
+
+### Fill in the Blanks Key
+1. Al-Amin
+2. Sumayyah
+3. Ahad
+4. Negus
+5. 'Am al-Huzn
+
+### Matching Key
+* Mount Safa ─── The hill where the Prophet ﷺ openly proclaimed Tawhid to Quraysh
+* Sayyidah Sumayyah ─── The first martyr in Islamic history
+* Sayyidina Ja'far ─── The eloquent spokesman who recited Surah Maryam to the Negus
+* Shi'b Abi Talib ─── The mountain ravine where Muslims endured three years of boycott
+* The Du'a of Ta'if ─── The supplication of humility and reliance uttered under the vineyard
+
+### Reflection Rubric
+* **Full Understanding:** Student provides structured, reflective responses citing specific Seerah details (such as the value of moral integrity before preaching, Ja'far's respectful diplomacy, the Prophet's prayer for the descendants of Ta'if, and perseverance under boycott).
+* **Basic Understanding:** Student provides brief answers without referencing Seerah context or practical moral applications.

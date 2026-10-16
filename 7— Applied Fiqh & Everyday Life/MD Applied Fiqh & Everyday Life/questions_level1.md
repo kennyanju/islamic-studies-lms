@@ -41,9 +41,9 @@
 ## Part B: Fill in the Blanks
 Vocabulary Bank: Bismillah, Right, Halal
 
-6. Food that is lawful, pure, and allowed by Allah is called ______.
-7. We say ______ before beginning our meal.
-8. We eat and drink using our clean ______ hand.
+1. Food that is lawful, pure, and allowed by Allah is called ______.
+2. We say ______ before beginning our meal.
+3. We eat and drink using our clean ______ hand.
 
 ---
 
@@ -56,7 +56,7 @@ Vocabulary Bank: Bismillah, Right, Halal
 ---
 
 ## Part D: Reflection
-9. What is your favorite healthy, halal meal that Allah made for us, and how can you thank your parents for preparing it?
+1. What is your favorite healthy, halal meal that Allah made for us, and how can you thank your parents for preparing it?
 
 ---
 
@@ -68,12 +68,16 @@ Vocabulary Bank: Bismillah, Right, Halal
 5. D - Saying Al-Hamdulillah expresses thankfulness to Allah for nourishment.
 
 ### Fill in the Blanks Key
-6. Halal
-7. Bismillah
-8. Right
+1. Halal
+2. Bismillah
+3. Right
 
 ### Matching Key
 * Bismillah ─── Said before eating to remember Allah
 * Al-Hamdulillah ─── Said after finishing to express gratitude
 * Right hand ─── Hand used for eating per the Sunnah
 * Tayyib ─── Wholesome, clean, and nutritious food
+
+### Reflection Marking Rubric
+* **Full Understanding:** Student names a wholesome halal food, remembers to thank Allah (Al-Hamdulillah), and describes a kind way to thank or help their parents in the kitchen.
+* **Basic Understanding:** Student names a food item without mentioning gratitude to Allah or parents.

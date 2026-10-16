@@ -3,21 +3,21 @@
 ## Part A: Multiple Choice Questions
 
 1. In the legal taxonomy of water outlined in *Al-Dhakhirah* by Imam al-Qarafi, what is the status of water altered by a pure substance such as rose water or soap (*Al-Ma' al-Mukhalat*)?
-   (A) It is strictly impure (*Najis*) and cannot be touched
+   (A) It becomes ritually impure (*Najis*) and invalidates the prayer clothes if any droplets touch them
    (B) It retains physical cleanliness (*Tahir*), but forfeits the legal capacity to lift ritual hadath (*Ghayr Mutahhir*)
-   (C) It remains fully purifying (*Tahur*) unconditionally
-   (D) It can be used for Ghusl but not for Wudu
+   (C) It remains unconditionally purifying (*Tahur*) for both minor ablution and major ritual bath in all cases
+   (D) It is valid for lifting major ritual impurity (*Janabah*) when heated, but invalid for minor ablution
 
 2. What is the linguistic and legal argument demonstrated by Imam Malik to prove that *Al-Dalk* (manual friction) is an obligatory pillar of Wudu?
-   (A) That the Quran explicitly mentions the word Dalk in Surah Al-Baqarah
-   (B) That water cannot clean dirt unless accompanied by chemical soap
+   (A) That an explicit verse in Surah Al-Baqarah commands believers to scrub each limb three times using rough cloth
+   (B) That water loses its purifying status on the skin unless combined with vigorous scrubbing to remove natural oils
    (C) That classical Arabic lexicography defines *Ghasl* as water application accompanied by the physical passage of the hand (*Al-Imrar bil-Yad*), distinguishing it from mere pouring (*Insibab*)
-   (D) That the Roman baths in Syria required rubbing with stones
+   (D) That solitary narrations from Kufan jurists equate submerging a limb in running river water with wiping over leather socks
 
 3. In Maliki legal theory (*Usul al-Fiqh*), why does the mass communal practice of Madinah (*'Amal Ahl al-Madinah*) take epistemic precedence over an isolated solitary report (*Khabar al-Ahad*) regarding the posture of *Sadl*?
-   (A) Because Madinah was politically the wealthiest city in Arabia
-   (B) Because solitary reports are rejected entirely in Islamic law
-   (C) Because Imam Malik was the sole governor of Madinah
+   (A) Because the municipal scholars of Madinah prohibited the recording of written hadith collections during the first two centuries
+   (B) Because solitary prophetic narrations (*Ahad*) are rejected altogether in Maliki jurisprudence even when no communal practice exists
+   (C) Because legal rulings in the Maliki school are derived exclusively from deductive analogy (*Qiyas*) without consulting prophetic traditions
    (D) Because an unbroken, mass-transmitted living practice (*Tawatur 'Amali*) of thousands of Companions' descendants is epistemologically definitive and immune to individual transmission slips or abrogations
 
 4. How does classical Maliki jurisprudence interpret the Qur'anic phrase concerning physical contact with the opposite gender (`أَوْ لَامَسْتُمُ النِّسَاءَ`) in the context of Wudu nullifiers?
@@ -27,15 +27,15 @@
    (D) It requires both a complete Ghusl and a monetary expiation
 
 5. What is the relied-upon Maliki position regarding the recitation of the *Basmalah* in obligatory (*Fard*) prayers?
-   (A) It must be shouted at the beginning of every Surah
+   (A) It must be recited aloud before Surah Al-Fatihah in all five daily obligatory prayers and silently before the second Surah
    (B) It is omitted (neither recited aloud nor silently) before Al-Fatihah and the subsequent Surah, because recitation begins directly with *Al-Hamdu lillahi Rabbil-'Alamin*
-   (C) It must be recited in Persian before Al-Fatihah
-   (D) It is an obligatory pillar whose omission invalidates the prayer
+   (C) It is an individual obligation (*Fard*) counted as the first verse of every Surah whose omission invalidates the prayer
+   (D) It is recited aloud in the daytime prayers (Dhuhr and 'Asr) and omitted completely during the nighttime prayers
 
 6. In modern bio-medical jurisprudence, how does Maliki fiqh classify blood circulating through an external hemodialysis circuit?
-   (A) It invalidates Wudu immediately because blood is classified as hadath
-   (B) It requires a full hospital Ghusl before every prayer
-   (C) It permanently exempts the patient from praying altogether
+   (A) It invalidates Wudu immediately because any blood leaving a vein is classified as a major nullifier of ritual purity
+   (B) It obligates the patient to perform a complete ritual bath (*Ghusl*) and dry ablution (*Tayammum*) before each prayer
+   (C) It suspends the obligation of the five daily prayers entirely until the patient completes all dialysis sessions for the week
    (D) It does not break Wudu, because blood exiting and re-entering from non-private passages does not invalidate ritual purity in the Maliki school
 
 7. What is the legal protocol for a patient wearing an orthopedic plaster cast or sterile medical dressing (*Jaba'ir*) that cannot be safely removed for Wudu?
@@ -51,15 +51,15 @@
    (D) They prostrate once before the Salam and once after the Salam
 
 9. What is the structure of the Funeral Prayer (*Salat al-Janazah*) in orthodox Sunni jurisprudence?
-   (A) Two units with four bowings and eight prostrations
+   (A) Two full units (*Rak'ahs*) performed with audible Quranic recitation, two bowings, and four prostrations like Fajr
    (B) Four Takbirs performed entirely standing, with no Ruku' and no Sujud, concluding with a single Salam to the right
-   (C) A silent prayer performed while sitting in a circle
-   (D) Three rak'ahs identical to Maghrib prayer
+   (C) Four sitting units performed silently around the bier without facing the Qiblah or raising the hands in Takbir
+   (D) Three standing units identical in structure to the Maghrib prayer followed by two prostrations of gratitude
 
 10. In *Bidayat al-Mujtahid*, what overall conclusion does Qadi Ibn Rushd reach regarding the evidentiary methodologies of the four Sunni Imams?
-    (A) That only one school has valid evidence and the other three are unfounded
-    (B) That Islamic law should discard classical schools in favor of personal opinion
-    (C) That legal disagreements were caused by linguistic corruption in Baghdad
+    (A) That only one legal school possesses authentic prophetic evidence while the remaining three rely on unverified custom
+    (B) That jurists should discard the foundational methodologies of the four schools in favor of unrestricted personal preference
+    (C) That jurisprudential disagreements arose primarily from political rivalries between the Abbasid and Umayyad courts
     (D) That the variant rulings of the four Imams stem from profound, rigorous hermeneutical principles, proving that all four schools are grounded in authentic Sunnah and sound legal theory
 
 ---

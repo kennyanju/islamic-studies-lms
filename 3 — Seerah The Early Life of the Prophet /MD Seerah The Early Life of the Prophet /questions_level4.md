@@ -37,9 +37,9 @@
 (D) Sayyidina Bilal ibn Rabah (RA)
 
 ### 6. What was the central commitment undertaken by the Yathrib delegates at the Second Pledge of 'Aqabah?
-(A) To send fifty horses each lunar month to the markets of Makkah
-(B) To initiate an armed campaign against the Sasanian Persian empire
-(C) To cease maritime fishing operations along the Red Sea coast
+(A) To remain in Yathrib while sending annual financial tribute to support the believers staying in Makkah
+(B) To negotiate a commercial trade truce with the leaders of Ta'if on behalf of the Quraysh clans
+(C) To relocate the Muslims of Yathrib to the Christian kingdom of Abyssinia under the Negus's protection
 (D) To protect and shelter the Prophet ﷺ and his companions just as they protected their own families
 
 ### 7. Which celebrated 12th-century Maliki jurist of Ceuta authored the masterwork *Al-Shifa bi-Ta'rif Huquq al-Mustafa*?
@@ -71,18 +71,11 @@
 ## Part B: Fill in the Blanks
 Vocabulary Bank: Al-Siddiq, Mus'ab, Al-Shifa, Sidrat al-Muntaha, Al-Isra'
 
-6. The miraculous night journey from the Sacred Mosque in Makkah to Jerusalem is known as ______.
-7. The celestial boundary tree beyond the Seventh Heaven where the Five Daily Prayers were ordained is ______.
-8. For his unwavering certitude in verifying the Night Journey, Abu Bakr was honored with the title ______.
-9. The dedicated young companion appointed as the first Quran teacher and ambassador to Madinah was ______ ibn 'Umayr.
-10. Qadi 'Iyad's renowned Maliki text detailing the rights and characteristics of the Prophet ﷺ is titled ______.
-
-### Fill in the Blanks Key
-6. Al-Isra'
-7. Sidrat al-Muntaha
-8. Al-Siddiq
-9. Mus'ab
-10. Al-Shifa
+1. The miraculous night journey from the Sacred Mosque in Makkah to Jerusalem is known as ______.
+2. The celestial boundary tree beyond the Seventh Heaven where the Five Daily Prayers were ordained is ______.
+3. For his unwavering certitude in verifying the Night Journey, Abu Bakr was honored with the title ______.
+4. The dedicated young companion appointed as the first Quran teacher and ambassador to Madinah was ______ ibn 'Umayr.
+5. Qadi 'Iyad's renowned Maliki text detailing the rights and characteristics of the Prophet ﷺ is titled ______.
 
 ---
 
@@ -93,25 +86,14 @@ Vocabulary Bank: Al-Siddiq, Mus'ab, Al-Shifa, Sidrat al-Muntaha, Al-Isra'
 * Mus'ab ibn 'Umayr ─── The first ambassador who taught the Quran to the households of Madinah
 * Al-Shama'il ─── The branch of Seerah studying the physical appearance, demeanor, and character of the Prophet ﷺ
 
-### Matching Key
-* Al-Isra' ─── The night journey from Makkah to Bayt al-Maqdis in Jerusalem
-* Al-Mi'raj ─── The bodily ascension through the heavens to Sidrat al-Muntaha
-* Bay'at al-'Aqabah ─── The solemn covenants of protection and allegiance made by Yathrib delegates
-* Mus'ab ibn 'Umayr ─── The first ambassador who taught the Quran to the households of Madinah
-* Al-Shama'il ─── The branch of Seerah studying the physical appearance, demeanor, and character of the Prophet ﷺ
-
 ---
 
 ## Part D: Reflection & Application
 
-11. Why was it spiritually significant that the Prophet ﷺ led all prior Prophets in congregational prayer at Masjid al-Aqsa during the Night Journey?
-12. Analyze the diplomatic methodology of Mus'ab ibn 'Umayr in Yathrib: How did moral character and Quranic recitation succeed in transforming a city where military force had failed?
-13. Examine Sayyidina 'Umar's progression in understanding prophetic love in Sahih al-Bukhari 6632: Why must rational, intentional love of the Prophet ﷺ precede mere emotional sentiment?
-14. How does studying the detailed *Shama'il* of the Prophet ﷺ provide modern teenagers with a durable moral standard against transient pop-culture trends?
-
-### Reflection Rubric
-* **Full Understanding:** Student articulates clear theological and practical connections, citing the universality of prophetic mission, Mus'ab's patient pedagogical approach, the cognitive shift in 'Umar's loyalty, and the grounding value of Prophetic character (*Shama'il*).
-* **Basic Understanding:** Student gives general observations without referencing the textual evidence or specific historical context.
+1. Why was it spiritually significant that the Prophet ﷺ led all prior Prophets in congregational prayer at Masjid al-Aqsa during the Night Journey?
+2. Analyze the diplomatic methodology of Mus'ab ibn 'Umayr in Yathrib: How did moral character and Quranic recitation succeed in transforming a city where military force had failed?
+3. Examine Sayyidina 'Umar's progression in understanding prophetic love in Sahih al-Bukhari 6632: Why must rational, intentional love of the Prophet ﷺ precede mere emotional sentiment?
+4. How does studying the detailed *Shama'il* of the Prophet ﷺ provide modern teenagers with a durable moral standard against transient pop-culture trends?
 
 ---
 
@@ -126,3 +108,21 @@ Vocabulary Bank: Al-Siddiq, Mus'ab, Al-Shifa, Sidrat al-Muntaha, Al-Isra'
 8. B - Narrations in Tirmidhi's *Shama'il* describe his forward-leaning, purposeful gait.
 9. D - The Seal of Prophethood was a raised birthmark between his shoulder blades.
 10. C - Sahih al-Bukhari 6632 establishes that faith is perfected when the Prophet ﷺ is dearer than oneself.
+
+### Fill in the Blanks Key
+1. Al-Isra'
+2. Sidrat al-Muntaha
+3. Al-Siddiq
+4. Mus'ab
+5. Al-Shifa
+
+### Matching Key
+* Al-Isra' ─── The night journey from Makkah to Bayt al-Maqdis in Jerusalem
+* Al-Mi'raj ─── The bodily ascension through the heavens to Sidrat al-Muntaha
+* Bay'at al-'Aqabah ─── The solemn covenants of protection and allegiance made by Yathrib delegates
+* Mus'ab ibn 'Umayr ─── The first ambassador who taught the Quran to the households of Madinah
+* Al-Shama'il ─── The branch of Seerah studying the physical appearance, demeanor, and character of the Prophet ﷺ
+
+### Reflection Rubric
+* **Full Understanding:** Student articulates clear theological and practical connections, citing the universality of prophetic mission, Mus'ab's patient pedagogical approach, the cognitive shift in 'Umar's loyalty, and the grounding value of Prophetic character (*Shama'il*).
+* **Basic Understanding:** Student gives general observations without referencing the textual evidence or specific historical context.

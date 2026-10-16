@@ -57,9 +57,9 @@
 
 10. What does the concept of "Muwatanah" signify in contemporary Islamic political ethics?
     (A) Shared civic citizenship based on mutual rights, public duties, and constructive contributions to civil society.
-    (B) Hereditary monarchical succession.
-    (C) The physical segregation of different religious groups.
-    (D) Prohibiting non-citizens from owning private businesses.
+    (B) The restriction of legal residency and commercial trade exclusively to members of a single tribal lineage.
+    (C) The replacement of constitutional public treaties with informal clan arbitration outside state jurisdiction.
+    (D) The exemption of religious minorities from civic defense agreements and municipal neighborhood obligations.
 
 ## Part B: Fill in the Blanks
 Vocabulary Bank: Mu'ahid, Sahifat al-Madinah, Dar al-'Ahd, Al-Shaybani, Hilf al-Fudul

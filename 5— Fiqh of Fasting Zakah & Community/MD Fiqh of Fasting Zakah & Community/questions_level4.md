@@ -8,9 +8,9 @@
    (D) Exactly 10.0% (one tenth).
 
 2. What is the classic Nisab threshold for gold in Islamic jurisprudence?
-   (A) 10 grams of pure gold.
-   (B) 500 grams of pure gold.
-   (C) 1 kilogram of pure gold.
+   (A) 10 gold dinars, equivalent to approximately 42.5 grams of pure gold.
+   (B) 200 gold dinars, equivalent to approximately 595 grams of pure gold.
+   (C) 40 gold dinars, equivalent to approximately 170 grams of pure gold.
    (D) 20 gold dinars, equivalent to approximately 85 grams of pure gold.
 
 3. What does the juristic prerequisite of "Al-Hawl" signify in Zakah calculations?
@@ -38,9 +38,9 @@
    (D) Qada' can only be performed in Makkah during the pilgrimage season.
 
 7. In the Maliki school, what is the preferred and primary option when performing Kaffarah for an intentional violation of Ramadan?
-   (A) Fasting six days in Shawwal.
-   (B) Sponsoring a student's travel expenses.
-   (C) Sacrificing three camels in Mina.
+   (A) Fasting three consecutive days during Shawwal or feeding ten poor persons one Mudd of staple food each.
+   (B) Paying double the annual Zakah rate on one's savings and performing two units of voluntary repentance prayer.
+   (C) Sacrificing one sheep on the Day of Eid al-Adha and distributing all of its meat to local orphans.
    (D) Feeding sixty poor persons (one Mudd of staple food each), or fasting two consecutive lunar months.
 
 8. How many essential pillars (Arkan) of Hajj are codified in classical Maliki manuals such as Matn Ibn 'Ashir?

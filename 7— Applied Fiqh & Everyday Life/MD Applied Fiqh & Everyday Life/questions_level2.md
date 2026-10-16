@@ -32,19 +32,19 @@
 
 ### 5. In Maliki fiqh, if a Muslim forgets to say Bismillah when slaughtering an animal, what is the status of the meat?
 (A) Halal and lawful to eat, because unintentional forgetfulness does not invalidate the slaughter
-(B) Strictly Haram and treated as carrion
-(C) Disliked to eat unless cooked with vinegar
-(D) Permissible only for feeding domestic pets
+(B) Unlawful to eat and treated as carrion, just as if the name of Allah was intentionally omitted
+(C) Permissible only if the person pays a charitable expiation before cooking and serving the meat
+(D) Disliked (*Makruh*) for the slaughterer's family to eat, though it may be given to non-relatives
 
 ---
 
 ## Part B: Fill in the Blanks
 Vocabulary Bank: Bismillah, Maytah, Pork, Right
 
-6. Meat from an animal that died of illness without slaughter is called ______.
-7. Gelatin derived from ______ is strictly forbidden.
-8. At the time of humane slaughter, the slaughterer says ______.
-9. When eating, a Muslim uses their ______ hand.
+1. Meat from an animal that died of illness without slaughter is called ______.
+2. Gelatin derived from ______ is strictly forbidden.
+3. At the time of humane slaughter, the slaughterer says ______.
+4. When eating, a Muslim uses their ______ hand.
 
 ---
 
@@ -57,7 +57,7 @@ Vocabulary Bank: Bismillah, Maytah, Pork, Right
 ---
 
 ## Part D: Reflection
-10. Why did the Prophet ﷺ command that slaughtering blades be sharpened away from the animal's sight? What does this teach us about mercy toward animals in Islam?
+1. Why did the Prophet ﷺ command that slaughtering blades be sharpened away from the animal's sight? What does this teach us about mercy toward animals in Islam?
 
 ---
 
@@ -69,13 +69,17 @@ Vocabulary Bank: Bismillah, Maytah, Pork, Right
 5. A - In Maliki fiqh, unintentional omission of Bismillah leaves the meat Halal (*Al-Risalah*).
 
 ### Fill in the Blanks Key
-6. Maytah
-7. Pork
-8. Bismillah
-9. Right
+1. Maytah
+2. Pork
+3. Bismillah
+4. Right
 
 ### Matching Key
 * Dhabihah ─── Humane ritual slaughter in Allah's Name
 * Maytah ─── Carrion or unslaughtered dead animal
 * Halal ─── Permissible and wholesome under Islamic law
 * Digital Adab ─── Practicing honesty, modesty, and kindness online
+
+### Reflection Marking Rubric
+* **Full Understanding:** Student explains that hiding the blade spares the animal fear and distress (Sahih Muslim 1955), showing that Islam requires ihsan (excellence and mercy) toward every living creature.
+* **Basic Understanding:** Student states that we should be kind to animals without explaining why the blade is hidden from sight.

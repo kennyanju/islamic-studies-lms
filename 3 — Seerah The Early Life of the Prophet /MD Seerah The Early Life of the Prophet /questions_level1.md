@@ -41,14 +41,9 @@
 ## Part B: Fill in the Blanks
 Vocabulary Bank: Makkah, Halimah, Al-Amin
 
-6. Prophet Muhammad ﷺ was born in the blessed city of ______.
-7. The loving desert mother who nursed and raised baby Muhammad ﷺ was Lady ______.
-8. Because he never lied and always kept his word, the people gave him the title of ______.
-
-### Fill in the Blanks Key
-6. Makkah
-7. Halimah
-8. Al-Amin
+1. Prophet Muhammad ﷺ was born in the blessed city of ______.
+2. The loving desert mother who nursed and raised baby Muhammad ﷺ was Lady ______.
+3. Because he never lied and always kept his word, the people gave him the title of ______.
 
 ---
 
@@ -57,20 +52,11 @@ Vocabulary Bank: Makkah, Halimah, Al-Amin
 * Lady Halimah ─── The caring desert nurse of baby Muhammad ﷺ
 * Al-Amin ─── The title given to young Muhammad ﷺ meaning The Trustworthy
 
-### Matching Key
-* Year of the Elephant ─── The blessed year Prophet Muhammad ﷺ was born
-* Lady Halimah ─── The caring desert nurse of baby Muhammad ﷺ
-* Al-Amin ─── The title given to young Muhammad ﷺ meaning The Trustworthy
-
 ---
 
 ## Part D: Reflection
 
-9. What is one honest action you can take today at home or at school to follow the example of young Muhammad ﷺ as Al-Amin?
-
-### Reflection Rubric
-* **Full Understanding:** Student mentions a clear, honest action (such as admitting a mistake, returning a borrowed pencil, or telling the truth) and connects it to being trustworthy like the Prophet ﷺ.
-* **Basic Understanding:** Student mentions an honest behavior without explaining why it reflects being Al-Amin.
+1. What is one honest action you can take today at home or at school to follow the example of young Muhammad ﷺ as Al-Amin?
 
 ---
 
@@ -80,3 +66,17 @@ Vocabulary Bank: Makkah, Halimah, Al-Amin
 3. D - Surah Al-Fil relates how Allah sent flocks of birds (Ababil) to protect the Ka'bah.
 4. B - Al-Amin means The Trustworthy, given because he was known for truthfulness.
 5. C - Speaking the truth and being trustworthy embodies the Sunnah in daily life.
+
+### Fill in the Blanks Key
+1. Makkah
+2. Halimah
+3. Al-Amin
+
+### Matching Key
+* Year of the Elephant ─── The blessed year Prophet Muhammad ﷺ was born
+* Lady Halimah ─── The caring desert nurse of baby Muhammad ﷺ
+* Al-Amin ─── The title given to young Muhammad ﷺ meaning The Trustworthy
+
+### Reflection Rubric
+* **Full Understanding:** Student mentions a clear, honest action (such as admitting a mistake, returning a borrowed pencil, or telling the truth) and connects it to being trustworthy like the Prophet ﷺ.
+* **Basic Understanding:** Student mentions an honest behavior without explaining why it reflects being Al-Amin.

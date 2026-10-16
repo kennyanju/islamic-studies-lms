@@ -41,9 +41,9 @@
 ## Part B: Fill in the Blanks
 Vocabulary Bank: Hijrah, Madinah, Qaswa'
 
-6. The Prophet's blessed migration from Makkah to Madinah is called the ______.
-7. The city formerly known as Yathrib became known as ______.
-8. The camel that stopped at the site of the Prophet's Mosque was named ______.
+1. The Prophet's blessed migration from Makkah to Madinah is called the ______.
+2. The city formerly known as Yathrib became known as ______.
+3. The camel that stopped at the site of the Prophet's Mosque was named ______.
 
 ---
 
@@ -56,7 +56,7 @@ Vocabulary Bank: Hijrah, Madinah, Qaswa'
 ---
 
 ## Part D: Reflection
-9. The Ansar of Madinah shared their homes and dates with new Muslim friends. How can you be a kind helper to a new student or neighbor today?
+1. The Ansar of Madinah shared their homes and dates with new Muslim friends. How can you be a kind helper to a new student or neighbor today?
 
 ---
 
@@ -68,12 +68,16 @@ Vocabulary Bank: Hijrah, Madinah, Qaswa'
 5. B - The people of Madinah welcomed him with the nasheed Tala'a al-Badru 'Alayna.
 
 ### Fill in the Blanks Key
-6. Hijrah
-7. Madinah
-8. Qaswa'
+1. Hijrah
+2. Madinah
+3. Qaswa'
 
 ### Matching Key
 * Hijrah ─── Migration from Makkah to Madinah
 * Abu Bakr ─── The faithful companion in Cave Thawr
 * Al-Qaswa' ─── The camel that stopped at the mosque site
 * Ansar ─── The generous helpers of Madinah
+
+### Reflection Marking Rubric
+* **Full Understanding:** Student describes a welcoming, generous action (such as inviting a new classmate to sit together, sharing supplies, or greeting a neighbor warmly) and connects it to the example of the Ansar.
+* **Basic Understanding:** Student mentions being nice without giving a specific example of welcoming or sharing.

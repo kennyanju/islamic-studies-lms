@@ -19,9 +19,9 @@
 (D) 15 letters of the alphabet
 
 ### 3. When a Noon Sakinah or Tanween is followed immediately by the letter Ba (ب), which Tajweed rule must be applied?
-(A) Al-Idgham without Ghunnah
-(B) Al-Izhar al-Halqi
-(C) Al-Qalqalah al-Sughra
+(A) Al-Idgham bila Ghunnah (merging the Noon sound completely without any nasal resonance)
+(B) Al-Izhar al-Halqi (pronouncing the Noon clearly from the throat without any nasal prolongation)
+(C) Al-Ikhfa' al-Haqiqi (hiding the Noon sound between clear pronunciation and full merging)
 (D) Al-Iqlab (converting the sound into a soft nasal Meem for two counts)
 
 ### 4. Which two letters produce "Al-Idgham WITHOUT Ghunnah" when preceded by Noon Sakinah or Tanween?
@@ -43,10 +43,10 @@
 (D) Sughra occurs when the Qalqalah letter is in the middle of a word, while Kubra occurs when stopping at the end of an ayah
 
 ### 7. What is the central theme of the opening verses of Surah An-Naba' (Chapter 78)?
-(A) The commercial trade routes of ancient Yemen
+(A) The historical account of how the ancient tribes of 'Ad and Thamud built their mountain dwellings
 (B) The reality of the "Great News" (the Day of Resurrection and ultimate accountability)
-(C) Agricultural techniques for desert farming
-(D) The construction of naval ships in antiquity
+(C) The detailed legal rulings for distributing charity and caring for orphans in early Madinah
+(D) The journey of Prophet Musa (AS) when he crossed the sea and received the tablets on Mount Sinai
 
 ### 8. In Surah An-Naba' (78:7), what natural creation is described as "Awtada" (stabilizing pegs) for the earth?
 (A) Desert sand dunes
@@ -55,34 +55,27 @@
 (D) Deep forests
 
 ### 9. What is the classical Sunni requirement regarding handling the physical Arabic Mushaf?
-(A) It may be handled casually without ritual preparation
-(B) It can only be read while standing outdoors
-(C) It must only be touched by certified community elders
+(A) It may be touched casually without any ritual preparation so long as the reader's hands are visually clean
+(B) It can only be recited while standing outdoors facing the direction of the Qiblah under open skies
+(C) It must only be opened and read by certified community elders and appointed mosque imams
 (D) It is obligatory to be in a state of ritual purity (Wudu) before touching the Arabic text (Surah Al-Waqi'ah 56:79)
 
 ### 10. What remorseful statement will the unrepentant person utter on the Day of Judgment according to the final verse of Surah An-Naba' (78:40)?
 (A) "Oh, I wish that I were dust!" (Ya laytani kuntu turaba)
-(B) "Oh, I wish I had gathered more gold and silver!"
-(C) "Oh, I wish I had built a fortress on a mountain!"
-(D) "Oh, I wish I had traveled across the seven seas!"
+(B) "Oh, I wish I had been given another century of life in the world!"
+(C) "Oh, I wish my wealth and my children had interceded for me today!"
+(D) "Oh, I wish the mountains had hidden my book of deeds from sight!"
 
 ---
 
 ## Part B: Fill in the Blanks
 Vocabulary Bank: Qutbu Jaddin, Al-Iqlab, Awtada, Al-Izhar, Tadabbur
 
-6. Pronouncing the Noon Sakinah clearly without nasal hum before the six throat letters is ______.
-7. Transforming a Noon Sakinah into a soft Meem before the letter Ba is the rule of ______.
-8. The five letters of Qalqalah are collected in the mnemonic phrase ______.
-9. Surah An-Naba' describes the mountains as stabilizing pegs termed ______.
-10. The deep contemplation and reflection over the meanings and lessons of the Quran is called ______.
-
-### Fill in the Blanks Key
-6. Al-Izhar
-7. Al-Iqlab
-8. Qutbu Jaddin
-9. Awtada
-10. Tadabbur
+1. Pronouncing the Noon Sakinah clearly without nasal hum before the six throat letters is ______.
+2. Transforming a Noon Sakinah into a soft Meem before the letter Ba is the rule of ______.
+3. The five letters of Qalqalah are collected in the mnemonic phrase ______.
+4. Surah An-Naba' describes the mountains as stabilizing pegs termed ______.
+5. The deep contemplation and reflection over the meanings and lessons of the Quran is called ______.
 
 ---
 
@@ -93,25 +86,14 @@ Vocabulary Bank: Qutbu Jaddin, Al-Iqlab, Awtada, Al-Izhar, Tadabbur
 * Qalqalah ─── Echoing vibration on the letters of Qutbu Jaddin when bearing a Sukun
 * Tadabbur ─── Reflecting deeply upon the meanings and moral lessons of the Quran
 
-### Matching Key
-* Al-Izhar al-Halqi ─── Clear pronunciation of Noon Sakinah before the 6 throat letters
-* Al-Idgham ─── Merging the Noon sound into Yanmu or Lam/Ra
-* Al-Iqlab ─── Converting Noon Sakinah into a nasal Meem before Ba
-* Qalqalah ─── Echoing vibration on the letters of Qutbu Jaddin when bearing a Sukun
-* Tadabbur ─── Reflecting deeply upon the meanings and moral lessons of the Quran
-
 ---
 
 ## Part D: Reflection & Application
 
-11. In Surah An-Naba' (78:6-16), what signs in the created universe does Allah describe to demonstrate His divine power to bring about the Day of Sorting (*Yawm al-Fasl*)?
-12. Outline the practical steps a student should take to establish sacred *Adab* (etiquette) before sitting down to recite the Quran at home.
-13. Contrast *Ikhlas* (sincerity) with *Riya'* (ostentation) in your daily actions: Why did the Prophet ﷺ warn that doing good deeds to show off to people ruins their spiritual reward?
-14. Explain the four requirements for human success outlined in Surah Al-'Asr (103:1-3) and how young Muslims can practice them together.
-
-### Reflection Rubric
-* **Full Understanding:** Student identifies multiple cosmic signs from Surah An-Naba' (such as the earth as a cradle, mountains as pegs, sleep for rest, night as a garment, radiant sun, rain clouds), details physical/spiritual Quranic adab, explains that Riya' seeks creation's praise instead of Allah's pleasure, and lists the 4 conditions of Surah Al-'Asr.
-* **Basic Understanding:** Student gives brief or incomplete answers without citing specific verses or concepts from the handout.
+1. In Surah An-Naba' (78:6-16), what signs in the created universe does Allah describe to demonstrate His divine power to bring about the Day of Sorting (*Yawm al-Fasl*)?
+2. Outline the practical steps a student should take to establish sacred *Adab* (etiquette) before sitting down to recite the Quran at home.
+3. Contrast *Ikhlas* (sincerity) with *Riya'* (ostentation) in your daily actions: Why did the Prophet ﷺ warn that doing good deeds to show off to people ruins their spiritual reward?
+4. Explain the four requirements for human success outlined in Surah Al-'Asr (103:1-3) and how young Muslims can practice them together.
 
 ---
 
@@ -126,3 +108,21 @@ Vocabulary Bank: Qutbu Jaddin, Al-Iqlab, Awtada, Al-Izhar, Tadabbur
 8. C - Verse 7 states: "Wal-jibala awtada" (And the mountains as pegs).
 9. D - Based on Surah Al-Waqi'ah 56:79, ritual purity (Wudu) is required to touch the Arabic Mushaf.
 10. A - Verse 40 records the remorseful cry: "Ya laytani kuntu turaba" (Oh, I wish that I were dust!).
+
+### Fill in the Blanks Key
+1. Al-Izhar
+2. Al-Iqlab
+3. Qutbu Jaddin
+4. Awtada
+5. Tadabbur
+
+### Matching Key
+* Al-Izhar al-Halqi ─── Clear pronunciation of Noon Sakinah before the 6 throat letters
+* Al-Idgham ─── Merging the Noon sound into Yanmu or Lam/Ra
+* Al-Iqlab ─── Converting Noon Sakinah into a nasal Meem before Ba
+* Qalqalah ─── Echoing vibration on the letters of Qutbu Jaddin when bearing a Sukun
+* Tadabbur ─── Reflecting deeply upon the meanings and moral lessons of the Quran
+
+### Reflection Rubric
+* **Full Understanding:** Student identifies multiple cosmic signs from Surah An-Naba' (such as the earth as a cradle, mountains as pegs, sleep for rest, night as a garment, radiant sun, rain clouds), details physical/spiritual Quranic adab, explains that Riya' seeks creation's praise instead of Allah's pleasure, and lists the 4 conditions of Surah Al-'Asr.
+* **Basic Understanding:** Student gives brief or incomplete answers without citing specific verses or concepts from the handout.

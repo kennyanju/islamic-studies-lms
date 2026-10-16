@@ -20,10 +20,10 @@
    (D) Comparing Arabic manuscripts with ancient Byzantine scrolls.
 
 4. What primary crisis prompted Caliph 'Uthman ibn 'Affan to standardize the Quran into official regional codices (Al-Masahif al-'Uthmaniyyah)?
-   (A) Disagreements regarding the number of daily obligatory prayers.
+   (A) The martyrdom of seventy senior Quran memorizers during the Battle of Yamamah under Caliph Abu Bakr.
    (B) Regional dialect pronunciation disputes among Muslim soldiers in newly opened territories.
-   (C) Complete loss of original manuscripts during civil unrest.
-   (D) A decree by Persian governors requesting Greek translations.
+   (C) The emergence of unverified personal commentaries mixing prophetic hadith reports with Quranic verses.
+   (D) The request of Syrian and Iraqi scholars to arrange all chapters strictly in chronological order of revelation.
 
 5. What does the theological concept of "I'jaz al-Qur'an" signify?
    (A) The physical preservation of ink and paper across centuries.

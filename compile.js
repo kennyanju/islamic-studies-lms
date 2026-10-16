@@ -218,6 +218,7 @@ function parseQuestionsComprehensive(markdownText) {
   const studentLines = [];
 
   let inAnswerKey = false;
+  let inInlineKey = false;
   let currentSection = '';
   let currentMcq = null;
   let wordBank = [];
@@ -229,11 +230,29 @@ function parseQuestionsComprehensive(markdownText) {
 
     if (/^#{1,4}\s*.*(Answer\s+Key|Marking\s+Guide|Teacher\s+Answers)/i.test(trimmed)) {
       inAnswerKey = true;
+      inInlineKey = false;
       continue;
     }
 
-    if (inAnswerKey) {
+    if (
+      !inAnswerKey &&
+      /^#{2,4}\s*(Fill\s+in\s+the\s+Blanks\s+Key|Matching\s+Key|Reflection\s+(?:Marking\s+)?Rubric)/i.test(
+        trimmed
+      )
+    ) {
+      inInlineKey = true;
       answerKeyLines.push(line);
+      continue;
+    }
+
+    if (inInlineKey && /^#{2,4}\s*Part\s+[A-D1-4]/i.test(trimmed)) {
+      inInlineKey = false;
+    }
+
+    if (inAnswerKey || inInlineKey) {
+      if (!/^-{3,}$/.test(trimmed)) {
+        answerKeyLines.push(line);
+      }
       continue;
     }
 
@@ -348,12 +367,15 @@ function parseQuestionsComprehensive(markdownText) {
     } else if (currentSection === 'MATCH') {
       if (trimmed.startsWith('#')) {
         currentMatchGroup = trimmed.replace(/^#+\s*/, '').trim();
-      } else if (trimmed.includes('───') || trimmed.includes('---') || trimmed.includes('->')) {
+      } else if (
+        !/^-{3,}$/.test(trimmed) &&
+        (trimmed.includes('───') || trimmed.includes('---') || trimmed.includes('->'))
+      ) {
         const parts = trimmed
           .replace(/^\*\s*/, '')
           .replace(/^Pair\s+\d+:\s*/i, '')
           .split(/\s*(?:───|---|->)\s*/);
-        if (parts.length === 2) {
+        if (parts.length === 2 && parts[0].trim() && parts[1].trim()) {
           matching.push({
             group: currentMatchGroup,
             left: parts[0].trim(),
@@ -408,22 +430,48 @@ function parseQuestionsComprehensive(markdownText) {
     }
   });
 
-  // Extract Fill in the Blanks answers if present in answerKeyRaw
+  // Extract Fill in the Blanks answers and optional explanations from answerKeyRaw
   const fibKeyMatch = answerKeyRaw.match(
     /###?\s*(?:Fill in the Blanks Key|Part B[^\n]*)\s*([\s\S]*?)(?:###?|$)/i
   );
   if (fibKeyMatch) {
     const fibLines = fibKeyMatch[1].split(/\r?\n/);
     const fibKeyMap = {};
+    const fibKeyArr = [];
     fibLines.forEach((l) => {
       const m = l.trim().match(/^(\d+)[\.\)]\s*(.*)/);
       if (m) {
-        fibKeyMap[parseInt(m[1], 10)] = m[2].replace(/^\*\*|\*\*$/g, '').trim();
+        const [ansPart, ...expParts] = m[2].trim().split(/\s+[-—–]\s+/);
+        const entry = {
+          answer: ansPart
+            .replace(/^\*\*|\*\*$/g, '')
+            .replace(/\*/g, '')
+            .trim(),
+          explanation: expParts
+            .join(' - ')
+            .replace(/^\*\*|\*\*$/g, '')
+            .trim()
+        };
+        fibKeyMap[parseInt(m[1], 10)] = entry;
+        fibKeyArr.push(entry);
       }
     });
     fillBlanks.forEach((fb, idx) => {
-      fb.answer = fibKeyMap[fb.id] || fibKeyMap[idx + 1] || '';
+      const entry = fibKeyMap[fb.id] || fibKeyMap[idx + 1] || fibKeyArr[idx];
+      fb.answer = entry ? entry.answer : '';
+      if (entry && entry.explanation) {
+        fb.explanation = entry.explanation;
+      }
     });
+  }
+
+  // Extract Reflection Rubric from answerKeyRaw if present
+  let reflectionRubric = '';
+  const rubricMatch = answerKeyRaw.match(
+    /###?\s*(?:Part D:\s*)?Reflection\s+(?:Marking\s+)?Rubric\s*([\s\S]*?)(?:###?|$)/i
+  );
+  if (rubricMatch) {
+    reflectionRubric = rubricMatch[1].trim();
   }
 
   return {
@@ -431,6 +479,7 @@ function parseQuestionsComprehensive(markdownText) {
     fillBlanks,
     matching,
     reflection,
+    reflectionRubric,
     answerKeyRaw,
     studentQuestionsMd
   };

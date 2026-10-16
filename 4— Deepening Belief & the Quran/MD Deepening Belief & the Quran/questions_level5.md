@@ -39,9 +39,9 @@
 
 7. Why does the presence of erased lower texts on ancient palimpsests (such as the Sana'a manuscript) fail to challenge the integrity of the Quranic text?
    (A) Because Quranic transmission was fundamentally oral and communal; personal scribal training sheets never compromised the living mass consensus (Ijma') of certified memorizers.
-   (B) Because early manuscripts were never used by actual Muslim communities.
-   (C) Because palimpsests were exclusively produced by non-Muslim scribes outside Arabia.
-   (D) Because the lower texts were proven to be translations into ancient Syriac.
+   (B) Because early written parchments were kept locked in private caliphal archives and were never consulted by ordinary Muslim communities in regional centers.
+   (C) Because palimpsests and manuscript revisions were produced exclusively by non-Muslim scribal guilds operating outside the borders of the Arabian peninsula.
+   (D) Because the lower erased writing on the Yemen parchments was conclusively proven by scholars to be poetic glosses rather than Quranic verses.
 
 8. Why did Caliph 'Uthman distribute master codices written with an unadorned consonantal skeleton (Rasm) without diacritical dots or short vowel markers?
    (A) Because paper makers in Madinah lacked sufficient ink supplies.
@@ -56,10 +56,10 @@
    (D) Refusing to pay local municipal property taxes.
 
 10. In Maliki legal theory (Usul al-Fiqh), what unique evidentiary weight is granted to 'Amal Ahl al-Madinah (the practice of the people of Madinah)?
-    (A) It applies only to agricultural land leases in the Hijaz.
-    (B) It is considered secondary to isolated personal opinions of later scholars.
-    (C) It is restricted solely to the lineage of the Quraysh tribe.
-    (D) It is treated as an unbroken communal mass transmission (Tawatur) of the living Sunnah that can take precedence over solitary solitary hadiths (Ahad).
+    (A) It is consulted only when no solitary hadith (Khabar al-Ahad) or analogical deduction (Qiyas) can be found on a legal question.
+    (B) It is restricted to municipal commercial customs in the Hijaz and holds no weight in matters of ritual worship ('Ibadat).
+    (C) It is treated as equivalent to the consensus of later regional jurists in Kufa and Basra rather than a transmitter-based proof.
+    (D) It is treated as an unbroken communal mass transmission (Tawatur) of the living Sunnah that can take precedence over solitary hadiths (Ahad).
 
 ## Part B: Fill in the Blanks
 Vocabulary Bank: Warsh 'an Nafi', Al-Kalam al-Nafsi, Sana'a, Rasm, Dhul-Qarnayn

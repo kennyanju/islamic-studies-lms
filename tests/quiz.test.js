@@ -64,4 +64,95 @@ describe('Server-Side Quiz Grading & Module Validation Tests', () => {
     expect(res.statusCode).toBe(400);
     expect(res.body.success).toBe(false);
   });
+
+  test('All 45 interactive quizzes (Modules 1-9 x Levels 1-5) have valid MCQ, FIB, Matching, and Reflection structures', () => {
+    const fs = require('fs');
+    const path = require('path');
+
+    for (let m = 1; m <= 9; m++) {
+      const modPath = path.join(__dirname, '..', 'public', 'course_data', `module_${m}.json`);
+      const modData = JSON.parse(fs.readFileSync(modPath, 'utf8'));
+
+      for (let l = 1; l <= 5; l++) {
+        const trackKey = `level${l}`;
+        const pq = modData.tracks[trackKey].parsedQuestions;
+        expect(pq).toBeDefined();
+
+        // 1. Multiple Choice validation
+        expect(pq.multipleChoice.length).toBeGreaterThanOrEqual(l <= 2 ? 5 : 10);
+        pq.multipleChoice.forEach((q) => {
+          expect(q.options.length).toBe(4);
+          expect(['A', 'B', 'C', 'D']).toContain(q.correctAnswer);
+          expect(q.explanation.length).toBeGreaterThan(5);
+        });
+
+        // 2. Fill in the Blanks validation
+        expect(pq.fillBlanks.length).toBeGreaterThanOrEqual(3);
+        const wb = (pq.fillBlanks[0].wordBank || []).map((w) => w.toLowerCase());
+        expect(wb.length).toBeGreaterThanOrEqual(pq.fillBlanks.length);
+        pq.fillBlanks.forEach((fb) => {
+          expect(fb.text).toContain('______');
+          expect(fb.answer.length).toBeGreaterThan(0);
+          expect(wb).toContain(fb.answer.toLowerCase());
+        });
+
+        // 3. Concept Matching validation (no empty ghost rows or leaked duplicates)
+        expect(pq.matching.length).toBeGreaterThanOrEqual(3);
+        pq.matching.forEach((pair) => {
+          expect(pair.left.length).toBeGreaterThan(0);
+          expect(pair.right.length).toBeGreaterThan(0);
+        });
+
+        // 4. Reflection & Rubric validation
+        expect(pq.reflection.length).toBeGreaterThanOrEqual(1);
+        expect((pq.reflectionRubric || '').length).toBeGreaterThan(10);
+      }
+    }
+  });
+
+  test('All 361 MCQs across all 45 quizzes maintain option-length parity and avoid joke distractors', () => {
+    const fs = require('fs');
+    const path = require('path');
+    const bannedPhrases = [
+      'play video games',
+      'television volume',
+      'horse race organized outside makkah',
+      'submerged under ocean waterways',
+      'camel racing',
+      'solar eclipses',
+      'solitary solitary'
+    ];
+    const violations = [];
+
+    for (let m = 1; m <= 9; m++) {
+      const modPath = path.join(__dirname, '..', 'public', 'course_data', `module_${m}.json`);
+      const mod = JSON.parse(fs.readFileSync(modPath, 'utf8'));
+      for (const lvl of ['level1', 'level2', 'level3', 'level4', 'level5']) {
+        const mcList = mod.tracks[lvl].parsedQuestions.multipleChoice || [];
+        mcList.forEach((mc) => {
+          const opts = mc.options || [];
+          const correctOpt = opts.find((o) => o.key === mc.correctAnswer);
+          const wrongOpts = opts.filter((o) => o.key !== mc.correctAnswer);
+          const avgWrong =
+            wrongOpts.reduce((s, o) => s + o.text.length, 0) / (wrongOpts.length || 1);
+          const ratio = correctOpt.text.length / (avgWrong || 1);
+          if (ratio > 2.25 && correctOpt.text.length > 45) {
+            violations.push(
+              `M${m}_${lvl} Q${mc.id}: length ratio ${ratio.toFixed(2)} (correct: ${correctOpt.text.length}, avgWrong: ${avgWrong.toFixed(1)})`
+            );
+          }
+          opts.forEach((o) => {
+            const lower = o.text.toLowerCase();
+            for (const phrase of bannedPhrases) {
+              if (lower.includes(phrase)) {
+                violations.push(`M${m}_${lvl} Q${mc.id} (${o.key}): banned phrase "${phrase}"`);
+              }
+            }
+          });
+        });
+      }
+    }
+
+    expect(violations).toEqual([]);
+  });
 });

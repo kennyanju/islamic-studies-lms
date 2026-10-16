@@ -33,16 +33,16 @@
    (D) The footwear must be colored black or dark brown
 
 6. In the Maliki school, how is the physical wipe over leather footwear (*Mash 'ala al-Khuffayn*) performed?
-   (A) Submerging the entire shoe into a bucket of water
-   (B) Wiping only the heel and the laces of the shoe
-   (C) Wiping the right shoe with water and the left shoe with sand
+   (A) Washing the outer leather surface three separate times from the ankle down to the tips of the toes
+   (B) Wiping only the back heel and upper ankle cuff of both leather socks with a single wet hand
+   (C) Sprinkling water lightly over the top of each shoe without passing the palm across the leather
    (D) Placing the right moistened hand on the top of the foot and the left hand beneath the sole, wiping across from toes toward the ankle
 
 7. What is the primary evidentiary foundation for the practice of *Sadl* (resting arms at the sides) during prayer in the Maliki school?
-   (A) An isolated textual report that forbids raising the hands
+   (A) An isolated textual report prohibiting raising the hands during prayer
    (B) The living, mass communal practice of the scholars and descendants of the Sahabah in Madinah (*'Amal Ahl al-Madinah*)
-   (C) A desire to make the prayer physically faster
-   (D) A decree issued by the Umayyad governors in Damascus
+   (C) A desire by later jurists to make the physical standing movements of the prayer faster
+   (D) An administrative decree issued by the Umayyad governors in Damascus to standardize prayer postures
 
 8. How is a rak'ah legally counted as caught by a latecomer (*Masbuq*) joining a congregational prayer?
    (A) By entering the mosque before the Imam finishes reciting Surah Al-Fatihah
@@ -57,9 +57,9 @@
    (D) Any three prayers of the worshipper's choosing
 
 10. What is the scholarly consensus among the four Sunni schools of law regarding Muslims who pray with *Sadl* (arms at sides) and those who pray with *Qabd* (hands clasped)?
-    (A) The prayer of one group is invalid and must be repeated
-    (B) Muslims praying with Sadl cannot pray behind an Imam who prays with Qabd
-    (C) Both groups must pray in separate mosques
+    (A) A follower must always abandon their own school's hand posture to match the Imam's posture or repeat the prayer
+    (B) Congregational prayer is only valid when the Imam and all followers belong to the exact same legal school
+    (C) Performing either posture invalidates the standing pillar of prayer unless compensated by two prostrations of forgetfulness
     (D) Both Sadl and Qabd are authentic, recognized Sunni postures; prayers behind either are completely valid, and mutual brotherhood is maintained
 
 ---

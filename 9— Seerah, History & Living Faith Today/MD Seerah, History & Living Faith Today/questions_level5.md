@@ -38,9 +38,9 @@
    (D) Complete separation between religious jurisprudence and natural philosophical inquiries.
 
 7. What historical evidence refutes colonial claims that sub-Saharan West Africa lacked sophisticated literary and academic traditions before European contact?
-   (A) Architectural ruins mirroring ancient Persian administrative centers.
-   (B) Agricultural treatises translated from Byzantine Greek manuscripts.
-   (C) Oral folklore traditions preserved without written textual documentation.
+   (A) Ancient architectural ruins in Gao and Jenne that mirrored the administrative brickwork of early Abbasid trade centers.
+   (B) Royal diplomatic correspondence and agricultural handbooks translated directly from Byzantine Greek chronicles in the 10th century.
+   (C) Unwritten oral folk epics preserved by court bards that avoided the use of written scripts or scholarly commentaries.
    (D) The extensive manuscript heritage of Timbuktu and Sankore University, encompassing hundreds of thousands of texts on law, astronomy, mathematics, and medicine.
 
 8. In Ibn Khaldun's civilizational cycle, what primary factors trigger the eventual decline and replacement of a ruling dynasty?

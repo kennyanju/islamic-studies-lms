@@ -61,3 +61,7 @@ Vocabulary Bank: Ramadan, Dates, Iftar
 * Suhur connects with The blessed pre-dawn meal eaten before fasting begins.
 * Iftar connects with The meal eaten at sunset to break the fast.
 * Eid al-Fitr connects with The joyful festival celebrating the completion of Ramadan.
+
+### Reflection Marking Rubric
+* **Full Understanding:** Student names two concrete acts of kindness or charity (such as sharing a snack, helping parents set the table for Iftar, or greeting family members with a warm smile) and connects them to Sadaqah.
+* **Basic Understanding:** Student names only one general action without connecting it to helping or bringing joy to others.

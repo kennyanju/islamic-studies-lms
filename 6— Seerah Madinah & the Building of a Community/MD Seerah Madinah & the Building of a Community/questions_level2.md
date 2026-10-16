@@ -41,10 +41,10 @@
 ## Part B: Fill in the Blanks
 Vocabulary Bank: Salman, Ansar, Muhajirun, Badr
 
-6. The Muslims who migrated from Makkah to Madinah were the ______.
-7. The welcoming helpers who lived in Madinah were the ______.
-8. The first major defensive victory in Islam was the Battle of ______.
-9. The companion who suggested digging the defensive trench was ______.
+1. The Muslims who migrated from Makkah to Madinah were the ______.
+2. The welcoming helpers who lived in Madinah were the ______.
+3. The first major defensive victory in Islam was the Battle of ______.
+4. The companion who suggested digging the defensive trench was ______.
 
 ---
 
@@ -57,7 +57,7 @@ Vocabulary Bank: Salman, Ansar, Muhajirun, Badr
 ---
 
 ## Part D: Reflection
-10. How did the bond of brotherhood (*Mu'akhah*) between Muhajirun and Ansar prove that faith is stronger than tribal background or social wealth?
+1. How did the bond of brotherhood (*Mu'akhah*) between Muhajirun and Ansar prove that faith is stronger than tribal background or social wealth?
 
 ---
 
@@ -69,13 +69,17 @@ Vocabulary Bank: Salman, Ansar, Muhajirun, Badr
 5. C - 'Amal Ahl al-Madinah preserves mass-transmitted living practice handed down from the Prophet ﷺ.
 
 ### Fill in the Blanks Key
-6. Muhajirun
-7. Ansar
-8. Badr
-9. Salman
+1. Muhajirun
+2. Ansar
+3. Badr
+4. Salman
 
 ### Matching Key
 * Muhajirun ─── Emigrants who left Makkah for their faith
 * Ansar ─── Helpers of Madinah who shared their homes
 * Salman al-Farsi ─── Companion who advised digging the northern trench
 * Hudaybiyyah ─── The 10-year peace treaty enabling widespread peaceful dialogue
+
+### Reflection Marking Rubric
+* **Full Understanding:** Student explains that the Ansar and Muhajirun came from different cities, tribes, and financial statuses, yet united as brothers for the sake of Allah by sharing homes and livelihoods.
+* **Basic Understanding:** Student notes that the Ansar helped the Muhajirun without explaining how it overcame tribal or wealth divisions.

@@ -14,10 +14,10 @@
    (D) The Apostasy Wars (Hurub al-Riddah) and false claimants to prophethood, preserving communal unity and the Quran.
 
 3. Which major state institutions and civil systems were established during the caliphate of Sayyidina 'Umar ibn al-Khattab?
-   (A) A hereditary dynasty system and privatized provincial revenue collections.
+   (A) A hereditary royal succession council, minted gold dinars bearing caliphal portraits, and provincial tax-farming monopolies.
    (B) The Islamic Hijri calendar, the public state treasury (Bayt al-Mal), social welfare stipends, and independent judicial courts.
-   (C) The first international naval merchant fleet and imperial toll roads.
-   (D) Mandatory military conscription for all foreign travelers passing through Madinah.
+   (C) The translation bureau of Bayt al-Hikmah in Baghdad, paper mills in Samarkand, and standardized madrasa endowments.
+   (D) A standing palace guard in Damascus, mandatory military conscription for non-Muslim citizens, and maritime customs ports.
 
 4. How did Sayyidina 'Umar enter the city of Jerusalem in 16 AH upon concluding its peaceful surrender?
    (A) Walking on foot leading his mount, upon which his servant took turns riding, wearing humble patched garments.

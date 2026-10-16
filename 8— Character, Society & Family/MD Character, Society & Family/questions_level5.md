@@ -56,10 +56,10 @@
    (D) An indispensable spiritual discipline that purges ostentation (Riya') and anchors genuine sincerity before Allah.
 
 10. What did classical scholars declare regarding the vital relationship between Fiqh (Law) and Tasawwuf (Spiritual Purification)?
-    (A) "Spirituality replaces the need for outward ritual prayer."
+    (A) "Whoever attains inward spiritual sincerity is exempted from the outward legal conditions of ritual worship and commercial law."
     (B) "Whoever studies Fiqh and ignores Tasawwuf becomes corrupted, and whoever studies Tasawwuf and ignores Fiqh becomes a heretic; only he who combines them attains the truth!"
-    (C) "A student must choose either law or spirituality, but can never study both."
-    (D) "Jurisprudence is for ordinary citizens, while spirituality is reserved for kings."
+    (C) "Outward legal rulings suffice for salvation in the Hereafter, whereas inward character purification is merely an optional literary art."
+    (D) "A seeker must complete forty years of solitary spiritual retreat before learning the foundational rulings of purification and prayer."
 
 ## Part B: Fill in the Blanks
 Vocabulary Bank: Tawfiq, Ahmad Zarruq, Batar al-Haqq, 'Ujb, Nadam

@@ -7,9 +7,9 @@
 ## Part A: Multiple Choice
 
 ### 1. What was Hilf al-Fudul, the pre-Islamic agreement that young Muhammad ﷺ witnessed and praised?
-(A) A horse race organized outside Makkah
-(B) A treaty determining annual market dates
-(C) An agreement to share water from the well of Zamzam
+(A) A commercial treaty signed by Quraysh merchants to fix caravan prices between Syria and Yemen
+(B) An annual schedule dividing the duties of providing Zamzam water and food to pilgrims in Makkah
+(C) A military alliance formed by desert tribes to guard the southern mountain passes from raiders
 (D) A noble pact among clans to protect the oppressed and restore stolen goods to visitors
 
 ### 2. How did Prophet Muhammad ﷺ resolve the tribal dispute over placing the Black Stone (*Al-Hajar al-Aswad*) during the reconstruction of the Ka'bah?
@@ -41,16 +41,10 @@
 ## Part B: Fill in the Blanks
 Vocabulary Bank: Hira, Iqra', Cloak, Khadijah
 
-6. The mountain sanctuary on Jabal al-Nur where the Prophet ﷺ retreated in contemplation was Cave ______.
-7. The first divine command delivered by Archangel Jibril was ______.
-8. To share the communal honor of placing the Black Stone, the Prophet ﷺ placed it upon his ______.
-9. The noble first wife who comforted the Prophet ﷺ and affirmed his mission was Lady ______.
-
-### Fill in the Blanks Key
-6. Hira
-7. Iqra'
-8. Cloak
-9. Khadijah
+1. The mountain sanctuary on Jabal al-Nur where the Prophet ﷺ retreated in contemplation was Cave ______.
+2. The first divine command delivered by Archangel Jibril was ______.
+3. To share the communal honor of placing the Black Stone, the Prophet ﷺ placed it upon his ______.
+4. The noble first wife who comforted the Prophet ﷺ and affirmed his mission was Lady ______.
 
 ---
 
@@ -60,21 +54,11 @@ Vocabulary Bank: Hira, Iqra', Cloak, Khadijah
 * Hilf al-Fudul ─── Moral alliance formed to defend the rights of the oppressed
 * The Black Stone ─── Sacred stone placed cooperatively by all tribal chieftains
 
-### Matching Key
-* Cave Hira ─── Location where the first five verses of Surah Al-'Alaq were revealed
-* Lady Khadijah ─── The first believer and loving supporter of the Prophet ﷺ
-* Hilf al-Fudul ─── Moral alliance formed to defend the rights of the oppressed
-* The Black Stone ─── Sacred stone placed cooperatively by all tribal chieftains
-
 ---
 
 ## Part D: Reflection
 
-10. What does the Prophet's ﷺ cooperative resolution of the Black Stone dispute teach us about teamwork and conflict resolution in our daily lives?
-
-### Reflection Rubric
-* **Full Understanding:** Student explains how the Prophet ﷺ included all parties so nobody felt left out, and connects this to avoiding fights, sharing credit, and solving disputes peacefully with classmates or siblings.
-* **Basic Understanding:** Student mentions using a cloak to lift the stone without explaining the leadership lesson of shared participation.
+1. What does the Prophet's ﷺ cooperative resolution of the Black Stone dispute teach us about teamwork and conflict resolution in our daily lives?
 
 ---
 
@@ -84,3 +68,19 @@ Vocabulary Bank: Hira, Iqra', Cloak, Khadijah
 3. C - Revelation began in Cave Hira on Jabal al-Nur outside Makkah.
 4. A - The opening command of Surah Al-'Alaq (96:1) is Iqra' ("Read!" or "Recite!").
 5. D - Sayyidah Khadijah (RA) was the first person to believe in his prophethood and reassure him.
+
+### Fill in the Blanks Key
+1. Hira
+2. Iqra'
+3. Cloak
+4. Khadijah
+
+### Matching Key
+* Cave Hira ─── Location where the first five verses of Surah Al-'Alaq were revealed
+* Lady Khadijah ─── The first believer and loving supporter of the Prophet ﷺ
+* Hilf al-Fudul ─── Moral alliance formed to defend the rights of the oppressed
+* The Black Stone ─── Sacred stone placed cooperatively by all tribal chieftains
+
+### Reflection Rubric
+* **Full Understanding:** Student explains how the Prophet ﷺ included all parties so nobody felt left out, and connects this to avoiding fights, sharing credit, and solving disputes peacefully with classmates or siblings.
+* **Basic Understanding:** Student mentions using a cloak to lift the stone without explaining the leadership lesson of shared participation.

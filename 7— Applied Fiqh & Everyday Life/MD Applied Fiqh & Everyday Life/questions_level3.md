@@ -32,16 +32,16 @@
    (D) The meat must be boiled for forty minutes before consumption.
 
 6. What did the Prophet ﷺ teach young 'Umar ibn Abi Salamah regarding dining etiquette (Sahih al-Bukhari 5376)?
-   (A) "Eat as fast as possible to show hunger."
+   (A) "Begin from the center of the shared platter, eat with either hand, and finish before the elders."
    (B) "Mention the Name of Allah, eat with your right hand, and eat from what is directly in front of you."
-   (C) "Always drink while standing."
-   (D) "Leave half your plate untouched."
+   (C) "Wait until all guests have finished eating before taking your portion from the far side of the dish."
+   (D) "Recite Surah Al-Ikhlas aloud before every bite and drink water only after completing the meal."
 
 7. If a person forgets to say *Bismillah* before their first bite and remembers during the meal, what is the Sunnah invocation to recite?
    (A) "Bismillahi awwalahu wa akhirahu" (In the Name of Allah, at its beginning and end).
-   (B) "Astaghfirullah" three times.
-   (C) "Allahu Akbar" five times.
-   (D) "Al-Hamdulillah" continuously.
+   (B) "Subhanallahi wa bihamdihi" (Glory and praise be to Allah) before taking the next bite.
+   (C) "Al-Hamdulillahi Rabbil-'Alamin" (Praise be to Allah, Lord of the worlds) three times aloud.
+   (D) "Astaghfirullaha wa atubu ilayh" (I seek Allah's forgiveness and repent to Him) after the meal.
 
 8. What was the noble habit of Prophet Muhammad ﷺ if he was served food he did not personally prefer (Sahih al-Bukhari 5409)?
    (A) He instructed the cook to prepare a replacement immediately.
@@ -56,10 +56,10 @@
    (D) Wheat gluten mixed with lard.
 
 10. What is the legal status of seafood (fish, prawns, squid) in the Maliki school of jurisprudence?
-    (A) Disliked (Makruh) except for river carp.
-    (B) Prohibited unless ritually slaughtered.
+    (A) Disliked (*Makruh*) unless the creature has visible scales and swims near the surface of the water.
+    (B) Prohibited (*Haram*) for everything except scaled fish unless it undergoes formal land-animal slaughter.
     (C) Lawful (*Halal*) to catch and consume without ritual slaughter (Muwatta Malik 43).
-    (D) Permitted only on Fridays.
+    (D) Permitted only for coastal travelers who cannot find lawful livestock meat during their journey.
 
 ## Part B: Fill in the Blanks
 Vocabulary Bank: Ihsan, Agar-Agar, Al-Ibahah, Bismillah, Wadajayn

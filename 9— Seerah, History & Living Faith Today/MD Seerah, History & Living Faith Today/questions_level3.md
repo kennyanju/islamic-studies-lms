@@ -14,10 +14,10 @@
    (D) Remaining outside the city walls until all clan elders surrendered unconditionally.
 
 3. What verse of the Quran did the Prophet ﷺ recite as the 360 idols around the Ka'bah were dismantled?
-   (A) Surah Al-Ikhlas (112:1-4).
-   (B) The opening verses of Surah Al-Fath (48:1-3).
+   (A) "Say: He is Allah, the One; Allah, the Eternal Refuge" (Surah Al-Ikhlas 112:1-2).
+   (B) "Indeed, We have granted you a clear and manifest victory" (Surah Al-Fath 48:1).
    (C) "The truth has come, and falsehood has perished. Indeed, falsehood is bound to perish!" (Surah Al-Isra' 17:81).
-   (D) The Ayat al-Kursi (Surah Al-Baqarah 2:255).
+   (D) "Allah: there is no deity except Him, the Ever-Living, the Sustainer of all" (Surah Al-Baqarah 2:255).
 
 4. Whom did the Prophet ﷺ honor by commanding him to ascend the roof of the Ka'bah and call the Adhan?
    (A) Sayyidina 'Ali ibn Abi Talib.
@@ -44,10 +44,10 @@
    (D) That an Arab has no superiority over a non-Arab, nor white over black, except by piety (Taqwa).
 
 8. Which momentous verse was revealed on the Day of 'Arafah during the Farewell Pilgrimage?
-   (A) Surah Al-Baqarah (2:286).
-   (B) Surah An-Nasr (110:1-3).
+   (A) "Allah does not burden any soul beyond what it can bear; it receives every good it earns." (Surah Al-Baqarah 2:286).
+   (B) "When the victory of Allah has come and the conquest, and you see the people entering Islam in crowds." (Surah An-Nasr 110:1-2).
    (C) "This day I have perfected for you your religion, completed My favor upon you, and have chosen for you Islam as your religion." (Surah Al-Ma'idah 5:3).
-   (D) Surah At-Tawbah (9:128).
+   (D) "There has certainly come to you a Messenger from among yourselves; grievous to him is what you suffer." (Surah At-Tawbah 9:128).
 
 9. What were the profound final words spoken by Prophet Muhammad ﷺ before his passing?
    (A) "Nay, rather, the Highest Companion in Paradise!" (Bal al-Rafiq al-A'la).

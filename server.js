@@ -1418,6 +1418,80 @@ app.post('/api/quiz/grade', validateModuleId, quizLimiter, async (req, res, next
       }
     }
 
+    let fibResult = null;
+    if (
+      req.body.fibAnswers &&
+      typeof req.body.fibAnswers === 'object' &&
+      trackData.parsedQuestions &&
+      Array.isArray(trackData.parsedQuestions.fillBlanks) &&
+      trackData.parsedQuestions.fillBlanks.length > 0
+    ) {
+      const fibList = trackData.parsedQuestions.fillBlanks;
+      let fibCorrect = 0;
+      const norm = (s) =>
+        String(s || '')
+          .replace(/[\u2018\u2019\u02BC`']/g, "'")
+          .replace(/\s+/g, ' ')
+          .trim()
+          .toLowerCase();
+      const fibFeedback = fibList.map((fbItem, idx) => {
+        const student = (
+          req.body.fibAnswers[idx] !== undefined
+            ? req.body.fibAnswers[idx]
+            : req.body.fibAnswers[idx + 1] !== undefined
+              ? req.body.fibAnswers[idx + 1]
+              : ''
+        ).toString();
+        const isCorrect = norm(student) === norm(fbItem.answer);
+        if (isCorrect) fibCorrect++;
+        return {
+          index: idx,
+          studentAnswer: student,
+          expectedAnswer: fbItem.answer,
+          isCorrect,
+          explanation: fbItem.explanation || ''
+        };
+      });
+      fibResult = { score: fibCorrect, total: fibList.length, feedback: fibFeedback };
+    }
+
+    let matchResult = null;
+    if (
+      req.body.matchAnswers &&
+      typeof req.body.matchAnswers === 'object' &&
+      trackData.parsedQuestions &&
+      Array.isArray(trackData.parsedQuestions.matching) &&
+      trackData.parsedQuestions.matching.length > 0
+    ) {
+      const matchList = trackData.parsedQuestions.matching;
+      let matchCorrect = 0;
+      const norm = (s) =>
+        String(s || '')
+          .replace(/[\u2018\u2019\u02BC`']/g, "'")
+          .replace(/\s+/g, ' ')
+          .trim()
+          .toLowerCase();
+      const matchFeedback = matchList.map((mItem, idx) => {
+        const student = (
+          req.body.matchAnswers[idx] !== undefined
+            ? req.body.matchAnswers[idx]
+            : req.body.matchAnswers[idx + 1] !== undefined
+              ? req.body.matchAnswers[idx + 1]
+              : ''
+        ).toString();
+        const isCorrect = norm(student) === norm(mItem.right);
+        if (isCorrect) matchCorrect++;
+        return {
+          index: idx,
+          left: mItem.left,
+          studentAnswer: student,
+          expectedAnswer: mItem.right,
+          isCorrect
+        };
+      });
+      matchResult = { score: matchCorrect, total: matchList.length, feedback: matchFeedback };
+    }
+
     res.json({
       success: true,
       moduleId,
@@ -1426,7 +1500,21 @@ app.post('/api/quiz/grade', validateModuleId, quizLimiter, async (req, res, next
       total,
       percentage,
       passed,
-      feedback: feedbackList
+      feedback: feedbackList,
+      ...(fibResult
+        ? {
+            fibScore: fibResult.score,
+            fibTotal: fibResult.total,
+            fibFeedback: fibResult.feedback
+          }
+        : {}),
+      ...(matchResult
+        ? {
+            matchScore: matchResult.score,
+            matchTotal: matchResult.total,
+            matchFeedback: matchResult.feedback
+          }
+        : {})
     });
   } catch (err) {
     next(err);

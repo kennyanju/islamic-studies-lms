@@ -20,10 +20,10 @@
    (D) A separate intention before every dawn is strictly mandatory, or the fast is void.
 
 4. In the relied-upon Maliki position (Matn Ibn 'Ashir, Al-Risalah), if a person eats or drinks out of pure forgetfulness (Nisyan) during an obligatory Ramadan fast, what must they do?
-   (A) Break their fast for the day and pay a heavy financial penalty.
+   (A) They may eat and drink for the remainder of that day, then fast two consecutive months after Ramadan as Kaffarah.
    (B) Stop immediately, complete the rest of that day's fast, and make up (Qada') that single day after Ramadan without any Kaffarah penalty.
-   (C) Fast sixty consecutive days as expiation.
-   (D) Abandon the fast completely because forgetfulness carries a major sin.
+   (C) Their fast remains completely unaffected and no make-up day (Qada') is required in either obligatory or voluntary fasts.
+   (D) They must stop eating immediately, complete the day's fast, and feed sixty poor people one Mudd of staple food each.
 
 5. Which of the following medical treatments does NOT invalidate a person's fast?
    (A) Swallowing oral prescription tablets with water.
@@ -56,9 +56,9 @@
    (D) Consuming only liquids without solid food.
 
 10. What is the Nisab threshold for gold in calculating annual Zakah?
-    (A) 500 grams of gold.
-    (B) 10 grams of gold.
-    (C) 1 kilogram of gold.
+    (A) 200 gold dinars, which equals approximately 595 grams of pure gold.
+    (B) 5 gold dinars, which equals approximately 21.25 grams of pure gold.
+    (C) 40 gold dinars, which equals approximately 170 grams of pure gold.
     (D) 20 gold dinars, which equals approximately 85 grams of pure gold.
 
 ## Part B: Fill in the Blanks

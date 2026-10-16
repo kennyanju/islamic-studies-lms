@@ -20,9 +20,9 @@
    (D) Transfer their fast to a family member who is healthy.
 
 4. What is the required measure of staple food given for Zakat al-Fitr before the Eid prayer on behalf of each family member?
-   (A) Ten large loaves of bread.
-   (B) One piece of sweet fruit.
-   (C) Exactly half a kilogram of dates.
+   (A) Five Wasaqs (approximately 653 kilograms) of harvested wheat or barley from the family storehouse.
+   (B) One single Mudd (approximately 600 grams or one double-handful) of dried dates or raisins per household.
+   (C) Exactly two-point-five percent (2.5%) of all cooked meals prepared in the home during the last ten nights.
    (D) One Sa' (approximately 2.5 kilograms or four double-handfuls) of the local staple food.
 
 5. What is the special congregational night prayer performed after 'Isha during the month of Ramadan?
@@ -65,3 +65,7 @@ Vocabulary Bank: Imsak, Taraweeh, Sa', Maghrib
 * Zakat al-Fitr connects with Staple food charity paid before the Eid al-Fitr prayer.
 * Fidyah connects with Feeding a needy person for each day by someone permanently unable to fast.
 * Taraweeh connects with Special night prayers performed during Ramadan.
+
+### Reflection Marking Rubric
+* **Full Understanding:** Student explains that feeling physical hunger during Ramadan reminds believers of what needy people experience daily, inspiring gratitude to Allah and generosity through Zakah and Sadaqah.
+* **Basic Understanding:** Student states that fasting makes us feel hungry without explaining how it increases generosity toward those in need.

@@ -56,10 +56,10 @@
    (D) Permissible only for couples residing in Western jurisdictions.
 
 10. On which Quranic verse did major contemporary fatwa councils base the ethical permissibility of altruistic organ donation?
-    (A) Surah Al-Baqarah (2:255).
-    (B) Surah Al-Ikhlas (112:1-4).
+    (A) Surah Al-Baqarah (2:275: "Allah has permitted trade and has forbidden usurious interest").
+    (B) Surah Al-An'am (6:145: "Say: I do not find in what has been revealed to me anything forbidden to eat").
     (C) Surah Al-Ma'idah (5:32: "And whoever saves a life, it is as though he has saved all of humanity").
-    (D) Surah Al-Kafirun (109:1-6).
+    (D) Surah An-Nisa' (4:58: "Indeed, Allah commands you to render trusts back to whom they are due").
 
 ## Part B: Fill in the Blanks
 Vocabulary Bank: 120 days, Mahr, Faskh, Al-I'lan, Nafkh al-Ruh

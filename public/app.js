@@ -1747,6 +1747,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
       tpCheckCard.style.display = sc.checkQuestion ? 'block' : 'none';
       tpCheckText.innerHTML = sc.checkQuestion || '';
+      const guidanceBox = document.getElementById('tpAnswerGuidanceBox');
+      if (guidanceBox) {
+        guidanceBox.style.display = 'none';
+        guidanceBox.innerHTML = '';
+      }
+      if (tpShowAnswerBtn) {
+        tpShowAnswerBtn.setAttribute('aria-expanded', 'false');
+      }
     } else {
       tpCuePill.style.display = 'none';
       tpScriptText.textContent = 'No voice script available for this slide.';
@@ -1905,10 +1913,21 @@ document.addEventListener('DOMContentLoaded', () => {
         mod.teacher &&
         mod.teacher.parsedVoiceScript &&
         mod.teacher.parsedVoiceScript[currentTpSlideIndex];
-      if (sc && sc.checkQuestion) {
-        alert(
-          `Question: ${sc.checkQuestion}\n\nAnswer Guidance: Refer to student handout and Maliki fiqh key for full breakdown.`
-        );
+      const guidanceBox = document.getElementById('tpAnswerGuidanceBox');
+      if (sc && guidanceBox) {
+        const isHidden = guidanceBox.style.display === 'none';
+        if (isHidden) {
+          const guidanceSource =
+            sc.summary ||
+            sc.analogy ||
+            'Review the key points in the narrative script above and invite students to cite evidence from the handout.';
+          guidanceBox.innerHTML = `<strong>Teaching Anchor:</strong> ${renderMarkdown(guidanceSource)}`;
+          guidanceBox.style.display = 'block';
+          tpShowAnswerBtn.setAttribute('aria-expanded', 'true');
+        } else {
+          guidanceBox.style.display = 'none';
+          tpShowAnswerBtn.setAttribute('aria-expanded', 'false');
+        }
       }
     });
   }
@@ -2018,6 +2037,21 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  function formatQuizInline(str) {
+    if (!str) return '';
+    return escapeHtml(String(str))
+      .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+      .replace(/\*(.+?)\*/g, '<em>$1</em>');
+  }
+
+  function normalizeQuizText(str) {
+    return String(str || '')
+      .replace(/[\u2018\u2019\u02BC\u02BB`]/g, "'")
+      .replace(/\s+/g, ' ')
+      .trim()
+      .toLowerCase();
+  }
+
   function renderQuiz(mod) {
     quizScoreBanner.style.display = 'none';
     quizQuestionsArea.innerHTML = '';
@@ -2045,7 +2079,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const tracks = mod.tracks || {};
     let trackData = tracks[activeTrack] || tracks.level3 || tracks.level1 || {};
-    const pq = trackData.parsedQuestions || { multipleChoice: [], fillBlanks: [], reflection: [] };
+    const pq = trackData.parsedQuestions || {
+      multipleChoice: [],
+      fillBlanks: [],
+      matching: [],
+      reflection: []
+    };
 
     if (!pq || (!pq.multipleChoice.length && !pq.fillBlanks.length && !pq.reflection.length)) {
       const cleanMd =
@@ -2068,7 +2107,7 @@ document.addEventListener('DOMContentLoaded', () => {
       mcqSection.className = 'quiz-card';
       mcqSection.innerHTML = isLevel1
         ? `<h3><i class="fa-solid fa-gamepad" style="color:var(--emerald-primary);"></i> 🌟 Module Quest Quiz (${pq.multipleChoice.length} Questions)</h3>`
-        : `<h3><i class="fa-solid fa-list-check"></i> Multiple Choice Questions</h3>`;
+        : `<h3><i class="fa-solid fa-list-check"></i> Part A: Multiple Choice Questions</h3>`;
 
       pq.multipleChoice.forEach((q, idx) => {
         const qBox = document.createElement('div');
@@ -2081,7 +2120,7 @@ document.addEventListener('DOMContentLoaded', () => {
           optsHtml += `
             <button type="button" class="opt-btn" data-qid="${q.id}" data-opt="${opt.key}">
               <span class="opt-key-badge key-${opt.key}">${opt.key}</span>
-              <span>${opt.text}</span>
+              <span>${formatQuizInline(opt.text)}</span>
             </button>
           `;
         });
@@ -2089,7 +2128,7 @@ document.addEventListener('DOMContentLoaded', () => {
         qBox.innerHTML = `
           <div class="quiz-card-header">
             <span class="q-number">${idx + 1}</span>
-            <div>${q.question}</div>
+            <div>${formatQuizInline(q.question)}</div>
           </div>
           <div class="mcq-options">${optsHtml}</div>
           <div class="quiz-explanation-card" id="exp_${q.id}" style="display: none;"></div>
@@ -2101,7 +2140,6 @@ document.addEventListener('DOMContentLoaded', () => {
             e.preventDefault();
             btns.forEach((x) => x.classList.remove('selected'));
             b.classList.add('selected');
-            // Tactile micro-bounce feedback
             b.style.transform = 'scale(0.97)';
             setTimeout(() => {
               b.style.transform = '';
@@ -2121,98 +2159,124 @@ document.addEventListener('DOMContentLoaded', () => {
       fibSection.style.marginTop = '24px';
 
       let wordBankHtml = '';
-      if (pq.fillBlanks[0] && pq.fillBlanks[0].wordBank.length > 0) {
-        if (isLevel1) {
-          wordBankHtml = `
-            <div class="level1-wordbank-container">
-              <span style="font-weight:700;font-size:0.9rem;margin-right:4px;"><i class="fa-solid fa-wand-magic-sparkles" style="color:#f59e0b;"></i> Word Bank (Click to fill):</span>
-              ${pq.fillBlanks[0].wordBank
-                .map(
-                  (w) =>
-                    `<button type="button" class="level1-wordbank-chip">${escapeHtml(w)}</button>`
-                )
-                .join(' ')}
-            </div>
-          `;
-        } else {
-          wordBankHtml = `<div style="background:var(--input-bg);padding:12px;border-radius:var(--radius-sm);margin-bottom:16px;"><strong>Word Bank:</strong> ${pq.fillBlanks[0].wordBank.map((w) => `<span style="background:var(--card-bg);padding:2px 8px;margin:2px;border-radius:4px;display:inline-block;font-size:0.85rem;">${w}</span>`).join(' ')}</div>`;
-        }
+      if (pq.fillBlanks[0] && pq.fillBlanks[0].wordBank && pq.fillBlanks[0].wordBank.length > 0) {
+        wordBankHtml = `
+          <div class="level1-wordbank-container">
+            <span style="font-weight:700;font-size:0.9rem;margin-right:4px;"><i class="fa-solid fa-wand-magic-sparkles" style="color:#f59e0b;"></i> Word Bank (Click to fill):</span>
+            ${pq.fillBlanks[0].wordBank
+              .map(
+                (w) =>
+                  `<button type="button" class="level1-wordbank-chip">${escapeHtml(w)}</button>`
+              )
+              .join(' ')}
+          </div>
+        `;
       }
 
       let fibLinesHtml = '';
       pq.fillBlanks.forEach((fib, idx) => {
+        const formattedText = formatQuizInline(fib.text).replace(
+          /__+/g,
+          `<input type="text" class="fib-input" data-fibidx="${idx}" data-fibid="${fib.id}" autocomplete="off" placeholder="Type or click word...">`
+        );
         fibLinesHtml += `
-          <div style="margin-bottom: 14px; font-size: 0.95rem;">
-            <strong>${fib.id || idx + 1}.</strong> ${fib.text.replace(/__+/g, '<input type="text" class="fib-input" data-fibid="' + fib.id + '">')}
+          <div class="fib-row" style="margin-bottom: 16px; font-size: 0.95rem;">
+            <div><strong>${idx + 1}.</strong> ${formattedText}</div>
+            <div class="quiz-inline-feedback" id="fib_fb_${idx}" style="display: none;"></div>
           </div>
         `;
       });
 
       fibSection.innerHTML = `
-        <h3><i class="fa-solid fa-pen-line"></i> Fill in the Blanks</h3>
+        <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:8px; margin-bottom:12px;">
+          <h3 style="margin:0;"><i class="fa-solid fa-pen-line"></i> Part B: Fill in the Blanks</h3>
+          <span class="quiz-section-score" id="fibSectionScore" style="display:none;"></span>
+        </div>
         ${wordBankHtml}
         <div>${fibLinesHtml}</div>
       `;
 
-      if (isLevel1) {
-        const chips = fibSection.querySelectorAll('.level1-wordbank-chip');
-        chips.forEach((chip) => {
-          chip.addEventListener('click', () => {
-            const word = chip.textContent.trim();
-            const inputs = fibSection.querySelectorAll('.fib-input');
-            let filled = false;
-            for (const input of inputs) {
-              if (!input.value.trim()) {
-                input.value = word;
-                input.focus();
-                filled = true;
-                break;
-              }
-            }
-            if (!filled && inputs.length > 0) {
-              inputs[0].value = word;
-              inputs[0].focus();
-            }
-          });
+      let lastFocusedFibInput = null;
+      const inputs = fibSection.querySelectorAll('.fib-input');
+      inputs.forEach((inp) => {
+        inp.addEventListener('focus', () => {
+          lastFocusedFibInput = inp;
         });
-      }
+      });
+
+      const chips = fibSection.querySelectorAll('.level1-wordbank-chip');
+      chips.forEach((chip) => {
+        chip.addEventListener('click', () => {
+          const word = chip.textContent.trim();
+          if (lastFocusedFibInput && !lastFocusedFibInput.value.trim()) {
+            lastFocusedFibInput.value = word;
+            lastFocusedFibInput.focus();
+            return;
+          }
+          let filled = false;
+          for (const input of inputs) {
+            if (!input.value.trim()) {
+              input.value = word;
+              input.focus();
+              lastFocusedFibInput = input;
+              filled = true;
+              break;
+            }
+          }
+          if (!filled && (lastFocusedFibInput || inputs.length > 0)) {
+            const target = lastFocusedFibInput || inputs[0];
+            target.value = word;
+            target.focus();
+          }
+        });
+      });
 
       quizQuestionsArea.appendChild(fibSection);
     }
 
-    if (pq.matching && pq.matching.length > 0) {
+    const validMatches = (pq.matching || []).filter((m) => m && m.left && m.right);
+    if (validMatches.length > 0) {
       const matchSection = document.createElement('div');
       matchSection.className = 'quiz-card';
       matchSection.style.marginTop = '24px';
-      matchSection.innerHTML = isLevel1
-        ? `<h3><i class="fa-solid fa-puzzle-piece" style="color:#0ea5e9;"></i> 🧩 Match the Pairs</h3>`
-        : `<h3><i class="fa-solid fa-arrows-split-up-and-left"></i> Concept Matching</h3>`;
+      const matchTitle = isLevel1
+        ? `<h3 style="margin:0;"><i class="fa-solid fa-puzzle-piece" style="color:#0ea5e9;"></i> 🧩 Match the Pairs</h3>`
+        : `<h3 style="margin:0;"><i class="fa-solid fa-arrows-split-up-and-left"></i> Part C: Concept Matching</h3>`;
 
       // Collect right-hand definitions and sort them stably
-      const rightOptions = pq.matching.map((m) => m.right);
+      const rightOptions = validMatches.map((m) => m.right);
       const sortedOptions = [...rightOptions].sort((a, b) => a.localeCompare(b));
 
       let matchRowsHtml = '';
-      pq.matching.forEach((m, idx) => {
+      validMatches.forEach((m, idx) => {
         const selectOptions = sortedOptions
           .map((opt) => `<option value="${escapeHtml(opt)}">${escapeHtml(opt)}</option>`)
           .join('');
         matchRowsHtml += `
-          <div style="display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:12px; margin-bottom:12px; padding:10px; background:var(--input-bg); border-radius:var(--radius-sm);">
-            <div style="font-weight:600; font-size:0.95rem; flex:1; min-width:200px;">
-              ${idx + 1}. ${escapeHtml(m.left)}
+          <div class="match-row" data-matchrow="${idx}" style="margin-bottom:12px; padding:12px; background:var(--input-bg); border-radius:var(--radius-sm); border:1px solid transparent;">
+            <div style="display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:12px;">
+              <div style="font-weight:600; font-size:0.95rem; flex:1; min-width:200px;">
+                ${idx + 1}. ${formatQuizInline(m.left)}
+              </div>
+              <div style="flex:1; min-width:220px;">
+                <select class="match-select" data-matchid="${idx}" data-correct="${escapeHtml(m.right)}" style="width:100%; padding:8px; border-radius:6px; border:1px solid var(--border-color); background:var(--card-bg); color:var(--text-primary); font-size:0.9rem;">
+                  <option value="">-- Choose matching definition --</option>
+                  ${selectOptions}
+                </select>
+              </div>
             </div>
-            <div style="flex:1; min-width:220px;">
-              <select class="match-select" data-matchid="${idx}" data-correct="${escapeHtml(m.right)}" style="width:100%; padding:8px; border-radius:6px; border:1px solid var(--border-color); background:var(--card-bg); color:var(--text-primary); font-size:0.9rem;">
-                <option value="">-- Choose matching definition --</option>
-                ${selectOptions}
-              </select>
-            </div>
+            <div class="quiz-inline-feedback" id="match_fb_${idx}" style="display: none;"></div>
           </div>
         `;
       });
 
-      matchSection.innerHTML += `<div>${matchRowsHtml}</div>`;
+      matchSection.innerHTML = `
+        <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:8px; margin-bottom:14px;">
+          ${matchTitle}
+          <span class="quiz-section-score" id="matchSectionScore" style="display:none;"></span>
+        </div>
+        <div>${matchRowsHtml}</div>
+      `;
       quizQuestionsArea.appendChild(matchSection);
     }
 
@@ -2222,18 +2286,19 @@ document.addEventListener('DOMContentLoaded', () => {
       refSection.style.marginTop = '24px';
       refSection.innerHTML = isLevel1
         ? `<h3><i class="fa-solid fa-feather-pointed" style="color:#a855f7;"></i> ✍️ Young Scholar Reflection</h3>`
-        : `<h3><i class="fa-solid fa-comment-dots"></i> Reflection & Short Answer</h3>`;
+        : `<h3><i class="fa-solid fa-comment-dots"></i> Part D: Reflection & Short Answer</h3>`;
 
-      pq.reflection.forEach((ref) => {
+      pq.reflection.forEach((ref, idx) => {
         const item = document.createElement('div');
         item.style.marginTop = '16px';
 
         const saveKey = `ref_${activeModuleId}_${activeTrack}_${ref.id}`;
-        const savedText = userReflections[saveKey] || '';
+        const altKey = `ref_${activeModuleId}_${activeTrack}_${idx + 1}`;
+        const savedText = userReflections[saveKey] || userReflections[altKey] || '';
 
         item.innerHTML = `
-          <p><strong>${ref.id}. ${ref.question}</strong></p>
-          <textarea class="reflection-input" data-refkey="${saveKey}" placeholder="${isLevel1 ? 'Write your thoughts or story here...' : 'Write your thoughts or response here...'}">${savedText}</textarea>
+          <p><strong>${idx + 1}. ${formatQuizInline(ref.question)}</strong></p>
+          <textarea class="reflection-input" data-refkey="${saveKey}" data-refid="ref_${idx + 1}" placeholder="${isLevel1 ? 'Write your thoughts or story here...' : 'Write your thoughts or response here...'}">${escapeHtml(savedText)}</textarea>
         `;
 
         const ta = item.querySelector('textarea');
@@ -2248,12 +2313,29 @@ document.addEventListener('DOMContentLoaded', () => {
         refSection.appendChild(item);
       });
 
+      if (pq.reflectionRubric) {
+        const rubricBox = document.createElement('div');
+        rubricBox.className = 'quiz-explanation-card';
+        rubricBox.id = 'reflectionRubricBox';
+        rubricBox.style.display = 'none';
+        rubricBox.style.marginTop = '16px';
+        rubricBox.innerHTML = `
+          <div style="font-weight:700; margin-bottom:6px;"><i class="fa-solid fa-clipboard-check"></i> Self-Check & Marking Rubric:</div>
+          <div class="markdown-body" style="font-size:0.9rem;">${renderMarkdown(pq.reflectionRubric)}</div>
+        `;
+        refSection.appendChild(rubricBox);
+      }
+
       quizQuestionsArea.appendChild(refSection);
     }
 
     const scoreKey = `quiz_${activeModuleId}_${activeTrack}`;
     if (quizScores[scoreKey]) {
-      showQuizScoreBanner(quizScores[scoreKey].score, quizScores[scoreKey].total);
+      showQuizScoreBanner(
+        quizScores[scoreKey].score,
+        quizScores[scoreKey].total,
+        quizScores[scoreKey].sectionSummary
+      );
     }
   }
 
@@ -2266,7 +2348,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const track = activeTrack;
     const tracks = mod.tracks || {};
     let trackData = tracks[track] || tracks.level3 || tracks.level1 || {};
-    const mcqs = (trackData.parsedQuestions && trackData.parsedQuestions.multipleChoice) || [];
+    const pq = trackData.parsedQuestions || {};
+    const mcqs = pq.multipleChoice || [];
+    const fibs = pq.fillBlanks || [];
+    const validMatches = (pq.matching || []).filter((m) => m && m.left && m.right);
 
     const answers = {};
     mcqs.forEach((q, idx) => {
@@ -2276,6 +2361,16 @@ document.addEventListener('DOMContentLoaded', () => {
         if (selected) {
           answers[idx] = selected.dataset.opt;
         }
+      }
+    });
+
+    // Collect non-empty reflections for current module & track
+    const reflectionsPayload = {};
+    const refTextareas = quizQuestionsArea.querySelectorAll('.reflection-input');
+    refTextareas.forEach((ta, idx) => {
+      const val = (ta.value || '').trim();
+      if (val) {
+        reflectionsPayload[`${track}_q${idx + 1}`] = val;
       }
     });
 
@@ -2294,6 +2389,7 @@ document.addEventListener('DOMContentLoaded', () => {
             moduleId: activeModuleId,
             track,
             answers,
+            reflections: reflectionsPayload,
             childId: activeChild ? activeChild.id : null
           })
         });
@@ -2320,12 +2416,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // 2. Client-Side Grading Fallback (when server is unreachable or returns non-success)
       if (!data || !data.success) {
-        // Log the server-side reason if available (e.g. rate limit)
         if (data && data.error) {
           console.warn('Server grading declined:', data.error);
         }
 
-        // Grade locally using the already-loaded course data
         let correctCount = 0;
         const total = mcqs.length;
         const feedbackList = [];
@@ -2358,7 +2452,7 @@ document.addEventListener('DOMContentLoaded', () => {
         };
       }
 
-      // 3. Display option feedback and explanations
+      // 3. Display Part A (Multiple Choice) option feedback and explanations
       if (data.feedback && Array.isArray(data.feedback)) {
         data.feedback.forEach((item) => {
           const qObj = mcqs[item.questionIndex];
@@ -2370,6 +2464,7 @@ document.addEventListener('DOMContentLoaded', () => {
           const expBox = qBox.querySelector(`#exp_${qObj.id}`);
 
           optBtns.forEach((btn) => {
+            btn.classList.remove('correct', 'incorrect');
             const key = btn.dataset.opt;
             if (key === item.correctAnswer) {
               btn.classList.add('correct');
@@ -2385,13 +2480,96 @@ document.addEventListener('DOMContentLoaded', () => {
         });
       }
 
+      // 4. Grade Part B (Fill in the Blanks) and display inline feedback
+      let fibCorrect = 0;
+      if (fibs.length > 0) {
+        const fibInputs = quizQuestionsArea.querySelectorAll('.fib-input');
+        fibInputs.forEach((inp, idx) => {
+          const fibObj = fibs[idx];
+          if (!fibObj) return;
+          const expected = fibObj.answer || '';
+          const isMatch = expected && normalizeQuizText(inp.value) === normalizeQuizText(expected);
+          inp.classList.remove('correct', 'incorrect');
+          inp.classList.add(isMatch ? 'correct' : 'incorrect');
+          if (isMatch) fibCorrect++;
+
+          const fbEl = quizQuestionsArea.querySelector(`#fib_fb_${idx}`);
+          if (fbEl) {
+            fbEl.style.display = 'block';
+            const expSuffix = fibObj.explanation ? ` (${escapeHtml(fibObj.explanation)})` : '';
+            if (isMatch) {
+              fbEl.innerHTML = `<span class="feedback-pass"><i class="fa-solid fa-circle-check"></i> Correct!</span>${expSuffix}`;
+            } else {
+              fbEl.innerHTML = `<span class="feedback-fail"><i class="fa-solid fa-circle-xmark"></i> Correct answer: <strong>${escapeHtml(expected)}</strong></span>${expSuffix}`;
+            }
+          }
+        });
+
+        const fibScoreBadge = quizQuestionsArea.querySelector('#fibSectionScore');
+        if (fibScoreBadge) {
+          fibScoreBadge.style.display = 'inline-flex';
+          fibScoreBadge.textContent = `${fibCorrect} / ${fibs.length} Correct`;
+        }
+      }
+
+      // 5. Grade Part C (Concept Matching) and display inline feedback
+      let matchCorrect = 0;
+      if (validMatches.length > 0) {
+        const matchSelects = quizQuestionsArea.querySelectorAll('.match-select');
+        matchSelects.forEach((sel, idx) => {
+          const expected = sel.dataset.correct || '';
+          const isMatch = expected && normalizeQuizText(sel.value) === normalizeQuizText(expected);
+          sel.classList.remove('correct', 'incorrect');
+          sel.classList.add(isMatch ? 'correct' : 'incorrect');
+          const rowEl = sel.closest('.match-row');
+          if (rowEl) {
+            rowEl.classList.remove('correct', 'incorrect');
+            rowEl.classList.add(isMatch ? 'correct' : 'incorrect');
+          }
+          if (isMatch) matchCorrect++;
+
+          const fbEl = quizQuestionsArea.querySelector(`#match_fb_${idx}`);
+          if (fbEl) {
+            fbEl.style.display = 'block';
+            if (isMatch) {
+              fbEl.innerHTML = `<span class="feedback-pass"><i class="fa-solid fa-circle-check"></i> Correct match!</span>`;
+            } else {
+              fbEl.innerHTML = `<span class="feedback-fail"><i class="fa-solid fa-circle-xmark"></i> Correct match: <strong>${escapeHtml(expected)}</strong></span>`;
+            }
+          }
+        });
+
+        const matchScoreBadge = quizQuestionsArea.querySelector('#matchSectionScore');
+        if (matchScoreBadge) {
+          matchScoreBadge.style.display = 'inline-flex';
+          matchScoreBadge.textContent = `${matchCorrect} / ${validMatches.length} Matched`;
+        }
+      }
+
+      // 6. Reveal Part D Reflection Rubric if present
+      const rubricBox = quizQuestionsArea.querySelector('#reflectionRubricBox');
+      if (rubricBox) {
+        rubricBox.style.display = 'block';
+      }
+
+      const summaryParts = [`Multiple Choice: ${data.score}/${data.total}`];
+      if (fibs.length > 0) summaryParts.push(`Fill in Blanks: ${fibCorrect}/${fibs.length}`);
+      if (validMatches.length > 0)
+        summaryParts.push(`Matching: ${matchCorrect}/${validMatches.length}`);
+      const sectionSummary = summaryParts.join(' • ');
+
       const scoreKey = `quiz_${activeModuleId}_${activeTrack}`;
-      quizScores[scoreKey] = { score: data.score, total: data.total, percentage: data.percentage };
+      quizScores[scoreKey] = {
+        score: data.score,
+        total: data.total,
+        percentage: data.percentage,
+        sectionSummary
+      };
       localStorage.setItem(
         `lms_quiz_scores_${activeChild ? activeChild.id : 'global'}`,
         JSON.stringify(quizScores)
       );
-      showQuizScoreBanner(data.score, data.total);
+      showQuizScoreBanner(data.score, data.total, sectionSummary);
 
       stopQuizTimer();
 
@@ -2406,7 +2584,6 @@ document.addEventListener('DOMContentLoaded', () => {
         renderSidebarModules();
         updateProgressUI();
 
-        // Celebratory Confetti Shower
         triggerConfetti({ particleCount: 90, spread: 80 });
         setTimeout(() => triggerConfetti({ particleCount: 50, spread: 100 }), 450);
 
@@ -2437,7 +2614,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (mod) renderQuiz(mod);
   });
 
-  function showQuizScoreBanner(score, total) {
+  function showQuizScoreBanner(score, total, sectionSummary = '') {
     quizScoreBanner.style.display = 'flex';
     scoreDisplay.textContent = `${score} / ${total}`;
     const pct = total > 0 ? Math.round((score / total) * 100) : 0;
@@ -2454,25 +2631,25 @@ document.addEventListener('DOMContentLoaded', () => {
       scoreStreakEl.innerHTML = `<i class="fa-solid fa-fire font-amber" aria-hidden="true"></i> <span>${streakDays}-Day Learning Streak Active!</span>`;
     }
 
+    const summarySuffix = sectionSummary ? ` (${sectionSummary})` : '';
+
     if (pct === 100) {
       if (mascotAvatarEl) mascotAvatarEl.textContent = '🌟';
       if (celebrationTitleEl)
         celebrationTitleEl.textContent = "Masha'Allah! Perfect Scholar Mastery! 🏆";
       if (mascotMessageEl)
-        mascotMessageEl.textContent =
-          'Flawless score! You have mastered this lesson with great wisdom!';
+        mascotMessageEl.textContent = `Flawless score! You have mastered this lesson with great wisdom!${summarySuffix}`;
     } else if (pct >= 80) {
       if (mascotAvatarEl) mascotAvatarEl.textContent = '🦁';
       if (celebrationTitleEl)
         celebrationTitleEl.textContent = 'Excellent Achievement! Quiz Passed! ⭐';
       if (mascotMessageEl)
-        mascotMessageEl.textContent = 'Great dedication! Keep up the brilliant study journey!';
+        mascotMessageEl.textContent = `Great dedication! Keep up the steady study progress!${summarySuffix}`;
     } else {
       if (mascotAvatarEl) mascotAvatarEl.textContent = '🌱';
       if (celebrationTitleEl) celebrationTitleEl.textContent = 'Quest Completed: Keep Growing! 📖';
       if (mascotMessageEl)
-        mascotMessageEl.textContent =
-          'Good effort! Review the lesson cards and retry to unlock your certificate!';
+        mascotMessageEl.textContent = `Good effort! Review the lesson cards and retry to unlock your certificate!${summarySuffix}`;
     }
 
     if (pct >= 80) {

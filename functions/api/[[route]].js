@@ -1919,13 +1919,15 @@ export async function onRequest(context) {
 
       // Fetch compiled curriculum data for authoritative grading
       let moduleQuestions = [];
+      let parsedTrackQuestions = null;
       try {
         // Try modular chunk first, then full course data
         const chunkRes = await fetch(`${url.origin}/course_data/module_${mId}.json`);
         if (chunkRes.ok) {
           const mod = await chunkRes.json();
           if (mod.tracks && mod.tracks[studentTrack] && mod.tracks[studentTrack].parsedQuestions) {
-            moduleQuestions = mod.tracks[studentTrack].parsedQuestions.multipleChoice || [];
+            parsedTrackQuestions = mod.tracks[studentTrack].parsedQuestions;
+            moduleQuestions = parsedTrackQuestions.multipleChoice || [];
           }
         } else {
           const courseDataRes = await fetch(`${url.origin}/course_data.json`);
@@ -1933,8 +1935,8 @@ export async function onRequest(context) {
             const courseData = await courseDataRes.json();
             const targetModule = (courseData.modules || []).find((m) => m.id === mId);
             if (targetModule && targetModule.tracks && targetModule.tracks[studentTrack]) {
-              moduleQuestions =
-                targetModule.tracks[studentTrack].parsedQuestions?.multipleChoice || [];
+              parsedTrackQuestions = targetModule.tracks[studentTrack].parsedQuestions;
+              moduleQuestions = parsedTrackQuestions?.multipleChoice || [];
             }
           }
         }
@@ -2081,6 +2083,80 @@ export async function onRequest(context) {
         }
       }
 
+      let fibResult = null;
+      if (
+        body.fibAnswers &&
+        typeof body.fibAnswers === 'object' &&
+        parsedTrackQuestions &&
+        Array.isArray(parsedTrackQuestions.fillBlanks) &&
+        parsedTrackQuestions.fillBlanks.length > 0
+      ) {
+        const fibList = parsedTrackQuestions.fillBlanks;
+        let fibCorrect = 0;
+        const norm = (s) =>
+          String(s || '')
+            .replace(/[\u2018\u2019\u02BC`']/g, "'")
+            .replace(/\s+/g, ' ')
+            .trim()
+            .toLowerCase();
+        const fibFeedback = fibList.map((fbItem, idx) => {
+          const student = (
+            body.fibAnswers[idx] !== undefined
+              ? body.fibAnswers[idx]
+              : body.fibAnswers[idx + 1] !== undefined
+                ? body.fibAnswers[idx + 1]
+                : ''
+          ).toString();
+          const isCorrect = norm(student) === norm(fbItem.answer);
+          if (isCorrect) fibCorrect++;
+          return {
+            index: idx,
+            studentAnswer: student,
+            expectedAnswer: fbItem.answer,
+            isCorrect,
+            explanation: fbItem.explanation || ''
+          };
+        });
+        fibResult = { score: fibCorrect, total: fibList.length, feedback: fibFeedback };
+      }
+
+      let matchResult = null;
+      if (
+        body.matchAnswers &&
+        typeof body.matchAnswers === 'object' &&
+        parsedTrackQuestions &&
+        Array.isArray(parsedTrackQuestions.matching) &&
+        parsedTrackQuestions.matching.length > 0
+      ) {
+        const matchList = parsedTrackQuestions.matching;
+        let matchCorrect = 0;
+        const norm = (s) =>
+          String(s || '')
+            .replace(/[\u2018\u2019\u02BC`']/g, "'")
+            .replace(/\s+/g, ' ')
+            .trim()
+            .toLowerCase();
+        const matchFeedback = matchList.map((mItem, idx) => {
+          const student = (
+            body.matchAnswers[idx] !== undefined
+              ? body.matchAnswers[idx]
+              : body.matchAnswers[idx + 1] !== undefined
+                ? body.matchAnswers[idx + 1]
+                : ''
+          ).toString();
+          const isCorrect = norm(student) === norm(mItem.right);
+          if (isCorrect) matchCorrect++;
+          return {
+            index: idx,
+            left: mItem.left,
+            studentAnswer: student,
+            expectedAnswer: mItem.right,
+            isCorrect
+          };
+        });
+        matchResult = { score: matchCorrect, total: matchList.length, feedback: matchFeedback };
+      }
+
       return jsonResponse(
         {
           success: true,
@@ -2090,7 +2166,21 @@ export async function onRequest(context) {
           total,
           percentage,
           passed,
-          feedback
+          feedback,
+          ...(fibResult
+            ? {
+                fibScore: fibResult.score,
+                fibTotal: fibResult.total,
+                fibFeedback: fibResult.feedback
+              }
+            : {}),
+          ...(matchResult
+            ? {
+                matchScore: matchResult.score,
+                matchTotal: matchResult.total,
+                matchFeedback: matchResult.feedback
+              }
+            : {})
         },
         200,
         {},

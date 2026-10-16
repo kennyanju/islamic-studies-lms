@@ -7,9 +7,9 @@
 ## Part A: Multiple Choice
 
 ### 1. Who revealed the Noble Quran to Prophet Muhammad ﷺ?
-(A) A desert philosopher in ancient Arabia
-(B) A royal scribe in a palace
-(C) A council of poets in Makkah
+(A) The righteous Companions who wrote down their own wise sayings
+(B) Angel Mika'il (AS) who brings the rain and sustains the earth
+(C) The scholars of Madinah who gathered the stories of earlier prophets
 (D) Allah through Archangel Jibril (AS)
 
 ### 2. How many good deeds (hasanat) does a believer earn for reciting just ONE Arabic letter of the Quran?
@@ -25,10 +25,10 @@
 (D) Surah Al-Mulk
 
 ### 4. What should a respectful student do when the Quran is being recited aloud?
-(A) Run around and shout in the room
-(B) Increase the television volume
+(A) Recite a different surah out loud at the same time to practice memory
+(B) Chat with a friend about the lesson while the verses are being read
 (C) Listen quietly, attentively, and respectfully
-(D) Turn away and play video games
+(D) Leaf quickly through the mushaf pages without paying attention to the sound
 
 ### 5. Which short surah teaches us pure Tawhid: that Allah is One, the Eternal Refuge (Al-Samad), who has no children and no parents?
 (A) Surah Al-Fil
@@ -41,14 +41,9 @@
 ## Part B: Fill in the Blanks
 Vocabulary Bank: Words, Fatihah, Ten
 
-6. The Noble Quran is the direct ______ of Allah.
-7. Surah Al-______ is the opening surah recited in every prayer.
-8. Reciting one letter of the Quran earns a reward of ______ good deeds.
-
-### Fill in the Blanks Key
-6. Words
-7. Fatihah
-8. Ten
+1. The Noble Quran is the direct ______ of Allah.
+2. Surah Al-______ is the opening surah recited in every prayer.
+3. Reciting one letter of the Quran earns a reward of ______ good deeds.
 
 ---
 
@@ -57,20 +52,11 @@ Vocabulary Bank: Words, Fatihah, Ten
 * Surah Al-Ikhlas ─── Teaches pure Tawhid that Allah is One and Al-Samad
 * Ten Hasanat ─── The tenfold reward for reciting a single letter of the Quran
 
-### Matching Key
-* Surah Al-Fatihah ─── The opening chapter of the Quran recited in every rak'ah
-* Surah Al-Ikhlas ─── Teaches pure Tawhid that Allah is One and Al-Samad
-* Ten Hasanat ─── The tenfold reward for reciting a single letter of the Quran
-
 ---
 
 ## Part D: Reflection
 
-9. Recite Surah Al-Ikhlas to your teacher or parent with a calm, clear voice, and explain what Al-Samad means to you.
-
-### Reflection Rubric
-* **Full Understanding:** Student recites Surah Al-Ikhlas accurately and explains that Al-Samad means Allah is the Eternal Refuge whom everyone needs, while He needs no one.
-* **Basic Understanding:** Student recites the surah with assistance or gives a general definition of Allah's oneness.
+1. Recite Surah Al-Ikhlas to your teacher or parent with a calm, clear voice, and explain what Al-Samad means to you.
 
 ---
 
@@ -80,3 +66,17 @@ Vocabulary Bank: Words, Fatihah, Ten
 3. A - Surah Al-Fatihah is the Mother of the Book, recited in every rak'ah.
 4. C - Surah Al-A'raf (7:204) instructs believers to listen quietly and pay attention when the Quran is recited.
 5. D - Surah Al-Ikhlas teaches the pure Oneness of Allah and His attribute Al-Samad.
+
+### Fill in the Blanks Key
+1. Words
+2. Fatihah
+3. Ten
+
+### Matching Key
+* Surah Al-Fatihah ─── The opening chapter of the Quran recited in every rak'ah
+* Surah Al-Ikhlas ─── Teaches pure Tawhid that Allah is One and Al-Samad
+* Ten Hasanat ─── The tenfold reward for reciting a single letter of the Quran
+
+### Reflection Rubric
+* **Full Understanding:** Student recites Surah Al-Ikhlas accurately and explains that Al-Samad means Allah is the Eternal Refuge whom everyone needs, while He needs no one.
+* **Basic Understanding:** Student recites the surah with assistance or gives a general definition of Allah's oneness.

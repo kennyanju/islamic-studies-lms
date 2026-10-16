@@ -57,9 +57,9 @@
 
 10. During prayer in Rajab 2 AH at Masjid al-Qiblatayn, to which direction was the Qiblah permanently shifted by divine command (Surah Al-Baqarah 2:144)?
     (A) From Bayt al-Maqdis (Jerusalem) toward the Ka'bah (Al-Masjid al-Haram in Makkah).
-    (B) From Makkah toward Yemen.
-    (C) From Madinah toward Mount Sinai.
-    (D) From Damascus toward Alexandria.
+    (B) From the Ka'bah in Makkah toward Bayt al-Maqdis (the Noble Sanctuary in Jerusalem).
+    (C) From Masjid Quba in southern Madinah toward the Prophet's Mosque in central Madinah.
+    (D) From the Valley of Mina near Mount 'Arafah toward the sanctuary of Abraham in Hebron.
 
 ## Part B: Fill in the Blanks
 Vocabulary Bank: Al-Mu'akhah, Al-Qaswa', Bilal, Thawr, Quba'
