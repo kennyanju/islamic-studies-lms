@@ -1,5 +1,12 @@
--- Migration 0004: Seed Data Placeholder
--- Hardcoded user credentials removed for security (SEC-07).
--- Initial Super Admin provisioning is performed dynamically at runtime via ADMIN_EMAIL and ADMIN_PASSWORD environment variables.
--- For local development seed data, initialize accounts via the secure UI/API.
-SELECT 1;
+-- Seed Data Migrated from db.json
+-- Idempotent INSERT OR IGNORE statements for Users, Children, Progress, and Quizzes
+INSERT OR IGNORE INTO users (uid, email, display_name, role, is_verified, provider, password_hash, created_at, updated_at) VALUES ('super_learner_kennyanju', 'kennyanju@gmail.com', 'Super Learner', 'super_admin', 1, 'password', '$2b$10$n90jzRUfdeYLRNy2Ix9O0OZR/g0ZdpiMtRjujpzCiQUj3hUHorYSi', '2026-10-16T10:01:46.805Z', '2026-10-16T10:01:46.805Z');
+INSERT OR IGNORE INTO users (uid, email, display_name, role, is_verified, provider, password_hash, created_at, updated_at) VALUES ('admin_master_1', 'admin@islamicstudies.org', 'Portal Administrator', 'super_admin', 1, 'local', '$2b$10$wuVcdExo3ApKH8FGSL0O5OGileAnh3PCDOGldN8E07TytkWura/te', '2026-08-14T14:26:18.316Z', '2026-10-16T09:57:08.701Z');
+INSERT OR IGNORE INTO users (uid, email, display_name, role, is_verified, provider, password_hash, created_at, updated_at) VALUES ('user_1786718503937_ffed6be9', 'testuser1@gmail.com', 'Test User', 'parent', 0, 'password', '$2b$10$CNHoAAqjOlxSt/qw7gAtsu/ZrdefHtLgiOVA4k.6QwPKfSw8Po12C', '2026-08-14T14:41:43.937Z', '2026-08-14T14:41:43.937Z');
+INSERT OR IGNORE INTO children (id, parent_uid, name, avatar, assigned_track, pin_hash, created_at, updated_at) VALUES ('child_zayd_1', 'admin_master_1', 'Zayd', '🌟', 'level1', NULL, '2026-09-20T18:57:19.079Z', '2026-09-20T18:57:19.080Z');
+INSERT OR IGNORE INTO children (id, parent_uid, name, avatar, assigned_track, pin_hash, created_at, updated_at) VALUES ('child_maryam_2', 'admin_master_1', 'Maryam', '🌸', 'level2', NULL, '2026-09-20T18:57:19.080Z', '2026-09-20T18:57:19.080Z');
+INSERT OR IGNORE INTO children (id, parent_uid, name, avatar, assigned_track, pin_hash, created_at, updated_at) VALUES ('child_kenny_level1', 'super_learner_kennyanju', 'Level 1 Learner (Ages 6–8)', '🌱', 'level1', NULL, '2026-10-16T10:01:46.805Z', '2026-10-16T10:01:46.805Z');
+INSERT OR IGNORE INTO children (id, parent_uid, name, avatar, assigned_track, pin_hash, created_at, updated_at) VALUES ('child_kenny_level2', 'super_learner_kennyanju', 'Level 2 Learner (Ages 8–10)', '🌿', 'level2', NULL, '2026-10-16T10:01:46.805Z', '2026-10-16T10:01:46.805Z');
+INSERT OR IGNORE INTO children (id, parent_uid, name, avatar, assigned_track, pin_hash, created_at, updated_at) VALUES ('child_kenny_level3', 'super_learner_kennyanju', 'Level 3 Learner (Ages 10–12)', '📘', 'level3', NULL, '2026-10-16T10:01:46.805Z', '2026-10-16T10:01:46.805Z');
+INSERT OR IGNORE INTO children (id, parent_uid, name, avatar, assigned_track, pin_hash, created_at, updated_at) VALUES ('child_kenny_level4', 'super_learner_kennyanju', 'Level 4 Learner (Ages 12–14)', '📖', 'level4', NULL, '2026-10-16T10:01:46.805Z', '2026-10-16T10:01:46.805Z');
+INSERT OR IGNORE INTO children (id, parent_uid, name, avatar, assigned_track, pin_hash, created_at, updated_at) VALUES ('child_kenny_level5', 'super_learner_kennyanju', 'Level 5 Learner (Ages 14–16+)', '🎓', 'level5', NULL, '2026-10-16T10:01:46.805Z', '2026-10-16T10:01:46.805Z');

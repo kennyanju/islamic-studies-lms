@@ -1903,7 +1903,7 @@ export async function onRequest(context) {
         )
           .bind(studentId, mId)
           .first();
-        if (attemptsCount && attemptsCount.count >= 3) {
+        if (attemptsCount && attemptsCount.count >= 3 && authUser?.role !== 'super_admin') {
           return jsonResponse(
             {
               success: false,

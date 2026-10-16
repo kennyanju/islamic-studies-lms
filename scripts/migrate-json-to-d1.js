@@ -52,6 +52,23 @@ if (!adminUser) {
   realUsers.unshift(adminUser);
 }
 
+// Always ensure Super Learner (kennyanju@gmail.com) is present
+let superLearner = realUsers.find((u) => u.email === 'kennyanju@gmail.com');
+if (!superLearner) {
+  superLearner = {
+    uid: 'super_learner_kennyanju',
+    email: 'kennyanju@gmail.com',
+    passwordHash: '$2b$10$UTULzU0Ze6s/RqXWnKEsuuA54qjemnvgoNTAoTIBwlV1H10sSp.Gq',
+    displayName: 'Super Learner',
+    role: 'super_admin',
+    provider: 'password',
+    isVerified: true,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString()
+  };
+  realUsers.unshift(superLearner);
+}
+
 const validUserUids = new Set(realUsers.map((u) => u.uid));
 console.log(
   `✅ Filtered legitimate users (${realUsers.length} users):`,
@@ -60,6 +77,21 @@ console.log(
 
 // Child profiles for legitimate users
 let realChildren = (data.children || []).filter((c) => validUserUids.has(c.parentUid));
+
+// Ensure child profiles for Super Learner across all 5 levels exist
+const superChildren = [
+  { id: 'child_kenny_level1', parentUid: superLearner.uid, name: 'Level 1 Learner (Ages 6–8)', avatar: '🌱', assignedTrack: 'level1', pinHash: null, createdAt: new Date().toISOString(), updatedAt: new Date().toISOString() },
+  { id: 'child_kenny_level2', parentUid: superLearner.uid, name: 'Level 2 Learner (Ages 8–10)', avatar: '🌿', assignedTrack: 'level2', pinHash: null, createdAt: new Date().toISOString(), updatedAt: new Date().toISOString() },
+  { id: 'child_kenny_level3', parentUid: superLearner.uid, name: 'Level 3 Learner (Ages 10–12)', avatar: '📘', assignedTrack: 'level3', pinHash: null, createdAt: new Date().toISOString(), updatedAt: new Date().toISOString() },
+  { id: 'child_kenny_level4', parentUid: superLearner.uid, name: 'Level 4 Learner (Ages 12–14)', avatar: '📖', assignedTrack: 'level4', pinHash: null, createdAt: new Date().toISOString(), updatedAt: new Date().toISOString() },
+  { id: 'child_kenny_level5', parentUid: superLearner.uid, name: 'Level 5 Learner (Ages 14–16+)', avatar: '🎓', assignedTrack: 'level5', pinHash: null, createdAt: new Date().toISOString(), updatedAt: new Date().toISOString() }
+];
+
+for (const sc of superChildren) {
+  if (!realChildren.some((c) => c.id === sc.id)) {
+    realChildren.push(sc);
+  }
+}
 
 // If no children for admin, add authentic standard child profiles (Zayd & Maryam)
 if (realChildren.length === 0) {

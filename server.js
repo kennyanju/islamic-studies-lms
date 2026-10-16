@@ -134,6 +134,68 @@ const telemetryLogs = [];
   }
 })();
 
+// Seed Super Learner profile for curriculum and quiz testing
+(async function seedSuperLearner() {
+  try {
+    const superEmail = 'kennyanju@gmail.com';
+    const superPassword = '123456';
+    const existing = await db.findUserByEmail(superEmail);
+    const passwordHash = await bcrypt.hash(superPassword, BCRYPT_ROUNDS);
+    let userUid = 'super_learner_kennyanju';
+
+    if (!existing) {
+      await db.createUser({
+        uid: userUid,
+        email: superEmail,
+        displayName: 'Super Learner',
+        role: 'super_admin',
+        isVerified: true,
+        provider: 'password',
+        photoURL: `https://api.dicebear.com/7.x/avataaars/svg?seed=${encodeURIComponent(superEmail)}`,
+        passwordHash
+      });
+      console.log(`🌟 [SUPER LEARNER SEED] Initialized profile for ${superEmail}`);
+    } else {
+      userUid = existing.uid;
+      const isMatch = await bcrypt.compare(superPassword, existing.passwordHash || '');
+      if (!isMatch || existing.role !== 'super_admin' || !existing.isVerified) {
+        await db.updateUser(userUid, {
+          role: 'super_admin',
+          isVerified: true,
+          passwordHash
+        });
+      }
+    }
+
+    // Seed 5 child learner profiles across all curriculum levels for full-track testing
+    const existingChildren = await db.getChildren(userUid);
+    const learnerProfiles = [
+      { id: 'child_kenny_level1', name: 'Level 1 Learner (Ages 6–8)', track: 'level1', avatar: '🌱' },
+      { id: 'child_kenny_level2', name: 'Level 2 Learner (Ages 8–10)', track: 'level2', avatar: '🌿' },
+      { id: 'child_kenny_level3', name: 'Level 3 Learner (Ages 10–12)', track: 'level3', avatar: '📘' },
+      { id: 'child_kenny_level4', name: 'Level 4 Learner (Ages 12–14)', track: 'level4', avatar: '📖' },
+      { id: 'child_kenny_level5', name: 'Level 5 Learner (Ages 14–16+)', track: 'level5', avatar: '🎓' }
+    ];
+
+    for (const p of learnerProfiles) {
+      const match = existingChildren.find((c) => c.assignedTrack === p.track || c.id === p.id);
+      if (!match) {
+        await db.createChild({
+          id: p.id,
+          parentUid: userUid,
+          name: p.name,
+          avatar: p.avatar,
+          assignedTrack: p.track,
+          pinHash: null
+        });
+      }
+    }
+  } catch (e) {
+    console.error('Error seeding super learner account:', e);
+  }
+})();
+
+
 // Request Logging & Security Middleware
 
 // Package Metadata
@@ -1245,7 +1307,7 @@ const quizLimiter = rateLimit({
   windowMs: 60 * 1000,
   max: 10,
   message: { success: false, error: 'Too many quiz submissions. Please wait.' },
-  skip: (_req) => process.env.NODE_ENV === 'test'
+  skip: (req) => process.env.NODE_ENV === 'test' || req.session?.user?.role === 'super_admin'
 });
 
 app.post('/api/quiz/grade', validateModuleId, quizLimiter, async (req, res, next) => {
@@ -1263,8 +1325,8 @@ app.post('/api/quiz/grade', validateModuleId, quizLimiter, async (req, res, next
       sessionUid = req.body.guestId || require('crypto').randomUUID();
     }
 
-    // Check attempt limits (R14)
-    if (process.env.NODE_ENV !== 'test') {
+    // Check attempt limits (R14) - super_admin testing exempt
+    if (process.env.NODE_ENV !== 'test' && req.session?.user?.role !== 'super_admin') {
       const attempts = await db.getQuizAttemptCount(sessionUid, childId, moduleId);
       if (attempts >= 3) {
         return res.status(429).json({

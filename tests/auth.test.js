@@ -175,4 +175,60 @@ describe('Authentication & Session API Tests', () => {
     expect(reset2.statusCode).toBe(200);
     expect(reset2.body.success).toBe(true);
   });
+
+  describe('Super Learner Profile Tests (kennyanju@gmail.com)', () => {
+    const superAgent = request.agent(app);
+
+    test('POST /api/auth/login - Super Learner logs in with password 123456', async () => {
+      const res = await superAgent.post('/api/auth/login').send({
+        email: 'kennyanju@gmail.com',
+        password: '123456'
+      });
+
+      expect(res.statusCode).toBe(200);
+      expect(res.body.success).toBe(true);
+      expect(res.body.user).toBeDefined();
+      expect(res.body.user.email).toBe('kennyanju@gmail.com');
+      expect(res.body.user.role).toBe('super_admin');
+      expect(res.body.user.isVerified).toBe(true);
+    });
+
+    test('GET /api/parent/children - Super Learner has access to all 5 level learner profiles', async () => {
+      const res = await superAgent.get('/api/parent/children');
+
+      expect(res.statusCode).toBe(200);
+      expect(res.body.success).toBe(true);
+      expect(Array.isArray(res.body.children)).toBe(true);
+      expect(res.body.children.length).toBe(5);
+
+      const tracks = res.body.children.map((c) => c.assignedTrack);
+      expect(tracks).toContain('level1');
+      expect(tracks).toContain('level2');
+      expect(tracks).toContain('level3');
+      expect(tracks).toContain('level4');
+      expect(tracks).toContain('level5');
+    });
+
+    test('POST /api/quiz/grade - Super Learner can test quizzes across levels without lockout', async () => {
+      // Test quiz submission across level1, level3, level5
+      for (const track of ['level1', 'level3', 'level5']) {
+        const res = await superAgent.post('/api/quiz/grade').send({
+          moduleId: 1,
+          track,
+          answers: { 0: 'A', 1: 'B', 2: 'C' }
+        });
+        expect(res.statusCode).toBe(200);
+        expect(res.body.success).toBe(true);
+        expect(typeof res.body.score).toBe('number');
+        expect(typeof res.body.percentage).toBe('number');
+      }
+    });
+
+    test('GET /api/admin/overview - Super Learner has full admin and course testing privileges', async () => {
+      const res = await superAgent.get('/api/admin/overview');
+      expect(res.statusCode).toBe(200);
+      expect(res.body.success).toBe(true);
+      expect(res.body.stats).toBeDefined();
+    });
+  });
 });
