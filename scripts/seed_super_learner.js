@@ -40,7 +40,7 @@ if (existingIdx >= 0) {
   console.log('Inserted new super learner user:', superEmail);
 }
 
-const activeUid = existingIdx >= 0 ? (db.users[existingIdx].uid || superUid) : superUid;
+const activeUid = existingIdx >= 0 ? db.users[existingIdx].uid || superUid : superUid;
 
 // 5 learner profiles for all 5 tracks
 const learnerProfiles = [
@@ -54,7 +54,9 @@ const learnerProfiles = [
 if (!db.children) db.children = [];
 
 for (const p of learnerProfiles) {
-  const cIdx = db.children.findIndex((c) => c.parentUid === activeUid && (c.id === p.id || c.assignedTrack === p.track));
+  const cIdx = db.children.findIndex(
+    (c) => c.parentUid === activeUid && (c.id === p.id || c.assignedTrack === p.track)
+  );
   const childRecord = {
     id: p.id,
     parentUid: activeUid,

@@ -170,11 +170,36 @@ const telemetryLogs = [];
     // Seed 5 child learner profiles across all curriculum levels for full-track testing
     const existingChildren = await db.getChildren(userUid);
     const learnerProfiles = [
-      { id: 'child_kenny_level1', name: 'Level 1 Learner (Ages 6–8)', track: 'level1', avatar: '🌱' },
-      { id: 'child_kenny_level2', name: 'Level 2 Learner (Ages 8–10)', track: 'level2', avatar: '🌿' },
-      { id: 'child_kenny_level3', name: 'Level 3 Learner (Ages 10–12)', track: 'level3', avatar: '📘' },
-      { id: 'child_kenny_level4', name: 'Level 4 Learner (Ages 12–14)', track: 'level4', avatar: '📖' },
-      { id: 'child_kenny_level5', name: 'Level 5 Learner (Ages 14–16+)', track: 'level5', avatar: '🎓' }
+      {
+        id: 'child_kenny_level1',
+        name: 'Level 1 Learner (Ages 6–8)',
+        track: 'level1',
+        avatar: '🌱'
+      },
+      {
+        id: 'child_kenny_level2',
+        name: 'Level 2 Learner (Ages 8–10)',
+        track: 'level2',
+        avatar: '🌿'
+      },
+      {
+        id: 'child_kenny_level3',
+        name: 'Level 3 Learner (Ages 10–12)',
+        track: 'level3',
+        avatar: '📘'
+      },
+      {
+        id: 'child_kenny_level4',
+        name: 'Level 4 Learner (Ages 12–14)',
+        track: 'level4',
+        avatar: '📖'
+      },
+      {
+        id: 'child_kenny_level5',
+        name: 'Level 5 Learner (Ages 14–16+)',
+        track: 'level5',
+        avatar: '🎓'
+      }
     ];
 
     for (const p of learnerProfiles) {
@@ -194,7 +219,6 @@ const telemetryLogs = [];
     console.error('Error seeding super learner account:', e);
   }
 })();
-
 
 // Request Logging & Security Middleware
 

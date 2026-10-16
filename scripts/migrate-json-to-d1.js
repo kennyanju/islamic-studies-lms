@@ -80,11 +80,56 @@ let realChildren = (data.children || []).filter((c) => validUserUids.has(c.paren
 
 // Ensure child profiles for Super Learner across all 5 levels exist
 const superChildren = [
-  { id: 'child_kenny_level1', parentUid: superLearner.uid, name: 'Level 1 Learner (Ages 6–8)', avatar: '🌱', assignedTrack: 'level1', pinHash: null, createdAt: new Date().toISOString(), updatedAt: new Date().toISOString() },
-  { id: 'child_kenny_level2', parentUid: superLearner.uid, name: 'Level 2 Learner (Ages 8–10)', avatar: '🌿', assignedTrack: 'level2', pinHash: null, createdAt: new Date().toISOString(), updatedAt: new Date().toISOString() },
-  { id: 'child_kenny_level3', parentUid: superLearner.uid, name: 'Level 3 Learner (Ages 10–12)', avatar: '📘', assignedTrack: 'level3', pinHash: null, createdAt: new Date().toISOString(), updatedAt: new Date().toISOString() },
-  { id: 'child_kenny_level4', parentUid: superLearner.uid, name: 'Level 4 Learner (Ages 12–14)', avatar: '📖', assignedTrack: 'level4', pinHash: null, createdAt: new Date().toISOString(), updatedAt: new Date().toISOString() },
-  { id: 'child_kenny_level5', parentUid: superLearner.uid, name: 'Level 5 Learner (Ages 14–16+)', avatar: '🎓', assignedTrack: 'level5', pinHash: null, createdAt: new Date().toISOString(), updatedAt: new Date().toISOString() }
+  {
+    id: 'child_kenny_level1',
+    parentUid: superLearner.uid,
+    name: 'Level 1 Learner (Ages 6–8)',
+    avatar: '🌱',
+    assignedTrack: 'level1',
+    pinHash: null,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString()
+  },
+  {
+    id: 'child_kenny_level2',
+    parentUid: superLearner.uid,
+    name: 'Level 2 Learner (Ages 8–10)',
+    avatar: '🌿',
+    assignedTrack: 'level2',
+    pinHash: null,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString()
+  },
+  {
+    id: 'child_kenny_level3',
+    parentUid: superLearner.uid,
+    name: 'Level 3 Learner (Ages 10–12)',
+    avatar: '📘',
+    assignedTrack: 'level3',
+    pinHash: null,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString()
+  },
+  {
+    id: 'child_kenny_level4',
+    parentUid: superLearner.uid,
+    name: 'Level 4 Learner (Ages 12–14)',
+    avatar: '📖',
+    assignedTrack: 'level4',
+    pinHash: null,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString()
+  },
+  {
+    id: 'child_kenny_level5',
+    parentUid: superLearner.uid,
+    name: 'Level 5 Learner (Ages 14–16+)',
+    avatar: '🎓',
+    assignedTrack: 'level5',
+    pinHash: null,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString()
+  }
 ];
 
 for (const sc of superChildren) {

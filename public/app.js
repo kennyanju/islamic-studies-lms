@@ -3355,11 +3355,46 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (familyChildren.length === 0 && currentUser && currentUser.email === 'kennyanju@gmail.com') {
       familyChildren = [
-        { id: 'child_kenny_level1', parentUid: currentUser.uid, name: 'Level 1 Learner (Ages 6–8)', avatar: '🌱', assignedTrack: 'level1', hasPin: false },
-        { id: 'child_kenny_level2', parentUid: currentUser.uid, name: 'Level 2 Learner (Ages 8–10)', avatar: '🌿', assignedTrack: 'level2', hasPin: false },
-        { id: 'child_kenny_level3', parentUid: currentUser.uid, name: 'Level 3 Learner (Ages 10–12)', avatar: '📘', assignedTrack: 'level3', hasPin: false },
-        { id: 'child_kenny_level4', parentUid: currentUser.uid, name: 'Level 4 Learner (Ages 12–14)', avatar: '📖', assignedTrack: 'level4', hasPin: false },
-        { id: 'child_kenny_level5', parentUid: currentUser.uid, name: 'Level 5 Learner (Ages 14–16+)', avatar: '🎓', assignedTrack: 'level5', hasPin: false }
+        {
+          id: 'child_kenny_level1',
+          parentUid: currentUser.uid,
+          name: 'Level 1 Learner (Ages 6–8)',
+          avatar: '🌱',
+          assignedTrack: 'level1',
+          hasPin: false
+        },
+        {
+          id: 'child_kenny_level2',
+          parentUid: currentUser.uid,
+          name: 'Level 2 Learner (Ages 8–10)',
+          avatar: '🌿',
+          assignedTrack: 'level2',
+          hasPin: false
+        },
+        {
+          id: 'child_kenny_level3',
+          parentUid: currentUser.uid,
+          name: 'Level 3 Learner (Ages 10–12)',
+          avatar: '📘',
+          assignedTrack: 'level3',
+          hasPin: false
+        },
+        {
+          id: 'child_kenny_level4',
+          parentUid: currentUser.uid,
+          name: 'Level 4 Learner (Ages 12–14)',
+          avatar: '📖',
+          assignedTrack: 'level4',
+          hasPin: false
+        },
+        {
+          id: 'child_kenny_level5',
+          parentUid: currentUser.uid,
+          name: 'Level 5 Learner (Ages 14–16+)',
+          avatar: '🎓',
+          assignedTrack: 'level5',
+          hasPin: false
+        }
       ];
       localStorage.setItem('lms_children', JSON.stringify(familyChildren));
     }
@@ -4387,7 +4422,8 @@ document.addEventListener('DOMContentLoaded', () => {
   if (sidebarAdminBtn) sidebarAdminBtn.addEventListener('click', () => switchView('admin'));
   if (parentToAdminBtn) parentToAdminBtn.addEventListener('click', () => switchView('admin'));
   const adminGoToCoursesBtn = document.getElementById('adminGoToCoursesBtn');
-  if (adminGoToCoursesBtn) adminGoToCoursesBtn.addEventListener('click', () => switchView('dashboard'));
+  if (adminGoToCoursesBtn)
+    adminGoToCoursesBtn.addEventListener('click', () => switchView('dashboard'));
   if (adminRefreshBtn) {
     adminRefreshBtn.addEventListener('click', async () => {
       const icon = adminRefreshBtn.querySelector('i');
