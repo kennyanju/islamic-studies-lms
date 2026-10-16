@@ -10,7 +10,7 @@
 ## Slide 1: Welcome & Course Overview
 ### Slide Content
 * **Course Title:** Deepening Belief & the Quran (Islamic Studies for Family)
-* **Objective:** Developing a robust understanding of core Islamic beliefs, Quranic history, Tafseer, Hadith collection, and the Maliki legal tradition.
+* **Objective:** Developing a thorough understanding of core Islamic beliefs, Quranic history, Tafseer, Hadith collection, and the Maliki legal tradition.
 * **Key Themes:**
   1. Tawheed & Daily Intentions (*Niyyah*)
   2. The Quran: Revelation & Preservation
@@ -26,7 +26,7 @@
 
 ---
 
-## Slide 2: Unit 1: Tawheed in Daily Life — The Role of Intention (Niyyah)
+## Slide 2: Unit 1: Tawheed in Daily Life: The Role of Intention (Niyyah)
 ### Slide Content
 * **The Foundation of Action:**
   * Arabic Term: *Niyyah* (نِيّة) - Intention or purpose.
@@ -56,12 +56,12 @@
 
 ### Teacher Notes
 * **Aims:** Cultivate self-reflection and watchfulness (*murāqabah*) over one's heart.
-* **Pedagogical Tip:** Use the analogy of a fake coin—it looks shiny on the outside but is worthless inside. Similarly, an action done with *riyā’* has no weight in the sight of Allah.
+* **Pedagogical Tip:** Use the analogy of a fake coin: it looks shiny on the outside but is worthless inside. Similarly, an action done with *riyā’* has no weight in the sight of Allah.
 * **Ash‘arī Creed Flag:** Ash‘arīs emphasize that Allah does not accept actions that have partners associated with Him. The purity of belief (*Tawḥeed*) directly requires purity of action (*ikhlāṣ*).
 
 ---
 
-## Slide 4: Action & Creation — The Ash‘arī Concept of Kasb (Acquisition)
+## Slide 4: Action & Creation: The Ash‘arī Concept of Kasb (Acquisition)
 ### Slide Content
 * **Who Creates Our Actions?**
   * **Allah is the Creator of everything**, including our physical bodies and our choices.
@@ -96,7 +96,7 @@
 
 ---
 
-## Slide 6: Unit 2: The Quran — Divine Speech and Revelation
+## Slide 6: Unit 2: The Quran: Divine Speech and Revelation
 ### Slide Content
 * **What is the Quran?**
   * The speech of Allah (*Kalāmullāh*), revealed to Prophet Muhammad ﷺ through the Angel Jibreel (Gabriel).
@@ -134,7 +134,7 @@
 
 ---
 
-## Slide 8: Period of Revelation — Oral Transmission & Scribes
+## Slide 8: Period of Revelation: Oral Transmission & Scribes
 ### Slide Content
 * **The Primary Method: Oral Preservation**
   * The Prophet ﷺ memorized the Quran instantly when Jibreel recited it.
@@ -293,7 +293,7 @@
 
 ---
 
-## Slide 16: Unit 4: Hadith and Sunnah — Definitions and Collection
+## Slide 16: Unit 4: Hadith and Sunnah: Definitions and Collection
 ### Slide Content
 * **Definitions:**
   * **Sunnah (سُنَّة):** The lived practice, character, rulings, and path of the Prophet ﷺ.
@@ -331,7 +331,7 @@
 
 ---
 
-## Slide 18: Unit 5: Legal Frameworks — Why Muslims Follow a Madhhab
+## Slide 18: Unit 5: Legal Frameworks: Why Muslims Follow a Madhhab
 ### Slide Content
 * **What is a *Madhhab* (مَذْهَب)?**
   * Plural: *Madhāhib* (مَذَاهِب).

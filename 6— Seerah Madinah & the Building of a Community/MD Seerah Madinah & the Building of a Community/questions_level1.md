@@ -1,4 +1,4 @@
-# Level 1 Activity Sheet: Seerah — Madinah & Community
+# Level 1 Activity Sheet: Seerah: Madinah & Community
 **Age Group:** Ages 6–8 (Level 1 Track)  
 **Focus:** The Hijrah, Qaswa' the Camel, and Building the Mosque  
 
@@ -6,65 +6,74 @@
 
 ## Part A: Multiple Choice
 
-### 1. What was the journey of the Prophet ﷺ from Makkah to Madinah called?
-* A) The Hijrah
-* B) The Hajj
-* C) The Picnic
-* D) The Caravan
+### 1. What was the historic migration of the Prophet ﷺ and the early believers from Makkah to Madinah called?
+(A) The Hajj
+(B) The Hijrah
+(C) The Isra'
+(D) The Bay'ah
 
-### 2. Who was the Prophet's closest friend who traveled with him during the Hijrah?
-* A) Abu Bakr as-Siddiq (RA)
-* B) Abu Jahl
-* C) The Roman Emperor
-* D) A caravan guard
+### 2. Who accompanied the Prophet ﷺ as his trusted companion during the journey and hid in Cave Thawr?
+(A) Abu Jahl
+(B) Salman al-Farsi
+(C) Sayyidina Abu Bakr al-Siddiq
+(D) Bilal ibn Rabah
 
-### 3. What was the name of the Prophet's gentle camel who chose where to build the mosque?
-* A) Qaswa'
-* B) Star
-* C) Buraq
-* D) Sandy
+### 3. What was the name of the Prophet's camel that knelt where Al-Masjid an-Nabawi was built?
+(A) Al-Buraq
+(B) Al-Adbah
+(C) Safina
+(D) Al-Qaswa'
 
-### 4. What did the Prophet ﷺ do while the mosque was being built?
-* A) He helped carry the bricks with his own hands
-* B) He went to sleep
-* C) He stayed in Makkah
-* D) He rode away
+### 4. What did Prophet Muhammad ﷺ do when Al-Masjid an-Nabawi was being constructed in Madinah?
+(A) He worked alongside the companions and carried unbaked mud bricks
+(B) He asked only the workers from Makkah to build it
+(C) He stayed inside his tent until the building was completed
+(D) He hired architects from surrounding cities to do the work
 
-### 5. What famous welcome song did the people of Madinah sing when the Prophet ﷺ arrived?
-* A) Tala'a al-Badru 'Alayna
-* B) Happy Birthday
-* C) Twinkle Twinkle
-* D) Desert Song
+### 5. What famous welcome nasheed did the families of Madinah sing to welcome the Prophet ﷺ?
+(A) Al-Mu'akhah
+(B) Tala'a al-Badru 'Alayna
+(C) As-Subhu Bada
+(D) Subhan Allah
 
 ---
 
 ## Part B: Fill in the Blanks
-*Word Bank: Hijrah, Qaswa, Madinah*
+Vocabulary Bank: Hijrah, Madinah, Qaswa'
 
-6. The Prophet's journey to Madinah is called the **_________________**.
-7. The name of the blessed city the Muslims moved to is **_________________**.
-8. The camel that stopped at the site of the mosque was **_________________**.
+6. The Prophet's blessed migration from Makkah to Madinah is called the ______.
+7. The city formerly known as Yathrib became known as ______.
+8. The camel that stopped at the site of the Prophet's Mosque was named ______.
 
 ---
 
 ## Part C: Matching Pairs
-Pair 1: Hijrah --- Migration from Makkah to Madinah
-Pair 2: Abu Bakr --- The faithful companion in the Cave
-Pair 3: Qaswa' --- The camel who chose the site of the Mosque
+* Hijrah ─── Migration from Makkah to Madinah
+* Abu Bakr ─── The faithful companion in Cave Thawr
+* Al-Qaswa' ─── The camel that stopped at the mosque site
+* Ansar ─── The generous helpers of Madinah
 
 ---
 
 ## Part D: Reflection
-9. How can you help clean and look after your local mosque or prayer room at home?
+9. The Ansar of Madinah shared their homes and dates with new Muslim friends. How can you be a kind helper to a new student or neighbor today?
 
 ---
 
-## Teacher Answer Key
-1. A) The Hijrah.
-2. A) Abu Bakr as-Siddiq.
-3. A) Qaswa'.
-4. A) Carried bricks personally.
-5. A) Tala'a al-Badru 'Alayna.
+## Answer Key
+1. B - The migration from Makkah to Madinah is called the Hijrah.
+2. C - Sayyidina Abu Bakr al-Siddiq was the faithful companion who traveled with the Prophet ﷺ.
+3. D - The Prophet's camel was named Al-Qaswa'.
+4. A - The Prophet ﷺ rolled up his sleeves and helped carry bricks with the Sahabah.
+5. B - The people of Madinah welcomed him with the nasheed Tala'a al-Badru 'Alayna.
+
+### Fill in the Blanks Key
 6. Hijrah
 7. Madinah
-8. Qaswa
+8. Qaswa'
+
+### Matching Key
+* Hijrah ─── Migration from Makkah to Madinah
+* Abu Bakr ─── The faithful companion in Cave Thawr
+* Al-Qaswa' ─── The camel that stopped at the mosque site
+* Ansar ─── The generous helpers of Madinah

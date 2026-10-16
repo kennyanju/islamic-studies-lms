@@ -141,7 +141,7 @@
 *   **The Arrival:**
     *   The Prophet (pbuh) arrived in Quba' on 12th Rabi' al-Awwal, founding the first mosque there, before entering Yathrib.
 *   **A New Name:**
-    *   Yathrib was renamed **Al-Madinah al-Munawwarah** (الْمَدِينَة الْمُنَوَّرَة) — "The Illuminated City" or simply **Al-Madinah** (The City).
+    *   Yathrib was renamed **Al-Madinah al-Munawwarah** (الْمَدِينَة الْمُنَوَّرَة): "The Illuminated City" or simply **Al-Madinah** (The City).
 *   **The Prophet's Camel (*Al-Qaswa'*):**
     *   To avoid playing favorites among the tribes who wanted him to stay with them, the Prophet (pbuh) let his camel walk freely: *"Let her go, for she is commanded."*
     *   She knelt at the plot belonging to two young orphans, which became the site of the Prophet's Mosque.
@@ -210,7 +210,7 @@
 **Teacher Notes:**
 *   **Historical Significance:** Point out that this is considered by historians to be the first written constitution in human history.
 *   **Terminology:** *Wathiqat al-Madinah* (وَثِيقَة الْمَدِينَة) or *Kitab al-Madinah*. 
-*   **Clarification:** Make sure students understand that the word *Ummah* here was used in a civic sense—a coalition of citizens bound by mutual defense, even though they held different religious beliefs. This teaches that Muslims can form civic coalitions with non-Muslims for the common good.
+*   **Clarification:** Make sure students understand that the word *Ummah* here was used in a civic sense: a coalition of citizens bound by mutual defense, even though they held different religious beliefs. This teaches that Muslims can form civic coalitions with non-Muslims for the common good.
 
 ---
 
@@ -230,7 +230,7 @@
 ---
 **Teacher Notes:**
 *   **Civic Education:** Teach students that Islam respects diversity. The Prophet (pbuh) did not expel the Jewish tribes or force them to convert upon his arrival. He made them equal partners in the city's defense.
-*   **Terminology:** *Mu'ahid* (مُعَاهِد) — a non-Muslim who belongs to a community that has a treaty or covenant with the Muslims.
+*   **Terminology:** *Mu'ahid* (مُعَاهِد): a non-Muslim who belongs to a community that has a treaty or covenant with the Muslims.
 *   **Concept Check:** What were the obligations of the non-Muslims? (Defense contribution, non-treason). What were their rights? (Safety, freedom of religion).
 
 ---
@@ -261,7 +261,7 @@
     *   *"Permission [to fight] has been given to those who are being fought, because they were wronged..."* (Quran 22:39).
 *   **The Purpose of Fighting (*Qital*):**
     *   Strictly defensive: To defend against aggression.
-    *   Preservative: To protect places of worship—monasteries, churches, synagogues, and mosques (Quran 22:40).
+    *   Preservative: To protect places of worship: monasteries, churches, synagogues, and mosques (Quran 22:40).
     *   Not for forced conversion: *"There is no compulsion in religion"* (Quran 2:256).
 
 ---
@@ -307,7 +307,7 @@
 **Teacher Notes:**
 *   **Ash'ari Creed Integration:** Explain Quran 8:17. The physical throwing was attributed to the Prophet (pbuh) as an acquisition (*Kasb*), but the ultimate creation of the action's effect was attributed to Allah.
 *   **Relevance:** When we win or succeed, we must not become arrogant. We must thank Allah, because He is the source of all success.
-*   **Concept Definition:** *Al-Nasir* (النَّاصِر) — The Giver of Victory.
+*   **Concept Definition:** *Al-Nasir* (النَّاصِر): The Giver of Victory.
 
 ---
 
@@ -423,7 +423,7 @@
 ---
 **Teacher Notes:**
 *   **Fiqh Literacy Focus:** Explain the concept of *'Amal Ahl al-Madinah*. Use the example of a school policy: *"If the principal tells the whole school to do something, and everyone does it every day, it is more reliable than one student claiming the principal told him something different in private."*
-*   **Sadl Example:** The posture of letting arms hang at the sides (*Sadl*) in obligatory prayer is based on *'Amal Ahl al-Madinah*—the continuous practice of the city's scholars who learned from the Sahabah.
+*   **Sadl Example:** The posture of letting arms hang at the sides (*Sadl*) in obligatory prayer is based on *'Amal Ahl al-Madinah*, the continuous practice of the city's scholars who learned from the Sahabah.
 
 ---
 
@@ -436,11 +436,11 @@
     *   Protect human rights as outlined in the Farewell Sermon.
     *   Honor the chain of knowledge from the Prophet (pbuh) to Imam Malik.
 *   **Core Sources for Study:**
-    *   *Al-Muwatta* — Imam Malik
-    *   *Al-Shifa* — Qadi 'Ayyad
-    *   *Al-Seerah al-Nabawiyyah* — Ibn Hisham
-    *   *Fiqh al-Seerah* — Muhammad al-Ghazali
-    *   *Introduction to Islamic Creed* — Ash'ari scholars
+    *   *Al-Muwatta*: Imam Malik
+    *   *Al-Shifa*: Qadi 'Iyad
+    *   *Al-Seerah al-Nabawiyyah*: Ibn Hisham
+    *   *Fiqh al-Seerah*: Muhammad al-Ghazali
+    *   *Introduction to Islamic Creed*: Ash'ari scholars
 
 ---
 **Teacher Notes:**

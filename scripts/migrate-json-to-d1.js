@@ -20,11 +20,11 @@ if (!fs.existsSync(DB_PATH)) {
 const raw = fs.readFileSync(DB_PATH, 'utf8');
 const data = JSON.parse(raw);
 
-// 1. Create a backup of the current db.json before pruning
+// Create backup before pruning
 fs.writeFileSync(BACKUP_PATH, raw, 'utf8');
 console.log(`💾 Saved backup of raw db.json to ${BACKUP_PATH}`);
 
-// 2. Identify legitimate users (exclude test.com and synthetic test run accounts)
+// Filter out synthetic test run accounts
 const realUsers = (data.users || []).filter((u) => {
   if (!u.email) return false;
   const email = u.email.toLowerCase();
@@ -40,7 +40,7 @@ if (!adminUser) {
   adminUser = {
     uid: 'admin_master_1',
     email: 'admin@islamicstudies.org',
-    passwordHash: '$2b$10$wuVcdExo3ApKH8FGSL0O5OGileAnh3PCDOGldN8E07TytkWura/te', // Admin@Islam2026!
+    passwordHash: '$2b$10$wuVcdExo3ApKH8FGSL0O5OGileAnh3PCDOGldN8E07TytkWura/te',
     displayName: 'Portal Administrator',
     role: 'super_admin',
     provider: 'local',
@@ -58,7 +58,7 @@ console.log(
   realUsers.map((u) => u.email)
 );
 
-// 3. Children profiles
+// Child profiles for legitimate users
 let realChildren = (data.children || []).filter((c) => validUserUids.has(c.parentUid));
 
 // If no children for admin, add authentic standard child profiles (Zayd & Maryam)
@@ -92,7 +92,7 @@ console.log(
   realChildren.map((c) => c.name)
 );
 
-// 4. Progress records
+// Progress records and seed statements
 const sqlStatements = [
   '-- Seed Data Migrated from db.json',
   '-- Idempotent INSERT OR IGNORE statements for Users, Children, Progress, and Quizzes'
@@ -170,11 +170,11 @@ for (const q of cleanQuizResults) {
   );
 }
 
-// 5. Write SQL migration file
+// Write SQL migration file
 fs.writeFileSync(SEED_SQL_PATH, sqlStatements.join('\n') + '\n', 'utf8');
 console.log(`📄 Generated D1 Seed Migration SQL: ${SEED_SQL_PATH}`);
 
-// 6. Write pruned data back to data/db.json
+// Write pruned data back to database store
 const cleanDbJson = {
   users: realUsers,
   children: realChildren,
@@ -188,7 +188,7 @@ console.log(
   `✨ Pruned data/db.json saved (${realUsers.length} users, ${realChildren.length} children, ${cleanQuizResults.length} quiz results).`
 );
 
-// 7. Execute SQL on local D1
+// Apply seed SQL to local D1 instance
 try {
   console.log('⚡ Applying seed SQL to local Cloudflare D1 database...');
   execSync(`npx wrangler d1 execute islamic-studies-db --local --file="${SEED_SQL_PATH}"`, {

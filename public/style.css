@@ -707,7 +707,6 @@ h4,
   align-items: center;
   gap: 6px;
   transition: var(--transition);
-  backdrop-filter: blur(8px);
 }
 
 .hero-action-btn-sm:hover {
@@ -4288,7 +4287,6 @@ body.theme-light .btn-secondary-action:hover {
   border-radius: var(--radius-lg);
   padding: 28px;
   box-shadow: var(--shadow-lg);
-  backdrop-filter: blur(12px);
 }
 
 .card-header-auth {

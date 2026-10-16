@@ -1,99 +1,85 @@
 # Level 4 Student Handout: Fiqh of Fasting, Zakah & Community
-**Age Group:** Ages 12–14 (Level 4 Track - Adolescent & Puberty / Years 7 & 8)  
-**ICO Curriculum Benchmark:** Aligned with ICO Grades 7 & 8 (Adolescent & Puberty Stage)  
-**Topics:** Zakah Calculations & Nisab Math, Fasting Expiations (Kaffarah vs. Qada'), and The Complete Rites of Hajj  
-**Classical Text Spine:** *Matn Ibn 'Ashir* (Zakah, Siyam, Hajj) & *Al-Risalah* of Ibn Abi Zayd  
-**Riwayah & Tajweed:** Hafs 'an 'Asim (Juz' 29: Surah Al-Muzzammil and Al-Muddathir; Madd Rules)
+
+**Age Group:** Ages 12-14 (Level 4 Track - Adolescent & Puberty / Years 7 & 8)  
+**Topics:** Zakah Calculations & Nisab Math, Fasting Expiations (Kaffarah vs. Qada'), The Modes and Complete Rites of Hajj, and Community Solidarity  
+**Classical Text Spine:** *Matn Ibn 'Ashir* (Zakah, Siyam, Hajj) & *Al-Risalah* of Ibn Abi Zayd al-Qayrawani  
+**Riwayah & Tajweed:** Hafs 'an 'Asim and Warsh 'an Nafi' (Juz' 29: Surah Al-Muzzammil and Al-Muddathir; Madd Rules)
 
 ---
 
 ## 1. Zakah: Social Justice and Purifying Wealth
 
-As you reach the age of financial literacy and personal savings, understanding **Zakah** (the 3rd Pillar of Islam) is essential. Zakah is not voluntary charity (*Sadaqah*); it is an obligatory social tax ordained by Allah to eradicate poverty, circulate wealth, and cleanse the soul from greed.
+As you reach the age of financial accountability and personal savings, understanding **Zakah** (the Third Pillar of Islam) is an essential civic and religious duty. Zakah is not voluntary charity (*Sadaqah*); it is an obligatory social transfer ordained by Allah to eradicate poverty, circulate liquid capital, and cleanse the soul from greed (Surah Al-Hashr 59:7).
 
-```
-       ┌────────────────────────────────────────────────────────┐
-       │             THE THREE PREREQUISITES OF ZAKAH           │
-       └───────────────────────────┬────────────────────────────┘
-              ┌────────────────────┼────────────────────┐
-              ▼                    ▼                    ▼
-       1. Pure Ownership    2. Al-Nisab          3. Al-Hawl
-       The wealth is        Wealth exceeds the   A complete lunar year
-       fully owned and      minimum threshold:   (354 days) passes while
-       free from debt.      85g Gold / 595g      wealth remains at or
-                            Silver.              above Nisab.
-```
+| Prerequisite of Zakah | Arabic Term | Juristic Requirement & Classical Definition |
+| :--- | :--- | :--- |
+| **1. Complete Ownership** | *Al-Milkiyyah al-Tammah* | The asset must be fully owned, accessible, and free from encumbering short-term debts. |
+| **2. The Minimum Threshold** | *Al-Nisab* | Net qualifying surplus wealth must meet or exceed the classical benchmark: 85 grams of pure gold or 595 grams of pure silver. |
+| **3. The Passing of One Year** | *Al-Hawl* | One complete lunar year (approximately 354 days) must elapse while wealth remains at or above the Nisab. |
 
-### The Mathematics of Zakah:
-* **The Rate:** Exactly **2.5%** (or 1/40th) of qualifying surplus wealth.
-* **Qualifying Wealth:** Cash, bank savings, gold/silver bullion, stocks, cryptocurrencies held for trade, and business inventory.
+### The Mathematics and Calculation of Zakah
+* **The Obligatory Rate:** Exactly **2.5%** (one fortieth, or 1/40) of qualifying liquid surplus wealth.
+* **Qualifying Assets:** Cash, bank accounts, gold and silver bullion, stocks, commercial trade merchandise, and business inventory.
 * **The Nisab Threshold:**  
-  * *Gold Benchmark:* 85 grams of pure gold.  
-  * *Silver Benchmark:* 595 grams of pure silver.  
-  * *Calculation:* If gold is $70/gram, Nisab = 85 × $70 = $5,950. If you hold $6,000 for one full lunar year, your Zakah is:  
-    `$6,000 × 0.025 = $150`.
+  * *Gold Standard:* 20 dinars = 85 grams of pure gold.  
+  * *Silver Standard:* 200 dirhams = 595 grams of pure silver.  
+  * *Illustrative Calculation:* At a hypothetical illustrative price of $80 per gram of gold, 85 grams equals $6,800. If your qualifying personal savings remain at $8,000 for one full lunar year, your annual Zakah liability is:  
+    `$8,000 × 0.025 = $200`.  
+    *(Always verify the current live market spot price on your annual Zakah calculation date).*
 
-```
-┌────────────────────────────────────────────────────────────────────────┐
-│                      "OTHER SCHOLARS SAY" CORNER                       │
-│                        Zakah on Women's Jewelry                        │
-│                                                                        │
-│ • Hanafi School: Mandates Zakah (2.5%) on ALL gold and silver,         │
-│   including personal jewelry worn by women.                            │
-│                                                                        │
-│ • Maliki, Shafi'i & Hanbali Schools: Personal gold or silver jewelry   │
-│   kept for customary, lawful adornment is EXEMPT from Zakah!           │
-│   Imam Malik: "Jewelry is a personal asset, like clothes or furniture; │
-│   Zakah is only due on wealth kept for growth or investment."          │
-└────────────────────────────────────────────────────────────────────────┘
-```
+### Comparative Jurisprudence: Zakah on Women's Personal Jewelry
+
+| Legal School | Ruling on Lawful Personal Jewelry | Juristic Reasoning |
+| :--- | :--- | :--- |
+| **Maliki, Shafi'i & Hanbali Schools** | Lawful gold and silver jewelry kept for customary personal adornment is **exempt from Zakah**. | Imam Malik held that personal jewelry is an asset of private use, akin to personal clothing, furniture, or transportation, rather than commercial capital kept for growth or trade (*Nama'*). |
+| **Hanafi School** | Mandates Zakah (2.5%) on all gold and silver assets once above Nisab, including personal jewelry. | Focuses on the intrinsic monetary nature of precious metals (*Thamaniyyah*) regardless of whether they are worn or stored. |
 
 ---
 
-## 2. The 8 Qur'anic Categories of Zakah Recipients
+## 2. The Eight Quranic Categories of Zakah Recipients
 
-Surah At-Tawbah (9:60) strictly limits who may receive Zakah funds:
-1. **Al-Fuqara' (The Poor):** Those who have no income or less than half of basic living needs.
-2. **Al-Masakin (The Destitute):** Those with insufficient income to meet essential expenses.
-3. **Al-'Amilina 'Alayha (The Zakah Administrators):** Those employed to collect and distribute funds.
-4. **Al-Mu'allafati Qulubuhum (Reconciling Hearts):** New Muslims needing community support.
-5. **Fir-Riqab (Freeing Captives):** Emancipating enslaved human beings or human trafficking victims.
-6. **Al-Gharimin (The Debtors):** People overwhelmed by lawful, unpaid debt who cannot settle it.
-7. **Fi Sabilillah (In the Cause of Allah):** Defending the faith and community welfare.
-8. **Ibn al-Sabil (The Stranded Wayfarer):** A traveler cut off from resources far from home.
+Surah At-Tawbah (9:60) strictly enumerates the eight legitimate categories authorized to receive Zakah:
+1. **Al-Fuqara' (The Poor):** Individuals who have no wealth or earn less than half of their basic survival needs.
+2. **Al-Masakin (The Destitute):** Those who earn some livelihood but still cannot cover essential living expenses.
+3. **Al-'Amilina 'Alayha (The Zakah Administrators):** The appointed collectors, accountants, and distributors of Zakah.
+4. **Al-Mu'allafati Qulubuhum (Reconciling Hearts):** New Muslims or vulnerable community members needing support.
+5. **Fir-Riqab (Freeing Captives):** Emancipating enslaved persons or freeing victims of human trafficking.
+6. **Al-Gharimin (The Insolvent Debtors):** Individuals burdened by legitimate personal debts contracted without extravagance who cannot pay them.
+7. **Fi Sabilillah (In the Cause of Allah):** Defending the faith and community, and public welfare projects supporting sacred learning.
+8. **Ibn al-Sabil (The Stranded Wayfarer):** A traveler stranded far from home without access to their wealth.
 
 ---
 
 ## 3. Fasting Expiations: *Qada'* vs. *Kaffarah*
 
-When an adolescent is accountable (*Mukallaf*), breaking an obligatory fast carries serious legal distinctions:
+When an adolescent reaches physical and religious maturity (*Taklif*), breaking an obligatory fast carries precise legal consequences:
 
-1. **Al-Qada' (Making Up Missed Days):**  
-   Fasting one day for each day missed due to valid reasons (illness, travel, menses, forgetfulness).
-2. **Al-Kaffarah (The Major Expiation):**  
-   Imposed ONLY for **deliberate, defiant, intentional violations** of Ramadan without any valid excuse (e.g. eating lunch openly with contempt).
-   * **The Maliki Order of Kaffarah:**  
-     Imam Malik holds that the preferred and most noble option is **feeding 60 poor persons** (1 Mudd of staple food each), or fasting **two consecutive lunar months** (approx. 60 days without break).
+| Category of Expiation | Applicable Circumstance | Required Action |
+| :--- | :--- | :--- |
+| **Al-Qada' (Making Up Missed Days)** | Breaking the fast due to a legitimate excuse (acute illness, travel, menses) or due to mistake / forgetfulness in Maliki fiqh. | Fasting one makeup day for each missed day after Ramadan concludes. |
+| **Al-Kaffarah (The Major Expiation)** | Imposed exclusively for **deliberate, defiant, intentional violations** of Ramadan without any valid excuse (e.g., eating lunch publicly in defiance of divine law). | In the Maliki school, the preferred option is **feeding sixty poor persons** (one Mudd of staple food each), or fasting **two consecutive lunar months** (approximately 60 continuous days). |
 
 ---
 
-## 4. The Journey of a Lifetime: The Rites of Hajj
+## 4. The Journey of a Lifetime: The Rites and Modes of Hajj
 
-Hajj is the 5th Pillar of Islam, obligatory once in a lifetime upon every financially and physically capable Muslim (*Al-Istita'ah*).
+Hajj is the Fifth Pillar of Islam, obligatory once in a lifetime upon every Muslim possessing financial and physical capability (*Al-Istita'ah* - Surah Ali 'Imran 3:97).
 
-```
-       ┌────────────────────────────────────────────────────────┐
-       │             THE FOUR PILLARS (ARKAN) OF HAJJ           │
-       │                   According to Ibn 'Ashir              │
-       └───────────────────────────┬────────────────────────────┘
-        ┌───────────┬──────────────┼──────────────┬───────────┐
-        ▼           ▼              ▼              ▼           ▼
-    1. Al-Ihram  2. Tawaf        3. Al-Sa'i     4. Wuquf
-   (Sacred State   al-Ifadah    (7 laps between ('Arafah on
-    with white     (Circum-      Safa & Marwah)  9th Dhul-Hijjah;
-    garments &     ambulating                    the heart of
-    Talbiyah)      Ka'bah 7x)                    Hajj!)
-```
+### The Four Pillars (*Arkan*) of Hajj in Maliki Fiqh (*Matn Ibn 'Ashir*):
+1. **Al-Ihram:** Entering the sacred state of consecration with the intention and Talbiyah.
+2. **Tawaf al-Ifadah:** The obligatory seven circuits around the Ka'bah performed after descending from 'Arafah.
+3. **Al-Sa'i:** Walking seven times between the two hills of Safa and Marwah.
+4. **Al-Wuquf bi-'Arafah:** Standing on the plain of 'Arafah on the 9th of Dhul-Hijjah from midday until sunset. The Prophet ﷺ said: *"Hajj is 'Arafah!"* (Jami' at-Tirmidhi 889, Sahih).
 
-* **The Maliki Preference for Ifrad:** The Maliki school considers *Ifrad* (performing Hajj alone, followed by 'Umrah later) as the most virtuous mode of pilgrimage.
-* **The Day of 'Arafah:** The Prophet ﷺ declared: *"Hajj is 'Arafah!"* Standing on the plains of 'Arafah from midday until sunset in tearful supplication is the crowning pillar of Hajj.
+### The Three Modes of Performing Hajj:
+1. **Hajj al-Ifrad:** Performing Hajj alone, and performing 'Umrah at a later time. In the Maliki school, *Ifrad* is classified as the most virtuous and preferred mode of pilgrimage, following the narration of Sayyidah 'A'ishah that the Prophet ﷺ began his final pilgrimage with Ifrad (Sahih al-Bukhari 1562).
+2. **Hajj al-Qiran:** Entering Ihram with the simultaneous intention for both Hajj and 'Umrah together without exiting the sacred state between them.
+3. **Hajj al-Tamattu':** Performing 'Umrah first during the months of Hajj (Shawwal, Dhul-Qa'dah, early Dhul-Hijjah), exiting Ihram completely, and then re-entering Ihram for Hajj from Makkah on the 8th of Dhul-Hijjah.
+
+---
+
+## 5. Section 5: Curriculum Anchors in Practice
+
+1. **Personal Financial Discipline:** Track your own savings, gifts, or earnings. Practice calculating when you would reach Nisab, instilling an understanding that wealth is a trust (*Amanah*) from Allah.
+2. **Upholding Fasting Integrity:** Recognize the distinction between honest forgetfulness (requiring sincere Qada' without guilt) and deliberate negligence, developing a mature conscience before Allah.
+3. **Universal Brotherhood:** Contemplate how Hajj gathers Muslims of every race, social background, and nationality in identical simple dress, reminding believers that true nobility lies only in Taqwa.

@@ -1,4 +1,4 @@
-# 00 — ICO Benchmark Inventory: Grades 1–12
+# 00: ICO Benchmark Inventory: Grades 1-12
 
 > **Document Purpose**: Establishes the full reference benchmark from the International Curricula Organization (ICO, Riyadh) 12-Grade *Islamic Studies* curriculum. Every unit and lesson topic across all 12 grades is catalogued, tagged by strand, and assigned a confidence rating based on publisher samples, retailer listings, and curriculum documentation. This inventory serves as the baseline against which our 5-Year Ash'ari-Maliki Syllabus guarantees **100% coverage at equal or greater depth**.
 

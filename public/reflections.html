@@ -7,7 +7,7 @@
       name="description"
       content="View your child's reflections and personal insights from their Islamic Studies journey."
     />
-    <title>Student Reflections — Islamic Studies Family LMS</title>
+    <title>Student Reflections: Islamic Studies Family LMS</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -18,6 +18,8 @@
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      integrity="sha384-AUPyufJyyIQXv8SL3KZIyN2Dv9/rnHMiHdm1XF+OXsxfmo7rTNfodpFz+CJOXfXc"
+      crossorigin="anonymous"
     />
 
     <link rel="icon" type="image/svg+xml" href="icons/favicon.svg" />
@@ -701,13 +703,13 @@
           card.innerHTML = `
             <div class="reflection-header">
               <span class="reflection-module-badge">
-                <i class="fa fa-book-open"></i> ${moduleName(mId)}
+                <i class="fa fa-book-open"></i> ${escapeHtml(moduleName(mId))}
               </span>
-              <span class="reflection-date">${formatDate(date)}</span>
+              <span class="reflection-date">${escapeHtml(formatDate(date))}</span>
             </div>
             <div class="reflection-question">
               <i class="fa fa-comment-dots" style="margin-right:4px;opacity:0.6"></i>
-              Reflection: ${String(qId).replace(/_/g, ' ')}
+              Reflection: ${escapeHtml(String(qId).replace(/_/g, ' '))}
             </div>
             <div class="reflection-text">${escapeHtml(text)}</div>
           `;

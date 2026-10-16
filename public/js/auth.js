@@ -76,6 +76,40 @@ export function initPasswordUX() {
     'modalStrengthLabel',
     'modalStrengthCriteria'
   );
+  setupStrengthListener(
+    'newPasswordInput',
+    'resetPasswordStrengthContainer',
+    'resetStrengthFill',
+    'resetStrengthLabel',
+    'resetStrengthCriteria'
+  );
+
+  // Pre-submit Live Validation Indicators
+  function attachLiveValidator(inputId, validatorFn) {
+    const input = document.getElementById(inputId);
+    if (!input) return;
+    const check = () => {
+      if (!input.value) {
+        input.classList.remove('is-invalid');
+        return;
+      }
+      if (!validatorFn(input.value)) {
+        input.classList.add('is-invalid');
+      } else {
+        input.classList.remove('is-invalid');
+      }
+    };
+    input.addEventListener('input', check);
+    input.addEventListener('blur', check);
+  }
+
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  attachLiveValidator('authEmailInput', (v) => emailRegex.test(v.trim()));
+  attachLiveValidator('homeAuthEmailInput', (v) => emailRegex.test(v.trim()));
+  attachLiveValidator('signUpEmailInput', (v) => emailRegex.test(v.trim()));
+  attachLiveValidator('homeSignUpEmailInput', (v) => emailRegex.test(v.trim()));
+  attachLiveValidator('signUpPasswordInput', (v) => v.length >= 6);
+  attachLiveValidator('homeSignUpPasswordInput', (v) => v.length >= 6);
 }
 
 /**

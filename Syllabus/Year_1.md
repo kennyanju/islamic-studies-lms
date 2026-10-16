@@ -1,11 +1,11 @@
 # Year 1 Syllabus: Foundations of Wonder & Practice
 
-> **Target Learner**: Age 6–7  
+> **Target Learner**: Level 1 Track: Early Childhood (Ages 6-8)  
 > **Weekly Schedule**: 5 sessions × 20 minutes = 100 min/week  
 > **Annual Instructional Volume**: 36 Weeks (3 Terms of 12 Weeks) = 60 hours  
 > **ICO Benchmarks Absorbed**: Grade 1 and Grade 2 (foundational stages)  
 > **Classical Text Spine**: Oral introduction to *'Aqidat al-'Awamm* & foundational rules of *Mukhtasar al-Akhdari*  
-> **Riwayah**: Hafs 'an 'Asim (oral recitation and sensory letter familiarity)
+> **Riwayah**: Hafs 'an 'Asim & Warsh 'an Nafi' (oral recitation and sensory letter familiarity)
 
 ---
 
@@ -23,7 +23,7 @@
   1. Systematic definition of the personal attribute *Al-Wujud* (Necessary Existence) and negative attribute *Al-Wahdaniyyah* (Oneness in Essence, Attributes, and Actions).
   2. Refutation of anthropomorphism (*Tashbih*) and cosmic accidentalism via teleological observation (*Dalil al-Kawn*).
 * **Ash'ari Creed Flag**: Allah is not a physical body, does not occupy space or time, and needs nothing from creation (*Al-Ghaniyy*).
-* **🌍 Other Scholars Say — Awareness Box**:
+* **🌍 Other Scholars Say: Awareness Box**:
   > *Story*: When Imam Malik was asked how we know Allah exists without seeing Him, he pointed to the sour milk, the sweet honey, and the bitter olive coming from the very same soil and rain. All Sunni scholars agree that looking at nature with curiosity is a form of worship.
   > *What we do*: We love Allah and reflect on His gifts with humility.
   > *Remember*: Muslims of every school and every land share this love for Allah.
@@ -39,7 +39,7 @@
 * **Classical Reference**: *Al-Fusul fi Seerat ar-Rasul* (Ibn Kathir) / *Qadi 'Iyad's Al-Shifa* (Ch. on early childhood).
 * **Core Outcomes (Age 6–7)**:
   1. The child narrates the key events of the Year of the Elephant (*'Am al-Fil*) and the miraculous protection of the Ka'bah.
-  2. The child identifies the Prophet's ﷺ parents (Abdullah and Aminah) and his loving foster mother Halimah al-Sa'diyyah in the desert.
+  2. The child identifies the Prophet's ﷺ parents (Abdullah and Aminah) and his loving nurse-mother Halimah al-Sa'diyyah in the desert.
   3. The child learns that the Prophet ﷺ was an orphan who grew up under the care of his grandfather 'Abd al-Muttalib and uncle Abu Talib, yet remained pure and kind.
 * **Extension Outcomes (13+)**:
   1. Theological analysis of prophetic preparation (*Irhast*): the splitting of the chest (*Shaqq al-Sadr*) as divine purification.
@@ -63,7 +63,7 @@
   1. Legal classification of waters in Maliki fiqh: *Mutlaq/Tahur* (purifying), *Tahir* (pure but unpurifying), and *Najis* (impure).
   2. Legal parameters of removal of physical impurities (*Izalat al-Najasah*) from body, clothing, and prayer area.
 * **Maliki Fiqh Flag**: Water remains purifying as long as its color, taste, or odor has not been altered by an impurity, reflecting the school's practical preference for ease and non-rigidity.
-* **🌍 Other Scholars Say — Awareness Box**:
+* **🌍 Other Scholars Say: Awareness Box**:
   > *Story*: All four Imams agreed that cleanliness is half of faith (*Shatr al-Iman*). Some scholars say you can clean yourself with stones or toilet paper alone (*Istijmar*), while all agree that finishing with clean water is the best and most complete practice.
 * **Qur'an & Hadith Evidence**: Surah Al-Baqarah (2:222: *"Indeed, Allah loves those who turn to Him and loves those who purify themselves."*); Hadith: *"Cleanliness is half of faith."* (Muslim).
 * **Pedagogical Activities**: Color-sorting water bottles (clear pure water vs water changed with food coloring vs soapy water) to demonstrate the concept of *Tahur* water.
@@ -104,7 +104,7 @@
 * **Maliki Fiqh Flag**:
   * **Wiping the whole head**: Malikis require wiping the complete head from hairline to nape of neck, while Shafi'is allow a few hairs and Hanafis require a quarter.
   * **Dalk (Rubbing)**: Rubbing the limb with the hand while pouring water is an obligatory pillar (*Fard*) in the Maliki school, ensuring complete contact.
-* **🌍 Other Scholars Say — Awareness Box**:
+* **🌍 Other Scholars Say: Awareness Box**:
   > *Story*: When you visit mosques in Turkey, Egypt, or Saudi Arabia, you will see people wiping just the front of their hair, or leaving the tap running. Imam Malik taught that gently wiping the whole head and rubbing the skin with your wet hand honors the exact way the Sahabah saw the Prophet ﷺ perform wudu in Madinah.
 * **Qur'an & Hadith Evidence**: Surah Al-Ma'idah (5:6); Hadith of 'Uthman (RA) demonstrating the Prophet's wudu (Bukhari & Muslim).
 * **Pedagogical Activities**: "Wudu Bathroom Master Certification": The child performs wudu under the teacher/parent's gentle observation and receives a physical "Junior Mutatahhir" badge.
@@ -159,7 +159,7 @@
 * **Extension Outcomes (13+)**:
   1. Detailed analysis of *Sadl* (praying with hands at sides) in the Maliki Madhhab: The evidence from *'Amal Ahl al-Madinah* (the living practice of thousands of descendants of the Sahabah in Madinah) recorded in *Al-Mudawwanah*.
   2. How Imam Malik viewed *Qabd* as permissible in voluntary prayers (*Nawafil*) or as a secondary narration.
-* **🌍 Other Scholars Say — Awareness Box**:
+* **🌍 Other Scholars Say: Awareness Box**:
   > *Story*: When Imam Malik taught in the Prophet's Mosque in Madinah, he prayed with his arms resting straight at his sides (*Sadl*), because that is how he saw the scholars of Madinah pray. Imam Abu Hanifa, Imam al-Shafi'i, and Imam Ahmad placed their right hand over their left (*Qabd*). When we see someone pray with hands folded or at their sides, we smile, because both follow authentic narrations from the Prophet ﷺ!
 * **Qur'an & Hadith Evidence**: Surah Al-Baqarah (2:238: *"And stand before Allah in devout obedience."*); Hadith of the man who prayed improperly (*Al-Musi'u Salatahu*).
 * **Pedagogical Activities**: "Salah Movement Mirror": The child mirrors the teacher's deliberate, peaceful prayer movements; gentle posture adjustments for back straightness in ruku'.

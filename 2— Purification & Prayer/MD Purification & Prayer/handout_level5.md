@@ -1,84 +1,140 @@
 # Level 5 Senior Seminar Guide: Purification & Prayer
-**Age Group:** Ages 14–16+ (Senior High / Level 5 Capstone Track)  
-**ICO Curriculum Benchmark:** Aligned with ICO Grades 9–12 Senior Benchmark (Senior High & Capstone Track)  
-**Topics:** Usul al-Taharah, Evidentiary Derivations of Dalk & Wudu Pillars, Comparative Jurisprudence from *Bidayat al-Mujtahid*, and Modern Bio-Medical Fiqh  
-**Classical Text Spine:** *Bidayat al-Mujtahid wa Nihayat al-Muqtasid* (Ibn Rushd), *Al-Muwatta* (Imam Malik), and *Al-Dhakhirah* (Imam al-Qarafi)  
-**Riwayah & Advanced Tajweed:** Hafs 'an 'Asim with Warsh 'an Nafi' awareness; Advanced Rules of Waqf & Ibtida'
+
+| Metadata Field | Curriculum Specification |
+| :--- | :--- |
+| **Target Age Group** | Ages 14-16+ (Senior High / Level 5 Capstone Track) |
+| **Estimated Study Time** | 90-120 minutes |
+| **Prerequisites** | Comprehensive grasp of intermediate Maliki fiqh, travel concessions, and comparative Sunni madhhab frameworks |
+| **Surah Anchor / Tafsir** | Surah Al-Ma'idah (5:6): The Legislative Architecture of Taharah |
+| **Tajweed Rule** | Advanced Rules of Stopping and Starting (Ahkam al-Waqf wal-Ibtida': Waqf Lazim, Tam, Kafi, Hasan, Qabih) |
+| **Classical Text Spine** | *Bidayat al-Mujtahid wa Nihayat al-Muqtasid* (Qadi Ibn Rushd), *Al-Muwatta* (Imam Malik), and *Al-Dhakhirah* (Imam Shihab al-Din al-Qarafi) |
+| **Hadith Anchor (Nawawi 40)** | Hadith 1 ("Actions are by Intentions") and Hadith 2 (Hadith of Jibril) |
 
 ---
 
-## 1. The Epistemology of Ritual Law (*Usul al-Taharah*)
+## Section 1: The Epistemology of Ritual Law (Usul al-Taharah)
 
-In senior jurisprudence studies, ritual purity (*Taharah*) is examined through legal theory (*Usul al-Fiqh*). Jurisprudence does not simply ask *"What is the rule?"*, but *"How was this rule extracted from the Arabic grammar of the Quran, the transmission classifications of the Sunnah, and the objectives of the Law (Maqasid)?"*
+In advanced jurisprudence, ritual purity (*Taharah*) is analyzed through legal theory (*Usul al-Fiqh*). Scholars do not merely ask *"What is the rule?"*, but *"How was this rule extracted from the Arabic grammar of the revelation, the evidentiary weight of hadith transmissions, and the overarching objectives of Islamic law (Maqasid al-Shari'ah)?"*
 
-### The Taxonomy of Water in Maliki Jurisprudence
-1. **Al-Ma' al-Mutlaq (Absolute Purity):** Natural water remaining in its original created state (rain, sea, snow, well water). It is pure in itself (*Tahir*) and purifying for others (*Mutahhir*).
-2. **Al-Ma' al-Mukhalat (Altered Water):**
-   * *Altered by impure substances (Najasah):* Unusable for ritual purity or drinking if taste, color, or odor changes.
-   * *Altered by pure substances (e.g. soap, rose water, tea):* Retains physical purity (*Tahir*), but loses the capacity to remove ritual impurity (*Ghayr Mutahhir*).
+### The Taxonomy of Water in Maliki Legal Theory
+Imam Shihab al-Din al-Qarafi (d. 684 AH) in his legal encyclopedia *Al-Dhakhirah* details the three-fold classification of water:
+1. **Absolute Water (*Al-Ma' al-Mutlaq*):** Water that remains upon its primordial, created nature without qualifying adjectives (e.g. rainwater, seawater, groundwater, glacial runoff). It possesses intrinsic purity (*Tahir fi Nafsihi*) and the legal capacity to purify other entities (*Mutahhir li-Ghayrihi*), lifting ritual impurity (*Hadath*) and removing physical filth (*Khabath*).
+2. **Altered Clean Water (*Al-Ma' al-Mukhalat*):** Water whose fundamental characteristics (taste, color, or odor) have been permanently altered by a pure substance that does not naturally originate from water (such as soap, saffron, milk, or tea). In Maliki jurisprudence, this water retains physical cleanliness (*Tahir*), but forfeits the legal capacity to lift ritual hadath (*Ghayr Mutahhir*).
+3. **Contaminated Impure Water (*Al-Ma' al-Mutanajjis*):** Water corrupted by an impure substance (*Najasah*) that changes its taste, color, or smell. It is strictly unlawful for worship and consumption.
 
 ---
 
-## 2. Evidentiary Analysis: Why Does Imam Malik Mandate *Al-Dalk* (Rubbing)?
+## Section 2: Evidentiary Analysis: Why Does Imam Malik Mandate Al-Dalk (Rubbing)?
 
-Surah Al-Ma'idah (5:6) commands:  
-*“O you who have believed, when you rise to prayer, wash your faces and your forearms to the elbows...”*  
-`فَاغْسِلُوا وُجُوهَكُمْ وَأَيْدِيَكُمْ إِلَى الْمَرَافِقِ`
+Surah Al-Ma'idah (5:6) articulates the divine imperative:  
+`يَا أَيُّهَا الَّذِينَ آمَنُوا إِذَا قُمْتُمْ إِلَى الصَّلَاةِ فَاغْسِلُوا وُجُوهَكُمْ وَأَيْدِيَكُمْ إِلَى الْمَرَافِقِ`  
+*"O you who believe! When you rise to prayer, wash your faces and your forearms to the elbows..."*
 
-### The Juristic Dispute Analyzed in *Bidayat al-Mujtahid*:
-* **The Jamhur (Hanafi, Shafi'i, Hanbali):**  
-  Held that the Arabic verb *Ghasala* (غَسَلَ) simply means "causing water to flow over a surface." Therefore, if water touches every square millimeter of a limb without hand friction, the obligation is legally discharged.
+### The Classical Linguistic and Juristic Debate in *Bidayat al-Mujtahid*:
+Qadi Ibn Rushd (Averroes, d. 595 AH) explores the legal dispute between the Imams:
+* **The Majority (*Al-Jamhur*: Abu Hanifah, Al-Shafi'i, Ahmad):**  
+  Maintained that the classical Arabic verb *Ghasala* (غَسَلَ) denotes causing water to flow over an object (*Imrar al-Ma'*). Under this linguistic reading, if water covers every square millimeter of an arm without manual friction (such as submerging the limb in a flowing river or standing beneath a heavy shower), the obligation of washing is fully discharged.
 * **Imam Malik and the Madinan Jurists:**  
-  Demonstrated through classical lexicography that *Ghasl* in authentic Arabic requires both the application of water AND the passage of the hand (*Al-Imrar bil-Yad*). Pouring water without rubbing is termed *Al-Insibab* (pouring) or *Al-Dahn* (wetting/smearing), not *Ghasl*.  
-  *Legal consequence:* In the Maliki school, dipping an arm into a swimming pool without rubbing does not constitute valid wudu!
+  Demonstrated through classical Arabic lexicography and Prophetic practice that *Ghasl* requires both the application of water AND the physical passage of the hand over the limb (*Al-Imrar bil-Yad*). Pouring water passively without friction is designated in Arabic as *Al-Insibab* (pouring) or *Al-Dahn* (wetting/smearing), not *Ghasl*.  
+  *Legal Consequence:* In Maliki jurisprudence, dipping a limb into water without rubbing does not constitute valid Wudu. *Al-Dalk* is an indispensable, non-negotiable pillar (*Fard*).
+
+| Jurisprudential Issue | Maliki School | Shafi'i School | Hanafi School | Hanbali School |
+| :--- | :--- | :--- | :--- | :--- |
+| **Extent of Head Wiping** | Entire head (*Jami' al-Ra's*) | Any part (even 3 hairs) | One-quarter of head | Entire head |
+| **Rubbing (*Al-Dalk*)** | Obligatory pillar (*Fard*) | Recommended Sunnah | Recommended Sunnah | Recommended Sunnah |
+| **Continuity (*Al-Muwalat*)** | Obligatory pillar (*Fard*) | Recommended Sunnah | Recommended Sunnah | Obligatory pillar (*Fard*) |
+| **Basmalah in Al-Fatihah** | Neither loud nor quiet in Fard | Obligatory verse of Fatihah | Quiet Sunnah before Fatihah | Quiet Sunnah before Fatihah |
+| **Touch of Opposite Gender** | Breaks ONLY if with pleasure | Breaks unconditionally | Does not break wudu | Breaks if with desire |
 
 ---
 
-## 3. The Epistemology of *'Amal Ahl al-Madinah* Regarding *Sadl*
+## Section 3: The Hermeneutics of 'Amal Ahl al-Madinah Regarding Sadl
 
-In his monumental comparative work *Bidayat al-Mujtahid*, Qadi Ibn Rushd (Averroes) analyzes why the Imams differed on hand placement during prayer:
+In *Bidayat al-Mujtahid*, Qadi Ibn Rushd provides an objective comparative analysis of hand placement (*Wad' al-Yadayn*) during the standing position (*Qiyam*):
 
-1. **The Hadith of Sahl ibn Sa'd (Bukhari):**  
-   *"People were commanded to place their right hand over their left forearm in prayer."*
-2. **The Maliki Hermeneutical Counter-Weight:**  
-   Imam Malik recorded this hadith himself in *Al-Muwatta*, proving he knew it thoroughly! Yet in his practical fatwa, he declared *Sadl* to be the preferred Sunnah in obligatory prayers. Why?
-   * **The Principle of 'Amal:** The Prophet ﷺ led thousands of companions in prayer five times daily for ten years in Madinah. If folding hands were a binding obligatory sunnah, it would have been the overwhelming, universal practice of the city.
-   * Instead, the leading Tabi'in of Madinah—such as Sa'id ibn al-Musayyib, 'Urwah ibn al-Zubayr, and Al-Hasan al-Basri—prayed with arms naturally at their sides (*Sadl*).
-   * In Maliki Usul, **continuous generational practice (*Tawatur 'Amali*) takes precedence over solitary textual reports (*Khabar al-Ahad*)** because mass practice is immune from transmission errors or abrogations (*Naskh*).
-
-```
-┌────────────────────────────────────────────────────────────────────────┐
-│                   COMPARATIVE JURISPRUDENTIAL TABLE                    │
-│                 Extracted from Bidayat al-Mujtahid                     │
-├────────────────────┬──────────────────┬─────────────────┬──────────────┤
-│ Issue              │ Maliki School    │ Shafi'i School  │ Hanafi School│
-├────────────────────┼──────────────────┼─────────────────┼──────────────┤
-│ Wiping the Head    │ Complete head    │ A few hairs     │ 1/4 of head  │
-│ Rubbing (Dalk)     │ Obligatory pillar│ Recommended     │ Recommended  │
-│ Basmalah in Fatihah│ Prohibited loud  │ Fard verse      │ Quiet Sunnah │
-│ Touching Opposite  │ Invalidates ONLY │ Invalidates     │ Does NOT     │
-│ Gender             │ if with desire   │ unconditionally │ invalidate   │
-└────────────────────┴──────────────────┴─────────────────┴──────────────┘
-```
+1. **The Scriptural Evidence for Clasping (*Qabd*):**  
+   Imam al-Bukhari records the hadith of Sahl ibn Sa'd (RA): *"The people were commanded that a man should place his right hand on his left forearm in prayer."*
+2. **The Madinan Hermeneutical Counter-Weight:**  
+   Imam Malik transmitted this narration himself in *Al-Muwatta*, proving beyond doubt that he knew the textual report. Yet, in his operational legal rulings, he maintained that **Sadl** (resting arms naturally at the sides) is the preferred posture in obligatory prayers. Why?
+   * **The Epistemic Supremacy of 'Amal:** The Prophet ﷺ led thousands of Companions in prayer five times daily for an entire decade in Madinah. If clasping the hands had been an obligatory or exclusive Sunnah, the universal, continuous public practice of Madinah would have preserved it without divergence.
+   * Instead, the foremost scholars among the Successors (*Tabi'un*) in Madinah (including Sa'id ibn al-Musayyib, 'Urwah ibn al-Zubayr, and Ibn Sirin) were documented praying with their arms at their sides.
+   * In Maliki legal theory (*Usul al-Fiqh*), **unbroken mass living practice (*Tawatur 'Amali*) takes epistemic precedence over isolated solitary narrations (*Khabar al-Ahad*)**, because mass communal transmission is immune to transmission errors, idiosyncratic narration slips, or unrecognized historical abrogations (*Naskh*).
+   * Both postures are valid, recognized paths within Sunni orthodoxy.
 
 ---
 
-## 4. Modern Bio-Medical Jurisprudence & Hospital Worship
+## Section 4: Advanced Prayer Jurisprudence: Sujud al-Sahw and Funeral Rites
 
-Contemporary Muslim youth entering medical professions or navigating healthcare situations must understand how classical fiqh maxims apply to modern medical dilemmas:
+### 1. Complex Sujud al-Sahw Scenarios in Maliki Law:
+* **The Rule of Compounding Errors:** If a praying person both omits a confirmed Sunnah (e.g. forgets the first Tashahhud) AND accidentally adds an extra physical movement (e.g. sits for an extra pause), **the omission (*Nuqsan*) takes legal precedence**. The worshipper performs **Sujud al-Qabli** before the final Salam.
+* **The Mechanics of Qabli vs Ba'di:**
+  * *Sujud al-Qabli:* Performed after the final Tashahhud, before Salam, with two prostrations, followed immediately by the final Salam without a second Tashahhud (*Matn Ibn 'Ashir*).
+  * *Sujud al-Ba'di:* Performed after the final Salam, with two prostrations, followed by a second Tashahhud and a concluding Salam.
 
-### A. Renal Dialysis and Wudu
-* Hemodialysis involves drawing blood from an arteriovenous fistula, passing it through an artificial kidney filter, and returning it to the body.
-* *Maliki Ruling:* Blood exiting and re-entering does not break wudu! In Maliki fiqh, bleeding from wounds, cuts, or medical lines does not invalidate wudu (unlike bodily emissions from the two private exits).
-
-### B. Colostomy Bags and Medical Dressings (*Jaba'ir*)
-* Patients with permanent or temporary stoma bags are treated under the rule of **Salas (Chronic Discharge)**:
-  * They clean the appliance, perform wudu once after the entry of each prayer time, and pray freely regardless of subsequent involuntary discharge.
-* Medical casts and bandages: Wiped over with moist hands (*Al-Mash 'ala al-Jaba'ir*) without removing them, even if put on without prior wudu, based on the legal maxim: *"Harm must be removed"* (*Al-Dararu Yuzal*).
+### 2. Funeral Rites (*Ahkam al-Jana'iz*):
+The rights of a deceased Muslim upon the community are a communal obligation (*Fard Kifayah*):
+* **Washing the Deceased (*Ghasl al-Mayyit*):** Washing the body with pure water and lotus/camphor leaves with utmost dignity and privacy.
+* **Shrouding (*Al-Takfin*):** Enveloping the body in clean, unstitched white cloth (three sheets for men, five for women).
+* **The Funeral Prayer (*Salat al-Janazah*):**
+  * Performed entirely standing without Ruku' or Sujud.
+  * Consists of **four Takbirs**:
+    * 1st Takbir: Followed by praising Allah (and recitation of Surah Al-Fatihah).
+    * 2nd Takbir: Followed by blessings upon the Prophet ﷺ (*Al-Salat al-Ibrahimiyyah*).
+    * 3rd Takbir: Followed by sincere supplication for the deceased (*Du'a lil-Mayyit*).
+    * 4th Takbir: Followed by a pause for general du'a and a single audible Salam to the right side (*Taslimah Wahidah*).
+* **Burial (*Al-Dafn*):** Lowering the deceased gently into the grave (*Lahd*), laying them upon their right side facing the Qiblah.
 
 ---
 
-## 5. Senior Seminar Research & Case Studies
+## Section 5: Modern Bio-Medical Jurisprudence & Hospital Worship
 
-1. **Hermeneutical Analysis:** Write an essay analyzing how the debate between *'Amal Ahl al-Madinah* and *Khabar al-Ahad* illustrates the difference between textual formalism and living tradition.
-2. **Clinical Ethics Case:** A bedridden Muslim intensive care patient with multiple IV infusions and an oxygen mask cannot move. Formulate their prayer protocol using the principles of *Rukhsah*, Tayammum, and intention.
+Senior students preparing for university and professional life must understand how classical legal maxims apply to modern healthcare realities:
+
+### 1. Hemodialysis and Ritual Purity:
+Hemodialysis extracts blood through an arteriovenous fistula, circulates it through an artificial dialysis membrane, and returns it to the bloodstream.  
+* *Maliki Legal Analysis:* Blood circulation through an external machine does not break Wudu. In Maliki fiqh, blood exiting and re-entering the body from non-private passages does not invalidate ritual purity.
+
+### 2. Colostomy Appliances and Chronic Incontinence:
+Patients with permanent or temporary bowel/bladder stoma appliances are governed by the jurisprudence of **Chronic Discharge (*Salas*)**:
+* They clean the appliance area, perform Wudu once after the entry of each prayer time, and pray their obligatory and voluntary prayers freely, regardless of involuntary leakage during the prayer window.
+
+### 3. Medical Dressings and Orthopedic Splints (*Al-Jaba'ir*):
+* Medical casts, sterile wound dressings, and orthopedic splints are gently wiped over with moist hands (*Al-Mash 'ala al-Jaba'ir*) without removal.
+* This dispensation is grounded in the universal legal maxim: *"Harm must be removed"* (*Al-Dararu Yuzal*) and *"Hardship brings about ease"* (*Al-Mashaqqah Tajlib al-Taysir*).
+
+### 4. Critical Care / ICU Protocols:
+An immobilized intensive care patient unable to access water or move limbs:
+* Performs Tayammum if an assistant can present a clean stone or bag of natural earth (*Sa'id*).
+* If earth is medically prohibited or inaccessible, they pray within their capacity according to their current state (*Faqid al-Tahurayn*), moving the eyes or heart with intention. A Muslim never abandons prayer while consciousness remains.
+
+---
+
+## Section 6: Curriculum Anchors in Practice
+
+### 1. Qur'an and Tafsir Anchor: Surah Al-Ma'idah (5:6)
+Allah concludes the verse of purification with a profound statement of divine purpose:
+
+> **مَا يُرِيدُ اللَّهُ لِيَجْعَلَ عَلَيْكُم مِّنْ حَرَجٍ وَلَٰكِن يُرِيدُ لِيُطَهِّرَكُمْ وَلِيُتِمَّ نِعْمَتَهُ عَلَيْكُمْ لَعَلَّكُمْ تَشْكُرُونَ**  
+> *Ma yuridu Allahu li-yaj'ala 'alaykum min harajin wa lakin yuridu li-yutahhirakum wa li-yutimma ni'matahu 'alaykum la'allakum tashkurun.*  
+> *"Allah does not intend to place hardship upon you, but He intends to purify you and to complete His favor upon you that you may be grateful."* (Surah Al-Ma'idah 5:6).
+
+**Classical Tafsir (*Tafsir al-Qurtubi*):** Imam al-Qurtubi remarks that this closing sentence reveals the core *Hikmah* (divine wisdom) of all ritual legislation: Allah does not impose worship as an arbitrary burden, but as a systematic elevation of the human being into spiritual and physical cleanliness.
+
+### 2. Tajweed Rule in Action: Advanced Rules of Waqf and Ibtida'
+In advanced recitation, knowing where to stop (*Waqf*) and resume (*Ibtida'*) preserves precise theological meaning:
+* **Waqf Tam (Complete Stop):** Stopping on a word where the theme and grammatical structure are complete. Example: Stopping at the end of verses that conclude a legal decree.
+* **Waqf Kafi (Sufficient Stop):** Stopping on a phrase that is structurally complete, though the thematic topic continues in the next phrase.
+* **Waqf Hasan (Good Stop):** Stopping on a phrase that makes complete sense, but where resuming must begin from an earlier word due to grammatical attachment.
+* **Waqf Qabih (Reprehensible Stop):** Stopping in a manner that distorts or corrupts the meaning, such as stopping on **لَا تَقْرَبُوا الصَّلَاةَ** (*Do not approach prayer*) without reciting **وَأَنتُمْ سُكَارَىٰ** (*while you are intoxicated*).
+
+### 3. Classical Maliki Text Anchor: *Al-Dhakhirah* by Imam al-Qarafi
+Imam Shihab al-Din al-Qarafi writes in *Al-Dhakhirah*:
+> *"Ritual purification is an act of devoted obedience wherein the sacred law combines physical cleanliness with spiritual submission. The jurist must not confuse customary cleanliness with legal purification: legal purification requires intention, valid substance, and adherence to the authentic Sunnah."*
+
+### 4. Prophetic Hadith Anchor: Hadith 1 of Nawawi's 40
+The Messenger of Allah ﷺ said:
+
+> **إِنَّمَا الْأَعْمَالُ بِالنِّيَّاتِ، وَإِنَّمَا لِكُلِّ امْرِئٍ مَا نَوَى**  
+> *"Actions are judged only by intentions, and every person will have only what they intended."* (Sahih al-Bukhari 1, Sahih Muslim 1907, Sahih).
+
+**Family Application:** Purity begins within the secret chamber of the heart. When young adults cultivate honest intentions in their studies, work, and worship, their entire life becomes an unbroken act of service to Allah and a source of guidance for their families and communities.

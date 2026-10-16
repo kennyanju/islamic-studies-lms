@@ -3,8 +3,8 @@
 
 ---
 
-# Slide 1: Welcome & Course Overview
-## Character, Society & Family: The Outer Mirror of the Inner Soul
+## Slide 1: Welcome & Course Overview
+### Character, Society & Family: The Outer Mirror of the Inner Soul
 *   **Subject:** Islamic Studies (Akhlaq & Mu'amalat)
 *   **Fiqh School:** Maliki (*Madhhab*)
 *   **Creed School:** Ash'ari
@@ -24,8 +24,8 @@
 
 ---
 
-# Slide 2: Creed Foundation: What Makes an Action "Good"?
-## Divine Command Ethics (Al-Husn wal-Qubh al-Shar'iyyan)
+## Slide 2: Creed Foundation: What Makes an Action "Good"?
+### Divine Command Ethics (Al-Husn wal-Qubh al-Shar'iyyan)
 *   **How do we know what is moral?**
     *   **Ash'ari Creed Ruling:** Moral goodness (*Al-Husn* / الْحُسْن) and moral badness (*Al-Qubh* / الْقُبْح) are determined directly by Allah's revelation (*Al-Shar'* / الشَّرْع).
 *   **The Role of Reason (*'Aql*):**
@@ -43,8 +43,8 @@
 
 ---
 
-# Slide 3: Perfecting Character: The Prophet’s Mission & Human Choice
-## Understanding Character (Akhlaq) and Human Action (Kasb)
+## Slide 3: Perfecting Character: The Prophet’s Mission & Human Choice
+### Understanding Character (Akhlaq) and Human Action (Kasb)
 *   **The Prophetic Statement:** 
     *   The Prophet (peace be upon him) said: *"I was sent only to perfect noble character"* (*Innama bu'ithtu li-utammima makarim al-akhlaq*).
 *   **Creed Connection: Acquisition (*Kasb* / كَسْب):**
@@ -62,8 +62,8 @@
 
 ---
 
-# Slide 4: Honesty (Sidq): The Root of Trust
-## Truthfulness in Word, Deed, and State
+## Slide 4: Honesty (Sidq): The Root of Trust
+### Truthfulness in Word, Deed, and State
 *   **What is Sidq?**
     *   **Sidq** (صِدْق) means truthfulness, sincerity, and consistency.
 *   **Three Levels of Honesty:**
@@ -81,10 +81,10 @@
 
 ---
 
-# Slide 5: Humility (Tawadu'): Defeating the Ego
-## Overcoming Pride (Kibr) in the Heart
+## Slide 5: Humility (Tawadu'): Defeating the Ego
+### Overcoming Pride (Kibr) in the Heart
 *   **What is Tawadu'?**
-    *   **Tawadu'** (تَوَاضُع) is humility—the state of recognizing that every blessing you have is from Allah, not from your own greatness.
+    *   **Tawadu'** (تَوَاضُع) is humility, the state of recognizing that every blessing you have is from Allah, not from your own greatness.
 *   **Opposite: Pride (*Kibr* / كِبْر):**
     *   The Prophet (pbuh) defined pride as: *"Rejecting the truth (*Batar al-Haqq*) and looking down on people (*Ghamt al-Nas*)."*
 *   **The Spiritual Reality:**
@@ -100,13 +100,13 @@
 
 ---
 
-# Slide 6: Controlling Anger: The Power of Hilm
-## Forbearance (Hilm) vs. Explosive Rage (Ghadab)
+## Slide 6: Controlling Anger: The Power of Hilm
+### Forbearance (Hilm) vs. Explosive Rage (Ghadab)
 *   **What is Ghadab?**
     *   **Ghadab** (غَضَب) is anger. It is a spark from Shaytan that clouds human intellect (*'Aql*).
 *   **The Key Virtues:**
     *   **Kadhm al-Ghaydh** (كَظْم الْغَيْظ): Suppressing rage when you have the power to act on it.
-    *   **Hilm** (حِلْم): Forbearance and emotional control—developing a calm, gentle nature over time.
+    *   **Hilm** (حِلْم): Forbearance and emotional control, developing a calm, gentle nature over time.
 *   **The Prophetic Standard:**
     *   *"The strong person is not the one who can wrestle others down; the strong person is the one who controls himself in moments of anger."* (Muwatta Malik).
 *   **Practical Steps to Control Anger:**
@@ -122,10 +122,10 @@
 
 ---
 
-# Slide 7: Creed Connection: Anger, Patience, and Divine Decree
-## Connecting Character to Qadar
+## Slide 7: Creed Connection: Anger, Patience, and Divine Decree
+### Connecting Character to Qadar
 *   **The Ash'ari View on Qadar (Divine Decree):**
-    *   Everything that happens in the universe—both what we like and what we dislike—occurs by Allah's Will (*Iradah*), Knowledge (*'Ilm*), and Power (*Qudrah*).
+    *   Everything that happens in the universe (both what we like and what we dislike) occurs by Allah's Will (*Iradah*), Knowledge (*'Ilm*), and Power (*Qudrah*).
 *   **Anger as Resistance to Decree:**
     *   When we react with explosive anger to accidents, delays, or difficulties, we are, in a spiritual sense, reacting against what Allah has decreed.
 *   **Patience (*Sabr*) and Contentment (*Rida*):**
@@ -135,18 +135,18 @@
 ---
 **Teacher Notes:**
 *   **Deepening Belief:** This is a crucial Ash'ari theological application. Connect the sixth pillar of Iman (belief in *Qadar*) directly to everyday emotional control.
-*   **Clarification:** Emphasize that accepting *Qadar* does not mean we don't try to fix bad situations. If someone harms us, we seek justice. But we do not lose our inner peace or descend into rage, because we know Allah is in absolute control.
+*   **Clarification:** Emphasize that accepting *Qadar* does not mean we do not try to fix bad situations. If someone harms us, we seek justice. But we do not lose our inner peace or descend into rage, because we know Allah is in absolute control.
 *   **Reflection:** *"How does knowing that an accident was already written in the Preserved Tablet (Al-Lawh al-Mahfudh) make it easier to forgive the person who caused it?"*
 
 ---
 
-# Slide 8: Character and the Law: The Concept of Muru'ah
-## Nobility and Legal Competency in Maliki Fiqh
+## Slide 8: Character and the Law: The Concept of Muru'ah
+### Nobility and Legal Competency in Maliki Fiqh
 *   **What is Muru'ah?**
     *   **Muru'ah** (مُرُوءَة) translates to chivalry, dignity, and honorable behavior.
     *   It means acting in a way that respects local customs, is polite, and avoids foolishness.
 *   **The Maliki Legal Link:**
-    *   To testify in an Islamic court of law, a witness must have **'Adalah** (عَدَالَة) – upright legal character.
+    *   To testify in an Islamic court of law, a witness must have **'Adalah** (عَدَالَة), upright legal character.
     *   In Maliki fiqh, a person's **'Adalah** is ruined if they lack **Muru'ah**!
 *   **What destroys Muru'ah?**
     *   Public tantrums and screaming.
@@ -157,13 +157,13 @@
 ---
 **Teacher Notes:**
 *   **Fiqh Literacy Focus:** This is a unique, powerful concept. Most students think good manners are optional. Show them that in Maliki law, bad character has direct legal consequences.
-*   **Historical Context:** Explain that what violates *Muru'ah* can change slightly based on time and place (*'Urf* - custom), but the core principle remains: a Muslim must behave with dignity. 
-*   **Discussion:** Ask: *"What are things people do today on social media (like TikTok dances, prank videos) that would destroy their Muru'ah in the eyes of a Maliki judge?"*
+*   **Historical Context:** Explain that what violates *Muru'ah* can change slightly based on time and place (*'Urf*, custom), but the core principle remains: a Muslim must behave with dignity. 
+*   **Discussion:** Ask: *"What are things people do today on social media (like prank videos) that would destroy their Muru'ah in the eyes of a Maliki judge?"*
 
 ---
 
-# Slide 9: Rights of Parents (Birr al-Walidayn)
-## The Divine Equation
+## Slide 9: Rights of Parents (Birr al-Walidayn)
+### The Divine Equation
 *   **The Quranic Command:**
     *   Allah says: *"And your Lord has decreed that you worship none but Him, and to parents, good treatment."* (Surah al-Isra: 23).
     *   Allah pairs the duty of worshiping Him directly with the duty of honoring parents!
@@ -182,8 +182,8 @@
 
 ---
 
-# Slide 10: Legal Rights of Parents in Maliki Law
-## Specific Fiqh Rulings
+## Slide 10: Legal Rights of Parents in Maliki Law
+### Specific Fiqh Rulings
 *   **1. Parental Permission for Voluntary Deeds:**
     *   In Maliki fiqh, a child **must** obtain parental permission before embarking on voluntary travel, voluntary military service, or long-term voluntary study away from home if the parents will suffer from their absence.
 *   **2. Financial Maintenance (*Nafaqah* / نَفَقَة):**
@@ -195,12 +195,12 @@
 **Teacher Notes:**
 *   **Fiqh Literacy Details:** Detail the legal nature of *Birr*. It is not just about being polite; it has financial and legal components.
 *   **Nafaqah:** Explain that under Islamic law, maintenance (*nafaqah*) is reciprocal. Parents must support young children, and adult children must support elderly, poor parents. This is enforceable by a court.
-*   **Discussion:** Why do you think the Maliki school requires parental permission for voluntary travel? (Answer: Because serving parents and keeping their hearts at ease is a higher obligation—*Fard*—than voluntary travels).
+*   **Discussion:** Why do you think the Maliki school requires parental permission for voluntary travel? (Answer: Because serving parents and keeping their hearts at ease is a higher obligation (*Fard*) than voluntary travels).
 
 ---
 
-# Slide 11: Keeping Family Ties (Silat al-Rahim)
-## The Sacred Bonds of Kinship
+## Slide 11: Keeping Family Ties (Silat al-Rahim)
+### The Sacred Bonds of Kinship
 *   **What is Rahim?**
     *   **Rahim** (رَحِم) literally means "womb." 
     *   **Silat al-Rahim** (صِلَة الرَّحِم) means connecting and maintaining relationships with blood relatives (grandparents, siblings, aunts, uncles, cousins).
@@ -219,8 +219,8 @@
 
 ---
 
-# Slide 12: Rights of Neighbors (Huquq al-Jiwar)
-## The Sacred Radius of the Community
+## Slide 12: Rights of Neighbors (Huquq al-Jiwar)
+### The Sacred Radius of the Community
 *   **The Prophetic Warning:**
     *   The Prophet (pbuh) said: *"Angel Jibril kept advising me to treat neighbors kindly until I thought he would make them my heirs."* (Agreed upon).
 *   **Defining the Neighbor in Maliki Fiqh:**
@@ -233,14 +233,14 @@
 
 ---
 **Teacher Notes:**
-*   **The 40-House Rule:** Explain the spatial imagination of Islamic law. It doesn't just mean the person next door; it means the entire local micro-community of 40 houses.
+*   **The 40-House Rule:** Explain the spatial imagination of Islamic law. It does not just mean the person next door; it means the entire local micro-community of 40 houses.
 *   **Hadith Check:** Emphasize the strong language of the Prophet (pbuh): *"He is not a believer whose neighbor is not safe from his harm (*Bawa'iq*)."* (Muslim).
-*   **Actionable Advice:** Encourage students to think of small acts of kindness: baking cookies for a neighbor, shoveling snow from their walkway, or simply smiling and greeting them.
+*   **Actionable Advice:** Encourage students to think of small acts of kindness: sharing food with a neighbor, shoveling snow from their walkway, or simply smiling and greeting them.
 
 ---
 
-# Slide 13: Property & Neighborhood Rights in Maliki Law
-## Specific Legal Safeguards
+## Slide 13: Property & Neighborhood Rights in Maliki Law
+### Specific Legal Safeguards
 *   **1. Prevention of Harm (*Da'f al-Darar*):**
     *   In Maliki fiqh, a property owner is **legally blocked** from using their property in a way that causes direct harm to their neighbor.
     *   *Examples:* Building a high wall that blocks the neighbor's sunlight, opening a window that directly overlooks a neighbor's private courtyard, or venting smoke towards their house.
@@ -252,15 +252,15 @@
 **Teacher Notes:**
 *   **Fiqh Literacy Focus:** Introduce *Shuf'ah* (Pre-emption). This is a highly developed contract law concept in Maliki fiqh that directly serves social harmony (*Maslahah*).
 *   **Darar (Harm):** The Maliki school is very strict on *Darar*. While other schools might say "It's my property, I can build what I want," the Malikis enforce the Prophetic rule: *"There shall be no harming nor reciprocating harm"* (*La darar wa la dirar*).
-*   **Application:** If a neighbor complains to a Maliki judge that someone built a window specifically to spy on their women/family, the judge will order the window to be walled up or blocked.
+*   **Application:** If a neighbor complains to a Maliki judge that someone built a window specifically to spy on their family, the judge will order the window to be blocked.
 
 ---
 
-# Slide 14: Choosing Companions: The Ethics of Friendship
-## The Company You Keep Shapes Your Soul
+## Slide 14: Choosing Companions: The Ethics of Friendship
+### The Company You Keep Shapes Your Soul
 *   **Suhbah Salihah** (صُحْبَة صَالِحَة): Good, righteous companionship.
 *   **The Prophetic Analogy:**
-    *   *The Good Friend:* Like a seller of perfume (*Misk*). Even if you don't buy perfume, you leave smelling good.
+    *   *The Good Friend:* Like a seller of perfume (*Misk*). Even if you do not buy perfume, you leave smelling good.
     *   *The Bad Friend:* Like a blacksmith working a bellows. He either burns your clothes with flying sparks or leaves you smelling like foul smoke.
 *   **The Spiritual Influence:**
     *   The Prophet (pbuh) said: *"A person is on the religion of his close friend (*Khalil*), so let each of you look to whom he takes as a close friend."* (Abu Dawud).
@@ -268,13 +268,13 @@
 ---
 **Teacher Notes:**
 *   **Analysis of the Perfume/Blacksmith Hadith:** Explain that influence is often silent and subconscious. You do not have to copy your friend's bad behavior immediately; just sitting with them regularly causes your heart to become desensitized to sin.
-*   **Vocabulary:** *Khalil* (intimate, ultimate friend—a step higher than *Sadiq*).
+*   **Vocabulary:** *Khalil* (intimate, ultimate friend, a step higher than *Sadiq*).
 *   **Discussion:** Ask: *"How do your friends influence the way you talk? The games you play? The way you speak to your parents?"*
 
 ---
 
-# Slide 15: Friendship in Court: Maliki Rulings on Witness Testimony
-## The Legal Reality of Friendship
+## Slide 15: Friendship in Court: Maliki Rulings on Witness Testimony
+### The Legal Reality of Friendship
 *   **The Maliki View on Biased Testimony:**
     *   Islamic law requires witnesses to be completely objective.
     *   In the Maliki school, a person's testimony in court **in favor of their very close friend** (*Shahadat al-Sadiq li-Sadiqihi*) is **rejected**.
@@ -291,51 +291,51 @@
 
 ---
 
-# Slide 16: Confronting Peer Pressure
-## Standing Strong in the Face of Fitan (Trials)
+## Slide 16: Confronting Peer Pressure
+### Standing Strong in the Face of Fitan (Trials)
 *   **What is Peer Pressure?**
     *   The psychological and social force that pushes you to conform to the behavior of those around you to fit in.
 *   **Islamic Goal: Guarding the Deen (*Hifdh al-Din*):**
     *   Our primary objective is to protect our faith and relationship with Allah.
 *   **Strategies to Resist Peer Pressure:**
-    1.  **Define your boundaries early:** If people know you pray and do not lie, they won't ask you to cheat.
+    1.  **Define your boundaries early:** If people know you pray and do not lie, they will not ask you to cheat.
     2.  **The power of "No":** Saying "No" is a sign of *Muru'ah* (strength of character) and *Izzah* (honorable pride in Islam).
     3.  **Seek alternative company:** If a group makes you feel bad for practicing your Deen, walk away.
 
 ---
 **Teacher Notes:**
 *   **Pedagogical Discussion:** Peer pressure is one of the biggest challenges for 10-13 year olds. Keep this practical.
-*   **Vocabulary:** *Fitan* (plural of *Fitnah* - trials, temptations, confusion).
+*   **Vocabulary:** *Fitan* (plural of *Fitnah*, trials, temptations, confusion).
 *   **Scenario Exercise:** Ask students: *"Your friends are laughing at a classmate behind their back and tell you to join in. If you don't, they'll call you a coward. What do you do?"* Discuss how to walk away or change the topic.
 
 ---
 
-# Slide 17: Social Media & The Muslim Mindset
-## Guarding the Five Necessities (Al-Daruriyyat al-Khams)
+## Slide 17: Social Media & The Muslim Mindset
+### Guarding the Five Necessities (Al-Daruriyyat al-Khams)
 *   In Islamic law, the Shariah is designed to protect five essential things: **Religion (*Din*), Life (*Nafs*), Intellect (*'Aql*), Honor/Lineage (*'Ird* / *Nasl*), and Wealth (*Mal*)**.
 *   **How does Social Media impact these?**
-    *   **Guarding the Mind (*Hifdh al-'Aql*):** Social media algorithms feed addictive, mindless content that wastes time and distracts from deep thought.
-    *   **Guarding Honor (*Hifdh al-'Ird* / حِفْظ الْعِرْض):** Social media makes it easy to gossip (*Gheebah*), spread rumors (*Namimah*), spy on others (*Tajassus*), and expose people's private faults.
+    *   **Guarding the Mind (*Hifdh al-'Aql*):** Social media algorithms feed addictive content that wastes time and distracts from deep thought.
+    *   **Guarding Honor (*Hifdh al-'Ird* / حِفْظ الْعِرْض):** Social media makes it easy to gossip (*Ghibah*), spread rumors (*Namimah*), spy on others (*Tajassus*), and expose people's private faults.
 *   **The Islamic Golden Rule online:**
-    *   If you wouldn't say it to someone's face in front of their parents, do not type it online.
+    *   If you would not say it to someone's face in front of their parents, do not type it online.
 
 ---
 **Teacher Notes:**
 *   **Theological & Legal framework:** Introduce the *Daruriyyat al-Khams* (The Five Necessities) which are the core objectives of the Shariah (*Maqasid al-Shariah*).
 *   **Application:** Show how modern technology challenges these ancient legal protections. 
     *   *Honor ('Ird):* Spreading a screenshot of a private chat to humiliate someone is a direct attack on their *'Ird*, which is a major sin in Islam.
-    *   *Intellect ('Aql):* Doom-scrolling for hours damages the mind's ability to focus on Salah and Quran.
+    *   *Intellect ('Aql):* Mindless scrolling damages the mind's ability to focus on Salah and Quran.
 
 ---
 
-# Slide 18: Blocking the Paths to Harm: Sadd al-Dhara'i'
-## A Key Maliki Rule for the Digital Age
+## Slide 18: Blocking the Paths to Harm: Sadd al-Dhara'i'
+### A Key Maliki Rule for the Digital Age
 *   **What is Sadd al-Dhara'i'?**
     *   **Sadd al-Dhara'i'** (سَدّ الذَّرَائِع) is a famous Maliki legal principle meaning: **"Blocking the means to evil."**
     *   If a permissible action almost always leads to a forbidden result (*Haram*), the Maliki school rules that the action itself becomes restricted or prohibited.
 *   **Applying the Principle Online:**
-    *   *Example 1:* Following accounts that post inappropriate content. Even if you say "I won't copy them," the path leads to sin. Therefore, you must block/unfollow them (*Sadd al-Dhara'i'*).
-    *   *Example 2:* Joining chat groups where cyberbullying or gossiping occurs. The path leads to participating in *Gheebah*. You must leave the group.
+    *   *Example 1:* Following accounts that post inappropriate content. Even if you say "I won't copy them," the path leads to sin. Therefore, you must block or unfollow them (*Sadd al-Dhara'i'*).
+    *   *Example 2:* Joining chat groups where cyberbullying or gossiping occurs. The path leads to participating in *Ghibah*. You must leave the group.
 *   **Proactive Protection:** We guard our eyes, ears, and hearts before the sin even starts.
 
 ---
@@ -345,12 +345,12 @@
 
 ---
 
-# Slide 19: Justice ('Adl) and Equity (Qist)
-## The Universal Scales of Islam
+## Slide 19: Justice ('Adl) and Equity (Qist)
+### The Universal Scales of Islam
 *   **What is 'Adl?**
     *   **'Adl** (عَدْل) means justice, putting everything in its proper place, and giving everyone their due right.
 *   **What is Qist?**
-    *   **Qist** (قِسْط) is equity—ensuring fairness in practical distribution and treatment, taking into account individual circumstances.
+    *   **Qist** (قِسْط) is equity, ensuring fairness in practical distribution and treatment, taking into account individual circumstances.
 *   **The Command to be Just to All:**
     *   Allah says: *"O you who believe! Stand out firmly for justice, as witnesses to Allah, even though it be against yourselves, or your parents, or your kin..."* (Surah an-Nisa: 135).
 *   **Opposite: Oppression (*Zulm* / ظُلْم):**
@@ -359,13 +359,13 @@
 ---
 **Teacher Notes:**
 *   **Vocabulary Differentiation:** Clarify the nuance between *'Adl* (strict justice/equality under the law) and *Qist* (distributive equity/fairness that accounts for differences). 
-*   **Illustration:** If you have two siblings—one is 5 years old and the other is 15 years old—giving them both the exact same shoe size is "equal" but unjust. Giving them sizes that fit them is *Qist*.
+*   **Illustration:** If you have two siblings (one is 5 years old and the other is 15 years old), giving them both the exact same shoe size is "equal" but unjust. Giving them sizes that fit them is *Qist*.
 *   **Crucial Creed Detail:** In Ash'ari theology, Allah is Al-'Adl. Because He is the absolute owner of creation, whatever He does is just by definition. Oppression (*Zulm*) is impossible for Allah because oppression means violating someone else's rights, and everything belongs to Allah.
 
 ---
 
-# Slide 20: The Common Good: Maslahah Mursalah
-## Using Maliki Legal Principles to Treat Others Well
+## Slide 20: The Common Good: Maslahah Mursalah
+### Using Maliki Legal Principles to Treat Others Well
 *   **What is Maslahah Mursalah?**
     *   **Maslahah Mursalah** (مَصْلَحَة مُرْسَلَة) is a Maliki legal source meaning: **"Unrestricted Public Interest."**
     *   It refers to creating rules or taking actions that bring benefit or prevent harm to society, even if there is no specific Quranic text about that exact issue.
@@ -378,13 +378,13 @@
 ---
 **Teacher Notes:**
 *   **Fiqh Literacy Focus:** *Maslahah Mursalah* is another pillar of Maliki legal methodology (*Usul al-Fiqh*). Explain that Imam Malik was famous for using this principle to address new social problems.
-*   **Connection to Character:** Show that a good Muslim doesn't just ask, *"Is there a specific rule forcing me to do this?"* Instead, they ask, *"Does this action help my community and please Allah?"*
-*   **Discussion:** Ask: *"Can you think of a modern rule in your town or school that helps everyone, even though it wasn't around 1400 years ago?"* (e.g., speed limits, internet safety rules).
+*   **Connection to Character:** Show that a good Muslim does not just ask, *"Is there a specific rule forcing me to do this?"* Instead, they ask, *"Does this action help my community and please Allah?"*
+*   **Discussion:** Ask: *"Can you think of a modern rule in your town or school that helps everyone, even though it was not around 1400 years ago?"* (e.g., speed limits, internet safety rules).
 
 ---
 
-# Slide 21: Sources and Bibliography
-## Building on Classical Foundations
+## Slide 21: Sources and Bibliography
+### Building on Classical Foundations
 *   **Primary Fiqh Texts:**
     *   Imam Malik ibn Anas, *Al-Muwatta* (Collection of Hadith and legal practice of Madinah).
     *   Ibn Abi Zayd al-Qayrawani, *Al-Risalah* (The classical Maliki manual of law).
@@ -394,7 +394,7 @@
     *   Imam al-Ghazali, *Ihya 'Ulum al-Din* (Revival of the Religious Sciences - Akhlaq section).
     *   Imam al-Qarafi, *Al-Furuq* (Maliki legal distinctions and public interest philosophy).
 *   **Modern Fiqh Literacy Reference:**
-    *   Shaykh Muhyiddin ibn 'Arabi (and other commentators on the *Risalah* of Al-Qayrawani).
+    *   Commentaries on the *Risalah* of Al-Qayrawani.
 
 ---
 **Teacher Notes:**

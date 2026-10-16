@@ -5,7 +5,21 @@
 
 ---
 
-## Slide 1: Introduction to Aqidah & Fiqh
+## Slide 1: Islamic Creed (Aqidah) & Law (Fiqh) for Teachers
+* **Visual Guide / Layout:** Elegant title slide with geometric Islamic illumination and classical calligraphy. Central title: Islamic Creed (Aqidah) and Law (Fiqh). Subtitle: Foundations of Faith for Educators and Families.
+* **Slide Content:**
+  * **Foundations of Faith: Islamic Creed (Aqidah) & Law (Fiqh)**
+  * Core Themes: Tawhid, Names and Attributes, Six Pillars of Iman, Qadar and Human Choice.
+  * Classical Sunni Foundations: Ash'ari Theology and Maliki Jurisprudence.
+  * Target Audience: Parents and teachers guiding youth through foundational Islamic literacy.
+* **Teacher Notes:**
+  * Welcome parents and educators. Set an inspiring, serious tone for this unit.
+  * Emphasize that creed forms the heart's certainty, while jurisprudence shapes daily practice.
+  * Explain that our curriculum relies upon classical texts (Umm al-Barahin, Jawharat al-Tawhid, al-Murshid al-Mu'in, al-Risalah) to provide grounded scholarship.
+
+---
+
+## Slide 2: Introduction to Aqidah & Fiqh
 * **Visual Guide / Layout:** A simple, elegant title slide. Background showing a traditional manuscript design or geometric patterns. Emphasize the keywords: *Aqidah* (Creed) and *Fiqh* (Jurisprudence).
 * **Slide Content:**
   * **Welcome to our Islamic Studies Journey!**
@@ -21,20 +35,20 @@
 
 ---
 
-## Slide 2: Who is Allah? The Core Principle of Tawhid
+## Slide 3: Who is Allah? The Core Principle of Tawhid
 * **Visual Guide / Layout:** A starry night sky or a beautiful nature background. Central word: *Tawhid* (تَوْحِيد) in clean, prominent text.
 * **Slide Content:**
   * **Tawhid (تَوْحِيد):** Uncompromising belief in the Oneness of Allah.
-  * Allah is *Al-Wahid* (الْوَاحِد) and *Al-Ahad* (الأَحَد) – The One, The Unique.
+  * Allah is *Al-Wahid* (الْوَاحِد) and *Al-Ahad* (الأَحَد) - The One, The Unique.
   * He has no partners, no parents, no children, and no equals.
   * Knowing Allah is the very first obligation (*Wajib*) for a Muslim.
 * **Teacher Notes:**
   * Explain that *Tawhid* is the foundation of everything. In the Ash'ari school, the first obligation upon a person who reaches the age of mental maturity (*Bulugh*) is to know Allah through reason and revelation.
-  * Discuss Surah al-Ikhlas (Chapter 112) as the ultimate summary of Tawhid. Highlight the word *Al-Samad* (الصَّمَد) – the Self-Sufficient Master upon whom all creation depends, while He depends on nothing.
+  * Discuss Surah al-Ikhlas (Chapter 112) as the ultimate summary of Tawhid. Highlight the word *Al-Samad* (الصَّمَد) - the Self-Sufficient Master upon whom all creation depends, while He depends on nothing.
 
 ---
 
-## Slide 3: Knowing Allah through His Necessary Attributes (Sifat al-Wajibah)
+## Slide 4: Knowing Allah through His Necessary Attributes (Sifat al-Wajibah)
 * **Visual Guide / Layout:** A table or split column layout showing the Arabic terms on one side and English translations on the other.
 * **Slide Content:**
   * **Sifat al-Wajibah (الصِّفَات الْوَاجِبَة):** The attributes that logically must belong to Allah.
@@ -49,7 +63,7 @@
 
 ---
 
-## Slide 4: Transcending Space and Time (Mukhalafah lil-Hawadith)
+## Slide 5: Transcending Space and Time (Mukhalafah lil-Hawadith)
 * **Visual Guide / Layout:** Graphic illustrating a timeline and a globe, with a barrier or indicator showing Allah is completely outside and beyond these concepts.
 * **Slide Content:**
   * **Mukhalafah lil-Hawadith (مُخَالَفَتُهُ لِلْحَوَادِثِ):** Absolute difference from created things.
@@ -63,7 +77,7 @@
 
 ---
 
-## Slide 5: The Names of Allah (Al-Asma' al-Husna)
+## Slide 6: The Names of Allah (Al-Asma' al-Husna)
 * **Visual Guide / Layout:** A collage of beautiful calligraphy of some of the 99 Names, such as *Al-Khaliq* (The Creator), *Al-Rahman* (The Merciful), and *Al-Hakim* (The Wise).
 * **Slide Content:**
   * **Al-Asma' al-Husna (الأَسْمَاء الْحُسْنَى):** The Most Beautiful Names of Allah.
@@ -78,7 +92,7 @@
 
 ---
 
-## Slide 6: Ash'ari Reading of Sacred Texts: Tafwid and Ta'wil
+## Slide 7: Ash'ari Reading of Sacred Texts: Tafwid and Ta'wil
 * **Visual Guide / Layout:** A scale balance showing two valid paths: *Tafwid* (leaving the meaning to Allah) and *Ta'wil* (metaphorical interpretation).
 * **Slide Content:**
   * How do we understand Quranic words like the "Hand" (*Yad*) or "Face" (*Wajh*) of Allah?
@@ -95,7 +109,7 @@
 
 ---
 
-## Slide 7: The Six Pillars of Iman (Overview)
+## Slide 8: The Six Pillars of Iman (Overview)
 * **Visual Guide / Layout:** An infographic showing six pillars supporting a beautiful structure labeled *Iman* (Faith).
 * **Slide Content:**
   * **Iman (إِيمَان):** Faith or belief.
@@ -112,7 +126,7 @@
 
 ---
 
-## Slide 8: Iman in Allah and His Attributes of Power, Will, and Knowledge
+## Slide 9: Iman in Allah and His Attributes of Power, Will, and Knowledge
 * **Visual Guide / Layout:** Interlocking circles or gears showing *Qudrah* (Power), *Iradah* (Will), and *'Ilm* (Knowledge) working together.
 * **Slide Content:**
   * Under Ash'ari Aqidah, three key attributes explain how Allah acts in the universe:
@@ -129,7 +143,7 @@
 
 ---
 
-## Slide 9: Angels: Creation, Nature, and Characteristics
+## Slide 10: Angels: Creation, Nature, and Characteristics
 * **Visual Guide / Layout:** Bright light rays against a deep background. Emphasize that angels are not human-like babies with wings, but majestic creations of light.
 * **Slide Content:**
   * **Angels (Malā'ikah - مَلَائِكَة):** Noble creations of Allah made from light (*Nur*).
@@ -144,7 +158,7 @@
 
 ---
 
-## Slide 10: The Major Angels and Their Duties
+## Slide 11: The Major Angels and Their Duties
 * **Visual Guide / Layout:** Four columns or cards, each representing one of the major angels with their primary responsibility listed below.
 * **Slide Content:**
   * **Jibril (جِبْرِيل):** The Archangel of Revelation (*Wahy*). Delivered scripture to the Prophets.
@@ -158,7 +172,7 @@
 
 ---
 
-## Slide 11: The Angels Who Accompany Us
+## Slide 12: The Angels Who Accompany Us
 * **Visual Guide / Layout:** An illustration of a child walking, with two soft light shapes on either side representing the recording angels, and others around them for protection.
 * **Slide Content:**
   * **Kiraman Katibin (كِرَامًا كَاتِبِينَ) - The Honorable Recorders:**
@@ -173,7 +187,7 @@
 
 ---
 
-## Slide 12: The Holy Books (Kutub) and the Divine Speech (Kalam)
+## Slide 13: The Holy Books (Kutub) and the Divine Speech (Kalam)
 * **Visual Guide / Layout:** Images representing scrolls and books. Text highlighting the names of the books and the prophets who received them.
 * **Slide Content:**
   * We believe in the original scriptures sent by Allah:
@@ -187,11 +201,11 @@
     * The physical Quran we hold, read, and hear consists of created letters and sounds that *point to* that uncreated Divine Speech.
 * **Teacher Notes:**
   * Explain the historical context: Sunni scholars had a major debate about whether the Quran is created or uncreated. 
-  * The Ash'ari school resolved this with a beautiful distinction: Allah's attribute of Speech (*Kalam*) is eternal and uncreated, just like His Knowledge. However, the Arabic words we print on paper, the sound waves created when we recite, and the ink we use are created things. We must respect the printed Quran because of what it represents—the eternal Speech of Allah.
+  * The Ash'ari school resolved this with a beautiful distinction: Allah's attribute of Speech (*Kalam*) is eternal and uncreated, just like His Knowledge. However, the Arabic words we print on paper, the sound waves created when we recite, and the ink we use are created things. We must respect the printed Quran because of what it represents: the eternal Speech of Allah.
 
 ---
 
-## Slide 13: Prophets and Messengers (Anbiya' and Rusul)
+## Slide 14: Prophets and Messengers (Anbiya' and Rusul)
 * **Visual Guide / Layout:** A chain link timeline showing the continuity of Prophets from Adam to Muhammad ﷺ, emphasizing they all brought the same message of Tawhid.
 * **Slide Content:**
   * **Nabi (نَبِي) - Prophet:** A man chosen by Allah to receive guidance, usually following an existing law (*Shari'ah*).
@@ -205,7 +219,7 @@
 
 ---
 
-## Slide 14: The Infallibility of the Prophets ('Ismah)
+## Slide 15: The Infallibility of the Prophets ('Ismah)
 * **Visual Guide / Layout:** Icons representing clean virtues: Truth, Trust, Intelligence, and a shield representing protection from sin.
 * **Slide Content:**
   * **'Ismah (عِصْمَة):** Infallibility. The protection of Prophets from committing sins.
@@ -224,7 +238,7 @@
 
 ---
 
-## Slide 15: Believing in Qadar (Divine Decree)
+## Slide 16: Believing in Qadar (Divine Decree)
 * **Visual Guide / Layout:** An image of a pen writing on a scroll, representing the *Lawh al-Mahfuz* (Preserved Tablet).
 * **Slide Content:**
   * **Qadar (قَدَر):** Allah's eternal measurement and decree of all things.
@@ -239,7 +253,7 @@
 
 ---
 
-## Slide 16: Human Choice and the Ash'ari Concept of Kasb (Acquisition)
+## Slide 17: Human Choice and the Ash'ari Concept of Kasb (Acquisition)
 * **Visual Guide / Layout:** A user interface metaphor: Allah creates the computer system and the keyboard (Power/Creation), but the human chooses which buttons to press (Acquisition).
 * **Slide Content:**
   * If Allah creates everything, who is responsible for our actions?
@@ -257,7 +271,7 @@
 
 ---
 
-## Slide 17: Qadar is Not an Excuse for Bad Choices!
+## Slide 18: Qadar is Not an Excuse for Bad Choices!
 * **Visual Guide / Layout:** A stop sign or warning icon. Side-by-side text contrasting "Excusing choices" vs. "Taking responsibility."
 * **Slide Content:**
   * **We cannot use Qadar to justify our sins!**
@@ -271,7 +285,7 @@
 
 ---
 
-## Slide 18: Why We Learn Schools of Thought (Madhhabs)
+## Slide 19: Why We Learn Schools of Thought (Madhhabs)
 * **Visual Guide / Layout:** A map of the Muslim world showing different colors for different schools, or a tree with different branches showing unity in the trunk.
 * **Slide Content:**
   * Why do different scholars have different opinions on small details?
@@ -288,7 +302,7 @@
 
 ---
 
-## Slide 19: The Maliki Madhhab: The Practice of Madinah and Sadl
+## Slide 20: The Maliki Madhhab: The Practice of Madinah and Sadl
 * **Visual Guide / Layout:** An illustration of a person praying with their hands resting naturally at their sides (*Sadl*), contrasted with hands folded on the chest (*Qabd*).
 * **Slide Content:**
   * **Imam Malik ibn Anas (d. 179 AH):** The Imam of Madinah, the city of the Prophet ﷺ.
@@ -305,7 +319,7 @@
 
 ---
 
-## Slide 20: More Maliki Rulings on Salah
+## Slide 21: More Maliki Rulings on Salah
 * **Visual Guide / Layout:** Checklist format detailing specific Maliki rulings on Salah.
 * **Slide Content:**
   * **Recitation of the Basmalah (بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِيمِ):**
@@ -319,7 +333,7 @@
 
 ---
 
-## Slide 21: Summary & Reflection
+## Slide 22: Summary & Reflection
 * **Visual Guide / Layout:** Summary list on the left, a thought-bubble illustration with the word "Reflection" on the right.
 * **Slide Content:**
   * **What we have learned today:**
@@ -336,7 +350,7 @@
 
 ---
 
-## Slide 22: Sources & References (For Teachers)
+## Slide 23: Sources & References (For Teachers)
 * **Visual Guide / Layout:** A academic-looking bibliography slide with book covers or text styling.
 * **Slide Content:**
   * **Aqidah (Ash'ari School):**

@@ -6,65 +6,74 @@
 
 ## Part A: Multiple Choice
 
-### 1. What blessed word do we say before we begin eating our food?
-* A) Bismillah
-* B) Goodbye
-* C) Excuse me
-* D) Never
+### 1. What blessed phrase do we say before taking our first bite of food according to the Sunnah?
+(A) Subhan Allah
+(B) Astaghfirullah
+(C) La ilaha illallah
+(D) Bismillah
 
-### 2. Which hand did the Prophet Muhammad ﷺ teach us to eat and drink with?
-* A) Right hand
-* B) Left hand
-* C) Both hands behind our back
-* D) No hands
+### 2. Which hand did Prophet Muhammad ﷺ teach us to use when eating and drinking?
+(A) The right hand
+(B) The left hand
+(C) Either hand interchangeably
+(D) Both hands together
 
-### 3. What does the word "Halal" mean?
-* A) Permissible, good, and pure for us to eat
-* B) Poisonous
-* C) Sour
-* D) Very expensive
+### 3. What does the Arabic word "Halal" mean when applied to our food and drinks?
+(A) Expensive and rare
+(B) Only grown in a garden
+(C) Lawful, wholesome, and permitted by Allah
+(D) Imported from another country
 
-### 4. Which of the following foods is NOT halal for a Muslim to eat?
-* A) Pork / Bacon
-* B) Fresh apples
-* C) Honey
-* D) Bread
+### 4. Which of the following items is strictly forbidden (Haram) for a Muslim to consume?
+(A) Ripe sweet dates
+(B) Pork and intoxicating drinks
+(C) Fresh cow's milk
+(D) Warm baked bread
 
-### 5. What do we say when we finish eating our meal?
-* A) Al-Hamdulillah (Praise be to Allah)
-* B) I want more toys
-* C) Nothing
-* D) See you later
+### 5. What do we say after finishing our meal to express gratitude to Allah for providing our food?
+(A) As-salamu 'alaykum
+(B) Bismillah
+(C) Allahu Akbar
+(D) Al-Hamdulillah (All praise belongs to Allah)
 
 ---
 
 ## Part B: Fill in the Blanks
-*Word Bank: Bismillah, Right, Halal*
+Vocabulary Bank: Bismillah, Right, Halal
 
-6. Food that is clean, good, and allowed by Allah is called **_________________**.
-7. We say **_________________** before taking our first bite of food.
-8. We eat and drink using our **_________________** hand.
+6. Food that is lawful, pure, and allowed by Allah is called ______.
+7. We say ______ before beginning our meal.
+8. We eat and drink using our clean ______ hand.
 
 ---
 
 ## Part C: Matching Pairs
-Pair 1: Bismillah --- Said before eating
-Pair 2: Al-Hamdulillah --- Said after finishing a meal
-Pair 3: Right Hand --- Hand used for eating according to the Sunnah
+* Bismillah ─── Said before eating to remember Allah
+* Al-Hamdulillah ─── Said after finishing to express gratitude
+* Right hand ─── Hand used for eating per the Sunnah
+* Tayyib ─── Wholesome, clean, and nutritious food
 
 ---
 
 ## Part D: Reflection
-9. What is your favorite healthy, halal snack that Allah made for us?
+9. What is your favorite healthy, halal meal that Allah made for us, and how can you thank your parents for preparing it?
 
 ---
 
-## Teacher Answer Key
-1. A) Bismillah.
-2. A) Right hand.
-3. A) Permissible and pure.
-4. A) Pork is strictly haram.
-5. A) Al-Hamdulillah.
+## Answer Key
+1. D - Saying Bismillah before eating is taught in Sahih al-Bukhari 5376.
+2. A - The Prophet ﷺ instructed eating with the right hand.
+3. C - Halal signifies that which is lawful, good, and permitted by Allah.
+4. B - Pork and intoxicants are explicitly forbidden in Islamic law.
+5. D - Saying Al-Hamdulillah expresses thankfulness to Allah for nourishment.
+
+### Fill in the Blanks Key
 6. Halal
 7. Bismillah
 8. Right
+
+### Matching Key
+* Bismillah ─── Said before eating to remember Allah
+* Al-Hamdulillah ─── Said after finishing to express gratitude
+* Right hand ─── Hand used for eating per the Sunnah
+* Tayyib ─── Wholesome, clean, and nutritious food

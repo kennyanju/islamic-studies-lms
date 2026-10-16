@@ -1,11 +1,11 @@
 # Year 5 Syllabus: Analysis, Contemporary Issues, & Synthesis
 
-> **Target Learner**: Age 10–11  
+> **Target Learner**: Level 5 Track: Senior High & Capstone (Ages 14-16+)  
 > **Weekly Schedule**: **3 seminar sessions × 90 minutes** = 270 min/week  
 > **Annual Instructional Volume**: 36 Weeks (3 Terms of 12 Weeks) = 162 hours  
 > **ICO Benchmarks Absorbed**: Grade 10, Grade 11, and Grade 12 (epistemology, commercial law, modern ideologies, usul al-fiqh, bioethics, inheritance)  
 > **Classical Text Spine**: *Jawharat al-Tawhid* (Imam al-Laqani), *Bidayat al-Mujtahid* (Ibn Rushd), *Al-Waraqat* (Imam al-Juwayni), and *Ibn 'Ashir* (Tazkiyah section)  
-> **Riwayah**: Hafs 'an 'Asim (Juz' 29 completion: Surahs Al-Muddaththir, Al-Qiyamah, Al-Insan, Al-Mursalat; analytical study of Surah Al-Kahf and Surah Yasin)
+> **Riwayah**: Hafs 'an 'Asim & Warsh 'an Nafi' (Juz' 29 completion: Surahs Al-Muddaththir, Al-Qiyamah, Al-Insan, Al-Mursalat; analytical study of Surah Al-Kahf and Surah Yasin)
 
 ---
 
@@ -25,8 +25,8 @@
 * **Extension Outcomes (13+)**:
   1. The 4 Stages of Qadar: *Al-'Ilm* (Eternal Knowledge), *Al-Kitabah* (Preserved Tablet / *Al-Lawh al-Mahfuz*), *Al-Mashi'ah* (All-Encompassing Will), and *Al-Khalq* (Direct Creation of Action).
   2. Ash'ari critique of natural necessity (*Iqtiran* vs *Ta'thir*): Causality as a divine customary habit (*'Adah*) rather than inherent mechanical power in physical objects (fire does not burn by itself; Allah creates burning at the moment of contact).
-* **Ash'ari Creed Flag**: The doctrine of *Kasb*: *"Kullu shay'in bi-qada'illahi wa qadarih"* — Everything occurs by divine decree, yet human intention (*Qasd*) ensures full ethical and legal accountability.
-* **🌍 Other Scholars Say — Analysis Box**:
+* **Ash'ari Creed Flag**: The doctrine of *Kasb*: *"Kullu shay'in bi-qada'illahi wa qadarih"*: Everything occurs by divine decree, yet human intention (*Qasd*) ensures full ethical and legal accountability.
+* **🌍 Other Scholars Say (Analysis Box)**:
   > *Topic: Human Will, Action, and Divine Decree*
   > **All Sunni schools agree**: Allah knows everything that was and will be; nothing happens in the universe without His Will; human beings are genuinely responsible for their moral choices and will be held accountable.
   >
@@ -71,11 +71,11 @@
 * **Core Outcomes (Age 10–11)**:
   1. The student defines **Usul al-Fiqh**: The principles and methodology by which jurists extract detailed legal rulings from primary scriptural sources.
   2. The student categorizes human actions into the **5 Legal Rulings (Al-Ahkam al-Taklifiyyah)**:
-     * **Wajib / Fard** (Obligatory) — Rewarded for doing, punished for leaving (e.g. 5 daily prayers).
-     * **Mandub / Mustahabb** (Recommended) — Rewarded for doing, not punished for leaving (e.g. siwak, voluntary charity).
-     * **Mubah** (Permissible) — Neither rewarded nor punished inherently (e.g. eating an apple, walking).
-     * **Makruh** (Disliked) — Rewarded for leaving, not punished for doing (e.g. wasting water in wudu).
-     * **Haram** (Prohibited) — Rewarded for leaving, punished for doing (e.g. lying, consuming riba, theft).
+     * **Wajib / Fard** (Obligatory): Rewarded for doing, punished for leaving (e.g. 5 daily prayers).
+     * **Mandub / Mustahabb** (Recommended): Rewarded for doing, not punished for leaving (e.g. siwak, voluntary charity).
+     * **Mubah** (Permissible): Neither rewarded nor punished inherently (e.g. eating an apple, walking).
+     * **Makruh** (Disliked): Rewarded for leaving, not punished for doing (e.g. wasting water in wudu).
+     * **Haram** (Prohibited): Rewarded for leaving, punished for doing (e.g. lying, consuming riba, theft).
   3. The student details the unique hierarchy of sources in the **Maliki Madhhab**:
      1. The Noble Qur'an (Textual proof and universal principles).
      2. The Prophetic Sunnah (Mutawatir and Mashhur).
@@ -111,7 +111,7 @@
 * **Extension Outcomes (13+)**:
   1. Detailed analysis of the 6 Ribawi commodities (Gold, Silver, Wheat, Barley, Dates, Salt): The Maliki effective cause (*'Illah*) for food commodities (being staple and storable: *Al-Iqqiyāt wal-Iddikhar*) contrasted with the Hanafi and Shafi'i views.
   2. Options in contracts (**Al-Khiyar**): The Maliki rejection of *Khiyar al-Majlis* (option of the physical session) in favor of the binding nature of clear verbal agreement, upholding *'Amal Ahl al-Madinah*.
-* **🌍 Other Scholars Say — Analysis Box**:
+* **🌍 Other Scholars Say (Analysis Box)**:
   > *Topic: The Option of Canceling a Sale at the Counter (Khiyar al-Majlis)*
   > **All agree**: Both buyer and seller must deal with complete honesty, disclosure of defects, and mutual consent (*'An Taradin*).
   >
@@ -123,7 +123,7 @@
   > *Reflective thought*: Ibn Rushd in *Bidayat al-Mujtahid* points out that both camps used authentic texts; their difference was purely a methodological distinction between Madinan continuous practice and isolated textual phrasing!
 * **Qur'an & Hadith Evidence**: Surah Al-Baqarah (2:275: *"Allah has permitted trade and has forbidden interest"*); Surah An-Nisa (4:29: *"Do not consume one another's wealth unjustly but only in lawful business by mutual consent"*).
 * **Pedagogical Activities**: Business Ethics Boardroom: Students analyze simulated business contracts (e.g. subscription models, delayed payment plans, gaming loot-boxes) to detect hidden Gharar or Riba.
-* **Hifz & Memorisation**: Nawawi Hadith 32 (*"There shall be no harm, nor reciprocal harm"* — *La darara wa la dirar*). Surah Yasin (Verses 1–32).
+* **Hifz & Memorisation**: Nawawi Hadith 32 (*"There shall be no harm, nor reciprocal harm"*, *La darara wa la dirar*). Surah Yasin (Verses 1–32).
 
 ---
 
@@ -206,10 +206,10 @@
      * **North & West Africa**: The great universities of Al-Qarawiyyin in Fez (founded by Fatima al-Fihri - world's oldest degree-granting university), Al-Azhar in Cairo, and the Sankore University in Timbuktu (Mali).
      * **Ottoman Empire**: Institutional architecture (Sinan), preservation of Islamic borders, Waqf endowment networks.
   2. The student identifies major polymaths who synthesized faith and empirical science:
-     * **Al-Khwarizmi** — Father of Algebra (*Al-Jabr*) and algorithms.
-     * **Ibn Sina (Avicenna)** — Father of modern clinical medicine (*The Canon of Medicine*).
-     * **Ibn al-Haytham (Alhazen)** — Father of modern optics and the scientific method of empirical testing.
-     * **Ibn Khaldun** (Maliki judge of Tunis/Cairo) — Founder of sociology and historical analysis.
+     * **Al-Khwarizmi**: Pioneer of Algebra (*Al-Jabr*) and algorithms.
+     * **Ibn Sina (Avicenna)**: Author of *The Canon of Medicine* and pioneer of clinical medicine.
+     * **Ibn al-Haytham (Alhazen)**: Pioneer of modern optics and empirical testing.
+     * **Ibn Khaldun** (Maliki judge of Tunis/Cairo): Founder of sociology and historical analysis.
 * **Extension Outcomes (13+)**:
   1. The Islamic concept of **Waqf** (Perpetual Charitable Endowments): How free hospitals, universities, soup kitchens, and animal sanctuaries were funded autonomously without government interference.
   2. The legacy of Muslim scholarship in preserving and transmitting classical learning to spark the European Renaissance.
@@ -243,7 +243,7 @@
 ## Year 5 Assessment & Review Framework
 * **Capstone Research Thesis & Oral Defense**: A 1,500-word written monograph exploring a contemporary Islamic ethics topic (e.g. "Islamic Finance vs Conventional Debt", "Bioethics of Organ Donation", or "The Ash'ari Rebuttal of Materialism") defended before a teacher panel.
 * **Term Practicums**:
-  * *Term 1*: Usul al-Fiqh Case Defense — Deriving rulings using the 5 Maqasid and Maliki *'Amal*.
-  * *Term 2*: Mu'amalat Contract Analysis — Auditing an investment contract for Riba and Gharar.
-  * *Term 3*: Classical Matn Recitation — Delivering 50 lines of *Ibn 'Ashir* and selected lines of *Jawharat al-Tawhid* from memory.
+  * *Term 1*: Usul al-Fiqh Case Defense: Deriving rulings using the 5 Maqasid and Maliki *'Amal*.
+  * *Term 2*: Mu'amalat Contract Analysis: Auditing an investment contract for Riba and Gharar.
+  * *Term 3*: Classical Matn Recitation: Delivering 50 lines of *Ibn 'Ashir* and selected lines of *Jawharat al-Tawhid* from memory.
 * **Annual Milestone**: Awarding the **"Graduate of Islamic Studies Diploma"**, conferring full foundational Islamic literacy across the 7 Curricular Strands, certified readiness for intermediate madrasah / classical study, and complete K–12 ICO equivalency!

@@ -1,6 +1,24 @@
-/* ==========================================================================
-   Islamic Studies LMS - Single Page Application & Pedagogy Controller
-   ========================================================================== */
+// Islamic Studies LMS single page application controller
+import {
+  escapeHtml,
+  enhanceArabicText,
+  renderMarkdown,
+  openAccessibleModal,
+  closeAccessibleModal,
+  showToast
+} from './js/utils.js';
+import { evaluatePasswordStrength, initPasswordUX } from './js/auth.js';
+
+// Expose core utilities globally for backward compatibility
+if (typeof window !== 'undefined') {
+  window.escapeHtml = escapeHtml;
+  window.enhanceArabicText = enhanceArabicText;
+  window.renderMarkdown = renderMarkdown;
+  window.openAccessibleModal = openAccessibleModal;
+  window.closeAccessibleModal = closeAccessibleModal;
+  window.showToast = showToast;
+  window.evaluatePasswordStrength = evaluatePasswordStrength;
+}
 
 document.addEventListener('DOMContentLoaded', () => {
   // App State
@@ -163,215 +181,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const fullscreenSlidesBtn = document.getElementById('fullscreenSlidesBtn');
 
   const voiceScriptContent = document.getElementById('voiceScriptContent');
-
-  if (window.marked) {
-    const renderer = new marked.Renderer();
-    renderer.image = function (href, title, text) {
-      return `<img src="${href}" alt="${text || ''}" title="${title || ''}" loading="lazy" decoding="async" class="responsive-img" />`;
-    };
-    marked.setOptions({
-      renderer: renderer,
-      gfm: true,
-      breaks: true
-    });
-  }
-
-  function escapeHtml(str) {
-    if (typeof str !== 'string') return '';
-    return str
-      .replace(/&/g, '&amp;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;')
-      .replace(/"/g, '&quot;')
-      .replace(/'/g, '&#039;');
-  }
-
-  function enhanceArabicText(html) {
-    if (!html || typeof html !== 'string') return html;
-    // Replace text nodes containing Arabic characters without altering HTML tags
-    return html.replace(/>([^<]+)</g, (match, textContent) => {
-      const arabicRegex =
-        /([\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\uFB50-\uFDFF\uFE70-\uFEFF]+(?:[\s\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\uFB50-\uFDFF\uFE70-\uFEFF]+)*)/g;
-      const enhanced = textContent.replace(
-        arabicRegex,
-        '<span class="arabic-term" lang="ar" dir="rtl">$1</span>'
-      );
-      return `>${enhanced}<`;
-    });
-  }
-
-  function renderMarkdown(md) {
-    if (!md) return '';
-    const rawHtml = window.marked ? marked.parse(md) : md;
-    const sanitized = window.DOMPurify ? DOMPurify.sanitize(rawHtml) : rawHtml;
-    return enhanceArabicText(sanitized);
-  }
-
-  // --------------------------------------------------------------------------
-  // ACCESSIBLE MODAL & FOCUS TRAP MANAGER (Class-Based Transitions)
-  // --------------------------------------------------------------------------
-  let currentlyOpenModal = null;
-
-  function openAccessibleModal(modalEl, initialFocusSelector = null) {
-    if (!modalEl) return;
-    if (currentlyOpenModal && currentlyOpenModal !== modalEl) {
-      closeAccessibleModal(currentlyOpenModal, false);
-    }
-
-    modalEl._previouslyFocusedElement = document.activeElement;
-    modalEl.classList.add('is-open');
-    modalEl.setAttribute('aria-hidden', 'false');
-    currentlyOpenModal = modalEl;
-
-    // Focus target or first focusable item after CSS transition starts
-    setTimeout(() => {
-      let focusTarget = null;
-      if (initialFocusSelector) {
-        focusTarget = modalEl.querySelector(initialFocusSelector);
-      }
-      if (!focusTarget) {
-        focusTarget = modalEl.querySelector(
-          'input:not([type="hidden"]):not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), [tabindex="0"]'
-        );
-      }
-      if (focusTarget) {
-        focusTarget.focus();
-      } else {
-        modalEl.focus();
-      }
-    }, 60);
-
-    // Trap focus inside modal & close on Escape
-    if (!modalEl._trapKeyHandler) {
-      modalEl._trapKeyHandler = (e) => {
-        if (e.key === 'Escape') {
-          e.preventDefault();
-          closeAccessibleModal(modalEl);
-          return;
-        }
-
-        if (e.key === 'Tab') {
-          const focusable = Array.from(
-            modalEl.querySelectorAll(
-              'button:not([disabled]), [href], input:not([type="hidden"]):not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
-            )
-          ).filter(
-            (el) => el.offsetWidth > 0 || el.offsetHeight > 0 || el === document.activeElement
-          );
-
-          if (focusable.length === 0) return;
-
-          const first = focusable[0];
-          const last = focusable[focusable.length - 1];
-
-          if (e.shiftKey) {
-            if (document.activeElement === first || !modalEl.contains(document.activeElement)) {
-              e.preventDefault();
-              last.focus();
-            }
-          } else {
-            if (document.activeElement === last || !modalEl.contains(document.activeElement)) {
-              e.preventDefault();
-              first.focus();
-            }
-          }
-        }
-      };
-      modalEl.addEventListener('keydown', modalEl._trapKeyHandler);
-    }
-  }
-
-  function closeAccessibleModal(modalEl, restoreFocus = true) {
-    if (!modalEl) return;
-    modalEl.classList.remove('is-open');
-    modalEl.setAttribute('aria-hidden', 'true');
-
-    if (modalEl._trapKeyHandler) {
-      modalEl.removeEventListener('keydown', modalEl._trapKeyHandler);
-      modalEl._trapKeyHandler = null;
-    }
-
-    if (currentlyOpenModal === modalEl) {
-      currentlyOpenModal = null;
-    }
-
-    if (
-      restoreFocus &&
-      modalEl._previouslyFocusedElement &&
-      typeof modalEl._previouslyFocusedElement.focus === 'function'
-    ) {
-      try {
-        modalEl._previouslyFocusedElement.focus();
-      } catch (_err) {}
-    }
-  }
-
-  // --------------------------------------------------------------------------
-  // TOAST NOTIFICATION SYSTEM (With Optional Action / Retry Handler)
-  // --------------------------------------------------------------------------
-  const toastContainer = document.getElementById('toastContainer');
-
-  function showToast(
-    title,
-    message,
-    type = 'success',
-    duration = 4500,
-    actionCallback = null,
-    actionLabel = 'Retry'
-  ) {
-    if (!toastContainer) return;
-
-    const toast = document.createElement('div');
-    toast.className = `toast ${type}`;
-    toast.setAttribute('role', 'status');
-
-    let iconClass = 'fa-circle-check';
-    if (type === 'celebration') iconClass = 'fa-award';
-    else if (type === 'info') iconClass = 'fa-circle-info';
-    else if (type === 'error') iconClass = 'fa-triangle-exclamation';
-
-    toast.innerHTML = `
-      <div class="toast-icon" aria-hidden="true">
-        <i class="fa-solid ${iconClass}"></i>
-      </div>
-      <div class="toast-content">
-        <div class="toast-title">${escapeHtml(title)}</div>
-        <div class="toast-message">${escapeHtml(message)}</div>
-        ${actionCallback ? `<button class="toast-action-btn"><i class="fa-solid fa-rotate-right"></i> ${escapeHtml(actionLabel)}</button>` : ''}
-      </div>
-      <button class="toast-close-btn" aria-label="Dismiss notification">
-        <i class="fa-solid fa-xmark" aria-hidden="true"></i>
-      </button>
-    `;
-
-    const closeBtn = toast.querySelector('.toast-close-btn');
-    const dismiss = () => {
-      toast.classList.add('toast-hiding');
-      setTimeout(() => {
-        if (toast.parentNode === toastContainer) {
-          toastContainer.removeChild(toast);
-        }
-      }, 250);
-    };
-
-    closeBtn.addEventListener('click', dismiss);
-
-    if (actionCallback) {
-      const actionBtn = toast.querySelector('.toast-action-btn');
-      if (actionBtn) {
-        actionBtn.addEventListener('click', () => {
-          dismiss();
-          actionCallback();
-        });
-      }
-    }
-
-    toastContainer.appendChild(toast);
-
-    if (duration > 0) {
-      setTimeout(dismiss, duration);
-    }
-  }
+  // Core UI utilities (escapeHtml, enhanceArabicText, renderMarkdown, openAccessibleModal, closeAccessibleModal, showToast)
+  // are imported from modular ./js/utils.js
 
   // Fast Startup Course Data Loader with Multi-Source Fallbacks
   async function loadCourseData() {
@@ -1069,9 +880,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // --------------------------------------------------------------------------
-  // VIDEO LESSON PLAYER ENGINE
-  // --------------------------------------------------------------------------
+  // Video lesson player
   let _currentVideoSlide = null;
 
   function renderVideo(mod) {
@@ -1223,9 +1032,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // --------------------------------------------------------------------------
-  // Confetti Animation Engine (Canvas-Confetti with Offline DOM Fallback)
-  // --------------------------------------------------------------------------
+  // Confetti animation with offline fallback
   function triggerConfetti(options = {}) {
     if (typeof window.confetti === 'function') {
       try {
@@ -1298,9 +1105,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 3000);
   }
 
-  // --------------------------------------------------------------------------
-  // Level 1 (Ages 6–8) Playful Comic Card Renderer & Theming
-  // --------------------------------------------------------------------------
+  // Level 1 comic card renderer and theming
   function detectCardTheme(title = '', rawContent = '') {
     const t = (title || '').toLowerCase();
     const c = (rawContent || '').toLowerCase();
@@ -1707,14 +1512,6 @@ document.addEventListener('DOMContentLoaded', () => {
     9: ['Civilization & History', "Khulafa' al-Rashidun", 'Four Sunni Madhhabs', 'Living Faith']
   };
 
-  const trackIcoBenchmarkMap = {
-    level1: 'ICO Benchmark: Grades 1–2 Aligned (Ages 6–8)',
-    level2: 'ICO Benchmark: Grades 3–4 Aligned (Ages 8–10)',
-    level3: 'ICO Benchmark: Grades 5–6 Aligned (Ages 10–12)',
-    level4: 'ICO Benchmark: Grades 7–8 Aligned (Ages 12–14)',
-    level5: 'ICO Benchmark: Grades 9–12 Senior Benchmark (Ages 14–16+)',
-    teacher: 'ICO Curriculum Master: Grades 1–12 Complete Alignment'
-  };
 
   let isHandoutTtsPlaying = false;
   let handoutTtsUtterance = null;
@@ -1817,8 +1614,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function updateHandoutSessionBanner(mod, trackObj) {
     if (handoutIcoText) {
-      handoutIcoText.textContent =
-        trackIcoBenchmarkMap[activeTrack] || 'ICO Curricular Standard Aligned';
+      handoutIcoText.textContent = '';
     }
 
     const md = trackObj && trackObj.handoutMd ? trackObj.handoutMd : '';
@@ -1990,9 +1786,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // --------------------------------------------------------------------------
-  // TEACHER TELEPROMPTER & LIVE PRESENTATION ENGINE
-  // --------------------------------------------------------------------------
+  // Teacher teleprompter and presentation controller
 
   function renderTeleprompter(mod) {
     if (!mod || !mod.teacher) {
@@ -2070,9 +1864,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // --------------------------------------------------------------------------
-  // TELEPROMPTER AUTO SCROLL (Smooth rAF with gesture pause, speed & progress)
-  // --------------------------------------------------------------------------
+  // Teleprompter smooth auto-scroll
   let tpScrollRafId = null;
   let lastTpFrameTime = 0;
   const tpScrollProgressFill = document.getElementById('tpScrollProgressFill');
@@ -2176,9 +1968,7 @@ document.addEventListener('DOMContentLoaded', () => {
     tpScriptText.addEventListener('scroll', updateTpScrollProgress, { passive: true });
   }
 
-  // --------------------------------------------------------------------------
-  // Teleprompter Font Size Controls & Persistence
-  // --------------------------------------------------------------------------
+  // Teleprompter font controls
   function applySavedTpFontSize() {
     if (!tpScriptText) return;
     const saved = localStorage.getItem('lms_tp_font_size') || 'normal';
@@ -2232,9 +2022,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // --------------------------------------------------------------------------
-  // TEACHER MASTER ANSWER KEYS CONTROLLER
-  // --------------------------------------------------------------------------
+  // Teacher answer keys controller
 
   function renderAnswerKeys(mod) {
     updateAkToggleButtons();
@@ -2275,9 +2063,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // --------------------------------------------------------------------------
-  // INTERACTIVE QUIZ ENGINE & CERTIFICATE GENERATOR
-  // --------------------------------------------------------------------------
+  // Quiz engine and certificate generator
   let quizTimerInterval = null;
   let quizTimerRemainingSeconds = 0;
   let quizTimerTotalSeconds = 0;
@@ -2503,6 +2289,42 @@ document.addEventListener('DOMContentLoaded', () => {
       quizQuestionsArea.appendChild(fibSection);
     }
 
+    if (pq.matching && pq.matching.length > 0) {
+      const matchSection = document.createElement('div');
+      matchSection.className = 'quiz-card';
+      matchSection.style.marginTop = '24px';
+      matchSection.innerHTML = isLevel1
+        ? `<h3><i class="fa-solid fa-puzzle-piece" style="color:#0ea5e9;"></i> 🧩 Match the Pairs</h3>`
+        : `<h3><i class="fa-solid fa-arrows-split-up-and-left"></i> Concept Matching</h3>`;
+
+      // Collect right-hand definitions and sort them stably
+      const rightOptions = pq.matching.map((m) => m.right);
+      const sortedOptions = [...rightOptions].sort((a, b) => a.localeCompare(b));
+
+      let matchRowsHtml = '';
+      pq.matching.forEach((m, idx) => {
+        const selectOptions = sortedOptions
+          .map((opt) => `<option value="${escapeHtml(opt)}">${escapeHtml(opt)}</option>`)
+          .join('');
+        matchRowsHtml += `
+          <div style="display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:12px; margin-bottom:12px; padding:10px; background:var(--input-bg); border-radius:var(--radius-sm);">
+            <div style="font-weight:600; font-size:0.95rem; flex:1; min-width:200px;">
+              ${idx + 1}. ${escapeHtml(m.left)}
+            </div>
+            <div style="flex:1; min-width:220px;">
+              <select class="match-select" data-matchid="${idx}" data-correct="${escapeHtml(m.right)}" style="width:100%; padding:8px; border-radius:6px; border:1px solid var(--border-color); background:var(--card-bg); color:var(--text-primary); font-size:0.9rem;">
+                <option value="">-- Choose matching definition --</option>
+                ${selectOptions}
+              </select>
+            </div>
+          </div>
+        `;
+      });
+
+      matchSection.innerHTML += `<div>${matchRowsHtml}</div>`;
+      quizQuestionsArea.appendChild(matchSection);
+    }
+
     if (pq.reflection.length > 0) {
       const refSection = document.createElement('div');
       refSection.className = 'quiz-card';
@@ -2544,9 +2366,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // --------------------------------------------------------------------------
-  // Server-Side Quiz Grading & Maliki Scholarly Explanations Engine
-  // --------------------------------------------------------------------------
+  // Server-side quiz grading and explanation renderer
   submitQuizBtn.addEventListener('click', async () => {
     if (!courseData || !courseData.modules) return;
     const mod = courseData.modules.find((m) => m.id === activeModuleId);
@@ -2758,7 +2578,7 @@ document.addEventListener('DOMContentLoaded', () => {
         mascotMessageEl.textContent = 'Great dedication! Keep up the brilliant study journey!';
     } else {
       if (mascotAvatarEl) mascotAvatarEl.textContent = '🌱';
-      if (celebrationTitleEl) celebrationTitleEl.textContent = 'Quest Completed — Keep Growing! 📖';
+      if (celebrationTitleEl) celebrationTitleEl.textContent = 'Quest Completed: Keep Growing! 📖';
       if (mascotMessageEl)
         mascotMessageEl.textContent =
           'Good effort! Review the lesson cards and retry to unlock your certificate!';
@@ -2801,9 +2621,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (certCloseBtn) certCloseBtn.addEventListener('click', () => closeAccessibleModal(certModal));
   if (certDoneBtn) certDoneBtn.addEventListener('click', () => closeAccessibleModal(certModal));
 
-  // --------------------------------------------------------------------------
-  // SLIDESHOW & VOICE SCRIPT RENDERERS
-  // --------------------------------------------------------------------------
+  // Slideshow and voice script renderers
 
   function renderSlides(mod) {
     if (!mod || !mod.teacher) {
@@ -2885,9 +2703,7 @@ document.addEventListener('DOMContentLoaded', () => {
       progressSubtext.textContent = `${completedMods} of ${total} Modules Completed`;
   }
 
-  // --------------------------------------------------------------------------
-  // DAILY LEARNING STREAK TRACKER
-  // --------------------------------------------------------------------------
+  // Daily learning streak tracker
   function getLearnerStreakKey() {
     return `lms_streak_${activeChild ? activeChild.id : 'global'}`;
   }
@@ -2938,9 +2754,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // --------------------------------------------------------------------------
-  // --------------------------------------------------------------------------
-  // GLOBAL FULL-TEXT SEARCH ENGINE (250ms Debounced)
-  // --------------------------------------------------------------------------
+  // Full-text search engine (debounced)
   let searchDebounceTimer = null;
 
   function performSearch(query) {
@@ -3032,9 +2846,7 @@ document.addEventListener('DOMContentLoaded', () => {
     searchInput.focus();
   });
 
-  /* ==========================================================================
-     Multi-Tenant Auth, Family Learner Switcher, Parent & Admin Controller
-     ========================================================================== */
+  // Auth, learner switcher, parent and admin controller
 
   // State
   let currentUser = JSON.parse(localStorage.getItem('lms_user') || 'null');
@@ -4873,9 +4685,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Email Sign In Form Submit (Modal)
-  // --------------------------------------------------------------------------
-  // Client-Side WebCrypto Authentication Engine (Fallback for Static / Offline Edge)
-  // --------------------------------------------------------------------------
+  // WebCrypto client authentication fallback for offline edge
   async function hashClientPassword(pwd) {
     if (
       typeof window !== 'undefined' &&
@@ -5531,136 +5341,10 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
   })();
+  // Password reveal toggle and strength meter (initPasswordUX, evaluatePasswordStrength)
+  // are imported from modular ./js/auth.js
 
-  // --------------------------------------------------------------------------
-  // FORM UX: PASSWORD REVEAL & STRENGTH METER ENGINE
-  // --------------------------------------------------------------------------
-  function initPasswordUX() {
-    // 1. Password Reveal Toggles
-    document.querySelectorAll('.btn-password-toggle').forEach((btn) => {
-      btn.addEventListener('click', () => {
-        const targetId = btn.dataset.target;
-        const input = document.getElementById(targetId);
-        if (!input) return;
-        const isPassword = input.type === 'password';
-        input.type = isPassword ? 'text' : 'password';
-        btn.setAttribute('aria-pressed', isPassword ? 'true' : 'false');
-        btn.setAttribute('aria-label', isPassword ? 'Hide password' : 'Show password');
-        btn.innerHTML = `<i class="fa-solid fa-eye${isPassword ? '-slash' : ''}" aria-hidden="true"></i>`;
-      });
-    });
-
-    // 2. Password Strength Evaluator
-    function evaluatePasswordStrength(pass) {
-      if (!pass)
-        return { score: 0, label: 'Weak', class: 'weak', hint: 'Enter at least 6 characters' };
-      let score = 0;
-      if (pass.length >= 8) score += 1;
-      if (/[A-Z]/.test(pass)) score += 1;
-      if (/[a-z]/.test(pass)) score += 1;
-      if (/[0-9]/.test(pass)) score += 1;
-      if (/[^A-Za-z0-9]/.test(pass)) score += 1;
-
-      if (score <= 1)
-        return {
-          score: 1,
-          label: 'Weak',
-          class: 'weak',
-          hint: 'Use 8+ chars with letters & numbers'
-        };
-      if (score === 2)
-        return {
-          score: 2,
-          label: 'Fair',
-          class: 'fair',
-          hint: 'Good start. Add uppercase or symbols'
-        };
-      if (score === 3 || score === 4)
-        return { score: 3, label: 'Good', class: 'good', hint: 'Strong password. Excellent!' };
-      return {
-        score: 5,
-        label: 'Excellent',
-        class: 'strong',
-        hint: 'Very strong secure password! 🛡️'
-      };
-    }
-
-    function setupStrengthListener(inputId, containerId, fillId, labelId, criteriaId) {
-      const input = document.getElementById(inputId);
-      const container = document.getElementById(containerId);
-      const fill = document.getElementById(fillId);
-      const label = document.getElementById(labelId);
-      const criteria = document.getElementById(criteriaId);
-
-      if (!input || !container || !fill || !label || !criteria) return;
-
-      input.addEventListener('input', (e) => {
-        const val = e.target.value;
-        if (!val) {
-          container.style.display = 'none';
-          return;
-        }
-        container.style.display = 'block';
-        const res = evaluatePasswordStrength(val);
-        fill.className = `strength-bar-fill ${res.class}`;
-        label.innerHTML = `Password Strength: <strong>${res.label}</strong>`;
-        criteria.textContent = res.hint;
-      });
-    }
-
-    setupStrengthListener(
-      'homeSignUpPasswordInput',
-      'homePasswordStrengthContainer',
-      'homeStrengthFill',
-      'homeStrengthLabel',
-      'homeStrengthCriteria'
-    );
-    setupStrengthListener(
-      'signUpPasswordInput',
-      'modalPasswordStrengthContainer',
-      'modalStrengthFill',
-      'modalStrengthLabel',
-      'modalStrengthCriteria'
-    );
-    setupStrengthListener(
-      'newPasswordInput',
-      'resetPasswordStrengthContainer',
-      'resetStrengthFill',
-      'resetStrengthLabel',
-      'resetStrengthCriteria'
-    );
-
-    // 3. Pre-submit Live Validation Indicators
-    function attachLiveValidator(inputId, validatorFn) {
-      const input = document.getElementById(inputId);
-      if (!input) return;
-      const check = () => {
-        if (!input.value) {
-          input.classList.remove('is-invalid');
-          return;
-        }
-        if (!validatorFn(input.value)) {
-          input.classList.add('is-invalid');
-        } else {
-          input.classList.remove('is-invalid');
-        }
-      };
-      input.addEventListener('input', check);
-      input.addEventListener('blur', check);
-    }
-
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    attachLiveValidator('authEmailInput', (v) => emailRegex.test(v.trim()));
-    attachLiveValidator('homeAuthEmailInput', (v) => emailRegex.test(v.trim()));
-    attachLiveValidator('signUpEmailInput', (v) => emailRegex.test(v.trim()));
-    attachLiveValidator('homeSignUpEmailInput', (v) => emailRegex.test(v.trim()));
-    attachLiveValidator('signUpPasswordInput', (v) => v.length >= 6);
-    attachLiveValidator('homeSignUpPasswordInput', (v) => v.length >= 6);
-  }
-
-  // --------------------------------------------------------------------------
-  // FORGOT PASSWORD & RESET PASSWORD ENGINE
-  // --------------------------------------------------------------------------
+  // Password reset handlers
   function initForgotPasswordUX() {
     const forgotModal = document.getElementById('forgotPasswordModal');
     const resetModal = document.getElementById('resetPasswordModal');

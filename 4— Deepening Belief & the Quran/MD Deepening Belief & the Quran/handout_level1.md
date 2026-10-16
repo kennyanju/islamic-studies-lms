@@ -1,59 +1,68 @@
 # Level 1 Student Handout: Deepening Belief & the Quran
-**Age Group:** Ages 6–8 (Level 1 Track — Primary Stage 1)  
-**ICO Curriculum Benchmark:** Aligned with ICO Grades 1 & 2 (Qur'an Strand)  
-**Core Strands:** The Holy Qur'an | Respect for the Mushaf | Surah Al-Fatihah | Everyday Qur'anic Du'as  
-**Classical Text Spine:** *'Aqidat al-'Awamm* (The Heavenly Books) & *Mukhtasar al-Akhdari*  
-**Riwayah & Surah Target:** Hafs 'an 'Asim (Juz' 30: Surah Al-Fatihah, Surah Al-Falaq & Surah An-Nas)
+**Age Group:** Ages 6-8 (Level 1 Track: Primary Stage 1)  
+**Core Strands:** The Holy Quran, Respect for the Mushaf, Surah Al-Fatihah, Surah Al-Ikhlas, and Everyday Quranic Du'as  
+**Classical Text Spine:** *'Aqidat al-'Awamm* (The Heavenly Books) and *Mukhtasar al-Akhdari*  
+**Riwayah & Surah Target:** Hafs 'an 'Asim and Warsh 'an Nafi' (Juz' 30: Surah Al-Fatihah, Surah Al-Ikhlas, Surah Al-Falaq, and Surah An-Nas)
 
 ---
 
-## 📖 1. The Most Beautiful Book in the Entire World!
-Imagine receiving a special letter written just for you from someone who loves you very much. The **Holy Qur'an** is Allah's direct message of love, light, and guidance sent to all humanity!
+## 1. The Most Beautiful Book in the World
 
-* **The Speech of Allah:** The Qur'an is not a book made up by human beings; it is the pure, eternal Words of Allah.
-* **The Archangel of Light:** Allah sent the great Angel **Jibril** (Gabriel) from the heavens to recite these exact words into the heart of Prophet Muhammad ﷺ.
-* **The Mother of Books:** It teaches us how to be kind, how to pray, how to love our parents, and how to live happily in this world and in Paradise (*Jannah*).
+The **Holy Quran** is Allah's direct message of love, guidance, and light sent to all humanity:
 
-```
-                    🌟  📖  ✨  🕊️
-       The Holy Qur'an is Allah's Divine Light!
-       When we recite it, our hearts feel quiet and safe.
-```
+* **The Speech of Allah:** The Quran is not authored by human beings; it is the pure, eternal Words of Allah.
+* **The Archangel of Light:** Allah sent the great Archangel **Jibril** (AS) from the heavens to convey these exact Arabic words into the heart of Prophet Muhammad ﷺ.
+* **The Great Reward for Recitation:** The Prophet Muhammad ﷺ said:  
+  > *"Whoever recites a letter from the Book of Allah will be credited with a good deed, and a good deed receives a tenfold reward. I do not say that Alif-Lam-Mim is one letter, but Alif is a letter, Lam is a letter, and Mim is a letter."* (Jami' at-Tirmidhi 2910, Hasan Sahih)  
+  This means reciting just "Alif-Lam-Mim" earns thirty rewards (*Hasanat*)!
+* **A Guide for Living:** The Quran teaches us how to worship Allah, how to speak the truth, how to honor parents and teachers, and how to reach Paradise (*Jannah*).
 
 ---
 
-## 🤲 2. How We Care for and Respect the Mushaf
-A printed copy of the Holy Qur'an is called a **Mushaf**. Because it holds the sacred Words of Allah, little believers show it the greatest love and respect:
-1. **Purity First:** We make sure our hands are clean with fresh **Wudu** before holding the Mushaf.
-2. **Hold with Both Hands:** We hold the Mushaf gently and respectfully with both hands, hugging it close to our chest.
-3. **High and Noble Places:** We never place the Mushaf on the floor, under books, or where people might walk. We place it on a clean, high shelf or a carved wooden bookstand (*Rihl*).
-4. **Sweet Recitation:** We sit up straight, listen quietly when it is recited, and never play noisy games while the Qur'an is being read.
+## 2. How We Care for and Respect the Mushaf
+
+A printed physical copy of the Holy Quran is called a **Mushaf**. Because it holds the sacred Words of Allah, Muslims show it profound love and respect:
+
+1. **Purity with Wudu:** We make sure our hands and body are clean with fresh **Wudu** before holding the Mushaf.
+2. **Hold with Both Hands:** We hold the Mushaf gently with both hands, showing reverence for the book of Allah.
+3. **High and Clean Places:** We never place the Mushaf on the floor, under other books, or where people walk. We place it on a clean high shelf or a wooden bookstand (*Rihl*).
+4. **Attentive Listening:** When the Quran is recited, we sit quietly, listen carefully, and refrain from noisy play or distracting chatter.
 
 ---
 
-## 🌺 3. Surah Al-Fatihah: The Mother of the Book
-Every single rak'ah of our daily prayer begins with **Surah Al-Fatihah** (The Opening). It has seven precious verses:
-* **بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ** — *“In the name of Allah, the Most Compassionate, the Most Merciful.”*
-* **ٱلْحَمْدُ لِلَّٰهِ رَبِّ ٱلْعَٰلَمِينَ** — *“All praise belongs to Allah, Lord of all the worlds.”*
-* **ٱلرَّحْمَٰنِ ٱلرَّحِيمِ** — *“The Entirely Merciful, the Especially Merciful.”*
-* **مَٰلِكِ يَوْمِ ٱلدِّينِ** — *“Master of the Day of Judgment.”*
-* **إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ** — *“You alone we worship, and You alone we ask for help.”*
-* **ٱهْدِنَا ٱلصِّرَٰطَ ٱلْمُسْتَقِيمَ** — *“Guide us on the Straight Path!”*
-* **صِرَٰطَ ٱلَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ ٱلْمَغْضُوبِ عَلَيْهِمْ وَلَا ٱلضَّآلِّينَ** — *“The path of those You have blessed, not of those who earned anger, nor those who are lost.”*
+## 3. Surah Al-Fatihah and Surah Al-Ikhlas
 
-When you finish, you whisper softly: **“Ameen!”** (O Allah, please answer our prayer!).
+### A. Surah Al-Fatihah (The Opening: Surah 1)
+Every single rak'ah of our daily prayer begins with **Surah Al-Fatihah** (The Opening), known as the Mother of the Quran (*Umm al-Kitab*):
+* **بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ** (*"In the name of Allah, the Most Compassionate, the Most Merciful."*)
+* **ٱلْحَمْدُ لِلَّٰهِ رَبِّ ٱلْعَٰلَمِينَ** (*"All praise belongs to Allah, Lord of all the worlds."*)
+* **ٱلرَّحْمَٰنِ ٱلرَّحِيمِ** (*"The Entirely Merciful, the Especially Merciful."*)
+* **مَٰلِكِ يَوْمِ ٱلدِّينِ** (*"Master of the Day of Judgment."*)
+* **إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ** (*"You alone we worship, and You alone we ask for help."*)
+* **ٱهْدِنَا ٱلصِّرَٰطَ ٱلْمُسْتَقِيمَ** (*"Guide us on the Straight Path!"*)
+* **صِرَٰطَ ٱلَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ ٱلْمَغْضُوبِ عَلَيْهِمْ وَلَا ٱلضَّآلِّينَ** (*"The path of those You have blessed, not of those who earned anger, nor those who are lost."*)
+
+When we finish reciting Surah Al-Fatihah, we say softly: **"Ameen"** (O Allah, accept our prayer!).
+
+### B. Surah Al-Ikhlas (Pure Faith: Surah 112)
+Surah Al-Ikhlas is a short, powerful surah that teaches us the pure Oneness of Allah (*Tawhid*). The Prophet ﷺ explained that reciting it is equivalent in reward to reciting one-third of the Quran (Sahih al-Bukhari 5013):
+* **قُلْ هُوَ ٱللَّهُ أَحَدٌ** (*"Say: He is Allah, the One."*)
+* **ٱللَّهُ ٱلصَّمَدُ** (*"Allah, the Eternal Refuge [Al-Samad]: all creation relies upon Him, and He needs no one."*)
+* **لَمْ يَلِدْ وَلَمْ يُولَدْ** (*"He neither begets nor was He begotten: He has no children and no parents."*)
+* **وَلَمْ يَكُن لَّهُۥ كُفُوًا أَحَدٌۢ** (*"And there is none comparable unto Him."*)
 
 ---
 
-## 🛡️ 4. The Two Protecting Shields: Surah Al-Falaq & Surah An-Nas
-When the sun goes down or before you climb into bed, the Prophet ﷺ taught us to cup our hands together, recite the **Mu'awwidhatayn** (The Two Surahs of Refuge), blow gently into our hands, and wipe over our face and body:
-1. **Surah Al-Falaq:** We ask Allah, the Lord of Daybreak, to protect us from the darkness of the night, evil jealousy, and bad thoughts.
-2. **Surah An-Nas:** We ask Allah, the King of Mankind, to protect us from sneaky whispers that try to make us disobey Mum and Dad or do wrong things.
+## 4. The Two Protecting Surahs: Al-Falaq and An-Nas
 
-With these surahs in your heart, you sleep peacefully like a little warrior guarded by angels!
+Before going to sleep, the Prophet ﷺ taught us to cup our hands together, recite Surah Al-Ikhlas, Surah Al-Falaq, and Surah An-Nas, gently blow into our palms, and wipe over our head, face, and front of the body:
+1. **Surah Al-Falaq (The Daybreak):** We ask Allah to protect us from the darkness of the night, jealousy, and harm.
+2. **Surah An-Nas (Mankind):** We ask Allah, the Lord and King of humanity, to protect our hearts from negative thoughts and whispered doubts.
 
 ---
 
-## 🎨 My Daily Sunnah Challenge:
-1. **Kiss the Mushaf:** Pick up the Mushaf with wudu, kiss its cover with love, and read or recite your favorite short surah.
-2. **Recite before sleep:** Lie on your right side, recite Surah Al-Ikhlas, Al-Falaq, and An-Nas, and say: *"Bismika Allahumma ahya wa amut!"* (In Your name, O Allah, I live and die).
+## 5. Curriculum Anchors in Practice
+
+1. **Daily Recitation Habit:** Practice reciting a short surah like Surah Al-Ikhlas every morning and evening. Remember that each Arabic letter earns ten good deeds!
+2. **Handling the Quran with Care:** Inspect where the Mushaf is kept in your home. Ensure it rests on a clean, elevated table or bookshelf away from clutter.
+3. **Bedtime Sunnah:** Tonight before sleep, sit up, cup your hands, recite the three Qul surahs (Al-Ikhlas, Al-Falaq, and An-Nas), and thank Allah for all your blessings.

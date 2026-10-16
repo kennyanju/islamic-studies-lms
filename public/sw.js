@@ -6,7 +6,7 @@
  * - Network-only for dynamic API mutations
  */
 
-const CACHE_NAME = 'islamic-studies-vmv4uxste';
+const CACHE_NAME = 'islamic-studies-vmvalo6ab';
 const PRECACHE_ASSETS = [
   './',
   './index.html',
@@ -14,14 +14,13 @@ const PRECACHE_ASSETS = [
   './app.js',
   './modules_manifest.js',
   './modules_manifest.json',
-  './course_data.json',
   './manifest.json',
   './icons/favicon.svg',
   './icons/icon-192.png',
   './icons/icon-512.png'
 ];
 
-// 1. Precache Core Shell Assets on Install (fault-tolerant)
+// Precache core shell assets on install
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches
@@ -42,7 +41,7 @@ self.addEventListener('install', (event) => {
   );
 });
 
-// 2. Clean up Old Caches on Activate
+// Clean up old caches on activate
 self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches
@@ -61,7 +60,7 @@ self.addEventListener('activate', (event) => {
   );
 });
 
-// 3. Intelligent Fetch Routing
+// Fetch routing and caching strategies
 self.addEventListener('fetch', (event) => {
   const { request } = event;
   const url = new URL(request.url);

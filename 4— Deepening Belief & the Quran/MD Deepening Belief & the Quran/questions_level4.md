@@ -1,103 +1,103 @@
 # Level 4 Quiz: Deepening Belief & the Quran
 
 ## Part A: Multiple Choice Questions
-1. Why did Caliph Abu Bakr al-Siddiq commission the compilation of the Quran into a single codex?
-   (A) To sell copies of the text across Roman trade routes.
-   (B) Because many certified memorizers (Huffaz) were martyred at the Battle of Yamamah.
-   (C) Because the Arabic language was being replaced by Greek.
-   (D) Because the Prophet ﷺ had left no written fragments.
+1. Why did Caliph Abu Bakr al-Siddiq commission the compilation of the Quran into a single master codex (Suhuf)?
+   (A) To create simplified summaries for elementary classrooms.
+   (B) Because Roman translations had begun circulating in Syria.
+   (C) To reduce the number of chapters from original tribal collections.
+   (D) Because many certified memorizers (Huffaz) were martyred at the Battle of Yamamah.
 
-2. Who was chosen to lead the historic committee that compiled the first master volume of the Quran?
+2. Who was selected by Abu Bakr to lead the historic committee that compiled the first master volume of the Quran?
    (A) Sayyidina Khalid ibn al-Walid.
-   (B) Sayyidina Zayd ibn Thabit.
-   (C) Sayyidina Abu Hurairah.
+   (B) Sayyidina Abu Hurairah.
+   (C) Sayyidina Zayd ibn Thabit.
    (D) Sayyidina Bilal ibn Rabah.
 
-3. What strict evidentiary protocol did Zayd ibn Thabit enforce before accepting any written verse?
-   (A) A financial payment of twenty silver dirhams.
-   (B) Two independent, upright eyewitnesses testifying that the verse was written in the Prophet's presence.
-   (C) A vote by sixty tribal elders of Makkah.
-   (D) Chemical testing of the sheepskin parchment.
+3. What strict evidentiary protocol did Zayd ibn Thabit enforce before accepting any written parchment for the master codex?
+   (A) Requiring two upright eyewitnesses testifying that the verse was transcribed directly in the Prophet's presence, verified against oral memorization.
+   (B) Relying solely on his own personal written notes without seeking corroborating testimony.
+   (C) Accepting any verse submitted by any resident of Madinah provided they took an oath.
+   (D) Comparing Arabic manuscripts with ancient Byzantine scrolls.
 
-4. What urgent crisis prompted Caliph 'Uthman ibn 'Affan to standardize the Quran into official regional codices?
-   (A) Regional dialect pronunciation disputes among newly converted non-Arab soldiers.
-   (B) A severe shortage of black ink in Madinah.
-   (C) The discovery of ancient gold tablets in Persia.
-   (D) The destruction of the city of Kufah by floods.
+4. What primary crisis prompted Caliph 'Uthman ibn 'Affan to standardize the Quran into official regional codices (Al-Masahif al-'Uthmaniyyah)?
+   (A) Disagreements regarding the number of daily obligatory prayers.
+   (B) Regional dialect pronunciation disputes among Muslim soldiers in newly opened territories.
+   (C) Complete loss of original manuscripts during civil unrest.
+   (D) A decree by Persian governors requesting Greek translations.
 
-5. What does the term "I'jaz al-Qur'an" mean in Islamic theological science?
-   (A) The physical weight of the leather-bound book.
-   (B) The inimitability and miraculous nature of the Quran that renders human competition powerless.
-   (C) The history of calligraphy tools developed in Baghdad.
-   (D) The division of the Quran into thirty equal daily sections.
+5. What does the theological concept of "I'jaz al-Qur'an" signify?
+   (A) The physical preservation of ink and paper across centuries.
+   (B) The chronological order in which surahs were revealed in Makkah.
+   (C) The division of the sacred text into thirty equal reading portions.
+   (D) The divine inimitability of the Quran that renders all human attempts to match its speech powerless.
 
-6. What was the reaction of the master pagan orator Al-Walid ibn al-Mughirah when he heard the recitation of the Quran?
-   (A) He claimed that he had written identical poetry in his youth.
-   (B) He testified that it possessed unmatched sweetness and grace, surpassing all human speech.
-   (C) He ordered the execution of the reciter.
-   (D) He fell into a deep sleep for three days.
+6. What was the testimony of the pagan Qurayshi orator Al-Walid ibn al-Mughirah after listening to the Prophet's recitation?
+   (A) He admitted that the Quran possesses unmatched sweetness and grace, surpassing all human speech.
+   (B) He claimed it was standard pre-Islamic tribal poetry easily composed by local bards.
+   (C) He argued that its vocabulary was borrowed from Persian royal courts.
+   (D) He claimed that its rhetorical structure was flawed and repetitive.
 
-7. Which Tajweed rule applies when a Meem Sakinah is followed immediately by the letter Ba (ب)?
-   (A) Izhar Shafawi (clear articulation).
-   (B) Ikhfa' Shafawi (oral concealment with 2-count Ghunnah).
-   (C) Idgham with Ghunnah.
-   (D) Qalqalah Kubra.
+7. In the science of Tajweed, which rule applies when a Meem Sakinah (مْ) is followed immediately by the letter Ba (ب)?
+   (A) Izhar Shafawi (clear oral articulation without nasal humming).
+   (B) Idgham Shafawi (merging into a doubled Meem).
+   (C) Ikhfa' Shafawi (oral concealment with a 2-count Ghunnah).
+   (D) Qalqalah Kubra (heavy bouncing articulation).
 
-8. Why must special care be taken during "Izhar Shafawi" when Meem Sakinah is followed by Waw (و) or Fa (ف)?
-   (A) Because these letters require drinking warm water before pronouncing them.
-   (B) Because they share the same lip articulation point, creating a tendency to mistakenly hide the Meem.
-   (C) Because these letters are only found in Makkan surahs.
-   (D) Because they invalidate the reciter's state of wudu.
+8. In Ash'ari theology, how is human moral responsibility understood regarding voluntary actions?
+   (A) Pure fatalism (Jabr), where humans possess zero choice and are forced into every deed.
+   (B) The doctrine of Kasb (acquisition), where Allah creates the action and the human freely chooses their intention and acquires responsibility.
+   (C) Pure self-creation (Qadarism), where humans independently create actions without Allah's knowledge.
+   (D) External determinism, where only environmental factors dictate human decisions.
 
-9. What is the count duration for "Madd Lazim" (such as the word *Al-Dallin* in Surah Al-Fatihah)?
-   (A) 2 counts.
-   (B) 4 counts.
-   (C) Full 6 counts obligatory.
-   (D) 10 counts.
+9. What is the obligatory duration for "Madd Lazim" (such as in the word Al-Dallin)?
+   (A) 2 counts (natural duration).
+   (B) 3 counts (short elongation).
+   (C) 4 counts (moderate elongation).
+   (D) Full 6 counts (compulsory elongation).
 
-10. According to the opening verses of Surah Al-Mulk, why did Allah create life and death?
-    (A) To observe which empire builds the tallest monuments.
-    (B) To test human beings as to which of them is best in deed (*Ahsanu 'Amala*).
-    (C) To determine who accumulates the largest bank balance.
-    (D) To pass time between cosmic cycles.
+10. According to Surah Al-Mulk (67:2), why did Allah create life and death?
+    (A) To test human beings as to which of them is best in deed (Ahsanu 'Amala).
+    (B) To distinguish between wealthy and impoverished nations.
+    (C) To measure who accumulates the largest quantity of physical possessions.
+    (D) To populate different regions of the physical cosmos.
 
 ## Part B: Fill in the Blanks
 Vocabulary Bank: Madd Lazim, I'jaz, Zayd ibn Thabit, Ikhfa' Shafawi, Ahsanu 'Amala
 1. The young scholarly companion who led the compilation of the Quran under Abu Bakr was ______.
 2. The miraculous quality of the Quran that challenges humanity to produce even a single surah like it is ______.
 3. Softening the pronunciation of Meem Sakinah before the letter Ba is termed ______.
-4. The compulsory 6-count elongation occurring before a letter with Shaddah is ______.
+4. The compulsory 6-count elongation caused by an unyielding Sukun or Shaddah is ______.
 5. Surah Al-Mulk states that life and death exist to test who is best in deed, rendered in Arabic as ______.
 
 ## Part C: Matching Terms
 * I'jaz al-Qur'an ─── The divine inimitability rendering human opposition powerless
 * Zayd ibn Thabit ─── The primary scribe who oversaw the Abu Bakr compilation
 * Ikhfa' Shafawi ─── Concealing Meem Sakinah with Ghunnah before Ba
-* Madd Muttasil ─── Elongation within a single word followed by Hamzah (4–5 counts)
+* Madd Muttasil ─── Elongation within a single word followed by Hamzah (4 to 5 counts)
 * Madd Lazim ─── Compulsory 6-count elongation caused by an unyielding Sukun or Shaddah
 
 ## Part D: Reflection & Application
 1. How does the rigorous dual-witness verification method enforced by Zayd ibn Thabit refute secular claims that the Quran was altered after the Prophet's passing?
-2. Analyze the Quranic phrase *"Ahsanu 'Amala"* (best in deed) in Surah Al-Mulk: Why did Allah emphasize the *quality* of action rather than the *quantity*?
-3. Explain the linguistic challenge presented to the Arab poets: Why were the masters of Arabian eloquence unable to compose even three lines resembling Surah Al-Kawthar?
+2. Analyze the Quranic phrase "Ahsanu 'Amala" (best in deed) in Surah Al-Mulk: Why did Allah emphasize the quality of action rather than the quantity?
+3. Explain the linguistic challenge presented to Arab poets: Why were the masters of Arabian eloquence unable to compose even three lines resembling Surah Al-Kawthar?
 4. How does reciting and contemplating Surah Al-Mulk every night cultivate spiritual tranquility and accountability in the life of a modern student?
 
 ## Answer Key & Marking Guide
-1. B - The martyrdom of dozens of Huffaz at Yamamah prompted the proactive collection into a single volume.
-2. B - Zayd ibn Thabit was renowned for youthful sharp memory, scribal experience, and absolute integrity.
-3. B - Zayd required personal memory AND two written witness verifications recorded in the Prophet's presence.
-4. A - Dialect confusions among provincial troops prompted 'Uthman to produce standardized Qurayshi copies.
-5. B - I'jaz denotes divine perfection in rhetoric, structure, legislation, and guidance that cannot be replicated.
-6. B - Al-Walid ibn al-Mughirah admitted the Quran's transcendent sweetness and that it could not be human speech.
-7. B - Ikhfa' Shafawi softens the Meem before Ba with a 2-count nasal Ghunnah.
-8. B - Because Meem, Waw, and Fa share labial articulation points, reciters must ensure the Meem is pronounced clearly.
-9. C - Madd Lazim carries an unconditional, obligatory 6-count prolongation across all recitation schools.
-10. B - Verse 2 highlights moral quality, intentional purity, and conformity to truth over sheer numerical volume.
+1. D - The martyrdom of dozens of memorizers at the Battle of Yamamah prompted Abu Bakr to compile the scattered parchments into a single master codex.
+2. C - Zayd ibn Thabit was chosen due to his sharp memory, deep scribal experience during the Prophet's lifetime, and recognized integrity.
+3. A - Zayd required personal memory cross-referenced with two upright eyewitnesses who saw the verse written down in the Prophet's presence.
+4. B - Pronunciation disagreements among provincial soldiers in Armenia and Azerbaijan compelled 'Uthman to distribute authoritative master codices.
+5. D - I'jaz denotes divine perfection in rhetoric, legislation, and guidance that renders human emulation impossible.
+6. A - Al-Walid ibn al-Mughirah candidly admitted that the Quran possessed unmatched sweetness and grace and could not be human poetry.
+7. C - Ikhfa' Shafawi softens the Meem before Ba with a 2-count nasal Ghunnah.
+8. B - In Ash'ari creed, Allah creates the power and deed, while the human agent exercises will and intention, acquiring moral accountability.
+9. D - Madd Lazim carries an unconditional, obligatory 6-count prolongation across all authentic recitation schools.
+10. A - Surah Al-Mulk verse 2 highlights moral quality, sincerity of intention, and adherence to the Sunnah over sheer numerical volume.
 
 ### Fill in the Blanks Key
-1. Zayd ibn Thabit - Scribe of revelation.
-2. I'jaz - Inimitability.
-3. Ikhfa' Shafawi - Oral concealment.
+1. Zayd ibn Thabit - Scribe of revelation who led the compilation committee.
+2. I'jaz - Inimitability of the Quran.
+3. Ikhfa' Shafawi - Oral concealment with Ghunnah.
 4. Madd Lazim - Compulsory 6-count madd.
 5. Ahsanu 'Amala - Best in deed.
 
@@ -105,11 +105,11 @@ Vocabulary Bank: Madd Lazim, I'jaz, Zayd ibn Thabit, Ikhfa' Shafawi, Ahsanu 'Ama
 * I'jaz al-Qur'an connects with The divine inimitability rendering human opposition powerless.
 * Zayd ibn Thabit connects with The primary scribe who oversaw the Abu Bakr compilation.
 * Ikhfa' Shafawi connects with Concealing Meem Sakinah with Ghunnah before Ba.
-* Madd Muttasil connects with Elongation within a single word followed by Hamzah (4–5 counts).
+* Madd Muttasil connects with Elongation within a single word followed by Hamzah (4 to 5 counts).
 * Madd Lazim connects with Compulsory 6-count elongation caused by an unyielding Sukun or Shaddah.
 
 ### Reflection Marking Rubric
 - Question 1: Awards full points for explaining that oral memorization by hundreds of companions cross-checked contemporaneous physical manuscripts with multiple witnesses.
-- Question 2: Awards full points for discussing sincerity (*Ikhlas*), compliance with Sunnah, and inner spiritual excellence rather than ostentatious volume.
+- Question 2: Awards full points for discussing sincerity (Ikhlas), compliance with Sunnah, and inner spiritual excellence rather than ostentatious volume.
 - Question 3: Awards full points for showing that despite supreme linguistic motivation, Arab poets failed because the Quran's lexical density and rhythmic majesty transcend human limits.
 - Question 4: Awards full points for linking nightly recitation to remembering the grave, cosmic order, and living with intentional purpose.

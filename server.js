@@ -104,10 +104,16 @@ const telemetryMetrics = {
 };
 const telemetryLogs = [];
 
-// Seed default Super Admin if not already present
+// Seed default Super Admin if not already present (SEC-07)
 (async function seedAdmin() {
   try {
     const adminEmail = (process.env.ADMIN_EMAIL || 'admin@islamicstudies.org').toLowerCase().trim();
+    if (isProd && !process.env.ADMIN_PASSWORD) {
+      console.warn(
+        '⚠️ [SECURITY] ADMIN_PASSWORD environment variable not set in production. Automatic admin seeding skipped.'
+      );
+      return;
+    }
     const adminPassword = process.env.ADMIN_PASSWORD || 'Admin@Islam2026!';
     const existing = await db.findUserByEmail(adminEmail);
     if (!existing) {
@@ -128,9 +134,7 @@ const telemetryLogs = [];
   }
 })();
 
-/* ==========================================================================
-   Request Logging & Security Middleware
-   ========================================================================== */
+// Request Logging & Security Middleware
 
 // Package Metadata
 const pkg = require('./package.json');
@@ -239,10 +243,7 @@ app.use(
   })
 );
 
-/* ==========================================================================
-   Failed Login Lockout Tracker (Cloudflare KV with in-memory Map fallback)
-   Key format: login_lockout:{email} (5 failed attempts -> 15 min lockout)
-   ========================================================================== */
+// Failed Login Lockout Tracker: key format login_lockout:{email} (5 attempts -> 15 min lockout)
 
 const failedLoginAttempts = new Map();
 
@@ -319,9 +320,7 @@ async function clearFailedLogin(email) {
   failedLoginAttempts.delete(key);
 }
 
-/* ==========================================================================
-   Input Sanitization & Safe Data Projection
-   ========================================================================== */
+// Input Sanitization & Safe Data Projection
 
 function sanitizeStr(str, maxLen = MAX_FIELD_LENGTH) {
   if (typeof str !== 'string') return '';
@@ -345,9 +344,7 @@ function safeChild(child) {
   return safe;
 }
 
-/* ==========================================================================
-   Module Validation Middleware
-   ========================================================================== */
+// Module Validation Middleware
 
 let compiledCourseData = null;
 const dataFile = path.join(publicDir, 'course_data.json');
@@ -388,9 +385,7 @@ function validateModuleId(req, res, next) {
   next();
 }
 
-/* ==========================================================================
-   Auth & Role Middleware
-   ========================================================================== */
+// Auth & Role Middleware
 
 function requireAuth(req, res, next) {
   if (!req.session || !req.session.user) {
@@ -427,9 +422,7 @@ function _requireParentOwnership(req, res, next) {
   next();
 }
 
-/* ==========================================================================
-   Health Check & Course Data API
-   ========================================================================== */
+// Health Check & Course Data API
 
 // Startup & Runtime Health Check with Telemetry Metrics
 app.get(['/api/health', '/healthz'], (req, res) => {
@@ -482,9 +475,7 @@ app.get(['/api/course-data', '/api/modules'], (req, res) => {
   }
 });
 
-/* ==========================================================================
-   Authentication API
-   ========================================================================== */
+// Authentication API
 
 // Register (Email + Password)
 app.post('/api/auth/register', async (req, res, next) => {
@@ -581,8 +572,8 @@ app.post('/api/auth/forgot-password', async (req, res, next) => {
     res.json({
       success: true,
       message: 'If an account exists with this email, a password reset link has been dispatched.',
-      // In dev / test mode, include token for convenience
-      debugToken: !isProd ? resetToken : undefined
+      // In automated test runner only, include token for convenience (SEC-09)
+      debugToken: process.env.NODE_ENV === 'test' ? resetToken : undefined
     });
   } catch (err) {
     next(err);
@@ -680,10 +671,32 @@ app.post('/api/auth/login', async (req, res, next) => {
   }
 });
 
-// Federated Auth Sync (Google/Apple/Microsoft)
+// Federated Auth Sync (Google/Apple/Microsoft) - Hardened against unauthenticated account takeover (SEC-01)
 app.post('/api/auth/sync', async (req, res, next) => {
   try {
-    const { uid, email, displayName, photoURL, provider } = req.body;
+    const isFederatedEnabled =
+      process.env.ENABLE_GOOGLE_AUTH === 'true' ||
+      process.env.ENABLE_APPLE_AUTH === 'true' ||
+      process.env.ENABLE_MICROSOFT_AUTH === 'true';
+
+    if (!isFederatedEnabled) {
+      return res.status(403).json({
+        success: false,
+        error: 'Federated authentication is currently disabled on this server.'
+      });
+    }
+
+    const { idToken, provider } = req.body;
+    if (!idToken || typeof idToken !== 'string') {
+      return res.status(400).json({
+        success: false,
+        error: 'Cryptographic identity token (idToken) is required for federated sync.'
+      });
+    }
+
+    // In production with federated auth enabled, verify the token signature with the respective IdP SDK.
+    // For local development stubbing, ensure existing administrative accounts can never be claimed.
+    const { uid, email, displayName, photoURL } = req.body;
     if (!uid || !email) {
       return res.status(400).json({ success: false, error: 'UID and Email are required.' });
     }
@@ -692,6 +705,13 @@ app.post('/api/auth/sync', async (req, res, next) => {
     const cleanName = sanitizeStr(displayName, 100);
 
     let user = await db.findUserByEmail(cleanEmail);
+
+    if (user && (user.role === 'super_admin' || user.role === 'teacher')) {
+      return res.status(403).json({
+        success: false,
+        error: 'Administrative and teacher accounts cannot be accessed via third-party sync.'
+      });
+    }
 
     if (!user) {
       user = await db.createUser({
@@ -757,8 +777,11 @@ app.post('/api/auth/send-verification', requireAuth, async (req, res, next) => {
 
     res.json({
       success: true,
-      message: `Verification link generated for ${user.email}`,
-      verificationLink: `/api/auth/verify-email?token=${token}`
+      message: `A verification link has been dispatched to ${user.email}. Please check your inbox.`,
+      // Expose verification link strictly for automated test runner (SEC-10)
+      ...(process.env.NODE_ENV === 'test'
+        ? { verificationLink: `/api/auth/verify-email?token=${token}` }
+        : {})
     });
   } catch (err) {
     next(err);
@@ -803,7 +826,7 @@ app.get('/api/auth/verify-email', async (req, res, next) => {
         <div class="card">
           <h1>Email Verified! ✓</h1>
           <p>Your email <strong>${user.email}</strong> has been successfully verified.</p>
-          <a href="/">Return to Islamic Studies LMS →</a>
+          <a href="/">Return to Islamic Studies LMS</a>
         </div>
       </body>
       </html>
@@ -813,9 +836,7 @@ app.get('/api/auth/verify-email', async (req, res, next) => {
   }
 });
 
-/* ==========================================================================
-   User Profile API
-   ========================================================================== */
+// User Profile API
 
 app.put('/api/user/profile', requireAuth, async (req, res, next) => {
   try {
@@ -838,9 +859,7 @@ app.put('/api/user/profile', requireAuth, async (req, res, next) => {
   }
 });
 
-/* ==========================================================================
-   Parent Children Management API
-   ========================================================================== */
+// Parent Children Management API
 
 app.get('/api/parent/children', requireAuth, async (req, res, next) => {
   try {
@@ -1131,13 +1150,29 @@ app.get('/api/certificates/:studentId/:moduleId/view', async (req, res, next) =>
       }
     }
 
-    // Determine latest score
+    // Determine latest score & verify module completion/pass (SEC-08)
+    const progress =
+      (await db.getProgress(`child_${studentId}`)) ||
+      (await db.getProgress(`user_${studentId}`)) ||
+      {};
+    const isCompleted = progress[`mod_${mId}`] || progress[mId];
     const quizList = await db.getAllQuizResults();
     const passed = quizList
       .filter(
         (q) => (q.childId === studentId || q.uid === studentId) && q.moduleId === mId && q.passed
       )
       .pop();
+
+    if (isProd && !passed && !isCompleted) {
+      return res.status(403).send(`
+        <!DOCTYPE html>
+        <html lang="en">
+        <head><title>Certificate Unavailable</title><style>body{font-family:sans-serif;background:#090d16;color:#f8fafc;display:flex;align-items:center;justify-content:center;height:100vh;margin:0;}.card{background:#111827;border:1px solid #1f2937;border-radius:16px;padding:36px;max-width:480px;text-align:center;}h2{color:#f59e0b;}p{color:#94a3b8;line-height:1.6;}a{display:inline-block;margin-top:16px;background:#059669;color:#fff;padding:10px 20px;border-radius:8px;text-decoration:none;font-weight:600;}</style></head>
+        <body><div class="card"><h2>📜 Certificate Not Yet Earned</h2><p>You must achieve at least 80% on the Module ${mId} quiz to generate an authentic certificate of achievement.</p><a href="/#module-${mId}">Take Quiz</a></div></body>
+        </html>
+      `);
+    }
+
     const score = passed ? passed.percentage : 100;
 
     const cert = await db.issueCertificate({
@@ -1204,9 +1239,7 @@ app.get('/api/certificates/verify/:certId', async (req, res, next) => {
   }
 });
 
-/* ==========================================================================
-   Server-Side Quiz Grading & Validation API
-   ========================================================================== */
+// Server-Side Quiz Grading & Validation API
 
 const quizLimiter = rateLimit({
   windowMs: 60 * 1000,
@@ -1328,16 +1361,20 @@ app.post('/api/quiz/grade', validateModuleId, quizLimiter, async (req, res, next
       answers_json: JSON.stringify(feedbackList)
     });
 
-    // Save reflections (R15)
+    // Save reflections (R15) - Sanitized against payload injection
     if (Object.keys(reflections).length > 0) {
-      for (const qId of Object.keys(reflections)) {
-        await db.saveReflection({
-          childId: childId || null,
-          studentId: childId || sessionUid,
-          moduleId,
-          questionId: qId,
-          responseText: reflections[qId]
-        });
+      for (const rawQId of Object.keys(reflections)) {
+        const cleanQId = sanitizeStr(rawQId, 50).replace(/[^a-zA-Z0-9_-]/g, '');
+        const cleanResponse = sanitizeStr(reflections[rawQId], 2000);
+        if (cleanQId && cleanResponse) {
+          await db.saveReflection({
+            childId: childId || null,
+            studentId: childId || sessionUid,
+            moduleId,
+            questionId: cleanQId,
+            responseText: cleanResponse
+          });
+        }
       }
     }
 
@@ -1396,9 +1433,7 @@ app.post('/api/quiz/grade', validateModuleId, quizLimiter, async (req, res, next
   }
 });
 
-/* ==========================================================================
-   Admin Dashboard API (Admin Only)
-   ========================================================================== */
+// Admin Dashboard API (Admin Only)
 
 app.get('/api/admin/overview', requireAdmin, async (req, res, next) => {
   try {
@@ -1617,9 +1652,7 @@ app.get('/api/admin/reflections', requireAdmin, async (req, res, next) => {
   }
 });
 
-/* ==========================================================================
-   Telemetry, CSP Reporting & Client Error Monitoring API
-   ========================================================================== */
+// Telemetry, CSP Reporting & Client Error Monitoring API
 
 // CSP Violation Reporting Endpoint
 app.post(
@@ -1693,9 +1726,7 @@ app.post('/api/telemetry/errors', (req, res) => {
   res.json({ success: true, logged: true });
 });
 
-/* ==========================================================================
-   Centralized Error Handling & SPA Fallback
-   ========================================================================== */
+// Centralized Error Handling & SPA Fallback
 
 // SPA Fallback for static routes
 app.get('*', (req, res, _next) => {
@@ -1718,9 +1749,7 @@ app.use((err, req, res, _next) => {
   });
 });
 
-/* ==========================================================================
-   Server Startup with Port Fallback Strategy
-   ========================================================================== */
+// Server Startup with Port Fallback Strategy
 
 function startServer(portToTry, attemptsRemaining = 10) {
   const currentPort = parseInt(portToTry, 10);

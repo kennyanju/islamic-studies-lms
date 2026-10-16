@@ -1,80 +1,80 @@
 # Level 4 Quiz: Seerah: Madinah & Building a Community
 
 ## Part A: Multiple Choice Questions
-1. Why were the Muslims permitted to engage in defensive warfare after the migration to Madinah?
-   (A) Because they wanted to conquer agricultural territories in Syria.
-   (B) Because they had been persecuted, expelled from their homes, and faced armed annihilation by Quraysh.
-   (C) Because Arabian tribal custom required a war every spring.
-   (D) Because the Roman emperor requested military assistance.
+1. Why were the Muslims permitted to engage in armed defensive struggle only after the Hijrah to Madinah (Surah Al-Hajj 22:39)?
+   (A) Because they had been systematically wronged, expelled from their homes, and faced armed annihilation by Quraysh.
+   (B) Because they sought to conquer agricultural trade routes in the north.
+   (C) Because early Arabian customs mandated a raid every spring.
+   (D) Because non-Muslim empires had officially declared war on them.
 
-2. Which of the following is strictly prohibited under the Prophetic rules of military engagement?
-   (A) Signing a peace treaty with enemy ambassadors.
-   (B) Harming women, children, monks, non-combatants, or cutting down fruitful trees.
-   (C) Digging defensive trenches around a city.
-   (D) Fasting during the month of Ramadan.
+2. Which of the following is strictly prohibited under classical Islamic rules of military engagement?
+   (A) Agreeing to a temporary cease-fire or diplomatic treaty.
+   (B) Harming non-combatants, killing women and children, targeting monks in hermitages, or destroying crops.
+   (C) Stationing archers on elevated hills for territorial defense.
+   (D) Constructing defensive earthworks or trenches.
 
-3. How many believers fought alongside the Prophet ﷺ at the Battle of Badr (2 AH)?
-   (A) 70 men.
-   (B) 313 men.
-   (C) 1,000 men.
-   (D) 3,000 men.
+3. How many Muslim fighters took part in the Battle of Badr (2 AH) alongside the Prophet ﷺ?
+   (A) Exactly 70 companions.
+   (B) 1,000 armed warriors.
+   (C) 1,400 companions.
+   (D) 313 companions.
 
-4. What divine assistance was dispatched by Allah to support the outnumbered believers at Badr?
-   (A) An earthquake that leveled the mountains of Makkah.
-   (B) 1,000 angels led by Jibril fighting alongside the believers.
-   (C) A fleet of war galleys arriving on the Red Sea coast.
-   (D) A lunar eclipse that lasted twelve hours.
+4. What divine assistance was sent by Allah to support the outnumbered believers at Badr (Surah Al-Anfal 8:9)?
+   (A) A torrential river that flooded the plains of Makkah.
+   (B) A sudden sandstorm that buried all weapons in the valley.
+   (C) One thousand angels led by Jibril descending in ranks.
+   (D) A fleet of Roman ships landing on the coast.
 
-5. What fatal tactical error caused the painful reversal of fortune at the Battle of Uhud (3 AH)?
-   (A) The Muslim cavalry fell asleep during the afternoon.
-   (B) Forty archers on Mount 'Aynayn abandoned their strategic posts to gather war spoils, despite direct orders never to leave.
-   (C) The city of Madinah ran out of drinking water.
-   (D) The archers accidentally shot arrows at their own camp.
+5. What critical tactical mistake caused the tragic reversal at the Battle of Uhud (3 AH)?
+   (A) Forty archers on Mount 'Aynayn abandoned their post to gather spoils against explicit prophetic orders.
+   (B) The Muslim army retreated before engaging the enemy forces.
+   (C) The scouts provided incorrect directions across the desert.
+   (D) The cavalry soldiers refused to wear their protective armor.
 
-6. Who earned the eternal title "Sayyid ash-Shuhada'" (Master of Martyrs) after being slain at the Battle of Uhud?
-   (A) Sayyidina Mus'ab ibn 'Umayr.
-   (B) Sayyidina Hamzah ibn 'Abd al-Muttalib.
+6. Who was the heroic uncle of the Prophet ﷺ who fell as a martyr at Uhud and was designated "Sayyid ash-Shuhada'" (Master of Martyrs)?
+   (A) Sayyidina Abu Talib.
+   (B) Sayyidina Al-'Abbas ibn 'Abd al-Muttalib.
    (C) Sayyidina Ja'far ibn Abi Talib.
-   (D) Sayyidina Zayd ibn Harithah.
+   (D) Sayyidina Hamzah ibn 'Abd al-Muttalib.
 
-7. Who proposed the brilliant engineering strategy of digging a trench to protect Madinah during the Battle of the Confederates (Al-Khandaq)?
+7. Who proposed the novel defensive tactic of excavating a wide trench across the northern boundary of Madinah during the Battle of the Confederates (5 AH)?
    (A) Sayyidina Khalid ibn al-Walid.
    (B) Sayyidina Salman al-Farsi.
    (C) Sayyidina Bilal ibn Rabah.
-   (D) Sayyidina Sa'd ibn Abi Waqqas.
+   (D) Sayyidina 'Amr ibn al-'As.
 
-8. How did Allah decisively break the month-long siege of the 10,000 confederates at the Battle of the Trench?
-   (A) By sending an army of Roman mercenaries.
-   (B) By sending a ferocious, freezing gale wind (*Rih*) that uprooted their tents, extinguished fires, and scattered their army.
-   (C) By flooding the desert with river overflows.
-   (D) By turning all their armor into sand.
+8. How did Allah decisively break the month-long siege of the 10,000 confederate troops at Al-Khandaq (Surah Al-Ahzab 33:9)?
+   (A) By sending an earthquake that collapsed the surrounding hills.
+   (B) By striking the enemy camp with lightning bolts.
+   (C) By sending a ferocious, freezing gale wind (*Rih*) that uprooted tents, extinguished fires, and caused panic.
+   (D) By an army of foreign allies arriving from Abyssinia.
 
-9. Why did Allah declare the Treaty of Hudaybiyyah (6 AH) to be a "Clear Victory" (*Fathan Mubina*) despite its seemingly harsh terms?
-   (A) Because Quraysh paid the Muslims 100,000 silver dirhams.
-   (B) Because the 10-year peace treaty allowed peaceful dialogue to flourish, leading more people to embrace Islam in 2 years than in the previous 18 years combined.
-   (C) Because it granted Muslims ownership of the Ka'bah immediately.
-   (D) Because the Roman empire surrendered its Syrian provinces.
+9. Why did Allah refer to the Treaty of Hudaybiyyah (6 AH) as a "Manifest Victory" (*Fathan Mubina*) in Surah Al-Fath 48:1?
+   (A) Because the 10-year peace enabled open dialogue and safe travel, causing more people to embrace Islam in two years than in the previous eighteen years combined.
+   (B) Because Quraysh surrendered the city of Makkah immediately upon signing.
+   (C) Because Muslims were granted immediate tax revenues from Makkan trade caravans.
+   (D) Because it allowed Muslims to build military fortifications in the sacred precinct.
 
-10. Which two legendary military leaders embraced Islam shortly following the peaceful climate of the Treaty of Hudaybiyyah?
+10. Which two distinguished leaders and military strategists traveled to Madinah to embrace Islam during the peaceful climate fostered by the Treaty of Hudaybiyyah?
     (A) Abu Jahl and Umayyah ibn Khalaf.
-    (B) Khalid ibn al-Walid and 'Amr ibn al-'As.
-    (C) Chosroes and Caesar.
-    (D) Musaylimah and Suraqah.
+    (B) Musaylimah and Suraqah ibn Malik.
+    (C) Chosroes and Heraclius.
+    (D) Khalid ibn al-Walid and 'Amr ibn al-'As.
 
 ## Part B: Fill in the Blanks
 Vocabulary Bank: Uhud, 313, Hudaybiyyah, Salman al-Farsi, Hamzah
 1. At the Battle of Badr, the Muslim forces numbered exactly ______ companions.
 2. The archers who left their positions against direct orders caused the reversal at Mount ______.
 3. The beloved uncle of the Prophet martyred at Uhud was Sayyidina ______.
-4. The Persian companion who proposed digging the defensive trench was ______.
-5. The 10-year non-aggression pact celebrated in Surah Al-Fath as a manifest victory was the Treaty of ______.
+4. The companion who proposed digging the defensive trench was ______.
+5. The 10-year peace pact designated in Surah Al-Fath as a manifest victory was the Treaty of ______.
 
 ## Part C: Matching Terms
 * Badr (2 AH) ─── The decisive battle of 313 believers against 1,000 Quraysh warriors
 * Uhud (3 AH) ─── The trial of obedience where archers left the mountain and Hamzah was martyred
 * Al-Khandaq (5 AH) ─── The siege of 10,000 confederates broken by Salman's trench and divine wind
 * Al-Hudaybiyyah ─── The landmark peace treaty that enabled exponential peaceful conversion
-* Sayyidina Hamzah ─── The Prophet's lion-hearted uncle titled Sayyid ash-Shuhada'
+* Sayyidina Hamzah ─── The Prophet's uncle titled Sayyid ash-Shuhada'
 
 ## Part D: Reflection & Application
 1. How do the Prophetic rules of engagement dismantle modern stereotypes claiming that Islam was spread through aggressive terrorism or coercive violence?
@@ -82,31 +82,31 @@ Vocabulary Bank: Uhud, 313, Hudaybiyyah, Salman al-Farsi, Hamzah
 3. What leadership qualities did the Prophet ﷺ demonstrate during the Treaty of Hudaybiyyah when facing the emotional objections of close companions?
 4. How did Salman al-Farsi's suggestion of the trench illustrate Islam's openness to adopting beneficial technology and strategy from non-Arab civilizations?
 
-## Answer Key & Marking Guide
-1. B - Permission to fight was granted for defense against persecution and violent expulsion.
+## Answer Key
+1. A - Permission to fight was granted for defense against persecution and violent expulsion.
 2. B - Prophetic ethics strictly protected non-combatants, civilians, clergy, and ecological assets.
-3. B - Exactly 313 companions faced 1,000 heavily armored Quraysh fighters.
-4. B - Surah Al-Anfal confirms the descent of 1,000 angels to support the believers.
-5. B - 40 archers on Mount 'Aynayn violated prophetic orders, exposing the army's flank to Khalid's cavalry.
-6. B - Hamzah's extraordinary sacrifice and courage earned him the title Master of Martyrs.
+3. D - Exactly 313 companions faced 1,000 heavily armored Quraysh fighters.
+4. C - Surah Al-Anfal confirms the descent of 1,000 angels to support the believers.
+5. A - 40 archers on Mount 'Aynayn violated prophetic orders, exposing the army's flank to cavalry.
+6. D - Hamzah's extraordinary sacrifice and courage earned him the title Master of Martyrs.
 7. B - Salman al-Farsi introduced Persian defensive ditch engineering to Arabia.
-8. B - A divine hurricane-force wind destroyed confederate supply lines, forcing their retreat.
-9. B - Truce normalized diplomatic interaction, accelerating conversions across all Arabian tribes.
-10. B - Both Khalid ibn al-Walid and 'Amr ibn al-'As traveled to Madinah to accept Islam during the truce.
+8. C - A divine hurricane-force wind destroyed confederate supply lines, forcing their retreat.
+9. A - Truce normalized diplomatic interaction, accelerating conversions across all Arabian tribes.
+10. D - Both Khalid ibn al-Walid and 'Amr ibn al-'As traveled to Madinah to accept Islam during the truce.
 
 ### Fill in the Blanks Key
-1. 313 - Badr fighters.
-2. Uhud - Mountain of archers' trial.
-3. Hamzah - Master of martyrs.
-4. Salman al-Farsi - Trench engineer.
-5. Hudaybiyyah - Landmark peace treaty.
+1. 313
+2. Uhud
+3. Hamzah
+4. Salman al-Farsi
+5. Hudaybiyyah
 
 ### Matching Key
-* Badr (2 AH) connects with The decisive battle of 313 believers against 1,000 Quraysh warriors.
-* Uhud (3 AH) connects with The trial of obedience where archers left the mountain and Hamzah was martyred.
-* Al-Khandaq (5 AH) connects with The siege of 10,000 confederates broken by Salman's trench and divine wind.
-* Al-Hudaybiyyah connects with The landmark peace treaty that enabled exponential peaceful conversion.
-* Sayyidina Hamzah connects with The Prophet's lion-hearted uncle titled Sayyid ash-Shuhada'.
+* Badr (2 AH) ─── The decisive battle of 313 believers against 1,000 Quraysh warriors
+* Uhud (3 AH) ─── The trial of obedience where archers left the mountain and Hamzah was martyred
+* Al-Khandaq (5 AH) ─── The siege of 10,000 confederates broken by Salman's trench and divine wind
+* Al-Hudaybiyyah ─── The landmark peace treaty that enabled exponential peaceful conversion
+* Sayyidina Hamzah ─── The Prophet's uncle titled Sayyid ash-Shuhada'
 
 ### Reflection Marking Rubric
 - Question 1: Awards full points for detailing strict prohibitions against killing non-combatants, harming clergy, destroying infrastructure, and showing warfare was strictly defensive.

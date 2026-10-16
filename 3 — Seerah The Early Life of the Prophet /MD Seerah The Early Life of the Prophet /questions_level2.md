@@ -1,73 +1,86 @@
 # Level 2 Worksheet: Early Life & Prophethood
-**Age Group:** Ages 8–10 (Level 2 Track)  
-**Focus:** Hilf al-Fudul, Black Stone incident, Lady Khadijah, and Cave Hira  
+**Age Group:** Ages 8-10 (Level 2 Track)  
+**Focus:** Hilf al-Fudul, Black Stone Incident, Lady Khadijah, and Cave Hira  
 
 ---
 
 ## Part A: Multiple Choice
 
-### 1. What was Hilf al-Fudul?
-* A) A horse race
-* B) A noble pact to protect the oppressed and travelers in Makkah
-* C) A poetry contest
-* D) A trade fair
+### 1. What was Hilf al-Fudul, the pre-Islamic agreement that young Muhammad ﷺ witnessed and praised?
+(A) A horse race organized outside Makkah
+(B) A treaty determining annual market dates
+(C) An agreement to share water from the well of Zamzam
+(D) A noble pact among clans to protect the oppressed and restore stolen goods to visitors
 
-### 2. How did Prophet Muhammad ﷺ resolve the tribal dispute over the Black Stone?
-* A) He had all tribal leaders hold his cloak together to lift the stone
-* B) He threw the stone into the valley
-* C) He picked a winner by lottery
-* D) He kept the stone in his house
+### 2. How did Prophet Muhammad ﷺ resolve the tribal dispute over placing the Black Stone (*Al-Hajar al-Aswad*) during the reconstruction of the Ka'bah?
+(A) He instructed that the oldest chieftain place it alone
+(B) He placed the stone on his cloak and invited all tribal leaders to lift it together
+(C) He suggested waiting another year until an arbiter arrived from Yemen
+(D) He drew lots among the chieftains to select one clan
 
-### 3. In which cave was the first revelation of the Quran revealed?
-* A) Cave Thawr
-* B) Cave Hira
-* C) Cave of Uhud
-* D) Cave of Sinai
+### 3. In which mountain cave was the first revelation of the Quran revealed to Prophet Muhammad ﷺ through Archangel Jibril (AS)?
+(A) Cave Thawr on Mount Thawr
+(B) Cave of Uhud near Madinah
+(C) Cave Hira on Jabal al-Nur
+(D) Cave of Safa in Makkah
 
-### 4. What was the very first word of the Quran revealed to Prophet Muhammad ﷺ?
-* A) Bismillah
-* B) Iqra' (Read!)
-* C) Qul
-* D) Salam
+### 4. What was the very first word of the Quran revealed to Prophet Muhammad ﷺ in Surah Al-'Alaq?
+(A) Iqra' ("Read" or "Recite")
+(B) Bismillah ("In the Name of Allah")
+(C) Qul ("Say")
+(D) Al-Hamd ("All praise")
 
-### 5. Who was the first person to believe in Prophet Muhammad ﷺ and comfort him after the first revelation?
-* A) Lady Khadijah (RA)
-* B) Abu Jahl
-* C) The King of Rome
-* D) A Roman merchant
+### 5. Who was the very first person to believe in Prophet Muhammad's ﷺ prophethood and comfort him with certitude after the first revelation?
+(A) Abu Talib
+(B) Waraqah ibn Nawfal
+(C) Abu Bakr al-Siddiq (RA)
+(D) Sayyidah Khadijah bint Khuwaylid (RA)
 
 ---
 
 ## Part B: Fill in the Blanks
-*Word Bank: Iqra, Khadijah, Hira, Cloak*
+Vocabulary Bank: Hira, Iqra', Cloak, Khadijah
 
-6. The cave on Jabal al-Nur where the Prophet ﷺ retreated was Cave **_________________**.
-7. The first divine command spoken by Angel Jibril was **_________________**.
-8. To share the honor of the Black Stone, the Prophet ﷺ placed it upon his **_________________**.
-9. The noble wife who supported the Prophet ﷺ wholeheartedly was Lady **_________________**.
+6. The mountain sanctuary on Jabal al-Nur where the Prophet ﷺ retreated in contemplation was Cave ______.
+7. The first divine command delivered by Archangel Jibril was ______.
+8. To share the communal honor of placing the Black Stone, the Prophet ﷺ placed it upon his ______.
+9. The noble first wife who comforted the Prophet ﷺ and affirmed his mission was Lady ______.
+
+### Fill in the Blanks Key
+6. Hira
+7. Iqra'
+8. Cloak
+9. Khadijah
 
 ---
 
 ## Part C: Matching Pairs
-Pair 1: Cave Hira --- Location of the first revelation (Iqra')
-Pair 2: Lady Khadijah --- First believer and beloved supportive wife
-Pair 3: Hilf al-Fudul --- Alliance formed to defend the oppressed
-Pair 4: Black Stone --- Sacred stone placed by tribal consensus
+* Cave Hira ─── Location where the first five verses of Surah Al-'Alaq were revealed
+* Lady Khadijah ─── The first believer and loving supporter of the Prophet ﷺ
+* Hilf al-Fudul ─── Moral alliance formed to defend the rights of the oppressed
+* The Black Stone ─── Sacred stone placed cooperatively by all tribal chieftains
+
+### Matching Key
+* Cave Hira ─── Location where the first five verses of Surah Al-'Alaq were revealed
+* Lady Khadijah ─── The first believer and loving supporter of the Prophet ﷺ
+* Hilf al-Fudul ─── Moral alliance formed to defend the rights of the oppressed
+* The Black Stone ─── Sacred stone placed cooperatively by all tribal chieftains
 
 ---
 
 ## Part D: Reflection
-10. What does the Prophet's ﷺ resolution of the Black Stone dispute teach us about teamwork and peace-making?
+
+10. What does the Prophet's ﷺ cooperative resolution of the Black Stone dispute teach us about teamwork and conflict resolution in our daily lives?
+
+### Reflection Rubric
+* **Full Understanding:** Student explains how the Prophet ﷺ included all parties so nobody felt left out, and connects this to avoiding fights, sharing credit, and solving disputes peacefully with classmates or siblings.
+* **Basic Understanding:** Student mentions using a cloak to lift the stone without explaining the leadership lesson of shared participation.
 
 ---
 
 ## Teacher Answer Key
-1. B) Hilf al-Fudul defended oppressed travelers.
-2. A) Placing the stone on a cloak united the tribes.
-3. B) Cave Hira on Jabal al-Nur.
-4. B) Iqra' (Read!).
-5. A) Lady Khadijah (RA).
-6. Hira
-7. Iqra
-8. Cloak
-9. Khadijah
+1. D - Hilf al-Fudul was an ethical alliance formed to defend the rights of visiting merchants and oppressed residents.
+2. B - Placing the Black Stone on his cloak allowed every clan leader to participate in lifting it.
+3. C - Revelation began in Cave Hira on Jabal al-Nur outside Makkah.
+4. A - The opening command of Surah Al-'Alaq (96:1) is Iqra' ("Read!" or "Recite!").
+5. D - Sayyidah Khadijah (RA) was the first person to believe in his prophethood and reassure him.

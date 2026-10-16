@@ -1,73 +1,90 @@
 # Level 3 Quiz: Deepening Belief & the Quran
+**Age Group:** Ages 10-12 (Level 3 Track)  
+**Focus:** Tajweed (Noon Sakinah & Qalqalah), Surah An-Naba', Intention, and Hadith Sciences  
+
+---
 
 ## Part A: Multiple Choice Questions
-1. For how many total years was the Holy Quran revealed to Prophet Muhammad ﷺ?
-   (A) 10 years.
-   (B) 23 years.
-   (C) 40 years.
-   (D) 63 years.
 
-2. How many letters of the Arabic alphabet trigger the rule of "Al-Izhar al-Halqi" (Clear Pronunciation) for Noon Sakinah?
-   (A) 2 letters.
-   (B) 4 letters.
-   (C) 6 throat letters: Hamzah, Ha, 'Ayn, Ha, Ghayn, Kha.
-   (D) 15 letters.
+### 1. Over how many total years was the Holy Quran revealed to Prophet Muhammad ﷺ?
+(A) 10 years in Madinah only
+(B) 40 years from early youth
+(C) 23 years (13 in Makkah and 10 in Madinah)
+(D) 63 years throughout his entire lifetime
 
-3. When a Noon Sakinah is followed immediately by the letter Ba (ب), which Tajweed rule must be applied?
-   (A) Al-Idgham with Ghunnah.
-   (B) Al-Iqlab (converting the sound into a soft nasal Meem).
-   (C) Al-Izhar (clear sharp pronunciation).
-   (D) Al-Qalqalah.
+### 2. How many letters of the Arabic alphabet trigger the rule of "Al-Izhar al-Halqi" (Clear Pronunciation) for Noon Sakinah and Tanween?
+(A) 6 throat letters: Hamzah, Ha, 'Ayn, Ha, Ghayn, Kha
+(B) 2 letters: Lam and Ra
+(C) 4 letters: Yanmu (Ya, Noon, Meem, Waw)
+(D) 15 letters of the alphabet
 
-4. Which two letters produce "Al-Idgham WITHOUT Ghunnah" when preceded by Noon Sakinah or Tanween?
-   (A) Ya and Noon.
-   (B) Lam (ل) and Ra (ر).
-   (C) Meem and Waw.
-   (D) Qaf and Kaf.
+### 3. When a Noon Sakinah or Tanween is followed immediately by the letter Ba (ب), which Tajweed rule must be applied?
+(A) Al-Idgham without Ghunnah
+(B) Al-Izhar al-Halqi
+(C) Al-Qalqalah al-Sughra
+(D) Al-Iqlab (converting the sound into a soft nasal Meem for two counts)
 
-5. What mnemonic phrase contains all five letters of the echoing Tajweed rule called "Qalqalah"?
-   (A) Yanmu (ي ن م و).
-   (B) Qutbu Jaddin (ق ط ب ج د).
-   (C) Hayyun Qayyum.
-   (D) Khussa Daghtin Qiz.
+### 4. Which two letters produce "Al-Idgham WITHOUT Ghunnah" when preceded by Noon Sakinah or Tanween?
+(A) Ya and Noon
+(B) Lam (ل) and Ra (ر)
+(C) Meem and Waw
+(D) Qaf and Kaf
 
-6. What is the difference between Minor Qalqalah (Sughra) and Major Qalqalah (Kubra)?
-   (A) Sughra is recited on weekdays, while Kubra is recited only on Friday.
-   (B) Sughra occurs when the Qalqalah letter is in the middle of a word, while Kubra occurs when stopping at the end of an ayah.
-   (C) Sughra is recited silently, while Kubra is shouted loudly.
-   (D) Sughra applies only to children under ten years old.
+### 5. What mnemonic phrase contains all five letters of the echoing Tajweed rule called "Qalqalah"?
+(A) Qutbu Jaddin (ق ط ب ج د)
+(B) Yanmu (ي ن م و)
+(C) Khussa Daghtin Qiz (خ ص ض غ ط ق ظ)
+(D) Hayyun Qayyum
 
-7. What is the central theme of the opening verses of Surah An-Naba' (Chapter 78)?
-   (A) The construction of trading ships in southern Arabia.
-   (B) The reality of the "Great News" (the Day of Resurrection and Accountability).
-   (C) The botanical classification of olive trees.
-   (D) The historical genealogy of ancient Roman emperors.
+### 6. What is the practical difference between Minor Qalqalah (Sughra) and Major Qalqalah (Kubra)?
+(A) Sughra applies on weekdays, while Kubra applies on Fridays
+(B) Sughra is recited silently, while Kubra is shouted loudly
+(C) Sughra applies only to children under twelve years old
+(D) Sughra occurs when the Qalqalah letter is in the middle of a word, while Kubra occurs when stopping at the end of an ayah
 
-8. In Surah An-Naba', what geological feature is described as "Awtada" (stabilizing pegs) for the Earth?
-   (A) Ocean trenches.
-   (B) Desert sand dunes.
-   (C) The mountains.
-   (D) Dense rainforests.
+### 7. What is the central theme of the opening verses of Surah An-Naba' (Chapter 78)?
+(A) The commercial trade routes of ancient Yemen
+(B) The reality of the "Great News" (the Day of Resurrection and ultimate accountability)
+(C) Agricultural techniques for desert farming
+(D) The construction of naval ships in antiquity
 
-9. What is the classical Sunni requirement regarding handling the physical Arabic Mushaf?
-   (A) It may be carried in gym bags alongside athletic shoes without cover.
-   (B) It is obligatory to be in a state of ritual purity (Wudu) before touching the Arabic text.
-   (C) It must only be touched by certified university professors.
-   (D) It can only be read while standing outdoors under direct sunlight.
+### 8. In Surah An-Naba' (78:7), what natural creation is described as "Awtada" (stabilizing pegs) for the earth?
+(A) Desert sand dunes
+(B) Ocean currents
+(C) The mountains
+(D) Deep forests
 
-10. What haunting wish will the arrogant disbeliever utter on the Day of Judgment according to the final verse of Surah An-Naba'?
-    (A) "Oh, I wish I had built a larger palace of gold!"
-    (B) "Oh, I wish that I were dust!"
-    (C) "Oh, I wish I had sailed across the seven oceans!"
-    (D) "Oh, I wish I had studied astronomy!"
+### 9. What is the classical Sunni requirement regarding handling the physical Arabic Mushaf?
+(A) It may be handled casually without ritual preparation
+(B) It can only be read while standing outdoors
+(C) It must only be touched by certified community elders
+(D) It is obligatory to be in a state of ritual purity (Wudu) before touching the Arabic text (Surah Al-Waqi'ah 56:79)
+
+### 10. What remorseful statement will the unrepentant person utter on the Day of Judgment according to the final verse of Surah An-Naba' (78:40)?
+(A) "Oh, I wish that I were dust!" (Ya laytani kuntu turaba)
+(B) "Oh, I wish I had gathered more gold and silver!"
+(C) "Oh, I wish I had built a fortress on a mountain!"
+(D) "Oh, I wish I had traveled across the seven seas!"
+
+---
 
 ## Part B: Fill in the Blanks
 Vocabulary Bank: Qutbu Jaddin, Al-Iqlab, Awtada, Al-Izhar, Tadabbur
-1. Pronouncing the Noon Sakinah clearly without extra nasalization before the six throat letters is ______.
-2. Transforming a Noon Sakinah into a soft Meem before the letter Ba is the rule of ______.
-3. The five letters of Qalqalah are collected in the mnemonic phrase ______.
-4. Surah An-Naba' describes the mountains as geological pegs termed ______.
-5. The deep contemplation and reflection over the meanings of Quranic verses is called ______.
+
+6. Pronouncing the Noon Sakinah clearly without nasal hum before the six throat letters is ______.
+7. Transforming a Noon Sakinah into a soft Meem before the letter Ba is the rule of ______.
+8. The five letters of Qalqalah are collected in the mnemonic phrase ______.
+9. Surah An-Naba' describes the mountains as stabilizing pegs termed ______.
+10. The deep contemplation and reflection over the meanings and lessons of the Quran is called ______.
+
+### Fill in the Blanks Key
+6. Al-Izhar
+7. Al-Iqlab
+8. Qutbu Jaddin
+9. Awtada
+10. Tadabbur
+
+---
 
 ## Part C: Matching Terms
 * Al-Izhar al-Halqi ─── Clear pronunciation of Noon Sakinah before the 6 throat letters
@@ -76,40 +93,36 @@ Vocabulary Bank: Qutbu Jaddin, Al-Iqlab, Awtada, Al-Izhar, Tadabbur
 * Qalqalah ─── Echoing vibration on the letters of Qutbu Jaddin when bearing a Sukun
 * Tadabbur ─── Reflecting deeply upon the meanings and moral lessons of the Quran
 
-## Part D: Reflection & Application
-1. Explain how the geological description of mountains as "pegs" (*Awtada*) in Surah An-Naba' aligns with modern plate tectonics and isostasy.
-2. Outline the practical steps a student should take to establish sacred *Adab* (etiquette) before sitting down to recite the Quran at home.
-3. Compare the four rules of Noon Sakinah: Why did the Arabic language naturally develop these transitions between letters?
-4. What lesson can a young person learn from the final verse of Surah An-Naba' about the seriousness of daily accountability?
-
-## Answer Key & Marking Guide
-1. B - The revelation spanned 23 years (13 in Makkah, 10 in Madinah).
-2. C - The 6 throat letters (Hamzah, Ha, 'Ayn, Ha, Ghayn, Kha) govern Izhar Halqi.
-3. B - Iqlab transforms the Noon into an unclosed Meem with Ghunnah before Ba.
-4. B - Lam and Ra produce Idgham without Ghunnah (Idgham Kamil).
-5. B - The letters Qaf, Taa, Baa, Jeem, and Dal form "Qutbu Jaddin."
-6. B - Sughra is medial (mid-word); Kubra is final when stopping on an ayah boundary.
-7. B - Al-Naba' al-'Azim is the Day of Resurrection and the reality of Hereafter accountability.
-8. C - Verse 7 states: "Wal-jibala awtada" (And the mountains as pegs).
-9. B - Based on Surah Al-Waqi'ah 56:79 and the Prophet's letter to the people of Yemen.
-10. B - Verse 40 records: "Ya laytani kuntu turaba" (Oh, I wish that I were dust!).
-
-### Fill in the Blanks Key
-1. Al-Izhar - Clear pronunciation.
-2. Al-Iqlab - Conversion to Meem.
-3. Qutbu Jaddin - Mnemonic for Qalqalah letters.
-4. Awtada - Pegs / stakes.
-5. Tadabbur - Deep contemplation.
-
 ### Matching Key
-* Al-Izhar al-Halqi connects with Clear pronunciation of Noon Sakinah before the 6 throat letters.
-* Al-Idgham connects with Merging the Noon sound into Yanmu or Lam/Ra.
-* Al-Iqlab connects with Converting Noon Sakinah into a nasal Meem before Ba.
-* Qalqalah connects with Echoing vibration on the letters of Qutbu Jaddin when bearing a Sukun.
-* Tadabbur connects with Reflecting deeply upon the meanings and moral lessons of the Quran.
+* Al-Izhar al-Halqi ─── Clear pronunciation of Noon Sakinah before the 6 throat letters
+* Al-Idgham ─── Merging the Noon sound into Yanmu or Lam/Ra
+* Al-Iqlab ─── Converting Noon Sakinah into a nasal Meem before Ba
+* Qalqalah ─── Echoing vibration on the letters of Qutbu Jaddin when bearing a Sukun
+* Tadabbur ─── Reflecting deeply upon the meanings and moral lessons of the Quran
 
-### Reflection Marking Rubric
-- Question 1: Awards full points for explaining that mountain roots extend deep into the Earth's crust to anchor continental plates, matching the Quranic term "pegs."
-- Question 2: Awards full points for mentioning wudu, clean clothes, facing Qiblah, siwak, Isti'adhah, Basmalah, and quiet contemplation.
-- Question 3: Awards full points for explaining that phonological ease of articulation dictates whether sounds merge, convert, or pronounce clearly.
-- Question 4: Awards full points for discussing that worldly deeds have eternal consequences, inspiring vigilance in private and public behavior.
+---
+
+## Part D: Reflection & Application
+
+11. In Surah An-Naba' (78:6-16), what signs in the created universe does Allah describe to demonstrate His divine power to bring about the Day of Sorting (*Yawm al-Fasl*)?
+12. Outline the practical steps a student should take to establish sacred *Adab* (etiquette) before sitting down to recite the Quran at home.
+13. Contrast *Ikhlas* (sincerity) with *Riya'* (ostentation) in your daily actions: Why did the Prophet ﷺ warn that doing good deeds to show off to people ruins their spiritual reward?
+14. Explain the four requirements for human success outlined in Surah Al-'Asr (103:1-3) and how young Muslims can practice them together.
+
+### Reflection Rubric
+* **Full Understanding:** Student identifies multiple cosmic signs from Surah An-Naba' (such as the earth as a cradle, mountains as pegs, sleep for rest, night as a garment, radiant sun, rain clouds), details physical/spiritual Quranic adab, explains that Riya' seeks creation's praise instead of Allah's pleasure, and lists the 4 conditions of Surah Al-'Asr.
+* **Basic Understanding:** Student gives brief or incomplete answers without citing specific verses or concepts from the handout.
+
+---
+
+## Teacher Answer Key
+1. C - The Quran was revealed over 23 years (13 in Makkah, 10 in Madinah).
+2. A - The 6 throat letters (Hamzah, Ha, 'Ayn, Ha, Ghayn, Kha) trigger Izhar Halqi.
+3. D - Iqlab transforms the Noon into an unclosed Meem with Ghunnah before Ba.
+4. B - Lam and Ra produce Idgham without Ghunnah (Idgham Kamil).
+5. A - The letters Qaf, Taa, Baa, Jeem, and Dal form "Qutbu Jaddin."
+6. D - Sughra occurs within a word; Kubra occurs when pausing at an ayah boundary.
+7. B - Al-Naba' al-'Azim is the Day of Resurrection and accountability.
+8. C - Verse 7 states: "Wal-jibala awtada" (And the mountains as pegs).
+9. D - Based on Surah Al-Waqi'ah 56:79, ritual purity (Wudu) is required to touch the Arabic Mushaf.
+10. A - Verse 40 records the remorseful cry: "Ya laytani kuntu turaba" (Oh, I wish that I were dust!).

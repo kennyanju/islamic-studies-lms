@@ -53,7 +53,7 @@ flowchart TD
      * *Al-Khalq* (Allah creates all entities and acts; no secondary creator exists).
   2. The student defines the Ash'ari doctrine of **Kasb (Acquisition)**: Allah creates the power and the act at the moment of choice, while the human directs their conscious intent (*Qasd*), establishing genuine moral and legal accountability.
   3. The student resolves the "Problem of Evil and Suffering": Earth is not Paradise; it is *Dar al-Imtihan* (the testing realm). Pain and suffering serve as spiritual purifiers, tests of faith, catalysts for compassion, and are fully redressed in the perfect justice of the Hereafter.
-* **🌍 Other Scholars Say — Historical Analysis Box**:
+* **🌍 Other Scholars Say: Historical Analysis Box**:
   > *Topic: Human Will and Divine Sovereignty*
   > **All Sunni schools agree**: Allah is the sole Sovereign Creator; humans possess real choice and are fully accountable for their deeds.
   > *The Jabriyyah (Fatalists)*: Claimed humans are passive puppets without any choice, destroying the justice of divine reward and punishment.
@@ -78,8 +78,8 @@ flowchart TD
   3. The student defends the **Fine-Tuning Argument**: Demonstrating that physical constants (gravity, electromagnetic force, cosmological constant) are calibrated to unimaginable precision to permit life.
   4. The student addresses Moral Relativism: Showing that without an objective Divine Lawgiver, human rights become mere subjective social preferences with no binding moral authority.
 * **Qur'an & Hadith Evidence**: Surah Al-Anbiya' (21:30: *"Do not those who disbelieve see that the heavens and the earth were a joined entity, and We separated them?"*); Surah At-Tur (52:35–36).
-* **Seminar Workshop**: Mock Debate: "Can Science Replace Religion?" — Students practice articulating sound philosophical arguments against modern atheist debaters.
-* **Hifz & Texts**: Surah Al-Kahf (Verses 61–110 — complete). Nawawi Hadith 31–33.
+* **Seminar Workshop**: Mock Debate: "Can Science Replace Religion?": Students practice articulating sound philosophical arguments against modern atheist debaters.
+* **Hifz & Texts**: Surah Al-Kahf (Verses 61-110, complete). Nawawi Hadith 31–33.
 
 ---
 
@@ -101,7 +101,7 @@ flowchart TD
   2. The student applies the **Maqasid al-Shari'ah** (The 5 Universal Objectives): Preserving Religion (*Din*), Life (*Nafs*), Intellect (*'Aql*), Lineage/Family (*Nasl*), and Wealth (*Mal*).
   3. The student defines the boundaries of **Ijtihad** (independent legal derivation) and **Taqlid** (following an established school), refuting modern unqualified lay fatwas.
 * **Maliki Fiqh Flag**: *'Amal Ahl al-Madinah* represents the continuous living sunnah passed down generation by generation from thousands of Companions, serving as a superior historical safeguard against transmission errors.
-* **Qur'an & Hadith Evidence**: Surah An-Nisa (4:59); Surah Al-Hashr (59:2: *"So take admonition, O you who have insight"* — Qur'anic foundation of Qiyas).
+* **Qur'an & Hadith Evidence**: Surah An-Nisa (4:59); Surah Al-Hashr (59:2: *"So take admonition, O you who have insight"*, Qur'anic foundation of Qiyas).
 * **Seminar Workshop**: "Legal Derivation Lab": Students extract rulings on modern technologies (e.g. self-driving car liability, lab-grown meat) using the 5 Maqasid and Qiyas.
 * **Hifz & Texts**: *Al-Waraqat* (definitions of Fiqh, Usul, and the 5 Ahkam). Surah Yasin (Verses 1–35).
 
@@ -120,7 +120,7 @@ flowchart TD
      * **Gharar (Excessive Deception / Ambiguity)**: Contracts involving unknown delivery, hidden defects, or deceptive sales (selling fish wild in the sea, lottery ticket mystery boxes).
      * **Maysir / Qimar (Gambling & Speculation)**: Derivative zero-sum betting where money is won or lost purely by chance rather than productive economic enterprise.
   3. The student articulates the systemic harms of debt-based economies: Runaway inflation, wealth inequality, debt bondage of developing nations, and recurrent financial collapses.
-* **🌍 Other Scholars Say — Analysis Box**:
+* **🌍 Other Scholars Say: Analysis Box**:
   > *Topic: The Underlying Effective Cause ('Illah) of Riba in Foodstuffs*
   > **All schools agree**: Trading gold for gold, or wheat for wheat, must be equal in hand-to-hand exchange.
   > *Maliki School*: The 'Illah in food is being a **nourishing staple and storable** (*Qut wa Iddikhar*). Items like fruits and fresh greens are not subject to food-riba in exchange!
@@ -173,7 +173,7 @@ flowchart TD
      * Residuary heirs (*'Asabah*): Taking remaining wealth after fixed shares are distributed.
      * The social justice of Mirath: Preventing dynastic monopoly of wealth and guaranteeing intergenerational security for women and orphans.
 * **Maliki Fiqh Flag**: Imam Malik held that marriage must be proclaimed publicly (*I'lan*); a secret marriage conducted with two witnesses sworn to secrecy is legally void (*Fasid*).
-* **Qur'an & Hadith Evidence**: Surah Ar-Rum (30:21); Surah An-Nisa (4:11–12 — The Inheritance Verses).
+* **Qur'an & Hadith Evidence**: Surah Ar-Rum (30:21); Surah An-Nisa (4:11–12: The Inheritance Verses).
 * **Seminar Workshop**: "The Estate Executor Workshop": Calculating estate distributions for complex real-world family scenarios using primary Qur'anic shares.
 * **Hifz & Texts**: Surah Al-Hujurat (49: complete). Nawawi Hadith 40–42.
 

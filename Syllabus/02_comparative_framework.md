@@ -1,4 +1,4 @@
-# 02 — Comparative Framework: "Other Scholars Say"
+# 02: Comparative Framework: "Other Scholars Say"
 
 > **Purpose.** The Maliki madhhab and Ash'ari creed are taught as *our practice*. Children learn from Year 1 that the other Sunni schools are also valid, rightly guided, and worthy of love and respect. This document sets the policy, the box template, the age progression, and a checked list of difference topics that the Year documents draw on.
 
@@ -18,7 +18,7 @@
 
 ## 2. Age Progression
 
-| Year (Age) | Stage | Fiqh — what the child learns | Creed — what the child learns | Box frequency |
+| Year (Age) | Stage | Fiqh: what the child learns | Creed: what the child learns | Box frequency |
 |---|---|---|---|---|
 | **1 (6–7)** | Awareness | "People at the masjid may pray a little differently. They are following the Prophet ﷺ too." Stories of the Imams' kindness | We are *Ahl al-Sunnah wa'l-Jama'ah* | 1 per term (story form) |
 | **2 (7–8)** | Recognition | Names of the 4 Imams, where they lived, one famous story each; spotting visible differences (hand position, Amin) | Allah is unlike creation (*tanzih*); all Sunni Muslims agree | 1 per unit (where relevant) |
@@ -33,7 +33,7 @@
 
 ### 3a. Years 1–2 (story box)
 ```markdown
-> 🌍 **Other Scholars Say — Many Ways, One Sunnah**
+> 🌍 **Other Scholars Say: Many Ways, One Sunnah**
 > *Story:* [short story of an Imam showing respect]
 > *What we do:* [Maliki practice in one sentence]
 > *What some friends do:* [other practice in one sentence]
@@ -42,7 +42,7 @@
 
 ### 3b. Years 3–4 (table box)
 ```markdown
-> 🌍 **Other Scholars Say — [Topic]**
+> 🌍 **Other Scholars Say: [Topic]**
 > **All agree:** [point of ijma']
 >
 > | | Maliki (our practice) | Hanafi | Shafi'i | Hanbali |
@@ -55,7 +55,7 @@
 
 ### 3c. Year 5 / Extension (evidence box)
 ```markdown
-> 🌍 **Other Scholars Say — [Topic]**
+> 🌍 **Other Scholars Say: [Topic]**
 > **All agree:** …
 > | School | Position | Main evidence | Reason for difference |
 > |---|---|---|---|
@@ -65,7 +65,7 @@
 
 ### 3d. Creed box (Years 3+)
 ```markdown
-> 🧭 **Ahl al-Sunnah Map — [Topic]**
+> 🧭 **Ahl al-Sunnah Map: [Topic]**
 > **All Sunni schools agree:** …
 > **Ash'ari (our school):** … | **Maturidi:** … | **Athari:** …
 > **Why this is not a split:** …

@@ -33,7 +33,7 @@ This slide deck serves as a visual aid. The core of the learning will come from 
 #### Teacher Notes:
 In this course, we are not just looking at dates and events as dead history. Instead, we are tracing a golden line of transmission. Students should realize that the way we pray, make decisions, and view our creator today is directly connected to the actions of the Prophet ﷺ, preserved by the scholars of Madinah, and structured into a system of jurisprudence. 
 
-Make sure to emphasize that history is the soil from which our identity grows. By understanding how Islam was preserved and how it traveled to different parts of the world—especially North and West Africa—students will see Islam as a global, deeply rooted faith that is fully capable of addressing modern challenges.
+Make sure to emphasize that history is the soil from which our identity grows. By understanding how Islam was preserved and how it traveled to different parts of the world, especially North and West Africa, students will see Islam as a global, deeply rooted faith that is fully capable of addressing modern challenges.
 
 ---
 
@@ -50,7 +50,7 @@ Make sure to emphasize that history is the soil from which our identity grows. B
 #### Teacher Notes:
 We begin the historical narrative in the later years of the Prophet’s ﷺ life. The Conquest of Makkah (*Fatḥ Makkah*) is one of the greatest examples of political and spiritual victory in human history. Explain to the students that instead of seeking revenge against the Quraysh, who had tortured the early Muslims, boycotted them, and fought battles against them, the Prophet ﷺ showed unmatched mercy (*Raḥmah*). 
 
-He quoted Prophet Yusuf (peace be upon him) saying, *"No blame is upon you today."* Point out the character of the Prophet ﷺ—he did not enter Makkah with trumpet blasts and a raised sword; rather, his chin touched the saddle of his camel out of humility and gratitude to Allah. This victory shows that the goal of Islam is the guidance of hearts, not the destruction of people.
+He quoted Prophet Yusuf (peace be upon him) saying, *"No blame is upon you today."* Point out the character of the Prophet ﷺ: he did not enter Makkah with trumpet blasts and a raised sword; rather, his chin touched the saddle of his camel out of humility and gratitude to Allah. This victory shows that the goal of Islam is the guidance of hearts, not the destruction of people.
 
 ---
 
@@ -124,7 +124,7 @@ Highlight that this legacy must be handled with care. The preservation of the Su
 
 ---
 #### Teacher Notes:
-Define the word *Khilāfah* literally as "succession." The Caliph (*Khalīfah*) does not receive divine revelation—revelation ended with the Prophet ﷺ. Rather, the Caliph's job is to protect the religion and manage the worldly affairs of the community according to Islamic values. 
+Define the word *Khilāfah* literally as "succession." The Caliph (*Khalīfah*) does not receive divine revelation; revelation ended with the Prophet ﷺ. Rather, the Caliph's job is to protect the religion and manage the worldly affairs of the community according to Islamic values. 
 
 Introduce the term *Al-Khulafā’ al-Rāshidūn*. Explain that the Prophet ﷺ praised this era, stating that we should hold fast to their path. They faced unique, unprecedented issues and solved them using mutual consultation (*Shūrā*), showing us how to apply Islamic principles as the world changes.
 

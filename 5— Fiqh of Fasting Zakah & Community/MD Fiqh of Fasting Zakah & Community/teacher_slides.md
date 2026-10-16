@@ -94,7 +94,7 @@
 
 ---
 **Teacher Notes:**
-*   **Comparing Opinions:** Make sure students understand both views. Neither view is "wrong"—both are derived from legal interpretations of the same Hadiths.
+*   **Comparing Opinions:** Make sure students understand both views. Neither view is "wrong"; both are derived from legal interpretations of the same Hadiths.
 *   **Key Concept:** *Ikhtilaf al-Matali'* (إِخْتِلَاف الْمَطَالِع - difference in moon horizons).
 *   **Discussion:** How does the Maliki view on sighting help modern Muslim communities who want to fast together? What challenges arise when different countries start on different days?
 

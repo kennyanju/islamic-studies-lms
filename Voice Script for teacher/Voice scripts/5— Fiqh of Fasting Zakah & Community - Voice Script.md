@@ -8,17 +8,7 @@
 
 ---
 
-## Slide 1: Ramadan, Zakah, & Community Responsibility
-* **Slide Summary:** Unit title and opening overview covering the spirituality and fiqh of Fasting (Siyam), Zakat al-Fitr, Zakah al-Mal, and communal charity in the Maliki school.
-* **Delivery Direction:** `[Speak with warm spiritual joy and compassionate community focus]`
-* **Narrative Script (ElevenLabs v3 Ready):**
-  "[warmly] Bismillahir-Rahmanir-Rahim. [pause] Assalamu Alaikum wa Rahmatullahi wa Barakatuh. [pause] Welcome to our unit on **Ramadan, Zakah, and Community Responsibility**, [short pause] framed through the wisdom of Maliki jurisprudence and Ash'ari creed. [long pause] Worship in Islam is both personal and communal—[short pause]it connects our hearts to Allah while uplifting the vulnerable around us. [pause] In this course, we will explore the spiritual depth of fasting—*Siyam*, [short pause] the rules of moon-sighting, [short pause] the essential pillars and intention of fasting in the Maliki school, [short pause] and how to rectify missed fasts through Qada' and Kaffarah. [long pause] We will also master the social pillars of justice: [short pause] Zakat al-Fitr, [short pause] Zakah on wealth, [short pause] voluntary charity, [short pause] and the joyful sunnahs of Eid al-Fitr."
-* **Concept Analogy:** A reservoir of rain: Fasting purifies the inner springs of the soul, while Zakah flows outward to nourish the entire community garden.
-* **Check-for-Understanding Question:** "What two major financial obligations of purification are studied in this course? (Answer: Zakat al-Fitr and Zakah al-Mal)."
-
----
-
-## Slide 2: Welcome & Course Overview
+## Slide 1: Welcome & Course Overview
 * **Slide Summary:** Introduces the transition from individual physical worship to financial, communal, and social acts of worship.
 * **Delivery Direction:** `[Smile, extend arms in a welcoming gesture, and speak with high energy]`
 * **Narrative Script (ElevenLabs v3 Ready):**
@@ -28,36 +18,36 @@
 
 ---
 
-## Slide 3: Creed (Aqidah) Context: Why Do We Fast?
+## Slide 2: Creed (Aqidah) Context: Why Do We Fast?
 * **Slide Summary:** Exploring Divine Independence (Istighna') vs. human dependency (Iftiqar).
 * **Delivery Direction:** `[Speak in a slow, reflective, and humble tone]`
 * **Narrative Script (ElevenLabs v3 Ready):**
   "[thoughtful] Before we look at the rules of what breaks a fast, let's look at the theology. [pause] Why do we fast?
   
-  In our creed, we know that Allah is **Al-Ghani**—The Self-Sufficient. [pause] He does not need our hunger, our thirst, or our money. [pause] He is completely independent of all creation. [pause] Instead, *we* are the needy ones—**Al-Fuqara'**. [pause] We depend on Allah for every single breath and heartbeat. [pause] When we fast, and our stomachs rumble, it is a physical reminder of our absolute dependency—our **Iftiqar**—on Allah for our food and life. [pause] Fasting is also a secret worship. [pause] Unlike prayer, there is no physical action. [pause] Only Allah knows if you are truly fasting!"
+  In our creed, we know that Allah is **Al-Ghani**: The Self-Sufficient. [pause] He does not need our hunger, our thirst, or our money. [pause] He is completely independent of all creation. [pause] Instead, *we* are the needy ones: **Al-Fuqara'**. [pause] We depend on Allah for every single breath and heartbeat. [pause] When we fast, and our stomachs rumble, it is a physical reminder of our absolute dependency: our **Iftiqar**: on Allah for our food and life. [pause] Fasting is also a secret worship. [pause] Unlike prayer, there is no physical action. [pause] Only Allah knows if you are truly fasting!"
 * **Concept Analogy:** The air we breathe: the atmosphere doesn't need humans to breathe it, but we would die in seconds without it. We need Allah's provision; He does not need our worship.
 * **Check-for-Understanding Question:** "Why is fasting called a 'secret worship'? (Answer: Because there are no visible movements; only Allah and the person know if they are truly fasting)."
 
 ---
 
-## Slide 4: The Spirit of Fasting (Siyam)
+## Slide 3: The Spirit of Fasting (Siyam)
 * **Slide Summary:** Fasting as a shield (Turs) and the two levels of fasting.
 * **Delivery Direction:** `[Use a reassuring and protective tone; act out holding a shield]`
 * **Narrative Script (ElevenLabs v3 Ready):**
   "[thoughtful] The Prophet sallallahu alayhi wa sallam taught us: *'Fasting is a shield.'* 
   
   Just like a shield blocks arrows in battle, fasting protects us from making bad choices in this world and blocks the Fire in the next. [pause] But there are two levels of fasting:
-  First: **Fasting of the stomach**—holding back from food and drink. [pause] Second: **Fasting of the limbs and heart**—holding back our tongue from lying or arguing, our eyes from looking at bad things, and our hearts from jealousy. [pause] The Prophet sallallahu alayhi wa sallam warned us that if we don't give up lying and bad behavior, Allah has no need of us leaving our food and drink! Fasting is the ultimate training for **Ikhlas** (sincerity)."
+  First: **Fasting of the stomach**: holding back from food and drink. [pause] Second: **Fasting of the limbs and heart**: holding back our tongue from lying or arguing, our eyes from looking at bad things, and our hearts from jealousy. [pause] The Prophet sallallahu alayhi wa sallam warned us that if we don't give up lying and bad behavior, Allah has no need of us leaving our food and drink! Fasting is the ultimate training for **Ikhlas** (sincerity)."
 * **Concept Analogy:** A software firewall: it doesn't just block big virus downloads; it monitors all the small incoming traffic to keep the system clean and safe. Fasting is a firewall for the soul.
 * **Check-for-Understanding Question:** "What did the Prophet sallallahu alayhi wa sallam say fasting is like? (Answer: A shield)."
 
 ---
 
-## Slide 5: Establishing Ramadan: Moon Sighting (Hilal)
+## Slide 4: Establishing Ramadan: Moon Sighting (Hilal)
 * **Slide Summary:** Visual moon sighting rules vs. astronomical calculations in the Maliki school.
 * **Delivery Direction:** `[Point up with your finger as if looking at the night sky]`
 * **Narrative Script (ElevenLabs v3 Ready):**
-  "[thoughtful] How do we know when Ramadan starts? The Prophet sallallahu alayhi wa sallam said: *'Fast when you see it—the crescent moon—and break your fast when you see it.'*
+  "[thoughtful] How do we know when Ramadan starts? The Prophet sallallahu alayhi wa sallam said: *'Fast when you see it, the crescent moon, and break your fast when you see it.'*
   
   In the Maliki school, we establish the start of Ramadan in one of three ways:
   1. [pause] A reliable sighting of the crescent moon (*Hilal*) by two upright male witnesses.
@@ -68,7 +58,7 @@
 
 ---
 
-## Slide 6: The Maliki View on Global vs. Local Sighting
+## Slide 5: The Maliki View on Global vs. Local Sighting
 * **Slide Summary:** Maliki global sighting rule vs. Shafi'i local sighting.
 * **Delivery Direction:** `[Spread your arms wide to show distance and global unity]`
 * **Narrative Script (ElevenLabs v3 Ready):**
@@ -82,7 +72,7 @@
 
 ---
 
-## Slide 7: The Pillars of Fasting (Arkan al-Siyam)
+## Slide 6: The Pillars of Fasting (Arkan al-Siyam)
 * **Slide Summary:** The two pillars of fasting: Intention (Niyyah) and Abstinence (Imsak).
 * **Delivery Direction:** `[Speak clearly; list the two pillars with emphasis]`
 * **Narrative Script (ElevenLabs v3 Ready):**
@@ -90,43 +80,43 @@
   
   First: **The Intention** (*Niyyah*). [pause] You must decide in your heart that you are fasting for the sake of Allah. [pause] Second: **Abstinence** (*Imsak*). [pause] You must refrain from food, drink, and anything entering the stomach cavity from the first light of true dawn (*Fajr*) all the way until sunset (*Maghrib*). [pause] Fasting is obligatory for every sane, mature Muslim who is physically able, and women must be clear of their monthly bleeding. [pause] That's the baseline!"
 * **Concept Analogy:** The walls of a box: if you have a top and a bottom but no sides (abstinence), the box cannot hold anything. The pillars contain and protect the fast.
-* **Check-for-Understanding Question:** "When does the fast actually start—at sunrise or at dawn (Fajr)? (Answer: At true dawn/Fajr)."
+* **Check-for-Understanding Question:** "When does the fast actually start: at sunrise or at dawn (Fajr)? (Answer: At true dawn/Fajr)."
 
 ---
 
-## Slide 8: Deep-Dive: The Intention (Niyyah) in Maliki Fiqh
+## Slide 7: Deep-Dive: The Intention (Niyyah) in Maliki Fiqh
 * **Slide Summary:** The Maliki rule of Niyyah Wahidah (single intention for consecutive fasts).
 * **Delivery Direction:** `[Show a single finger; speak with a tone of clarification]`
 * **Narrative Script (ElevenLabs v3 Ready):**
-  "[thoughtful] Let's focus on a major Maliki ruling about the intention: **Niyyah Wahidah** (a single intention). [pause] In the Maliki school, because Ramadan is a continuous, consecutive fast, you only need to make **one single intention** on the night before the first day of Ramadan to cover the entire month! You don't have to worry if you forget to make the intention on night fifteen. [pause] However, if your fast is broken—like if you get sick, travel, or have your period—you *must* make a new intention the night before you start fasting again. [pause] Other schools require a brand new intention every single night, but Imam Malik viewed the whole month as one single package of worship."
+  "[thoughtful] Let's focus on a major Maliki ruling about the intention: **Niyyah Wahidah** (a single intention). [pause] In the Maliki school, because Ramadan is a continuous, consecutive fast, you only need to make **one single intention** on the night before the first day of Ramadan to cover the entire month! You don't have to worry if you forget to make the intention on night fifteen. [pause] However, if your fast is broken, like if you get sick, travel, or have your period, you *must* make a new intention the night before you start fasting again. [pause] Other schools require a brand new intention every single night, but Imam Malik viewed the whole month as one single package of worship."
 * **Concept Analogy:** Buying a season pass: you pay once at the gate to enter the park for the whole season (single intention), rather than buying a new ticket every single morning you walk in.
 * **Check-for-Understanding Question:** "If a person has to stop fasting on day ten of Ramadan because they traveled, what must they do when they return to fast on day twelve? (Answer: Make a fresh intention the night before)."
 
 ---
 
-## Slide 9: Invalidators of Fasting: Qada' (Makeup Only)
+## Slide 8: Invalidators of Fasting: Qada' (Makeup Only)
 * **Slide Summary:** Actions that break the fast requiring a makeup day (Qada') without sin.
 * **Delivery Direction:** `[Use a teaching, analytical tone; write Qada' on the board]`
 * **Narrative Script (ElevenLabs v3 Ready):**
-  "[thoughtful] Sometimes the fast is broken. [pause] In Maliki fiqh, if a fast is broken in certain ways, you only owe **Qada'**—which means you make up that single day after Ramadan. [pause] Here is a major Maliki difference: if you eat or drink **by mistake or forgetfulness**, your fast *is* broken in our school, and you must make it up, but you have no sin. [pause] In other schools, forgetful eating doesn't break the fast. [pause] Other things that require Qada' only include: throwing up deliberately, getting nose drops or ear drops into your throat, or failing to make your intention before Fajr. [pause] You are not in trouble, but you must replace that day."
+  "[thoughtful] Sometimes the fast is broken. [pause] In Maliki fiqh, if a fast is broken in certain ways, you only owe **Qada'**, which means you make up that single day after Ramadan. [pause] Here is a major Maliki difference: if you eat or drink **by mistake or forgetfulness**, your fast *is* broken in our school, and you must make it up, but you have no sin. [pause] In other schools, forgetful eating doesn't break the fast. [pause] Other things that require Qada' only include: throwing up deliberately, getting nose drops or ear drops into your throat, or failing to make your intention before Fajr. [pause] You are not in trouble, but you must replace that day."
 * **Concept Analogy:** A flat tire: if you get a puncture by accident, your trip is paused, and you must change the tire (Qada'). You aren't in trouble with the police, but you still have to fix the tire to finish the journey.
 * **Check-for-Understanding Question:** "If Zayd forgets he is fasting and drinks milk in the Maliki school, what is the ruling? (Answer: His fast is broken; he must fast a makeup day (Qada') after Ramadan, but he has no sin)."
 
 ---
 
-## Slide 10: Major Violations: Qada' and Kaffarah (Expiation)
+## Slide 9: Major Violations: Qada' and Kaffarah (Expiation)
 * **Slide Summary:** Deliberate violations that trigger both Qada' and Kaffarah (expiation).
 * **Delivery Direction:** `[Speak with seriousness and weight]`
 * **Narrative Script (ElevenLabs v3 Ready):**
   "[thoughtful] But what if someone deliberately and voluntarily breaks their fast during Ramadan without a valid excuse, like eating a sandwich or drinking juice? 
   
-  In the Maliki school, this is a massive violation! It triggers both Qada' (making up the day) AND **Kaffarah**—which is a severe expiation or penalty to repair the spiritual gravity of violating Ramadan. [pause] We require *Kaffarah* for *any* deliberate breaking of the fast, whether by eating, drinking, or intimacy. [pause] Other schools limit *Kaffarah* only to breaking the fast through intimacy. [pause] Our Madhhab protects the sacredness of Ramadan very strictly!"
+  In the Maliki school, this is a massive violation! It triggers both Qada' (making up the day) AND **Kaffarah**: which is a severe expiation or penalty to repair the spiritual gravity of violating Ramadan. [pause] We require *Kaffarah* for *any* deliberate breaking of the fast, whether by eating, drinking, or intimacy. [pause] Other schools limit *Kaffarah* only to breaking the fast through intimacy. [pause] Our Madhhab protects the sacredness of Ramadan very strictly!"
 * **Concept Analogy:** Breaking a contract: if you accidentally spill water on a contract, you print a new copy (Qada'). But if you deliberately tear up the contract in front of the business partner, you face a major penalty (Kaffarah) for disrespecting the agreement.
 * **Check-for-Understanding Question:** "What is the term for the penalty paid for deliberately breaking the Ramadan fast? (Answer: Kaffarah)."
 
 ---
 
-## Slide 11: The Maliki Hierarchy of Kaffarah
+## Slide 10: The Maliki Hierarchy of Kaffarah
 * **Slide Summary:** The three options of Kaffarah, with feeding 60 poor people as the preferred option.
 * **Delivery Direction:** `[Speak with appreciation for social justice]`
 * **Narrative Script (ElevenLabs v3 Ready):**
@@ -139,7 +129,7 @@
 
 ---
 
-## Slide 12: Recommended & Disliked Acts of Fasting
+## Slide 11: Recommended & Disliked Acts of Fasting
 * **Slide Summary:** Sunnahs (Suhoor, Iftar) and Makruhat (tasting food, deep rinsing).
 * **Delivery Direction:** `[Speak with practical advice and warmth]`
 * **Narrative Script (ElevenLabs v3 Ready):**
@@ -156,17 +146,17 @@
 
 ---
 
-## Slide 13: Zakat al-Fitr: The Charity of Fasting
+## Slide 12: Zakat al-Fitr: The Charity of Fasting
 * **Slide Summary:** Purpose, obligation, and communal role of Zakat al-Fitr.
 * **Delivery Direction:** `[Speak with warmth; emphasize community care]`
 * **Narrative Script (ElevenLabs v3 Ready):**
-  "[thoughtful] At the end of Ramadan, we pay a special obligatory charity called **Zakat al-Fitr**. [pause] This charity is obligatory on every single Muslim—man, woman, and child—who has enough food for Eid day. [pause] Parents pay it on behalf of their children. [pause] Why do we pay it? The Prophet sallallahu alayhi wa sallam said it does two things: it cleans our fasting from any mistakes or idle talk we made during Ramadan, and it feeds the poor. [pause] It ensures that no member of our community goes hungry on the day of Eid. [pause] It connects our worship directly to caring for others!"
+  "[thoughtful] At the end of Ramadan, we pay a special obligatory charity called **Zakat al-Fitr**. [pause] This charity is obligatory on every single Muslim: man, woman, and child: who has enough food for Eid day. [pause] Parents pay it on behalf of their children. [pause] Why do we pay it? The Prophet sallallahu alayhi wa sallam said it does two things: it cleans our fasting from any mistakes or idle talk we made during Ramadan, and it feeds the poor. [pause] It ensures that no member of our community goes hungry on the day of Eid. [pause] It connects our worship directly to caring for others!"
 * **Concept Analogy:** A clean-up crew: after building a beautiful house (our fasts in Ramadan), the clean-up crew sweeps away any dust and wood shavings (our minor mistakes) so the house is perfectly ready to show.
 * **Check-for-Understanding Question:** "Who is responsible for paying Zakat al-Fitr for children? (Answer: Their parents or guardians)."
 
 ---
 
-## Slide 14: Zakat al-Fitr: Timing & The Maliki Rules
+## Slide 13: Zakat al-Fitr: Timing & The Maliki Rules
 * **Slide Summary:** Due times, best times, and forbidden times for Zakat al-Fitr.
 * **Delivery Direction:** `[Point to a timeline or slide visual; speak with structure]`
 * **Narrative Script (ElevenLabs v3 Ready):**
@@ -180,7 +170,7 @@
 
 ---
 
-## Slide 15: Zakat al-Fitr: Amounts & Measurements
+## Slide 14: Zakat al-Fitr: Amounts & Measurements
 * **Slide Summary:** Volumetric measurement of Sa' and Mudd, and modern weight equivalents.
 * **Delivery Direction:** `[Hold hands together as a scoop to demonstrate]`
 * **Narrative Script (ElevenLabs v3 Ready):**
@@ -190,27 +180,27 @@
 
 ---
 
-## Slide 16: Zakat al-Fitr: Staple Foods vs. Cash
+## Slide 15: Zakat al-Fitr: Staple Foods vs. Cash
 * **Slide Summary:** The debate on paying in food (Maliki default) vs. cash (Hanafi default).
 * **Delivery Direction:** `[Speak with balance and scholarly appreciation]`
 * **Narrative Script (ElevenLabs v3 Ready):**
-  "[thoughtful] What do we pay? In the **Maliki school**, you must pay Zakat al-Fitr using the **common staple foods** of the country—like rice, wheat, dates, or raisins. [pause] Paying in cash is *not* valid in our classical school because the Prophet sallallahu alayhi wa sallam specified food. [pause] In contrast, the **Hanafi school** allows paying in **cash**, arguing that money is more useful for the poor today. [pause] To balance this, many modern Maliki charities allow you to give them cash, and they use that cash to buy the actual rice or wheat to distribute to the poor on Eid morning. [pause] Both approaches ensure the poor are fed!"
+  "[thoughtful] What do we pay? In the **Maliki school**, you must pay Zakat al-Fitr using the **common staple foods** of the country, like rice, wheat, dates, or raisins. [pause] Paying in cash is *not* valid in our classical school because the Prophet sallallahu alayhi wa sallam specified food. [pause] In contrast, the **Hanafi school** allows paying in **cash**, arguing that money is more useful for the poor today. [pause] To balance this, many modern Maliki charities allow you to give them cash, and they use that cash to buy the actual rice or wheat to distribute to the poor on Eid morning. [pause] Both approaches ensure the poor are fed!"
 * **Concept Analogy:** A gift card vs. the actual toy: some people prefer giving the exact item (food), while others prefer giving the money so the recipient can choose (cash). Both seek to bring joy.
 * **Check-for-Understanding Question:** "Why does the classical Maliki school require food instead of cash? (Answer: To follow the exact physical practice described in the Hadiths)."
 
 ---
 
-## Slide 17: Zakah on Wealth (Zakah al-Mal)
+## Slide 16: Zakah on Wealth (Zakah al-Mal)
 * **Slide Summary:** Meaning of Zakah and the theology of wealth as a trust (Amanah).
 * **Delivery Direction:** `[Speak in a slow, ethical, and inspiring tone]`
 * **Narrative Script (ElevenLabs v3 Ready):**
-  "[thoughtful] Now let's look at the third pillar of Islam: **Zakah al-Mal**—Zakah on wealth. [pause] Linguistically, Zakah means 'growth' and 'purification'. [pause] In our creed, we believe that **wealth is a trust** (*Amanah*). [pause] Allah is the true Owner of everything, and we are just caretakers. [pause] Zakah is not a voluntary tip; it is the legal right of the poor that Allah has placed inside our bank accounts. [pause] When we pay it, we prune our wealth, cleaning it from greed and materialism. [pause] Just like pruning a plant makes it look smaller but helps it grow back stronger, Zakah purifies and grows our wealth!"
+  "[thoughtful] Now let's look at the third pillar of Islam: **Zakah al-Mal**: Zakah on wealth. [pause] Linguistically, Zakah means 'growth' and 'purification'. [pause] In our creed, we believe that **wealth is a trust** (*Amanah*). [pause] Allah is the true Owner of everything, and we are just caretakers. [pause] Zakah is not a voluntary tip; it is the legal right of the poor that Allah has placed inside our bank accounts. [pause] When we pay it, we prune our wealth, cleaning it from greed and materialism. [pause] Just like pruning a plant makes it look smaller but helps it grow back stronger, Zakah purifies and grows our wealth!"
 * **Concept Analogy:** Pruning a tree: you cut off some branches (giving 2.5% of your money), which looks like you have less, but it actually causes the tree to grow back healthier, stronger, and full of sweet fruit.
 * **Check-for-Understanding Question:** "What does the word 'Zakah' mean linguistically? (Answer: Growth and Purification)."
 
 ---
 
-## Slide 18: Who Must Pay Zakah al-Mal?
+## Slide 17: Who Must Pay Zakah al-Mal?
 * **Slide Summary:** Conditions of obligation, and the Maliki ruling on children's wealth.
 * **Delivery Direction:** `[Raise your finger for the comparison between Malikis and Hanafis]`
 * **Narrative Script (ElevenLabs v3 Ready):**
@@ -225,11 +215,11 @@
 
 ---
 
-## Slide 19: Nisab, Hawl, & The Categories of Zakah
+## Slide 18: Nisab, Hawl, & The Categories of Zakah
 * **Slide Summary:** Calculating 2.5% Zakah, Gold/Silver Nisabs, and the harvest rule.
 * **Delivery Direction:** `[Speak with a clear, mathematical focus]`
 * **Narrative Script (ElevenLabs v3 Ready):**
-  "[thoughtful] How do we calculate Zakah? For cash, gold, and silver, the rate is **2.5%**—which is one-fortieth of your wealth. [pause] The minimum threshold, or **Nisab**, is based on:
+  "[thoughtful] How do we calculate Zakah? For cash, gold, and silver, the rate is **2.5%**, which is one-fortieth of your wealth. [pause] The minimum threshold, or **Nisab**, is based on:
   - Gold: Eighty-five grams of pure gold.
   - Silver: Five hundred and ninety-five grams of silver. [pause] If your savings are above this value for a whole lunar year (*Hawl*), you pay 2.5%. [pause] But note: agricultural crops and fruits do *not* require waiting a year. [pause] You pay their Zakah immediately on the day of harvest. [pause] As the Quran says: *'Give its due on the day of its harvest.'*"
 * **Concept Analogy:** A tax threshold: you only pay if your income crosses a certain limit. Nisab is that boundary line of financial comfort.
@@ -237,7 +227,7 @@
 
 ---
 
-## Slide 20: The Recipients of Zakah (Asnaf)
+## Slide 19: The Recipients of Zakah (Asnaf)
 * **Slide Summary:** The eight categories of Zakah recipients and who is excluded.
 * **Delivery Direction:** `[Point to the list on the slide; speak methodically]`
 * **Narrative Script (ElevenLabs v3 Ready):**
@@ -255,11 +245,11 @@
 
 ---
 
-## Slide 21: Sadaqah: Voluntary Kindness & Social Responsibility
+## Slide 20: Sadaqah: Voluntary Kindness & Social Responsibility
 * **Slide Summary:** Voluntary Sadaqah, communal responsibility (Fard Kifayah), and social justice.
 * **Delivery Direction:** `[Speak with inspiration; show a gesture of a helping hand]`
 * **Narrative Script (ElevenLabs v3 Ready):**
-  "[thoughtful] Zakah is obligatory, but we also have **Sadaqah**—voluntary charity. [pause] The word *Sadaqah* comes from *Sidq* (truthfulness), because giving away your money voluntarily proves the truth of your faith!
+  "[thoughtful] Zakah is obligatory, but we also have **Sadaqah**: voluntary charity. [pause] The word *Sadaqah* comes from *Sidq* (truthfulness), because giving away your money voluntarily proves the truth of your faith!
   
   Sadaqah is huge in scope. [pause] The Prophet sallallahu alayhi wa sallam said: *'Every good deed is a charity.'* Smiling at your brother, removing a branch from the road, or helping someone carry their bags is Sadaqah. [pause] We also have a collective duty: **Fard Kifayah**. [pause] Ensuring no one in our neighborhood starves is a duty on the whole town. [pause] If a poor person starves and the townspeople knew, the entire community shares the sin. [pause] Islam builds a network of care!"
 * **Concept Analogy:** A building code: the government requires a basic safety structure (Zakah), but the community adds beautiful gardens, parks, and playgrounds (Sadaqah) to make it a great place to live.
@@ -267,15 +257,14 @@
 
 ---
 
-## Slide 22: Eid al-Fitr: Etiquette and Celebration
+## Slide 21: Eid al-Fitr: Etiquette and Celebration
 * **Slide Summary:** Eid al-Fitr prayer (Confirmed Sunnah), extra Takbeers, and Sunnah practices.
-* **Delivery Direction:** `[Smile, speak with joy and celebration]`
+* **Delivery Direction:** `[Smile, speak with joy and celebration. Lead the students in reciting the Eid Takbeerat together to end the class on a high note.]`
 * **Narrative Script (ElevenLabs v3 Ready):**
   "[thoughtful] After the spiritual marathon of Ramadan, Allah gifts us a day of joy: **Eid al-Fitr**! 
   
   In the Maliki school, the Eid prayer is a **Confirmed Sunnah** prayed in congregation. [pause] It is two Rak'ahs. [pause] In the first Rak'ah, we make six extra Takbeers before reciting. [pause] In the second Rak'ah, we make five extra Takbeers. [pause] The Sunnahs of Eid are: taking a bath (*Ghusl*), wearing your absolute best clothes, eating an odd number of dates before leaving the house, and walking to the prayer place by one path and returning by another. [pause] Let's celebrate our worship with joy!
   
   Jazakum Allahu Khayran, and Eid Mubarak to you all!"
-* **Delivery Tip:** `[Lead the students in reciting the Eid Takbeerat together to end the class on a high note.]`
 * **Concept Analogy:** A mosaic masterpiece: every element of knowledge contributes to a unified, beautiful picture of faith in action.
 * **Check-for-Understanding Question:** "What is the recommended Sunnah before going out to the Eid prayer on Eid al-Fitr? (Answer: To eat an odd number of dates and pay Zakat al-Fitr before the prayer)."

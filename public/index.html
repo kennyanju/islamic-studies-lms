@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Islamic Studies Family LMS - IDEO-designed interactive learning portal with authentic Seerah and Teacher Teleprompter."
+      content="Islamic Studies Family LMS - An interactive learning portal across five age levels, grounded in Sunni Creed (Ash'ari) and the Maliki school of Fiqh."
     />
-    <title>Islamic Studies Family LMS — Interactive Learning Portal</title>
+    <title>Islamic Studies Family LMS: Interactive Learning Portal</title>
 
     <!-- Preconnect & Streamlined Google Fonts (Optimized weights & font-display: swap for LCP) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
@@ -21,16 +21,30 @@
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      integrity="sha384-AUPyufJyyIQXv8SL3KZIyN2Dv9/rnHMiHdm1XF+OXsxfmo7rTNfodpFz+CJOXfXc"
+      crossorigin="anonymous"
     />
 
-    <!-- Marked Markdown Parser -->
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <!-- Marked Markdown Parser (Pinned v12.0.2 with SRI) -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"
+      integrity="sha384-9+LK2u6DvdxpsVIZtUzq+5+zt7UQ7Nzokz839hatSuCEBDiXflBOoEfU3cVx4JWx"
+      crossorigin="anonymous"
+    ></script>
 
-    <!-- DOMPurify HTML Sanitizer -->
-    <script src="https://cdn.jsdelivr.net/npm/dompurify@3.1.6/dist/purify.min.js"></script>
+    <!-- DOMPurify HTML Sanitizer (Upgraded v3.4.13 with SRI) -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/dompurify@3.4.13/dist/purify.min.js"
+      integrity="sha384-2e8Bi5fiUYUF9CbXLybocsm2/pVY5FRxXs7kPkj5NnWM74yr1CSbOhj/kcprFuzf"
+      crossorigin="anonymous"
+    ></script>
 
-    <!-- Canvas Confetti for Gamified Quiz Celebrations -->
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+    <!-- Canvas Confetti for Gamified Quiz Celebrations (Pinned v1.9.3 with SRI) -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"
+      integrity="sha384-PP+lSzBp+c4z2MCHz4J3+HloSfUQMUvwb7fcyyNIxgEQYdL1dZ18GkXWbTuH8S1m"
+      crossorigin="anonymous"
+    ></script>
 
     <!-- Web App Manifest & App Icons -->
     <link rel="icon" type="image/svg+xml" href="icons/favicon.svg" />
@@ -673,7 +687,7 @@
                 <h3>5 Age-Tailored Tracks</h3>
                 <p>
                   Progressive lessons and age-appropriate vocabulary tailored to your child's
-                  developmental stage (Ages 6–16+)—from early childhood foundations to young adult
+                  developmental stage (Ages 6–16+), from early childhood foundations to young adult
                   ethics.
                 </p>
               </div>
@@ -1411,34 +1425,7 @@
             aria-labelledby="handoutTabBtn"
           >
             <div class="content-card">
-              <!-- Session Alignment Banner -->
-              <div class="handout-session-banner" id="handoutSessionBanner">
-                <div class="handout-session-banner-top">
-                  <div class="handout-ico-pill" id="handoutIcoBadge">
-                    <i class="fa-solid fa-graduation-cap" aria-hidden="true"></i>
-                    <span id="handoutIcoText">ICO Benchmark: Grades 1–2 Aligned (Ages 6–8)</span>
-                  </div>
-                  <div class="handout-session-meta">
-                    <span class="handout-read-time" id="handoutReadTime">
-                      <i class="fa-regular fa-clock" aria-hidden="true"></i>
-                      <span id="handoutReadTimeText">15 min study session</span>
-                    </span>
-                    <span class="maliki-citation-tag" id="malikiCitationTag">
-                      <i class="fa-solid fa-book-open" aria-hidden="true"></i>
-                      <span id="malikiCitationText">Maliki Fiqh Reference</span>
-                    </span>
-                  </div>
-                </div>
-                <div class="handout-session-banner-bottom">
-                  <div
-                    class="handout-strands-list"
-                    id="handoutStrandsList"
-                    aria-label="Curriculum strands"
-                  >
-                    <!-- Populated dynamically by app.js -->
-                  </div>
-                </div>
-              </div>
+
 
               <!-- Interactive Session Toolbar -->
               <div class="content-toolbar">
@@ -3188,7 +3175,7 @@
                   restrictions to prevent Cross-Site Scripting (XSS).
                 </li>
                 <li>
-                  <strong>Brute-Force Rate Limiting:</strong> Intelligent throttling on login and
+                  <strong>Brute-Force Rate Limiting:</strong> Rate-based throttling on login and
                   child PIN entry attempts.
                 </li>
               </ul>
@@ -3288,6 +3275,6 @@
     <!-- Pre-compiled Manifest Data for Instant Offline Bootstrap -->
     <script src="modules_manifest.js" defer></script>
     <!-- Custom App JS -->
-    <script src="app.js" defer></script>
+    <script type="module" src="app.js"></script>
   </body>
 </html>

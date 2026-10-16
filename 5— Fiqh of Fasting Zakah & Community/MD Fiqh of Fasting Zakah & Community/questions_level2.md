@@ -1,73 +1,67 @@
-# Level 2 Worksheet: Fasting, Zakah & Community
-**Age Group:** Ages 8–10 (Level 2 Track)  
-**Focus:** Conditions of Sawm, Single Niyyah rule, and Zakat al-Fitr  
+# Level 2 Activity Sheet: Fasting, Zakah & Community
 
----
+## Part A: Multiple Choice Questions
+1. What are the two essential pillars (Arkan) of fasting in Islamic law?
+   (A) Reciting poetry and resting during the afternoon.
+   (B) Niyyah (Intention in the heart) and Imsak (Abstaining from food and drink from dawn until sunset).
+   (C) Traveling to a distant city and performing extra prayers.
+   (D) Giving away all personal possessions to neighbors.
 
-## Part A: Multiple Choice
+2. In the relied-upon Maliki position, when does a single intention (Niyyah) suffice for the entire month of Ramadan?
+   (A) It only suffices if a person makes the intention on the final night.
+   (B) A single intention never suffices under any circumstances in the school.
+   (C) On the first night of Ramadan, as long as the consecutive days of fasting are not interrupted by illness or travel.
+   (D) It only suffices for adults who have memorized the entire Quran.
 
-### 1. What are the two essential pillars (*Arkan*) of fasting in Islamic law?
-* A) Running and sleeping
-* B) Niyyah (Intention) and Imsak (Abstinence from dawn to sunset)
-* C) Cooking and eating
-* D) Traveling and spending
+3. If a person experiences an acute illness and fasting would harm their recovery, what does Islamic law instruct them to do?
+   (A) Utilize the concession (Rukhsah) granted by Allah to break the fast, and make up the missed days (Qada') when healthy.
+   (B) Force themselves to continue fasting regardless of medical advice.
+   (C) Pay a penalty of ten gold coins and abandon fasting permanently.
+   (D) Transfer their fast to a family member who is healthy.
 
-### 2. In Maliki fiqh, when does a single intention (*Niyyah*) suffice for the entire month of Ramadan?
-* A) It never suffices
-* B) On the first night of Ramadan, as long as the fast is not broken by travel or illness
-* C) Only on the last night
-* D) Only on Fridays
+4. What is the required measure of staple food given for Zakat al-Fitr before the Eid prayer on behalf of each family member?
+   (A) Ten large loaves of bread.
+   (B) One piece of sweet fruit.
+   (C) Exactly half a kilogram of dates.
+   (D) One Sa' (approximately 2.5 kilograms or four double-handfuls) of the local staple food.
 
-### 3. If a person is sick and their doctor says fasting will harm them, what should they do?
-* A) Force themselves to fast anyway
-* B) Break the fast as an allowance from Allah, and make up the missed days when healthy
-* C) Leave Islam
-* D) Never pray again
-
-### 4. What is the required payment of Zakat al-Fitr given before Eid prayer?
-* A) One Sa' (approx. 2.5 kg) of staple food per person in the family
-* B) A new car
-* C) 100 gold coins
-* D) One piece of fruit
-
-### 5. What Sunnah prayer is performed in congregation during the nights of Ramadan?
-* A) Salat al-Khusuf
-* B) Salat al-Taraweeh
-* C) Salat al-Istisqa
-* D) Salat al-Janazah
-
----
+5. What is the special congregational night prayer performed after 'Isha during the month of Ramadan?
+   (A) Salat al-Kusuf (Eclipse prayer).
+   (B) Salat al-Taraweeh.
+   (C) Salat al-Istisqa (Rain prayer).
+   (D) Salat al-Khawf (Fear prayer).
 
 ## Part B: Fill in the Blanks
-*Word Bank: Imsak, Taraweeh, Sa', Maghrib*
-
-6. Fasting ends at the call to **_________________** prayer.
-7. Refraining from eating and drinking during fasting is called **_________________**.
-8. The measure of food given for Zakat al-Fitr is one **_________________**.
-9. The special nightly congregational prayers during Ramadan are called **_________________**.
-
----
+Vocabulary Bank: Imsak, Taraweeh, Sa', Maghrib
+1. The daily fast concludes when the sun sets at the call to ______ prayer.
+2. The act of refraining from food and drink from dawn until sunset is called ______.
+3. The measurement of staple food required for Zakat al-Fitr is one ______.
+4. The special congregational night prayers performed during Ramadan are called ______.
 
 ## Part C: Matching Pairs
-Pair 1: Imsak --- Abstaining from food and drink from Fajr to Maghrib
-Pair 2: Zakat al-Fitr --- Staple food charity paid before Eid prayer
-Pair 3: Fidyah --- Compensation feeding given by those unable to fast
-Pair 4: Taraweeh --- Night prayers performed during Ramadan
+* Imsak ─── Abstaining from food and drink from Fajr to Maghrib
+* Zakat al-Fitr ─── Staple food charity paid before the Eid al-Fitr prayer
+* Fidyah ─── Feeding a needy person for each day by someone permanently unable to fast
+* Taraweeh ─── Special night prayers performed during Ramadan
 
----
+## Part D: Reflection & Application
+1. How does experiencing the hunger of fasting help build empathy and compassion for people in our community who face food insecurity?
 
-## Part D: Reflection
-10. How does fasting make you feel more empathetic towards children around the world who don't have enough food?
+## Answer Key & Marking Guide
+1. B - The two pillars of fasting are Niyyah (pure intention before dawn) and Imsak (abstaining from invalidators).
+2. C - In Maliki fiqh, a single intention on night 1 suffices for the continuous 30-day month unless broken by travel or sickness.
+3. A - Allah grants a merciful concession (Rukhsah) to the sick to break the fast and perform Qada' later.
+4. D - Zakat al-Fitr is measured at one Sa' (approximately 2.5 kg) of staple food per household member.
+5. B - Taraweeh is the communal night prayer established after 'Isha during Ramadan.
 
----
+### Fill in the Blanks Key
+1. Maghrib - Sunset prayer marking the end of fasting.
+2. Imsak - Abstinence from dawn to sunset.
+3. Sa' - Traditional volume measure for Zakat al-Fitr.
+4. Taraweeh - Ramadan night vigils.
 
-## Teacher Answer Key
-1. B) Niyyah and Imsak.
-2. B) On night 1 for the whole continuous month.
-3. B) Concession to break fast and make up later.
-4. A) One Sa' of staple food.
-5. B) Taraweeh.
-6. Maghrib
-7. Imsak
-8. Sa'
-9. Taraweeh
+### Matching Key
+* Imsak connects with Abstaining from food and drink from Fajr to Maghrib.
+* Zakat al-Fitr connects with Staple food charity paid before the Eid al-Fitr prayer.
+* Fidyah connects with Feeding a needy person for each day by someone permanently unable to fast.
+* Taraweeh connects with Special night prayers performed during Ramadan.

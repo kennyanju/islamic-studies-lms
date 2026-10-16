@@ -2,64 +2,64 @@
 
 ## Part A: Multiple Choice Questions
 1. In the tripartite framework of the religion established in the Hadith of Jibril, what classical discipline corresponds to the dimension of "Ihsan"?
-   (A) 'Ilm al-Fara'id (Inheritance math).
-   (B) Tazkiyat al-Nafs (Spiritual purification / Tasawwuf).
-   (C) 'Ilm al-Rijal (Biographical critique).
-   (D) Fiqh al-Siyar (International warfare).
+   (A) 'Ilm al-Fara'id (Inheritance calculation).
+   (B) 'Ilm al-Rijal (Biographical evaluation of narrators).
+   (C) Fiqh al-Siyar (International treaties and relations).
+   (D) Tazkiyat al-Nafs (Spiritual purification and Tasawwuf).
 
-2. How did Prophet Muhammad ﷺ definitively diagnose the internal disease of "Al-Kibr" (Arrogance)?
-   (A) Wearing clean, elegant clothes and fragrant perfume.
-   (B) Rejecting the truth (*Batar al-Haqq*) and looking down upon people (*Ghamt al-Nas*).
-   (C) Eating two meals a day instead of one.
-   (D) Memorizing historical dates of ancient battles.
+2. How did Prophet Muhammad ﷺ definitively define the internal disease of "Al-Kibr" (Arrogance) in Sahih Muslim?
+   (A) Wearing clean clothes and fine footwear.
+   (B) Seeking advanced degrees in secular universities.
+   (C) Rejecting the truth (Batar al-Haqq) and looking down upon people (Ghamt al-Nas).
+   (D) Refusing to eat sweet foods during the week.
 
 3. What is the fundamental theological objection underlying the spiritual disease of "Al-Hasad" (Destructive Envy)?
-   (A) It wastes physical bodily calories.
-   (B) It subtly objects to Allah's divine wisdom and sovereign decree (*Qada'*) in distributing blessings to His servants.
-   (C) It violates the dietary laws of slaughter.
-   (D) It prevents a person from learning foreign languages.
+   (A) It wastes bodily calories and weakens eyesight.
+   (B) It subtly objects to Allah's divine wisdom and decree (Qada') in distributing blessings to His servants.
+   (C) It violates the dietary laws of lawful slaughter.
+   (D) It prevents a student from memorizing poetry.
 
-4. How does "Al-'Ujb" (Self-Righteous Vanity) differ from "Al-Riya'" (Ostentation)?
-   (A) 'Ujb is looking down on parents, while Riya' is looking down on teachers.
-   (B) Riya' requires an audience to show off, whereas 'Ujb is solitary conceit where a person becomes infatuated with their own piety.
-   (C) 'Ujb applies only to wealth, while Riya' applies only to fasting.
-   (D) There is no distinction between the two terms.
+4. How does "Al-'Ujb" (Self-Righteous Vanity) differ from "Al-Riya'" (Ostentation) in Islamic spiritual diagnosis?
+   (A) Riya' requires human spectators to show off, whereas 'Ujb is internal conceit where a person marvels at their own piety in solitude.
+   (B) 'Ujb is looking down on parents, while Riya' is looking down on neighbors.
+   (C) 'Ujb applies exclusively to physical wealth, while Riya' applies only to fasting.
+   (D) There is no difference; classical scholars treat them as identical terms.
 
-5. What theological principle serves as the ultimate spiritual antidote to 'Ujb (Self-Righteous Vanity)?
-   (A) Recognizing that personal intellect created all opportunities.
-   (B) Recognizing the concept of *Tawfiq* (Enabling Divine Grace): that every righteous act is purely a gift from Allah, not personal triumph.
-   (C) Donating ten percent of assets to municipal parks.
-   (D) Fasting three days in mid-summer.
+5. What theological principle serves as the primary spiritual antidote to 'Ujb (Self-Righteous Vanity)?
+   (A) Meditating on personal achievements and awards.
+   (B) Attributing all success to natural genetic advantages.
+   (C) Donating twenty percent of assets to civic improvements.
+   (D) Recognizing the concept of Tawfiq (Enabling Divine Grace): that every righteous act is purely a gift from Allah.
 
 6. What four obligatory conditions are required for "Tawbah Nasuhah" (Sincere Repentance) when human rights have been violated?
-   (A) Paying fifty gold dinars to the government, fasting for forty days, crying publicly, and changing one's name.
-   (B) Immediate cessation, deep remorse, firm resolve never to return, and restoring stolen rights or seeking forgiveness from the victim.
-   (C) Moving to a different country, remaining silent for a month, discarding all clothes, and shaving the head.
-   (D) Performing five consecutive pilgrimages to Makkah.
+   (A) Paying fifty gold dinars to the treasury, fasting for forty days, crying publicly, and changing one's name.
+   (B) Immediate desistance (Al-Iqla'), deep remorse (Al-Nadam), firm resolve never to return, and restoring violated rights (Radd al-Mazalim).
+   (C) Relocating to another country, remaining silent for a month, and discarding all belongings.
+   (D) Performing five consecutive pilgrimages to Makkah without missing a day.
 
-7. Who was the 15th-century North African Maliki jurist who codified *Qawa'id al-Tasawwuf*, harmonizing inner spirituality with outer Shari'ah?
-   (A) Sidi Ahmad Zarruq of Fes.
+7. Who was the 15th-century North African Maliki jurist who codified Qawa'id al-Tasawwuf, harmonizing inner spirituality with outer Shari'ah?
+   (A) Tariq ibn Ziyad.
    (B) Ibn Battuta.
-   (C) Al-Khwarizmi.
-   (D) Tariq ibn Ziyad.
+   (C) Sidi Ahmad Zarruq of Fes.
+   (D) Al-Khwarizmi.
 
-8. In the spiritual pedagogy of Imam al-Ghazali, how does a believer effectively dismantle the disease of *Hasad* (Envy)?
-   (A) By challenging the envied person to a public debate.
-   (B) By forcing the ego to make sincere secret supplications for the envied person and treating them with honor.
-   (C) By ignoring the envied person completely.
-   (D) By writing anonymous critiques of their work.
+8. In the spiritual pedagogy of classical scholars, how does a believer effectively dismantle the destructive urge of Hasad (Envy)?
+   (A) By forcing the soul to make sincere, secret supplications for the envied person and treating them with honor.
+   (B) By challenging the envied person to a public academic debate.
+   (C) By ignoring the envied person completely and never speaking to them.
+   (D) By writing anonymous critiques of their performance.
 
-9. What is the status of "Secret Deeds" (*'Amal al-Sirr*) in the curriculum of Tazkiyah?
-   (A) Disliked, because all worship must be broadcast publicly.
-   (B) An indispensable spiritual training tool that purges Riya' and anchors sincerity.
-   (C) Permitted only for elderly scholars.
-   (D) An innovation not known in the early generations.
+9. What is the spiritual role of "Secret Deeds" ('Amal al-Sirr) in the curriculum of Tazkiyah?
+   (A) Prohibited, because all religious worship must be broadcast publicly.
+   (B) Permitted exclusively for elderly ascetics living in deserts.
+   (C) An innovation unknown to the early generations of Muslims.
+   (D) An indispensable spiritual discipline that purges ostentation (Riya') and anchors genuine sincerity before Allah.
 
-10. What did Imam Malik famously declare regarding the vital relationship between Fiqh (Law) and Tasawwuf (Spiritual Purification)?
-    (A) "Whoever studies Fiqh and ignores Tasawwuf becomes corrupted, and whoever studies Tasawwuf and ignores Fiqh becomes a heretic; only he who combines them attains the truth!"
-    (B) "A student must choose either law or spirituality, but can never study both."
-    (C) "Spirituality replaces the need for ritual prayer."
-    (D) "Law is for commoners, while spirituality is for royalty."
+10. What did classical scholars declare regarding the vital relationship between Fiqh (Law) and Tasawwuf (Spiritual Purification)?
+    (A) "Spirituality replaces the need for outward ritual prayer."
+    (B) "Whoever studies Fiqh and ignores Tasawwuf becomes corrupted, and whoever studies Tasawwuf and ignores Fiqh becomes a heretic; only he who combines them attains the truth!"
+    (C) "A student must choose either law or spirituality, but can never study both."
+    (D) "Jurisprudence is for ordinary citizens, while spirituality is reserved for kings."
 
 ## Part B: Fill in the Blanks
 Vocabulary Bank: Tawfiq, Ahmad Zarruq, Batar al-Haqq, 'Ujb, Nadam
@@ -69,30 +69,30 @@ Vocabulary Bank: Tawfiq, Ahmad Zarruq, Batar al-Haqq, 'Ujb, Nadam
 4. The Prophet ﷺ declared that the indispensable essence of repentance is remorse, termed ______.
 5. The Maliki reformer who authored the landmark treatise *Qawa'id al-Tasawwuf* was Sidi ______.
 
-## Part C: Matching Spiritual Diseases & Remedies
+## Part C: Matching Terms
 * Hasad ─── Destructive envy cured by praying secretly for the success of the blessed person
 * Kibr ─── Arrogance cured by contemplating one's humble origin from fluid and dust
 * 'Ujb ─── Self-righteous vanity cured by attributing all deeds to divine Tawfiq
 * Riya' ─── Ostentation cured by practicing secret hidden worship ('Amal al-Sirr)
 * Tawbah Nasuhah ─── Sincere repentance requiring remorse, cessation, resolve, and restoring rights
 
-## Part D: Senior Seminar Case Study & Reflection
-1. Synthesize Imam Malik's golden maxim on the interdependence of *Fiqh* and *Tasawwuf*: Why does external law without inner spirituality lead to hypocrisy, while spirituality without legal boundaries leads to heresy?
-2. A successful young Muslim professional finds themselves feeling bitter and envious whenever a colleague receives a promotion or public praise. Formulate a comprehensive spiritual prescription based on *Ihya' 'Ulum al-Din*.
+## Part D: Reflection & Application
+1. Synthesize the golden maxim on the interdependence of Fiqh and Tasawwuf: Why does external law without inner spirituality lead to hypocrisy, while spirituality without legal boundaries leads to heresy?
+2. A successful young Muslim professional finds themselves feeling bitter and envious whenever a colleague receives a promotion or public praise. Formulate a comprehensive spiritual prescription based on classical Tazkiyah.
 3. Detail the fourth condition of Tawbah (Restitution of Rights): If someone engaged in cyberbullying, slander, or financial embezzlement in their youth, what exact steps must they take for repentance to be valid?
-4. Contrast the modern secular cult of "self-esteem / self-worship" with the Islamic ideal of *Tawadu'* (humility) grounded in divine consciousness.
+4. Contrast the modern secular cult of self-worship with the Islamic ideal of Tawadu' (humility) grounded in divine consciousness.
 
 ## Answer Key & Marking Guide
-1. B - Tazkiyah / Tasawwuf represents the internal reality of Ihsan (spiritual excellence).
-2. B - The Prophet ﷺ defined Kibr as rejecting the truth and treating people with contempt.
-3. B - Envy implicitly accuses Allah of injustice in distributing worldly and spiritual bounties.
-4. B - Riya' involves human spectators; 'Ujb is internal self-infatuation in solitary worship.
-5. B - Tawfiq attributes all ability to Allah, stripping the ego of any claim to personal credit.
-6. B - Sincere repentance requires immediate cessation, remorse, firm resolve, and full restitution of human rights.
-7. A - Sidi Ahmad Zarruq was the premier Maliki jurist who harmonized law and spirituality.
-8. B - Forcing the ego to honor and pray for the envied person breaks the satanic impulse of Hasad.
-9. B - Hidden deeds (*'Amal al-Sirr*) cultivate absolute sincerity away from the intoxicating drug of human praise.
-10. A - Imam Malik's famous synthesis remains the eternal benchmark of Sunni orthodoxy.
+1. D - Tazkiyah / Tasawwuf represents the internal reality of Ihsan (spiritual excellence) in the Hadith of Jibril (Sahih Muslim 8).
+2. C - The Prophet ﷺ defined Kibr as rejecting the truth and looking down upon people (Sahih Muslim 91).
+3. B - Envy implicitly objects to Allah's wisdom and sovereign decree (Qada') in distributing worldly and spiritual gifts.
+4. A - Riya' involves human spectators; 'Ujb is internal self-infatuation in solitary worship without spectators.
+5. D - Tawfiq attributes all ability to Allah, stripping the ego of any claim to personal merit or pride.
+6. B - Sincere repentance requires immediate cessation (Al-Iqla'), remorse (Al-Nadam), firm resolve, and restoring human rights (Radd al-Mazalim).
+7. C - Sidi Ahmad Zarruq was the premier Maliki jurist who harmonized law and spirituality in Qawa'id al-Tasawwuf.
+8. A - Forcing the ego to honor and pray for the envied person breaks the destructive impulse of Hasad.
+9. D - Hidden deeds ('Amal al-Sirr) cultivate absolute sincerity away from the desire for human praise (Sahih al-Bukhari 1423).
+10. B - The classical synthesis between Fiqh and Tasawwuf remains the benchmark of Sunni orthodoxy.
 
 ### Fill in the Blanks Key
 1. Batar al-Haqq - Rejecting the truth.
@@ -109,7 +109,7 @@ Vocabulary Bank: Tawfiq, Ahmad Zarruq, Batar al-Haqq, 'Ujb, Nadam
 * Tawbah Nasuhah connects with Sincere repentance requiring remorse, cessation, resolve, and restoring rights.
 
 ### Reflection Marking Rubric
-- Question 1: Awards full points for explaining that Fiqh without Tazkiyah creates dry, corrupt legalism, while Tazkiyah without Fiqh produces antinomian heresy (*Zandaqah*).
-- Question 2: Awards full points for prescribing theological reflection on Qadar, acknowledging personal arrogance, performing secret du'a, and giving gifts to the colleague.
-- Question 3: Awards full points for explaining that human wrongs require returning stolen assets or seeking direct forgiveness, or repairing public slander with public praise.
-- Question 4: Awards full points for contrasting egocentric vanity with God-centered dignity, showing that true honor stems from humble servitude (*'Ubudiyyah*) to Allah.
+- Question 1: Awards full points for explaining that Fiqh provides the objective legal boundaries, while Tasawwuf provides the sincere inner devotion; separating them creates empty ritualism or antinomian heresy.
+- Question 2: Awards full points for outlining steps: recognizing envy as an objection to Qada', praying for the colleague's barakah, giving them congratulations or a gift, and reflecting on one's own blessings.
+- Question 3: Awards full points for explaining that sins against human rights require returning stolen funds, apologizing for slander/cyberbullying if possible without greater harm, or making du'a and giving charity on their behalf.
+- Question 4: Awards full points for contrasting secular arrogance/egoism with Tawadu' rooted in understanding that all talent and life are loans from Allah.

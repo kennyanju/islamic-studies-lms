@@ -17,7 +17,7 @@ This slide deck is designed to guide teachers through the core topics of daily a
 
 ### Speaker Notes
 *   Welcome the students. Explain that fiqh is not just a set of dry rules to memorize; it is the practical guide to aligning our everyday actions with the will of Allah, our Creator.
-*   Introduce the concept that every action we take—from what we eat to how we greet a friend or buy a snack—is an opportunity for worship (*‘Ibādah*) if done with the right intention (*Niyyah*).
+*   Introduce the concept that every action we take (from what we eat to how we greet a friend or buy a snack) is an opportunity for worship (*‘Ibādah*) if done with the right intention (*Niyyah*).
 *   Mention that throughout this unit, we will study these concepts through the lens of the Maliki school of jurisprudence (*Madhhab*) and the Ash'ari school of creed (*‘Aqīdah*), so students understand the consistency and lineage of their practice.
 
 ---
@@ -31,7 +31,7 @@ This slide deck is designed to guide teachers through the core topics of daily a
 
 ### Speaker Notes
 *   *Ash'ari Connection:* Explain to the students that in Ash'ari theology, we believe that ultimate moral goodness and badness are determined by Allah's revelation, not merely by what human intellect finds pleasant or unpleasant. Allah is the Creator of all causes and effects, and His wisdom is absolute.
-*   Therefore, when we follow fiqh, we are submitting to Allah's decree. Fiqh means "deep understanding"—specifically, understanding our responsibilities before Allah.
+*   Therefore, when we follow fiqh, we are submitting to Allah's decree. Fiqh means "deep understanding", specifically understanding our responsibilities before Allah.
 *   Encourage students to see that studying fiqh is a way of getting closer to Allah by learning what pleases Him.
 
 ---
@@ -129,7 +129,7 @@ This slide deck is designed to guide teachers through the core topics of daily a
     *   Exposing the thigh in public is strongly disliked (*Makrūh*) and must be avoided.
 
 ### Speaker Notes
-*   > [!NOTE] **Maliki Ruling:** In the Maliki school, the *‘Awrah* of a man is divided into "heavy" (*Mughallaẓah*)—the private organs—and "light" (*Khafīfah*)—the thighs and surrounding area. While the navel and knee are not included, exposing the thighs in public is still forbidden or highly disliked depending on the context, and it is a breach of *Ḥayā’*.
+*   > [!NOTE] **Maliki Ruling:** In the Maliki school, the *‘Awrah* of a man is divided into "heavy" (*Mughallaẓah*), meaning the private organs, and "light" (*Khafīfah*), meaning the thighs and surrounding area. While the navel and knee are not included, exposing the thighs in public is still forbidden or highly disliked depending on the context, and it is a breach of *Ḥayā’*.
 *   For prayer, a man must cover at least his heavy awrah for the prayer to be valid, but covering from navel to knee is required to avoid sin, and wearing a garment over the shoulders is highly recommended (*Mandūb*).
 *   Teach boys that wearing short shorts that reveal the thighs violates the basic rules of Islamic dress code.
 
@@ -147,7 +147,7 @@ This slide deck is designed to guide teachers through the core topics of daily a
 ### Speaker Notes
 *   Explain the general ruling: Modest clothing for women must be loose (not skin-tight) and thick (not see-through).
 *   > [!NOTE] **Maliki Ruling:** The Maliki school holds that a woman's feet are part of the light *‘Awrah* (*‘Awrah Khafīfah*). Unlike other schools (like the Hanafi school which says feet are not awrah at all, or the Shafi'i/Hanbali schools which say feet are heavy awrah and prayer is invalid if uncovered), the Malikis take a middle path: the prayer is valid if they are uncovered, but she has left a recommendation and it is preferred to cover them or repeat the prayer if the time of that prayer has not expired.
-*   Remind students that dress codes protect dignity and foster a society based on character, not physical attraction.
+*   Remind students that dress codes protect dignity and build a society based on character, not physical attraction.
 
 ---
 
@@ -343,7 +343,7 @@ This slide deck is designed to guide teachers through the core topics of daily a
 *   **The Heart of Fiqh:** Seeking the pleasure of Allah in everything we do.
 
 ### Speaker Notes
-*   Summarize the presentation. Remind the students that knowing the rules is only the first step. The real goal is to put them into practice until they become second nature—habits that we perform without even thinking, yet still get rewarded for.
+*   Summarize the presentation. Remind the students that knowing the rules is only the first step. The real goal is to put them into practice until they become second nature, habits that we perform without even thinking, yet still get rewarded for.
 *   Challenge the students: Choose one manner we discussed today (like greeting everyone with Salām or knocking three times and standing to the side) and implement it consciously for the next week.
 *   Ask if there are any questions before transitioning to the student handouts and activities.
 

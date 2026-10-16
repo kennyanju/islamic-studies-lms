@@ -1,54 +1,77 @@
 # Level 1 Student Handout: Fasting, Zakah & Community
-**Age Group:** Ages 6–8 (Level 1 Track — Primary Stage 1)  
-**ICO Curriculum Benchmark:** Aligned with ICO Grades 1 & 2 ('Ibaadaat Strand)  
-**Core Strands:** Ramadan Joy | Practicing Fasting (Sawm) | Zakah & Charity | Eid al-Fitr Celebration  
+
+**Age Group:** Ages 6-8 (Level 1 Track - Primary Stage 1)  
+**Core Strands:** Ramadan Joy | Practicing Fasting (Sawm) | Zakah & Charity | Hajj & The Two Eids  
 **Classical Text Spine:** *Mukhtasar al-Akhdari* (The Spirit of Ramadan & Giving)  
-**Riwayah & Surah Target:** Hafs 'an 'Asim (Juz' 30: Surah Al-Qadr & Surah Al-Kawthar)
+**Riwayah & Surah Target:** Hafs 'an 'Asim and Warsh 'an Nafi' (Juz' 30: Surah Al-Qadr & Surah Al-Kawthar)
 
 ---
 
-## 🌙 1. Welcome, Ramadan: The Month of Mercy!
-Every year, when the delicate silver crescent moon appears in the evening sky, Muslims all around the world smile and hug each other, saying:  
-> **رَمَضَان مُبَارَك!** — *"Ramadan Mubarak!"* (Blessed Ramadan!).
+## 1. Welcome, Ramadan: The Month of Mercy!
 
-Ramadan is the ninth month of the Islamic calendar. It is the most special month of the year because:
-* It is the birthday month of the Holy Qur'an, when it was first revealed!
-* The gates of Paradise (*Jannah*) are opened wide, and special angels descend with peace.
-* Families wake up before sunrise to eat a blessed breakfast together called **Suhur**.
+Every year, when the delicate silver crescent moon appears in the evening sky, Muslims all around the world greet each other with joy:  
+> **رَمَضَان مُبَارَك!** *"Ramadan Mubarak!"* (Blessed Ramadan!).
 
----
-
-## 🍽️ 2. Practicing Fasting (Sawm) Like a Young Champion
-What is **Sawm** (Fasting)? It means not eating or drinking anything from the moment the dawn begins (*Fajr*) until the golden sun sets in the evening (*Maghrib*).
-
-### The "Bird Fast" (Half-Day Practice):
-Because you are growing strong at ages 6–8, Allah does not require young children to fast the full day. But little believers love to practice!
-* You can try a **half-day fast** (from Suhur until lunchtime, or from lunchtime until sunset).
-* When the Maghrib Adhan calls, you break your fast (*Iftar*) with sweet, chewy dates and a glass of cool water, just like Prophet Muhammad ﷺ!
-* We recite the sweet du'a:  
-  > *“Dhahaba adh-dhama'u, wabtallat al-'urooq, wa thabat al-ajru in sha' Allah!”*  
-  > (The thirst has vanished, the veins are moistened, and the reward is confirmed by Allah's will!).
+Ramadan is the ninth month of the Islamic lunar calendar. It is the most special month of the whole year because:
+* Allah revealed the Holy Quran during this blessed month (Surah Al-Baqarah 2:185).
+* The gates of Paradise (*Jannah*) are opened wide, and special angels descend with peace and mercy.
+* Families wake up before the break of dawn to eat a blessed breakfast together called **Suhur**.
 
 ---
 
-## 💰 3. Sharing with Others: Zakah and Sadaqah
-Allah blessed us with warm homes, cozy beds, and delicious food. But some boys and girls in the world do not have enough bread, warm coats, or school shoes.
+## 2. Practicing Fasting (Sawm) Like a Young Champion
 
-* **Zakah:** A special obligatory sharing of money given by grown-ups every year to help poor and needy families.
-* **Sadaqah:** Any voluntary act of kindness that you can do every single day!
-  * Putting shiny coins into the charity box at the mosque.
-  * Sharing half of your sandwich or cookie with a friend.
-  * Smiling at someone who is lonely—Prophet Muhammad ﷺ said: *"Smiling at your brother is charity!"*
-  * Picking up a sharp stone, twig, or trash from the sidewalk so nobody trips.
+What is **Sawm** (Fasting)? It means worshiping Allah by not eating or drinking anything from the early dawn (*Fajr*) until the golden sun sets in the evening (*Maghrib*).
+
+### The Half-Day Practice Fast:
+Because you are growing strong at ages 6-8, Allah does not require young children to fast the entire day. But young believers love to practice!
+* You can try a **practice fast** for a few hours (from morning until lunchtime, or from lunchtime until sunset).
+* When the Maghrib Adhan is called, you break your fast (*Iftar*) with sweet dates and a cool glass of water, following the Sunnah of Prophet Muhammad ﷺ.
+* When breaking the fast, we say the beautiful du'a:  
+  > *“Dhahaba adh-dhama'u, wabtallat al-'uruqu, wa thabata al-ajru in sha' Allah!”*  
+  > (The thirst has vanished, the veins are moistened, and the reward is confirmed by Allah's will! - Sunan Abi Dawud 2357, Hasan).
 
 ---
 
-## 🎉 4. Eid al-Fitr: The Day of Joy and Presents!
-When the thirty days of Ramadan are complete, Allah gives all Muslims a huge holiday called **Eid al-Fitr** (The Festival of Fast-Breaking)!
+## 3. Sharing with Others: Zakah and Sadaqah
 
-### Our Sunnah Morning Routine on Eid:
-1. **Take a warm Ghusl** (shower) and put on your cleanest, best clothes!
-2. **Eat an odd number of sweet dates** (1, 3, or 5) before leaving home, following the Prophet's Sunnah.
-3. **Walk to the Eid prayer** with your family while saying the joyful Takbirat:  
-   > *“Allahu Akbar, Allahu Akbar, La ilaha illa Allah! Allahu Akbar, Allahu Akbar, wa lillahil-Hamd!”*
-4. **Greet everyone:** Give big hugs, say *"Eid Mubarak!"*, visit grandparents, eat delicious sweets, and enjoy presents!
+Allah blessed us with warm homes, cozy beds, and delicious food. But some families in the world do not have enough bread, warm coats, or shoes.
+
+* **Zakah (The Obligatory Pillar):** A special obligation where adults share a portion of their surplus wealth every year to support poor and needy people.
+* **Sadaqah (Everyday Voluntary Charity):** Any act of kindness that you can do every single day!
+  * Putting coins into the charity box at the mosque.
+  * Sharing your lunch or snack with a classmate.
+  * Smiling warmly at someone: Prophet Muhammad ﷺ said: *"Your smiling in the face of your brother is charity for you."* (Jami' at-Tirmidhi 1956, Sahih).
+  * Removing a sharp stone or litter from the footpath so nobody gets hurt.
+
+---
+
+## 4. The Blessed Journey: The Ka'bah and Hajj
+
+Islam has five pillars. The fifth pillar is **Hajj**, the sacred pilgrimage to the Holy City of Makkah.
+* In the twelfth month of the Islamic calendar, called **Dhul-Hijjah**, millions of Muslims travel to Makkah.
+* Pilgrims visit the **Ka'bah**, the sacred House of Allah built by Prophet Ibrahim and his son Prophet Isma'il (peace be upon them).
+* Muslims stand together in unity and prayer, wearing simple white garments that remind us that all human beings are equal before Allah.
+
+---
+
+## 5. The Two Blessed Holidays: Eid al-Fitr and Eid al-Adha
+
+Allah gave the Muslim community two great festivals of gratitude and joy:
+1. **Eid al-Fitr (The Festival of Fast-Breaking):** Celebrated immediately after Ramadan ends, thanking Allah for the blessings of fasting and the Quran.
+2. **Eid al-Adha (The Festival of Sacrifice):** Celebrated during the month of Hajj, remembering the obedience of Prophet Ibrahim. Families share delicious meals and give meat (*Udhiyah*) to relatives and families in need.
+
+### Sunnah Manners for Eid Day:
+* Take a refreshing Ghusl (bath) and wear your finest, cleanest clothes.
+* On Eid al-Fitr, eat an odd number of dates (such as 1, 3, or 5) before heading to the prayer.
+* Walk with your family while reciting the joyful Takbirat:  
+  > *“Allahu Akbar, Allahu Akbar, La ilaha illa Allah! Allahu Akbar, Allahu Akbar, wa lillahil-Hamd!”*
+* Greet your loved ones with hugs and smiles, saying *"Eid Mubarak!"*
+
+---
+
+## 6. Curriculum Anchors in Practice
+
+1. **Morning Gratitude:** When you wake up, thank Allah for your breakfast and your health.
+2. **Practice Fasting:** Try fasting for two or three hours on a weekend during Ramadan, experiencing the joy of breaking your fast at Iftar.
+3. **Daily Sadaqah:** Practice giving every day, whether by sharing a toy, helping your parents tidy up, or giving a cheerful smile to a neighbor.

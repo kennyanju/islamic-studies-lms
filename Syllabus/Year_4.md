@@ -1,11 +1,11 @@
 # Year 4 Syllabus: Evidence, Law, & Prophetic Mission
 
-> **Target Learner**: Age 9–10  
+> **Target Learner**: Level 4 Track: Adolescent & Puberty (Ages 12-14)  
 > **Weekly Schedule**: **3 extended sessions × 70 minutes** = 210 min/week  
 > **Annual Instructional Volume**: 36 Weeks (3 Terms of 12 Weeks) = 126 hours  
 > **ICO Benchmarks Absorbed**: Grade 7, Grade 8, and Grade 9 (analytical theology, systematic worship, Madinan battles, Caliphate)  
 > **Classical Text Spine**: *Ibn 'Ashir* (Salah, Zakah, Fasting, Hajj), Sanusi's *Umm al-Barahin* (The 20 Necessary Attributes), *Risalah* of Ibn Abi Zayd (selected chapters), and Qadi 'Iyad's *Al-Shifa*  
-> **Riwayah**: Hafs 'an 'Asim (Juz' 29: Surah Al-Mulk to Surah Al-Mursalat, systematic Tajweed rules: Noon Sakinah, Meem Sakinah, Madd)
+> **Riwayah**: Hafs 'an 'Asim & Warsh 'an Nafi' (Juz' 29: Surah Al-Mulk to Surah Al-Mursalat, systematic Tajweed rules: Noon Sakinah, Meem Sakinah, Madd)
 
 ---
 
@@ -26,10 +26,10 @@
 * **Extension Outcomes (13+)**:
   1. The Ash'ari doctrine of *Ta'alluqat* (functional attachments of attributes): How Power and Will attach to all possible things (*Al-Ja'izat*), while Knowledge attaches to the Necessary, Impossible, and Possible.
   2. Hermeneutical reconciliation of ambiguous scriptural texts (*Ayat al-Mutashabihat*): The two valid Sunni methodologies:
-     * **Al-Tafwid** (Consigning the ultimate reality to Allah while affirming *Tanzih* — the way of the Salaf).
-     * **Al-Ta'wil al-Tafsili** (Linguistic contextual interpretation to safeguard layman faith — the way of the Khalaf).
+     * **Al-Tafwid** (Consigning the ultimate reality to Allah while affirming *Tanzih*, the way of the Salaf).
+     * **Al-Ta'wil al-Tafsili** (Linguistic contextual interpretation to safeguard layman faith, the way of the Khalaf).
 * **Ash'ari Creed Flag**: Affirming that Allah's Speech (*Kalam*) is an eternal, uncreated attribute of His Essence without letters, sounds, sequence, or silence.
-* **🌍 Other Scholars Say — Reasons Box**:
+* **🌍 Other Scholars Say (Reasons Box)**:
   > *Topic: How do Sunni Scholars Explain Apparent Spatial Texts (e.g. Istiwa' over the Throne)?*
   > **All Sunni schools agree**: Allah is completely unlike creation (*Laysa ka-mithlihi shay'*). Allah does not sit, stand, have physical weight, or occupy physical space, because space was created by Allah!
   > *Ash'ari & Maturidi scholars*: Held that *Tafwid* (saying: "Allah knows what He meant, and He is free of all physical traits") is safe and sound, while allowing *Ta'wil* (understanding *Istiwa'* as divine subjugation and majesty, like a king asserting sovereign rule).
@@ -73,7 +73,7 @@
   1. Zakah on livestock (*An'am*) and agricultural produce (*Harth*): Differentiating between naturally watered crops (10% / *'Ushr*) and artificially irrigated crops (5% / *Nisf al-'Ushr*).
   2. The Maliki ruling on permissible worn jewelry: Gold and silver jewelry owned by women for regular lawful adornment is **exempt** from Zakah in the relied-upon Maliki position (in stark contrast to the Hanafi school where worn gold is strictly zakatable).
 * **Maliki Fiqh Flag**: Permissible worn gold jewelry is not subject to annual Zakah, as it is classified as a personal utility rather than growing wealth (*Mal Namin*).
-* **🌍 Other Scholars Say — Reasons Box**:
+* **🌍 Other Scholars Say (Reasons Box)**:
   > *Topic: Zakah on Women's Worn Gold Jewelry*
   > **All agree**: Gold bullion, coins, and hoarded investment gold are 100% subject to Zakah.
   >
@@ -127,7 +127,7 @@
 * **Extension Outcomes (13+)**:
   1. Duration of travel status: In the Maliki school, if a traveler resolves to stay in a destination for **4 full days (or 20 fard prayers)** or more upon arrival, they immediately become a resident (*Muqim*) and must pray full rak'ahs.
   2. The Maliki ruling on wiping over socks: Unlike the 24-hour resident / 72-hour traveler limits of the three other schools, Imam Malik held that there is **no fixed time limit** for wiping over leather socks, provided they were put on in a state of pure wudu and have not been removed (though weekly washing for Jumu'ah is recommended).
-* **🌍 Other Scholars Say — Reasons Box**:
+* **🌍 Other Scholars Say (Reasons Box)**:
   > *Topic: Combining Prayers while Traveling (Jam')*
   >
   > | School | Shortening (Qasr) | Combining (Jam') |
@@ -138,7 +138,7 @@
   > | **Hanbali** | Recommended | Permitted with broad flexibility. |
   > *Why the difference?* Imam Abu Hanifa prioritized the Qur'anic ayah *"Indeed prayer is decreed at specific times"*, while the other three Imams followed explicit hadiths where the Prophet ﷺ combined prayers on the expedition to Tabuk.
 * **Qur'an & Hadith Evidence**: Surah An-Nisa (4:101: *"And when you travel throughout the land, there is no blame upon you for shortening the prayer"*); Hadith of Ibn 'Umar on the Prophet's travel prayer.
-* **Pedagogical Activities**: "The Travel Itinerary Planner": Plotting a family trip from London to Manchester (or New York to Philadelphia) — marking exactly where Qasr begins and ends on a map.
+* **Pedagogical Activities**: "The Travel Itinerary Planner": Plotting a family trip from London to Manchester (or New York to Philadelphia), marking exactly where Qasr begins and ends on a map.
 * **Hifz & Memorisation**: Surah Al-Haqqah (Verses 1–25). Nawawi Hadith 25 & 26.
 
 ---
@@ -196,7 +196,7 @@
      2. **Al-Tawaf** (Tawaf al-Ifadah / Ziyarah around the Ka'bah 7 circuits).
      3. **Al-Sa'i** (Walking between Safa and Marwah 7 times).
      4. **Wuquf bi-'Arafah** (Standing at 'Arafat on the 9th of Dhul-Hijjah).
-  3. The student distinguishes between the 3 modes of Hajj: **Ifrad** (Hajj alone — the most preferred in the Maliki school), **Qiran** (combining Hajj and 'Umrah together), and **Tamattu'** ('Umrah followed by Hajj).
+  3. The student distinguishes between the 3 modes of Hajj: **Ifrad** (Hajj alone, the most preferred in the Maliki school), **Qiran** (combining Hajj and 'Umrah together), and **Tamattu'** ('Umrah followed by Hajj).
 * **Extension Outcomes (13+)**:
   1. Prohibitions of Ihram: Perfume, cutting hair/nails, covering head for men, stitching clothes to fit limbs for men, marital intimacy, and hunting land animals.
   2. The spiritual symbolism of Hajj: Shedding worldly status, universal equality of all races, rehearsing the Day of Resurrection at the plain of 'Arafat.

@@ -1,4 +1,4 @@
-# 05 — Hifz, Tajweed, & Classical Matn Track: 5-Year Master Plan
+# 05: Hifz, Tajweed, & Classical Matn Track: 5-Year Master Plan
 
 > **Scope**: A comprehensive 5-year Qur'anic memorisation, recitation, Tajweed, classical didactic poetry (*Matn*), and Prophetic Hadith progression designed for ages 6–11.  
 > **Primary Recitation**: **Hafs 'an 'Asim via the Shatibiyyah route**  
@@ -154,7 +154,7 @@ flowchart LR
 * **Memorisation Target**:
   1. Completion of Juz' 29: Surah Al-Muzzammil (73), Al-Muddaththir (74), Al-Qiyamah (75), Al-Insan (76), Al-Mursalat (77).
   2. Surah Yasin (36: complete).
-  3. Surah Al-Kahf (18: Verses 1–60 — protecting against the trials of Dajjal).
+  3. Surah Al-Kahf (18: Verses 1-60, protecting against the trials of Dajjal).
 * **Tajweed Principles & The Science of Qira'at**:
   * Completion of *Tuhfat al-Atfal* (the classic didactic poem on tajweed rules).
   * Understanding the 10 Mutawatir Qira'at: Transmission chains, regional dominance.

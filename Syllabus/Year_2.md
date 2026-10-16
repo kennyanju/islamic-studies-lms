@@ -1,11 +1,11 @@
 # Year 2 Syllabus: Habits of Devotion & Character
 
-> **Target Learner**: Age 7–8  
+> **Target Learner**: Level 2 Track: Middle Childhood (Ages 8-10)  
 > **Weekly Schedule**: 5 sessions × 30 minutes = 150 min/week  
 > **Annual Instructional Volume**: 36 Weeks (3 Terms of 12 Weeks) = 90 hours  
 > **ICO Benchmarks Absorbed**: Grade 3 and Grade 4 (worship conditions, pillars of iman, early revelation)  
 > **Classical Text Spine**: *Matn al-'Ashmawiyyah* (Fiqh of Prayer) & Imam an-Nawawi's *40 Hadith* (Hadiths 1–10)  
-> **Riwayah**: Hafs 'an 'Asim (Juz' 'Amma mid-section, rules of Madd basics)
+> **Riwayah**: Hafs 'an 'Asim & Warsh 'an Nafi' (Juz' 'Amma mid-section, rules of Madd basics)
 
 ---
 
@@ -23,12 +23,12 @@
   1. Ash'ari Epistemological breakdown: The definition of *Tasdiq* (assent of the heart) as the root of Iman.
   2. Does Iman increase and decrease? Comparing the Ash'ari position (the core assent is indivisible, but its illumination and righteous fruits fluctuate) with other theological frameworks.
 * **Ash'ari Creed Flag**: Iman resides in the heart's submission; a sinner who commits a major sin does not exit Islam, refuting the extremist Kharijite doctrine of takfir.
-* **🌍 Other Scholars Say — Recognition Box**:
+* **🌍 Other Scholars Say: Recognition Box**:
   > *Who were the Four Great Imams?*
-  > 1. **Imam Abu Hanifa** (Kufa, Iraq) — Known for his deep wisdom and generous character.
-  > 2. **Imam Malik** (Madinah, Arabia) — The Imam of Dar al-Hijrah, who preserved the lived tradition of the Prophet's city.
-  > 3. **Imam al-Shafi'i** (Gaza / Makkah / Egypt) — The master of the Arabic language and jurisprudence.
-  > 4. **Imam Ahmad ibn Hanbal** (Baghdad, Iraq) — The patient champion of the Sunnah.
+  > 1. **Imam Abu Hanifa** (Kufa, Iraq): Known for his deep wisdom and generous character.
+  > 2. **Imam Malik** (Madinah, Arabia): The Imam of Dar al-Hijrah, who preserved the lived tradition of the Prophet's city.
+  > 3. **Imam al-Shafi'i** (Gaza / Makkah / Egypt): The master of the Arabic language and jurisprudence.
+  > 4. **Imam Ahmad ibn Hanbal** (Baghdad, Iraq): The patient champion of the Sunnah.
   > *Remember*: All four Imams agreed completely on the Six Pillars of Faith!
 * **Qur'an & Hadith Evidence**: Surah Al-Baqarah (2:285); Hadith Jibril (Muslim).
 * **Pedagogical Activities**: Constructing a "Pillars of Faith Hexagon Mobile" to hang in the room; role-playing the arrival of Angel Jibril in pure white garments.
@@ -88,7 +88,7 @@
 * **Extension Outcomes (13+)**:
   1. Distinguishing between *Arkan* (Pillars that cannot be compensated by prostration) and *Sunan Mu'akkadah* (confirmed sunnahs compensated by *Sujud al-Sahw*) in prayer.
   2. The Maliki ruling on reciting the Basmalah before Surah Al-Fatihah: Disliked (*Makruh*) in obligatory prayers because it is not considered an ayah of Al-Fatihah in the relied-upon Madinan tradition.
-* **🌍 Other Scholars Say — Recognition Box**:
+* **🌍 Other Scholars Say: Recognition Box**:
   > *Topic: Raising the Hands in Prayer (Takbir)*
   > *Maliki practice*: We raise our hands to shoulder level at the very beginning of prayer (*Takbirat al-Ihram*). During the rest of the prayer, we move into bowing and standing peacefully without raising our hands again (as recorded in the primary Maliki transmissions).
   > *Other Scholars Say*: Imam al-Shafi'i and Imam Ahmad taught raising hands before ruku' and when rising from ruku'.
@@ -106,12 +106,12 @@
 * **Core Outcomes (Age 7–8)**:
   1. The child describes angels as noble beings created by Allah from light who never disobey Allah and tirelessly carry out His divine commands.
   2. The child identifies the major archangels and their responsibilities:
-     * **Jibril** (Gabriel) — Conveying Divine Revelation (*Wahy*).
-     * **Mika'il** (Michael) — Rain, clouds, and sustenance.
-     * **Israfil** (Raphael) — Blowing the Trumpet on the Day of Judgment.
-     * **Malik** — Keeper of the Hellfire; **Ridwan** — Keeper of Paradise.
-     * **Munkar & Nakir** — Questioning the soul in the grave.
-     * **Kiram Katibin** — The noble recording angels on our shoulders.
+     * **Jibril** (Gabriel): Conveying Divine Revelation (*Wahy*).
+     * **Mika'il** (Michael): Rain, clouds, and sustenance.
+     * **Israfil** (Raphael): Blowing the Trumpet on the Day of Judgment.
+     * **Malik**: Keeper of the Hellfire; **Ridwan**: Keeper of Paradise.
+     * **Munkar & Nakir**: Questioning the soul in the grave.
+     * **Kiram Katibin**: The noble recording angels on our shoulders.
   3. The child matches the Heavenly Books with their Prophets: The *Suhuf* (Scrolls) to Ibrahim, the *Tawrah* (Torah) to Musa, the *Zabur* (Psalms) to Dawud, the *Injeel* (Gospel) to 'Isa, and the *Qur'an* to Muhammad ﷺ.
 * **Extension Outcomes (13+)**:
   1. The metaphysical nature of Angels: Free from gender, appetite, sleep, physical exhaustion, and free will in the human sense.
@@ -136,7 +136,7 @@
   2. Sayyidah Khadijah's theological intuition: Drawing upon empirical moral character to discern divine favor; the consultation with the Christian scholar Waraqah ibn Nawfal.
 * **Qur'an & Hadith Evidence**: Surah Al-'Alaq (96:1–5); Hadith of 'A'ishah on the beginnings of revelation (Bukhari).
 * **Pedagogical Activities**: Diorama crafting of Mount Hira and the cave entrance; practicing expressive dramatic recitation of the first 5 verses of Surah Al-'Alaq.
-* **Hifz & Memorisation**: Surah Al-'Alaq (first 8 verses). Nawawi Hadith 1 (*"Innama al-a'malu bin-niyyat"* — Actions are judged by intentions).
+* **Hifz & Memorisation**: Surah Al-'Alaq (first 8 verses). Nawawi Hadith 1 (*"Innama al-a'malu bin-niyyat"*, Actions are judged by intentions).
 
 ---
 
@@ -179,13 +179,13 @@
 * **Maliki Fiqh Flag**:
   * **Touching with pleasure**: Touching the opposite gender only breaks wudu in the Maliki school if accompanied by sexual pleasure or if pleasure was intended (unlike Shafi'is who break on any skin contact, and Hanafis who do not break except with intimacy).
   * **Bleeding**: Blood flowing from a cut does **not** break wudu in the Maliki school.
-* **🌍 Other Scholars Say — Recognition Box**:
+* **🌍 Other Scholars Say: Recognition Box**:
   > *Topic: Bleeding and Wudu*
   > *Maliki practice*: If your nose bleeds or you get a paper cut, your wudu is still perfectly valid. You simply wash the blood off your skin or clothing.
   > *Hanafi view*: If blood flows past the wound, wudu is broken and must be repeated.
   > *Remember*: When you see a friend wash their wudu after a nosebleed, you understand they are following Imam Abu Hanifa!
 * **Qur'an & Hadith Evidence**: Hadith of the man who wondered if he passed wind during prayer: *"Do not leave unless you hear a sound or detect an odor."* (Bukhari).
-* **Pedagogical Activities**: "Fiqh Detective": Case-study scenario cards ("Zayd had a short 2-minute sitting nap," "Maryam got a small finger cut," "Bilal drank orange juice") — the child votes "Wudu Valid" or "Wudu Broken".
+* **Pedagogical Activities**: "Fiqh Detective": Case-study scenario cards ("Zayd had a short 2-minute sitting nap," "Maryam got a small finger cut," "Bilal drank orange juice"), the child votes "Wudu Valid" or "Wudu Broken".
 * **Hifz & Memorisation**: Surah Al-Burooj (completion). Nawawi Hadith 3 (The Five Pillars of Islam).
 
 ---

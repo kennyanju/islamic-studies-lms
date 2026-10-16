@@ -3,7 +3,28 @@
 
 ---
 
-# Slide 1: Welcome & Course Overview
+# Slide 1: Purification & Prayer (Taharah & Salah)
+## Orientation and Overview
+*   **Subject:** Islamic Studies (Fiqh and Aqidah)
+*   **Fiqh School:** Maliki (*Madhhab*)
+*   **Creed School:** Ash'ari
+*   **Core Focus:** Understanding how to purify ourselves externally and internally to stand before our Creator.
+*   **Key Themes:**
+    *   Water and Purity (*Taharah*)
+    *   Ablution (*Wudu*) and Ritual Bathing (*Ghusl*)
+    *   Dry Ablution (*Tayammum*)
+    *   The Five Daily Prayers (*Salah*)
+    *   The Posture of Standing in Prayer (*Sadl*)
+
+---
+**Teacher Notes:**
+*   **Welcome & Objective:** Welcome parents, teachers, and students to the unit on Purification and Prayer (*Taharah* and *Salah*).
+*   **Spiritual Theme:** Emphasize that physical purity is the outer gateway to internal illumination and presence before Allah.
+*   **Methodological Note:** Explain that learning through the Maliki and Ash'ari frameworks connects students to time-tested classical scholarship and the living tradition of Madinah.
+
+---
+
+# Slide 2: Welcome & Course Overview
 ## Purification & Prayer: The Journey of the Soul
 *   **Subject:** Islamic Studies (Fiqh and Aqidah)
 *   **Fiqh School:** Maliki (*Madhhab*)
@@ -19,12 +40,12 @@
 ---
 **Teacher Notes:**
 *   **Welcome & Objective:** Welcome the students. Explain that this unit will cover how we prepare physically and spiritually to meet Allah in prayer.
-*   **Pedagogical Note:** Highlight that we are learning the rulings according to the **Maliki school** of jurisprudence (*fiqh*) and the **Ash'ari school** of theology (*aqidah*). Explain that learning a specific school helps build "fiqh literacy"—understanding that while there is diversity in Islamic practice (*ikhtilaf*), each school is built on sound, systematic interpretations of the Quran and Sunnah.
+*   **Pedagogical Note:** Highlight that we are learning the rulings according to the **Maliki school** of jurisprudence (*fiqh*) and the **Ash'ari school** of theology (*aqidah*). Explain that learning a specific school helps build "fiqh literacy": understanding that while there is diversity in Islamic practice (*ikhtilaf*), each school is built on sound, systematic interpretations of the Quran and Sunnah.
 *   **Discussion Starter:** Ask students: *"Why do you think we wash ourselves before talking to Allah? What does cleaning the body do for the heart?"*
 
 ---
 
-# Slide 2: The Creed (Aqidah) Context: Why Do We Worship?
+# Slide 3: The Creed (Aqidah) Context: Why Do We Worship?
 ## Understanding 'Ubudiyyah (Servantship)
 *   **Allah is Al-Ghani (The Independent):**
     *   Allah does not *need* our prayers or our worship.
@@ -44,7 +65,7 @@
 
 ---
 
-# Slide 3: The Importance of Purity (Taharah)
+# Slide 4: The Importance of Purity (Taharah)
 ## External and Internal Cleanliness
 *   **What is Taharah?**
     *   Linguistically: Cleanliness and purification.
@@ -57,12 +78,12 @@
 ---
 **Teacher Notes:**
 *   **Explanation:** Distinguish between *hadath* (an invisible spiritual state of impurity, like after sleeping or using the bathroom) and *najasah* (a physical substance like urine or blood). 
-*   **Pedagogical Tip:** Use the analogy of a computer screen: *Najasah* is like dust on the screen (you can see it and wipe it off), while *hadath* is like the screen being turned off (it's clean, but you need to press the power button—perform Wudu—to make it active).
+*   **Pedagogical Tip:** Use the analogy of a computer screen: *Najasah* is like dust on the screen (you can see it and wipe it off), while *hadath* is like the screen being turned off (it's clean, but you need to press the power button: perform Wudu: to make it active).
 *   **Reflection:** How does physical cleanliness help us focus mentally and spiritually?
 
 ---
 
-# Slide 4: Types of Water — Overview
+# Slide 5: Types of Water :  Overview
 ## The Legal Categories of Water
 *   Water is the primary tool for physical purification.
 *   In the Maliki school, water is classified into three main categories:
@@ -79,7 +100,7 @@
 
 ---
 
-# Slide 5: Category 1: Al-Ma' al-Mutlaq (Purifying Water)
+# Slide 6: Category 1: Al-Ma' al-Mutlaq (Purifying Water)
 ## Pure in Itself and Purifying for Others
 *   **Definition:** Water that remains in its natural state, just as Allah created it.
 *   **Examples:**
@@ -98,7 +119,7 @@
 
 ---
 
-# Slide 6: Category 2: Al-Ma' al-Tahir (Pure but Non-Purifying)
+# Slide 7: Category 2: Al-Ma' al-Tahir (Pure but Non-Purifying)
 ## When Pure Things Mix with Water
 *   **Definition:** Purifying water (*mutlaq*) that has been mixed with a **pure** substance (e.g., milk, soap, rosewater, honey).
 *   **The Key Maliki Ruling:**
@@ -114,7 +135,7 @@
 
 ---
 
-# Slide 7: Category 3: Al-Ma' al-Najis (Impure Water)
+# Slide 8: Category 3: Al-Ma' al-Najis (Impure Water)
 ## When Impurity Mixes with Water
 *   **Definition:** Water that has been altered by an impurity (*najasah*), such as urine, blood, or sewage.
 *   **The Maliki View on Water volume:**
@@ -131,7 +152,7 @@
 
 ---
 
-# Slide 8: Step-by-Step Wudu (Obligations / Fara'id)
+# Slide 9: Step-by-Step Wudu (Obligations / Fara'id)
 ## The Core Pillars of Wudu
 *   To have a valid Wudu, you must perform the **seven obligations (*Fara'id*)** according to the Maliki school:
     1.  **Intention (*Niyyah*)**
@@ -151,7 +172,7 @@
 
 ---
 
-# Slide 9: Focus on Wudu Fara'id: Niyyah, Face, and Arms
+# Slide 10: Focus on Wudu Fara'id: Niyyah, Face, and Arms
 ## Starting the Wudu Correctly
 *   **1. Intention (*Niyyah*):**
     *   Must be made in the heart at the very moment you begin washing.
@@ -169,10 +190,10 @@
 
 ---
 
-# Slide 10: Wiping the Entire Head (Mash al-Ra's)
+# Slide 11: Wiping the Entire Head (Mash al-Ra's)
 ## A Key Maliki Distinction
 *   **4. Wiping the Head (*Mash*):**
-    *   You must wipe your hands over the **entire head**—from the front hairline all the way to the nape of the neck.
+    *   You must wipe your hands over the **entire head**: from the front hairline all the way to the nape of the neck.
 *   **The Maliki View:**
     *   Wiping the *entire* head is an absolute obligation (*Fard*).
 *   **Comparison with Other Schools:**
@@ -189,7 +210,7 @@
 
 ---
 
-# Slide 11: Rubbing (Dalk) and Continuity (Muwalat)
+# Slide 12: Rubbing (Dalk) and Continuity (Muwalat)
 ## Distinctive Maliki Obligations
 *   **6. Rubbing (*Dalk*):**
     *   Passing the hand over the body part while washing it, or immediately after pouring water, before it dries.
@@ -205,7 +226,7 @@
 
 ---
 
-# Slide 12: Sunnan and Fada'il of Wudu
+# Slide 13: Sunnan and Fada'il of Wudu
 ## Enhancing Our Purification
 *   **Sunnahs of Wudu (High Sunnahs):**
     *   Washing the hands to the wrists at the beginning.
@@ -227,7 +248,7 @@
 
 ---
 
-# Slide 13: Ghusl — The Ritual Bath
+# Slide 14: Ghusl :  The Ritual Bath
 ## Restoring Major Ritual Purity
 *   **What is Ghusl?**
     *   Washing the entire body with purifying water (*mutlaq*) with a specific intention.
@@ -245,7 +266,7 @@
 
 ---
 
-# Slide 14: Steps and Obligations of Ghusl
+# Slide 15: Steps and Obligations of Ghusl
 ## The Maliki Method of Ghusl
 *   **The Obligations (*Fara'id*) of Ghusl (5 items):**
     1.  **Intention (*Niyyah*):** To lift the major impurity.
@@ -264,7 +285,7 @@
 
 ---
 
-# Slide 15: Tayammum — Purification with Earth
+# Slide 16: Tayammum :  Purification with Earth
 ## Allah's Mercy When Water is Unavailable
 *   **What is Tayammum?**
     *   Dry purification using clean, natural earth.
@@ -281,7 +302,7 @@
 
 ---
 
-# Slide 16: The Steps and Substance of Tayammum
+# Slide 17: The Steps and Substance of Tayammum
 ## What is "Sa'id" and How is it Wiped?
 *   **The Ground Substance (*Sa'id*):**
     *   In the Maliki school, *Sa'id* is defined as anything that is part of the natural surface of the earth.
@@ -300,7 +321,7 @@
 
 ---
 
-# Slide 17: The Five Daily Prayers (Salah)
+# Slide 18: The Five Daily Prayers (Salah)
 ## The Pillar of Religion (Imad al-Din)
 *   **Why is Salah the Pillar?**
     *   The Prophet (pbuh) said: *"The head of the matter is Islam, its pillar is the prayer, and its peak is Jihad"* (Tirmidhi).
@@ -320,7 +341,7 @@
 
 ---
 
-# Slide 18: Prayer Times & Cosmic Rhythms
+# Slide 19: Prayer Times & Cosmic Rhythms
 ## Aligning Our Day with Creation
 *   Each prayer has a specific window of time linked to the movement of the sun:
     *   **Subh (Fajr):** Starts at true dawn (*al-fajr al-sadiq*) and ends at sunrise.
@@ -338,7 +359,7 @@
 
 ---
 
-# Slide 19: How We Stand in Prayer — The Position of the Arms
+# Slide 20: How We Stand in Prayer :  The Position of the Arms
 ## Standing (Qiyam) and Sadl
 *   **Qiyam (Standing):**
     *   Qiyam is an obligatory pillar (*Rukn*) of the obligatory prayers.
@@ -357,7 +378,7 @@
 
 ---
 
-# Slide 20: Understanding Sadl (Arms at the Sides)
+# Slide 21: Understanding Sadl (Arms at the Sides)
 ## The Background of the Maliki Practice
 *   *Why do Malikis perform Sadl?*
     1.  **The Practice of Madinah (*'Amal Ahl al-Madinah*):** Imam Malik lived in Madinah, the city of the Prophet (pbuh). He observed that the scholars and descendants of the Companions prayed with their arms at their sides.
@@ -372,7 +393,7 @@
 
 ---
 
-# Slide 21: Summary & References
+# Slide 22: Summary & References
 ## Taking it Forward
 *   **What We Learned:**
     *   How to categorize water (Mutlaq, Tahir, Najis).

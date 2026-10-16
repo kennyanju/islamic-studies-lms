@@ -55,7 +55,7 @@ const modulesConfig = [
     category: 'Seerah (History)',
     description:
       'Trace the noble lineage, birth, youth, marriage to Khadijah (RA), and early revelation of Prophet Muhammad ﷺ.',
-    icon: 'fa-book-quran',
+    icon: 'fa-feather-pointed',
     estTime: '50 mins',
     bloomLevel: 'Analyzing & Synthesizing',
     objectives: [
@@ -117,7 +117,7 @@ const modulesConfig = [
     bloomLevel: 'Analyzing & Reflecting',
     objectives: [
       "Examine the strategic significance of the Hijrah and the brotherhood (Mu'akhah) established in Madinah.",
-      'Analyze the Constitution of Madinah as a foundational charter of pluralism and civic duty.',
+      'Analyze the Covenant of Madinah (Sahifat al-Madinah) and how it established mutual rights, security, and justice across Madinah\'s tribes and religious communities.',
       'Understand the defensive context of key historical encounters (Badr, Uhud, Al-Khandaq).'
     ],
     malikiNotes:
@@ -159,7 +159,7 @@ const modulesConfig = [
       'Implement strategies for conflict resolution and speech preservation in family life.'
     ],
     malikiNotes:
-      "Draws from Imam Malik's emphasis on Adab before knowledge, citing Al-Adab al-Mufrad and classical ethical treatises."
+      "Draws from Imam Malik's teaching in Al-Muwatta' (Book of Good Character) that manners (Adab) precede knowledge, alongside Imam al-Bukhari's Al-Adab al-Mufrad."
   },
   {
     id: 9,
@@ -227,7 +227,7 @@ function parseQuestionsComprehensive(markdownText) {
     const line = lines[i];
     const trimmed = line.trim();
 
-    if (/^(##|###)\s*.*(Answer\s+Key|Marking\s+Guide|Teacher\s+Answers)/i.test(trimmed)) {
+    if (/^#{1,4}\s*.*(Answer\s+Key|Marking\s+Guide|Teacher\s+Answers)/i.test(trimmed)) {
       inAnswerKey = true;
       continue;
     }
@@ -348,9 +348,15 @@ function parseQuestionsComprehensive(markdownText) {
     } else if (currentSection === 'MATCH') {
       if (trimmed.startsWith('#')) {
         currentMatchGroup = trimmed.replace(/^#+\s*/, '').trim();
-      } else if (trimmed.includes('───') || trimmed.includes('->')) {
-        const delim = trimmed.includes('───') ? '───' : '->';
-        const parts = trimmed.replace(/^\*\s*/, '').split(delim);
+      } else if (
+        trimmed.includes('───') ||
+        trimmed.includes('---') ||
+        trimmed.includes('->')
+      ) {
+        const parts = trimmed
+          .replace(/^\*\s*/, '')
+          .replace(/^Pair\s+\d+:\s*/i, '')
+          .split(/\s*(?:───|---|->)\s*/);
         if (parts.length === 2) {
           matching.push({
             group: currentMatchGroup,
@@ -405,6 +411,24 @@ function parseQuestionsComprehensive(markdownText) {
       }
     }
   });
+
+  // Extract Fill in the Blanks answers if present in answerKeyRaw
+  const fibKeyMatch = answerKeyRaw.match(
+    /###?\s*(?:Fill in the Blanks Key|Part B[^\n]*)\s*([\s\S]*?)(?:###?|$)/i
+  );
+  if (fibKeyMatch) {
+    const fibLines = fibKeyMatch[1].split(/\r?\n/);
+    const fibKeyMap = {};
+    fibLines.forEach((l) => {
+      const m = l.trim().match(/^(\d+)[\.\)]\s*(.*)/);
+      if (m) {
+        fibKeyMap[parseInt(m[1], 10)] = m[2].replace(/^\*\*|\*\*$/g, '').trim();
+      }
+    });
+    fillBlanks.forEach((fb, idx) => {
+      fb.answer = fibKeyMap[fb.id] || fibKeyMap[idx + 1] || '';
+    });
+  }
 
   return {
     multipleChoice: mcq,

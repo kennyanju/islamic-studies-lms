@@ -1,65 +1,65 @@
 # Level 5 Quiz: Deepening Belief & the Quran
 
 ## Part A: Multiple Choice Questions
-1. In Ash'ari theology, what is the precise distinction between "Al-Kalam al-Nafsi" and "Al-Lafz al-Munazzal"?
-   (A) Kalam Nafsi is Arabic poetry, while Lafz Munazzal is legal code.
-   (B) Kalam Nafsi is the eternal, uncreated attribute inherent in Allah's essence, while Lafz Munazzal is the revealed Arabic expression transmitted through Jibril.
-   (C) Kalam Nafsi is restricted to angels, while Lafz Munazzal is for humans.
-   (D) There is no distinction; both are created physical sound waves.
+1. In Ash'ari scholastic theology, what is the precise distinction between "Al-Kalam al-Nafsi" and "Al-Lafz al-Munazzal"?
+   (A) Kalam Nafsi denotes legal statutes, while Lafz Munazzal denotes devotional supplications.
+   (B) Kalam Nafsi is the eternal, uncreated attribute inherent in Allah's Divine Essence transcendent of sound and letters, while Lafz Munazzal is the revealed Arabic speech recited by human tongues and inscribed in codices.
+   (C) Kalam Nafsi was revealed only to pre-Islamic prophets, while Lafz Munazzal was granted exclusively to Prophet Muhammad ﷺ.
+   (D) Kalam Nafsi refers to human internal thought, while Lafz Munazzal refers to spoken dialogue.
 
-2. What dangerous implication led Sunni scholars to vigorously refute the Mu'tazilite doctrine of "Khalq al-Qur'an" (Createdness of the Quran)?
-   (A) It would make paper manufacturing illegal under Islamic law.
-   (B) It implies that divine commands and moral values are contingent, temporary creations that can be abrogated or discarded by human reason.
-   (C) It would require translating the Quran into Latin.
-   (D) It prohibited Muslims from memorizing more than three chapters.
+2. What fundamental theological danger prompted Sunni theologians to refute the Mu'tazilite doctrine of "Khalq al-Qur'an" (Createdness of the Quran)?
+   (A) If divine speech were a contingent, created object, divine moral commands and ethical principles would be transient cultural artifacts subject to human alteration.
+   (B) It would invalidate the historical treaties established between Madinah and neighboring nations.
+   (C) It would require all Muslims to memorize only the Makkan chapters.
+   (D) It implied that the Arabic language was older than all other human languages.
 
-3. What is the fundamental difference between the "Seven Ahruf" and the "Seven/Ten Canonical Qira'at"?
-   (A) Ahruf were regional currencies, while Qira'at were judicial courts.
-   (B) Ahruf were divine dialect concessions during the Prophetic era, while Qira'at are mass-transmitted recitation methodologies codified by later master scholars based on the Uthmanic consonantal skeleton.
-   (C) Ahruf apply only to women, while Qira'at apply only to men.
-   (D) Qira'at were written by the Abbasid caliph in Baghdad.
+3. What is the fundamental historical and technical distinction between the "Seven Ahruf" and the "Canonical Qira'at"?
+   (A) Ahruf are legal categories of halal and haram, while Qira'at are poetic meters.
+   (B) Ahruf were regional currencies in early Islam, while Qira'at were court rulings in Kufah.
+   (C) Ahruf apply only to private recitation, while Qira'at are reserved for public Friday sermons.
+   (D) Ahruf were divine dialectal concessions granted during the Prophetic era, while Qira'at are codified mass-transmitted recitation systems based on the Uthmanic consonantal skeleton.
 
 4. Which canonical recitation methodology is historically dominant in North and West Africa within the Maliki scholarly heritage?
-   (A) Hafs 'an 'Asim.
-   (B) Warsh 'an Nafi' of Madinah.
-   (C) Hamzah 'an Zayyat.
-   (D) Al-Duri 'an Abi 'Amr.
+   (A) Hamzah 'an Zayyat of Kufah.
+   (B) Hafs 'an 'Asim of Kufah.
+   (C) Warsh 'an Nafi' of Madinah.
+   (D) Al-Duri 'an Abi 'Amr of Basrah.
 
-5. What are the four overarching civilizational trials (*Fitan*) addressed sequentially in Surah Al-Kahf?
-   (A) The trial of War, Famine, Disease, and Drought.
-   (B) The trial of Faith (Cave), Wealth (Two Gardens), Knowledge (Musa/Khidr), and Power (Dhul-Qarnayn).
-   (C) The trial of Trade, Navigation, Agriculture, and Architecture.
-   (D) The trial of Grammar, Philosophy, Mathematics, and Medicine.
+5. What four overarching civilizational trials (Fitan) are systematically addressed across the narratives of Surah Al-Kahf?
+   (A) The trials of War, Famine, Disease, and Natural Disasters.
+   (B) The trials of Faith (The Cave), Wealth (The Two Gardens), Knowledge (Musa and Al-Khidr), and Power (Dhul-Qarnayn).
+   (C) The trials of Agricultural Trade, Maritime Navigation, Urban Architecture, and Metallurgy.
+   (D) The trials of Lineage, Tribal Pride, Dialectal Speech, and Nomadic Migration.
 
-6. How does the narrative of Dhul-Qarnayn in Surah Al-Kahf present the ideal Islamic model of political power?
-   (A) Authoritarian military domination focused purely on wealth extraction.
-   (B) God-conscious authority dedicated to establishing justice, protecting the vulnerable, and attributing all success to divine mercy.
-   (C) Complete isolationism refusing to interact with neighboring civilizations.
-   (D) Surrendering political governance to hereditary royal families.
+6. How does the narrative of Dhul-Qarnayn in Surah Al-Kahf present the ideal Islamic model of political power and leadership?
+   (A) An isolationist dynasty that withdraws from international diplomacy.
+   (B) An imperial state dedicated solely to extracting material wealth from conquered regions.
+   (C) A regime that enforces religious conversion through military coercion.
+   (D) God-conscious authority committed to establishing justice, defending vulnerable populations, and attributing all success to divine grace.
 
-7. Why does the discovery of erased lower texts in ancient manuscripts (like the Sana'a palimpsest) fail to challenge the integrity of the Quran?
-   (A) Because early manuscripts were discarded in deep wells.
-   (B) Because Quranic transmission was fundamentally oral and communal; personal scribal notebooks with training exercises never superseded the living consensus (*Ijma'*) of the Huffaz.
-   (C) Because early Muslims did not know how to read ink writings.
-   (D) Because the Sana'a manuscripts were written by Christian monks in Yemen.
+7. Why does the presence of erased lower texts on ancient palimpsests (such as the Sana'a manuscript) fail to challenge the integrity of the Quranic text?
+   (A) Because Quranic transmission was fundamentally oral and communal; personal scribal training sheets never compromised the living mass consensus (Ijma') of certified memorizers.
+   (B) Because early manuscripts were never used by actual Muslim communities.
+   (C) Because palimpsests were exclusively produced by non-Muslim scribes outside Arabia.
+   (D) Because the lower texts were proven to be translations into ancient Syriac.
 
-8. Why did Caliph 'Uthman intentionally commission the Quranic text without short vowels and diacritical dots (*Nuqat*)?
-   (A) Ink was too expensive to afford dots on consonants.
-   (B) To allow the unadorned consonantal skeleton (*Rasm*) to accommodate the authentic variant readings (*Qira'at*) authorized by the Prophet ﷺ.
-   (C) Because Arabian scribes did not possess fine pens.
-   (D) To prevent non-Muslims from deciphering the text.
+8. Why did Caliph 'Uthman distribute master codices written with an unadorned consonantal skeleton (Rasm) without diacritical dots or short vowel markers?
+   (A) Because paper makers in Madinah lacked sufficient ink supplies.
+   (B) To prevent non-Arab converts from learning to recite the sacred text.
+   (C) To allow the unadorned consonantal text to accommodate the authentic, verified variant readings (Qira'at) authorized by the Prophet ﷺ.
+   (D) Because the Arabic alphabet had not yet developed consonants.
 
-9. In the story of the Owner of the Two Gardens in Surah Al-Kahf, what fatal intellectual error led to his downfall?
-   (A) He underpaid his agricultural laborers.
-   (B) He attributed his economic prosperity solely to his personal skill and doubted the reality of the Hereafter, divorcing wealth from the Giver.
-   (C) He planted poisonous grapes that destroyed neighboring vines.
-   (D) He failed to build defensive stone walls around his estate.
+9. In the story of the Owner of the Two Gardens in Surah Al-Kahf, what fatal intellectual error led to his spiritual ruin?
+   (A) Failing to construct adequate irrigation channels for his vineyards.
+   (B) Materialist arrogance and denying divine sovereignty, attributing his prosperity entirely to personal worth and doubting the Hereafter.
+   (C) Entering into unfair commercial contracts with travelers from Damascus.
+   (D) Refusing to pay local municipal property taxes.
 
-10. What did Imam al-Ghazali demonstrate regarding the relationship between the human intellect and divine revelation in *Al-Iqtisad fil-I'tiqad*?
-    (A) Intellect must be silenced completely once a person reaches adulthood.
-    (B) Sound intellect leads a person to recognize the rational necessity of Revelation, which then guides the intellect beyond the boundaries of empirical observation.
-    (C) Revelation only applies to personal worship, while intellect governs all theology.
-    (D) Reason and revelation are in permanent, irreconcilable warfare.
+10. In Maliki legal theory (Usul al-Fiqh), what unique evidentiary weight is granted to 'Amal Ahl al-Madinah (the practice of the people of Madinah)?
+    (A) It applies only to agricultural land leases in the Hijaz.
+    (B) It is considered secondary to isolated personal opinions of later scholars.
+    (C) It is restricted solely to the lineage of the Quraysh tribe.
+    (D) It is treated as an unbroken communal mass transmission (Tawatur) of the living Sunnah that can take precedence over solitary solitary hadiths (Ahad).
 
 ## Part B: Fill in the Blanks
 Vocabulary Bank: Warsh 'an Nafi', Al-Kalam al-Nafsi, Sana'a, Rasm, Dhul-Qarnayn
@@ -77,22 +77,22 @@ Vocabulary Bank: Warsh 'an Nafi', Al-Kalam al-Nafsi, Sana'a, Rasm, Dhul-Qarnayn
 * Dhul-Qarnayn ─── The Quranic model of righteous, God-conscious civilizational leadership
 
 ## Part D: Senior Seminar Case Study & Reflection
-1. Detail the theological implications of the Ash'ari distinction between *Kalam Nafsi* and *Lafz Munazzal*, explaining how it upholds Tawhid while affirming the reality of revelation.
-2. Analyze why the Western Islamic world (North and West Africa) historically preserved the recitation of *Warsh 'an Nafi'* alongside the Maliki legal madhhab.
+1. Detail the theological implications of the Ash'ari distinction between Kalam Nafsi and Lafz Munazzal, explaining how it upholds Tawhid while affirming the reality of revelation.
+2. Analyze why the Western Islamic world (North and West Africa) historically preserved the recitation of Warsh 'an Nafi' alongside the Maliki legal madhhab.
 3. How does Surah Al-Kahf systematically diagnose the four psychological traps of modern secular civilization (scientism, consumerism, intellectual pride, authoritarianism)?
 4. Formulate an evidence-based historical critique against the revisionist orientalist claim that the Quran underwent centuries of evolutionary editing.
 
 ## Answer Key & Marking Guide
 1. B - Kalam Nafsi is eternal and non-composite; Lafz Munazzal is the revealed Arabic manifestation.
-2. B - A created Quran implies transient, malleable ethics subject to human cultural whims.
-3. B - Ahruf were dialectal concessions; Qira'at are codified transmission systems based on the Uthmanic rasm.
-4. B - Warsh 'an Nafi' remains the historical standard across the Maghrib and West Africa.
+2. A - A created Quran implies transient, malleable ethics subject to human cultural whims.
+3. D - Ahruf were dialectal concessions; Qira'at are codified transmission systems based on the Uthmanic rasm.
+4. C - Warsh 'an Nafi' remains the historical standard across the Maghrib and West Africa.
 5. B - Faith, Wealth, Knowledge, and Power form the four interconnected trials of Surah Al-Kahf.
-6. B - Dhul-Qarnayn balances sovereign power with humble attribution of all grace to Allah.
-7. B - Communal oral transmission backed by mass consensus (*Tawatur*) rendered personal parchment drafts irrelevant to canonical stability.
-8. B - The unpointed skeletal ductus (*Rasm*) ingeniously accommodated the authentic variant vocalizations.
+6. D - Dhul-Qarnayn balances sovereign power with humble attribution of all grace to Allah.
+7. A - Communal oral transmission backed by mass consensus (Tawatur) rendered personal parchment drafts irrelevant to canonical stability.
+8. C - The unpointed skeletal ductus (Rasm) accommodated authentic variant vocalizations authorized by the Prophet ﷺ.
 9. B - Materialist entitlement and denial of divine sovereignty caused his spiritual ruin.
-10. B - Intellect serves as the rational gateway recognizing the authority of transcendent revelation.
+10. D - Communal practice of Madinah represents living mass transmission of the Sunnah.
 
 ### Fill in the Blanks Key
 1. Al-Kalam al-Nafsi - Internal eternal speech.

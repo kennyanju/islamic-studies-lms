@@ -1,11 +1,11 @@
 # Year 3 Syllabus: Systematic Practice & Understanding
 
-> **Target Learner**: Age 8–9  
+> **Target Learner**: Level 3 Track: Upper Elementary (Ages 10-12)  
 > **Weekly Schedule**: 4 sessions × 40 minutes = 160 min/week  
 > **Annual Instructional Volume**: 36 Weeks (3 Terms of 12 Weeks) = 96 hours  
 > **ICO Benchmarks Absorbed**: Grade 5 and Grade 6 (systematic taharah, Jumu'ah, Sawm, Hijrah, Caliphate)  
-> **Classical Text Spine**: *Ibn 'Ashir* (*Al-Murshid al-Mu'in* — Creed & Taharah sections), *Muqaddimah* of Ibn Abi Zayd's *Risalah*, and Nawawi's *40 Hadith* (Hadiths 11–20)  
-> **Riwayah**: Hafs 'an 'Asim (Completion of Juz' 'Amma: Surah Al-Inshiqaq to Surah An-Naba', introduction to Noon Sakinah rules)
+> **Classical Text Spine**: *Ibn 'Ashir* (*Al-Murshid al-Mu'in*: Creed & Taharah sections), *Muqaddimah* of Ibn Abi Zayd's *Risalah*, and Nawawi's *40 Hadith* (Hadiths 11–20)  
+> **Riwayah**: Hafs 'an 'Asim & Warsh 'an Nafi' (Completion of Juz' 'Amma: Surah Al-Inshiqaq to Surah An-Naba', introduction to Noon Sakinah rules)
 
 ---
 
@@ -17,15 +17,15 @@
 * **Classical Reference**: *Ibn 'Ashir* (Lines 11–25: *Hukm al-'Aql* and Necessary Attributes).
 * **Core Outcomes (Age 8–9)**:
   1. The child classifies statements into the three mental judgments (*Ahkam 'Aqliyyah*):
-     * **Wajib 'Aqli** (Rationally Necessary) — Something the mind cannot imagine not existing (e.g. Allah exists, is One, and has no beginning).
-     * **Mustahil 'Aqli** (Rationally Impossible) — Something the mind cannot imagine existing (e.g. Allah having a partner, child, or physical shape).
-     * **Ja'iz 'Aqli** (Rationally Possible) — Something that can either exist or not exist (e.g. creating the universe, rain falling, living or dying).
+     * **Wajib 'Aqli** (Rationally Necessary): Something the mind cannot imagine not existing (e.g. Allah exists, is One, and has no beginning).
+     * **Mustahil 'Aqli** (Rationally Impossible): Something the mind cannot imagine existing (e.g. Allah having a partner, child, or physical shape).
+     * **Ja'iz 'Aqli** (Rationally Possible): Something that can either exist or not exist (e.g. creating the universe, rain falling, living or dying).
   2. The child explains Divine Transcendence (**Tanzih**): Whatever pops into your imagination, Allah is completely unlike it (*Kullu ma khatara bi-balika fa-Allahu bi-khilafi dhalik*).
 * **Extension Outcomes (13+)**:
   1. Epistemological role of the intellect (*'Aql*) in Sunni theology: The mind recognizes the logical necessity of the Creator, while divine revelation (*Sama'*) establishes legal obligations and afterlife details.
   2. The Sanusi taxonomy of attributes: Distinction between the Personal Attribute (*Al-Wujud*), the Five Negating Attributes (*Salbiyyah*), and the Existential Attributes (*Ma'ani*).
 * **Ash'ari Creed Flag**: Rejection of *Tajsim* (attributing a physical body to Allah) and *Makan* (attributing a spatial location or physical direction to Allah). Allah existed before space and time, and He is now as He has always been.
-* **🌍 Other Scholars Say — Identification Box**:
+* **🌍 Other Scholars Say: Identification Box**:
   > *Topic: Who are the Sunni Schools of Creed?*
   > **All Sunnis agree**: Allah is One, eternal, all-powerful, without body or parts (*Laysa ka-mithlihi shay'*).
   > *Imam Abu al-Hasan al-Ash'ari* (Iraq) and *Imam Abu Mansur al-Maturidi* (Samarkand) systematized Sunni theology using logic to defend the Qur'an and Sunnah against deviants.
@@ -50,7 +50,7 @@
 * **Maliki Fiqh Flag**:
   * **Tarji' in Adhan**: The Mu'adhin recites the Shahadah twice quietly to himself, then proclaims it aloud twice with full voice, following the practice of Abu Mahdhura in Makkah and the people of Madinah.
   * **Basmalah in Prayer**: The Basmalah is omitted in fard prayers before Al-Fatihah and the following surah.
-* **🌍 Other Scholars Say — Identification Box**:
+* **🌍 Other Scholars Say: Identification Box**:
   > *Topic: Reciting the Basmalah in Al-Fatihah*
   > **All agree**: Al-Fatihah is the greatest chapter of the Qur'an and must be recited in prayer.
   >
@@ -103,7 +103,7 @@
 * **Extension Outcomes (13+)**:
   1. Textual analysis of the Arabic poem: *"Fara'idu al-wudū'i sab'atun tu'ad / Niyyatun bi-bad'ihi wa ghaslu wajhin qad..."*
   2. The legal theory behind *Dalk* (rubbing): Why Imam Malik held that mere immersion in water without friction is not called "washing" (*Ghasl*) in classical Arabic linguistic custom.
-* **🌍 Other Scholars Say — Identification Box**:
+* **🌍 Other Scholars Say: Identification Box**:
   > *Topic: The Obligatory Pillars of Wudu Across the Four Schools*
   > **All agree**: The Face, Arms, Head, and Feet must be purified (Surah Al-Ma'idah 5:6).
   >
@@ -169,7 +169,7 @@
 * **Extension Outcomes (13+)**:
   1. The combined situation: If a person both omitted a sunnah and added an extra action in the same prayer, the **Qabli** (subtraction) takes precedence over the Ba'di.
   2. The Maliki ruling on doubts (*Shakk*): Build upon what is certain (the minimum number of rak'ahs prayed), complete the prayer, and perform a **Ba'di** prostration after salam.
-* **🌍 Other Scholars Say — Identification Box**:
+* **🌍 Other Scholars Say: Identification Box**:
   > *Topic: When to perform Sujud as-Sahw?*
   >
   > | School | Rule for Sujud as-Sahw |
@@ -212,7 +212,7 @@
 * **Core Outcomes (Age 8–9)**:
   1. The child defines **Ikhlas** (Pure Sincerity): Doing every good action exclusively for the pleasure of Allah, not to be praised or noticed by people.
   2. The child identifies the poison of **Riya'** (Ostentation/Showing off): The minor shirk that burns the reward of good deeds like fire burns dry wood.
-  3. The child learns the danger of the tongue: Staying away from backbiting (*Ghibah* — speaking ill of someone behind their back even if true), slander (*Buhtan*), and lying.
+  3. The child learns the danger of the tongue: Staying away from backbiting (*Ghibah*, speaking ill of someone behind their back even if true), slander (*Buhtan*), and lying.
   4. The child completes the memorisation and reflection of **Surah An-Naba'**, marking the joyful completion of the entire 30th Juz' (Juz' 'Amma).
 * **Extension Outcomes (13+)**:
   1. Tazkiyah anatomy: The spiritual organs of the heart (*Qalb*), the lower self (*Nafs*), and spiritual vigilance (*Muraqabah*).
@@ -228,5 +228,5 @@
 * **Term Practicums**:
   * *Term 1*: "Mind Judgments" oral quiz + Adhan and Iqamah performance with Tarji'.
   * *Term 2*: Complete recitation of the 7 Fara'id of Wudu in Arabic and English from memory.
-  * *Term 3*: "The Salah Clinic" — executing Sujud as-Sahw (Qabli vs Ba'di) across 5 blind scenarios.
+  * *Term 3*: "The Salah Clinic": executing Sujud as-Sahw (Qabli vs Ba'di) across 5 blind scenarios.
 * **Annual Milestone**: Awarding the prestigious **"Juz' 'Amma & Ibn 'Ashir Foundation Certificate"**, celebrating the complete memorisation of the 30th Juz', the core foundations of Ash'ari creed, and Maliki worship literacy.

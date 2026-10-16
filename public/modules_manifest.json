@@ -1,5 +1,5 @@
 {
-  "compiledAt": "2026-10-12T06:14:52.658Z",
+  "compiledAt": "2026-10-16T06:42:04.042Z",
   "totalModules": 9,
   "modules": [
     {
@@ -48,7 +48,7 @@
           "questionCount": 10
         },
         "teacher": {
-          "slideCount": 22,
+          "slideCount": 23,
           "hasVoiceScript": true
         }
       }
@@ -99,7 +99,7 @@
           "questionCount": 10
         },
         "teacher": {
-          "slideCount": 21,
+          "slideCount": 22,
           "hasVoiceScript": true
         }
       }
@@ -109,7 +109,7 @@
       "title": "Seerah: Early Life of the Prophet ﷺ",
       "category": "Seerah (History)",
       "description": "Trace the noble lineage, birth, youth, marriage to Khadijah (RA), and early revelation of Prophet Muhammad ﷺ.",
-      "icon": "fa-book-quran",
+      "icon": "fa-feather-pointed",
       "estTime": "50 mins",
       "bloomLevel": "Analyzing & Synthesizing",
       "objectives": [
@@ -150,7 +150,7 @@
           "questionCount": 10
         },
         "teacher": {
-          "slideCount": 25,
+          "slideCount": 26,
           "hasVoiceScript": true
         }
       }
@@ -267,7 +267,7 @@
       "bloomLevel": "Analyzing & Reflecting",
       "objectives": [
         "Examine the strategic significance of the Hijrah and the brotherhood (Mu'akhah) established in Madinah.",
-        "Analyze the Constitution of Madinah as a foundational charter of pluralism and civic duty.",
+        "Analyze the Covenant of Madinah (Sahifat al-Madinah) and how it established mutual rights, security, and justice across Madinah's tribes and religious communities.",
         "Understand the defensive context of key historical encounters (Badr, Uhud, Al-Khandaq)."
       ],
       "malikiNotes": "Highlights the practice of the people of Madinah ('Amal Ahl al-Madinah') as a fundamental source of law in Maliki methodology.",
@@ -372,7 +372,7 @@
         "Evaluate spiritual diseases of the heart (pride, envy, ostentation) and their remedies.",
         "Implement strategies for conflict resolution and speech preservation in family life."
       ],
-      "malikiNotes": "Draws from Imam Malik's emphasis on Adab before knowledge, citing Al-Adab al-Mufrad and classical ethical treatises.",
+      "malikiNotes": "Draws from Imam Malik's teaching in Al-Muwatta' (Book of Good Character) that manners (Adab) precede knowledge, alongside Imam al-Bukhari's Al-Adab al-Mufrad.",
       "tracksSummary": {
         "level1": {
           "targetAge": "Ages 6–8 (Level 1: Foundations of Wonder & Practice)",

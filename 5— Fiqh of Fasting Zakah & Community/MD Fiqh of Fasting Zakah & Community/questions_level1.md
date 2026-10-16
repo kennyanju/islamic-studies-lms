@@ -1,70 +1,63 @@
 # Level 1 Activity Sheet: Fasting, Zakah & Community
-**Age Group:** Ages 6–8 (Level 1 Track)  
-**Focus:** Ramadan, Iftar, Sharing, and Eid  
 
----
+## Part A: Multiple Choice Questions
+1. In which special Islamic month do Muslims fast from dawn until sunset?
+   (A) Ramadan.
+   (B) Safar.
+   (C) Rabi' al-Awwal.
+   (D) Shawwal.
 
-## Part A: Multiple Choice
+2. What is the special meal called that we eat at sunset to break our fast?
+   (A) Suhur.
+   (B) Lunch.
+   (C) Walimah.
+   (D) Iftar.
 
-### 1. In which special month do Muslims fast from dawn until sunset?
-* A) Ramadan
-* B) Muharram
-* C) Safar
-* D) Rajab
+3. According to the Sunnah, what should a fasting Muslim eat first when breaking the fast at Maghrib?
+   (A) Fried pastries.
+   (B) Sweet dates and cool water.
+   (C) Salted meat.
+   (D) Lemon slices.
 
-### 2. What is the meal we eat at sunset to break our fast called?
-* A) Suhoor
-* B) Iftar
-* C) Lunch
-* D) Breakfast
+4. What is the joyful celebration called that marks the end of the month of Ramadan?
+   (A) Eid al-Adha.
+   (B) Day of 'Arafah.
+   (C) Eid al-Fitr.
+   (D) Laylat al-Qadr.
 
-### 3. What sweet fruit is the Sunnah to eat first when breaking the fast?
-* A) Dates
-* B) Apples
-* C) Lemons
-* D) Ice cream
-
-### 4. What is the celebration called at the end of Ramadan?
-* A) Eid al-Fitr
-* B) Eid al-Adha
-* C) New Year
-* D) Sports Day
-
-### 5. What does giving Zakah and charity do to our hearts and wealth?
-* A) Makes us poor
-* B) Purifies our hearts and brings blessings (*Barakah*)
-* C) Makes us angry
-* D) Has no effect
-
----
+5. What does giving Zakah and Sadaqah do for our hearts and our community?
+   (A) It purifies our hearts, helps families in need, and brings Allah's blessing (Barakah).
+   (B) It causes our wealth to disappear completely without any benefit.
+   (C) It is only meant for buying luxury gifts for ourselves.
+   (D) It makes people proud and distant from their neighbors.
 
 ## Part B: Fill in the Blanks
-*Word Bank: Ramadan, Dates, Iftar*
-
-6. The blessed month of fasting is called **_________________**.
-7. The sunset meal when we break our fast is called **_________________**.
-8. It is sunnah to break our fast with sweet **_________________** and water.
-
----
+Vocabulary Bank: Ramadan, Dates, Iftar
+1. The blessed ninth month of the Islamic lunar calendar is called ______.
+2. The sunset meal when Muslims break their fast is called ______.
+3. Following the Sunnah, it is recommended to break the fast with water and sweet ______.
 
 ## Part C: Matching Pairs
-Pair 1: Suhoor --- Pre-dawn meal eaten before fasting begins
-Pair 2: Iftar --- Meal eaten at sunset to break the fast
-Pair 3: Eid al-Fitr --- Joyful celebration marking the end of Ramadan
-
----
+* Suhur ─── The blessed pre-dawn meal eaten before fasting begins
+* Iftar ─── The meal eaten at sunset to break the fast
+* Eid al-Fitr ─── The joyful festival celebrating the completion of Ramadan
 
 ## Part D: Reflection
-9. What is your favorite treat to share with friends on Eid morning?
+1. Name two kind acts of Sadaqah you can do this week to bring a smile to your family or friends.
 
----
+## Answer Key & Marking Guide
+1. A - Ramadan is the ninth lunar month in which fasting is obligatory for adult believers.
+2. D - Iftar is the blessed meal eaten immediately when Maghrib enters.
+3. B - The Prophet ﷺ broke his fast with fresh or dried dates and water.
+4. C - Eid al-Fitr celebrates the completion of fasting and gratitude for the Quran.
+5. A - Charity purifies the soul, removes greed, and brings barakah to wealth.
 
-## Teacher Answer Key
-1. A) Ramadan.
-2. B) Iftar.
-3. A) Dates.
-4. A) Eid al-Fitr.
-5. B) Purifies hearts and brings barakah.
-6. Ramadan
-7. Iftar
-8. Dates
+### Fill in the Blanks Key
+1. Ramadan - The month of fasting.
+2. Iftar - The sunset meal.
+3. Dates - Sweet fruit recommended by the Sunnah.
+
+### Matching Key
+* Suhur connects with The blessed pre-dawn meal eaten before fasting begins.
+* Iftar connects with The meal eaten at sunset to break the fast.
+* Eid al-Fitr connects with The joyful festival celebrating the completion of Ramadan.

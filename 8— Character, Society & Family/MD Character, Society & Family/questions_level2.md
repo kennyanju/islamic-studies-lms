@@ -1,73 +1,72 @@
-# Level 2 Worksheet: Character, Society & Family
-**Age Group:** Ages 8–10 (Level 2 Track)  
-**Focus:** Birr al-Walidayn, Silat al-Rahim, Controlling Anger, and Tongue Stewardship  
+# Level 2 Quiz: Character, Society & Family
 
----
+## Part A: Multiple Choice Questions
+1. How many times did the Prophet Muhammad ﷺ repeat "Your mother" when asked who is most deserving of good companionship?
+   (A) One time.
+   (B) Two times.
+   (C) Five times.
+   (D) Three times.
 
-## Part A: Multiple Choice
+2. What does the term Birr al-Walidayn mean in Islamic ethics?
+   (A) Deep excellence, devotion, and loving honor shown to parents.
+   (B) Asking parents for financial allowance each week.
+   (C) Keeping family history records in a book.
+   (D) Moving far away to live independently without communication.
 
-### 1. How many times did the Prophet Muhammad ﷺ repeat "Your mother" when asked who deserves the best companionship?
-* A) 1 time
-* B) 2 times
-* C) 3 times
-* D) 5 times
+3. What golden counsel did the Prophet ﷺ repeatedly give to the man who asked him for advice?
+   (A) "Fast every single day without interruption."
+   (B) "Do not become angry" (La Taghdab).
+   (C) "Travel to every country in the world."
+   (D) "Remain awake all night every night."
 
-### 2. What does the term *Birr al-Walidayn* mean in Islamic ethics?
-* A) Deep excellence, devotion, and honor shown to parents
-* B) Arguing with parents
-* C) Moving far away
-* D) Writing names on a tree
+4. How did Prophet Muhammad ﷺ define Ghibah (backbiting) in Sahih Muslim?
+   (A) Greeting someone with words of peace in their presence.
+   (B) Reminding a friend to perform the noon prayer on time.
+   (C) Speaking about an absent person in a way they would dislike, even if it is true.
+   (D) Offering constructive advice to a classmate in private.
 
-### 3. What golden advice did the Prophet ﷺ repeat three times to the man who asked for counsel?
-* A) "Do not become angry" (*La Taghdab*)
-* B) "Sleep all day"
-* C) "Eat lots of sweets"
-* D) "Run as fast as you can"
-
-### 4. What is *Ghibah* (backbiting)?
-* A) Speaking about someone in their absence in a manner they would dislike
-* B) Greeting someone with Salam
-* C) Helping a neighbor carry groceries
-* D) Reciting Quran aloud
-
-### 5. What are the rewards promised for keeping close family ties (*Silat al-Rahim*)?
-* A) Allah increases blessings in wealth and grants a long, meaningful life
-* B) You get free video games
-* C) Nothing happens
-* D) It is only for adults
-
----
+5. What dual blessings did the Prophet ﷺ promise for those who faithfully maintain family kinship ties (Silat al-Rahim)?
+   (A) Gaining high scores on school examinations without studying.
+   (B) Never experiencing any sickness or difficulty in life.
+   (C) Becoming a political ruler of an empire.
+   (D) Expansion and blessing in provision, and a lengthened, blessed lifespan.
 
 ## Part B: Fill in the Blanks
-*Word Bank: Ghibah, Mother, Three, Silat al-Rahim*
+Vocabulary Bank: Ghibah, Mother, Three, Silat al-Rahim
+1. The Prophet ﷺ emphasized honoring the ______ three times before mentioning the father.
+2. Maintaining loving and supportive bonds with relatives is called ______.
+3. The Prophet ﷺ repeated his counsel against anger ______ times.
+4. Mentioning an absent person with what they dislike is known as ______.
 
-6. The Prophet ﷺ emphasized honoring the **_________________** three times before mentioning the father.
-7. Maintaining close bonds with relatives is called **_________________**.
-8. The Prophet ﷺ repeated his advice against anger **_________________** times.
-9. Talking badly about someone behind their back is known as **_________________**.
+## Part C: Matching Terms
+* Birr al-Walidayn ─── Supreme excellence and devotion to parents
+* Silat al-Rahim ─── Upholding loving ties of kinship with relatives
+* La Taghdab ─── Prophetic counsel: "Do not become angry"
+* Ghibah ─── Speaking about an absent person in a manner they dislike
 
----
+## Part D: Reflection & Application
+1. Think of a situation where someone feels angry. What are two Sunnah steps they can take immediately to calm down?
+2. Why is carrying gossip between people (Namimah) considered so destructive to friendships and community trust?
 
-## Part C: Matching Pairs
-Pair 1: Birr al-Walidayn --- Highest devotion and honor to parents
-Pair 2: Silat al-Rahim --- Upholding loving ties of kinship
-Pair 3: La Taghdab --- Prophetic injunction: "Do not become angry"
-Pair 4: Ghibah --- Backbiting and character assassination (forbidden)
+## Answer Key & Marking Guide
+1. D - The Prophet ﷺ repeated "Your mother" three times before saying "Then your father" (Sahih al-Bukhari 5971, Sahih Muslim 2548).
+2. A - Birr al-Walidayn is the Quranic obligation of showing supreme excellence and kindness to parents (Surah Al-Isra' 17:23).
+3. B - In Sahih al-Bukhari 6116, the Prophet ﷺ repeated three times: "Do not become angry."
+4. C - In Sahih Muslim 2589, the Prophet ﷺ defined backbiting as mentioning your brother with what he dislikes.
+5. D - Sahih al-Bukhari 2067 and Sahih Muslim 2557 state that maintaining ties of kinship expands provision and prolongs life.
 
----
+### Fill in the Blanks Key
+1. Mother - Honored three times.
+2. Silat al-Rahim - Kinship bonds.
+3. Three - Repeated counsel.
+4. Ghibah - Backbiting.
 
-## Part D: Reflection
-10. Think of a time when you were angry. What is a Sunnah step you can take next time (e.g. sitting down, making wudu, saying *A'udhu billah*)?
+### Matching Key
+* Birr al-Walidayn connects with Supreme excellence and devotion to parents.
+* Silat al-Rahim connects with Upholding loving ties of kinship with relatives.
+* La Taghdab connects with Prophetic counsel: "Do not become angry".
+* Ghibah connects with Speaking about an absent person in a manner they dislike.
 
----
-
-## Teacher Answer Key
-1. C) 3 times.
-2. A) Deep excellence and devotion to parents.
-3. A) "Do not become angry" (*La Taghdab*).
-4. A) Speaking about someone behind their back uncharitably.
-5. A) Increased barakah in life and provision.
-6. Mother
-7. Silat al-Rahim
-8. Three
-9. Ghibah
+### Reflection Marking Rubric
+- Question 1: Awards full points for identifying two Prophetic remedies: seeking refuge from Shaytan, remaining silent, sitting/lying down, or making wudu.
+- Question 2: Awards full points for explaining that Namimah destroys trust, breeds suspicion, causes hostility, and carries the warning that the tale-bearer will not enter Paradise.

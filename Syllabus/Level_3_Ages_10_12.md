@@ -4,8 +4,8 @@
 > **Target Learner**: Ages 10–12 (Pre-Adolescent / Years 5 & 6)  
 > **ICO Benchmarks Absorbed**: Grade 5 and Grade 6  
 > **Weekly Schedule**: 4 sessions × 40 minutes = 160 min/week (96 h/year)  
-> **Classical Text Spine**: *Ibn 'Ashir* (*Al-Murshid al-Mu'in* — Creed & Taharah), *Muqaddimat al-Risalah*, and Nawawi's *40 Hadith* (Hadiths 11–20)  
-> **Riwayah**: Hafs 'an 'Asim (Surahs 85 to 78, completing the entire 30th Juz' / Juz' 'Amma!)
+> **Classical Text Spine**: *Ibn 'Ashir* (*Al-Murshid al-Mu'in*: Creed & Taharah), *Muqaddimat al-Risalah*, and Nawawi's *40 Hadith* (Hadiths 11–20)  
+> **Riwayah**: Hafs 'an 'Asim & Warsh 'an Nafi' (Surahs 85 to 78, completing the entire 30th Juz' / Juz' 'Amma!)
 
 ---
 
@@ -43,7 +43,7 @@ At ages 10–12, children develop analytical thinking, logical categorization, a
 ---
 
 ## Hifz & Classical Matn Targets (Level 3)
-* **Qur'an (8 Long Surahs — Completing Juz' 30!)**: Al-Burooj, Al-Inshiqaq, Al-Mutaffifin, Al-Infitar, At-Takwir, 'Abasa, An-Nazi'at, An-Naba'.
+* **Qur'an (8 Long Surahs, Completing Juz' 30!)**: Al-Burooj, Al-Inshiqaq, Al-Mutaffifin, Al-Infitar, At-Takwir, 'Abasa, An-Nazi'at, An-Naba'.
 * **Tajweed**: Comprehensive rules of **Noon Sakinah & Tanween** (Izhar, Idgham with/without ghunnah, Iqlab, Ikhfa') and **Qalqalah** on the letters of *Qutbu Jaddin*.
 * **Classical Matn**: *Ibn 'Ashir* (Lines 11 to 35: Creed and the 7 Obligations of Wudu in Arabic).
 * **Hadith**: Imam an-Nawawi's *40 Hadith* (Hadiths 11 to 20).

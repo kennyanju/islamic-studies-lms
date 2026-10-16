@@ -3,7 +3,7 @@
   "info": {
     "title": "Islamic Studies Family LMS API",
     "version": "1.0.0",
-    "description": "Interactive REST API for Islamic Studies Family LMS — Maliki Fiqh, Ash'ari Creed, authentic Seerah, child progress tracking, parent dashboard, and Educator teleprompter tools.",
+    "description": "Interactive REST API for Islamic Studies Family LMS: Maliki Fiqh, Ash'ari Creed, authentic Seerah, child progress tracking, parent dashboard, and Educator teleprompter tools.",
     "contact": {
       "name": "Islamic Studies LMS Support",
       "email": "support@islamicstudies.org"

@@ -6,68 +6,76 @@
 
 ## Part A: Multiple Choice
 
-### 1. What must be mentioned at the time of slaughtering a halal animal?
-* A) The Name of Allah (Bismillah)
-* B) The weather forecast
-* C) A poem
-* D) Nothing
+### 1. What sacred Name must be mentioned when slaughtering an animal for Halal meat?
+(A) The Name of Allah (saying Bismillah)
+(B) The name of the buyer
+(C) The name of the farm
+(D) The name of the market
 
-### 2. Which type of gelatin is forbidden for a Muslim to consume?
-* A) Gelatin derived from pork
-* B) Plant-based agar-agar
-* C) Halal beef gelatin
-* D) Apple pectin
+### 2. Which type of gelatin or gelling agent is strictly forbidden (Haram) for a Muslim to consume in snacks?
+(A) Plant-derived agar-agar
+(B) Gelatin derived from pork or pig bones
+(C) Fruit-derived pectin
+(D) Certified Halal beef gelatin
 
-### 3. What is an animal called that died on its own without proper Islamic slaughter?
-* A) Maytah (Carrion) - which is Haram
-* B) Halal
-* C) Mustahabb
-* D) Makruh
+### 3. In the Maliki school of jurisprudence, what is the legal ruling regarding seafood such as shrimp, lobster, and crab?
+(A) Disliked (Makruh) to consume
+(B) Forbidden (Haram) unless caught with a net
+(C) Only permitted if slaughtered on the boat
+(D) Completely permissible (Halal) without needing ritual slaughter
 
-### 4. What is the Islamic rule regarding cheating in board games or video games?
-* A) Cheating and lying are forbidden in all games and activities
-* B) Cheating is allowed if you don't get caught
-* C) It is fine for children
-* D) Games don't have rules
+### 4. What did the Prophet Muhammad ﷺ say in Sahih Muslim when he discovered damp grain hidden under dry grain in the market?
+(A) "Sell it at half price"
+(B) "Separate the dry from the wet immediately"
+(C) "Whoever cheats or deceives us is not one of us"
+(D) "Ask the buyer if they mind damp grain"
 
-### 5. How should a young Muslim behave when chatting or messaging online?
-* A) Use polite, truthful language and never bully or tease others
-* B) Use fake names to insult people
-* C) Share private photos of friends
-* D) Spend all day playing games
+### 5. In Maliki fiqh, if a Muslim forgets to say Bismillah when slaughtering an animal, what is the status of the meat?
+(A) Halal and lawful to eat, because unintentional forgetfulness does not invalidate the slaughter
+(B) Strictly Haram and treated as carrion
+(C) Disliked to eat unless cooked with vinegar
+(D) Permissible only for feeding domestic pets
 
 ---
 
 ## Part B: Fill in the Blanks
-*Word Bank: Bismillah, Maytah, Pork, Right*
+Vocabulary Bank: Bismillah, Maytah, Pork, Right
 
-6. Meat from an animal that died of illness without slaughter is called **_________________**.
-7. Gelatin derived from **_________________** is strictly forbidden.
-8. At the time of humane slaughter, the butcher says **_________________**.
-9. When eating, a Muslim uses their **_________________** hand.
+6. Meat from an animal that died of illness without slaughter is called ______.
+7. Gelatin derived from ______ is strictly forbidden.
+8. At the time of humane slaughter, the slaughterer says ______.
+9. When eating, a Muslim uses their ______ hand.
 
 ---
 
 ## Part C: Matching Pairs
-Pair 1: Dhabihah --- Humane Islamic ritual slaughter in Allah's Name
-Pair 2: Maytah --- Carrion / unslaughtered dead animal (forbidden)
-Pair 3: Halal --- Permissible and wholesome under Islamic law
-Pair 4: Digital Adab --- Practicing honesty, modesty, and kindness online
+* Dhabihah ─── Humane ritual slaughter in Allah's Name
+* Maytah ─── Carrion or unslaughtered dead animal
+* Halal ─── Permissible and wholesome under Islamic law
+* Digital Adab ─── Practicing honesty, modesty, and kindness online
 
 ---
 
 ## Part D: Reflection
-10. Why did Allah command us to ensure that slaughter knives are extremely sharp? What does this teach us about animal welfare in Islam?
+10. Why did the Prophet ﷺ command that slaughtering blades be sharpened away from the animal's sight? What does this teach us about mercy toward animals in Islam?
 
 ---
 
-## Teacher Answer Key
-1. A) Bismillah.
-2. A) Pork gelatin is haram.
-3. A) Maytah (Carrion).
-4. A) Cheating and dishonesty are forbidden everywhere.
-5. A) Polite, truthful language online.
+## Answer Key
+1. A - The Name of Allah must be invoked at slaughter (Bismillah).
+2. B - Pork and its derivatives are explicitly prohibited.
+3. D - In the Maliki school, all seafood is Halal per Muwatta Malik 43.
+4. C - The Prophet ﷺ declared: "Man ghashshana fa laysa minna" (Sahih Muslim 102).
+5. A - In Maliki fiqh, unintentional omission of Bismillah leaves the meat Halal (*Al-Risalah*).
+
+### Fill in the Blanks Key
 6. Maytah
 7. Pork
 8. Bismillah
 9. Right
+
+### Matching Key
+* Dhabihah ─── Humane ritual slaughter in Allah's Name
+* Maytah ─── Carrion or unslaughtered dead animal
+* Halal ─── Permissible and wholesome under Islamic law
+* Digital Adab ─── Practicing honesty, modesty, and kindness online

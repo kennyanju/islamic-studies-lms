@@ -1,73 +1,72 @@
-# Level 2 Worksheet: Seerah, History & Living Faith
-**Age Group:** Ages 8–10 (Level 2 Track)  
-**Focus:** Fath Makkah, The Four Caliphs, and Imam Malik  
+# Level 2 Quiz: Seerah, History & Living Faith Today
 
----
+## Part A: Multiple Choice Questions
+1. How did Prophet Muhammad ﷺ treat his former enemies when he entered Makkah during the Conquest (Fath Makkah)?
+   (A) He ordered that they be exiled to distant lands.
+   (B) He forgave them with magnanimity, declaring them completely free.
+   (C) He demanded that they pay heavy financial reparations immediately.
+   (D) He confiscated all their personal belongings and homes.
 
-## Part A: Multiple Choice
+2. Who was the first Rightly Guided Caliph chosen to lead the Ummah after the Prophet's ﷺ passing?
+   (A) Sayyidina 'Ali ibn Abi Talib (RA).
+   (B) Sayyidina 'Umar ibn al-Khattab (RA).
+   (C) Sayyidina 'Uthman ibn 'Affan (RA).
+   (D) Sayyidina Abu Bakr al-Siddiq (RA).
 
-### 1. How did Prophet Muhammad ﷺ treat his former enemies when he liberated Makkah (Fath Makkah)?
-* A) He punished all of them
-* B) He forgave them with magnanimity and declared them all free
-* C) He exiled them to Rome
-* D) He locked them in towers
+3. Which Rightly Guided Caliph standardized the authoritative written copies of the Holy Quran distributed to major Islamic centers?
+   (A) Sayyidina 'Ali ibn Abi Talib (RA).
+   (B) Sayyidina Abu Bakr al-Siddiq (RA).
+   (C) Sayyidina 'Uthman ibn 'Affan (RA).
+   (D) Sayyidina 'Umar ibn al-Khattab (RA).
 
-### 2. Who was the first Rightly Guided Caliph after the Prophet's ﷺ passing?
-* A) Sayyiduna Abu Bakr as-Siddiq (RA)
-* B) Sayyiduna 'Umar (RA)
-* C) Sayyiduna 'Uthman (RA)
-* D) Sayyiduna 'Ali (RA)
+4. What is the title of the landmark early legal and Hadith compendium authored by Imam Malik ibn Anas in Madinah?
+   (A) Al-Muwatta' (The Well-Trodden Path).
+   (B) Sahih al-Bukhari.
+   (C) Al-Majmu' Sharh al-Muhadhdhab.
+   (D) Sunan al-Tirmidhi.
 
-### 3. Which Caliph standardized the official written copies of the Quran sent to all major cities?
-* A) Sayyiduna 'Uthman ibn 'Affan (RA)
-* B) Abu Bakr (RA)
-* C) 'Umar (RA)
-* D) 'Ali (RA)
-
-### 4. What was the name of the famous book authored by Imam Malik compiling the hadiths and practice of Madinah?
-* A) Al-Muwatta'
-* B) The Atlas
-* C) The History Book
-* D) The Math Book
-
-### 5. In which historical regions did the Maliki school of law become the predominant heritage?
-* A) North Africa, West Africa, and Andalusia (Spain)
-* B) South America only
-* C) The North Pole
-* D) China only
-
----
+5. In which geographic regions did the Maliki school of jurisprudence (Madhhab) historically become the predominant tradition?
+   (A) Eastern Europe and Central Asia only.
+   (B) North Africa, West Africa, and Muslim Spain (Al-Andalus).
+   (C) Southeast Asia and coastal China only.
+   (D) Northern Anatolia and the Caucasus mountains.
 
 ## Part B: Fill in the Blanks
-*Word Bank: Muwatta, Uthman, Abu Bakr, Forgave*
+Vocabulary Bank: Muwatta, Uthman, Abu Bakr, Forgave
+1. The first Caliph of Islam was Sayyidina ______ al-Siddiq.
+2. Upon peacefully entering Makkah, the Prophet ﷺ graciously ______ all former enemies.
+3. The official standardized copies of the Quran were compiled under Caliph ______.
+4. The celebrated hadith and fiqh text compiled by Imam Malik in Madinah is ______.
 
-6. The first Caliph of Islam was **_________________** as-Siddiq.
-7. Upon entering Makkah, the Prophet ﷺ graciously **_________________** all who had opposed him.
-8. The official master codices of the Quran were standardized under Caliph **_________________**.
-9. The celebrated hadith book written by Imam Malik is **_________________**.
+## Part C: Matching Terms
+* Abu Bakr al-Siddiq ─── The First Caliph who preserved the unity of the Ummah
+* 'Umar ibn al-Khattab ─── Known as Al-Faruq and established the Islamic Hijri calendar
+* 'Uthman ibn 'Affan ─── Standardized and distributed the Uthmanic codex of the Quran
+* 'Ali ibn Abi Talib ─── The Fourth Caliph renowned for courage, eloquence, and judicial wisdom
 
----
+## Part D: Reflection & Application
+1. How does the Prophet's ﷺ general pardon during the Conquest of Makkah teach us how to handle disputes with classmates or siblings?
+2. Why is studying the historical spread of the Maliki school in North and West Africa important for understanding Muslim cultural heritage?
 
-## Part C: Matching Pairs
-Pair 1: Abu Bakr as-Siddiq --- The First Caliph who united the Ummah
-Pair 2: 'Umar ibn al-Khattab --- Known as Al-Faruq (the distinguisher between truth and falsehood)
-Pair 3: 'Uthman ibn 'Affan --- Standardized the Uthmanic codex of the Quran
-Pair 4: 'Ali ibn Abi Talib --- Gate of knowledge and fourth Caliph
+## Answer Key & Marking Guide
+1. B - The Prophet ﷺ granted a general pardon to the Quraysh, saying: "Go, for you are completely free" (Ibn Hisham).
+2. D - Sayyidina Abu Bakr al-Siddiq was selected as the first Caliph of the Muslim community (11-13 AH).
+3. C - Sayyidina 'Uthman ibn 'Affan standardized the master codices (Al-Mushaf al-Imam) in 25 AH.
+4. A - Imam Malik authored Al-Muwatta', which unites authentic Hadith with the living practice of Madinah.
+5. B - The Maliki Madhhab spread widely throughout North Africa, West Africa, and Al-Andalus (Muslim Spain).
 
----
+### Fill in the Blanks Key
+1. Abu Bakr - First Caliph.
+2. Forgave - General pardon.
+3. Uthman - Standardized codex.
+4. Muwatta - Maliki foundational text.
 
-## Part D: Reflection
-10. How does the Prophet's ﷺ forgiveness during the Conquest of Makkah teach us how to handle conflicts with classmates or siblings?
+### Matching Key
+* Abu Bakr al-Siddiq connects with The First Caliph who preserved the unity of the Ummah.
+* 'Umar ibn al-Khattab connects with Known as Al-Faruq and established the Islamic Hijri calendar.
+* 'Uthman ibn 'Affan connects with Standardized and distributed the Uthmanic codex of the Quran.
+* 'Ali ibn Abi Talib connects with The Fourth Caliph renowned for courage, eloquence, and judicial wisdom.
 
----
-
-## Teacher Answer Key
-1. B) Forgave them with sublime mercy.
-2. A) Abu Bakr as-Siddiq.
-3. A) 'Uthman ibn 'Affan.
-4. A) Al-Muwatta'.
-5. A) North Africa, West Africa, Andalusia.
-6. Abu Bakr
-7. Forgave
-8. Uthman
-9. Muwatta
+### Reflection Marking Rubric
+- Question 1: Awards full points for explaining that genuine strength lies in forgiving others when you have the power to seek revenge, replacing grudges with peace.
+- Question 2: Awards full points for identifying that the Maliki school created an enduring, unified legal and spiritual tradition across African and Andalusian history.

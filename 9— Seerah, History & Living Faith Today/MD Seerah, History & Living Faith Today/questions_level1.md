@@ -1,70 +1,68 @@
-# Level 1 Activity Sheet: Seerah, History & Living Faith
-**Age Group:** Ages 6–8 (Level 1 Track)  
-**Focus:** The Farewell Message, Equality, and Global Ummah  
+# Level 1 Quiz: Seerah, History & Living Faith Today
 
----
+## Part A: Multiple Choice Questions
+1. In the Farewell Sermon, what did the Prophet Muhammad ﷺ teach is the only true measure of honor in the sight of Allah?
+   (A) Taqwa (reverence of Allah, clean heart, and righteous deeds).
+   (B) A person's tribal lineage and noble ancestry.
+   (C) The amount of gold and silver coins accumulated.
+   (D) Living in a prestigious city with grand buildings.
 
-## Part A: Multiple Choice
+2. Approximately how many Muslims live across the globe today as members of the worldwide Ummah?
+   (A) Fifty million people.
+   (B) Over two billion people.
+   (C) Five hundred thousand people.
+   (D) Ten million people.
 
-### 1. In the Farewell Sermon, what did the Prophet ﷺ say makes one person better than another?
-* A) Their skin color
-* B) How much money they have
-* C) Faith and good character in the heart (Taqwa)
-* D) How fast they run
+3. Toward which sacred city and blessed house do Muslims around the world turn when praying five times daily?
+   (A) Jerusalem and the Aqsa Mosque.
+   (B) Damascus and the Umayyad Mosque.
+   (C) Cairo and Al-Azhar Mosque.
+   (D) Makkah and the Holy Ka'bah.
 
-### 2. How many Muslims are there in our global family (the Ummah) around the world today?
-* A) 10 people
-* B) About 2 billion people!
-* C) Only 100 people
-* D) None
+4. What is the historical name of the final pilgrimage performed by Prophet Muhammad ﷺ in the 10th year of Hijrah?
+   (A) The Treaty Pilgrimage.
+   (B) The Early Spring Umrah.
+   (C) Hajjat al-Wada' (The Farewell Pilgrimage).
+   (D) The Pilgrimage of Hudaybiyyah.
 
-### 3. Which holy city do all Muslims around the globe face when they pray?
-* A) Makkah
-* B) New York
-* C) Tokyo
-* D) Paris
-
-### 4. What was the name of the final pilgrimage performed by Prophet Muhammad ﷺ?
-* A) Hajjat al-Wada' (The Farewell Hajj)
-* B) The Winter Hajj
-* C) The First Hajj
-* D) The Fast Hajj
-
-### 5. How can we shine brightly as young Muslims today?
-* A) By being kind, telling the truth, and loving Allah
-* B) By hiding in our room
-* C) By not sharing our toys
-* D) By arguing with teachers
-
----
+5. How can young Muslims best represent the character of Prophet Muhammad ﷺ in their daily lives?
+   (A) By practicing honesty, showing kindness to others, and fulfilling daily prayers.
+   (B) By seeking praise on social media and showing off awards.
+   (C) By isolating themselves and never speaking to classmates.
+   (D) By arguing loudly whenever someone disagrees with them.
 
 ## Part B: Fill in the Blanks
-*Word Bank: Makkah, Equal, Ummah*
+Vocabulary Bank: Makkah, Equal, Ummah
+1. In Islam, all human beings are ______ in origin and dignity like the teeth of a comb.
+2. The worldwide community of Muslim believers is known as the ______.
+3. All Muslims face toward the Holy Ka'bah located in the blessed city of ______.
 
-6. In Islam, all people are **_________________** like the teeth of a comb.
-7. The worldwide family of Muslims is called the **_________________**.
-8. All Muslims face the Holy Ka'bah in the city of **_________________**.
+## Part C: Matching Terms
+* Farewell Sermon ─── Proclaimed universal human equality and brotherhood
+* The Ummah ─── The worldwide community of believers united in faith
+* Taqwa ─── Inner God-consciousness and doing righteous deeds for Allah
 
----
+## Part D: Reflection & Application
+1. How does the Prophet's teaching that "all humans are equal like the teeth of a comb" help us stop teasing or excluding others at school?
+2. Mention two simple good deeds you can perform this week to show mercy to someone around you.
 
-## Part C: Matching Pairs
-Pair 1: Farewell Sermon --- Declared universal human equality and kindness
-Pair 2: The Ummah --- Our worldwide family of believers
-Pair 3: Taqwa --- Good character and reverence in the heart
+## Answer Key & Marking Guide
+1. A - The Prophet ﷺ taught that Taqwa is the sole criterion of distinction before Allah (Musnad Ahmad 23489).
+2. B - Today, the global Muslim Ummah comprises over two billion believers worldwide.
+3. D - Muslims everywhere pray facing toward the Holy Ka'bah in Makkah.
+4. C - The final pilgrimage in 10 AH is known as Hajjat al-Wada' (The Farewell Pilgrimage).
+5. A - Young Muslims reflect the Prophet's sunnah through truthfulness, kindness, and devotion to worship.
 
----
+### Fill in the Blanks Key
+1. Equal - Equality in origin.
+2. Ummah - Global community.
+3. Makkah - Sacred direction (Qiblah).
 
-## Part D: Reflection
-9. Draw a picture of the earth with a big heart, showing love for all Muslims around the world!
+### Matching Key
+* Farewell Sermon connects with Proclaimed universal human equality and brotherhood.
+* The Ummah connects with The worldwide community of believers united in faith.
+* Taqwa connects with Inner God-consciousness and doing righteous deeds for Allah.
 
----
-
-## Teacher Answer Key
-1. C) Faith and good deeds (Taqwa).
-2. B) Nearly 2 billion people.
-3. A) Makkah.
-4. A) Hajjat al-Wada'.
-5. A) Kindness, truthfulness, and faith.
-6. Equal
-7. Ummah
-8. Makkah
+### Reflection Marking Rubric
+- Question 1: Awards full points for explaining that since Allah created everyone from Adam and Eve, racism, bullying, and prejudice are completely forbidden in Islam.
+- Question 2: Awards full points for naming two specific, realistic acts of mercy (helping a sibling, sharing food, smiling, comforting a sad classmate).

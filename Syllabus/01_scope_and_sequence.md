@@ -1,4 +1,4 @@
-# 01 — Scope and Sequence: 5-Level Curriculum (Ages 6 to 16+)
+# 01: Scope and Sequence: 5-Level Curriculum (Ages 6 to 16+)
 
 > **Overview**: A comprehensive, developmentally staged pedagogical master plan benchmarked against all 12 grades of the International Curricula Organization (ICO) Islamic Studies series. Spans from **Age 6 all the way to Age 16+**, structured into **5 Progressive Levels** that match the 5 learner tracks in the LMS app. Specially adapted for the **Ash'ari creed**, **Maliki madhhab**, and **Junaydi tazkiyah**, with systematic integration of the cross-cutting **"Other Scholars Say"** comparative framework.
 
@@ -82,17 +82,17 @@ Each of the 5 Levels is anchored in classical didactic texts of the Western Isla
    * *Level 4*: Modesty (*Haya'*), lowering the gaze, Islamic brotherhood, social justice, standing for truth.
    * *Level 5*: Junaydi Tazkiyah (*Ibn 'Ashir*): Curing heart diseases (envy, arrogance, vanity, love of praise), sincere repentance (*Tawbah*), environmental stewardship (*Khilafah*), digital ethics, and civic leadership.
 7. **Adab al-Ikhtilaf (Comparative Sunni Appreciation)**:
-   * *Level 1*: **Awareness & Love** — Muslims pray in slightly different ways; all follow the Sunnah. Stories of the 4 Imams' friendship.
-   * *Level 2*: **Recognition** — The 4 Imams by name and city; raising hands; saying Amin.
-   * *Level 3*: **Identification** — 4-school comparative tables for wudu, prayer, and fasting; Ash'ari & Maturidi creed harmony.
-   * *Level 4*: **Reasons** — *Why* scholars differ (hadith reach, linguistic meaning, *'Amal Ahl al-Madinah*, qiyas); Athari approach to attributes (*Tafwid*).
-   * *Level 5*: **Evidence & Analysis** — *Bidayat al-Mujtahid* case studies, taqlid, talfiq, contemporary fatwa councils, historical sects, and confident living in the modern world.
+   * *Level 1*: **Awareness & Love**: Muslims pray in slightly different ways; all follow the Sunnah. Stories of the 4 Imams' friendship.
+   * *Level 2*: **Recognition**: The 4 Imams by name and city; raising hands; saying Amin.
+   * *Level 3*: **Identification**: 4-school comparative tables for wudu, prayer, and fasting; Ash'ari & Maturidi creed harmony.
+   * *Level 4*: **Reasons**: *Why* scholars differ (hadith reach, linguistic meaning, *'Amal Ahl al-Madinah*, qiyas); Athari approach to attributes (*Tafwid*).
+   * *Level 5*: **Evidence & Analysis**: *Bidayat al-Mujtahid* case studies, taqlid, talfiq, contemporary fatwa councils, historical sects, and confident living in the modern world.
 
 ---
 
 ## 4. App Level Integration
 
-In the Islamic Studies LMS application, the student and parent interface provides seamless switching between these **5 Levels**:
+In the Islamic Studies LMS application, the student and parent interface provides direct switching between these **5 Levels**:
 * **Level 1 (Ages 6–8)**: Playful comic cards, tactile emoji mascots, audio-guided wudu/salah drills.
 * **Level 2 (Ages 8–10)**: Illustrated story handouts, gamified quizzes, habit tracker badges.
 * **Level 3 (Ages 10–12)**: Classical matn lines in Arabic, comparative tables, "Fiqh Clinic" dilemma quizzes.

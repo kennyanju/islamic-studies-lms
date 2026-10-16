@@ -1,115 +1,119 @@
-# Level 3 Quiz: Foundations of Belief
+# Module 1: Foundations of Belief (Level 3 Assessment)
 
 ## Part A: Multiple Choice Questions
-1. How does classical Islamic logic define a "Rationally Necessary" (Al-Wajib al-'Aqli) judgment?
-   (A) Something that can be conceived as existing or not existing equally.
-   (B) Something that the intellect cannot possibly conceive of as nonexistent.
-   (C) A scientific experiment that has been verified in a modern laboratory.
-   (D) A legal rule that requires a fine if violated.
+*Select the single best answer for each question.*
 
-2. Which of the following is an example of "Al-Mustahil al-'Aqli" (The Rationally Impossible)?
-   (A) Humans building a colony on Mars in the year 2050.
-   (B) A triangle possessing four equal interior right angles.
-   (C) Rain falling on a sunny afternoon in the Sahara desert.
-   (D) A bird learning how to mimic human speech.
+**1. How does classical Islamic theology define a "Rationally Necessary" (Al-Wajib al-'Aqli) judgment?**
+(A) That which the sound intellect cannot possibly conceive of as nonexistent
+(B) A legal obligation that carries a financial penalty if omitted
+(C) A worldly occurrence that can exist or not exist equally
+(D) An empirical claim that requires laboratory testing to confirm
 
-3. What is the fundamental meaning of the theological term "Tanzih" (تَنْزِيه)?
-   (A) Memorizing the Quran in twenty different vocal melodies.
-   (B) Exalting Allah above any resemblance to created things, bodily limits, or defects.
-   (C) Translating Arabic legal texts into contemporary English without notes.
-   (D) Calculating the exact percentage of Zakah owed on agricultural crops.
+**2. Which of the following is an example of "Al-Mustahil al-'Aqli" (The Rationally Impossible)?**
+(A) Heavy rain falling in a dry desert during winter
+(B) A traveler reaching a distant destination in a single hour
+(C) A geometric shape being simultaneously a perfect square and a perfect circle at the same time
+(D) An ancient tree living for over a thousand years
 
-4. Which famous maxim was articulated by Imam Zu al-Nun al-Misri and affirmed by Imam Ahmad?
-   (A) "Knowledge is only acquired through prolonged physical isolation."
-   (B) "Whatever you imagine in your mind, Allah is not like that."
-   (C) "All four legal schools must combine their prayers at all times."
-   (D) "The human mind cannot understand any grammar without philosophy."
+**3. What is the fundamental meaning of the theological term "Tanzih" (تَنْزِيه) in Sunni Creed?**
+(A) Reciting religious poetry before commencing ritual worship
+(B) Exalting Allah above any resemblance to created things, bodily limits, parts, or defects
+(C) Delaying the morning prayer until full sunrise
+(D) Studying astronomical charts to determine prayer directions
 
-5. In classical Arabic eloquence, how did Ash'ari theologians understand terms like "Yad" when applied to Allah?
-   (A) As a physical organ consisting of flesh, bone, and joints.
-   (B) As denoting Divine Power, Favor, Dominion, and Protection.
-   (C) As an imaginary fable with no theological relevance.
-   (D) As a reference to the physical angels carrying the clouds.
+**4. Which foundational maxim of creed was articulated by Imam Dhu al-Nun al-Misri and affirmed by Imam Ahmad ibn Hanbal?**
+(A) "Knowledge is valid only when practiced in complete physical isolation."
+(B) "Religious rulings must change whenever circumstances become inconvenient."
+(C) "Human reason has no place in contemplating the signs of the Creator."
+(D) "Whatever comes to your mind or imagination, Allah is completely different from that."
 
-6. What does the attribute "Mukhalafah lil-Hawadith" mean in Sunni Creed?
-   (A) Allah is completely and utterly different from all created beings and events.
-   (B) Allah changes His intentions when humans make heartfelt supplications.
-   (C) Allah occupies the physical space inside the seven planetary skies.
-   (D) Creation has existed alongside Allah from all eternity without a beginning.
+**5. How did classical Sunni scholars understand apparent textual descriptions like "Yad" when applied to Allah?**
+(A) As denoting divine power, generosity, or majesty, while strictly denying any physical limb, bodily shape, or created organ
+(B) As a physical hand composed of light and physical dimensions
+(C) As an imaginary metaphor that carries no divine reality
+(D) As referring exclusively to the physical wings of the archangels
 
-7. In the didactic matn of Imam Ibn 'Ashir, which divine qualities are listed alongside Existence (Al-Wujud)?
-   (A) Exhaustion, slumber, and seasonal physical movement.
-   (B) Beginninglessness (Al-Qidam), Endlessness (Al-Baqa'), and Absolute Self-Sufficiency.
-   (C) Physical form, geographical location, and containment within time.
-   (D) Dependency on angelic praise in order to sustain planetary orbits.
+**6. What does the divine attribute "Mukhalafah lil-Hawadith" establish in Islamic belief?**
+(A) Allah changes His eternal intentions based upon worldly events
+(B) Physical creation has existed from all eternity without a beginning
+(C) Allah does not resemble created beings in His Essence, Attributes, or Actions
+(D) All created beings share divine powers of origination
 
-8. What is the status of affirming that Allah created space and time and is not contained by them?
-   (A) A minor difference of opinion between the four Sunni legal schools.
-   (B) The consensus (Ijma') of mainstream Sunni theology across the Ash'ari, Maturidi, and Athari scholars.
-   (C) An idea borrowed from European medieval philosophy in the 18th century.
-   (D) A concept restricted only to advanced Sufi hermits.
+**7. In the didactic matn of Imam Ibn 'Ashir, which divine qualities are listed alongside Existence (Al-Wujud)?**
+(A) Physical boundaries, containment, and temporal movement
+(B) Slumber, fatigue, and reliance upon angels to sustain the cosmos
+(C) Dependency upon creation for nourishment and worship
+(D) Beginninglessness (Al-Qidam), Endlessness (Al-Baqa'), and Absolute Independence (Al-Ghina al-Mutlaq)
 
-9. How does belief in the Kiraman Katibin (Noble Recording Angels) influence daily life?
-   (A) It encourages constant awareness of speech and deeds, fostering moral integrity.
-   (B) It teaches believers to avoid looking at mirrors or taking photographs.
-   (C) It replaces the obligation of performing daily ritual prayers.
-   (D) It makes students afraid of writing down notes during school examinations.
+**8. What is the consensus (Ijma') of mainstream Sunni theology across the Ash'ari, Maturidi, and Athari scholars regarding space and time?**
+(A) Allah is physically bounded inside the created celestial spheres
+(B) Allah created both space and time and exists without physical location, bodily boundaries, or temporal change
+(C) Space and time are uncreated entities that co-existed with Allah from eternity
+(D) The Sunni schools differ on whether Allah possesses physical organs and limbs
 
-10. What is the correct Sunni response to the question: "Why did Allah create the universe?"
-    (A) Allah was lonely and required companions to keep Him company.
-    (B) He was compelled by cosmic laws to bring creatures into existence.
-    (C) He created the cosmos out of pure Will, Grace, and Wisdom, needing nothing from it.
-    (D) The universe originated through accidental chemical collisions without divine intent.
+**9. How does conscious belief in the recording angels (Al-Kiram al-Katibin) shape a Muslim's daily conduct?**
+(A) It inspires constant mindfulness, truthfulness, and moral integrity in private and public
+(B) It removes the requirement to perform voluntary good deeds
+(C) It encourages believers to withdraw from society and avoid speaking to peers
+(D) It guarantees automatic salvation without personal moral effort
+
+**10. What is the authentic Sunni response to the question: "Why did Allah create the universe?"**
+(A) Allah was lonely and required created companions to glorify Him
+(B) Cosmic physical forces compelled Allah to bring creatures into existence
+(C) Allah created the cosmos out of pure Divine Will, Grace, and Wisdom, needing nothing from creation
+(D) The universe originated through accidental mechanical collisions without divine knowledge or intent
+
+---
 
 ## Part B: Fill in the Blanks
-Vocabulary Bank: Tanzih, Al-Ja'iz, Al-Wajib, Mukhalafah, Al-Mustahil
-1. A statement whose nonexistence cannot be conceived by pure reason is called ______.
-2. Believing that Allah has a physical son or partner is an example of ______ in rational creed.
-3. Whether an individual is born tall or short, or whether an empire rises or falls, belongs to the realm of ______.
-4. The theological discipline of exalting Allah above physical dimensions and human imperfections is known as ______.
-5. The divine attribute stating that Allah has absolute incomparability to created things is called ______ lil-Hawadith.
+Vocabulary Bank: Al-Wajib, Al-Mustahil, Al-Ja'iz, Tanzih, Mukhalafah
 
-## Part C: Matching Terms
+1. A judgment whose nonexistence cannot be conceived by the sound intellect is called __________.
+2. Conceiving of a physical son or partner for the eternal Creator is an example of __________ in rational creed.
+3. Whether rain falls today or whether an individual is born tall or short belongs to the realm of __________.
+4. Exalting Allah above physical dimensions, locations, and human limitations is known as __________.
+5. The divine attribute stating that Allah has absolute incomparability to created things is called __________ lil-Hawadith.
+
+---
+
+## Part C: Concept Matching
+*Match each theological concept on the left with its correct definition on the right.*
+
 * Al-Wajib al-'Aqli ─── Rationally necessary truth that cannot be conceived as false
 * Al-Mustahil al-'Aqli ─── Rationally impossible concept containing internal contradiction
 * Al-Ja'iz al-'Aqli ─── Rationally possible reality that may exist or not exist
 * Tanzih ─── Exalting the Creator above all physical limits and anthropomorphic forms
 * Mukhalafah lil-Hawadith ─── The divine attribute of absolute difference from created things
 
-## Part D: Reflection & Application
-1. Explain how understanding the three judgments of the intellect helps protect a young Muslim from believing superstitious rumors or pseudo-scientific claims.
-2. Why is it impossible for Allah to have a physical body, location, or boundary? Ground your answer in the Ash'ari concept of Tanzih.
-3. When someone asks: "Can Allah create a rock so heavy He cannot lift it?", how do you resolve this trick question using the definition of Al-Mustahil?
-4. Contrast the method of Tafwid with the method of Ta'wil when reading verses with figurative expressions in the Quran.
+---
 
-## Answer Key & Marking Guide
-1. B - Al-Wajib al-'Aqli is defined by classical theologians as that which the mind cannot conceive of as nonexistent (e.g., the existence of the eternal Creator).
-2. B - A four-cornered circle or a triangle with four right angles contains a direct geometric contradiction, making it rationally impossible.
-3. B - Tanzih means declaring Allah free of all deficiencies, limits, organs, and created boundaries.
-4. B - Imam Zu al-Nun al-Misri's golden rule is cited across Ash'ari and Athari manuals to ensure that mental imagery is never attributed to the Creator.
-5. B - Classical Arabic uses "yad" to denote strength, authority, and bounty, which scholars use to explain textual phrases without anthropomorphism.
-6. A - Mukhalafah lil-Hawadith asserts that Allah shares no physical attributes or ontological qualities with creation.
-7. B - Ibn 'Ashir states: "Yajibu lillahi al-wujud wal-qidam, kadha al-baqa' wal-ghina al-mutlaqu 'am."
-8. B - All Sunni authorities agree that Allah is the Creator of space and time, existing before them and unconfined by them.
-9. A - Awareness of the angels recording deeds inspires Taqwa (God-consciousness) and accountability in private and public.
-10. C - Allah is Al-Ghani (The Rich/Self-Sufficient); His creation of the world is an expression of His Power, Generosity, and Will, not out of need.
+## Part D: Short Answer & Reflection
+**1. Explain how understanding the three judgments of the intellect helps protect a young Muslim from believing superstitious rumors or pseudo-scientific claims.**
+**2. When someone poses the trick question: "Can Allah create a rock so heavy He cannot lift it?", how do you resolve it using the definition of Al-Mustahil?**
+
+---
+
+# Answer Key & Marking Guide
+
+### Part A: Multiple Choice Answers
+1. A - Al-Wajib al-'Aqli is defined as that which the sound intellect cannot conceive of as nonexistent (Handout Section 1).
+2. C - A square circle contains an internal logical contradiction, making it rationally impossible (Handout Section 1).
+3. B - Tanzih means declaring Allah free of all deficiencies, physical shapes, and created boundaries (Handout Section 2).
+4. D - The maxim of Dhu al-Nun al-Misri and Imam Ahmad affirms total transcendence from mental imagery (Handout Section 2).
+5. A - Classical scholars affirmed Tanzih, explaining such expressions as divine power, favor, or majesty without bodily modality (Handout Section 2).
+6. C - Mukhalafah lil-Hawadith means absolute dissimilarity to all originated things (Surah Ash-Shura 42:11; Handout Section 2).
+7. D - Matn Ibn 'Ashir lists Qidam, Baqa', and Ghina Mutlaq immediately after Wujud (Handout Section 3).
+8. B - Mainstream Sunni orthodoxy agrees that Allah created space and time and does not dwell within a physical place (Handout Section 2).
+9. A - Awareness of the Kiraman Katibin cultivates God-consciousness and personal accountability (Handout Section 4).
+10. C - Allah created the universe out of pure sovereign Will and Wisdom, possessing absolute independence from it (Handout Section 1).
 
 ### Fill in the Blanks Key
-1. Al-Wajib - The rationally necessary.
-2. Al-Mustahil - The rationally impossible.
-3. Al-Ja'iz - The rationally possible.
-4. Tanzih - Exalting Allah above created imperfections.
-5. Mukhalafah - Absolute difference from created phenomena.
+1. Al-Wajib
+2. Al-Mustahil
+3. Al-Ja'iz
+4. Tanzih
+5. Mukhalafah
 
-### Matching Key
-* Al-Wajib al-'Aqli connects with Rationally necessary truth that cannot be conceived as false.
-* Al-Mustahil al-'Aqli connects with Rationally impossible concept containing internal contradiction.
-* Al-Ja'iz al-'Aqli connects with Rationally possible reality that may exist or not exist.
-* Tanzih connects with Exalting the Creator above all physical limits and anthropomorphic forms.
-* Mukhalafah lil-Hawadith connects with The divine attribute of absolute difference from created things.
-
-### Reflection Marking Rubric
-- Question 1: Awards full points for distinguishing between empirical facts, logical axioms, and irrational myths.
-- Question 2: Awards full points for explaining that bodies are composite, limited, and dependent on space, whereas Allah is One and uncreated.
-- Question 3: Awards full points for explaining that logical contradictions are non-entities (Mustahil) that do not belong to the realm of divine power.
-- Question 4: Awards full points for accurately stating that Tafwid consigns specific modality to Allah while negating physical meaning, whereas Ta'wil uses classical Arabic linguistic metaphor.
+### Part D: Reflection Marking Rubric
+* **Question 1 Criteria:** The student explains that the sound intellect tests claims against logical necessity, impossibility, and possibility, preventing blind acceptance of irrational superstitions.
+* **Question 2 Criteria:** The student explains that an omnipotent God being unable to lift an object is an inherent contradiction (*Mustahil*); divine power (*Qudrah*) relates to possibilities (*Ja'izat*), not absurd non-entities.

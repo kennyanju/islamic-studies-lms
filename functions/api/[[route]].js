@@ -2,6 +2,7 @@
  * Cloudflare Pages Functions - Full-Stack Edge API Router & Workers Backend
  * Enterprise-Hardened Architecture with Cloudflare D1 SQL & WebCrypto
  */
+import bcrypt from 'bcryptjs';
 import { buildCertificateHtml } from '../../lib/certificate.js';
 
 // Global Worker Deployment / Startup Timestamp
@@ -9,9 +10,7 @@ if (!globalThis._WORKER_START_TIME) {
   globalThis._WORKER_START_TIME = Date.now();
 }
 
-// --------------------------------------------------------------------------
 // WebCrypto Password & JWT Helper Functions
-// --------------------------------------------------------------------------
 async function hashPassword(password, saltHex = null) {
   const enc = new TextEncoder();
   const salt = saltHex ? hexToBuf(saltHex) : crypto.getRandomValues(new Uint8Array(16));
@@ -50,7 +49,23 @@ function timingSafeEqual(a, b) {
 }
 
 async function verifyPassword(password, storedHash) {
-  if (!storedHash || !storedHash.includes(':')) return false;
+  if (!storedHash || typeof storedHash !== 'string') return false;
+
+  // Backward-compatible bcrypt verification for accounts created via Node.js runtime
+  if (
+    storedHash.startsWith('$2a$') ||
+    storedHash.startsWith('$2b$') ||
+    storedHash.startsWith('$2y$')
+  ) {
+    try {
+      return bcrypt.compareSync(password, storedHash);
+    } catch (_e) {
+      return false;
+    }
+  }
+
+  // Edge WebCrypto PBKDF2 format (saltHex:hashHex)
+  if (!storedHash.includes(':')) return false;
   const [saltHex, originalHashHex] = storedHash.split(':');
   const computed = await hashPassword(password, saltHex);
   const [, computedHashHex] = computed.split(':');
@@ -71,9 +86,7 @@ function hexToBuf(hex) {
   return bytes;
 }
 
-// --------------------------------------------------------------------------
 // Ephemeral / Runtime Secret Key Generator (Lazy, No hardcoded fallback strings)
-// --------------------------------------------------------------------------
 function getJwtSecret(env) {
   if (env && env.SESSION_SECRET && env.SESSION_SECRET.length >= 16) {
     return env.SESSION_SECRET;
@@ -88,9 +101,7 @@ function getJwtSecret(env) {
   return globalThis._EPHEMERAL_JWT_SECRET;
 }
 
-// --------------------------------------------------------------------------
 // Universal UTF-8 Safe Base64URL Encoding / Decoding Helpers
-// --------------------------------------------------------------------------
 function base64UrlEncode(str) {
   if (typeof Buffer !== 'undefined') {
     return Buffer.from(str, 'utf8').toString('base64url');
@@ -147,9 +158,7 @@ function base64UrlToBytes(b64url) {
   return bytes;
 }
 
-// --------------------------------------------------------------------------
 // JWT Session Token Engine (HMAC-SHA256)
-// --------------------------------------------------------------------------
 async function signJwt(payload, secret) {
   const enc = new TextEncoder();
   const header = { alg: 'HS256', typ: 'JWT' };
@@ -213,33 +222,54 @@ function parseCookies(cookieHeader) {
 }
 
 function resolveCorsOrigin(request, env) {
-  if (!request) return '*';
+  if (!request) return null;
   const reqOrigin = request.headers.get('Origin');
-  if (!reqOrigin) return '*';
+  if (!reqOrigin) return null;
+
+  const originLower = reqOrigin.toLowerCase();
 
   // If ALLOWED_ORIGINS configured (e.g. "https://malikikids.com,https://learn.malikikids.com")
   if (env && env.ALLOWED_ORIGINS) {
     const allowedList = env.ALLOWED_ORIGINS.split(',')
       .map((s) => s.trim().toLowerCase())
       .filter(Boolean);
-    const originLower = reqOrigin.toLowerCase();
     if (allowedList.includes(originLower)) {
       return reqOrigin;
     }
-    return allowedList[0] || '*';
+    return null;
   }
 
-  return reqOrigin;
+  // Default secure fallback: allow same origin or standard local development origins
+  try {
+    const selfOrigin = new URL(request.url).origin.toLowerCase();
+    const devOrigins = [
+      selfOrigin,
+      'http://localhost:3000',
+      'http://127.0.0.1:3000',
+      'http://localhost:8787',
+      'http://127.0.0.1:8787'
+    ];
+    if (devOrigins.includes(originLower)) {
+      return reqOrigin;
+    }
+  } catch (_e) {
+    // Malformed URL, reject
+  }
+
+  return null;
 }
 
 function jsonResponse(data, status = 200, headers = {}, request = null, env = null) {
-  const origin = request ? request.headers.get('Origin') : null;
   const corsOrigin = resolveCorsOrigin(request, env);
   const corsHeaders = {
     'Content-Type': 'application/json',
-    'Access-Control-Allow-Origin': corsOrigin,
-    'Access-Control-Allow-Credentials': origin && corsOrigin !== '*' ? 'true' : 'false',
-    Vary: 'Origin',
+    ...(corsOrigin
+      ? {
+          'Access-Control-Allow-Origin': corsOrigin,
+          'Access-Control-Allow-Credentials': 'true',
+          Vary: 'Origin'
+        }
+      : {}),
     ...headers
   };
   return new Response(JSON.stringify(data), {
@@ -248,9 +278,7 @@ function jsonResponse(data, status = 200, headers = {}, request = null, env = nu
   });
 }
 
-// --------------------------------------------------------------------------
 // Cloudflare Turnstile Bot Defense Verification Helper
-// --------------------------------------------------------------------------
 async function verifyTurnstileToken(token, secret, clientIp) {
   if (!secret) return { success: true }; // Passed when Turnstile is not configured
   if (!token) return { success: false, error: 'Turnstile verification token missing' };
@@ -273,9 +301,7 @@ async function verifyTurnstileToken(token, secret, clientIp) {
   }
 }
 
-// --------------------------------------------------------------------------
 // Cloudflare Edge Email Dispatch Engine (Resend REST API / Web Standards)
-// --------------------------------------------------------------------------
 async function sendEdgeEmail({ to, subject, html, text, env }) {
   const from =
     (env && (env.EMAIL_FROM || env.FROM_EMAIL)) || 'Islamic Studies LMS <onboarding@resend.dev>';
@@ -393,9 +419,7 @@ function buildWelcomeHtml({ appUrl, email, displayName, role }) {
 </html>`;
 }
 
-// --------------------------------------------------------------------------
 // Super Admin First-Run Bootstrap Helper & D1 Schema Assurance
-// --------------------------------------------------------------------------
 let _d1SchemaInitialized = false;
 async function ensureD1Schema(env) {
   if (!env || !env.DB || _d1SchemaInitialized) return;
@@ -473,6 +497,11 @@ async function ensureD1Schema(env) {
         url TEXT,
         created_at TEXT DEFAULT CURRENT_TIMESTAMP
       );
+      CREATE INDEX IF NOT EXISTS idx_children_parent ON children(parent_uid);
+      CREATE INDEX IF NOT EXISTS idx_progress_student_mod ON module_progress(student_id, module_id);
+      CREATE INDEX IF NOT EXISTS idx_quiz_student_passed ON quiz_results(student_id, module_id, passed);
+      CREATE INDEX IF NOT EXISTS idx_quiz_student ON quiz_results(student_id);
+      CREATE INDEX IF NOT EXISTS idx_progress_student ON module_progress(student_id);
     `);
     _d1SchemaInitialized = true;
   } catch (_e) {
@@ -486,6 +515,12 @@ async function ensureSuperAdminBootstrap(env) {
     await ensureD1Schema(env);
     const countRow = await env.DB.prepare('SELECT COUNT(*) as c FROM users').first();
     if (countRow && countRow.c === 0) {
+      if (!env.ADMIN_PASSWORD && env.ENVIRONMENT === 'production') {
+        console.warn(
+          '⚠️ [SECURITY] ADMIN_PASSWORD secret not set in production. Skipping admin bootstrap.'
+        );
+        return;
+      }
       const adminEmail = (env.ADMIN_EMAIL || 'admin@islamicstudies.org').trim().toLowerCase();
       const adminPass = env.ADMIN_PASSWORD || 'Admin@Islam2026!';
       const pHash = await hashPassword(adminPass);
@@ -521,9 +556,7 @@ function checkRateLimit(ip, path, max = 60, windowSec = 60) {
   return record.count <= max;
 }
 
-// --------------------------------------------------------------------------
 // Cloudflare Pages Functions Request Handler
-// --------------------------------------------------------------------------
 export async function onRequest(context) {
   const { request, env } = context;
   const url = new URL(request.url);
@@ -541,13 +574,16 @@ export async function onRequest(context) {
   // Handle CORS preflight OPTIONS request
   if (method === 'OPTIONS') {
     const corsOrigin = resolveCorsOrigin(request, env);
+    if (!corsOrigin) {
+      return new Response(null, { status: 403 });
+    }
     return new Response(null, {
       status: 204,
       headers: {
         'Access-Control-Allow-Origin': corsOrigin,
         'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
         'Access-Control-Allow-Headers': 'Content-Type, Authorization, Cookie',
-        'Access-Control-Allow-Credentials': corsOrigin !== '*' ? 'true' : 'false',
+        'Access-Control-Allow-Credentials': 'true',
         'Access-Control-Max-Age': '86400',
         Vary: 'Origin'
       }
@@ -852,6 +888,23 @@ export async function onRequest(context) {
           if (row) {
             const isMatch = await verifyPassword(password, row.password_hash);
             if (isMatch) {
+              // Transparent hash upgrade: modernize bcrypt hash to WebCrypto PBKDF2 in D1
+              if (
+                row.password_hash &&
+                (row.password_hash.startsWith('$2a$') ||
+                  row.password_hash.startsWith('$2b$') ||
+                  row.password_hash.startsWith('$2y$'))
+              ) {
+                try {
+                  const upgradedHash = await hashPassword(password);
+                  await env.DB.prepare('UPDATE users SET password_hash = ? WHERE uid = ?')
+                    .bind(upgradedHash, row.uid)
+                    .run();
+                } catch (upgradeErr) {
+                  console.warn('Silent password hash upgrade failed:', upgradeErr.message);
+                }
+              }
+
               // Success - clear lockout counter in KV
               if (env.LOGIN_KV) {
                 try {
@@ -1145,7 +1198,7 @@ export async function onRequest(context) {
             <div class="card">
               <h1>Email Verified! ✓</h1>
               <p>Your email <strong>${user.email}</strong> has been successfully verified.</p>
-              <a href="/">Return to Islamic Studies LMS →</a>
+              <a href="/">Return to Islamic Studies LMS</a>
             </div>
           </body>
           </html>`,
@@ -1417,9 +1470,9 @@ export async function onRequest(context) {
 
     try {
       const row = await env.DB.prepare(
-        'SELECT id, name, avatar, assigned_track as assignedTrack, CASE WHEN pin_hash IS NOT NULL AND pin_hash != "" THEN 1 ELSE 0 END as hasPin FROM children WHERE id = ? OR LOWER(id) = LOWER(?) OR LOWER(name) = LOWER(?)'
+        'SELECT id, name, avatar, assigned_track as assignedTrack, CASE WHEN pin_hash IS NOT NULL AND pin_hash != "" THEN 1 ELSE 0 END as hasPin FROM children WHERE id = ? OR LOWER(id) = LOWER(?)'
       )
-        .bind(childId, childId, childId)
+        .bind(childId, childId)
         .first();
 
       if (!row) {
@@ -1558,6 +1611,22 @@ export async function onRequest(context) {
         )
           .bind(studentId, moduleId)
           .first();
+
+        const progRow = await env.DB.prepare(
+          'SELECT completed FROM module_progress WHERE student_id = ? AND module_id = ? AND completed = 1'
+        )
+          .bind(studentId, moduleId)
+          .first();
+
+        const hasPassed =
+          (quizRow && (quizRow.passed || quizRow.percentage >= 80)) || Boolean(progRow);
+        if (!hasPassed && env.ENVIRONMENT === 'production') {
+          return new Response(
+            `<!DOCTYPE html><html lang="en"><head><title>Certificate Unavailable</title><style>body{font-family:sans-serif;background:#090d16;color:#f8fafc;display:flex;align-items:center;justify-content:center;height:100vh;margin:0;}.card{background:#111827;border:1px solid #1f2937;border-radius:16px;padding:36px;max-width:480px;text-align:center;}h2{color:#f59e0b;}p{color:#94a3b8;line-height:1.6;}a{display:inline-block;margin-top:16px;background:#059669;color:#fff;padding:10px 20px;border-radius:8px;text-decoration:none;font-weight:600;}</style></head><body><div class="card"><h2>📜 Certificate Not Yet Earned</h2><p>You must achieve at least 80% on the Module ${moduleId} quiz to generate an authentic certificate of achievement.</p><a href="/#module-${moduleId}">Take Quiz</a></div></body></html>`,
+            { status: 403, headers: { 'Content-Type': 'text/html; charset=utf-8' } }
+          );
+        }
+
         if (quizRow) {
           score = Math.round(quizRow.percentage || 100);
         }
@@ -1653,12 +1722,45 @@ export async function onRequest(context) {
     const body = await request.json();
     const { pin } = body;
 
+    // Rate limiting defense against automated PIN scanning
+    if (!checkRateLimit(clientIp, 'child_pin_' + childId, 10, 60)) {
+      return jsonResponse(
+        { success: false, error: 'Too many PIN verification attempts. Please wait a minute.' },
+        429,
+        {},
+        request
+      );
+    }
+
+    // Check Cloudflare KV Lockout defense (5 failed attempts -> 15 min lockout)
+    const pinLockKey = `pin_lockout:${childId}`;
+    if (env.LOGIN_KV) {
+      try {
+        const lockRec = await env.LOGIN_KV.get(pinLockKey, 'json');
+        if (lockRec && lockRec.lockedUntil && Date.now() < lockRec.lockedUntil) {
+          const minutesLeft = Math.ceil((lockRec.lockedUntil - Date.now()) / 60000);
+          return jsonResponse(
+            {
+              success: false,
+              verified: false,
+              error: `Profile temporarily locked due to 5 consecutive failed PIN attempts. Please try again in ${minutesLeft} minute${minutesLeft === 1 ? '' : 's'}.`
+            },
+            429,
+            {},
+            request
+          );
+        }
+      } catch (_e) {
+        // Non-fatal if KV read fails
+      }
+    }
+
     if (!env.DB) return jsonResponse({ success: true, verified: true }, 200, {}, request);
     try {
       const row = await env.DB.prepare(
-        'SELECT id, name, avatar, assigned_track as assignedTrack, pin_hash, CASE WHEN pin_hash IS NOT NULL AND pin_hash != "" THEN 1 ELSE 0 END as hasPin FROM children WHERE id = ? OR LOWER(id) = LOWER(?) OR LOWER(name) = LOWER(?)'
+        'SELECT id, name, avatar, assigned_track as assignedTrack, pin_hash, CASE WHEN pin_hash IS NOT NULL AND pin_hash != "" THEN 1 ELSE 0 END as hasPin FROM children WHERE id = ? OR LOWER(id) = LOWER(?)'
       )
-        .bind(childId, childId, childId)
+        .bind(childId, childId)
         .first();
 
       if (!row) {
@@ -1691,12 +1793,52 @@ export async function onRequest(context) {
 
       const isMatch = await verifyPassword(pin, row.pin_hash);
       if (!isMatch) {
+        // Record failed PIN attempt in LOGIN_KV
+        if (env.LOGIN_KV) {
+          try {
+            let rec = (await env.LOGIN_KV.get(pinLockKey, 'json')) || { count: 0 };
+            rec.count = (rec.count || 0) + 1;
+            if (rec.count >= 5) {
+              rec.lockedUntil = Date.now() + 15 * 60 * 1000;
+            }
+            await env.LOGIN_KV.put(pinLockKey, JSON.stringify(rec), { expirationTtl: 900 });
+          } catch (_e) {
+            // Ignored
+          }
+        }
         return jsonResponse(
           { success: false, verified: false, error: 'Incorrect PIN. Please try again.' },
           401,
           {},
           request
         );
+      }
+
+      // Success - clear lockout counter
+      if (env.LOGIN_KV) {
+        try {
+          await env.LOGIN_KV.delete(pinLockKey);
+        } catch (_e) {
+          // Ignored
+        }
+      }
+
+      // Transparent PIN upgrade: modernize bcrypt PIN hash to WebCrypto PBKDF2 in D1
+      if (
+        env.DB &&
+        row.pin_hash &&
+        (row.pin_hash.startsWith('$2a$') ||
+          row.pin_hash.startsWith('$2b$') ||
+          row.pin_hash.startsWith('$2y$'))
+      ) {
+        try {
+          const upgradedPinHash = await hashPassword(pin);
+          await env.DB.prepare('UPDATE children SET pin_hash = ? WHERE id = ?')
+            .bind(upgradedPinHash, row.id)
+            .run();
+        } catch (upgradeErr) {
+          console.warn('Silent PIN hash upgrade failed:', upgradeErr.message);
+        }
       }
 
       return jsonResponse(
@@ -1878,15 +2020,21 @@ export async function onRequest(context) {
           .run();
 
         if (Object.keys(submittedReflections).length > 0) {
-          for (const qId of Object.keys(submittedReflections)) {
-            const refId =
-              'ref_' + Date.now().toString(36) + '_' + Math.random().toString(36).substring(2, 6);
-            await env.DB.prepare(
-              'INSERT INTO reflections (id, student_id, module_id, question_id, response_text) VALUES (?, ?, ?, ?, ?)'
-            )
-              .bind(refId, studentId, mId, qId, submittedReflections[qId])
-              .run()
-              .catch(() => {});
+          for (const rawQId of Object.keys(submittedReflections)) {
+            const cleanQId = String(rawQId)
+              .slice(0, 50)
+              .replace(/[^a-zA-Z0-9_-]/g, '');
+            const cleanResponse = String(submittedReflections[rawQId] || '').slice(0, 2000);
+            if (cleanQId && cleanResponse) {
+              const refId =
+                'ref_' + Date.now().toString(36) + '_' + Math.random().toString(36).substring(2, 6);
+              await env.DB.prepare(
+                'INSERT INTO reflections (id, student_id, module_id, question_id, response_text) VALUES (?, ?, ?, ?, ?)'
+              )
+                .bind(refId, studentId, mId, cleanQId, cleanResponse)
+                .run()
+                .catch(() => {});
+            }
           }
         }
 
@@ -2011,6 +2159,14 @@ export async function onRequest(context) {
 
   // 12. Telemetry & CSP Logs
   if (path === '/telemetry/errors' && method === 'POST') {
+    if (!checkRateLimit(clientIp, 'telemetry_errors', 20, 60)) {
+      return jsonResponse(
+        { success: false, error: 'Too many telemetry error reports' },
+        429,
+        {},
+        request
+      );
+    }
     try {
       const body = await request.json();
       if (env.DB) {
@@ -2032,6 +2188,9 @@ export async function onRequest(context) {
   }
 
   if (path === '/telemetry/csp' && method === 'POST') {
+    if (!checkRateLimit(clientIp, 'telemetry_csp', 20, 60)) {
+      return new Response(null, { status: 429 });
+    }
     try {
       const body = await request.json();
       if (env.DB) {

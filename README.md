@@ -12,7 +12,7 @@
 ## 🌟 Key Features
 
 - **📖 9 Curated Curriculum Modules**: Covering Foundations of Belief (Aqidah), Purification & Prayer (Fiqh), Early & Madinan Seerah, Fasting & Zakah, Applied Everyday Fiqh, Islamic Character & Family, and Living Faith Today.
-- **👶 Multi-Child Learning Profiles**: Parents can add children, assign age-appropriate learning tracks (*Level 1: 10y* vs *Level 2: 13y+*), configure 4-digit security PINs, and track completion progress and reflections.
+- **👶 Multi-Child Learning Profiles**: Parents can add children, assign age-appropriate learning tracks across five spiral levels (Level 1: Ages 6-8, Level 2: Ages 8-10, Level 3: Ages 10-12, Level 4: Ages 12-14, Level 5: Ages 14-16+), configure 4-digit security PINs, and track completion progress and reflections.
 - **🔗 Direct Learner Access**: Children can access their individual profiles directly via simple URLs (e.g. `/public/child/:id` or `/public/child/:name`) with PIN verification without needing parent session access.
 - **🎙️ Educator & Teacher Suite**: Includes synchronised Presentation Teleprompter, Master Answer Keys, and Full Voice Scripts for homeschool instructors and teachers.
 - **📱 Zero-Cache PWA**: Installable to Android, iOS, and Desktop Home Screens with automatic client claiming and guaranteed fresh network asset delivery.

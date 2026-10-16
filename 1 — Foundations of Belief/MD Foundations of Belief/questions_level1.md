@@ -1,70 +1,79 @@
-# Level 1 Activity Sheet: Foundations of Belief
-**Age Group:** Ages 6–8 (Level 1 Track)  
-**Focus:** Tawhid, Loving Allah, and Good Manners  
+# Module 1: Foundations of Belief (Level 1 Assessment)
+
+## Part A: Multiple Choice Questions
+*Select the single best answer for each question.*
+
+**1. Who created the sun, the moon, the earth, and all the animals?**
+(A) Allah (Al-Khaliq)
+(B) The mountains
+(C) The ocean
+(D) The clouds
+
+**2. What does Tawheed mean for a young Muslim?**
+(A) Memorizing the names of the stars
+(B) Going to sleep after sunset
+(C) Knowing and declaring that Allah is One and has no partners
+(D) Walking to the local garden
+
+**3. What did Allah create the noble angels from?**
+(A) Warm clay
+(B) Pure light (Nur)
+(C) Blazing fire
+(D) Fresh water
+
+**4. Which great angel was chosen by Allah to bring revelation to the Prophets?**
+(A) Angel Mika'il
+(B) Angel Israfil
+(C) Angel Malik
+(D) Angel Jibril
+
+**5. When you see a beautiful flower or an amazing sunset, what praise should you say?**
+(A) SubhanAllah (Glory be to Allah)
+(B) Astaghfirullah (I seek forgiveness from Allah)
+(C) JazakAllahu Khayran (May Allah reward you with good)
+(D) Bismillah (In the name of Allah)
 
 ---
 
-## Part A: Multiple Choice (Choose the best answer)
+## Part B: Fill in the Blanks
+Vocabulary Bank: Creator, One, Light, Five
 
-### 1. Who created the sun, the moon, and all the animals?
-* A) Allah (Al-Khaliq)
-* B) The clouds
-* C) The trees
-* D) The birds
-
-### 2. What does Tawhid mean?
-* A) Allah has three partners
-* B) Allah is One and has no partners
-* C) Drawing pictures of the sky
-* D) Sleeping after prayer
-
-### 3. What were the noble Angels created from?
-* A) Clay
-* B) Fire
-* C) Pure Light (Nur)
-* D) Water
-
-### 4. Which great angel brought Allah's words to the Prophets?
-* A) Angel Jibril
-* B) Angel Mika'il
-* C) Angel Israfil
-* D) Angel Ridwan
-
-### 5. If you see something beautiful in nature, what beautiful word should you say?
-* A) SubhanAllah
-* B) Goodbye
-* C) Never mind
-* D) Oops
+1. Allah is Al-Khaliq, which means the supreme __________.
+2. In Islam, our golden promise teaches that Allah is __________ and unique.
+3. The noble angels are created from pure __________.
+4. Our beautiful religion of Islam is built upon __________ pillars.
 
 ---
 
-## Part B: Fill in the Blanks (Use the word bank)
-*Word Bank: One, Light, Creator*
+## Part C: Concept Matching
+*Match each term on the left with its correct definition on the right.*
 
-6. Allah is Al-Khaliq, which means the **_________________**.
-7. In Islam, we believe that Allah is **_________________** and unique.
-8. The angels are made from pure **_________________**.
-
----
-
-## Part C: Matching (Draw a line to connect)
-Pair 1: Al-Khaliq --- The Creator of all things
-Pair 2: Angel Jibril --- Brought revelation to the Prophets
-Pair 3: SubhanAllah --- Glory be to Allah
+* Al-Khaliq ─── The Creator of all things
+* Angel Jibril ─── Brought revelation to the Prophets
+* SubhanAllah ─── Glory be to Allah
+* Shahaadah ─── The golden testimony of faith
 
 ---
 
-## Part D: Reflection
-9. Draw or tell your parent one thing Allah made that you love the most (like your kitten, a rainbow, or mangoes)!
+## Part D: Short Answer & Reflection
+**1. Name two things Allah made that you are thankful for today, and explain why you love them.**
 
 ---
 
-## Teacher Answer Key
-1. A) Allah (Al-Khaliq) is the sole Creator.
-2. B) Tawhid affirms Allah's absolute Oneness.
-3. C) Angels are created from pure light (*Nur*).
-4. A) Jibril is the archangel of revelation.
-5. A) SubhanAllah expresses wonder at Allah's creation.
-6. Creator
-7. One
-8. Light
+# Answer Key & Marking Guide
+
+### Part A: Multiple Choice Answers
+1. A - Allah is Al-Khaliq, the sole Creator of everything in existence (Handout Section 1).
+2. C - Tawheed is the foundational principle that Allah is One without partner (Handout Section 2).
+3. B - Hadith records that angels were created from pure light, while humanity was created from clay (Handout Section 3).
+4. D - Angel Jibril is the leader of the angels entrusted with conveying revelation to the prophets (Handout Section 3).
+5. A - Saying SubhanAllah expresses awe and glorifies Allah upon seeing His beautiful creation (Handout Section 1).
+
+### Fill in the Blanks Key
+1. Creator
+2. One
+3. Light
+4. Five
+
+### Part D: Reflection Marking Rubric
+* **Question 1 Criteria:** The student names two blessings created by Allah (such as family, water, fruits, sunshine, or sight) and expresses gratitude by saying *Alhamdulillah* or describing why they appreciate them.

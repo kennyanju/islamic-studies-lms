@@ -1,91 +1,64 @@
 # Level 5 Senior Seminar Guide: Seerah: Madinah & Building a Community
 **Age Group:** Ages 14–16+ (Senior High / Level 5 Capstone Track)  
-**ICO Curriculum Benchmark:** Aligned with ICO Grades 9–12 Senior Benchmark (Senior High & Capstone Track)  
 **Topics:** The Constitution of Madinah (*Sahifat al-Madinah*), Classical Islamic International Law (*Fiqh al-Siyar*), 'Amal Ahl al-Madinah as Legal Proof, and Modern Pluralistic Statecraft  
-**Classical Text Spine:** *Al-Muwatta* (Imam Malik), *Kitab al-Siyar al-Kabir* (Imam Muhammad al-Shaybani), and *Al-Amwal* (Ibn Zanjawayh)  
+**Classical Text Spine:** *Al-Muwatta* (Imam Malik), *Kitab al-Siyar al-Kabir* (Imam Muhammad al-Shaybani), and *Tartib al-Madarik* (Qadi 'Iyad)  
 **Riwayah & Advanced Tajweed:** Hafs 'an 'Asim with Warsh 'an Nafi' awareness; Linguistic Analysis of Madinan Covenant Terms
 
 ---
 
-## 1. The Constitution of Madinah: The World's First Written Constitutional Charter
+## 1. The Constitution of Madinah: Early Constitutional Governance
+Drafted by Prophet Muhammad ﷺ in 622 CE, the **Constitution of Madinah (Sahifat al-Madinah)** established an early political and constitutional architecture that defined mutual relations in the fledgling state.
 
-Drafted by Prophet Muhammad ﷺ in 622 CE, the **Constitution of Madinah (Sahifat al-Madinah)** established a groundbreaking political and constitutional architecture over a millennium before the Magna Carta or the American Constitution.
-
-```
-       ┌────────────────────────────────────────────────────────┐
-       │             THE CONSTITUTION OF MADINAH (622 CE)       │
-       │                   (Sahifat al-Madinah)                 │
-       └───────────────────────────┬────────────────────────────┘
-        ┌───────────┬──────────────┼──────────────┬───────────┐
-        ▼           ▼              ▼              ▼           ▼
-    1. Ummah    2. Religious    3. Mutual      4. Judicial 5. Civil
-    Wahidah     Freedom         Defense        Sovereignty Equality
-    A unified   Jewish tribes   All signatoriesAllah & His Blood-money,
-    federal     retain their    defend Madinah Messenger as redemption of
-    commonwealthreligion and    jointly from   supreme     captives, mutual
-    of citizens.property.       external foes. arbitration.assistance.
-```
+| Pillar of the Charter | Meaning in Sahifat al-Madinah |
+| :--- | :--- |
+| **1. Ummah Wahidah** | A unified civic commonwealth binding Muhajirun, Ansar, and allied Jewish tribes in collective solidarity. |
+| **2. Freedom of Faith** | Jewish clans retained their religion, internal legal customs, and property without religious coercion. |
+| **3. Mutual Defense** | All signatories agreed to jointly defend the sanctuary of Yathrib against outside aggression. |
+| **4. Judicial Sovereignty** | Allah and His Messenger ﷺ served as the final arbitrating authority in inter-tribal disputes. |
+| **5. Civil Protection** | Universal standards for blood-money, ransom of captives, and safeguarding the vulnerable against oppression. |
 
 ### Key Constitutional Clauses Analyzed:
 1. **The Concept of a Civic Ummah:**  
-   Clause 1 declares: *"Indeed, they are one political community (Ummah Wahidah) distinct from all other people."* Crucially, Clause 25 adds:  
-   *“And indeed the Jews of Banu 'Awf are an Ummah alongside the believers; to the Jews their religion, and to the Muslims their religion.”*  
-   This established a **pluralistic civic commonwealth** based on contractual citizenship (*Muwatanah*), not religious coercion.
+   Clause 1 declares: *"Indeed, they are one community (Ummah Wahidah) distinct from all other people."* Crucially, Clause 25 adds:  
+   *“And indeed the Jews of Banu 'Awf are a community alongside the believers; to the Jews their religion, and to the Muslims their religion.”*  
+   This established a civic confederation based on contractual rights and mutual duties (*Muwatanah*), not religious compulsion.
 2. **Freedom of Religion and Conscience:**  
-   Guaranteed absolute internal autonomy to the Jewish tribes of Madinah to govern their internal affairs according to the Torah.
+   Guaranteed internal autonomy to the Jewish tribes of Madinah to govern their domestic affairs according to their scriptures.
 3. **Collective Defense and Anti-Treason:**  
-   All signatories pledged mutual military defense against external aggression, agreeing that no clan would make a separate peace with Quraysh invaders.
+   All signatories pledged mutual military defense against external aggression, agreeing that no clan would make a separate peace with Quraysh invaders against the common interest of the city.
 
 ---
 
 ## 2. Classical Islamic International Law (*Fiqh al-Siyar*)
+Founded systematically by the 8th-century jurist **Imam Muhammad ibn al-Hasan al-Shaybani** (author of *Kitab al-Siyar al-Kabir*), Islamic international law codified early principles of international relations and warfare:
 
-Founded by the 8th-century Hanafi jurist **Imam Muhammad ibn al-Hasan al-Shaybani** (author of *Kitab al-Siyar al-Kabir*), Islamic international law codified the world's first comprehensive rules of engagement:
-
-```
-┌────────────────────────────────────────────────────────────────────────┐
-│                   THE THREE REALMS IN CLASSICAL SIYAR                  │
-│                                                                        │
-│ 1. DAR AL-ISLAM (The Abode of Security & Justice):                     │
-│    Lands where Islamic law governs and citizens enjoy religious peace. │
-│                                                                        │
-│ 2. DAR AL-'AHD / DAR AL-SULH (The Abode of Treaty & Peace):            │
-│    Sovereign non-Muslim nations that maintain peace treaties, trade    │
-│    pacts, and diplomatic relations with Muslim states.                 │
-│                                                                        │
-│ 3. DAR AL-HARB (The Abode of Belligerence):                            │
-│    Hostile nations actively engaged in armed military warfare against  │
-│    the Muslim community.                                               │
-│                                                                        │
-│ • Contemporary Reality: Under the UN Charter and international peace   │
-│   treaties, ALL modern recognized nation-states belong to DAR AL-'AHD! │
-│   Muslims living in the West reside under sacred civil covenants.      │
-└────────────────────────────────────────────────────────────────────────┘
-```
+| Classical Realm in Siyar | Classical Definition | Modern Juristic Application |
+| :--- | :--- | :--- |
+| **Dar al-Islam** (Abode of Security & Justice) | Lands where Islamic legal jurisdiction prevails and believers practice openly. | Muslim-majority sovereign nations and self-governing states. |
+| **Dar al-'Ahd / Dar al-Sulh** (Abode of Treaty & Peace) | Sovereign non-Muslim states maintaining peaceful diplomatic covenants and trade accords with Muslims. | Contemporary jurists (including the European Council for Fatwa and Research and scholars like Shaykh Abdallah bin Bayyah) classify modern nation-states bound by the UN Charter, international treaties, and bilateral embassies under Dar al-'Ahd. |
+| **Dar al-Harb** (Abode of Belligerence) | Belligerent states in an active state of armed military warfare against the Muslim community. | Confined strictly to states actively waging armed aggression. |
 
 ### The Inviolability of Covenants (*Wafa' bil-'Uqud*):
-The Prophet ﷺ warned against violating treaties with non-Muslim citizens or nations:  
-*“Whoever harms a covenant-partner (Mu'ahid), infringes his rights, burdens him beyond his capacity, or takes something from him without his consent, I will be his adversary on the Day of Resurrection!”* (Sunan Abi Dawud).
+The Prophet ﷺ issued a stern warning against violating treaties or harming non-Muslim citizens:  
+> *“Whoever harms a covenant-partner (Mu'ahid), infringes his rights, burdens him beyond his capacity, or takes something from him without his consent, I will be his adversary on the Day of Resurrection!”* (Sunan Abi Dawud 3052, Sahih).
 
 ---
 
 ## 3. The Epistemological Primacy of *'Amal Ahl al-Madinah*
-
-In the jurisprudence of Imam Malik, the communal practice of the city of Madinah holds a supreme legal status:
+In the jurisprudence of Imam Malik, the communal, living practice of the city of Madinah holds a preeminent legal standing:
 
 1. **Why Madinah?**  
-   Madinah was the capital of the Prophet ﷺ, the landing place of revelation, and the residence of thousands of Companions and their righteous successors (*Tabi'in*).
+   Madinah was the capital of the Prophet ﷺ, the locus of revelation, and the home of thousands of Sahabah and their righteous successors (*Tabi'in*).
 2. **Transmission by Action (*Al-Naql al-'Amali*):**  
-   When ten thousand people in Madinah perform an act (such as the measurements of the Sa' and Mudd, the Adhan wording, or the abandonment of zakah on vegetables), their shared communal witness is **Tawatur (mass-transmitted certainty)**.
-3. **Imam Malik's Golden Dictum:**  
-   *"A practice transmitted by thousands from thousands is far more reliable than an isolated report transmitted by one person from one person."*
+   When generations in Madinah practiced an act collectively (such as the volumetric measure of the Sa' and Mudd, the wording of the Adhan, or the prayer postures), their shared communal enactment constitutes **Tawatur (mass-transmitted certainty)**.
+3. **Imam Malik's Juristic Dictum:**  
+   As recorded by Qadi 'Iyad in *Tartib al-Madarik*: *"A practice transmitted by thousands from thousands is far more reliable than an isolated report transmitted by one person from one person."*
 
 ---
 
-## 4. Modern Muslim Civic Leadership in Democratic Societies
+## 4. Modern Muslim Civic Leadership in Contemporary Societies
+How do senior students apply the Madinan legacy to 21st-century citizenship?
 
-How do senior high Muslim students apply the Madinan legacy to 21st-century citizenship in the West?
-
-1. **Contractual Integrity (*Al-Muwatanah*):** Passports, visas, and citizenship oaths represent binding Islamic legal covenants (*'Uqud*). A Muslim is the most law-abiding, honest, and dedicated contributor to civic peace.
-2. **Coalitions for Common Good (*Hilf al-Fudul*):** The Prophet ﷺ praised the pre-Islamic League of the Virtuous (*Hilf al-Fudul*), stating that if invited to such a human rights coalition in Islam, he would eagerly accept! Muslims must collaborate with all people of conscience on poverty alleviation, racial justice, and climate preservation.
-3. **Moral & Professional Excellence (*Ihsan*):** Elevating society through exemplary leadership in law, medicine, technology, education, and civil service.
+1. **Contractual Integrity (*Al-Muwatanah*):** Passports, visas, and citizenship oaths represent binding Islamic legal covenants (*'Uqud*). A Muslim honors civil laws and contributes proactively to civic peace and welfare.
+2. **Coalitions for Common Good (*Hilf al-Fudul*):** The Prophet ﷺ praised the pre-Islamic League of the Virtuous (*Hilf al-Fudul*), stating that if invited to such a justice coalition in Islam, he would eagerly respond! Muslims are encouraged to collaborate with all people of good will on poverty relief, social justice, and environmental stewardship.
+3. **Moral & Professional Excellence (*Ihsan*):** Serving society with competence, integrity, and mercy across medicine, law, public policy, education, and technology.

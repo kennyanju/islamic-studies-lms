@@ -13,18 +13,43 @@ export function escapeHtml(str) {
     .replace(/'/g, '&#039;');
 }
 
-export function renderMarkdown(md) {
-  if (!md) return '';
-  if (typeof marked !== 'undefined' && typeof DOMPurify !== 'undefined') {
-    const rawHtml = marked.parse(md);
-    return DOMPurify.sanitize(rawHtml);
-  }
-  return escapeHtml(md).replace(/\n/g, '<br>');
+export function enhanceArabicText(html) {
+  if (!html || typeof html !== 'string') return html;
+  // Replace text nodes containing Arabic characters without altering HTML tags
+  return html.replace(/>([^<]+)</g, (match, textContent) => {
+    const arabicRegex =
+      /([\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\uFB50-\uFDFF\uFE70-\uFEFF]+(?:[\s\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\uFB50-\uFDFF\uFE70-\uFEFF]+)*)/g;
+    const enhanced = textContent.replace(
+      arabicRegex,
+      '<span class="arabic-term" lang="ar" dir="rtl">$1</span>'
+    );
+    return `>${enhanced}<`;
+  });
 }
 
-// --------------------------------------------------------------------------
-// Accessible Modal & Focus Trap Manager
-// --------------------------------------------------------------------------
+export function renderMarkdown(md) {
+  if (!md) return '';
+  if (typeof marked !== 'undefined') {
+    if (!renderMarkdown._configured && marked.Renderer) {
+      const renderer = new marked.Renderer();
+      renderer.image = function (href, title, text) {
+        return `<img src="${href}" alt="${text || ''}" title="${title || ''}" loading="lazy" decoding="async" class="responsive-img" />`;
+      };
+      marked.setOptions({
+        renderer: renderer,
+        gfm: true,
+        breaks: true
+      });
+      renderMarkdown._configured = true;
+    }
+    const rawHtml = marked.parse(md);
+    const sanitized = typeof DOMPurify !== 'undefined' ? DOMPurify.sanitize(rawHtml) : rawHtml;
+    return enhanceArabicText(sanitized);
+  }
+  return enhanceArabicText(escapeHtml(md).replace(/\n/g, '<br>'));
+}
+
+// Accessible modal and focus trap manager
 let currentlyOpenModal = null;
 
 export function openAccessibleModal(modalEl, initialFocusSelector = null) {
@@ -119,11 +144,7 @@ export function closeAccessibleModal(modalEl, restoreFocus = true) {
   }
 }
 
-// --------------------------------------------------------------------------
-// Toast Notification System with Optional Interactive Action/Retry Button
-// --------------------------------------------------------------------------
-const toastContainer = document.getElementById('toastContainer');
-
+// Toast notification system with optional action or retry handler
 export function showToast(
   title,
   message,
@@ -132,7 +153,8 @@ export function showToast(
   actionCallback = null,
   actionLabel = 'Retry'
 ) {
-  if (!toastContainer) return;
+  const container = document.getElementById('toastContainer');
+  if (!container) return;
 
   const toast = document.createElement('div');
   toast.className = `toast ${type}`;
@@ -161,8 +183,8 @@ export function showToast(
   const dismiss = () => {
     toast.classList.add('toast-hiding');
     setTimeout(() => {
-      if (toast.parentNode === toastContainer) {
-        toastContainer.removeChild(toast);
+      if (toast.parentNode === container) {
+        container.removeChild(toast);
       }
     }, 250);
   };
@@ -179,7 +201,7 @@ export function showToast(
     }
   }
 
-  toastContainer.appendChild(toast);
+  container.appendChild(toast);
 
   if (duration > 0) {
     setTimeout(dismiss, duration);
