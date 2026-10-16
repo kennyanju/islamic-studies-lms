@@ -71,13 +71,13 @@
     2.  **Truth in Action (*Sidq al-'Amal*):** Making sure your outer actions match your inner intentions. No hypocrisy (*Nifaq*).
     3.  **Truth in Intention (*Sidq al-Niyyah*):** Doing good purely for the sake of Allah, not to show off (*Riya'*).
 *   **The Ultimate Status:**
-    *   The Prophet (pbuh) said: *"Truthfulness leads to righteousness (*Birr*), and righteousness leads to Paradise."* (Agreed upon).
+    *   The Prophet ﷺ said: *"Truthfulness leads to righteousness (*Birr*), and righteousness leads to Paradise."* (Agreed upon).
 
 ---
 **Teacher Notes:**
 *   **Concept Breakdown:** Discuss how honesty goes beyond just "not telling lies." It means being authentic.
 *   **Fiqh Literacy Link:** In Islamic law, a single lie can destroy a person's legal credibility. In the Maliki school, a person who is caught lying is classified as having compromised integrity (*Fasiq*) and their testimony in court is rejected.
-*   **Interactive Discussion:** *"Is it ever okay to lie to make people laugh?"* Explain that the Prophet (pbuh) warned against lying even when joking: *"Woe to the one who speaks and lies to make the people laugh..."* (Abu Dawud).
+*   **Interactive Discussion:** *"Is it ever okay to lie to make people laugh?"* Explain that the Prophet ﷺ warned against lying even when joking: *"Woe to the one who speaks and lies to make the people laugh..."* (Abu Dawud).
 
 ---
 
@@ -86,11 +86,11 @@
 *   **What is Tawadu'?**
     *   **Tawadu'** (تَوَاضُع) is humility, the state of recognizing that every blessing you have is from Allah, not from your own greatness.
 *   **Opposite: Pride (*Kibr* / كِبْر):**
-    *   The Prophet (pbuh) defined pride as: *"Rejecting the truth (*Batar al-Haqq*) and looking down on people (*Ghamt al-Nas*)."*
+    *   The Prophet ﷺ defined pride as: *"Rejecting the truth (*Batar al-Haqq*) and looking down on people (*Ghamt al-Nas*)."*
 *   **The Spiritual Reality:**
     *   Allah says in the Quran: *"And walk not on the earth with pride. Verily, you cannot rend the earth asunder, nor reach the mountains in height."* (Surah al-Isra: 37).
 *   **Prophetic Model:**
-    *   The Prophet (pbuh) would repair his own shoes, milk his goats, and serve his family.
+    *   The Prophet ﷺ would repair his own shoes, milk his goats, and serve his family.
 
 ---
 **Teacher Notes:**
@@ -206,10 +206,10 @@
     *   **Silat al-Rahim** (صِلَة الرَّحِم) means connecting and maintaining relationships with blood relatives (grandparents, siblings, aunts, uncles, cousins).
 *   **The Severity of Severing Ties (*Qat' al-Rahim*):**
     *   Severing family ties is a major sin (*Kabirah*).
-    *   The Prophet (pbuh) said: *"The severer of family ties will not enter Paradise."* (Agreed upon).
+    *   The Prophet ﷺ said: *"The severer of family ties will not enter Paradise."* (Agreed upon).
 *   **How to maintain ties?**
     *   Visiting them, calling them, sending gifts, helping them financially when they are in need, and forgiving them when they hurt us.
-    *   The Prophet (pbuh) said: *"The one who maintains ties is not the one who merely reciprocates. Rather, it is the one who, when his ties are severed, connects them."* (Bukhari).
+    *   The Prophet ﷺ said: *"The one who maintains ties is not the one who merely reciprocates. Rather, it is the one who, when his ties are severed, connects them."* (Bukhari).
 
 ---
 **Teacher Notes:**
@@ -222,7 +222,7 @@
 ## Slide 12: Rights of Neighbors (Huquq al-Jiwar)
 ### The Sacred Radius of the Community
 *   **The Prophetic Warning:**
-    *   The Prophet (pbuh) said: *"Angel Jibril kept advising me to treat neighbors kindly until I thought he would make them my heirs."* (Agreed upon).
+    *   The Prophet ﷺ said: *"Angel Jibril kept advising me to treat neighbors kindly until I thought he would make them my heirs."* (Agreed upon).
 *   **Defining the Neighbor in Maliki Fiqh:**
     *   How far does the "neighborhood" go?
     *   **The Maliki Standard:** The neighborhood extends to **forty (40) houses** in every direction (front, back, left, and right).
@@ -234,7 +234,7 @@
 ---
 **Teacher Notes:**
 *   **The 40-House Rule:** Explain the spatial imagination of Islamic law. It does not just mean the person next door; it means the entire local micro-community of 40 houses.
-*   **Hadith Check:** Emphasize the strong language of the Prophet (pbuh): *"He is not a believer whose neighbor is not safe from his harm (*Bawa'iq*)."* (Muslim).
+*   **Hadith Check:** Emphasize the strong language of the Prophet ﷺ: *"He is not a believer whose neighbor is not safe from his harm (*Bawa'iq*)."* (Muslim).
 *   **Actionable Advice:** Encourage students to think of small acts of kindness: sharing food with a neighbor, shoveling snow from their walkway, or simply smiling and greeting them.
 
 ---
@@ -263,7 +263,7 @@
     *   *The Good Friend:* Like a seller of perfume (*Misk*). Even if you do not buy perfume, you leave smelling good.
     *   *The Bad Friend:* Like a blacksmith working a bellows. He either burns your clothes with flying sparks or leaves you smelling like foul smoke.
 *   **The Spiritual Influence:**
-    *   The Prophet (pbuh) said: *"A person is on the religion of his close friend (*Khalil*), so let each of you look to whom he takes as a close friend."* (Abu Dawud).
+    *   The Prophet ﷺ said: *"A person is on the religion of his close friend (*Khalil*), so let each of you look to whom he takes as a close friend."* (Abu Dawud).
 
 ---
 **Teacher Notes:**
@@ -287,7 +287,7 @@
 **Teacher Notes:**
 *   **Fiqh Literacy Concept:** Show the students how the legal reality of friendship is codified in law. In the Maliki school, the judge will ask: *"What is the relationship between the witness and the claimant?"* If they are intimate friends who eat, travel, and share secrets, the testimony is disqualified due to *Tuhmah* (suspicion of bias).
 *   **Moral Lesson:** Emphasize that loyalty to Allah and justice (*'Adl*) always comes before loyalty to a friend. 
-*   **Hadith Connection:** *"Help your brother whether he is the oppressor or the oppressed."* The Companions asked how to help the oppressor. The Prophet (pbuh) replied: *"By stopping him from oppressing."* (Bukhari).
+*   **Hadith Connection:** *"Help your brother whether he is the oppressor or the oppressed."* The Companions asked how to help the oppressor. The Prophet ﷺ replied: *"By stopping him from oppressing."* (Bukhari).
 
 ---
 

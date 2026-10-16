@@ -48,7 +48,7 @@
 # Slide 3: The Spirit of Fasting (Siyam)
 ## Purification of the Heart (Taharah al-Batin)
 *   **Fasting is a Shield (*Turs*):**
-    *   The Prophet (pbuh) said: *"Fasting is a shield."* It protects us from sin in this world and the Fire in the next.
+    *   The Prophet ﷺ said: *"Fasting is a shield."* It protects us from sin in this world and the Fire in the next.
 *   **Two Levels of Fasting:**
     1.  **Fasting of the Stomach and Private Parts:** Refraining from food, drink, and intimacy.
     2.  **Fasting of the Limbs and Heart:** Restraining the tongue from lying, the eyes from looking at haram, the ears from gossip, and the heart from jealousy and anger.
@@ -58,7 +58,7 @@
 ---
 **Teacher Notes:**
 *   **Connecting Taharah to Fasting:** Remind students of the concept of *Taharah* (purification) from the previous unit. Just as Wudu purifies the limbs, *Siyam* purifies the inner self (*tazkiyah*).
-*   **Hadith Check:** Emphasize that the Prophet (pbuh) warned: *"Whoever does not give up false speech and evil actions, Allah has no need of his leaving his food and drink"* (Bukhari).
+*   **Hadith Check:** Emphasize that the Prophet ﷺ warned: *"Whoever does not give up false speech and evil actions, Allah has no need of his leaving his food and drink"* (Bukhari).
 *   **Discussion:** Why is it easier to behave well when we are fasting? How does hunger train our self-control?
 
 ---
@@ -66,18 +66,18 @@
 # Slide 4: Establishing Ramadan: Moon Sighting (Hilal)
 ## Sighting vs. Astronomical Calculations
 *   **The Command to Sight:**
-    *   The Prophet (pbuh) said: *"Fast when you see it [the crescent], and break your fast when you see it"* (Muwatta Malik).
+    *   The Prophet ﷺ said: *"Fast when you see it [the crescent], and break your fast when you see it"* (Muwatta Malik).
 *   **The Sighting Rule (*Ruyah*):**
     *   In Maliki fiqh, the start of Ramadan is established by either:
         1. Sighting the new crescent (*Hilal*) by two upright male witnesses.
         2. Sighting by a large crowd of people (*inshifad*) such that collusion to lie is impossible.
         3. Completing 30 days of the preceding month, Sha'ban.
 *   **Calculations (*Hisab*):**
-    *   The Maliki school (and classical consensus) does not adopt astronomical calculations as a substitute for visual sighting, maintaining the physical practice taught by the Prophet (pbuh).
+    *   The Maliki school (and classical consensus) does not adopt astronomical calculations as a substitute for visual sighting, maintaining the physical practice taught by the Prophet ﷺ.
 
 ---
 **Teacher Notes:**
-*   **Fiqh Literacy Focus:** Explain the debate about astronomical calculations vs. actual sighting. Malikis adhere strictly to the visual sighting method because the Prophet (pbuh) made the ruling dependent on the *sight* (*ruyah*), which is accessible to all people, rich or poor, learned or unlearned.
+*   **Fiqh Literacy Focus:** Explain the debate about astronomical calculations vs. actual sighting. Malikis adhere strictly to the visual sighting method because the Prophet ﷺ made the ruling dependent on the *sight* (*ruyah*), which is accessible to all people, rich or poor, learned or unlearned.
 *   **Communal Aspect:** Explain that moon sighting is a communal effort. It builds anticipation and connects the community to the cosmos and natural cycles created by Allah.
 
 ---
@@ -146,7 +146,7 @@
 
 ---
 **Teacher Notes:**
-*   **Maliki Specific Detail on Forgetfulness:** Focus on the forgetfulness ruling. Imam Malik argued that the fast means actual abstinence; if you eat (even by mistake), the physical reality of the fast is broken, so it must be made up. However, the Prophet (pbuh) said the sin is forgiven, so the person has no sin.
+*   **Maliki Specific Detail on Forgetfulness:** Focus on the forgetfulness ruling. Imam Malik argued that the fast means actual abstinence; if you eat (even by mistake), the physical reality of the fast is broken, so it must be made up. However, the Prophet ﷺ said the sin is forgiven, so the person has no sin.
 *   **Class Activity:** Present a scenario: *"Zayd is fasting. He forgets he is fasting, walks to the kitchen, and drinks a glass of water. What is the status of his fast in the Maliki school versus the Shafi'i school?"*
     *   *Answer:* Maliki: He must make up the day (*Qada'*). Shafi'i: His fast is still valid; he doesn't need to make it up.
 
@@ -259,7 +259,7 @@
 
 ---
 **Teacher Notes:**
-*   **Physical Demo:** If possible, bring a cup or bowl and show what a "double handful" (*mudd*) looks like. Explain that the Prophet (pbuh) blessed these specific measurements.
+*   **Physical Demo:** If possible, bring a cup or bowl and show what a "double handful" (*mudd*) looks like. Explain that the Prophet ﷺ blessed these specific measurements.
 *   **Historical Note:** Imam Malik lived in Madinah and used the actual measurement containers handed down from the families of the Companions, ensuring high accuracy of the prophetic *Sa'*.
 *   **Terminology:** *Sa'* (صَاع) and *Mudd* (مُدّ).
 
@@ -369,7 +369,7 @@
 *   **What is Sadaqah (صَدَقَة)?**
     *   Voluntary charity given out of love and desire to please Allah. The word comes from *Sidq* (truthfulness), showing that charity proves the truth of one's faith.
 *   **The Scope of Sadaqah:**
-    *   The Prophet (pbuh) said: *"Every good deed is a charity."* (Smiling, removing a branch from the road, helping someone carry luggage).
+    *   The Prophet ﷺ said: *"Every good deed is a charity."* (Smiling, removing a branch from the road, helping someone carry luggage).
 *   **Fard Kifayah (Communal Obligation):**
     *   While Zakah is an individual obligation (*Fard 'Ayn*), ensuring that no one in the neighborhood goes hungry is a **Communal Obligation (*Fard Kifayah*)**.
     *   If a poor person in a town starves to death and the townspeople knew about him, the entire community shares the sin.

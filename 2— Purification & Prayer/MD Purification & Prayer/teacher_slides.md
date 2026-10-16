@@ -114,7 +114,7 @@
 ---
 **Teacher Notes:**
 *   **Detailing the Ruling:** Even if well water contains some natural minerals or leaves that fell into it naturally, it is still classified as *Mutlaq* because these changes are natural and unavoidable.
-*   **Hadith Reference:** Mention the Prophet's (pbuh) statement about the sea: *"Its water is purifying, and its dead meat is halal"* (Muwatta Malik).
+*   **Hadith Reference:** Mention the Prophet's ﷺ statement about the sea: *"Its water is purifying, and its dead meat is halal"* (Muwatta Malik).
 *   **Key Question:** What makes well water or rain water different from apple juice, even though both are clean? (Answer: Well water is in its natural state and is called simply "water" without qualifiers).
 
 ---
@@ -244,7 +244,7 @@
 ---
 **Teacher Notes:**
 *   **Clarifying Tarteeb:** Note that in the Shafi'i and Hanbali schools, *Tarteeb* is a Fard (obligation). In the Maliki school, it is a Sunnah. This means that if someone accidentally washes their feet before wiping their head, their Wudu is still technically valid, though they have missed a Sunnah. They should correct it if they remember during the Wudu.
-*   **Class Activity:** Ask students: *"If Wudu order is a Sunnah, why should we still try to keep it in order?"* Explain that following the Sunnah brings immense reward and aligns us with the practice of the Prophet (pbuh).
+*   **Class Activity:** Ask students: *"If Wudu order is a Sunnah, why should we still try to keep it in order?"* Explain that following the Sunnah brings immense reward and aligns us with the practice of the Prophet ﷺ.
 
 ---
 
@@ -324,7 +324,7 @@
 # Slide 18: The Five Daily Prayers (Salah)
 ## The Pillar of Religion (Imad al-Din)
 *   **Why is Salah the Pillar?**
-    *   The Prophet (pbuh) said: *"The head of the matter is Islam, its pillar is the prayer, and its peak is Jihad"* (Tirmidhi).
+    *   The Prophet ﷺ said: *"The head of the matter is Islam, its pillar is the prayer, and its peak is Jihad"* (Tirmidhi).
 *   **The Metaphor of the Pillar:**
     *   Just like a tent collapses if the main central pole (*'imad*) is pulled out, a person's practice of Islam cannot stand without Salah.
 *   **The Five Obligatory Prayers (*Al-Salawat al-Khams*):**
@@ -374,14 +374,14 @@
 **Teacher Notes:**
 *   **Clarification:** Many students may see Muslims clasping their hands and assume this is the only way to pray. Explain that **Sadl** is a very ancient, valid practice.
 *   **Diversity in Fiqh:** Emphasize that all four Sunni schools are correct. Shafi'is, Hanafis, and Hanbalis perform *Qabd* (with slight variations on placement). Malikis perform *Sadl*. 
-*   **Class Activity:** Ask students to try both postures. Ask: *"How does it feel to stand in Sadl? Does it feel relaxed and natural?"* Explain that both ways are inherited from the Prophet (pbuh).
+*   **Class Activity:** Ask students to try both postures. Ask: *"How does it feel to stand in Sadl? Does it feel relaxed and natural?"* Explain that both ways are inherited from the Prophet ﷺ.
 
 ---
 
 # Slide 21: Understanding Sadl (Arms at the Sides)
 ## The Background of the Maliki Practice
 *   *Why do Malikis perform Sadl?*
-    1.  **The Practice of Madinah (*'Amal Ahl al-Madinah*):** Imam Malik lived in Madinah, the city of the Prophet (pbuh). He observed that the scholars and descendants of the Companions prayed with their arms at their sides.
+    1.  **The Practice of Madinah (*'Amal Ahl al-Madinah*):** Imam Malik lived in Madinah, the city of the Prophet ﷺ. He observed that the scholars and descendants of the Companions prayed with their arms at their sides.
     2.  **The Mudawwanah:** The primary textbook of Maliki fiqh quotes Imam Malik saying that he disliked clasping the hands in obligatory prayers, preferring that the arms rest naturally.
 *   **Nafl (Voluntary) Prayers:**
     *   Imam Malik permitted clasping (*qabd*) in voluntary prayers if the prayer is long and the person needs to rest their arms.

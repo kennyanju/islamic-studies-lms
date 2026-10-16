@@ -155,4 +155,64 @@ describe('Server-Side Quiz Grading & Module Validation Tests', () => {
 
     expect(violations).toEqual([]);
   });
+
+  test('All 201 slides across Modules 1-9 have matching parsedSlides and parsedVoiceScript with complete fields and clean scripts', () => {
+    const fs = require('fs');
+    const path = require('path');
+    const expectedSlideCounts = {
+      1: 23,
+      2: 22,
+      3: 26,
+      4: 21,
+      5: 21,
+      6: 23,
+      7: 22,
+      8: 21,
+      9: 22
+    };
+
+    let totalSlides = 0;
+
+    for (let m = 1; m <= 9; m++) {
+      const modPath = path.join(__dirname, '..', 'public', 'course_data', `module_${m}.json`);
+      const modData = JSON.parse(fs.readFileSync(modPath, 'utf8'));
+
+      expect(modData.teacher).toBeDefined();
+      const ps = modData.teacher.parsedSlides || [];
+      const pvs = modData.teacher.parsedVoiceScript || [];
+
+      expect(ps.length).toBe(expectedSlideCounts[m]);
+      expect(pvs.length).toBe(expectedSlideCounts[m]);
+      totalSlides += ps.length;
+
+      // 1. Verify parsedSlides structure
+      ps.forEach((slide, sIdx) => {
+        expect(slide.slideNum).toBe(sIdx + 1);
+        expect((slide.title || '').length).toBeGreaterThan(0);
+        expect((slide.content || '').length).toBeGreaterThan(10);
+      });
+
+      // 2. Verify parsedVoiceScript completeness and cleanliness
+      pvs.forEach((voice, vIdx) => {
+        expect(voice.slideNum).toBe(vIdx + 1);
+        expect((voice.title || '').length).toBeGreaterThan(0);
+        expect((voice.summary || '').length).toBeGreaterThan(5);
+        expect((voice.direction || '').length).toBeGreaterThan(3);
+        expect((voice.script || '').length).toBeGreaterThan(15);
+        expect((voice.analogy || '').length).toBeGreaterThan(5);
+        expect((voice.checkQuestion || '').length).toBeGreaterThan(5);
+        expect((voice.checkAnswer || '').length).toBeGreaterThan(3);
+
+        // Ensure raw bracket tags are stripped from teleprompter script
+        expect(voice.script).not.toMatch(
+          /\[(thoughtful|pause|short pause|warmly|excited|softly|curious|reverent)\]/i
+        );
+
+        // Ensure question does not leak the answer
+        expect(voice.checkQuestion).not.toContain('(Answer:');
+      });
+    }
+
+    expect(totalSlides).toBe(201);
+  });
 });

@@ -60,7 +60,7 @@
 
 ---
 
-## Slide 6: The Noble Family of the Prophet sallallahu alayhi wa sallam
+## Slide 6: The Noble Family of the Prophet ﷺ
 * **Slide Summary:** Lineage of the Prophet sallallahu alayhi wa sallam and his birth in Rabi' al-Awwal.
 * **Delivery Direction:** `[Speak with respect and pride]`
 * **Narrative Script (ElevenLabs v3 Ready):**
@@ -274,7 +274,7 @@
 
 ---
 
-## Slide 25: Al-Muwatta' & Reverence for the Prophet sallallahu alayhi wa sallam
+## Slide 25: Al-Muwatta' & Reverence for the Prophet ﷺ
 * **Slide Summary:** Introduction to the Muwatta' and Imam Malik's extreme adab (manners) with knowledge.
 * **Delivery Direction:** `[Speak with a tone of deep reverence and respect]`
 * **Narrative Script (ElevenLabs v3 Ready):**

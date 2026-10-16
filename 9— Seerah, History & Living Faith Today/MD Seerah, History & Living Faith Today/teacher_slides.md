@@ -186,7 +186,7 @@ Sayyiduna ‘Uthman was famous for his modesty (*Ḥayā’*) and immense genero
 ---
 
 ## Slide 11: Caliph 4: ‘Ali ibn Abi Talib (35–40 AH)
-### The Gate of Knowledge
+### Standard of Courage, Wisdom & Judicial Mastery
 
 * **Relationship:** Cousin and son-in-law of the Prophet ﷺ (married to Sayyidah Fāṭimah).
 * **Key Attributes:** Famous for his bravery, wisdom, and deep knowledge of jurisprudence.
@@ -201,7 +201,7 @@ Sayyiduna ‘Uthman was famous for his modesty (*Ḥayā’*) and immense genero
 [Creed Focus: Ash'ari School]
 In Sunni theology (Ash'ari creed), we respect all the Companions (*Ṣaḥābah*). We hold that the conflicts between them (such as the battles of Jamal and Siffin) were based on differences in legal reasoning (*Ijtihād*). We do not curse or speak ill of any of them. Sayyiduna ‘Ali was correct in his political position, and those who opposed him were mistaken in their analysis, but all of them acted out of a desire to do what they thought was best for the Ummah.
 
-Explain to students that Sayyiduna ‘Ali faced the most difficult political climate, yet he maintained high ethical standards. He did not compromise on justice. His deep understanding of the Quran and Sunnah was so respected that the previous Caliphs constantly consulted him on complex legal cases.
+Explain to students that Sayyiduna ‘Ali faced the most difficult political climate, yet he maintained high ethical standards. He did not compromise on justice. In Sahih al-Bukhari (3706) and Sahih Muslim (2404), the Prophet ﷺ announced at Khaybar: "Tomorrow I will give the banner to a man through whose hands Allah will grant victory; he loves Allah and His Messenger, and Allah and His Messenger love him." His deep understanding of the Quran and Sunnah was so respected that the previous Caliphs constantly consulted him on complex legal cases.
 
 ---
 

@@ -275,7 +275,7 @@
   
   Jazakum Allahu Khayran, and see you next time!"
 * **Concept Analogy:** A mosaic masterpiece: every element of knowledge contributes to a unified, beautiful picture of faith in action.
-* **Check-for-Understanding Question:** "How does the principle discussed on this slide strengthen our practice as Muslims?"
+* **Check-for-Understanding Question:** "How does the principle discussed on this slide strengthen our practice as Muslims? (Answer: By transforming routine permissible actions into rewarded worship through sincere intention and daily Sunnah habits)."
 
 ---
 

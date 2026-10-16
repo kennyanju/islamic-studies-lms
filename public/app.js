@@ -964,6 +964,14 @@ document.addEventListener('DOMContentLoaded', () => {
             ? `<div class="script-question-box">
                 <strong><i class="fa-solid fa-circle-question"></i> Check for Understanding:</strong>
                 <p>${escapeHtml(chap.checkQuestion)}</p>
+                ${
+                  chap.checkAnswer
+                    ? `<details class="script-answer-details" style="margin-top: 0.5rem;">
+                        <summary style="cursor: pointer; font-weight: 600; color: var(--primary-color);">Reveal Answer</summary>
+                        <p style="margin-top: 0.35rem; padding: 0.5rem; background: var(--bg-tertiary, #f8f9fa); border-radius: 4px;">${escapeHtml(chap.checkAnswer)}</p>
+                       </details>`
+                    : ''
+                }
                </div>`
             : ''
         }
@@ -1918,10 +1926,12 @@ document.addEventListener('DOMContentLoaded', () => {
         const isHidden = guidanceBox.style.display === 'none';
         if (isHidden) {
           const guidanceSource =
+            sc.checkAnswer ||
             sc.summary ||
             sc.analogy ||
             'Review the key points in the narrative script above and invite students to cite evidence from the handout.';
-          guidanceBox.innerHTML = `<strong>Teaching Anchor:</strong> ${renderMarkdown(guidanceSource)}`;
+          const label = sc.checkAnswer ? 'Answer Guidance:' : 'Teaching Anchor:';
+          guidanceBox.innerHTML = `<strong>${label}</strong> ${renderMarkdown(guidanceSource)}`;
           guidanceBox.style.display = 'block';
           tpShowAnswerBtn.setAttribute('aria-expanded', 'true');
         } else {
@@ -2751,13 +2761,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     const scriptMd = mod.teacher.voiceScriptMd;
     if (scriptMd) {
-      const taggedScriptMd = scriptMd.replace(
-        /(\*\s*\*\*Narrative Script:\*\*\s*)([\s\S]*?)(?=\n\*\s*\*\*|\n---|$)/gi,
-        (_, label, script) => `${label}[warmly] ${script.trim()} [pause]`
-      );
-      voiceScriptContent.innerHTML = renderMarkdown(taggedScriptMd);
+      voiceScriptContent.innerHTML = renderMarkdown(scriptMd);
     } else {
-      voiceScriptContent.innerHTML = `<pre>${escapeHtml(scriptMd || 'No teacher voice script recorded for this module.')}</pre>`;
+      voiceScriptContent.innerHTML = `<pre>No teacher voice script recorded for this module.</pre>`;
     }
   }
 

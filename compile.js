@@ -534,13 +534,33 @@ function parseVoiceScript(voiceScriptMd) {
     const summaryMatch = trimmed.match(/\*\s*\*\*Slide Summary:\*\*\s*(.*)/i);
     const directionMatch = trimmed.match(/\*\s*\*\*Delivery Direction:\*\*\s*(.*)/i);
     const scriptMatch = trimmed.match(
-      /\*\s*\*\*Narrative Script:\*\*\s*([\s\S]*?)(?=\n\*\s*\*\*|\n---|$)/i
+      /\*\s*\*\*Narrative Script(?:\s*\([^)]*\))?:\*\*\s*([\s\S]*?)(?=\n\*\s*\*\*|\n---|$)/i
     );
     const analogyMatch = trimmed.match(/\*\s*\*\*Concept Analogy:\*\*\s*(.*)/i);
     const checkMatch = trimmed.match(/\*\s*\*\*Check-for-Understanding Question:\*\*\s*(.*)/i);
 
-    const script = scriptMatch ? scriptMatch[1].trim().replace(/^"|"$/g, '') : '';
-    const direction = directionMatch ? directionMatch[1].trim() : '';
+    let rawScript = scriptMatch ? scriptMatch[1].trim().replace(/^"|"$/g, '') : '';
+    // Clean script for human reading / browser teleprompter (strip inline ElevenLabs tags)
+    const cleanScript = rawScript
+      .replace(
+        /\[(?:thoughtful|pause|short pause|warmly|excited|softly|curious|reverent)\]\s*/gi,
+        ''
+      )
+      .replace(/\s+/g, ' ')
+      .trim();
+
+    let direction = directionMatch ? directionMatch[1].trim() : '';
+    // Strip surrounding brackets and backticks from direction
+    direction = direction.replace(/^[`\[]+|[`\]]+$/g, '').trim();
+
+    let checkQuestion = checkMatch ? checkMatch[1].trim().replace(/^"|"$/g, '') : '';
+    let checkAnswer = '';
+    const answerMatch = checkQuestion.match(/\(Answer:\s*([\s\S]*?)\)\.?$/i);
+    if (answerMatch) {
+      checkAnswer = answerMatch[1].trim();
+      checkQuestion = checkQuestion.replace(/\s*\(Answer:\s*[\s\S]*?\)\.?$/i, '').trim();
+    }
+
     const directionText = direction.toLowerCase();
     const toneTag =
       idx === 0 || /welcome|excited|enthusiasm/.test(directionText)
@@ -556,9 +576,11 @@ function parseVoiceScript(voiceScriptMd) {
       title: titleMatch ? titleMatch[1].trim() : `Slide ${idx + 1}`,
       summary: summaryMatch ? summaryMatch[1].trim() : '',
       direction,
-      script: script ? `${toneTag} ${script} [pause]` : '',
+      rawScript: rawScript ? `${toneTag} ${rawScript} [pause]` : '',
+      script: cleanScript,
       analogy: analogyMatch ? analogyMatch[1].trim() : '',
-      checkQuestion: checkMatch ? checkMatch[1].trim() : '',
+      checkQuestion,
+      checkAnswer,
       rawSection: trimmed
     });
   });

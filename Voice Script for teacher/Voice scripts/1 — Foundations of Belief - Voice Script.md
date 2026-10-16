@@ -12,7 +12,7 @@
 * **Narrative Script (ElevenLabs v3 Ready):**
   "[warmly] Bismillahir-Rahmanir-Rahim. [pause] Assalamu Alaikum wa Rahmatullahi wa Barakatuh. [pause] Welcome to our foundational journey through Islamic Creed, [short pause]*Aqidah*, and Islamic Law, [short pause]*Fiqh*. [long pause] In this unit, we will explore the most profound questions of our existence: [short pause] Who is Allah? [short pause] How do we understand His Beautiful Names and Necessary Attributes? [pause] What are the Six Pillars of Iman? [pause] How do Angels, Divine Books, Prophets, and the mystery of Divine Decree, *Qadar*, shape our worldview? [long pause] Together, we will examine these sacred truths through the authentic, time-tested scholarship of the Ash'ari school of creed and the Maliki school of jurisprudence. [pause] Let us begin with open minds and receptive hearts."
 * **Concept Analogy:** A compass and a map: Aqidah is our spiritual compass that points our hearts to Allah, while Fiqh is the map showing us each practical step of the road.
-* **Check-for-Understanding Question:** "What two foundational branches of Islamic knowledge are we exploring in this course?"
+* **Check-for-Understanding Question:** "What two foundational branches of Islamic knowledge are we exploring in this course? (Answer: Aqidah/Creed and Fiqh/Jurisprudence)."
 
 ---
 
@@ -22,7 +22,7 @@
 * **Narrative Script (ElevenLabs v3 Ready):**
   "[welcoming] Assalamu Alaikum, everyone! Welcome! [pause] Today, we begin by looking at the two essential dimensions of our faith: [short pause] **Aqidah** and **Fiqh**. [pause] Think of *Aqidah* as the roots of a mighty tree. [short pause] You cannot see the roots, but they anchor the tree deep into the earth. [pause] *Aqidah* is what we believe with certainty in our hearts, [short pause]our conviction about Allah, His Angels, and the unseen realm. [long pause] *Fiqh*, on the other hand, is like the trunk, branches, leaves, and sweet fruit of that tree. [pause] It is the practical guide for *how* we live, [short pause]how we perform Wudu, [short pause]how we offer Salah, [short pause]and how we treat our families and communities. [long pause] In this series, we learn through the lens of two classical schools of thought: [short pause] the **Ash'ari** school of creed, [short pause] and the **Maliki** school of law. [pause] Why do we follow a systematic school, a *Madhhab*? [short pause] Because it builds deep theological literacy, [short pause] and teaches us to appreciate the rich, brilliant heritage of Islamic scholarship across centuries."
 * **Concept Analogy:** A fruit tree: Aqidah is the hidden, nourishing root system, while Fiqh is the visible, flourishing branches bearing good deeds.
-* **Check-for-Understanding Question:** "If I believe in Angels with all my heart, is that an example of Aqidah or Fiqh? What about learning how to pray?"
+* **Check-for-Understanding Question:** "If I believe in Angels with all my heart, is that an example of Aqidah or Fiqh? What about learning how to pray? (Answer: Believing in angels is Aqidah/Creed; learning how to pray is Fiqh/Jurisprudence)."
 
 ---
 
@@ -62,7 +62,7 @@
 * **Narrative Script (ElevenLabs v3 Ready):**
   "[tender, heartfelt] Allah has made Himself known to us through His most beautiful names: [short pause] **Al-Asma' al-Husna**. [pause] The Prophet, sallallahu alayhi wa sallam, taught us in Sahih al-Bukhari: [short pause] 'Allah has ninety-nine names, one hundred less one. [short pause] Whoever guards and lives by them will enter Paradise.' [long pause] Guarding them does not mean merely reciting them like a list. [pause] It means understanding how Allah manifests His care and majesty in our lives. [pause] When you feel down or make a mistake, [short pause] you call upon **Al-Ghaffar**, The Repeatedly Forgiving. [pause] When you need sustenance, health, or success in school, [short pause] you beseech **Al-Razzaq**, The Supreme Provider. [pause] When life feels confusing, [short pause] you trust in **Al-Hakim**, The Perfectly Wise. [pause] Every name is a doorway to love, awe, and intimate connection with your Lord."
 * **Concept Analogy:** Knowing someone's name and character unlocks friendship; knowing Allah's names unlocks true love and reliance on Him.
-* **Check-for-Understanding Question:** "Which Name of Allah would you call upon when you feel nervous and need protection? (e.g., Al-Hafiz, The Protector)."
+* **Check-for-Understanding Question:** "Which Name of Allah would you call upon when you feel nervous and need protection? (Answer: Al-Hafiz, The Protector, or Al-Wakil, The Trustee)."
 
 ---
 
@@ -132,7 +132,7 @@
 * **Narrative Script (ElevenLabs v3 Ready):**
   "[dignified, profound] The third pillar of Iman is belief in the **Holy Books**, *Al-Kutub*. [pause] We believe in the original divine revelations bestowed upon the Prophets: [short pause] The *Suhuf* granted to Ibrahim; [short pause] the *Tawrah* revealed to Musa; [short pause] the *Zabur* given to Dawud; [short pause] the *Injil* sent to 'Isa; [short pause] and the final, incorruptible revelation, the *Quran*, revealed to Muhammad, sallallahu alayhi wa sallam. [long pause] Ash'ari scholarship draws a profound theological distinction regarding Divine Speech: [pause] Allah's eternal attribute of speech is called **Kalam Nafsi**, [short pause]His intrinsic, eternal Speech, which exists without sounds, syllables, or letters. [pause] The physical Arabic Quran that we recite with our tongues, hear with our ears, and touch on paper consists of **Kalam Lafzi**, [short pause]created sounds and letters that signify and point to that uncreated Divine Speech. [pause] We revere and sanctify the physical Mushaf because it manifests and conveys the eternal guidance of our Lord."
 * **Concept Analogy:** An unexpressed thought in your heart: it possesses meaning without ink or sound. When you write it into a letter, you use created ink and letters to convey that meaning to the world.
-* **Check-for-Understanding Question:** "What is the difference between Kalam Nafsi and Kalam Lafzi in Ash'ari theology?"
+* **Check-for-Understanding Question:** "What is the difference between Kalam Nafsi and Kalam Lafzi in Ash'ari theology? (Answer: Kalam Nafsi is the eternal, uncreated inner attribute of Allah without sounds or letters, while Kalam Lafzi refers to the created sounds and letters revealed in human language)."
 
 ---
 
@@ -223,7 +223,7 @@
   "[reflective, warm] SubhanAllah, [short pause] look at the vast expanse of sacred wisdom we have navigated together today! [pause] Let us summarize our key principles: [pause] Allah is One, [short pause] Unique, [short pause] and beyond space and time, *Mukhalafah lil-Hawadith*. [pause] The Six Pillars of Iman anchor our hearts and guide our worldview. [pause] Angels surround us constantly, [short pause] guarding us and faithfully recording our deeds. [pause] Qadar is Allah's perfect decree, [short pause] while our moral choices, *Kasb*, determine our deeds and accountability. [pause] And our Madhhabs, such as the Maliki school, are an ocean of mercy connecting us directly to the Prophetic tradition. [long pause] Now, take a quiet moment to reflect on this question: [pause] *How does knowing that Allah creates all ability, but you choose how to direct it through Kasb, change the way you approach your daily intentions and choices?* [long pause] Take a minute to ponder this in your heart."
 * **Delivery Tip:** `[Allow 1-2 minutes of classroom silence, then invite students or family members to share their reflections.]`
 * **Concept Analogy:** A completed jigsaw puzzle: each individual piece, Aqidah, the Pillars, the Angels, Qadar, and Fiqh, locks together to reveal a stunning, unified picture of faith and purposeful living.
-* **Check-for-Understanding Question:** "What is one key lesson you will take away from today's study of Aqidah and Fiqh?"
+* **Check-for-Understanding Question:** "What is one key lesson you will take away from today's study of Aqidah and Fiqh? (Answer: Sound belief in the heart guides proper righteous action with the limbs)."
 
 ---
 

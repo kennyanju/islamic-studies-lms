@@ -33,31 +33,31 @@
     *   Madinah is the birthplace of the Sunnah's practical implementation.
     *   Imam Malik’s jurisprudence is built on the living practice of this very city (*'Amal Ahl al-Madinah*).
 *   **Seerah as Law:**
-    *   The actions, treaties, and battles of the Prophet (pbuh) in Madinah became the legal bases for international relations, contracts, and governance.
+    *   The actions, treaties, and battles of the Prophet ﷺ in Madinah became the legal bases for international relations, contracts, and governance.
 
 ---
 **Teacher Notes:**
 *   **Explanation:** Explain that in Makkah, Muslims had no state or political power; they focused on purifying their hearts and establishing *Aqidah*. In Madinah, Allah established them in the land. Thus, laws (*Fiqh*) regarding family, business, treaties, and community cooperation were revealed.
-*   **Ash'ari/Maliki Link:** Emphasize that for Malikis, the customs and continuous practice of Madinah's early generations are highly authoritative. This is because they inherited their daily practices directly from the Prophet (pbuh) without interruption.
+*   **Ash'ari/Maliki Link:** Emphasize that for Malikis, the customs and continuous practice of Madinah's early generations are highly authoritative. This is because they inherited their daily practices directly from the Prophet ﷺ without interruption.
 
 ---
 
 # Slide 3: The Call to Hijrah
 ## The Decision to Migrate
 *   **Persecution in Makkah:**
-    *   The Quraysh boycott, torture, and final plot to assassinate the Prophet (pbuh).
+    *   The Quraysh boycott, torture, and final plot to assassinate the Prophet ﷺ.
 *   **The Command to Migrate (*Hijrah*):**
     *   *Hijrah* (هِجْرَة) means migration for the sake of Allah to preserve one's faith.
 *   **The Destiny: Yathrib:**
-    *   The Pledges of 'Aqabah (*Bay'at al-'Aqabah*) established a covenant of protection between the Prophet (pbuh) and the leaders of Yathrib.
+    *   The Pledges of 'Aqabah (*Bay'at al-'Aqabah*) established a covenant of protection between the Prophet ﷺ and the leaders of Yathrib.
 *   **Sacrifice of the Companions (*Sahabah*):**
     *   Leaving homes, wealth, and families behind in Makkah solely for the pleasure of Allah.
 
 ---
 **Teacher Notes:**
-*   **Historical Context:** Explain how the pagan Quraysh decided they could no longer tolerate the Prophet (pbuh) and plotted to kill him. At this point, Allah permitted migration.
+*   **Historical Context:** Explain how the pagan Quraysh decided they could no longer tolerate the Prophet ﷺ and plotted to kill him. At this point, Allah permitted migration.
 *   **Concept Definition:** Define *Hijrah* (migration). Emphasize that it was not a flight of fear, but a strategic move to build a safe space for Islam.
-*   **Language Tip:** Explain *Bay'at al-'Aqabah* (Pledge of 'Aqabah). The people of Yathrib promised to protect the Prophet (pbuh) as they would protect their own families.
+*   **Language Tip:** Explain *Bay'at al-'Aqabah* (Pledge of 'Aqabah). The people of Yathrib promised to protect the Prophet ﷺ as they would protect their own families.
 
 ---
 
@@ -75,7 +75,7 @@
 ---
 **Teacher Notes:**
 *   **Ash'ari Creed Integration:** This is a crucial theological point. Ash'aris teach that physical causes do not possess independent power to produce effects. Fire does not burn by its own power; Allah creates the burning when the fire touches the wood. 
-*   **Application to Seerah:** Show that the Prophet (pbuh) did not just say "Allah will save me" and walk out of Makkah in broad daylight with no plan. He hid, used a guide, took supplies, and took precautions. He used the *Asbab* perfectly, yet his heart relied solely on Allah.
+*   **Application to Seerah:** Show that the Prophet ﷺ did not just say "Allah will save me" and walk out of Makkah in broad daylight with no plan. He hid, used a guide, took supplies, and took precautions. He used the *Asbab* perfectly, yet his heart relied solely on Allah.
 *   **Reflection:** Ask: *"If you study hard for an exam (using the means), who actually grants you the success? Does the studying itself create the grade, or is it Allah?"*
 
 ---
@@ -83,7 +83,7 @@
 # Slide 5: Meticulous Planning: Putting Asbab into Practice
 ## The Prophet's Strategy
 *   **Hiring a Guide:**
-    *   The Prophet (pbuh) and Abu Bakr hired Abdullah ibn Urayqit, a non-Muslim skilled guide, showing that expertise is valued regardless of creed.
+    *   The Prophet ﷺ and Abu Bakr hired Abdullah ibn Urayqit, a non-Muslim skilled guide, showing that expertise is valued regardless of creed.
 *   **The Alternative Route:**
     *   Traveling south toward Yemen instead of north toward Madinah to confuse the Quraysh search parties.
 *   **The Cave of Thawr:**
@@ -94,24 +94,24 @@
 ---
 **Teacher Notes:**
 *   **Analysis:** Walk the students through the details of the plan. Highlight how organized it was. This demonstrates that using *Asbab* is part of the Sunnah.
-*   **Discussion Point:** Why did the Prophet (pbuh) hire a non-Muslim guide? Explain that in matters of worldly expertise (like navigation or medicine), Muslims are encouraged to seek the best help available, showing that cooperation across beliefs is part of the Sunnah.
+*   **Discussion Point:** Why did the Prophet ﷺ hire a non-Muslim guide? Explain that in matters of worldly expertise (like navigation or medicine), Muslims are encouraged to seek the best help available, showing that cooperation across beliefs is part of the Sunnah.
 
 ---
 
 # Slide 6: Sacrifice on the Night of Hijrah
 ## Ali ibn Abi Talib’s Bravery
 *   **The Plot:**
-    *   Quraysh selected a youth from every tribe to strike the Prophet (pbuh) simultaneously, dividing the blood-guilt.
+    *   Quraysh selected a youth from every tribe to strike the Prophet ﷺ simultaneously, dividing the blood-guilt.
 *   **The Sacrifice:**
     *   Ali ibn Abi Talib (may Allah honor him) volunteered to sleep in the Prophet's bed, wearing his green cloak, acting as a decoy.
 *   **Fulfilling Trusts (*Amanat*):**
-    *   Even though the Quraysh were trying to kill him, they had left their valuables with the Prophet (pbuh) because of his honesty (*Al-Amin*).
+    *   Even though the Quraysh were trying to kill him, they had left their valuables with the Prophet ﷺ because of his honesty (*Al-Amin*).
     *   Ali was instructed to stay behind to return every single trust (*Amanah*) to its Makkan owner.
 
 ---
 **Teacher Notes:**
-*   **Ethical Focus:** Emphasize the Prophet’s (pbuh) character. Even when his enemies wanted to assassinate him, he refused to steal their property. He ensured all their belongings were safely returned.
-*   **Sacrifice lesson:** Talk about the courage of Ali. He knew he might be killed, yet his love for the Prophet (pbuh) and trust in Allah overcame his fear.
+*   **Ethical Focus:** Emphasize the Prophet’s ﷺ character. Even when his enemies wanted to assassinate him, he refused to steal their property. He ensured all their belongings were safely returned.
+*   **Sacrifice lesson:** Talk about the courage of Ali. He knew he might be killed, yet his love for the Prophet ﷺ and trust in Allah overcame his fear.
 *   **Fiqh Connection:** This highlights the absolute obligation (*Fard*) of returning trusts (*Amanah*) to their owners, even if the owners are non-Muslim combatants or enemies.
 
 ---
@@ -119,12 +119,12 @@
 # Slide 7: Friendship and Sacrifice in the Cave
 ## Abu Bakr al-Siddiq’s Loyalty
 *   **Entering the Cave First:**
-    *   Abu Bakr (may Allah be pleased with him) entered the Cave of Thawr first to clean it and block all holes to protect the Prophet (pbuh) from snakes and scorpions.
+    *   Abu Bakr (may Allah be pleased with him) entered the Cave of Thawr first to clean it and block all holes to protect the Prophet ﷺ from snakes and scorpions.
 *   **The Quraysh at the Entrance:**
     *   The trackers reached the very mouth of the cave.
     *   Abu Bakr whispered: *"If one of them looks down at his feet, he will see us."*
 *   **Prophetic Certainty (*Yaqeen*):**
-    *   The Prophet (pbuh) replied: *"O Abu Bakr, what do you think of two, of whom Allah is the third?"* (Quran 9:40).
+    *   The Prophet ﷺ replied: *"O Abu Bakr, what do you think of two, of whom Allah is the third?"* (Quran 9:40).
 *   **The Miracle of the Spider and the Dove:**
     *   Allah used a spider web and a nesting dove (weak causes) to turn away the heavily armed trackers.
 
@@ -139,25 +139,25 @@
 # Slide 8: Arrival in Yathrib
 ## The Birth of Al-Madinah al-Munawwarah
 *   **The Arrival:**
-    *   The Prophet (pbuh) arrived in Quba' on 12th Rabi' al-Awwal, founding the first mosque there, before entering Yathrib.
+    *   The Prophet ﷺ arrived in Quba' on 12th Rabi' al-Awwal, founding the first mosque there, before entering Yathrib.
 *   **A New Name:**
     *   Yathrib was renamed **Al-Madinah al-Munawwarah** (الْمَدِينَة الْمُنَوَّرَة): "The Illuminated City" or simply **Al-Madinah** (The City).
 *   **The Prophet's Camel (*Al-Qaswa'*):**
-    *   To avoid playing favorites among the tribes who wanted him to stay with them, the Prophet (pbuh) let his camel walk freely: *"Let her go, for she is commanded."*
+    *   To avoid playing favorites among the tribes who wanted him to stay with them, the Prophet ﷺ let his camel walk freely: *"Let her go, for she is commanded."*
     *   She knelt at the plot belonging to two young orphans, which became the site of the Prophet's Mosque.
 
 ---
 **Teacher Notes:**
-*   **Historical detail:** Explain that "Yathrib" had a connotation of sickness or blame in Arabic, so the Prophet (pbuh) renamed it. Renaming places with positive names is a Sunnah.
-*   **Wisdom in camel's choice:** Highlight the Prophet's (pbuh) political wisdom. By letting the camel choose, he avoided tribal jealousy among the Ansar.
-*   **Fiqh Note:** The Prophet (pbuh) insisted on paying the orphans for the land, refusing to take it as a charity. This teaches the importance of protecting the wealth of orphans (*Aytam*) in Islamic law.
+*   **Historical detail:** Explain that "Yathrib" had a connotation of sickness or blame in Arabic, so the Prophet ﷺ renamed it. Renaming places with positive names is a Sunnah.
+*   **Wisdom in camel's choice:** Highlight the Prophet's ﷺ political wisdom. By letting the camel choose, he avoided tribal jealousy among the Ansar.
+*   **Fiqh Note:** The Prophet ﷺ insisted on paying the orphans for the land, refusing to take it as a charity. This teaches the importance of protecting the wealth of orphans (*Aytam*) in Islamic law.
 
 ---
 
 # Slide 9: The First Action: Building the Mosque
 ## The Center of the Community
 *   **Al-Masjid al-Nabawi (الْمَسْجِد النَّبَوِيّ):**
-    *   Built from clay bricks and palm trunks. The Prophet (pbuh) worked alongside the companions, carrying bricks.
+    *   Built from clay bricks and palm trunks. The Prophet ﷺ worked alongside the companions, carrying bricks.
 *   **Multi-functional Center:**
     *   Not just a place for ritual prayer (*Salah*).
     *   A school/university for the students of the *Suffah*.
@@ -179,7 +179,7 @@
     *   **Al-Muhajirun (الْمُهَاجِرُونَ):** The Emigrants who left Makkah with nothing.
     *   **Al-Ansar (الأَنْصَار):** The Helpers of Madinah who welcomed them.
 *   **The Muwakhah (الْمُؤَاخَاة):**
-    *   The Prophet (pbuh) paired each Muhajir with an Ansari as brothers.
+    *   The Prophet ﷺ paired each Muhajir with an Ansari as brothers.
 *   **Extreme Generosity:**
     *   The Ansar offered to split their houses, lands, and wealth in half with their new brothers.
 *   **Dignity of the Muhajirun:**
@@ -187,7 +187,7 @@
 
 ---
 **Teacher Notes:**
-*   **Social Engineering:** Explain how the Prophet (pbuh) solved the refugee crisis. Instead of building refugee camps, he integrated the Muhajirun directly into families.
+*   **Social Engineering:** Explain how the Prophet ﷺ solved the refugee crisis. Instead of building refugee camps, he integrated the Muhajirun directly into families.
 *   **Moral Lesson:** Emphasize the balance between the generosity of the Ansar and the dignity/work ethic of the Muhajirun.
 *   **Discussion:** How can we show the spirit of *Ansar* to new students or refugees in our modern communities?
 
@@ -196,7 +196,7 @@
 # Slide 11: The Constitution of Madinah
 ## Wathiqat al-Madinah: A Document of Peace
 *   **The Document:**
-    *   An agreement drafted by the Prophet (pbuh) establishing the rules of the city.
+    *   An agreement drafted by the Prophet ﷺ establishing the rules of the city.
 *   **A Unified Nation (*Ummah Wahidah*):**
     *   The treaty declared all signatories (Muslims of Quraysh and Yathrib, and the Jewish tribes) to be "one community (*Ummah*) to the exclusion of all other people."
 *   **Freedom of Belief:**
@@ -204,7 +204,7 @@
 *   **Mutual Defense:**
     *   All citizens promised to defend Madinah collectively if it was attacked.
 *   **Rule of Law:**
-    *   Arbitration of disputes was referred back to the Prophet (pbuh).
+    *   Arbitration of disputes was referred back to the Prophet ﷺ.
 
 ---
 **Teacher Notes:**
@@ -225,11 +225,11 @@
     *   Contributing financially to the defense of the city during warfare.
     *   Refraining from aiding the external enemies of Madinah (like the Quraysh).
 *   **Justice for All:**
-    *   The Prophet (pbuh) said: *"Beware, whoever oppresses a covenant-partner (Mu'ahid) or cuts off his right... I will be his opponent on the Day of Resurrection"* (Abu Dawud).
+    *   The Prophet ﷺ said: *"Beware, whoever oppresses a covenant-partner (Mu'ahid) or cuts off his right... I will be his opponent on the Day of Resurrection"* (Abu Dawud).
 
 ---
 **Teacher Notes:**
-*   **Civic Education:** Teach students that Islam respects diversity. The Prophet (pbuh) did not expel the Jewish tribes or force them to convert upon his arrival. He made them equal partners in the city's defense.
+*   **Civic Education:** Teach students that Islam respects diversity. The Prophet ﷺ did not expel the Jewish tribes or force them to convert upon his arrival. He made them equal partners in the city's defense.
 *   **Terminology:** *Mu'ahid* (مُعَاهِد): a non-Muslim who belongs to a community that has a treaty or covenant with the Muslims.
 *   **Concept Check:** What were the obligations of the non-Muslims? (Defense contribution, non-treason). What were their rights? (Safety, freedom of religion).
 
@@ -276,17 +276,17 @@
 *   **The Context (2 AH):**
     *   Quraysh sent a massive army of 1,000 soldiers to crush Madinah. The Muslims were only 313, poorly equipped.
 *   **Consultation (*Shura* - شُورَى):**
-    *   The Prophet (pbuh) consulted the Ansar, as they had promised to protect him in Madinah, not fight outside.
+    *   The Prophet ﷺ consulted the Ansar, as they had promised to protect him in Madinah, not fight outside.
     *   Sa'd ibn Mu'adh (leader of Ansar) said: *"If you lead us to the sea and plunge into it, we will plunge with you!"*
 *   **The Night Before Badr:**
-    *   While the army slept peacefully, the Prophet (pbuh) spent the entire night weeping and praying to Allah for victory.
+    *   While the army slept peacefully, the Prophet ﷺ spent the entire night weeping and praying to Allah for victory.
 *   **The Result:**
     *   Despite being outnumbered 3 to 1, the Muslims won a decisive victory.
 
 ---
 **Teacher Notes:**
 *   **Moral Lessons:**
-    *   *Shura* (consultation): The Prophet (pbuh) did not act like a dictator. He consulted his community, especially the Ansar, respecting their treaty boundaries.
+    *   *Shura* (consultation): The Prophet ﷺ did not act like a dictator. He consulted his community, especially the Ansar, respecting their treaty boundaries.
     *   *Yaqeen* (certainty): Trusting Allah when the odds seem impossible.
 *   **Discussion:** Why did Allah make the Muslims win at Badr? Was it because of their swords, or because of their spiritual connection and surrender to Him?
 
@@ -298,14 +298,14 @@
     *   *"And you threw not when you threw, but it was Allah who threw..."* (Quran 8:17).
 *   **Creed Focus: Divine Will and Creation:**
     *   In Ash'ari theology, Allah is the Sole Creator of all actions. 
-    *   The Prophet (pbuh) threw a handful of dust at the enemy (the *Sabab*/cause), but it was Allah who made that dust reach the eyes of every soldier in the enemy army (the *Musabbib*/effect creator).
+    *   The Prophet ﷺ threw a handful of dust at the enemy (the *Sabab*/cause), but it was Allah who made that dust reach the eyes of every soldier in the enemy army (the *Musabbib*/effect creator).
 *   **The Angels at Badr:**
     *   Allah sent 1,000 angels to assist, not because Allah needs angels, but to bring tranquility (*Sakinah*) to the hearts of the believers.
 *   **Lesson:** Victory does not come from numbers or weapons; it comes only from Allah (*Al-Nasir*).
 
 ---
 **Teacher Notes:**
-*   **Ash'ari Creed Integration:** Explain Quran 8:17. The physical throwing was attributed to the Prophet (pbuh) as an acquisition (*Kasb*), but the ultimate creation of the action's effect was attributed to Allah.
+*   **Ash'ari Creed Integration:** Explain Quran 8:17. The physical throwing was attributed to the Prophet ﷺ as an acquisition (*Kasb*), but the ultimate creation of the action's effect was attributed to Allah.
 *   **Relevance:** When we win or succeed, we must not become arrogant. We must thank Allah, because He is the source of all success.
 *   **Concept Definition:** *Al-Nasir* (النَّاصِر): The Giver of Victory.
 
@@ -316,18 +316,18 @@
 *   **The Context (3 AH):**
     *   Quraysh returned with 3,000 soldiers to avenge Badr.
 *   **The Archers' Command:**
-    *   The Prophet (pbuh) stationed 50 archers on Mount Aynayn, commanding them: *"Do not leave your post, even if you see birds pecking our corpses, until I send for you."*
+    *   The Prophet ﷺ stationed 50 archers on Mount Aynayn, commanding them: *"Do not leave your post, even if you see birds pecking our corpses, until I send for you."*
 *   **The Mistake:**
     *   When the battle seemed won, the archers saw the spoils of war (*Ghanimah*) and rushed down, leaving their post unprotected.
 *   **The Setback:**
-    *   Khalid ibn al-Walid (then commanding the Quraysh cavalry) attacked from behind, turning victory into defeat. The Prophet (pbuh) was wounded.
+    *   Khalid ibn al-Walid (then commanding the Quraysh cavalry) attacked from behind, turning victory into defeat. The Prophet ﷺ was wounded.
 *   **The Lesson:**
     *   Disobedience to the Prophetic command and loving worldly gain (*Dunya*) leads to spiritual and physical setbacks.
 
 ---
 **Teacher Notes:**
 *   **Analysis:** Emphasize that Uhud was not a failure of strategy, but a failure of spiritual discipline.
-*   **Creed Angle:** Why did Allah allow them to suffer? To teach them that victory is tied to obedience and patience (*Sabr*). It also proved the human nature of the Prophet (pbuh); he was wounded, showing he is a human messenger, not a divine being (refuting extremist beliefs).
+*   **Creed Angle:** Why did Allah allow them to suffer? To teach them that victory is tied to obedience and patience (*Sabr*). It also proved the human nature of the Prophet ﷺ; he was wounded, showing he is a human messenger, not a divine being (refuting extremist beliefs).
 *   **Reflection:** Ask: *"Can you think of a time when you disobeyed a rule because you wanted something quick, and it ended up ruining things for you?"*
 
 ---
@@ -339,7 +339,7 @@
     *   Strictly prohibited: Cutting down fruitful trees, destroying crops, killing livestock (except for food), and burning property.
     *   Prohibited: Poisoning wells or using weapons of mass destruction that kill indiscriminately.
 *   **Comparison:**
-    *   While modern international law (Geneva Conventions) was written in the 20th century, these rules were laid down by the Prophet (pbuh) and formalized by Imam Malik 1,300 years ago.
+    *   While modern international law (Geneva Conventions) was written in the 20th century, these rules were laid down by the Prophet ﷺ and formalized by Imam Malik 1,300 years ago.
 *   **The Goal of Battle:**
     *   Restoring peace and justice, not vengeance or looting.
 
@@ -354,7 +354,7 @@
 # Slide 19: The Farewell Sermon (Khutbat al-Wada')
 ## The Final Message of Equality and Justice
 *   **The Context (10 AH):**
-    *   During the final pilgrimage, the Prophet (pbuh) addressed over 100,000 companions at Mount Arafat.
+    *   During the final pilgrimage, the Prophet ﷺ addressed over 100,000 companions at Mount Arafat.
 *   **Sacredness of Human Life & Property:**
     *   *"Your blood and your property are sacred to you, like the sacredness of this day..."*
 *   **Abolition of Riba (Usury/Interest):**
@@ -366,7 +366,7 @@
 
 ---
 **Teacher Notes:**
-*   **Significance:** This sermon is the final summary of the Prophet's (pbuh) mission. It serves as a universal declaration of human rights.
+*   **Significance:** This sermon is the final summary of the Prophet's ﷺ mission. It serves as a universal declaration of human rights.
 *   **Interactive Reading:** Read the quotes aloud with deep respect. 
 *   **Discussion:** Why is usury (*Riba*) mentioned alongside the sacredness of blood? Explain that economic oppression kills communities slowly, just like physical violence.
 
@@ -392,7 +392,7 @@
 # Slide 21: From the Companions to Imam Malik
 ## How Knowledge Travelled to Madinah
 *   **The Transmission of Sunnah:**
-    *   The Prophet (pbuh) lived and died in Madinah.
+    *   The Prophet ﷺ lived and died in Madinah.
     *   His companions (like Umar, Ibn Umar, Aisha, Zayd ibn Thabit) stayed in Madinah and taught the next generation.
 *   **The Seven Fiqh Scholars of Madinah:**
     *   The top students of the Sahabah who consolidated the law in the generation of the Tabi'un (e.g., Sa'id ibn al-Musayyib, Urwah ibn al-Zubayr).
@@ -404,7 +404,7 @@
 ---
 **Teacher Notes:**
 *   **The Chain of Knowledge:** Draw or trace the path of transmission.
-    *   Prophet Muhammad (pbuh) -> Ibn Umar / Aisha -> Nafi' -> Imam Malik.
+    *   Prophet Muhammad ﷺ -> Ibn Umar / Aisha -> Nafi' -> Imam Malik.
     *   This is known as the **Golden Chain** (*Silsilat al-Dhahab*).
 *   **Pedagogical point:** Explain why the Maliki school relies so heavily on this chain. It is a direct, living chain of action, not just books.
 
@@ -434,7 +434,7 @@
     *   Live peacefully in diverse societies through justice and covenants.
     *   Understand conflict as a test of patience, never glorify war.
     *   Protect human rights as outlined in the Farewell Sermon.
-    *   Honor the chain of knowledge from the Prophet (pbuh) to Imam Malik.
+    *   Honor the chain of knowledge from the Prophet ﷺ to Imam Malik.
 *   **Core Sources for Study:**
     *   *Al-Muwatta*: Imam Malik
     *   *Al-Shifa*: Qadi 'Iyad

@@ -75,7 +75,7 @@
 
 ---
 
-# Slide 5: [Aqidah Flag] The Fitrah and the Hanifs
+# Slide 5: Aqidah Focus: The Fitrah and the Hanifs
 ## The Light of Intellect and Monotheism
 *   **Fitrah (Natural State):** The innate human disposition to recognize the oneness of Allah.
 *   **The Hanifs (Monotheists):**
@@ -222,7 +222,7 @@
 
 ---
 
-# Slide 14: [Aqidah Flag] The Nature of Wahy (Revelation)
+# Slide 14: Aqidah Focus: The Nature of Wahy (Revelation)
 ## Ash'ari Theology of Allah's Speech
 *   **What is Wahy?** Direct, secure communication from Allah to His chosen Prophets.
 *   **The Ash'ari Understanding of Kalam (Speech):**
@@ -321,7 +321,7 @@
 
 ---
 
-# Slide 20: [Aqidah Flag] The Prayer of Ta'if
+# Slide 20: Aqidah Focus: The Prayer of Ta'if
 ## Absolute Servantship ('Ubudiyyah) and Qadar
 *   **The Supplication:** Resting in an orchard, the Prophet ﷺ turned to Allah with profound humility:
     > *"O Allah! To You alone I complain of my weakness, my lack of resources, and my vulnerability before people... So long as You are not displeased with me, I do not care..."*
@@ -390,7 +390,7 @@
 
 ---
 
-# Slide 24: [Fiqh Flag] The Practice of the People of Madinah
+# Slide 24: Fiqh Focus: The Practice of the People of Madinah
 ## 'Amal Ahl al-Madinah as a Source of Law
 *   **The Maliki Foundation:** The collective practice of the scholars and community of Madinah (*'Amal Ahl al-Madinah*) serves as a primary source of law.
 *   **Why is 'Amal Authoritative?**
